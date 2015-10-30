@@ -1,0 +1,14 @@
+[html]
+title = pkglts's coverage
+directory = build/htmlcov
+
+
+[run]
+source = pkglts
+
+[report]
+exclude_lines =
+    # Don't complain if tests don't hit defensive assertion code:
+    raise AssertionError
+    raise NotImplemented
+    raise NotImplementedError

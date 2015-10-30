@@ -1,0 +1,32 @@
+*.py[cod]
+
+# Packages
+*.egg
+*.egg-info
+dist
+build
+eggs
+parts
+bin
+var
+sdist
+develop-eggs
+.installed.cfg
+lib
+lib64
+
+# user defined
+# nothing
+
+# editors
+.idea
+
+
+# coverage
+.coverage
+
+
+
+# tox
+.tox
+

@@ -1,0 +1,87 @@
+{
+    "base": {
+        "namespace": null, 
+        "owner": "revesansparole", 
+        "pkg_fullname": "pkglts", 
+        "pkgname": "pkglts"
+    }, 
+    "coverage": {
+        "option": null
+    }, 
+    "data": {
+        "option": null
+    }, 
+    "doc": {
+        "description": "Building packages with long term support", 
+        "keywords": "packaging, package builder"
+    }, 
+    "flake8": {
+        "option": null
+    }, 
+    "github": {
+        "project": "pkglts"
+    }, 
+    "hash": {
+        "./.coveragerc": "1apfDzrl8AY4B4M9gp8L7swJLNc6iqF3S7FH/VOZi6xEwHSgiPKm4HV+pclIunO+rutJkreU1UIerxl+uiYpzg==", 
+        "./.gitignore": "nH1VC3m9f1c/HPvaQge/Gg+l2hjeT1KUJWEBxjchs8UvOmD/B7H+ZvqLE6Oc/ISwsWsvOG+Vqv2WXJSY2mGA8g==", 
+        "./AUTHORS.rst": "XlSz5xtF8xdGHrafhDem7i9fpKeXlX6v9RJLPa+7T+QIw/L64HXilOQFSv7D9ta3k2tHbvIeLB1uykvbFI5Raw==", 
+        "./HISTORY.rst": "fmzGsCQ/hOSsupj31f6l3TVXwzgPDe3wYn2mY5rHu/tUDhvVRvLDbnpMLzIclgVP2O3EX9VfW/tUajU4zXqq/g==", 
+        "./LICENSE": "Me1YDWsuNjWZm6uIJl9lDKsFeL6DnHmU712mAk2LAFYJpL41mJEEFfSvnyyypfsKUBVkYqbVTTjouGaFdIUZJw==", 
+        "./MANIFEST.in": "NejArBHj54Z0o+tW7Cw0tWKCYlaN9s+pZN4S7J5AT6CexZRsLWDUkZytDWJk9WMOJQx2CUuZgu9ntMRxkmWYNw==", 
+        "./README.rst": "5UkRsRn3t8Uypq8W3tgn8AAUgi38sEOqDYci5FYairssrKpPUxe6OkpzD1F74HoNIB/LfC/tq1NjYCeUmaz4fw==", 
+        "./doc": "walou", 
+        "./doc/Makefile": "ul5WYkcHnKhDn1SFPh876PNs7aKFDk9uBbk9pgcGZCC25gFxQMwyY9bzFOjNLR4F69D1wRhpcwqArbbDcJUy4g==", 
+        "./doc/_static": "walou", 
+        "./doc/authors.rst": "f5wvagVnx3gAH0Q19UAMzYUGniDtv6+pmlJX/V24JangtLHW/RJ0nvLE2B/16xISUDzdDx/SnZon/sOAoQPKUg==", 
+        "./doc/conf.py": "F0d1jiTtkvf3jZ2eWZ1l4Mg0UYkC6fZysxYaPUpUOwajRbpYqw0GdT3/nZHsh64q0tWC5MTuXsri9EiXLkyzhQ==", 
+        "./doc/contributing.rst": "U2ANVfo4WX+Um1mpdbJJnnzdHwUoAfOfgTK5a2hLzDfqUJfWa447fUiOR7kDb/gA8n5VKbGarrWpG6d7D/UyKw==", 
+        "./doc/history.rst": "ZdV0pINAaEoQ7BAkGGrDHbslB1InfgvuXw9y/5/ZBQyLO/SBW7VwNtlq9HLBz470D8poPsFZo7yRlp41AvgjOQ==", 
+        "./doc/index.rst": "+gCPyRD1jJ4z75WQ21/l3vOiLJIkVXnRCsE4NJSMQkzcLetomcrIDwv45iJLA/pHdUZhb4FiWKNySkx4psi+Jw==", 
+        "./doc/installation.rst": "Ke5bhev8iOtfwqmBikBnywVagzq6gXI7QAv2POxU5z7DnWpYyA8vbvQxYyIEYehMMXITiBkqdv7N34BG4oCYBg==", 
+        "./doc/make.bat": "bbNuK62j9QY5MhGBVfYqwKEFHSQCUEDzIvB42duOwTHpTT+6x5FYhEXoP4UegAuB8plEF8QtoSYn+8Gk1C+ZjQ==", 
+        "./doc/readme.rst": "QbQV5oCKE0v+zABnMwQ6lYLhAtV2Vmy+eMokm0pMy6p6PupMbzK6Ga7+X68pU1ZbDXpavWzT+CZXhyqSSUdb3w==", 
+        "./doc/usage.rst": "ZZUbiO/C5lvjGuFqJmNs+3Br+2bJAxySavtnWq5HacgDgoAiRoCjLxbv/nEi7Nq5/CspLEsir/INO84ihwbdUQ==", 
+        "./requirements.txt": "LSnP1xhQ/3CwNFEOJrx8qHwr3+qvnUjAUjJ67jsqHZXBgHq1HRao0UngJgRaNdNKYLHhm5/I/f6r6fnKcokCEw==", 
+        "./setup.cfg": "8uwI0TFNXvUYbyEpwOQE+JsHACLlacNmRJ2vQT8+vpKCwS2aIwrTP+ejCkRuti0YUyPU6fQC630MOXkuEoAcdQ==", 
+        "./setup.py": "91Z+KkQL/fqabQxKTaOIdt8tXeZ+JoBvECaoasGJ9uht4PqKNZZST8W5QkVl85+97uHX1tEis1NikUXfylZ/HA==", 
+        "./src": "walou", 
+        "./src/pkglts": "walou", 
+        "./src/pkglts/data_access.py": "F+iRDbS2swk2/OB7FUJpgSkgLeScPMbQmx2aW7+/Td54kFImr5qR1Fv/J9qu8eFVEZ0f7w9Cffl5ICDqFoK1aQ==", 
+        "./src/pkglts/version.py": "3U0jvrBgNyOV3f4MyDmAfCvGXjGnwdTySTo/3rKZQwywc0FZVYU99r6qYqOk+Q4jvoGKqQeWO/bF8QPlKt0CMQ==", 
+        "./src/pkglts_data": "walou", 
+        "./src/pkglts_data/__init__.py": "z4PhNX7vuL3xVChQ1m2AB9Yg5AULVxXcg/SpIdNs6c5H0NE8XYXysP+DGNKHfuwvY7kxvUdBeoGlODJ6+SfaPg==", 
+        "./test": "walou", 
+        "./test/info.rst": "z4PhNX7vuL3xVChQ1m2AB9Yg5AULVxXcg/SpIdNs6c5H0NE8XYXysP+DGNKHfuwvY7kxvUdBeoGlODJ6+SfaPg==", 
+        "./tox.ini": "VXgUA8rAJdXPXMYzBupJyIZ+RfGZ5IbOqQo+zJ1dUrxVwRkGijIX2XFwZG70MZ63XLfNTy+r9l0mJ5vl+k+62A=="
+    }, 
+    "license": {
+        "name": "mit", 
+        "organization": "OpenAlea", 
+        "project": "pkglts", 
+        "year": "2015"
+    }, 
+    "pydist": {
+        "classifiers": [
+            "Intended Audience :: Developers"
+        ], 
+        "intended_versions": [
+            "27", 
+            "34"
+        ]
+    }, 
+    "sphinx": {
+        "option": null
+    }, 
+    "test": {
+        "option": "None"
+    }, 
+    "tox": {
+        "option": null
+    }, 
+    "version": {
+        "auto": "off", 
+        "major": "0", 
+        "minor": "1", 
+        "post": "0"
+    }
+}
