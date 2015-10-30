@@ -1,3 +1,3 @@
 option = ['base']
 setup = ['lice']
-install = []
+install = ['lice']

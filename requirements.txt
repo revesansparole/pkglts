@@ -1,7 +1,8 @@
 tox
 sphinx
-github3.py
 twine
+github3.py
+lice
 nose
 coverage
 flake8
