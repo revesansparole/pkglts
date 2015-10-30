@@ -1,3 +1,3 @@
 option = ['base']
 setup = []
-install = ['nose']
+install = ['nose', 'mock']
