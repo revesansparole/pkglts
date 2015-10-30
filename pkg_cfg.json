@@ -29,7 +29,7 @@
         "./HISTORY.rst": "fmzGsCQ/hOSsupj31f6l3TVXwzgPDe3wYn2mY5rHu/tUDhvVRvLDbnpMLzIclgVP2O3EX9VfW/tUajU4zXqq/g==", 
         "./LICENSE": "Me1YDWsuNjWZm6uIJl9lDKsFeL6DnHmU712mAk2LAFYJpL41mJEEFfSvnyyypfsKUBVkYqbVTTjouGaFdIUZJw==", 
         "./MANIFEST.in": "NejArBHj54Z0o+tW7Cw0tWKCYlaN9s+pZN4S7J5AT6CexZRsLWDUkZytDWJk9WMOJQx2CUuZgu9ntMRxkmWYNw==", 
-        "./README.rst": "tuHZruJliHG3b8tK+1DpyoYr4AZAifxFqHDK4INlFw22Xtc1D8YgNIBgcK7lnGMrStYlPe87l267earTqVjQgA==", 
+        "./README.rst": "4ndzZr9SEy92BpjWgu6T+RqZMpBB01e3RQHZ/MdNt3vzsRLR0PVkiIyyNF1/SlOa4QP9UAbJi5NAGMbGy9JcEA==", 
         "./doc": "walou", 
         "./doc/Makefile": "ul5WYkcHnKhDn1SFPh876PNs7aKFDk9uBbk9pgcGZCC25gFxQMwyY9bzFOjNLR4F69D1wRhpcwqArbbDcJUy4g==", 
         "./doc/_static": "walou", 
@@ -69,6 +69,9 @@
             "27", 
             "34"
         ]
+    }, 
+    "readthedocs": {
+        "option": null
     }, 
     "sphinx": {
         "option": null
