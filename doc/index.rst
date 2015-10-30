@@ -1,6 +1,6 @@
-
-Welcome to pkglts's documentation!
-======================================================
+=======================================================
+Welcome to Packaging Long Term service's documentation!
+=======================================================
 
 Contents:
 
@@ -10,6 +10,8 @@ Contents:
    readme
    installation
    usage
+   tutorials
+   option_list
    contributing
    authors
    history
