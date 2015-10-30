@@ -31,7 +31,7 @@ project_root = os.path.dirname(cwd)
 # version is used.
 sys.path.insert(0, os.path.join(project_root, os.path.dirname('src/pkglts')))
 
-import pkglts as mypkg
+# import pkglts as mypkg
 
 # -- General configuration ---------------------------------------------
 

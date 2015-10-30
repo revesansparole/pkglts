@@ -1,8 +1,8 @@
 import mock
 
 from pkglts.option.doc.handlers import (badges,
-                                              leading_list, contributing_list,
-                                              history)
+                                        leading_list, contributing_list,
+                                        history)
 
 
 def test_badges():
@@ -58,4 +58,3 @@ def test_history_fmt():
     with mock.patch("pkglts.option.doc.history.fetch_history",
                     return_value=["toto"] * 4):
         assert len(history("txt", dict(github={})).split("\n")) == 4
-

@@ -32,12 +32,12 @@
         "./HISTORY.rst": "ICa1m95y90f+/xA396QHrCJ1Fo8cv3b15d7q0H/f4Dyy2GUm46zJonGq1yxSKfOhwhrL7VkgxLFFrlw0QR/xLQ==", 
         "./LICENSE": "Me1YDWsuNjWZm6uIJl9lDKsFeL6DnHmU712mAk2LAFYJpL41mJEEFfSvnyyypfsKUBVkYqbVTTjouGaFdIUZJw==", 
         "./MANIFEST.in": "NejArBHj54Z0o+tW7Cw0tWKCYlaN9s+pZN4S7J5AT6CexZRsLWDUkZytDWJk9WMOJQx2CUuZgu9ntMRxkmWYNw==", 
-        "./README.rst": "sW+LeOyLLYUCPoIJj568zNH+1UVImp6Z2cJT+A0sDp39yKCvufNe9EACYgjrclWKaMY8Thr7l19vS6/dpKRe7A==", 
+        "./README.rst": "+/YtN0/WTE0ZFqzSG72TkA5wm7kFGCPf8g74aNNMDvvkbpj1n16IE2ITIV06fww/CjS6Q4zQAb/o6pcz8STNXQ==", 
         "./doc": "walou", 
         "./doc/Makefile": "C58jxdu8XJNOoaWOw7VWy4LwFmS8lTQt/JeZLt5JozMSJ503plOZchucx+vAEzELbx/Czs/h9pshe9s+9HeOeQ==", 
         "./doc/_static": "walou", 
         "./doc/authors.rst": "f5wvagVnx3gAH0Q19UAMzYUGniDtv6+pmlJX/V24JangtLHW/RJ0nvLE2B/16xISUDzdDx/SnZon/sOAoQPKUg==", 
-        "./doc/conf.py": "F0d1jiTtkvf3jZ2eWZ1l4Mg0UYkC6fZysxYaPUpUOwajRbpYqw0GdT3/nZHsh64q0tWC5MTuXsri9EiXLkyzhQ==", 
+        "./doc/conf.py": "zM9QqIHmHktpvI1DjEKTw9JV09ZhoNmgwvch5iQCuhQjlixkG6gTQ6Xm5LsWYZ3isHZLWURaeeI9PGS+jA8UAA==", 
         "./doc/contributing.rst": "U2ANVfo4WX+Um1mpdbJJnnzdHwUoAfOfgTK5a2hLzDfqUJfWa447fUiOR7kDb/gA8n5VKbGarrWpG6d7D/UyKw==", 
         "./doc/history.rst": "ZdV0pINAaEoQ7BAkGGrDHbslB1InfgvuXw9y/5/ZBQyLO/SBW7VwNtlq9HLBz470D8poPsFZo7yRlp41AvgjOQ==", 
         "./doc/installation.rst": "cq9BbjVe4/WEaJW24Ovwqu7OJWgMnCOyqKS7+zALXhwvACMpfs78XUHM1+tnK6Vz+c9/Fkdc26IEX4nYV+D9pw==", 
@@ -45,8 +45,8 @@
         "./doc/readme.rst": "QbQV5oCKE0v+zABnMwQ6lYLhAtV2Vmy+eMokm0pMy6p6PupMbzK6Ga7+X68pU1ZbDXpavWzT+CZXhyqSSUdb3w==", 
         "./doc/usage.rst": "ZZUbiO/C5lvjGuFqJmNs+3Br+2bJAxySavtnWq5HacgDgoAiRoCjLxbv/nEi7Nq5/CspLEsir/INO84ihwbdUQ==", 
         "./requirements.txt": "PlfDAT9VmbB9fOzaXvg6HLkt/DcAu0eYehLfd8y9tc50nbH17GgofIsTf+CVPzM+y1ETPypPumDTlTYcSNfjBQ==", 
-        "./setup.cfg": "8uwI0TFNXvUYbyEpwOQE+JsHACLlacNmRJ2vQT8+vpKCwS2aIwrTP+ejCkRuti0YUyPU6fQC630MOXkuEoAcdQ==", 
-        "./setup.py": "FJMhepCFXIOeXB8+3sOK8nlHAwdpBMlj/g6yayNmEAZyo8v5t9tZ0dqtcf0qkYz+5BiN8AHhMfX/Kkr0eDm8ew==", 
+        "./setup.cfg": "rhLZP5timFIvCPPnpjHEsCCDulF1PspDiKeB4lvQSvH1zBYoTKYnFTLCqmiX5vBd06PRlxZXoOIBbtSxSo39Zw==", 
+        "./setup.py": "amn1PpGa2FY3az1LIZJd6toPb7wyxMvJvOaxPz4w8BeGnIk4bm8H1nTZr1RJw/9B0W7Z802lqb35vvoJCkT6PA==", 
         "./src": "walou", 
         "./src/pkglts": "walou", 
         "./src/pkglts/data_access.py": "F+iRDbS2swk2/OB7FUJpgSkgLeScPMbQmx2aW7+/Td54kFImr5qR1Fv/J9qu8eFVEZ0f7w9Cffl5ICDqFoK1aQ==", 
@@ -55,7 +55,7 @@
         "./src/pkglts_data/__init__.py": "z4PhNX7vuL3xVChQ1m2AB9Yg5AULVxXcg/SpIdNs6c5H0NE8XYXysP+DGNKHfuwvY7kxvUdBeoGlODJ6+SfaPg==", 
         "./test": "walou", 
         "./test/info.rst": "z4PhNX7vuL3xVChQ1m2AB9Yg5AULVxXcg/SpIdNs6c5H0NE8XYXysP+DGNKHfuwvY7kxvUdBeoGlODJ6+SfaPg==", 
-        "./tox.ini": "VXgUA8rAJdXPXMYzBupJyIZ+RfGZ5IbOqQo+zJ1dUrxVwRkGijIX2XFwZG70MZ63XLfNTy+r9l0mJ5vl+k+62A=="
+        "./tox.ini": "u8HE2QG95Scp7CKnYHLRi3TN41hSE4+YHXh4XfkUChxPa09+8ZPXzUQ6c3GF7TIgG2j+fXhuL09wdQ5UZn62sA=="
     }, 
     "landscape": {
         "option": null

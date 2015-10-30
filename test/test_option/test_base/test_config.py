@@ -33,12 +33,12 @@ def test_config_use_good_defaults():
 
 def test_config_handle_namespace():
     pkg_cfg = main({}, dict(pkg_fullname='mypkg',
-                             owner='owner'))
+                            owner='owner'))
     assert pkg_cfg['namespace'] is None
     assert pkg_cfg['pkgname'] == 'mypkg'
 
     pkg_cfg = main({}, dict(pkg_fullname='myns.mypkg',
-                             owner='owner'))
+                            owner='owner'))
     assert pkg_cfg['namespace'] == 'myns'
     assert pkg_cfg['pkgname'] == 'mypkg'
 

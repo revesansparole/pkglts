@@ -1,2 +1,3 @@
-__author__ = '{{key, base.author_name}}'
-__email__ = '{{key, base.author_email}}'
+from . import version
+
+__version__ = version.__version__

@@ -7,11 +7,11 @@ from shutil import rmtree
 
 from pkglts.versioning import get_local_version
 from pkglts.manage import (clean, get_pkg_config,
-                                 init_pkg,
-                                 regenerate,
-                                 add_option, update_option, edit_option,
-                                 update_pkg,
-                                 write_pkg_config)
+                           init_pkg,
+                           regenerate,
+                           add_option, update_option, edit_option,
+                           update_pkg,
+                           write_pkg_config)
 
 
 print(__file__)

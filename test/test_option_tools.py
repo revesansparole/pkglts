@@ -7,6 +7,7 @@ from pkglts.option_tools import ask_arg, get_key, get_user_permission
 print(__file__)
 loc_input = 'pkglts.option_tools.loc_input'
 
+
 def test_user_permission():
     with mock.patch(loc_input, return_value=''):
         assert get_user_permission('action')
@@ -74,4 +75,3 @@ def test_ask_arg_handle_list():
         assert res == ["1"]
         assert_raises(UserWarning, lambda: ask_arg('keys', {'keys': "1"},
                                                    ["1", "2"], {}))
-

@@ -75,7 +75,7 @@ setup(
     # }}
     keywords='{{key, doc.keywords}}',
     # {{pypi rm,
-    classifiers=[  # {{pypi.classifiers,
+    classifiers=[# {{pypi.classifiers,
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',

@@ -4,6 +4,7 @@ from pkglts.option.pydist.handlers import mapping, requirements, get_url
 
 # TODO get_extra
 
+
 def test_handlers():
     assert len(mapping) == 3
 

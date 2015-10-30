@@ -31,7 +31,7 @@ project_root = os.path.dirname(cwd)
 # version is used.
 sys.path.insert(0, os.path.join(project_root, os.path.dirname('{{src_pth, }}')))
 
-import {{key, base.pkgname}} as mypkg
+# import {{key, base.pkgname}} as mypkg
 
 # -- General configuration ---------------------------------------------
 

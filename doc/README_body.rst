@@ -84,6 +84,7 @@ in case of conflicts but it is your responsibility to solve them and relaunch th
 command.
 
 .. _pkg_struct_func:
+
 Add Package Structure Functionality
 ===================================
 
