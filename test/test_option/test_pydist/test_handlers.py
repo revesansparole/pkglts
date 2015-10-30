@@ -20,7 +20,7 @@ def test_requirements_error_for_bad_options():
 
 def test_get_requirements_get_install_requirements():
     pkg_cfg = {'test': {}}
-    assert requirements("txt", pkg_cfg) == "nose\nmock"
+    assert "nose" in requirements("txt", pkg_cfg)
 
 
 def test_get_url_return_empty_default():
