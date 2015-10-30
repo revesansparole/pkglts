@@ -48,7 +48,7 @@ def ensure_login(pkg_cfg, recursion_ind=0):
     if 'login' in cookie:
         user = cookie['login']
     else:
-        user = ask_arg("github.user", pkg_cfg, owner, cfg)
+        user = ask_arg("github.user", pkg_cfg, "", cfg)
         if user == "":
             print("anonymous forbidden")
             return ensure_login(pkg_cfg, recursion_ind + 1)

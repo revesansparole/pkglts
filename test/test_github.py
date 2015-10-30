@@ -41,7 +41,7 @@ def test_github_login_do_not_prompt_user_if_already_done():
 
 @with_setup(setup, teardown)
 def test_github_login_do_not_recurse_infinitively():
-    cfg = dict(github=dict(owner="moi", project="mine"))
+    cfg = dict(base=dict(owner="moi"), github=dict(project="mine"))
     with mock.patch("pkglts.github.ask_arg", return_value=""):
         assert_raises(UserWarning, lambda: ensure_login(cfg))
 
