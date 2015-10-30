@@ -30,3 +30,8 @@ lib64
 # tox
 .tox
 
+
+
+# pypi rc file
+.pypirc
+

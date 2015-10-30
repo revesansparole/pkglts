@@ -26,7 +26,7 @@
     }, 
     "hash": {
         "./.coveragerc": "1apfDzrl8AY4B4M9gp8L7swJLNc6iqF3S7FH/VOZi6xEwHSgiPKm4HV+pclIunO+rutJkreU1UIerxl+uiYpzg==", 
-        "./.gitignore": "nH1VC3m9f1c/HPvaQge/Gg+l2hjeT1KUJWEBxjchs8UvOmD/B7H+ZvqLE6Oc/ISwsWsvOG+Vqv2WXJSY2mGA8g==", 
+        "./.gitignore": "aRogB+vZc0PwwipqRBlqgE/ytejs3x/ezWfYQNMoScO4GP6Of1SFeG9XX+ZL1rlvjCNwhkD1h8+yodkAzVYlbA==", 
         "./.travis.yml": "dh6SLDfqdE05DYWE3hGNDQJ82JGJoRcgl4lGUl9HX/Tb9rRkys/LB2kAOx1rS9n9E/K2AcNZd1kzJqYHPnZ4KA==", 
         "./AUTHORS.rst": "XlSz5xtF8xdGHrafhDem7i9fpKeXlX6v9RJLPa+7T+QIw/L64HXilOQFSv7D9ta3k2tHbvIeLB1uykvbFI5Raw==", 
         "./HISTORY.rst": "fmzGsCQ/hOSsupj31f6l3TVXwzgPDe3wYn2mY5rHu/tUDhvVRvLDbnpMLzIclgVP2O3EX9VfW/tUajU4zXqq/g==", 
@@ -41,17 +41,17 @@
         "./doc/contributing.rst": "U2ANVfo4WX+Um1mpdbJJnnzdHwUoAfOfgTK5a2hLzDfqUJfWa447fUiOR7kDb/gA8n5VKbGarrWpG6d7D/UyKw==", 
         "./doc/history.rst": "ZdV0pINAaEoQ7BAkGGrDHbslB1InfgvuXw9y/5/ZBQyLO/SBW7VwNtlq9HLBz470D8poPsFZo7yRlp41AvgjOQ==", 
         "./doc/index.rst": "+gCPyRD1jJ4z75WQ21/l3vOiLJIkVXnRCsE4NJSMQkzcLetomcrIDwv45iJLA/pHdUZhb4FiWKNySkx4psi+Jw==", 
-        "./doc/installation.rst": "Ke5bhev8iOtfwqmBikBnywVagzq6gXI7QAv2POxU5z7DnWpYyA8vbvQxYyIEYehMMXITiBkqdv7N34BG4oCYBg==", 
+        "./doc/installation.rst": "9pSgb4UqRsuycb7Otb9m7oLI/fF0TOSEGJXjez4x5xpQayH96vInZKUT5IH/+a8YsVRwk3RR5LhNGqz6a4v1LQ==", 
         "./doc/make.bat": "bbNuK62j9QY5MhGBVfYqwKEFHSQCUEDzIvB42duOwTHpTT+6x5FYhEXoP4UegAuB8plEF8QtoSYn+8Gk1C+ZjQ==", 
         "./doc/readme.rst": "QbQV5oCKE0v+zABnMwQ6lYLhAtV2Vmy+eMokm0pMy6p6PupMbzK6Ga7+X68pU1ZbDXpavWzT+CZXhyqSSUdb3w==", 
         "./doc/usage.rst": "ZZUbiO/C5lvjGuFqJmNs+3Br+2bJAxySavtnWq5HacgDgoAiRoCjLxbv/nEi7Nq5/CspLEsir/INO84ihwbdUQ==", 
-        "./requirements.txt": "LSnP1xhQ/3CwNFEOJrx8qHwr3+qvnUjAUjJ67jsqHZXBgHq1HRao0UngJgRaNdNKYLHhm5/I/f6r6fnKcokCEw==", 
+        "./requirements.txt": "9Ay6H0lzqrxG4Ks+wUhkkALTzk1EsLI+6529i2aFeMVUWW7E4Qzwpnq5sIrsIigavH8czH7sBoIzbIvWfOK9sQ==", 
         "./setup.cfg": "8uwI0TFNXvUYbyEpwOQE+JsHACLlacNmRJ2vQT8+vpKCwS2aIwrTP+ejCkRuti0YUyPU6fQC630MOXkuEoAcdQ==", 
-        "./setup.py": "91Z+KkQL/fqabQxKTaOIdt8tXeZ+JoBvECaoasGJ9uht4PqKNZZST8W5QkVl85+97uHX1tEis1NikUXfylZ/HA==", 
+        "./setup.py": "z02niPemfbUpmq/CfpXUvkwr0FG7v1rWDcVFnGgChKWRX+UnSxy8St0xMXjy9XLiOgPAu7PMIdD2QMRR6NXq+w==", 
         "./src": "walou", 
         "./src/pkglts": "walou", 
         "./src/pkglts/data_access.py": "F+iRDbS2swk2/OB7FUJpgSkgLeScPMbQmx2aW7+/Td54kFImr5qR1Fv/J9qu8eFVEZ0f7w9Cffl5ICDqFoK1aQ==", 
-        "./src/pkglts/version.py": "3U0jvrBgNyOV3f4MyDmAfCvGXjGnwdTySTo/3rKZQwywc0FZVYU99r6qYqOk+Q4jvoGKqQeWO/bF8QPlKt0CMQ==", 
+        "./src/pkglts/version.py": "TsmmEN3hiKMNcdMveRxXIYbRRLQexgNjyJfpfewkPCsGAse4OXypYETIra23EhQD/PoWome0YFF9OvWRGKlbPw==", 
         "./src/pkglts_data": "walou", 
         "./src/pkglts_data/__init__.py": "z4PhNX7vuL3xVChQ1m2AB9Yg5AULVxXcg/SpIdNs6c5H0NE8XYXysP+DGNKHfuwvY7kxvUdBeoGlODJ6+SfaPg==", 
         "./test": "walou", 
@@ -76,6 +76,9 @@
             "34"
         ]
     }, 
+    "pypi": {
+        "option": null
+    }, 
     "readthedocs": {
         "option": null
     }, 
@@ -95,6 +98,6 @@
         "auto": "off", 
         "major": "0", 
         "minor": "1", 
-        "post": "0"
+        "post": "1"
     }
 }
