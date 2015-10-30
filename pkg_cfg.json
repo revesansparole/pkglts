@@ -29,7 +29,7 @@
         "./HISTORY.rst": "fmzGsCQ/hOSsupj31f6l3TVXwzgPDe3wYn2mY5rHu/tUDhvVRvLDbnpMLzIclgVP2O3EX9VfW/tUajU4zXqq/g==", 
         "./LICENSE": "Me1YDWsuNjWZm6uIJl9lDKsFeL6DnHmU712mAk2LAFYJpL41mJEEFfSvnyyypfsKUBVkYqbVTTjouGaFdIUZJw==", 
         "./MANIFEST.in": "NejArBHj54Z0o+tW7Cw0tWKCYlaN9s+pZN4S7J5AT6CexZRsLWDUkZytDWJk9WMOJQx2CUuZgu9ntMRxkmWYNw==", 
-        "./README.rst": "4ndzZr9SEy92BpjWgu6T+RqZMpBB01e3RQHZ/MdNt3vzsRLR0PVkiIyyNF1/SlOa4QP9UAbJi5NAGMbGy9JcEA==", 
+        "./README.rst": "vK0EFAhSuaoi0QgI8xPNTd1I4VnWzzGlxS1Ph4ul0Yg+b0iFvrraaPn/TgJMezPLI/nBQBEtjBqcqRVRMIEJHA==", 
         "./doc": "walou", 
         "./doc/Makefile": "ul5WYkcHnKhDn1SFPh876PNs7aKFDk9uBbk9pgcGZCC25gFxQMwyY9bzFOjNLR4F69D1wRhpcwqArbbDcJUy4g==", 
         "./doc/_static": "walou", 
@@ -54,6 +54,9 @@
         "./test": "walou", 
         "./test/info.rst": "z4PhNX7vuL3xVChQ1m2AB9Yg5AULVxXcg/SpIdNs6c5H0NE8XYXysP+DGNKHfuwvY7kxvUdBeoGlODJ6+SfaPg==", 
         "./tox.ini": "VXgUA8rAJdXPXMYzBupJyIZ+RfGZ5IbOqQo+zJ1dUrxVwRkGijIX2XFwZG70MZ63XLfNTy+r9l0mJ5vl+k+62A=="
+    }, 
+    "landscape": {
+        "option": null
     }, 
     "license": {
         "name": "mit", 
