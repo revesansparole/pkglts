@@ -1,5 +1,6 @@
 tox
 sphinx
+github3.py
 twine
 nose
 coverage

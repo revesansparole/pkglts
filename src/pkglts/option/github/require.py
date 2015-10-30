@@ -1,3 +1,3 @@
 option = ['base']
-setup = ['github3.py']
-install = []
+setup = []
+install = ['github3.py']
