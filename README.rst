@@ -62,11 +62,9 @@ Run 'manage' inside this directory::
     (dvlpt)toto$ manage regenerate
 
 This will create the bare basic minimum for a python package. Add more options
-(see `Add Package Structure Functionality`_ for more options) afterward. Especially,
-since in the example above we just added the 'base' option that will create a 'src'
-directory to put your code in it.
-
-.. _pkglts: https://github.com/revesansparole/pkglts
+(see the 'Add Package Structure Functionality' below for more options) afterward.
+Especially, since in the example above we just added the 'base' option that will
+create a 'src' directory to put your code in it.
 
 Upgrade Package Structure
 =========================
@@ -105,6 +103,8 @@ This phase will never overwrite any files you modified or created. You'll be pro
 in case of conflicts but it is your responsibility to solve them and relaunch the
 command.
 
+.. _pkglts: https://github.com/revesansparole/pkglts
+
 .. _pkg_struct_func:
 
 Add Package Structure Functionality
@@ -113,7 +113,7 @@ Add Package Structure Functionality
 Package Builder provide a set of options to introduce new functionality to an
 already existing package:
 
- - |base|: base option, basic package management
+ - base: base option, basic package management
  - license: will help the developer to choose a license and add the relevant
    files
  - doc: Add some documentation to your package

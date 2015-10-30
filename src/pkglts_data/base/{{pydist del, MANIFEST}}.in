@@ -6,6 +6,7 @@ include README.rst
 include requirements.txt
 
 recursive-include test *
+{{data rm, recursive-include src/{{key, base.pkgname}}_data *}}
 recursive-exclude * __pycache__
 recursive-exclude * *.py[co]
 

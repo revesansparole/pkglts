@@ -31,8 +31,8 @@
         "./AUTHORS.rst": "51gdNUPHfVmcQV9j/wjxQnQKwbZjzF3uI2RyofUcLfY9QtUcuvw+kAlbv1G2iQXAGpCqQZqDyRU28o9OqF3EuA==", 
         "./HISTORY.rst": "ICa1m95y90f+/xA396QHrCJ1Fo8cv3b15d7q0H/f4Dyy2GUm46zJonGq1yxSKfOhwhrL7VkgxLFFrlw0QR/xLQ==", 
         "./LICENSE": "Me1YDWsuNjWZm6uIJl9lDKsFeL6DnHmU712mAk2LAFYJpL41mJEEFfSvnyyypfsKUBVkYqbVTTjouGaFdIUZJw==", 
-        "./MANIFEST.in": "NejArBHj54Z0o+tW7Cw0tWKCYlaN9s+pZN4S7J5AT6CexZRsLWDUkZytDWJk9WMOJQx2CUuZgu9ntMRxkmWYNw==", 
-        "./README.rst": "+/YtN0/WTE0ZFqzSG72TkA5wm7kFGCPf8g74aNNMDvvkbpj1n16IE2ITIV06fww/CjS6Q4zQAb/o6pcz8STNXQ==", 
+        "./MANIFEST.in": "37Y8/JUQzi6741Pfch+IbVizh38j5xt57nmZM3CoZpr/RyBCs881K11Aa5JEKwCy9vEFQRixCZA18OBoUoNGbQ==", 
+        "./README.rst": "ntPK3Z+8oDikF1vRAuITiYDp48D2bg5Fjav+40vjOdaqSM41f1l+A6inbvAw1NgtSuXNiR38rYUd+9hWduXOrA==", 
         "./doc": "walou", 
         "./doc/Makefile": "C58jxdu8XJNOoaWOw7VWy4LwFmS8lTQt/JeZLt5JozMSJ503plOZchucx+vAEzELbx/Czs/h9pshe9s+9HeOeQ==", 
         "./doc/_static": "walou", 
@@ -50,7 +50,7 @@
         "./src": "walou", 
         "./src/pkglts": "walou", 
         "./src/pkglts/data_access.py": "F+iRDbS2swk2/OB7FUJpgSkgLeScPMbQmx2aW7+/Td54kFImr5qR1Fv/J9qu8eFVEZ0f7w9Cffl5ICDqFoK1aQ==", 
-        "./src/pkglts/version.py": "in8iYVH2TilMnKv3L4ziclleCJH7EIAOj1pK42CIyY5IMMxdiM8UtM8hljLMeNtjIPqgzvtYFL9kamgVRSzaEg==", 
+        "./src/pkglts/version.py": "I/GtxtXpxuqMFFDFLU49drACvAgSrQ6cbUpRXrNYPQuon9iYSdUYYdiRu11xCvBeSnhaNIHJjM1g8m8qEpth5g==", 
         "./src/pkglts_data": "walou", 
         "./src/pkglts_data/__init__.py": "z4PhNX7vuL3xVChQ1m2AB9Yg5AULVxXcg/SpIdNs6c5H0NE8XYXysP+DGNKHfuwvY7kxvUdBeoGlODJ6+SfaPg==", 
         "./test": "walou", 
@@ -97,6 +97,6 @@
         "auto": "off", 
         "major": "0", 
         "minor": "1", 
-        "post": "2"
+        "post": "3"
     }
 }
