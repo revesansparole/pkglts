@@ -17,10 +17,7 @@ def ensure_login(pkg_cfg, recursion_ind=0):
     if recursion_ind > 3:
         raise UserWarning("Pb, infinite recursion in github login")
 
-    cfg = pkg_cfg['github']
-    owner = pkg_cfg['base']['owner']
-    project = cfg['project']
-
+    # check for login in same session
     try:
         gh = pkg_cfg['_session']['github']
         try:
@@ -28,6 +25,8 @@ def ensure_login(pkg_cfg, recursion_ind=0):
             return gh, repo
         except KeyError:
             try:
+                owner = pkg_cfg['base']['owner']
+                project = pkg_cfg['github']['project']
                 repo = gh.repository(owner, project)
                 pkg_cfg['_session']['github_repo'] = repo
                 return gh, repo
@@ -39,6 +38,7 @@ def ensure_login(pkg_cfg, recursion_ind=0):
     except KeyError:
         pass
 
+    # check for cheat codes in a cookie file
     if exists(".cookie.json"):
         with open(".cookie.json", 'r') as f:
             cookie = json.load(f)
@@ -48,7 +48,7 @@ def ensure_login(pkg_cfg, recursion_ind=0):
     if 'login' in cookie:
         user = cookie['login']
     else:
-        user = ask_arg("github.user", pkg_cfg, "", cfg)
+        user = ask_arg("login", {}, "", {})
         if user == "":
             print("anonymous forbidden")
             return ensure_login(pkg_cfg, recursion_ind + 1)
@@ -56,14 +56,18 @@ def ensure_login(pkg_cfg, recursion_ind=0):
     if 'password' in cookie:
         pwd = cookie['password']
     else:
-        pwd = ask_arg("github.password", pkg_cfg, "", cfg)
+        pwd = ask_arg("password", {}, "", {})
         if pwd == "":
             print("need your password, sorry")
             return ensure_login(pkg_cfg, recursion_ind + 1)
 
     gh = login(user, pwd)
+    owner = pkg_cfg['base']['owner']
+    project = pkg_cfg['github']['project']
     try:
         repo = gh.repository(owner, project)
+        if repo.is_null():
+            return ensure_login(pkg_cfg, recursion_ind + 1)
     except GitHubError:
         print ("bad credentials")
         return ensure_login(pkg_cfg, recursion_ind + 1)
