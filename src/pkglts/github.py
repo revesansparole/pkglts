@@ -24,13 +24,13 @@ def ensure_login(pkg_cfg, recursion_ind=0):
         gh = pkg_cfg['_session']['github']
         try:
             repo = pkg_cfg['_session']['github_repo']
-            return gh, repo
+            return repo
         except KeyError:
             try:
                 owner = pkg_cfg['base']['owner']
                 repo = gh.repository(owner, project)
                 pkg_cfg['_session']['github_repo'] = repo
-                return gh, repo
+                return repo
             except GitHubError:
                 print ("bad credentials")
                 del pkg_cfg['_session']['github']
@@ -81,13 +81,13 @@ def ensure_login(pkg_cfg, recursion_ind=0):
     pkg_cfg['_session']['github'] = gh
     pkg_cfg['_session']['github_repo'] = repo
 
-    return gh, repo
+    return repo
 
 
 def fetch_contributors(pkg_cfg):
     """ Try to list all contributors for a github project
     """
-    gh, repo = ensure_login(pkg_cfg)
+    repo = ensure_login(pkg_cfg)
 
     info = []
     for user in repo.contributors():
@@ -103,7 +103,7 @@ def fetch_contributors(pkg_cfg):
 def fetch_history(pkg_cfg):
     """ Get the list of commit messages
     """
-    gh, repo = ensure_login(pkg_cfg)
+    # repo = ensure_login(pkg_cfg)
 
     info = []
     # TODO
