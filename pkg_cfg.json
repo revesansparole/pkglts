@@ -24,11 +24,12 @@
     "hash": {
         "./.coveragerc": "1apfDzrl8AY4B4M9gp8L7swJLNc6iqF3S7FH/VOZi6xEwHSgiPKm4HV+pclIunO+rutJkreU1UIerxl+uiYpzg==", 
         "./.gitignore": "nH1VC3m9f1c/HPvaQge/Gg+l2hjeT1KUJWEBxjchs8UvOmD/B7H+ZvqLE6Oc/ISwsWsvOG+Vqv2WXJSY2mGA8g==", 
+        "./.travis.yml": "5aE6NiQsb/eK0gxBZtd8MWc+qIe/XNhREJ1xCL0aqDCkmyOWja3hGCVR3BoV3nSvzGjU3ySPUf9yHkArTUJO0Q==", 
         "./AUTHORS.rst": "XlSz5xtF8xdGHrafhDem7i9fpKeXlX6v9RJLPa+7T+QIw/L64HXilOQFSv7D9ta3k2tHbvIeLB1uykvbFI5Raw==", 
         "./HISTORY.rst": "fmzGsCQ/hOSsupj31f6l3TVXwzgPDe3wYn2mY5rHu/tUDhvVRvLDbnpMLzIclgVP2O3EX9VfW/tUajU4zXqq/g==", 
         "./LICENSE": "Me1YDWsuNjWZm6uIJl9lDKsFeL6DnHmU712mAk2LAFYJpL41mJEEFfSvnyyypfsKUBVkYqbVTTjouGaFdIUZJw==", 
         "./MANIFEST.in": "NejArBHj54Z0o+tW7Cw0tWKCYlaN9s+pZN4S7J5AT6CexZRsLWDUkZytDWJk9WMOJQx2CUuZgu9ntMRxkmWYNw==", 
-        "./README.rst": "fPR39VjhpW2hnozL5r8U+fqkpRlu0mlJn/G6+ar0rcOIbu3EaOoeuuSGwfdi75hav4oAMMTDaYkMyNxqoUQ5wg==", 
+        "./README.rst": "tuHZruJliHG3b8tK+1DpyoYr4AZAifxFqHDK4INlFw22Xtc1D8YgNIBgcK7lnGMrStYlPe87l267earTqVjQgA==", 
         "./doc": "walou", 
         "./doc/Makefile": "ul5WYkcHnKhDn1SFPh876PNs7aKFDk9uBbk9pgcGZCC25gFxQMwyY9bzFOjNLR4F69D1wRhpcwqArbbDcJUy4g==", 
         "./doc/_static": "walou", 
@@ -76,6 +77,9 @@
         "option": "None"
     }, 
     "tox": {
+        "option": null
+    }, 
+    "travis": {
         "option": null
     }, 
     "version": {
