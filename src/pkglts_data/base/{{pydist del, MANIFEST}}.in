@@ -1,0 +1,13 @@
+include AUTHORS.rst
+{{github rm, include CONTRIBUTING.rst}}
+include HISTORY.rst
+include LICENSE
+include README.rst
+include requirements.txt
+
+recursive-include test *
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
+
+recursive-include doc *.rst{{sphinx rm,  conf.py Makefile make.bat}}
+
