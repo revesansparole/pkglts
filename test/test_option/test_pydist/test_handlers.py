@@ -1,8 +1,26 @@
-from nose.tools import assert_raises
+import json
+from nose.tools import assert_raises, with_setup
+from os import chdir, mkdir
+from os.path import exists
+from shutil import rmtree
 
-from pkglts.option.pydist.handlers import mapping, requirements, get_url
+from pkglts.option.pydist.handlers import (get_extra, get_url,
+                                           mapping, requirements)
 
-# TODO get_extra
+tmp_dir = "tmp_hpydist"
+
+
+def setup_func():
+    if not exists(tmp_dir):
+        mkdir(tmp_dir)
+
+    chdir(tmp_dir)
+
+
+def teardown_func():
+    chdir("..")
+    if exists(tmp_dir):
+        rmtree(tmp_dir)
 
 
 def test_handlers():
@@ -51,3 +69,23 @@ def test_get_url_avoid_none_urls():
         pkg_cfg = dict((n, {'url': None}) for n in places)
         pkg_cfg[name]['url'] = name
         assert get_url("txt", pkg_cfg) == name
+
+
+@with_setup(setup_func, teardown_func)
+def test_get_extra_return_txt_if_no_extra():
+    txt = get_extra("txt", {})
+    assert txt == "txt"
+
+
+@with_setup(setup_func, teardown_func)
+def test_get_extra_read_entry_point_json():
+    eps = dict(toto1=["ep1", "ep2"], toto2=["ep3"])
+    with open("entry_points.json", 'w') as f:
+        json.dump(eps, f)
+
+    txt = get_extra("txt", {})
+
+    assert "toto1" in txt
+    assert "toto2" in txt
+    for i in range(1, 4):
+        assert "ep%d" % i in txt
