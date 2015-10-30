@@ -35,7 +35,7 @@ def test_main():
 
 
 def test_example_func_default_to_beau_texte():
-    assert ex.example_func() == "beau texte"
+    assert ex.example_func() == "nice text"
 
 
 def test_example_func_default_return_given_txt():
@@ -44,7 +44,7 @@ def test_example_func_default_return_given_txt():
 
 def test_example_class_creation():
     eg = ex.ExampleClass()
-    assert eg.txt() == "texte encore plus beau"
+    assert eg.txt() == "much more beautifull text"
 
 
 class TestExampleClass(object):
@@ -63,4 +63,4 @@ class TestExampleClass(object):
 
     def test_method(self):
         print("test method")
-        assert self.eg.txt() == "texte encore plus beau"
+        assert self.eg.txt() == "much more beautifull text"
