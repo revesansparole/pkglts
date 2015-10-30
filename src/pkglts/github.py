@@ -66,8 +66,11 @@ def ensure_login(pkg_cfg, recursion_ind=0):
     project = pkg_cfg['github']['project']
     try:
         repo = gh.repository(owner, project)
-        if repo.is_null():
-            return ensure_login(pkg_cfg, recursion_ind + 1)
+        try:
+            if repo.is_null():
+                return ensure_login(pkg_cfg, recursion_ind + 1)
+        except AttributeError:
+            pass
     except GitHubError:
         print ("bad credentials")
         return ensure_login(pkg_cfg, recursion_ind + 1)
