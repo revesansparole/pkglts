@@ -4,7 +4,7 @@
 import os
 
 
-def example_func(txt="beau texte"):
+def example_func(txt="nice text"):
     """Print txt message and return it.
     """
     print(txt)
@@ -17,7 +17,7 @@ class ExampleClass(object):
     """
 
     def __init__(self):
-        self._txt = "texte encore plus beau"
+        self._txt = "much more beautifull text"
 
     def txt(self):
         return self._txt
