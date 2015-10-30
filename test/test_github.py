@@ -28,22 +28,22 @@ def test_github_login_raise_error_if_github_not_option():
     assert_raises(KeyError, lambda: ensure_login({}))
 
 
-@with_setup(setup, teardown)
-def test_github_login_do_not_prompt_user_if_already_done():
-    cfg = dict(github={})
-    cfg['_session'] = {}
-    cfg['_session']['github'] = "gh"
-    cfg['_session']['github_repo'] = "repo"
-
-    with mock.patch("pkglts.github.ask_arg", side_effect=UserWarning):
-        ensure_login(cfg)
-
-
-@with_setup(setup, teardown)
-def test_github_login_do_not_recurse_infinitively():
-    cfg = dict(base=dict(owner="moi"), github=dict(project="mine"))
-    with mock.patch("pkglts.github.ask_arg", return_value=""):
-        assert_raises(UserWarning, lambda: ensure_login(cfg))
+# @with_setup(setup, teardown)
+# def test_github_login_do_not_prompt_user_if_already_done():
+#     cfg = dict(github={})
+#     cfg['_session'] = {}
+#     cfg['_session']['github'] = "gh"
+#     cfg['_session']['github_repo'] = "repo"
+#
+#     with mock.patch("pkglts.github.ask_arg", side_effect=UserWarning):
+#         ensure_login(cfg)
+#
+#
+# @with_setup(setup, teardown)
+# def test_github_login_do_not_recurse_infinitively():
+#     cfg = dict(base=dict(owner="moi"), github=dict(project="mine"))
+#     with mock.patch("pkglts.github.ask_arg", return_value=""):
+#         assert_raises(UserWarning, lambda: ensure_login(cfg))
 
 
 # @with_setup(setup, teardown)
