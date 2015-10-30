@@ -64,7 +64,7 @@ setup(
     # }}
     install_requires=open("requirements.txt").read().split("\n"),
     tests_require=[],
-    # {{plugin.setup rm,
+    # {{plugin.setup pydist.extra rm,
     entry_points={
         # 'console_scripts': [
         #       'fake_script = openalea.fakepackage.amodule:console_script', ],

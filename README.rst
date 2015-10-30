@@ -46,9 +46,9 @@ Activate it::
 
     $ dvlpt/Scripts/activate
 
-Install ltpkgbuilder_::
+Install pkglts_::
 
-    (dvlpt)$ pip install ltpkgbuilder
+    (dvlpt)$ pip install pkglts
 
 Create a directory for your package::
 
@@ -66,7 +66,7 @@ This will create the bare basic minimum for a python package. Add more options
 since in the example above we just added the 'base' option that will create a 'src'
 directory to put your code in it.
 
-.. _ltpkgbuilder: https://github.com/revesansparole/ltpkgbuilder
+.. _pkglts: https://github.com/revesansparole/pkglts
 
 Upgrade Package Structure
 =========================
@@ -79,7 +79,7 @@ Packages generated with Package Builder contains three different types of files:
    change and not meant to be modified by user. These files are generated
    automatically by the package builder using templates provided with the package.
  - developer data and modules edited by hand which contains the actual python
-   code of the package independently of the structure of the package. ltpkgbuilder_
+   code of the package independently of the structure of the package. pkglts_
    will never touch them. If they conflict with some files used by a newly
    added option, the user will be prompted and will have to solve the conflict
    to install the option.
@@ -231,4 +231,4 @@ You can contribute to this package by:
 
 
 .. :begin_links_section:
-.. _base: http://ltpkgbuilder.readthedocs.org/en/latest/option/base/main.html
+.. _base: http://pkglts.readthedocs.org/en/latest/option/base/main.html

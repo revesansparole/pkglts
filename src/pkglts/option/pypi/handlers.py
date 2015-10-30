@@ -1,0 +1,17 @@
+def get_classifiers(txt, env):
+    cfg = env['pydist']
+
+    items = [" " * 8 + "'%s'," % key for key in cfg['classifiers']]
+
+    # add license item
+    # TODO
+
+    # add intended versions items
+    ver_cla_tpl = " " * 8 + "'Programming Language :: Python :: %s.%s',"
+    for ver in cfg['intended_versions']:
+        items.append(ver_cla_tpl % (ver[0], ver[1]))
+
+    return "\n" + "\n".join(items)
+
+
+mapping = {"pypi.classifiers": get_classifiers}

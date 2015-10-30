@@ -11,7 +11,7 @@ Install python (multiple versions?)
 
 Create virtual env
 
-Install ltpkgbuilder that will install all its dependencies
+Install pkglts that will install all its dependencies
 
 
 To go further

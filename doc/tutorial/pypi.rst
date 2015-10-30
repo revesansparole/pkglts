@@ -9,7 +9,7 @@ Setting up your development environment
 =======================================
 
 I will assume you already have a development environment running with
-ltpkgbuilder installed. If not check :doc:dvlpt_env.
+pkglts installed. If not check :doc:dvlpt_env.
 
 In the following, I will assume you have created a 'dvlpt' virtual environment
 and that you activated it. Just forget about it if you are not using virtual

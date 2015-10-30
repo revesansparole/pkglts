@@ -1,2 +1,3 @@
-__author__ = 'base.author_name'
-__email__ = 'base.author_email'
+from .version import __version__
+
+__version__ = version.__version__

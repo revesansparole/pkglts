@@ -1,0 +1,5 @@
+{
+    "console_scripts": [
+        "manage = pkglts.manage_script:main"
+    ]
+}

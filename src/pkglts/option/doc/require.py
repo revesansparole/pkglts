@@ -1,0 +1,3 @@
+option = ['base']
+setup = []
+install = []

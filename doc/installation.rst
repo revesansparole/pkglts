@@ -9,15 +9,15 @@ Download source then, at the command line::
 
 Alternatively the command line::
 
-    $ easy_install ltpkgbuilder
+    $ easy_install pkglts
 
 Or::
 
-    $ pip install ltpkgbuilder
+    $ pip install pkglts
 
 Preferred method use virtual environments::
 
     $ virtualenv 'myenv'
     $ myenv/scripts/activate
-    (myenv)$ pip install ltpkgbuilder
+    (myenv)$ pip install pkglts
 

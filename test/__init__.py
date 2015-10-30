@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 
 def setup_package():
     """Some code executed once when test are loaded.

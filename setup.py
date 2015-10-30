@@ -58,7 +58,12 @@ setup(
     
     install_requires=open("requirements.txt").read().split("\n"),
     tests_require=[],
-    
+        entry_points={
+        'console_scripts': [
+            'manage = pkglts.manage_script:main',
+        ],
+    },
+
     keywords='packaging, package builder',
     
     classifiers=[  

@@ -16,7 +16,9 @@ lib
 lib64
 
 # user defined
-# nothing
+try
+.cookie.json
+
 
 # editors
 .idea
