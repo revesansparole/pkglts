@@ -17,6 +17,8 @@ def ensure_login(pkg_cfg, recursion_ind=0):
     if recursion_ind > 3:
         raise UserWarning("Pb, infinite recursion in github login")
 
+    project = pkg_cfg['github']['project']
+
     # check for login in same session
     try:
         gh = pkg_cfg['_session']['github']
@@ -26,7 +28,6 @@ def ensure_login(pkg_cfg, recursion_ind=0):
         except KeyError:
             try:
                 owner = pkg_cfg['base']['owner']
-                project = pkg_cfg['github']['project']
                 repo = gh.repository(owner, project)
                 pkg_cfg['_session']['github_repo'] = repo
                 return gh, repo
@@ -48,7 +49,7 @@ def ensure_login(pkg_cfg, recursion_ind=0):
     if 'login' in cookie:
         user = cookie['login']
     else:
-        user = ask_arg("login", {}, "", {})
+        user = ask_arg("github.login", {}, "", {})
         if user == "":
             print("anonymous forbidden")
             return ensure_login(pkg_cfg, recursion_ind + 1)
@@ -63,7 +64,6 @@ def ensure_login(pkg_cfg, recursion_ind=0):
 
     gh = login(user, pwd)
     owner = pkg_cfg['base']['owner']
-    project = pkg_cfg['github']['project']
     try:
         repo = gh.repository(owner, project)
         try:
