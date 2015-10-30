@@ -1,7 +1,7 @@
 from nose.tools import assert_raises
 
 from pkglts.local import (load_handlers, load_all_handlers,
-                                installed_options, src_dir)
+                          installed_options, src_dir)
 
 
 print(__file__)
