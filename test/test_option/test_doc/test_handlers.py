@@ -16,9 +16,9 @@ def test_badges():
 
 
 def test_badges_number():
-    web_services = ("readthedocs", "travis", "coveralls", "landscape")
+    web_services = ("readthedocs", "travis", "coveralls", "landscape", "pypi")
     pkg_cfg = dict((name, {}) for name in web_services)
-    pkg_cfg["base"] = dict(owner='toto')
+    pkg_cfg["base"] = dict(owner='toto', pkgname='pkgname')
     pkg_cfg["github"] = dict(project='project')
     txt = badges("txt", pkg_cfg)
     assert txt.count(".. image::") == len(web_services)

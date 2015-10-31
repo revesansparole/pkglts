@@ -18,6 +18,10 @@ pkglts
     :alt: Code health status
     :target: https://landscape.io/github/revesansparole/pkglts/master
 
+.. image:: https://badge.fury.io/py/pkglts.svg
+    :alt: PyPI version
+    :target: https://badge.fury.io/py/pkglts
+
 Building packages with long term support
 
 At it simplest, a Python_ package is a mere directory with a '__init__.py' file

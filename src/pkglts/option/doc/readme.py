@@ -12,6 +12,7 @@ def badges(txt, env):  # TODO: maybe not the right place for badge knowledge
         return txt
 
     owner = env['base']['owner']
+    pkgname = env['base']['pkgname']
     project = env['github']['project']
 
     items = []
@@ -35,6 +36,11 @@ def badges(txt, env):  # TODO: maybe not the right place for badge knowledge
         url = "landscape.io/github/%s/%s/master" % (owner, project)
         badge = url + "/landscape.svg?style=flat"
         items.append(fmt_badge(badge, url, "Code health status"))
+
+    if 'pypi' in env:
+        url = "badge.fury.io/py/%s" % pkgname
+        badge = url + ".svg"
+        items.append(fmt_badge(badge, url, "PyPI version"))
 
     return "\n\n".join(items)
 
