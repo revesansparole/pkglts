@@ -49,6 +49,7 @@ def main():
         print "regenerate"
         overwrite = 'overwrite' in extra
         pkg_cfg = get_pkg_config()
+        clean()
         regenerate(pkg_cfg, overwrite=overwrite)
         write_pkg_config(pkg_cfg)
     elif args.action == 'add':

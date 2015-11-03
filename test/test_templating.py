@@ -18,6 +18,12 @@ def test_replace_handle_no_div():
     assert txt == new_txt
 
 
+def test_replace_handle_bracket_end():
+    txt = "d = {'toto': 1}"
+    new_txt = replace(txt, {}, None)
+    assert txt == new_txt
+
+
 def test_replace_handle_unknown_div_class():
     txt = """
 print 'before'

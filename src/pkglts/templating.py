@@ -83,7 +83,7 @@ def parse(txt, comment_marker):
             i += ind + 1
             if txt[i] == " ":
                 i += 1  # strip space after comma
-        elif txt[i] == "}" and txt[i + 1] == "}":  # TODO potential trouble if text finish with single }
+        elif txt[i] == "}" and ((i + 1) < len(txt) and txt[i + 1] == "}"):  # TODO potential trouble if text finish with single }
             cur_node.parent.post_fmt = find_fmt_chars(cur_node, comment_marker)
             cur_node = Node("txt", cur_node.parent.parent)
             i += 2

@@ -5,14 +5,15 @@ Use 'setup.py' for common tasks.
 """
 
 import json
-from os import remove, walk
-from os.path import exists, splitext
+from os import listdir, remove, walk
+from os.path import exists, isdir, splitext
 from os.path import join as pj
 from shutil import rmtree
 
 from .local import load_all_handlers, installed_options
 from .manage_tools import check_tempering, regenerate_dir, update_opt
 from .option_tools import get_user_permission
+from .templating import get_comment_marker, replace
 from .versioning import get_github_version, get_local_version
 
 
@@ -163,6 +164,27 @@ def add_option(name, pkg_cfg, extra=None):
     return update_opt(name, pkg_cfg, extra)
 
 
+def regenerate_file(name, pkg_cfg, handlers):
+    """ Parse the content of a file for {{div}}
+    use handlers to modify the content and rewrite file
+
+    args:
+     - name (str): name of file to scan/modify
+     - pkg_cfg (dict of (str, dict)): package configuration parameters
+     - handlers (dict of (str, handler)): functions used to modify text
+    """
+    print "reg", name
+    with open(name, 'r') as f:
+        src_content = f.read()
+
+    new_src_content = replace(src_content, handlers, pkg_cfg,
+                              get_comment_marker(name))
+
+    # overwrite file without any warning
+    with open(name[:-4] + "_modif" + name[-4:], 'w') as f:
+        f.write(new_src_content)
+
+
 def regenerate(pkg_cfg, target=".", overwrite=False):
     """ Rebuild all automatically generated files
 
@@ -188,3 +210,19 @@ def regenerate(pkg_cfg, target=".", overwrite=False):
 
     # walk all files in repo and regenerate them
     regenerate_dir(root, target, handlers, pkg_cfg, True)
+
+    # walk all files in package and replace div inside if needed
+    # TODO: use gitignore to ignore some directories/files
+    for fname in listdir(target):
+        if not isdir(fname):
+            regenerate_file(fname, pkg_cfg, handlers)
+
+    for dname in ("doc", "src", "test"):
+        for pdir, dnames, fnames in walk(pj(target, dname)):
+            for name in tuple(dnames):
+                if "regenerate.no" in listdir(pj(pdir, name)):
+                    dnames.remove(name)
+
+            for name in fnames:
+                if splitext(name) not in (".pyc", ".pyo"):
+                    regenerate_file(pj(pdir, name), pkg_cfg, handlers)
