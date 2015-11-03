@@ -103,6 +103,221 @@ def test_replace_preserve_indentation():
     assert new_txt == "print 'toto'\n\tTOTO"
 
 
+def test_replace_preserve_upstream_fmt1():
+    handlers = {'upper': upper}
+
+    txt = """
+before = 1
+# {{upper, inside = 1}}
+after = 1
+"""
+    res = """
+before = 1
+INSIDE = 1
+after = 1
+"""
+    new_txt = replace(txt, handlers, None)
+    assert new_txt == res
+
+
+def test_replace_preserve_upstream_fmt2():
+    handlers = {'upper': upper}
+
+    txt = """
+before = 1
+
+# {{upper, inside = 1}}
+after = 1
+"""
+    res = """
+before = 1
+
+INSIDE = 1
+after = 1
+"""
+    new_txt = replace(txt, handlers, None)
+    assert new_txt == res
+
+
+def test_replace_preserve_upstream_fmt3():
+    handlers = {'upper': upper}
+
+    txt = """
+before = 1
+# {{upper,
+inside = 1
+# }}
+after = 1
+"""
+    res = """
+before = 1
+INSIDE = 1
+after = 1
+"""
+    new_txt = replace(txt, handlers, None)
+    assert new_txt == res
+
+
+def test_replace_preserve_upstream_fmt4():
+    handlers = {'upper': upper}
+
+    txt = """
+before = 1
+
+# {{upper,
+inside = 1
+# }}
+after = 1
+"""
+    res = """
+before = 1
+
+INSIDE = 1
+after = 1
+"""
+    new_txt = replace(txt, handlers, None)
+    assert new_txt == res
+
+
+def test_replace_preserve_upstream_fmt5():
+    handlers = {'upper': upper}
+
+    txt = """
+before = 1
+
+# {{upper, inside = 1}}
+after = 1
+"""
+    res = """
+before = 1
+
+INSIDE = 1
+after = 1
+"""
+    new_txt = replace(txt, handlers, None)
+    assert new_txt == res
+
+
+def test_replace_preserve_downstream_fmt1():
+    handlers = {'upper': upper}
+
+    txt = """
+before = 1
+# {{upper, inside = 1}}
+after = 1
+"""
+    res = """
+before = 1
+INSIDE = 1
+after = 1
+"""
+    new_txt = replace(txt, handlers, None)
+    assert new_txt == res
+
+
+def test_replace_preserve_downstream_fmt2():
+    handlers = {'upper': upper}
+
+    txt = """
+before = 1
+# {{upper, inside = 1}}
+
+after = 1
+"""
+    res = """
+before = 1
+INSIDE = 1
+
+after = 1
+"""
+    new_txt = replace(txt, handlers, None)
+    assert new_txt == res
+
+
+def test_replace_preserve_downstream_fmt3():
+    handlers = {'upper': upper}
+
+    txt = """
+before = 1
+# {{upper,
+inside = 1
+# }}
+after = 1
+"""
+    res = """
+before = 1
+INSIDE = 1
+after = 1
+"""
+    new_txt = replace(txt, handlers, None)
+    assert new_txt == res
+
+
+def test_replace_preserve_downstream_fmt4():
+    handlers = {'upper': upper}
+
+    txt = """
+before = 1
+# {{upper,
+inside = 1
+# }}
+
+after = 1
+"""
+    res = """
+before = 1
+INSIDE = 1
+
+after = 1
+"""
+    new_txt = replace(txt, handlers, None)
+    assert new_txt == res
+
+
+def test_replace_preserve_downstream_fmt5():
+    handlers = {'upper': upper}
+
+    txt = """
+before = 1
+# {{upper,
+inside = 1
+
+# }}
+after = 1
+"""
+    res = """
+before = 1
+INSIDE = 1
+
+after = 1
+"""
+    new_txt = replace(txt, handlers, None)
+    assert new_txt == res
+
+
+def test_replace_preserve_downstream_fmt6():
+    handlers = {'upper': upper}
+
+    txt = """
+before = 1
+# {{upper,
+
+inside = 1
+
+# }}
+after = 1
+"""
+    res = """
+before = 1
+
+INSIDE = 1
+
+after = 1
+"""
+    new_txt = replace(txt, handlers, None)
+    assert new_txt == res
+
+
 def test_replace_preserve_spacing():
     txt = "title\n=====\n\n{{upper, toto}}\n\n"
     handlers = {'upper': upper}
@@ -216,6 +431,168 @@ def test_template_handle_different_types_of_comments_div():
     txt = "before = 1\n.. {{div,\n\ninside = 1\n.. }}\n\nafter = 1"
     new_txt = replace(txt, {}, {}, comment_marker=".. ")
     assert new_txt == "before = 1\n\ninside = 1\n\nafter = 1"
+
+
+def test_template_pkglts_upstream_fmt1():
+    handlers = {'upper': upper}
+
+    txt = """
+before = 1
+# {{pkglts upper, inside = 1}}
+after = 1
+"""
+    res = """
+before = 1
+# {{pkglts upper, INSIDE = 1}}
+after = 1
+"""
+    new_txt = replace(txt, handlers, None)
+    assert new_txt == res
+
+
+def test_template_pkglts_upstream_fmt2():
+    handlers = {'upper': upper}
+
+    txt = """
+before = 1
+
+# {{pkglts upper, inside = 1}}
+after = 1
+"""
+    res = """
+before = 1
+
+# {{pkglts upper, INSIDE = 1}}
+after = 1
+"""
+    new_txt = replace(txt, handlers, None)
+    assert new_txt == res
+
+
+def test_template_pkglts_upstream_fmt3():
+    handlers = {'upper': upper}
+
+    txt = """
+before = 1
+# {{pkglts upper,
+inside = 1
+# }}
+after = 1
+"""
+    res = """
+before = 1
+# {{pkglts upper,
+INSIDE = 1
+# }}
+after = 1
+"""
+    new_txt = replace(txt, handlers, None)
+    assert new_txt == res
+
+
+def test_template_pkglts_upstream_fmt4():
+    handlers = {'upper': upper}
+
+    txt = """
+before = 1
+
+# {{pkglts upper,
+inside = 1
+# }}
+after = 1
+"""
+    res = """
+before = 1
+
+# {{pkglts upper,
+INSIDE = 1
+# }}
+after = 1
+"""
+    new_txt = replace(txt, handlers, None)
+    assert new_txt == res
+
+
+def test_template_pkglts_downstream_fmt1():
+    handlers = {'upper': upper}
+
+    txt = """
+before = 1
+# {{pkglts upper, inside = 1}}
+
+after = 1
+"""
+    res = """
+before = 1
+# {{pkglts upper, INSIDE = 1}}
+
+after = 1
+"""
+    new_txt = replace(txt, handlers, None)
+    assert new_txt == res
+
+
+def test_template_pkglts_downstream_fmt2():
+    handlers = {'upper': upper}
+
+    txt = """
+before = 1
+# {{pkglts upper, inside = 1 }}
+after = 1
+"""
+    res = """
+before = 1
+# {{pkglts upper, INSIDE = 1 }}
+after = 1
+"""
+    new_txt = replace(txt, handlers, None)
+    assert new_txt == res
+
+
+def test_template_pkglts_downstream_fmt3():
+    handlers = {'upper': upper}
+
+    txt = """
+before = 1
+# {{pkglts upper,
+inside = 1
+
+# }}
+after = 1
+"""
+    res = """
+before = 1
+# {{pkglts upper,
+INSIDE = 1
+
+# }}
+after = 1
+"""
+    new_txt = replace(txt, handlers, None)
+    assert new_txt == res
+
+
+def test_template_pkglts_inline_to_div1():
+    def upper_div(txt, env):
+        return "\n" + txt.upper() + "\n"
+
+    handlers = {'upper': upper_div}
+
+    txt = """
+before = 1
+# {{pkglts upper, inside = 1}}
+after = 1
+"""
+    res = """
+before = 1
+# {{pkglts upper,
+INSIDE = 1
+# }}
+after = 1
+"""
+    new_txt = replace(txt, handlers, None)
+    assert new_txt == res
+
 
 
 def test_get_comment_marker():

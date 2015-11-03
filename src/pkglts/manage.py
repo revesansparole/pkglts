@@ -181,7 +181,11 @@ def regenerate_file(name, pkg_cfg, handlers):
                               get_comment_marker(name))
 
     # overwrite file without any warning
-    with open(name[:-4] + "_modif" + name[-4:], 'w') as f:
+    if "modif" in name:
+        new_name = name
+    else:
+        new_name = name[:-4] + "_modif" + name[-4:]
+    with open(new_name, 'w') as f:
         f.write(new_src_content)
 
 
@@ -214,8 +218,8 @@ def regenerate(pkg_cfg, target=".", overwrite=False):
     # walk all files in package and replace div inside if needed
     # TODO: use gitignore to ignore some directories/files
     for fname in listdir(target):
-        if not isdir(fname):
-            regenerate_file(fname, pkg_cfg, handlers)
+        if not isdir(pj(target, fname)):
+            regenerate_file(pj(target, fname), pkg_cfg, handlers)
 
     for dname in ("doc", "src", "test"):
         for pdir, dnames, fnames in walk(pj(target, dname)):

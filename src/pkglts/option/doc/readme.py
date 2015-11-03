@@ -8,7 +8,6 @@ def fmt_badge(badge, url, txt):
 def badges(txt, env):  # TODO: maybe not the right place for badge knowledge
     """ Produce relevant image links to include web services badges
     """
-    print "badges", env
     if 'github' not in env:
         return txt
 
@@ -16,7 +15,6 @@ def badges(txt, env):  # TODO: maybe not the right place for badge knowledge
     pkgname = env['base']['pkgname']
     project = env['github']['project']
 
-    print "badges pass"
     items = []
     if 'readthedocs' in env:
         badge = "readthedocs.org/projects/%s/badge/?version=latest" % project
@@ -47,7 +45,7 @@ def badges(txt, env):  # TODO: maybe not the right place for badge knowledge
     if len(items) == 0:
         return txt
     else:
-        return "\n\n" + "\n\n".join(items) + "\n\n.. "
+        return "\n\n" + "\n\n".join(items) + "\n"
 
 
 def get_body(txt, env):

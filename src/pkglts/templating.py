@@ -33,6 +33,7 @@ def end_with_comment(data, comment_marker):
 
 def find_fmt_chars(node, comment_marker):
     """ Consume all characters in node.data up to a comment marker
+    more or less
 
     returns:
       - (str): string of consumed characters
@@ -40,6 +41,7 @@ def find_fmt_chars(node, comment_marker):
     nb = len(comment_marker)
     fmt = []
     has_marker = False
+    nb_new_line = 0
     cont = True
     while cont and len(node.data) > 0:
         if end_with_comment(node.data, comment_marker):
@@ -48,8 +50,15 @@ def find_fmt_chars(node, comment_marker):
                 fmt.insert(0, node.data[-1])
                 del node.data[-1]
         elif node.data[-1] in space_chars:
-            fmt.insert(0, node.data[-1])
-            del node.data[-1]
+            if has_marker:
+                if node.data[-1] == "\n":
+                    if nb_new_line == 0:
+                        nb_new_line = 1
+                    else:
+                        cont = False
+            if cont:
+                fmt.insert(0, node.data[-1])
+                del node.data[-1]
         else:
             cont = False
 
@@ -83,7 +92,7 @@ def parse(txt, comment_marker):
             i += ind + 1
             if txt[i] == " ":
                 i += 1  # strip space after comma
-        elif txt[i] == "}" and ((i + 1) < len(txt) and txt[i + 1] == "}"):  # TODO potential trouble if text finish with single }
+        elif txt[i] == "}" and ((i + 1) < len(txt) and txt[i + 1] == "}"):
             cur_node.parent.post_fmt = find_fmt_chars(cur_node, comment_marker)
             cur_node = Node("txt", cur_node.parent.parent)
             i += 2
@@ -167,12 +176,21 @@ def div_replace(node, handlers, env, comment_marker):
         else:  # by construction it must be a div node
             txt += div_replace(child, handlers, env, comment_marker)
 
+    # replace txt
+    handler = get_handler(node.key, handlers)
+    new_txt = handler(txt, env)
+
     # handle formatting
     if node.key.split(" ")[0] == "pkglts":
         pre = node.pre_fmt + "{{%s," % node.key
-        if not txt.startswith("\n"):
+        if not new_txt.startswith("\n"):
             pre += " "
-        post = node.post_fmt + "}}"
+        if new_txt.endswith("\n") and node.post_fmt == "":
+            post = node.pre_fmt + "}}"
+            if post[0] == "\n":
+                post = post[1:]
+        else:
+            post = node.post_fmt + "}}"
     else:
         if comment_marker in node.pre_fmt:
             if comment_marker in node.post_fmt:  # block div
@@ -186,8 +204,7 @@ def div_replace(node, handlers, env, comment_marker):
             pre = node.pre_fmt
             post = node.post_fmt
 
-    handler = get_handler(node.key, handlers)
-    return pre + handler(txt, env) + post
+    return pre + new_txt + post
 
 
 def replace(txt, handlers, env, comment_marker="#"):
