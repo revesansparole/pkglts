@@ -13,10 +13,13 @@ from setuptools import setup, find_packages
 short_descr = "Building packages with long term support"
 readme = open('README.rst').read()
 history = open('HISTORY.rst').read().replace('.. :changelog:', '')
+
 # find version number in /src/$pkg_pth/version.py
 version = {}
 with open("src/pkglts/version.py") as fp:
     exec(fp.read(), version)
+
+
 data_files = []
 
 nb = len(normpath(abspath("src/pkglts_data"))) + 1
@@ -32,6 +35,7 @@ def data_rel_pth(pth):
 for root, dnames, fnames in walk("src/pkglts_data"):
     for name in fnames:
         data_files.append(data_rel_pth(pj(root, name)))
+
 
 setup(
     name='pkglts',

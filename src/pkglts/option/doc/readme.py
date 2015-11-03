@@ -46,15 +46,3 @@ def badges(txt, env):  # TODO: maybe not the right place for badge knowledge
         return txt
     else:
         return "\n\n" + "\n\n".join(items) + "\n"
-
-
-def get_body(txt, env):
-    """ Copy the content of doc/README_body.rst
-    """
-    try:
-        with open("doc/README_body.rst", 'r') as f:
-            txt = f.read()
-    except IOError:
-        print("doc/README_body.rst not found, maybe install doc examples?")
-
-    return txt

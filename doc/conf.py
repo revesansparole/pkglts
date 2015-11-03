@@ -61,6 +61,7 @@ copyright = u'2015, pkglts'
 # The version info for the project you're documenting, acts as replacement
 # for |version| and |release|, also used in various other places throughout
 # the built documents.
+
 # find version number in /src/$pkg_pth/version.py
 pkgver = {}
 with open("../src/pkglts/version.py") as fp:

@@ -1,12 +1,12 @@
 # import mock
 
-from pkglts.option.version.handlers import fetch_github_version
-
-
-def test_handlers():
-    pkg_cfg = dict()
-    txt = fetch_github_version("", pkg_cfg)
-    assert txt == ""
+# from pkglts.option.version.handlers import fetch_github_version
+#
+#
+# def test_handlers():
+#     pkg_cfg = dict()
+#     txt = fetch_github_version("", pkg_cfg)
+#     assert txt == ""
 
 
 # def test_handlers_not_available():

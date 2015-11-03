@@ -70,13 +70,13 @@ def clean(rep="."):
 
     for root, dnames, fnames in walk(rep):
         # do not walk directories starting with "."
-        for name in list(dnames):
-            if name.startswith("."):
+        for name in tuple(dnames):
+            if "clean.no" in listdir(pj(root, name)):
                 dnames.remove(name)
-            if name == "__pycache__":
+            elif name.startswith("."):
+                dnames.remove(name)
+            elif name == "__pycache__":
                 rmtree(pj(root, name))
-                dnames.remove(name)
-            if name == "venv_toto":
                 dnames.remove(name)
 
         for name in fnames:
@@ -217,16 +217,18 @@ def regenerate(pkg_cfg, target=".", overwrite=False):
 
     # walk all files in package and replace div inside if needed
     # TODO: use gitignore to ignore some directories/files
-    for fname in listdir(target):
-        if not isdir(pj(target, fname)):
-            regenerate_file(pj(target, fname), pkg_cfg, handlers)
+    if "regenerate.no" not in listdir(target):
+        for fname in listdir(target):
+            if not isdir(pj(target, fname)):
+                regenerate_file(pj(target, fname), pkg_cfg, handlers)
 
     for dname in ("doc", "src", "test"):
-        for pdir, dnames, fnames in walk(pj(target, dname)):
-            for name in tuple(dnames):
-                if "regenerate.no" in listdir(pj(pdir, name)):
-                    dnames.remove(name)
+        if "regenerate.no" not in listdir(dname):
+            for pdir, dnames, fnames in walk(pj(target, dname)):
+                for name in tuple(dnames):
+                    if "regenerate.no" in listdir(pj(pdir, name)):
+                        dnames.remove(name)
 
-            for name in fnames:
-                if splitext(name) not in (".pyc", ".pyo"):
-                    regenerate_file(pj(pdir, name), pkg_cfg, handlers)
+                for name in fnames:
+                    if splitext(name) not in (".pyc", ".pyo"):
+                        regenerate_file(pj(pdir, name), pkg_cfg, handlers)

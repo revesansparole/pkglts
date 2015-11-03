@@ -129,6 +129,22 @@ def test_clean_do_not_explore_hidden_directories():
 
 
 @with_setup(setup, teardown)
+def test_clean_do_not_explore_clean_no_directories():
+    hidden = tmp_dir + "/" + "test"
+    mkdir(hidden)
+    name = hidden + "/" + "toto.py"
+    with open(name, 'w') as f:
+        f.write("toto")
+
+    with open(hidden + "/" + "clean.no", 'w') as f:
+        f.write("")
+
+    clean(tmp_dir)
+    assert exists(hidden)
+    assert exists(name)
+
+
+@with_setup(setup, teardown)
 def test_clean_remove_dist_build_directories():
     for name in ("dist", "build"):
         mkdir(tmp_dir + "/" + name)

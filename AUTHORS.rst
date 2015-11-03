@@ -5,7 +5,9 @@ Credits
 Development Lead
 ----------------
 
-  * revesansparole <None>
+
+* base.author_name <base.author_email>
+
 
 Contributors
 ------------
