@@ -2,6 +2,8 @@ from base64 import b64encode
 from hashlib import sha512
 from os import mkdir
 
+from .templating import get_comment_marker, parse
+
 
 def get_revision(txt):
     """ Get file revision as defined locally by a single statement
@@ -80,3 +82,55 @@ def user_modified(pth, hashmap):
 
     new_hash = b64encode(algo.digest()).decode("utf-8")
     return new_hash != ref_hash
+
+
+def flatten_divs(root, nodes):
+    nodes.append(root)
+    for div in root.children:
+        if div.typ == "div":
+            flatten_divs(div, nodes)
+
+
+def get_div_txt(node):
+    if node.typ == "txt":
+        return "".join(node.data)
+    else:
+        return "".join(get_div_txt(child) for child in node.children)
+
+
+def get_hash(pth, editable=False):
+    """ Compute hash associated to a file.
+
+    If file can be modified by user, hash will be computed
+    for each pkglts div inside content.
+    Else total content will be used.
+
+    args:
+     - pth (str): path to file to analyse
+     - editable (bool): default False, whether the file can be modified
+                        by user or not
+
+    return:
+     - hash (str): hash created from the content of the file
+    """
+    with open(pth, 'rb') as f:
+        content = f.read()
+
+    if editable:
+        root = parse(content, get_comment_marker(pth))
+        divs = []
+        flatten_divs(root, divs)
+
+        hashs = []
+        for div in divs:
+            if div.key.split(" ")[0] == "pkglts":
+                algo = sha512()
+                algo.update("".join(get_div_txt(div)))
+                hashs.append(b64encode(algo.digest()).decode("utf-8"))
+
+        return tuple(hashs)
+    else:
+        algo = sha512()
+        algo.update(content)
+
+        return b64encode(algo.digest()).decode("utf-8")
