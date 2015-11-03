@@ -1,4 +1,4 @@
-from pkglts.templating import replace
+from pkglts.templating import get_comment_marker, replace
 
 
 print(__file__)
@@ -128,3 +128,94 @@ def test_replace_builtin_func_unknown_key():
     txt = "print '{{key, toto.titi}}'"
     new_txt = replace(txt, {}, {})
     assert new_txt == "print 'toto.titi'"
+
+
+def test_replace_keep_template_fmt_in_pkglts_div():
+    txt = """
+print("toto")
+# {{pkglts,
+print("titi")
+# }}
+print("tutu")
+"""
+    new_txt = replace(txt, {}, {})
+    assert new_txt == txt
+
+
+def test_replace_keep_template_fmt_in_pkglts_div_inline():
+    txt = """
+print{{pkglts, ("titi")}}
+"""
+    new_txt = replace(txt, {}, {})
+    assert new_txt == txt
+
+
+def test_template_pkglts_divs_can_be_reformatted():
+    txt = """
+print("toto")
+# {{pkglts,
+print("titi")
+# }}
+print("tutu")
+"""
+    new_txt = replace(txt, {}, {})
+    new_txt2 = replace(new_txt, {}, {})
+    assert new_txt2 == new_txt
+
+
+def test_template_pkglts_divs_can_be_reformatted2():
+    txt = """
+print("toto")
+# {{pkglts modif,
+print("titi")
+# }}
+print("tutu")
+"""
+
+    def modif(txt, env):
+        return txt.upper()
+
+    new_txt = replace(txt, dict(modif=modif), {})
+
+    def modif(txt, env):
+        return txt.lower()
+
+    new_txt2 = replace(new_txt, dict(modif=modif), {})
+    assert new_txt2 != new_txt
+
+
+def test_template_handle_different_types_of_comments_inline():
+    txt = "print#{{div, ('titi')}}"
+    new_txt = replace(txt, {}, {}, comment_marker="#")
+    assert new_txt == "print('titi')"
+
+    txt = "print%{{div, ('titi')}}"
+    new_txt = replace(txt, {}, {}, comment_marker="%")
+    assert new_txt == "print('titi')"
+
+    txt = "before\n.. {{div, inline}}\n\nafter"
+    new_txt = replace(txt, {}, {}, comment_marker=".. ")
+    assert new_txt == "before\ninline\n\nafter"
+
+
+def test_template_handle_different_types_of_comments_div():
+    txt = "before = 1\n# {{div,\ninside = 1\n# }}\nafter = 1"
+    new_txt = replace(txt, {}, {}, comment_marker="#")
+    assert new_txt == "before = 1\ninside = 1\nafter = 1"
+
+    txt = "before = 1\n% {{div,\ninside = 1\n% }}\nafter = 1"
+    new_txt = replace(txt, {}, {}, comment_marker="%")
+    assert new_txt == "before = 1\ninside = 1\nafter = 1"
+
+    txt = "before = 1\n.. {{div,\n\ninside = 1\n.. }}\n\nafter = 1"
+    new_txt = replace(txt, {}, {}, comment_marker=".. ")
+    assert new_txt == "before = 1\n\ninside = 1\n\nafter = 1"
+
+
+def test_get_comment_marker():
+    assert get_comment_marker("toto.py") == "#"
+    assert get_comment_marker("toto.ini") == "#"
+    assert get_comment_marker("toto.cfg") == "#"
+    assert get_comment_marker("toto.yml") == "#"
+    assert get_comment_marker("toto.rst") == ".. "
+    assert get_comment_marker("toto.bat") == "REM "

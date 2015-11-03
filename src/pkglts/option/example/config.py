@@ -1,6 +1,6 @@
 from pkglts.local import load_all_handlers
 from pkglts.manage_tools import check_tempering, regenerate_dir
-from pkglts.option_tools import ask_arg
+from pkglts.option_tools import ask_arg, get_user_permission
 
 
 def main(pkg_cfg, extra):
@@ -21,11 +21,17 @@ def main(pkg_cfg, extra):
     # of files by user
     tf = []
     check_tempering(root, ".", h, pkg_cfg, tf)
+    overwrite = {}
     if len(tf) > 0:
-        msg = "Trying to overwrite files that already exists:\n"
-        msg += "\n".join(tf)
-        raise UserWarning(msg)
+        print("Trying to overwrite files that already exists")
+        for name in tf:
+            overwrite[name] = get_user_permission("overwrite '%s'" % name,
+                                                  False)
 
+    if '_session' not in pkg_cfg:
+        pkg_cfg['_session'] = {}
+
+    pkg_cfg['_session']['overwrite'] = overwrite
     # get option examples
     regenerate_dir(root, ".", h, pkg_cfg, False)
 

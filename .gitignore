@@ -16,6 +16,7 @@ lib
 lib64
 
 # user defined
+example
 try
 .cookie.json
 

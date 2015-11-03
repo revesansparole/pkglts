@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# pkglts documentation build configuration file, created by
+# Package pkglts documentation build configuration file, created by
 # sphinx-quickstart on Tue Jul  9 22:26:36 2013.
 #
 # This file is execfile()d with the current directory set to its
@@ -61,7 +61,6 @@ copyright = u'2015, pkglts'
 # The version info for the project you're documenting, acts as replacement
 # for |version| and |release|, also used in various other places throughout
 # the built documents.
-#
 # find version number in /src/$pkg_pth/version.py
 pkgver = {}
 with open("../src/pkglts/version.py") as fp:

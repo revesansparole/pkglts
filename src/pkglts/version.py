@@ -1,4 +1,5 @@
-# -*- coding: utf-8 -*-off
+# -*- coding: utf-8 -*-
+# test off
 
 major = 0
 minor = 1

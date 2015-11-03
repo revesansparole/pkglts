@@ -9,7 +9,7 @@ from .file_management import make_dir, user_modified, write_file
 from .local import init_namespace_dir
 from .option_tools import get_user_permission
 from .rmtfile import get, ls
-from .templating import replace
+from .templating import get_comment_marker, replace
 
 
 def check_tempering(cur_src_pth, cur_dst_pth, handlers, pkg_cfg, tf):
@@ -48,7 +48,8 @@ def check_tempering(cur_src_pth, cur_dst_pth, handlers, pkg_cfg, tf):
 
                 dst_dir += "/" + new_name
                 if not exists(dst_dir) and dst_dir in pkg_cfg['hash']:
-                    print("Directory '%s' has been removed" % dst_dir)
+                    # print("Directory '%s' has been removed" % dst_dir)
+                    pass
                 else:
                     check_tempering(cur_src_pth + "/" + name,
                                     dst_dir,
@@ -60,7 +61,7 @@ def check_tempering(cur_src_pth, cur_dst_pth, handlers, pkg_cfg, tf):
             if new_name.split(".")[0] != "_":
                 pth = cur_dst_pth + "/" + new_name
                 if exists(pth) and user_modified(pth, pkg_cfg['hash']):
-                    print("user modified file: %s" % pth)
+                    # print("user modified file: %s" % pth)
                     tf.append(pth)
 
 
@@ -86,6 +87,8 @@ def regenerate_dir(cur_src_pth, cur_dst_pth, handlers, pkg_cfg,
         hashmap = pkg_cfg['hash']
     else:
         hashmap = None
+
+    overwrite = pkg_cfg.get('_session', {}).get('overwrite', {})
 
     items = ls(cur_src_pth)
     for name, is_dir_type in items:
@@ -115,11 +118,13 @@ def regenerate_dir(cur_src_pth, cur_dst_pth, handlers, pkg_cfg,
             if (new_name.split(".")[0] != "_" and
                new_name[-3:] not in ("pyc", "pyo")):
                 # TODO: Bof when removing one option
-                src_content = get(cur_src_pth + "/" + name)
-                new_src_content = replace(src_content, handlers, pkg_cfg)
-                # overwrite file without any warning
                 new_pth = cur_dst_pth + "/" + new_name
-                write_file(new_pth, new_src_content, hashmap)
+                if new_pth not in overwrite or overwrite[new_pth]:
+                    src_content = get(cur_src_pth + "/" + name)
+                    new_src_content = replace(src_content, handlers, pkg_cfg,
+                                              get_comment_marker(new_name))
+                    # overwrite file without any warning
+                    write_file(new_pth, new_src_content, hashmap)
 
 
 def update_opt(name, pkg_cfg, extra=None):

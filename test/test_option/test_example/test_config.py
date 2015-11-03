@@ -1,8 +1,9 @@
 from nose.tools import assert_raises, with_setup
 import mock
-from os import chdir, mkdir
+from os import chdir, mkdir, stat
 from os.path import exists
 from shutil import rmtree
+from time import sleep
 
 from pkglts.option.example.config import main
 
@@ -83,7 +84,7 @@ def test_config_copy_files():
 
 
 @with_setup(setup_func, teardown_func)
-def test_config_do_not_overwrite_files():
+def test_config_ask_to_overwrite_files():
     pkg_cfg = dict(base=dict(pkg_fullname='toto',
                              pkgname='toto',
                              namespace=None),
@@ -91,6 +92,15 @@ def test_config_do_not_overwrite_files():
 
     # create files
     main(pkg_cfg, dict(option_name='base'))
+    cr_date = stat("src/toto/__init__.py").st_mtime
+    sleep(0.1)
 
-    # check that rewriting them raises error
-    assert_raises(UserWarning, lambda: main(pkg_cfg, dict(option_name='base')))
+    # do not overwrite
+    with mock.patch('pkglts.option_tools.loc_input', return_value='n'):
+        main(pkg_cfg, dict(option_name='base'))
+        assert stat("src/toto/__init__.py").st_mtime == cr_date
+
+    # overwrite
+    with mock.patch('pkglts.option_tools.loc_input', return_value='y'):
+        main(pkg_cfg, dict(option_name='base'))
+        assert stat("src/toto/__init__.py").st_mtime > cr_date

@@ -42,7 +42,10 @@ def badges(txt, env):  # TODO: maybe not the right place for badge knowledge
         badge = url + ".svg"
         items.append(fmt_badge(badge, url, "PyPI version"))
 
-    return "\n\n".join(items)
+    if len(items) == 0:
+        return txt
+    else:
+        return "\n\n" + "\n\n".join(items) + "\n\n.. "
 
 
 def get_body(txt, env):

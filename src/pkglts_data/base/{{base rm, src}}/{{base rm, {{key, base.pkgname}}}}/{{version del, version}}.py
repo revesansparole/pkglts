@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# {{version.fetch_github rm, {{key, version.auto}}}}
+# test {{version.fetch_github rm, {{key, version.auto}}}}
 
 major = {{key, version.major}}
 minor = {{key, version.minor}}

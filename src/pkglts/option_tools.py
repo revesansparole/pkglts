@@ -6,8 +6,11 @@ except NameError:
     loc_input = input
 
 
-def get_user_permission(action_name):
-    return loc_input("%s [y], n?" % action_name) in ("", "y")
+def get_user_permission(action_name, default_true=True):
+    if default_true:
+        return loc_input("%s [y], n?" % action_name) in ("", "y")
+    else:
+        return loc_input("%s y, [n]?" % action_name) == "y"
 
 
 def get_key(key, env):
