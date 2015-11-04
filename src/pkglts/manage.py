@@ -11,17 +11,25 @@ from os.path import join as pj
 from shutil import rmtree
 
 from .local import load_all_handlers, installed_options
-from .manage_tools import check_tempering, regenerate_dir, update_opt
+from .manage_tools import (create_package_hash_keys,
+                           clone_base_option, clone_example, regenerate_pkg,
+                           update_opt)
 from .option_tools import get_user_permission
 from .templating import get_comment_marker, replace
 from .versioning import get_github_version, get_local_version
 
 
+pkg_cfg_file = "pkg_cfg.json"
+pkg_hash_file = "pkg_hash.json"
+
+
 def init_pkg(rep="."):
     """ Initialise a package in given directory
     """
-    pkg_cfg = {'hash': {}}
-    write_pkg_config(pkg_cfg, rep)
+    if not exists(pkg_cfg_file):
+        write_pkg_config({}, rep)
+    if not exists(pkg_hash_file):
+        write_pkg_hash({}, rep)
 
 
 def get_pkg_config(rep="."):
@@ -33,7 +41,7 @@ def get_pkg_config(rep="."):
     return:
      - (dict of (str, dict)): option_name: options
     """
-    with open(pj(rep, "pkg_cfg.json"), 'r') as f:
+    with open(pj(rep, pkg_cfg_file), 'r') as f:
         info = json.load(f)
 
     return info
@@ -51,7 +59,40 @@ def write_pkg_config(pkg_cfg, rep="."):
         if key.startswith("_"):
             del cfg[key]
 
-    with open(pj(rep, "pkg_cfg.json"), 'w') as f:
+    with open(pj(rep, pkg_cfg_file), 'w') as f:
+        json.dump(cfg, f, sort_keys=True, indent=4)
+
+
+def get_pkg_hash(rep="."):
+    """ Read pkg_hash file associated to this package
+
+    args:
+     - rep (str): directory to search for info
+
+    return:
+     - (dict of (str, hash)): file path: hash key
+    """
+    with open(pj(rep, pkg_hash_file), 'r') as f:
+        hm = json.load(f)
+
+    return dict((pth, tuple(key)) for pth, key in hm.items())
+
+
+def write_pkg_hash(pkg_hash, rep="."):
+    """ Store hash associated to this package on disk
+
+    args:
+     - pkg_hash (dict of (str, hash)): file path: hash key
+     - rep (str): directory to search for info
+    """
+    cfg = dict(pkg_hash)
+
+    # remove unwanted keys
+    # for key in tuple(cfg.keys()):
+    #     if key.startswith("_"):
+    #         del cfg[key]
+
+    with open(pj(rep, pkg_hash_file), 'w') as f:
         json.dump(cfg, f, sort_keys=True, indent=4)
 
 
@@ -164,29 +205,90 @@ def add_option(name, pkg_cfg, extra=None):
     return update_opt(name, pkg_cfg, extra)
 
 
-def regenerate_file(name, pkg_cfg, handlers):
-    """ Parse the content of a file for {{div}}
-    use handlers to modify the content and rewrite file
+def install_example_files(option, pkg_cfg, target="."):
+    if option is None:
+        return None
 
-    args:
-     - name (str): name of file to scan/modify
-     - pkg_cfg (dict of (str, dict)): package configuration parameters
-     - handlers (dict of (str, handler)): functions used to modify text
-    """
-    print "reg", name
-    with open(name, 'r') as f:
-        src_content = f.read()
+    if option not in pkg_cfg:
+        print("please install option before example files")
+        return None
 
-    new_src_content = replace(src_content, handlers, pkg_cfg,
-                              get_comment_marker(name))
+    # get handlers
+    h = load_all_handlers(pkg_cfg)
 
-    # overwrite file without any warning
-    if "modif" in name:
-        new_name = name
-    else:
-        new_name = name[:-4] + "_modif" + name[-4:]
-    with open(new_name, 'w') as f:
-        f.write(new_src_content)
+    root = "pkglts_data/example/%s" % option
+    # walk all files in example repo to copy them handling conflicts on the way
+    clone_example(root, target, pkg_cfg, h)
+
+
+# def regenerate_file(name, pkg_cfg, handlers):
+#     """ Parse the content of a file for {{div}}
+#     use handlers to modify the content and rewrite file
+#
+#     args:
+#      - name (str): name of file to scan/modify
+#      - pkg_cfg (dict of (str, dict)): package configuration parameters
+#      - handlers (dict of (str, handler)): functions used to modify text
+#     """
+#     print "reg", name
+#     with open(name, 'r') as f:
+#         src_content = f.read()
+#
+#     new_src_content = replace(src_content, handlers, pkg_cfg,
+#                               get_comment_marker(name))
+#
+#     # overwrite file without any warning
+#     if "modif" in name:
+#         new_name = name
+#     else:
+#         new_name = name[:-4] + "_modif" + name[-4:]
+#     with open(new_name, 'w') as f:
+#         f.write(new_src_content)
+#
+
+# def regenerate(pkg_cfg, target=".", overwrite=False):
+#     """ Rebuild all automatically generated files
+#
+#     args:
+#      - pkg_cfg (dict of (str, dict)): package configuration parameters
+#      - target (str): target directory to write into
+#      - overwrite (bool): default False, whether or not
+#                          to overwrite user modified files
+#     """
+#     # parse options and load handlers
+#     handlers = load_all_handlers(pkg_cfg)
+#
+#     root = "pkglts_data/base"
+#     if not overwrite:
+#         # walk all files in repo to check for possible tempering
+#         # of files by user
+#         tf = []
+#         check_tempering(root, target, handlers, pkg_cfg, tf)
+#         if len(tf) > 0:
+#             msg = "These files have been modified by user:\n"
+#             msg += "\n".join(tf)
+#             raise UserWarning(msg)
+#
+#     # walk all files in repo and regenerate them
+#     regenerate_dir(root, target, handlers, pkg_cfg, True)
+#
+#     # walk all files in package and replace div inside if needed
+#     # TODO: use gitignore to ignore some directories/files
+#     if "regenerate.no" not in listdir(target):
+#         for fname in listdir(target):
+#             if not isdir(pj(target, fname)):
+#                 regenerate_file(pj(target, fname), pkg_cfg, handlers)
+#
+#     for dname in ("doc", "src", "test"):
+#         if "regenerate.no" not in listdir(dname):
+#             for pdir, dnames, fnames in walk(pj(target, dname)):
+#                 for name in tuple(dnames):
+#                     if "regenerate.no" in listdir(pj(pdir, name)):
+#                         dnames.remove(name)
+#
+#                 for name in fnames:
+#                     if splitext(name) not in (".pyc", ".pyo"):
+#                         regenerate_file(pj(pdir, name), pkg_cfg, handlers)
 
 
 def regenerate(pkg_cfg, target=".", overwrite=False):
@@ -198,37 +300,40 @@ def regenerate(pkg_cfg, target=".", overwrite=False):
      - overwrite (bool): default False, whether or not
                          to overwrite user modified files
     """
-    # parse options and load handlers
     handlers = load_all_handlers(pkg_cfg)
 
-    root = "pkglts_data/base"
-    if not overwrite:
-        # walk all files in repo to check for possible tempering
-        # of files by user
-        tf = []
-        check_tempering(root, target, handlers, pkg_cfg, tf)
-        if len(tf) > 0:
-            msg = "These files have been modified by user:\n"
-            msg += "\n".join(tf)
-            raise UserWarning(msg)
+    # check for potential conflicts
+    hm_ref = get_pkg_hash(target)
+    hm = create_package_hash_keys(pkg_cfg, target)
+    conflicted = []
+    for pth, ref_key in hm_ref.items():
+        try:
+            key = hm[pth]
+            if key != ref_key:
+                conflicted.append(pth)
+        except KeyError:
+            # file apparently not managed by pkglts
+            pass
 
-    # walk all files in repo and regenerate them
-    regenerate_dir(root, target, handlers, pkg_cfg, True)
+    overwrite_file = {}
+    if len(conflicted) > 0:
+        print("conflicted", conflicted)
+        if overwrite:
+            for name in conflicted:
+                overwrite_file[name] = True
+        else:
+            for name in conflicted:
+                print("A non editable section of %s has been modified" % name)
+                overwrite_file[name] = get_user_permission("overwrite", False)
 
-    # walk all files in package and replace div inside if needed
-    # TODO: use gitignore to ignore some directories/files
-    if "regenerate.no" not in listdir(target):
-        for fname in listdir(target):
-            if not isdir(pj(target, fname)):
-                regenerate_file(pj(target, fname), pkg_cfg, handlers)
+    # copy all missing files for options
+    # regenerating pkglts divs on the way
+    for option in installed_options(pkg_cfg):
+        clone_base_option(option, pkg_cfg, handlers, target, overwrite_file)
 
-    for dname in ("doc", "src", "test"):
-        if "regenerate.no" not in listdir(dname):
-            for pdir, dnames, fnames in walk(pj(target, dname)):
-                for name in tuple(dnames):
-                    if "regenerate.no" in listdir(pj(pdir, name)):
-                        dnames.remove(name)
+    # regenerate files
+    regenerate_pkg(pkg_cfg, handlers, target, overwrite_file)
 
-                for name in fnames:
-                    if splitext(name) not in (".pyc", ".pyo"):
-                        regenerate_file(pj(pdir, name), pkg_cfg, handlers)
+    # re create hash
+    hm = create_package_hash_keys(pkg_cfg, target)
+    write_pkg_hash(hm, target)

@@ -1,3 +1,14 @@
+from pkglts.option.doc import fmt_badge
+
+
+def badge(txt, env):
+    pkgname = env['base']['pkgname']
+
+    url = "badge.fury.io/py/%s" % pkgname
+    img = url + ".svg"
+    return fmt_badge(img, url, "PyPI version")
+
+
 def get_classifiers(txt, env):
     cfg = env['pydist']
 
@@ -14,4 +25,5 @@ def get_classifiers(txt, env):
     return "\n" + "\n".join(items)
 
 
-mapping = {"pypi.classifiers": get_classifiers}
+mapping = {'pypi.badge': badge,
+           'pypi.classifiers': get_classifiers}

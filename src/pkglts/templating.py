@@ -18,6 +18,24 @@ class Node(object):
         if parent is not None:
             parent.children.append(self)
 
+    def clone(self, new_parent):
+        """ Clone this node to produce a new node
+        with same attributes but different parent.
+
+        .. warning: also clone all children
+
+        .. warning: same reference on node.data
+        """
+        new_node = Node(self.typ, None)
+        new_node.key = self.key
+        new_node.parent = new_parent
+        new_node.data = self.data
+        new_node.pre_fmt = self.pre_fmt
+        new_node.post_fmt = self.post_fmt
+        new_node.children = [child.clone(new_node) for child in self.children]
+
+        return new_node
+
 
 space_chars = (" ", "\t", "\n")
 
@@ -38,7 +56,6 @@ def find_fmt_chars(node, comment_marker):
     returns:
       - (str): string of consumed characters
     """
-    nb = len(comment_marker)
     fmt = []
     has_marker = False
     nb_new_line = 0
@@ -79,7 +96,7 @@ def parse(txt, comment_marker):
 
     i = 0
     while i < len(txt):
-        if txt[i] == "{" and txt[i + 1] == "{":
+        if txt[i] == "{" and ((i + 1) < len(txt) and txt[i + 1] == "{"):
             div_node = Node("div", cur_node.parent)
             div_node.pre_fmt = find_fmt_chars(cur_node, comment_marker)
 
@@ -173,7 +190,7 @@ def div_replace(node, handlers, env, comment_marker):
     for child in node.children:
         if child.typ == 'txt':
             txt += "".join(child.data)
-        else:  # by construction it must be a div node
+        else:  # by construction it must be a div node or root?
             txt += div_replace(child, handlers, env, comment_marker)
 
     # replace txt
@@ -222,6 +239,80 @@ def replace(txt, handlers, env, comment_marker="#"):
     """
     root = parse(txt, comment_marker)
     txt = div_replace(root, handlers, env, comment_marker)
+    return txt
+
+
+def flatten_divs(node):
+    nodes = [node]
+    for div in node.children:
+        if div.typ == "div":
+            nodes.extend(flatten_divs(div))
+
+    return nodes
+
+
+def reconstruct_txt_div(node):
+    if node.typ == "txt":
+        return "".join(node.data)
+    elif node.typ == "root":
+        cnt = "".join(reconstruct_txt_div(child) for child in node.children)
+        return cnt
+    else:
+        txt = node.pre_fmt + "{{" + node.key + ","
+        cnt = "".join(reconstruct_txt_div(child) for child in node.children)
+        if not cnt.startswith("\n"):
+            txt += " "
+        txt += cnt
+        txt += node.post_fmt + "}}"
+
+        return txt
+
+
+def _swap_div(node, dm):
+    """ Swap current div if div_id in dm
+    """
+    if node.typ == "txt":
+        pass
+    else:  # root or div
+        keys = node.key.split(" ")
+        if keys[0] == "pkglts":
+            if len(keys) == 1:
+                div_id = None
+            else:
+                div_id = keys[1]
+
+            node.children = [div.clone(node) for div in dm.get(div_id, [])]
+        else:
+            for child in node.children:
+                _swap_div(child, dm)
+
+
+def swap_divs(src_content, tgt_content, comment_marker):
+    """ Find pkglts divs in both content and replace
+    data in tgt with data in src
+
+    args:
+     - src_content (str): source content used as ref
+     - tgt_content (str): content to replace
+    """
+    # create map of divs: data
+    src_root = parse(src_content, comment_marker)
+    dm = {}
+    for div in flatten_divs(src_root):
+        keys = div.key.split(" ")
+        if keys[0] == "pkglts":
+            if len(keys) == 1:
+                div_id = None
+            else:
+                div_id = keys[1]
+            dm[div_id] = div.children
+
+    # replace divs in tgt
+    tgt_root = parse(tgt_content, comment_marker)
+    _swap_div(tgt_root, dm)
+
+    # reconstruct text
+    txt = reconstruct_txt_div(tgt_root)
     return txt
 
 

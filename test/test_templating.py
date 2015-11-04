@@ -1,4 +1,6 @@
-from pkglts.templating import get_comment_marker, replace
+from pkglts.templating import (get_comment_marker, parse,
+                               reconstruct_txt_div, replace,
+                               swap_divs)
 
 
 print(__file__)
@@ -20,6 +22,10 @@ def test_replace_handle_no_div():
 
 def test_replace_handle_bracket_end():
     txt = "d = {'toto': 1}"
+    new_txt = replace(txt, {}, None)
+    assert txt == new_txt
+
+    txt = "d = {'toto': 1{"
     new_txt = replace(txt, {}, None)
     assert txt == new_txt
 
@@ -195,6 +201,21 @@ INSIDE = 1
 after = 1
 """
     new_txt = replace(txt, handlers, None)
+    assert new_txt == res
+
+
+def test_replace_preserve_upstream_fmt6():
+    handlers = {'upper': upper}
+
+    txt = """
+ {{upper, inside = 1}}
+after = 1
+"""
+    res = """
+ INSIDE = 1
+after = 1
+"""
+    new_txt = replace(txt, handlers, None, ".. ")
     assert new_txt == res
 
 
@@ -594,7 +615,6 @@ after = 1
     assert new_txt == res
 
 
-
 def test_get_comment_marker():
     assert get_comment_marker("toto.py") == "#"
     assert get_comment_marker("toto.ini") == "#"
@@ -602,3 +622,39 @@ def test_get_comment_marker():
     assert get_comment_marker("toto.yml") == "#"
     assert get_comment_marker("toto.rst") == ".. "
     assert get_comment_marker("toto.bat") == "REM "
+
+
+def test_reconstruct_txt():
+    txt = """
+before = 1  # {{upper, inline = 1}}
+# {{lower,
+div = 1
+# }}
+after = 1
+"""
+    root = parse(txt, "#")
+    new_txt = reconstruct_txt_div(root)
+    assert new_txt == txt
+
+
+def test_swap_divs():
+    src_txt = """
+before = 1  # {{pkglts upper, inline = 1}}{{pkglts up2, inline = 3}}
+# {{pkglts lower,
+div = 1
+# }}
+after = 1
+# {{pkglts, inline = 2}}
+after2 = 1
+"""
+    tgt_txt = """
+before = 1  # {{pkglts upper, None}}{{pkglts up2, None}}
+# {{pkglts lower,
+None
+# }}
+after = 1
+# {{pkglts, None}}
+after2 = 1
+"""
+    new_txt = swap_divs(src_txt, tgt_txt, "#")
+    assert new_txt == src_txt

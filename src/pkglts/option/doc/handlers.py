@@ -1,3 +1,3 @@
-from .readme import badges
+# from .readme import badges
 
-mapping = {'doc.badges': badges}
+mapping = {}#'doc.badges': badges}

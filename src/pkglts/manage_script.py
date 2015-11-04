@@ -2,7 +2,7 @@ from argparse import ArgumentParser
 
 from local import installed_options
 from manage import (clean, get_pkg_config,
-                    init_pkg,
+                    init_pkg, install_example_files,
                     regenerate,
                     add_option, edit_option,
                     update_option, update_pkg,
@@ -60,6 +60,9 @@ def main():
         pkg_cfg = get_pkg_config()
         pkg_cfg = edit_option(args.option, pkg_cfg)
         write_pkg_config(pkg_cfg)
+    elif args.action == 'example':
+        pkg_cfg = get_pkg_config()
+        install_example_files(args.option, pkg_cfg)
     else:
         print "unknown"
 

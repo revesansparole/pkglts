@@ -2,14 +2,15 @@
 """
 
 from importlib import import_module
-from os.path import exists
+from os import listdir, walk
+from os.path import exists, isdir
 import pip
 
-from .file_management import make_dir, user_modified, write_file
+from .file_management import get_hash, make_dir, user_modified, write_file
 from .local import init_namespace_dir
 from .option_tools import get_user_permission
 from .rmtfile import get, ls
-from .templating import get_comment_marker, replace
+from .templating import get_comment_marker, replace, swap_divs
 
 
 def check_tempering(cur_src_pth, cur_dst_pth, handlers, pkg_cfg, tf):
@@ -181,3 +182,145 @@ def update_opt(name, pkg_cfg, extra=None):
         pass
 
     return pkg_cfg
+
+
+def clone_base_option_dir(src_dir, tgt_dir, pkg_cfg, handlers, overwrite_file):
+    """ Clone src_dir into tgt_dir
+
+    args:
+     - src_dir (str): path to source directory
+     - tgt_dir (str): path to target directory in which to copy files
+     - pkg_cfg (dict of (str, dict)): package configuration parameters
+     - handlers (dict of func): associate keys to handler functions
+     - overwrite_files (dict of (str, bool)): whether to overwrite a specific
+                                              path in case of conflict
+    """
+    # TODO handle namespace
+    for src_name, is_dir in ls(src_dir):
+        src_pth = src_dir + "/" + src_name
+
+        tgt_name = replace(src_name, handlers, pkg_cfg)
+        tgt_pth = tgt_dir + "/" + tgt_name
+
+        if is_dir:
+            if tgt_name not in ("", "_") and not exists(tgt_pth):
+                make_dir(tgt_pth, None)
+
+            clone_base_option_dir(src_pth, tgt_pth, pkg_cfg, handlers,
+                                  overwrite_file)
+        else:
+            if (tgt_name.split(".")[0] != "_" and
+                    tgt_name[-3:] not in ("pyc", "pyo")):
+                if exists(tgt_pth):
+                    if overwrite_file.get(tgt_pth, True):
+                        src_cnt = get(src_pth)
+                        with open(tgt_pth, 'r') as f:
+                            tgt_cnt = f.read()
+
+                        content = swap_divs(src_cnt, tgt_cnt, get_comment_marker(src_pth))
+                        write_file(tgt_pth, content, None)
+                else:
+                    content = get(src_pth)
+                    write_file(tgt_pth, content, None)
+
+
+def clone_base_option(option, pkg_cfg, handlers, target, overwrite_file):
+    """ Copy all files in option repository to target
+
+    Do not overwrite existing files, just ensure that
+    a clone of option repository exists.
+
+    args:
+     - option (str): name of option
+     - pkg_cfg (dict of (str, dict)): package configuration parameters
+     - handlers (dict of func): associate keys to handler functions
+     - target (str): path to copy files to
+    """
+    print "option", option
+    if (option, True) not in ls("pkglts_data/base"):
+        return  # nothing to do
+
+    option_root = "pkglts_data/base/%s" % option
+
+    clone_base_option_dir(option_root, target, pkg_cfg, handlers,
+                          overwrite_file)
+
+
+def clone_example(src_dir, tgt_dir, pkg_cfg, handlers):
+    """ Clone an example directory into tgt_dir
+    replacing text in files on the way.
+    """
+    for src_name, is_dir in ls(src_dir):
+        src_pth = src_dir + "/" + src_name
+
+        tgt_name = replace(src_name, handlers, pkg_cfg)
+        tgt_pth = tgt_dir + "/" + tgt_name
+
+        if is_dir:
+            if tgt_name not in ("", "_") and not exists(tgt_pth):
+                make_dir(tgt_pth, None)
+
+            clone_example(src_pth, tgt_pth, pkg_cfg, handlers)
+        else:
+            if (tgt_name.split(".")[0] != "_" and
+                    tgt_name[-3:] not in ("pyc", "pyo")):
+                if exists(tgt_pth):
+                    print("conflict '%s'" % tgt_name)
+                else:
+                    content = replace(get(src_pth), handlers, pkg_cfg)
+                    write_file(tgt_pth, content, None)
+
+
+def create_package_hash_keys(pkg_cfg, target):
+    """ Walk all files in package and replace content
+
+    args:
+     - pkg_cfg (dict of (str, dict)): package configuration parameters
+     - target (str): path to copy files to
+    """
+    hm = {}
+    for root, dnames, fnames in walk(target):
+        for name in tuple(dnames):
+            if "regenerate.no" in listdir(root + "/" + name):
+                dnames.remove(name)
+
+        for name in fnames:
+            pth = (root + "/" + name).replace("\\", "/")
+            hm[pth] = get_hash(pth, True)
+
+    return hm
+
+
+def regenerate_file(pth, pkg_cfg, handlers):
+    """ Regenerate the content of a file, loading divs in
+    pkglts_data.base if necessary.
+    """
+    with open(pth, 'r') as f:
+        content = f.read()
+
+    new_content = replace(content, handlers, pkg_cfg, get_comment_marker(pth))
+
+    with open(pth, 'w') as f:
+        f.write(new_content)
+
+
+def regenerate_pkg(pkg_cfg, handlers, target, overwrite_file):
+    """ Walk all files in package and replace content
+
+    args:
+     - pkg_cfg (dict of (str, dict)): package configuration parameters
+     - handlers (dict of func): associate keys to handler functions
+     - target (str): path to copy files to
+     - overwrite_file (dict of (str, bool)): whether or not to overwrite
+                                              a specific file
+    """
+    for name in listdir(target):
+        pth = target + "/" + name
+        if isdir(pth):
+            # exclusion rule
+            if "regenerate.no" not in listdir(pth):
+                # regenerate
+                regenerate_pkg(pkg_cfg, handlers, pth, overwrite_file)
+        else:
+            if overwrite_file.get(pth, True):
+                regenerate_file(pth, pkg_cfg, handlers)

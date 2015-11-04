@@ -2,7 +2,7 @@ from base64 import b64encode
 from hashlib import sha512
 from os import mkdir
 
-from .templating import get_comment_marker, parse
+from .templating import flatten_divs, get_comment_marker, parse
 
 
 def get_revision(txt):
@@ -84,13 +84,6 @@ def user_modified(pth, hashmap):
     return new_hash != ref_hash
 
 
-def flatten_divs(root, nodes):
-    nodes.append(root)
-    for div in root.children:
-        if div.typ == "div":
-            flatten_divs(div, nodes)
-
-
 def get_div_txt(node):
     if node.typ == "txt":
         return "".join(node.data)
@@ -118,11 +111,9 @@ def get_hash(pth, editable=False):
 
     if editable:
         root = parse(content, get_comment_marker(pth))
-        divs = []
-        flatten_divs(root, divs)
 
         hashs = []
-        for div in divs:
+        for div in flatten_divs(root):
             if div.key.split(" ")[0] == "pkglts":
                 algo = sha512()
                 algo.update("".join(get_div_txt(div)))

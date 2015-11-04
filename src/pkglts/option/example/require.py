@@ -1,3 +1,0 @@
-option = []
-setup = []
-install = []

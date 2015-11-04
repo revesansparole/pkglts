@@ -1,0 +1,39 @@
+# {{pkglts github,
+*.py[cod]
+
+# Packages
+*.egg
+*.egg-info
+dist
+build
+eggs
+parts
+bin
+var
+sdist
+develop-eggs
+.installed.cfg
+lib
+lib64
+
+# editors
+.idea
+
+{{coverage rm,
+# coverage
+.coverage
+}}
+
+{{tox rm,
+# tox
+.tox
+}}
+
+{{pypi rm,
+# pypi rc file
+.pypirc
+}}
+# }}
+
+# user defined
+
