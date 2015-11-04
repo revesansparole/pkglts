@@ -311,6 +311,22 @@ def swap_divs(src_content, tgt_content, comment_marker):
     tgt_root = parse(tgt_content, comment_marker)
     _swap_div(tgt_root, dm)
 
+    # test for missing divs in tgt
+    tgt_dm = {}
+    for div in flatten_divs(tgt_root):
+        keys = div.key.split(" ")
+        if keys[0] == "pkglts":
+            if len(keys) == 1:
+                div_id = None
+            else:
+                div_id = keys[1]
+            tgt_dm[div_id] = div.children
+
+    if tuple(tgt_dm.keys()) != tuple(dm.keys()):
+        msg = ["missing pkglts divs in tgt file",
+               "Maybe remove file and relaunch command"]
+        raise UserWarning("\n".join(msg))
+
     # reconstruct text
     txt = reconstruct_txt_div(tgt_root)
     return txt

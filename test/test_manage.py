@@ -6,9 +6,8 @@ from hashlib import sha512
 from shutil import rmtree
 
 from pkglts.versioning import get_local_version
-from pkglts.manage import (clean, get_pkg_config,
+from pkglts.manage import (clean, get_pkg_config, get_pkg_hash,
                            init_pkg,
-                           regenerate,
                            add_option, update_option, edit_option,
                            update_pkg,
                            write_pkg_config)
@@ -33,7 +32,14 @@ def teardown():
 def test_manage_init_create_pkg_config():
     init_pkg(tmp_dir)
     cfg = get_pkg_config(tmp_dir)
-    assert 'hash' in cfg
+    assert cfg is not None
+
+
+@with_setup(setup, teardown)
+def test_manage_init_create_pkg_hash():
+    init_pkg(tmp_dir)
+    hm = get_pkg_hash(tmp_dir)
+    assert hm is not None
 
 
 @with_setup(setup, teardown)
@@ -234,21 +240,3 @@ def test_manage_edit_opt_with_defaults_do_not_change_anything():
     with mock.patch('pkglts.option_tools.loc_input', return_value=''):
         pkg_cfg = edit_option('base', pkg_cfg)
         assert mem == pkg_cfg['base']
-
-
-@with_setup(setup, teardown)
-def test_regenerate():
-    pkg_cfg = {'doc': {}, 'hash': {}}
-    regenerate(pkg_cfg, tmp_dir)
-    assert True  # TODO
-
-
-@with_setup(setup, teardown)
-def test_regenerate_raise_error_if_tempered_files():
-    pkg_cfg = {'test': {}, 'hash': {}}
-    regenerate(pkg_cfg, tmp_dir)
-
-    with open(tmp_dir + "/test/info.rst", 'w') as f:
-        f.write("tempered")
-
-    assert_raises(UserWarning, lambda: regenerate(pkg_cfg, tmp_dir))

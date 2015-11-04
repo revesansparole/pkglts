@@ -6,7 +6,7 @@ from pkglts.option.version.config import main
 def test_config_is_self_sufficient():
     pkg_cfg = {}
     # call config a first time
-    cfg = main(pkg_cfg, dict(auto="off", major="0", minor="1", post="2"))
+    cfg = main(pkg_cfg, dict(major="0", minor="1", post="2"))
 
     # check that a second call with the same info provided
     # first does not require user input
@@ -19,17 +19,10 @@ def test_config_is_self_sufficient():
 def test_config_use_good_defaults():
     pkg_cfg = {}
     # call config a first time
-    cfg = main(pkg_cfg, dict(auto="off", major="0", minor="1", post="2"))
+    cfg = main(pkg_cfg, dict(major="0", minor="1", post="2"))
 
     # check that a second call provide right defaults
     pkg_cfg['version'] = cfg
     with mock.patch("pkglts.option_tools.loc_input", return_value=''):
         new_cfg = main(pkg_cfg, {})
         assert cfg == new_cfg
-
-
-def test_config_auto_do_not_ask_for_version():
-    pkg_cfg = {}
-    cfg = main(pkg_cfg, dict(auto="on"))
-
-    assert cfg['major'] == "0"

@@ -11,10 +11,11 @@ from os.path import join as pj
 from shutil import rmtree
 
 from .local import load_all_handlers, installed_options
-from .manage_tools import (create_package_hash_keys,
+from .manage_tools import (package_hash_keys,
                            clone_base_option, clone_example, regenerate_pkg,
                            update_opt)
 from .option_tools import get_user_permission
+from .rmtfile import ls
 from .templating import get_comment_marker, replace
 from .versioning import get_github_version, get_local_version
 
@@ -26,9 +27,9 @@ pkg_hash_file = "pkg_hash.json"
 def init_pkg(rep="."):
     """ Initialise a package in given directory
     """
-    if not exists(pkg_cfg_file):
+    if not exists(pj(rep, pkg_cfg_file)):
         write_pkg_config({}, rep)
-    if not exists(pkg_hash_file):
+    if not exists(pj(rep, pkg_hash_file)):
         write_pkg_hash({}, rep)
 
 
@@ -206,15 +207,16 @@ def add_option(name, pkg_cfg, extra=None):
 
 
 def install_example_files(option, pkg_cfg, target="."):
-    if option is None:
-        return None
-
     if option not in pkg_cfg:
         print("please install option before example files")
-        return None
+        return False
 
     # get handlers
     h = load_all_handlers(pkg_cfg)
+
+    if (option, True) not in ls("pkglts_data/example"):
+        print("option does not provide any example")
+        return False
 
     root = "pkglts_data/example/%s" % option
     # walk all files in example repo to copy them handling conflicts on the way
@@ -304,7 +306,7 @@ def regenerate(pkg_cfg, target=".", overwrite=False):
 
     # check for potential conflicts
     hm_ref = get_pkg_hash(target)
-    hm = create_package_hash_keys(pkg_cfg, target)
+    hm = package_hash_keys(pkg_cfg, target)
     conflicted = []
     for pth, ref_key in hm_ref.items():
         try:
@@ -312,7 +314,7 @@ def regenerate(pkg_cfg, target=".", overwrite=False):
             if key != ref_key:
                 conflicted.append(pth)
         except KeyError:
-            # file apparently not managed by pkglts
+            # file disappeared, clone will reload it if managed by pkglts
             pass
 
     overwrite_file = {}
@@ -331,9 +333,14 @@ def regenerate(pkg_cfg, target=".", overwrite=False):
     for option in installed_options(pkg_cfg):
         clone_base_option(option, pkg_cfg, handlers, target, overwrite_file)
 
+    init_file = pj(target, "src", "toto", "__init__.py")
+    if exists(init_file):
+        with open(init_file, 'r') as f:
+            print "INIT", f.read()
+
     # regenerate files
     regenerate_pkg(pkg_cfg, handlers, target, overwrite_file)
 
     # re create hash
-    hm = create_package_hash_keys(pkg_cfg, target)
+    hm = package_hash_keys(pkg_cfg, target)
     write_pkg_hash(hm, target)

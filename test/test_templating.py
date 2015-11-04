@@ -1,3 +1,5 @@
+from nose.tools import assert_raises
+
 from pkglts.templating import (get_comment_marker, parse,
                                reconstruct_txt_div, replace,
                                swap_divs)
@@ -658,3 +660,25 @@ after2 = 1
 """
     new_txt = swap_divs(src_txt, tgt_txt, "#")
     assert new_txt == src_txt
+
+
+def test_swap_divs_complains_if_some_pkglts_divs_missing():
+    src_txt = """
+before = 1  # {{pkglts upper, inline = 1}}{{pkglts up2, inline = 3}}
+# {{pkglts lower,
+div = 1
+# }}
+after = 1
+# {{pkglts, inline = 2}}
+after2 = 1
+"""
+    tgt_txt = """
+before = 1  # {{pkglts upper, None}}
+# {{pkglts lower,
+None
+# }}
+after = 1
+# {{pkglts, None}}
+after2 = 1
+"""
+    assert_raises(UserWarning, lambda: swap_divs(src_txt, tgt_txt, "#"))

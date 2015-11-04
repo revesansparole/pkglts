@@ -25,11 +25,11 @@ def test_src_dir():
     assert dir1 != dir2
 
 
-def test_installed_options_handle_hash_key():
+def test_installed_options_handle_private_keys():
     cfg = {'toto': {}, 'titi': None}
     assert set(installed_options(cfg)) == {'toto', 'titi'}
 
-    cfg['hash'] = {}
+    cfg['_key'] = {}
     assert set(installed_options(cfg)) == {'toto', 'titi'}
 
 

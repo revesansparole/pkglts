@@ -2,130 +2,131 @@
 """
 
 from importlib import import_module
-from os import listdir, walk
-from os.path import exists, isdir
-import pip
+from os import listdir, mkdir, walk
+from os.path import basename, exists, isdir
+from pip import get_installed_distributions
+from pip import main as pip_install
 
-from .file_management import get_hash, make_dir, user_modified, write_file
+from .file_management import get_hash, write_file
 from .local import init_namespace_dir
 from .option_tools import get_user_permission
 from .rmtfile import get, ls
 from .templating import get_comment_marker, replace, swap_divs
 
 
-def check_tempering(cur_src_pth, cur_dst_pth, handlers, pkg_cfg, tf):
-    """ Parse cur_src_pth assumed to be a directory
-    in repository and check all files in it to detect
-    tempering by user.
-
-    Function called recursively on sub directories
-
-    Does not make any test on the existence of cur_dst_pth
-
-    args:
-     - cur_src_pth (str): current pth to look into
-     - cur_dst_pth (str): mirror of cur_src_pth on destination
-     - handlers (dict of func): associate keys to handler functions
-     - pkg_cfg (dict of (str: dict)): more information to pass to handlers
-     - tf (list of str): list of tempered files to update, side effect
-    """
-    items = ls(cur_src_pth)
-    for name, is_dir_type in items:
-        if is_dir_type:
-            new_name = replace(name, handlers, pkg_cfg)
-            if new_name not in ("", "_"):
-                dst_dir = cur_dst_pth
-                # handling of namespace
-                if name == "{{base rm, {{key, base.pkgname}}}}":
-                    if 'base' in pkg_cfg:
-                        # check for namespace directory
-                        namespace = pkg_cfg['base']['namespace']
-                        if namespace is not None:
-                            dst_dir += "/" + namespace
-                            pth = dst_dir + "/__init__.py"
-                            if exists(pth) and user_modified(pth,
-                                                             pkg_cfg['hash']):
-                                tf.append(pth)
-
-                dst_dir += "/" + new_name
-                if not exists(dst_dir) and dst_dir in pkg_cfg['hash']:
-                    # print("Directory '%s' has been removed" % dst_dir)
-                    pass
-                else:
-                    check_tempering(cur_src_pth + "/" + name,
-                                    dst_dir,
-                                    handlers,
-                                    pkg_cfg,
-                                    tf)
-        else:
-            new_name = replace(name, handlers, pkg_cfg)
-            if new_name.split(".")[0] != "_":
-                pth = cur_dst_pth + "/" + new_name
-                if exists(pth) and user_modified(pth, pkg_cfg['hash']):
-                    # print("user modified file: %s" % pth)
-                    tf.append(pth)
-
-
-def regenerate_dir(cur_src_pth, cur_dst_pth, handlers, pkg_cfg,
-                   store_hash=True):
-    """ Parse cur_src_pth assumed to be a directory
-    in repository and regenerate all files in it
-    copy regenerated files in cur_dst_pth.
-
-    Function called recursively on sub directories
-
-    Does not make any test on the existence of cur_dst_pth
-
-    args:
-     - cur_src_pth (str): current pth to look into
-     - cur_dst_pth (str): mirror of cur_src_pth on destination
-     - handlers (dict of func): associate keys to handler functions
-     - pkg_cfg (dict of (str: dict)): more information to pass to handlers
-     - store_hash (bool): default True, whether to store hash associated
-                          with newly created files or not
-    """
-    if store_hash:
-        hashmap = pkg_cfg['hash']
-    else:
-        hashmap = None
-
-    overwrite = pkg_cfg.get('_session', {}).get('overwrite', {})
-
-    items = ls(cur_src_pth)
-    for name, is_dir_type in items:
-        if is_dir_type:
-            new_name = replace(name, handlers, pkg_cfg)
-            if new_name not in ("", "_"):  # TODO: Bof when removing one option
-                # handling of namespace
-                dst_dir = cur_dst_pth
-                if name == "{{base rm, {{key, base.pkgname}}}}":
-                    if 'base' in pkg_cfg:
-                        # check for namespace directory
-                        namespace = pkg_cfg['base']['namespace']
-                        if namespace is not None:
-                            dst_dir += "/" + namespace
-                            if not exists(dst_dir):
-                                make_dir(dst_dir, hashmap)
-                                init_namespace_dir(dst_dir, hashmap)
-
-                dst_dir += "/" + new_name
-                if not exists(dst_dir):
-                    make_dir(dst_dir, hashmap)
-
-                regenerate_dir(cur_src_pth + "/" + name, dst_dir,
-                               handlers, pkg_cfg, store_hash)
-        else:
-            new_name = replace(name, handlers, pkg_cfg)
-            if (new_name.split(".")[0] != "_" and
-               new_name[-3:] not in ("pyc", "pyo")):
-                # TODO: Bof when removing one option
-                new_pth = cur_dst_pth + "/" + new_name
-                if new_pth not in overwrite or overwrite[new_pth]:
-                    src_content = get(cur_src_pth + "/" + name)
-                    new_src_content = replace(src_content, handlers, pkg_cfg,
-                                              get_comment_marker(new_name))
-                    # overwrite file without any warning
-                    write_file(new_pth, new_src_content, hashmap)
+# def check_tempering(cur_src_pth, cur_dst_pth, handlers, pkg_cfg, tf):
+#     """ Parse cur_src_pth assumed to be a directory
+#     in repository and check all files in it to detect
+#     tempering by user.
+#
+#     Function called recursively on sub directories
+#
+#     Does not make any test on the existence of cur_dst_pth
+#
+#     args:
+#      - cur_src_pth (str): current pth to look into
+#      - cur_dst_pth (str): mirror of cur_src_pth on destination
+#      - handlers (dict of func): associate keys to handler functions
+#      - pkg_cfg (dict of (str: dict)): more information to pass to handlers
+#      - tf (list of str): list of tempered files to update, side effect
+#     """
+#     items = ls(cur_src_pth)
+#     for name, is_dir_type in items:
+#         if is_dir_type:
+#             new_name = replace(name, handlers, pkg_cfg)
+#             if new_name not in ("", "_"):
+#                 dst_dir = cur_dst_pth
+#                 # handling of namespace
+#                 if name == "{{base rm, {{key, base.pkgname}}}}":
+#                     if 'base' in pkg_cfg:
+#                         # check for namespace directory
+#                         namespace = pkg_cfg['base']['namespace']
+#                         if namespace is not None:
+#                             dst_dir += "/" + namespace
+#                             pth = dst_dir + "/__init__.py"
+#                             if exists(pth) and user_modified(pth,
+#                                                              pkg_cfg['hash']):
+#                                 tf.append(pth)
+#
+#                 dst_dir += "/" + new_name
+#                 if not exists(dst_dir) and dst_dir in pkg_cfg['hash']:
+#                     # print("Directory '%s' has been removed" % dst_dir)
+#                     pass
+#                 else:
+#                     check_tempering(cur_src_pth + "/" + name,
+#                                     dst_dir,
+#                                     handlers,
+#                                     pkg_cfg,
+#                                     tf)
+#         else:
+#             new_name = replace(name, handlers, pkg_cfg)
+#             if new_name.split(".")[0] != "_":
+#                 pth = cur_dst_pth + "/" + new_name
+#                 if exists(pth) and user_modified(pth, pkg_cfg['hash']):
+#                     # print("user modified file: %s" % pth)
+#                     tf.append(pth)
+#
+#
+# def regenerate_dir(cur_src_pth, cur_dst_pth, handlers, pkg_cfg,
+#                    store_hash=True):
+#     """ Parse cur_src_pth assumed to be a directory
+#     in repository and regenerate all files in it
+#     copy regenerated files in cur_dst_pth.
+#
+#     Function called recursively on sub directories
+#
+#     Does not make any test on the existence of cur_dst_pth
+#
+#     args:
+#      - cur_src_pth (str): current pth to look into
+#      - cur_dst_pth (str): mirror of cur_src_pth on destination
+#      - handlers (dict of func): associate keys to handler functions
+#      - pkg_cfg (dict of (str: dict)): more information to pass to handlers
+#      - store_hash (bool): default True, whether to store hash associated
+#                           with newly created files or not
+#     """
+#     if store_hash:
+#         hashmap = pkg_cfg['hash']
+#     else:
+#         hashmap = None
+#
+#     overwrite = pkg_cfg.get('_session', {}).get('overwrite', {})
+#
+#     items = ls(cur_src_pth)
+#     for name, is_dir_type in items:
+#         if is_dir_type:
+#             new_name = replace(name, handlers, pkg_cfg)
+#             if new_name not in ("", "_"):  # TODO: Bof when removing one option
+#                 # handling of namespace
+#                 dst_dir = cur_dst_pth
+#                 if name == "{{base rm, {{key, base.pkgname}}}}":
+#                     if 'base' in pkg_cfg:
+#                         # check for namespace directory
+#                         namespace = pkg_cfg['base']['namespace']
+#                         if namespace is not None:
+#                             dst_dir += "/" + namespace
+#                             if not exists(dst_dir):
+#                                 make_dir(dst_dir, hashmap)
+#                                 init_namespace_dir(dst_dir, hashmap)
+#
+#                 dst_dir += "/" + new_name
+#                 if not exists(dst_dir):
+#                     make_dir(dst_dir, hashmap)
+#
+#                 regenerate_dir(cur_src_pth + "/" + name, dst_dir,
+#                                handlers, pkg_cfg, store_hash)
+#         else:
+#             new_name = replace(name, handlers, pkg_cfg)
+#             if (new_name.split(".")[0] != "_" and
+#                new_name[-3:] not in ("pyc", "pyo")):
+#                 # TODO: Bof when removing one option
+#                 new_pth = cur_dst_pth + "/" + new_name
+#                 if new_pth not in overwrite or overwrite[new_pth]:
+#                     src_content = get(cur_src_pth + "/" + name)
+#                     new_src_content = replace(src_content, handlers, pkg_cfg,
+#                                               get_comment_marker(new_name))
+#                     # overwrite file without any warning
+#                     write_file(new_pth, new_src_content, hashmap)
 
 
 def update_opt(name, pkg_cfg, extra=None):
@@ -159,13 +160,13 @@ def update_opt(name, pkg_cfg, extra=None):
                 return pkg_cfg
 
     # find extra package requirements for setup
-    installed = set(p.project_name for p in pip.get_installed_distributions())
+    installed = set(p.project_name for p in get_installed_distributions())
     to_install = [n for n in opt_require.setup if n not in installed]
     if len(to_install) > 0:
         print("this option requires additional packages to setup:")
         print(", ".join(to_install))
         if get_user_permission("install"):
-            pip.main(['install'] + to_install)
+            pip_install(['install'] + to_install)
         else:
             return pkg_cfg
 
@@ -176,7 +177,7 @@ def update_opt(name, pkg_cfg, extra=None):
     if option_cfg is not None:
         pkg_cfg[name] = option_cfg
 
-    try:  # TODO: proper doc to expose this feature
+    try:  # TODO: proper developer doc to expose this feature
         opt_cfg.after(pkg_cfg)
     except AttributeError:
         pass
@@ -195,16 +196,24 @@ def clone_base_option_dir(src_dir, tgt_dir, pkg_cfg, handlers, overwrite_file):
      - overwrite_files (dict of (str, bool)): whether to overwrite a specific
                                               path in case of conflict
     """
-    # TODO handle namespace
     for src_name, is_dir in ls(src_dir):
         src_pth = src_dir + "/" + src_name
-
         tgt_name = replace(src_name, handlers, pkg_cfg)
         tgt_pth = tgt_dir + "/" + tgt_name
+        # handle namespace
+        if is_dir and basename(src_dir) == 'src' and src_name == "{{key, base.pkgname}}":
+            namespace = pkg_cfg['base']['namespace']
+            if namespace is not None:
+                ns_pth = tgt_dir + "/" + namespace
+                if not exists(ns_pth):
+                    mkdir(ns_pth)
+
+                init_namespace_dir(ns_pth, None)
+                tgt_pth = ns_pth + "/" + tgt_name
 
         if is_dir:
             if tgt_name not in ("", "_") and not exists(tgt_pth):
-                make_dir(tgt_pth, None)
+                mkdir(tgt_pth)
 
             clone_base_option_dir(src_pth, tgt_pth, pkg_cfg, handlers,
                                   overwrite_file)
@@ -236,7 +245,6 @@ def clone_base_option(option, pkg_cfg, handlers, target, overwrite_file):
      - handlers (dict of func): associate keys to handler functions
      - target (str): path to copy files to
     """
-    print "option", option
     if (option, True) not in ls("pkglts_data/base"):
         return  # nothing to do
 
@@ -258,7 +266,7 @@ def clone_example(src_dir, tgt_dir, pkg_cfg, handlers):
 
         if is_dir:
             if tgt_name not in ("", "_") and not exists(tgt_pth):
-                make_dir(tgt_pth, None)
+                mkdir(tgt_pth)
 
             clone_example(src_pth, tgt_pth, pkg_cfg, handlers)
         else:
@@ -271,12 +279,12 @@ def clone_example(src_dir, tgt_dir, pkg_cfg, handlers):
                     write_file(tgt_pth, content, None)
 
 
-def create_package_hash_keys(pkg_cfg, target):
-    """ Walk all files in package and replace content
+def package_hash_keys(pkg_cfg, target):
+    """ Walk all files in package and compute their hash key
 
     args:
      - pkg_cfg (dict of (str, dict)): package configuration parameters
-     - target (str): path to copy files to
+     - target (str): path to read files from
     """
     hm = {}
     for root, dnames, fnames in walk(target):
@@ -286,7 +294,7 @@ def create_package_hash_keys(pkg_cfg, target):
 
         for name in fnames:
             pth = (root + "/" + name).replace("\\", "/")
-            hm[pth] = get_hash(pth, True)
+            hm[pth] = get_hash(pth)
 
     return hm
 

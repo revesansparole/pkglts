@@ -35,12 +35,6 @@ def installed_options(pkg_cfg):
     """
     opts = list(pkg_cfg.keys())
 
-    # handle 'hash' key
-    try:
-        opts.remove("hash")
-    except ValueError:
-        pass
-
     # handle private non option cfg
     opts = [k for k in opts if not k.startswith("_")]
 
@@ -48,7 +42,9 @@ def installed_options(pkg_cfg):
 
 
 namespace_txt = """
+# {{pkglts,
 __import__('pkg_resources').declare_namespace(__name__)
+# }}
 """
 
 

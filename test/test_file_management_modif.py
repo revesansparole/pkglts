@@ -3,7 +3,7 @@ from os import remove
 from os.path import exists
 from string import Template
 
-from pkglts.file_management import get_hash, write_file, user_modified
+from pkglts.file_management import get_hash, write_file
 
 print(__file__)
 
@@ -45,29 +45,29 @@ $in4
     with open(ex_file, 'w') as f:
         f.write(txt.substitute(in1="1", in2="2", in3="3", in4="4"))
 
-    href = get_hash(ex_file, True)
+    href = get_hash(ex_file)
 
     with open(ex_file, 'w') as f:
         f.write(txt.substitute(in1="M", in2="2", in3="3", in4="4"))
 
-    assert get_hash(ex_file, True) == href
+    assert get_hash(ex_file) == href
 
     with open(ex_file, 'w') as f:
         f.write(txt.substitute(in1="1", in2="M", in3="3", in4="4"))
 
-    assert get_hash(ex_file, True) == href
+    assert get_hash(ex_file) == href
 
     with open(ex_file, 'w') as f:
         f.write(txt.substitute(in1="1", in2="2", in3="M", in4="4"))
 
-    assert get_hash(ex_file, True) != href
-    assert get_hash(ex_file, True)[1] == href[1]
+    assert get_hash(ex_file) != href
+    assert get_hash(ex_file)[1] == href[1]
 
     with open(ex_file, 'w') as f:
         f.write(txt.substitute(in1="1", in2="2", in3="3", in4="M"))
 
-    assert get_hash(ex_file, True) != href
-    assert get_hash(ex_file, True)[0] == href[0]
+    assert get_hash(ex_file) != href
+    assert get_hash(ex_file)[0] == href[0]
 
 
 # @with_setup(teardown=teardown)
