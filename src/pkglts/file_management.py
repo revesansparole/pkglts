@@ -106,16 +106,16 @@ def get_hash(pth):
     return:
      - hash (str): hash created from the content of the file
     """
-    with open(pth, 'rb') as f:
+    with open(pth, 'r') as f:
         content = f.read()
 
     root = parse(content, get_comment_marker(pth))
 
     hm = []
     for div in flatten_divs(root):
-        if div.key.split(" ")[0] == "pkglts":
+        if div.key.split(" ")[0] == 'pkglts':
             algo = sha512()
-            algo.update("".join(get_div_txt(div)))
-            hm.append(b64encode(algo.digest()).decode("utf-8"))
+            algo.update("".join(get_div_txt(div)).encode('utf-8'))  # TODO bad if non utf-8 encoded file
+            hm.append(b64encode(algo.digest()).decode('utf-8'))
 
     return tuple(hm)

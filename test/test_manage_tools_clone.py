@@ -25,7 +25,6 @@ def addendum():
 
     with open(init_file, 'w') as f:
         f.write("\n".join(lines))
-    print "\n".join(lines)
 
 
 def setup():
