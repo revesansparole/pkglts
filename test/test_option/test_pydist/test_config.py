@@ -4,9 +4,11 @@ from pkglts.option.pydist.config import main
 
 
 def test_config_is_self_sufficient():
-    pkg_cfg = {}
+    pkg_cfg = dict(base={'owner': 'owner'})
     # call config a first time
-    cfg = main(pkg_cfg, dict(intended_versions=["27"],
+    cfg = main(pkg_cfg, dict(author_name='author',
+                             author_email='email',
+                             intended_versions=["27"],
                              classifiers=["class"]))
 
     # check that a second call with the same info provided
@@ -18,9 +20,11 @@ def test_config_is_self_sufficient():
 
 
 def test_config_use_good_defaults():
-    pkg_cfg = {}
+    pkg_cfg = dict(base={'owner': 'owner'})
     # call config a first time
-    cfg = main(pkg_cfg, dict(intended_versions=["27"],
+    cfg = main(pkg_cfg, dict(author_name='author',
+                             author_email='email',
+                             intended_versions=["27"],
                              classifiers=["class"]))
 
     # check that a second call provide right defaults
