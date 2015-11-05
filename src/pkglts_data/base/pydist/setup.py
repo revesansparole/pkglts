@@ -59,8 +59,8 @@ setup(
     # }}
     description=short_descr,
     long_description=readme + '\n\n' + history,
-    author="{{key, base.author_name}}",
-    author_email='{{key, base.author_email}}',
+    author="{{key, pydist.author_name}}",
+    author_email='{{key, pydist.author_email}}',
     url='{{pkg_url, }}',
     # {{license.setup,
     license="None",

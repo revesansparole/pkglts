@@ -34,6 +34,8 @@
         "year": "2015"
     }, 
     "pydist": {
+        "author_email": "revesansparole@gmail.com", 
+        "author_name": "revesansparole", 
         "classifiers": [
             "Development Status :: 2 - Pre-Alpha", 
             "Intended Audience :: Developers", 
