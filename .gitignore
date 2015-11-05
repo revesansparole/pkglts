@@ -1,3 +1,4 @@
+# {{pkglts github,
 *.py[cod]
 
 # Packages
@@ -15,13 +16,6 @@ develop-eggs
 lib
 lib64
 
-# user defined
-example
-try
-.cookie.json
-feature_list.txt
-
-
 # editors
 .idea
 
@@ -38,4 +32,12 @@ feature_list.txt
 
 # pypi rc file
 .pypirc
+
+# }}
+
+# user defined
+example
+try
+.cookie.json
+feature_list.txt
 

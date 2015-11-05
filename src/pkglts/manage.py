@@ -224,12 +224,7 @@ def install_example_files(option, pkg_cfg, target="."):
 
 
 # def regenerate_file(name, pkg_cfg, handlers):
-#     """ Parse the content of a file for {{div}}
-#     use handlers to modify the content and rewrite file
-#
-#     args:
-#      - name (str): name of file to scan/modify
-#      - pkg_cfg (dict of (str, dict)): package configuration parameters
+#     """ Parse the content of a file for dict)): package configuration parameters
 #      - handlers (dict of (str, handler)): functions used to modify text
 #     """
 #     print "reg", name

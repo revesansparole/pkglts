@@ -37,7 +37,7 @@ from .templating import get_comment_marker, replace, swap_divs
 #             if new_name not in ("", "_"):
 #                 dst_dir = cur_dst_pth
 #                 # handling of namespace
-#                 if name == "{{base rm, {{key, base.pkgname}}}}":
+#                 if name == "pkglts":
 #                     if 'base' in pkg_cfg:
 #                         # check for namespace directory
 #                         namespace = pkg_cfg['base']['namespace']
@@ -99,7 +99,7 @@ from .templating import get_comment_marker, replace, swap_divs
 #             if new_name not in ("", "_"):  # TODO: Bof when removing one option
 #                 # handling of namespace
 #                 dst_dir = cur_dst_pth
-#                 if name == "{{base rm, {{key, base.pkgname}}}}":
+#                 if name == "pkglts":
 #                     if 'base' in pkg_cfg:
 #                         # check for namespace directory
 #                         namespace = pkg_cfg['base']['namespace']
@@ -204,7 +204,7 @@ def clone_base_option_dir(src_dir, tgt_dir, pkg_cfg, handlers, overwrite_file):
         tgt_pth = tgt_dir + "/" + tgt_name
         # handle namespace
         if (is_dir and basename(src_dir) == 'src' and
-                    src_name == "{{key, base.pkgname}}"):
+                    src_name == "pkglts"):
             namespace = pkg_cfg['base']['namespace']
             if namespace is not None:
                 ns_pth = tgt_dir + "/" + namespace

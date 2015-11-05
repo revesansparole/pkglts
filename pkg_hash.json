@@ -1,0 +1,154 @@
+{
+    "./.coveragerc": [], 
+    "./.gitignore": [
+        "o662b+/mPheMG+ToERRuBkXbVUm06xjIYDxRmT5slOaOLWY1J7ORE0Z2xR+zmVsfqjSJEN45vBHfh0PZBC+4aw=="
+    ], 
+    "./.gitignore.extra": [], 
+    "./.pypirc": [
+        "QI4FwYv93xNNAhAeO7Sp0OgJx5uHoH6oSJCXvFx40MBPFCDiUB0N/kT+Fp2OugQ0wFeW4SSSh4gEQWk/ONYcrw=="
+    ], 
+    "./.travis.yml": [
+        "LC4dfWtZnBeSymhAI47vwhEn8ejWiW0osfpfIK9GGTCC6UAv4aVpzdcOL2Qi7ERl2yor19mEmAH/QgeUd91Fiw=="
+    ], 
+    "./AUTHORS.rst": [], 
+    "./CONTRIBUTING.rst": [], 
+    "./HISTORY.rst": [], 
+    "./LICENSE": [
+        "kKVCXgB4QzVQXogGlDw3xpujPLSGdFUOJYH9bOlZt+AlAfD6QJLbyhyuIbh+OumGB/pQ00ebd60YwpeBoCcRfQ=="
+    ], 
+    "./MANIFEST.in": [
+        "pWh+CFt4ReUukHvmHSc2iazaEO1YBSVAn2i0qwi5YQ6JkHJqlUaqM4kDHzC/z2wNnTh6bAQc4uFYH97SU90XEg=="
+    ], 
+    "./README.rst": [
+        "5L0NPIjU7lJn2URlg5PazE788XAX4oWlY62oHSQR6cYU1u/ZOEmqUF4eNQdfedYKSAGbb5NVGvsqzYIvOt4NMw=="
+    ], 
+    "./doc/Makefile": [], 
+    "./doc/README_body.rst": [], 
+    "./doc/authors.rst": [], 
+    "./doc/conf.py": [
+        "rkKPlv0ddJQ8yxVcTviYnADr4ApxhUMapDnMCO0C3dDUj6zFp+C0RzVdp45/wtLLQk6nlgGDj5i1T1MXA4UGcw=="
+    ], 
+    "./doc/contributing.rst": [], 
+    "./doc/history.rst": [], 
+    "./doc/index.rst": [], 
+    "./doc/installation.rst": [], 
+    "./doc/make.bat": [
+        "BO4/+WO6IDftzVOIaQ2iPls6O1EPG7i8RtOJO4c2M7sLbiHpn7QadTNF8lQ3ViB4KrcWkapHMGmlptFHFJE0dw=="
+    ], 
+    "./doc/option_list.rst": [], 
+    "./doc/readme.rst": [], 
+    "./doc/tutorial/dvlpt_env.rst": [], 
+    "./doc/tutorial/pypi.rst": [], 
+    "./doc/tutorial/web_tools.rst": [], 
+    "./doc/tutorials.rst": [], 
+    "./doc/usage.rst": [], 
+    "./entry_points.json": [], 
+    "./feature_list.txt": [], 
+    "./pkg_cfg.json": [], 
+    "./pkg_hash.json": [], 
+    "./requirements.txt": [
+        "d8r0ocOs7/fD4TwCjkn23aWiNMVRSPFdTgqbsOEHCUmTQ/XL4vqiD9C0aAEJdaTOGs1QFgevhDCeAYPPxkGJtg=="
+    ], 
+    "./setup.cfg": [
+        "FXefmGWD7lNPKM/lmDX3ZU2XoEYsYf8eogYhF0vPThNWy7ES0iKPZq/TN7ucGq4gMbQzRZ95A8DVvp5/cCJ2OQ=="
+    ], 
+    "./setup.py": [
+        "J4m4iPk4NZVkvDMbbhLPssHZa74UJfTLntsmADb4qeXvLCSlmeFfzX8cMSJ3ApQLoqZTE7Ox7zh2YEqURRGgEQ=="
+    ], 
+    "./src/pkglts/__init__.py": [
+        "JlOpUAyLEQkIfDTBcR2zfc2AgU7RJCC+EnuUXW+nM+g+c+3/nFFBkQxVf1uX1UQgxhsqscOgMAisiaQIAuADdQ==", 
+        "LC9RpWCeFhH4FFaJgBRpWx/zbxv8PNjtZ/mv0WwKH2d6fK1jigX5BUwdqtEKp/2hMiUKojDdXdeFepoDFkRCRQ=="
+    ], 
+    "./src/pkglts/data_access.py": [
+        "wXZIHUGL0OE/2tDFMyLzjp042onGgNFfwLPXufmyqYc7Qzny/tAHLnNLmnOvMKoIjZ6GwMkAMeVbEKslImxJFQ=="
+    ], 
+    "./src/pkglts/file_management.py": [], 
+    "./src/pkglts/github.py": [], 
+    "./src/pkglts/local.py": [
+        "i7CoIMwiBpYFabCFdB3EQUGaQS0WgPAXnRvdvP3TDfh3exe26L+/fwWAnH5+e8+WVcKFLvsaZ5o8WRVB+q6uSw=="
+    ], 
+    "./src/pkglts/manage.py": [], 
+    "./src/pkglts/manage_script.py": [], 
+    "./src/pkglts/manage_tools.py": [], 
+    "./src/pkglts/option/__init__.py": [], 
+    "./src/pkglts/option/base/__init__.py": [], 
+    "./src/pkglts/option/base/config.py": [], 
+    "./src/pkglts/option/base/handlers.py": [], 
+    "./src/pkglts/option/base/require.py": [], 
+    "./src/pkglts/option/coverage/__init__.py": [], 
+    "./src/pkglts/option/coverage/config.py": [], 
+    "./src/pkglts/option/coverage/handlers.py": [], 
+    "./src/pkglts/option/coverage/require.py": [], 
+    "./src/pkglts/option/coveralls/__init__.py": [], 
+    "./src/pkglts/option/coveralls/config.py": [], 
+    "./src/pkglts/option/coveralls/handlers.py": [], 
+    "./src/pkglts/option/coveralls/require.py": [], 
+    "./src/pkglts/option/data/__init__.py": [], 
+    "./src/pkglts/option/data/config.py": [], 
+    "./src/pkglts/option/data/handlers.py": [], 
+    "./src/pkglts/option/data/require.py": [], 
+    "./src/pkglts/option/doc/__init__.py": [], 
+    "./src/pkglts/option/doc/config.py": [], 
+    "./src/pkglts/option/doc/handlers.py": [], 
+    "./src/pkglts/option/doc/readme.py": [], 
+    "./src/pkglts/option/doc/require.py": [], 
+    "./src/pkglts/option/flake8/__init__.py": [], 
+    "./src/pkglts/option/flake8/config.py": [], 
+    "./src/pkglts/option/flake8/handlers.py": [], 
+    "./src/pkglts/option/flake8/require.py": [], 
+    "./src/pkglts/option/github/__init__.py": [], 
+    "./src/pkglts/option/github/config.py": [], 
+    "./src/pkglts/option/github/handlers.py": [], 
+    "./src/pkglts/option/github/require.py": [], 
+    "./src/pkglts/option/landscape/__init__.py": [], 
+    "./src/pkglts/option/landscape/config.py": [], 
+    "./src/pkglts/option/landscape/handlers.py": [], 
+    "./src/pkglts/option/landscape/require.py": [], 
+    "./src/pkglts/option/license/__init__.py": [], 
+    "./src/pkglts/option/license/config.py": [], 
+    "./src/pkglts/option/license/handlers.py": [], 
+    "./src/pkglts/option/license/require.py": [], 
+    "./src/pkglts/option/pydist/__init__.py": [], 
+    "./src/pkglts/option/pydist/config.py": [], 
+    "./src/pkglts/option/pydist/handlers.py": [], 
+    "./src/pkglts/option/pydist/require.py": [], 
+    "./src/pkglts/option/pypi/__init__.py": [], 
+    "./src/pkglts/option/pypi/config.py": [], 
+    "./src/pkglts/option/pypi/handlers.py": [], 
+    "./src/pkglts/option/pypi/require.py": [], 
+    "./src/pkglts/option/readthedocs/__init__.py": [], 
+    "./src/pkglts/option/readthedocs/config.py": [], 
+    "./src/pkglts/option/readthedocs/handlers.py": [], 
+    "./src/pkglts/option/readthedocs/require.py": [], 
+    "./src/pkglts/option/sphinx/__init__.py": [], 
+    "./src/pkglts/option/sphinx/config.py": [], 
+    "./src/pkglts/option/sphinx/handlers.py": [], 
+    "./src/pkglts/option/sphinx/require.py": [], 
+    "./src/pkglts/option/test/__init__.py": [], 
+    "./src/pkglts/option/test/config.py": [], 
+    "./src/pkglts/option/test/handlers.py": [], 
+    "./src/pkglts/option/test/require.py": [], 
+    "./src/pkglts/option/tox/__init__.py": [], 
+    "./src/pkglts/option/tox/config.py": [], 
+    "./src/pkglts/option/tox/handlers.py": [], 
+    "./src/pkglts/option/tox/require.py": [], 
+    "./src/pkglts/option/travis/__init__.py": [], 
+    "./src/pkglts/option/travis/config.py": [], 
+    "./src/pkglts/option/travis/handlers.py": [], 
+    "./src/pkglts/option/travis/require.py": [], 
+    "./src/pkglts/option/version/__init__.py": [], 
+    "./src/pkglts/option/version/config.py": [], 
+    "./src/pkglts/option/version/github_versioning.py": [], 
+    "./src/pkglts/option/version/handlers.py": [], 
+    "./src/pkglts/option/version/require.py": [], 
+    "./src/pkglts/option_tools.py": [], 
+    "./src/pkglts/rmtfile.py": [], 
+    "./src/pkglts/templating.py": [], 
+    "./src/pkglts/version.py": [
+        "C8/7sS2H8kpeZUptSsTdvwoEIAjavgj6WxBLn6Jb9gKGSGD4MnTapNN6cARGWt3kn1wKSanhdP/dw4Wv3xRe8A=="
+    ], 
+    "./src/pkglts/versioning.py": [], 
+    "./tox.ini": [
+        "iVIs+8KLj01+cLbnrPyHiv8w07D92RmEPfc7DRLyBsfLX5LC/n5qbANkpBXg+kE5StjsP3fAynIL/7czdVIdcg=="
+    ]
+}

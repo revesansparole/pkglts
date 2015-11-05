@@ -2,7 +2,7 @@
 pkglts
 ==========================
 
-
+.. {{pkglts doc,
 
 .. image:: https://readthedocs.org/projects/pkglts/badge/?version=latest
     :alt: Documentation status
@@ -24,7 +24,7 @@ pkglts
     :alt: PyPI version
     :target: https://badge.fury.io/py/pkglts
 
+.. }}
 
 Building packages with long term support
 
-body

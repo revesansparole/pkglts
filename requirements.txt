@@ -1,3 +1,4 @@
+# {{pkglts pydist.requirements,
 tox
 sphinx
 twine
@@ -7,3 +8,4 @@ nose
 coverage
 mock
 flake8
+# }}

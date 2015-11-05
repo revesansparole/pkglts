@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# This Setup script has been generated automatically
-# do not modify
-
+# {{pkglts pydist,
 from os import walk
 from os.path import abspath, normpath
 from os.path import join as pj
@@ -52,7 +50,8 @@ setup(
     include_package_data=True,
     package_data={'pkglts_data': data_files},
     install_requires=open("requirements.txt").read().split("\n"),
-    tests_require=[],    entry_points={
+    tests_require=[],
+    entry_points={
         'console_scripts': [
             'manage = pkglts.manage_script:main',
         ],
@@ -71,3 +70,4 @@ setup(
     ],
     test_suite='nose.collector',
 )
+# }}

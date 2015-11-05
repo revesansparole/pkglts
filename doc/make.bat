@@ -1,3 +1,4 @@
+REM {{pkglts sphinx,
 @ECHO OFF
 
 REM Command file for Sphinx documentation
@@ -240,3 +241,4 @@ if "%1" == "pseudoxml" (
 )
 
 :end
+REM }}
