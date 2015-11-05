@@ -5,7 +5,9 @@ from os.path import exists
 from shutil import rmtree
 
 from pkglts.option.pydist.handlers import (get_extra, get_url,
-                                           mapping, requirements)
+                                           mapping,
+                                           requirements, install_requirements,
+                                           dvlpt_requirements)
 
 tmp_dir = "tmp_hpydist"
 
@@ -24,22 +26,27 @@ def teardown_func():
 
 
 def test_handlers():
-    assert len(mapping) == 3
+    assert len(mapping) == 4
 
 
 def test_requirements():
     pkg_cfg = {}
-    assert requirements("txt", pkg_cfg) == "\n" * 2
+    assert requirements(pkg_cfg, 'install') == "\n" * 2
 
 
 def test_requirements_error_for_bad_options():
     pkg_cfg = {'toto': {}}
-    assert_raises(KeyError, lambda: requirements("txt", pkg_cfg))
+    assert_raises(KeyError, lambda: requirements(pkg_cfg, 'dvlpt'))
 
 
-def test_get_requirements_get_install_requirements():
+def test_install_requirements_get_install_requirements():
+    pkg_cfg = {'base': {}}
+    assert install_requirements("txt", pkg_cfg) == "\n" * 2
+
+
+def test_dvlpt_requirements_get_dvlpt_requirements():
     pkg_cfg = {'test': {}}
-    assert "nose" in requirements("txt", pkg_cfg)
+    assert "nose" in dvlpt_requirements("txt", pkg_cfg)
 
 
 def test_get_url_return_empty_default():

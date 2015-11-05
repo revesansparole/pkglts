@@ -4,34 +4,34 @@ import json
 from pkglts.local import installed_options
 
 
-def requirements(txt, env):
-    """ Check all install requirements for installed options
+def requirements(pkg_cfg, requirement_name):
+    """ Check all requirements for installed options
+
+    args:
+     - pkg_cfg (dict of (str, dict)): option_name, options
+     - requirement_name (str): type of requirement 'install', 'dvlpt'
+
+    return:
+     - (str): one requirement per line
     """
     reqs = set()
-    for name in installed_options(env):
+    for name in installed_options(pkg_cfg):
         try:
             opt_req = import_module("pkglts.option.%s.require" % name)
-            reqs.update(opt_req.install)
+            reqs.update(getattr(opt_req, requirement_name))
         except ImportError:
             raise KeyError("option '%s' does not exists" % name)
 
     reqs_str = "\n".join(reqs)
     return "\n" + reqs_str + "\n"
+
+
+def install_requirements(txt, env):
+    return requirements(env, 'install')
 
 
 def dvlpt_requirements(txt, env):
-    """ Check all dvlpt requirements for installed options
-    """
-    reqs = set()
-    for name in installed_options(env):
-        try:
-            opt_req = import_module("pkglts.option.%s.require" % name)
-            reqs.update(opt_req.dvlpt)
-        except ImportError:
-            raise KeyError("option '%s' does not exists" % name)
-
-    reqs_str = "\n".join(reqs)
-    return "\n" + reqs_str + "\n"
+    return requirements(env, 'dvlpt')
 
 
 def get_url(txt, pkg_cfg):
@@ -87,7 +87,7 @@ def get_extra(txt, env):
     return txt
 
 
-mapping = {"pydist.requirements": requirements,
+mapping = {"pydist.install_requirements": install_requirements,
            "pydist.dvlpt_requirements": dvlpt_requirements,
            "pkg_url": get_url,
            "pydist.extra": get_extra}
