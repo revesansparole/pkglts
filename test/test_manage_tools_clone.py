@@ -84,13 +84,14 @@ def test_clone_overwrite_only_pkglts_divs():
 
 
 @with_setup(setup, teardown)
-def test_clone_complains_if_missing_pkglts_divs():
+def test_clone_returns_list_of_files_with_missing_pkglts_divs():
     clone_base_option('base', pkg_cfg, {}, tmp_dir, {})
     with open(init_file, 'w') as f:
         f.write("modified")
 
-    assert_raises(UserWarning, lambda: clone_base_option('base', pkg_cfg, {},
-                                                         tmp_dir, {}))
+    error_files = clone_base_option('base', pkg_cfg, {}, tmp_dir, {})
+    assert len(error_files) > 0
+    assert error_files[0] == init_file
 
 
 @with_setup(setup, teardown)

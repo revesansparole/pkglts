@@ -332,7 +332,15 @@ def regenerate(pkg_cfg, target=".", overwrite=False):
     # copy all missing files for options
     # regenerating pkglts divs on the way
     for option in installed_options(pkg_cfg):
-        clone_base_option(option, pkg_cfg, handlers, target, overwrite_file)
+        print("cloning option '%s'" % option)
+        error_files = clone_base_option(option, pkg_cfg, handlers, target,
+                                        overwrite_file)
+        if len(error_files) > 0:
+            for pth in error_files:
+                print("unable to resolve conflict in '%s'" % pth)
+                print("Maybe remove your copy and relaunch regenerate")
+
+            return False
 
     # regenerate files
     regenerate_pkg(pkg_cfg, handlers, target, overwrite_file)

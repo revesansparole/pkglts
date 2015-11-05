@@ -662,7 +662,7 @@ after2 = 1
     assert new_txt == src_txt
 
 
-def test_swap_divs_complains_if_some_pkglts_divs_missing():
+def test_swap_divs_returns_None_if_some_pkglts_divs_missing():
     src_txt = """
 before = 1  # {{pkglts upper, inline = 1}}{{pkglts up2, inline = 3}}
 # {{pkglts lower,
@@ -681,4 +681,5 @@ after = 1
 # {{pkglts, None}}
 after2 = 1
 """
-    assert_raises(UserWarning, lambda: swap_divs(src_txt, tgt_txt, "#"))
+    txt = swap_divs(src_txt, tgt_txt, "#")
+    assert txt is None

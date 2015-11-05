@@ -196,12 +196,15 @@ def clone_base_option_dir(src_dir, tgt_dir, pkg_cfg, handlers, overwrite_file):
      - overwrite_files (dict of (str, bool)): whether to overwrite a specific
                                               path in case of conflict
     """
+    error_files = []
+
     for src_name, is_dir in ls(src_dir):
         src_pth = src_dir + "/" + src_name
         tgt_name = replace(src_name, handlers, pkg_cfg)
         tgt_pth = tgt_dir + "/" + tgt_name
         # handle namespace
-        if is_dir and basename(src_dir) == 'src' and src_name == "{{key, base.pkgname}}":
+        if (is_dir and basename(src_dir) == 'src' and
+                    src_name == "{{key, base.pkgname}}"):
             namespace = pkg_cfg['base']['namespace']
             if namespace is not None:
                 ns_pth = tgt_dir + "/" + namespace
@@ -215,8 +218,9 @@ def clone_base_option_dir(src_dir, tgt_dir, pkg_cfg, handlers, overwrite_file):
             if tgt_name not in ("", "_") and not exists(tgt_pth):
                 mkdir(tgt_pth)
 
-            clone_base_option_dir(src_pth, tgt_pth, pkg_cfg, handlers,
-                                  overwrite_file)
+            ef = clone_base_option_dir(src_pth, tgt_pth, pkg_cfg, handlers,
+                                       overwrite_file)
+            error_files.extend(ef)
         else:
             if (tgt_name.split(".")[0] != "_" and
                     tgt_name[-3:] not in ("pyc", "pyo")):
@@ -226,11 +230,17 @@ def clone_base_option_dir(src_dir, tgt_dir, pkg_cfg, handlers, overwrite_file):
                         with open(tgt_pth, 'r') as f:
                             tgt_cnt = f.read()
 
-                        content = swap_divs(src_cnt, tgt_cnt, get_comment_marker(src_pth))
-                        write_file(tgt_pth, content, None)
+                        content = swap_divs(src_cnt, tgt_cnt,
+                                            get_comment_marker(src_pth))
+                        if content is None:
+                            error_files.append(tgt_pth)
+                        else:
+                            write_file(tgt_pth, content, None)
                 else:
                     content = get(src_pth)
                     write_file(tgt_pth, content, None)
+
+    return error_files
 
 
 def clone_base_option(option, pkg_cfg, handlers, target, overwrite_file):
@@ -246,12 +256,12 @@ def clone_base_option(option, pkg_cfg, handlers, target, overwrite_file):
      - target (str): path to copy files to
     """
     if (option, True) not in ls("pkglts_data/base"):
-        return  # nothing to do
+        return []  # nothing to do
 
     option_root = "pkglts_data/base/%s" % option
 
-    clone_base_option_dir(option_root, target, pkg_cfg, handlers,
-                          overwrite_file)
+    return clone_base_option_dir(option_root, target, pkg_cfg, handlers,
+                                 overwrite_file)
 
 
 def clone_example(src_dir, tgt_dir, pkg_cfg, handlers):
