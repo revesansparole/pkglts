@@ -5,6 +5,7 @@ include HISTORY.rst
 include LICENSE
 include README.rst
 include requirements.txt
+include dvlpt_requirements.txt
 
 recursive-include test *
 recursive-include src/pkglts_data *
