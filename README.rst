@@ -28,3 +28,59 @@ pkglts
 
 Building packages with long term support
 
+The rationale behind the creation of this 'package builder' is to keep the life
+of a python programmer as easy as possible by providing three core functions:
+
+ - A way to add more functionality to an existing package.
+ - A way to keep the package structure up to date with currently known best
+   practices.
+ - Remove repetitive tasks that can be automated from the list of things to do.
+
+.. _Python: http://python.org
+
+Quick start
+===========
+
+Create a virtual environment for development::
+
+    $ virtualenv dvlpt
+
+Activate it::
+
+    $ dvlpt/Scripts/activate
+
+Install pkglts_::
+
+    (dvlpt)$ pip install pkglts
+
+Create a directory for your package::
+
+    (dvlpt)$ mkdir toto
+
+Run 'manage' inside this directory::
+
+    (dvlpt)$ cd toto
+    (dvlpt)toto$ manage init
+    (dvlpt)toto$ manage add -opt base
+    (dvlpt)toto$ manage regenerate
+
+This will create the bare basic minimum for a python package. Add more options
+(see the add_option_ for more options) afterward. Especially, since in the example
+above we just added the 'base' option that will create a 'src' directory to put
+your code in it.
+
+.. _pkglts: https://pypi.python.org/pypi/pkglts/
+.. _add_option: https://pkglts.readthedocs.org/en/latest/option_list.html
+
+Documentation
+=============
+
+More documentation can be found on readthedocs_. If you just intend to use this package
+you can start with some tutorials_. However, if the core functionality are
+not sufficient and you want to be part of the development you might be interested
+with he developer_ section of the doc.
+
+
+.. _readthedocs: https://pkglts.readthedocs.org/en/latest
+.. _tutorials: https://pkglts.readthedocs.org/en/latest/tutorials.html
+.. _developer: https://pkglts.readthedocs.org/en/latest

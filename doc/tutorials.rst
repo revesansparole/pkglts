@@ -10,4 +10,5 @@ environment and creating a package.
 
    tutorial/dvlpt_env
    tutorial/pypi
+   tutorial/migration
    tutorial/web_tools
