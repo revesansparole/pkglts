@@ -12,6 +12,19 @@ short_descr = "Building packages with long term support"
 readme = open('README.rst').read()
 history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 
+
+def parse_requirements(fname):
+    with open(fname, 'r') as f:
+        txt = f.read()
+
+    reqs = []
+    for line in txt.splitlines():
+        line = line.strip()
+        if len(line) > 0 and not line.startswith("#"):
+            reqs.append(line)
+
+    return reqs
+
 # find version number in /src/$pkg_pth/version.py
 version = {}
 with open("src/pkglts/version.py") as fp:
@@ -42,15 +55,16 @@ setup(
     long_description=readme + '\n\n' + history,
     author="base.author_name",
     author_email='base.author_email',
-    url='',license="mit",
+    url='',
+    license="mit",
     zip_safe=False,
 
     packages=find_packages('src'),
     package_dir={'': 'src'},
     include_package_data=True,
     package_data={'pkglts_data': data_files},
-    install_requires=open("requirements.txt").read().split("\n"),
-    tests_require=[],
+    install_requires=parse_requirements("requirements.txt"),
+    tests_require=parse_requirements("dvlpt_requirements.txt"),
     entry_points={
         'console_scripts': [
             'manage = pkglts.manage_script:main',

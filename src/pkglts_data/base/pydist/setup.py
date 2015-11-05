@@ -12,6 +12,19 @@ short_descr = "{{key, doc.description}}"
 readme = open('README.rst').read()
 history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 
+
+def parse_requirements(fname):
+    with open(fname, 'r') as f:
+        txt = f.read()
+
+    reqs = []
+    for line in txt.splitlines():
+        line = line.strip()
+        if len(line) > 0 and not line.startswith("#"):
+            reqs.append(line)
+
+    return reqs
+
 # {{version rm,
 # find version number in /src/$pkg_pth/version.py
 version = {}
@@ -60,8 +73,8 @@ setup(
     include_package_data=True,
     package_data={'{{key, base.pkgname}}_data': data_files},
     # }}
-    install_requires=open("requirements.txt").read().split("\n"),
-    tests_require=[],
+    install_requires=parse_requirements("requirements.txt"),
+    tests_require=parse_requirements("dvlpt_requirements.txt"),
     # {{plugin.setup pydist.extra rm,
     entry_points={
         # 'console_scripts': [

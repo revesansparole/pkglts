@@ -14,7 +14,7 @@ def generate(txt, env):
 
 
 def setup_handler(txt, env):
-    return 'license="%s",' % env['license']['name']
+    return '\n    license="%s",' % env['license']['name']
 
 
 mapping = {"license.generate": generate,

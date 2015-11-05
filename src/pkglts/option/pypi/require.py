@@ -1,3 +1,4 @@
 option = ['pydist']
 setup = []
-install = ['twine']
+install = []
+dvlpt = ['twine']

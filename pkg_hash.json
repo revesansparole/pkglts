@@ -43,28 +43,22 @@
     "./doc/tutorial/web_tools.rst": [], 
     "./doc/tutorials.rst": [], 
     "./doc/usage.rst": [], 
+    "./dvlpt_requirements.txt": [
+        "T8kwzO/cHSZBmG+c3d8pl+14iG1Nqkpx0J+OjA5kKIFk8CEb1A1ZjcEUEkExvopEc5Eb6a4UkNiWtHJg/+9l0g=="
+    ], 
     "./entry_points.json": [], 
     "./feature_list.txt": [], 
     "./pkg_cfg.json": [], 
     "./pkg_hash.json": [], 
     "./requirements.txt": [
-        "T8kwzO/cHSZBmG+c3d8pl+14iG1Nqkpx0J+OjA5kKIFk8CEb1A1ZjcEUEkExvopEc5Eb6a4UkNiWtHJg/+9l0g=="
+        "AWuoxM/eZa+Zy1+ouKN+Lrc/SBs640mRZm3y4E/rbAOGZuvR7CtvYjlndWAzxwLd5fQj99R6tu0YJ/9TeDcx9w=="
     ], 
     "./setup.cfg": [
         "AceT0jzab5WkgiyG0lhA4oMUpq2t8vDdKg4f4G9h1q56nQjdtQ24XtebydlS+DvBf1kz6x6oCKLDuZ8KduBQ0Q=="
     ], 
     "./setup.py": [
-        "xMy/fTuFEG4ovQKQCS/I45UaIQTaonK2kUsG5G26bwJwnf/ngfsTuPu70QFM61uwq38KwtTTRyhardCldrIv7w=="
+        "FuCkRFs5ZcKPwSj8XMBNtOW4/h7InhsAEYJ0uysk0asCncMEDtmrtKrTIWc89Z4TEj+BPGNPtgeO7e8uKQ68Fg=="
     ], 
-    "./src/pkglts.egg-info/PKG-INFO": [
-        "Lqb49Dm+4RX/EJSPxTawqoMofttyywQjGlZNRy3MsB8gHxlmUWycOy5/EhwUmElvLkLtiMup5Gk+xdgPrAk6EA=="
-    ], 
-    "./src/pkglts.egg-info/SOURCES.txt": [], 
-    "./src/pkglts.egg-info/dependency_links.txt": [], 
-    "./src/pkglts.egg-info/entry_points.txt": [], 
-    "./src/pkglts.egg-info/not-zip-safe": [], 
-    "./src/pkglts.egg-info/requires.txt": [], 
-    "./src/pkglts.egg-info/top_level.txt": [], 
     "./src/pkglts/__init__.py": [
         "bXi4YRtInDLkaTvGi4V/ZIZpKXGCIgIw/Qm7wX5YZ+tM5kkkAAGCzzuDhxJDzcpoWKBE1UxDj7mT+40YH1DZQA==", 
         "fIn+GWAvhWfY/9NV/Sw6VXI4UIvx1OTgGxXQ1U5+9JFQ4vhuETzkaQvz8W4M9rMDYlL0vAeRmP2p2DyMgcvb9A=="

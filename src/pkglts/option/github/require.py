@@ -1,3 +1,4 @@
 option = ['base']
 setup = []
-install = ['github3.py']
+install = []
+dvlpt = ['github3.py']

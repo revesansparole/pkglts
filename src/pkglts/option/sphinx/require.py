@@ -1,3 +1,4 @@
 option = ['test']
 setup = []
-install = ['sphinx']
+install = []
+dvlpt = ['sphinx']

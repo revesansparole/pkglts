@@ -1,9 +1,11 @@
 """ Specific helper function for manage script
 """
 
+import imp
 from importlib import import_module
 from os import listdir, mkdir, walk
 from os.path import basename, exists, isdir
+import pip
 from pip import get_installed_distributions
 from pip import main as pip_install
 
@@ -17,119 +19,28 @@ from .templating import (closing_marker, get_comment_marker, opening_marker,
 
 tpl_src_name = "%skey, base.pkgname%s" % (opening_marker, closing_marker)
 
-# def check_tempering(cur_src_pth, cur_dst_pth, handlers, pkg_cfg, tf):
-#     """ Parse cur_src_pth assumed to be a directory
-#     in repository and check all files in it to detect
-#     tempering by user.
-#
-#     Function called recursively on sub directories
-#
-#     Does not make any test on the existence of cur_dst_pth
-#
-#     args:
-#      - cur_src_pth (str): current pth to look into
-#      - cur_dst_pth (str): mirror of cur_src_pth on destination
-#      - handlers (dict of func): associate keys to handler functions
-#      - pkg_cfg (dict of (str: dict)): more information to pass to handlers
-#      - tf (list of str): list of tempered files to update, side effect
-#     """
-#     items = ls(cur_src_pth)
-#     for name, is_dir_type in items:
-#         if is_dir_type:
-#             new_name = replace(name, handlers, pkg_cfg)
-#             if new_name not in ("", "_"):
-#                 dst_dir = cur_dst_pth
-#                 # handling of namespace
-#                 if name == "pkglts":
-#                     if 'base' in pkg_cfg:
-#                         # check for namespace directory
-#                         namespace = pkg_cfg['base']['namespace']
-#                         if namespace is not None:
-#                             dst_dir += "/" + namespace
-#                             pth = dst_dir + "/__init__.py"
-#                             if exists(pth) and user_modified(pth,
-#                                                              pkg_cfg['hash']):
-#                                 tf.append(pth)
-#
-#                 dst_dir += "/" + new_name
-#                 if not exists(dst_dir) and dst_dir in pkg_cfg['hash']:
-#                     # print("Directory '%s' has been removed" % dst_dir)
-#                     pass
-#                 else:
-#                     check_tempering(cur_src_pth + "/" + name,
-#                                     dst_dir,
-#                                     handlers,
-#                                     pkg_cfg,
-#                                     tf)
-#         else:
-#             new_name = replace(name, handlers, pkg_cfg)
-#             if new_name.split(".")[0] != "_":
-#                 pth = cur_dst_pth + "/" + new_name
-#                 if exists(pth) and user_modified(pth, pkg_cfg['hash']):
-#                     # print("user modified file: %s" % pth)
-#                     tf.append(pth)
-#
-#
-# def regenerate_dir(cur_src_pth, cur_dst_pth, handlers, pkg_cfg,
-#                    store_hash=True):
-#     """ Parse cur_src_pth assumed to be a directory
-#     in repository and regenerate all files in it
-#     copy regenerated files in cur_dst_pth.
-#
-#     Function called recursively on sub directories
-#
-#     Does not make any test on the existence of cur_dst_pth
-#
-#     args:
-#      - cur_src_pth (str): current pth to look into
-#      - cur_dst_pth (str): mirror of cur_src_pth on destination
-#      - handlers (dict of func): associate keys to handler functions
-#      - pkg_cfg (dict of (str: dict)): more information to pass to handlers
-#      - store_hash (bool): default True, whether to store hash associated
-#                           with newly created files or not
-#     """
-#     if store_hash:
-#         hashmap = pkg_cfg['hash']
-#     else:
-#         hashmap = None
-#
-#     overwrite = pkg_cfg.get('_session', {}).get('overwrite', {})
-#
-#     items = ls(cur_src_pth)
-#     for name, is_dir_type in items:
-#         if is_dir_type:
-#             new_name = replace(name, handlers, pkg_cfg)
-#             if new_name not in ("", "_"):  # TODO: Bof when removing one option
-#                 # handling of namespace
-#                 dst_dir = cur_dst_pth
-#                 if name == "pkglts":
-#                     if 'base' in pkg_cfg:
-#                         # check for namespace directory
-#                         namespace = pkg_cfg['base']['namespace']
-#                         if namespace is not None:
-#                             dst_dir += "/" + namespace
-#                             if not exists(dst_dir):
-#                                 make_dir(dst_dir, hashmap)
-#                                 init_namespace_dir(dst_dir, hashmap)
-#
-#                 dst_dir += "/" + new_name
-#                 if not exists(dst_dir):
-#                     make_dir(dst_dir, hashmap)
-#
-#                 regenerate_dir(cur_src_pth + "/" + name, dst_dir,
-#                                handlers, pkg_cfg, store_hash)
-#         else:
-#             new_name = replace(name, handlers, pkg_cfg)
-#             if (new_name.split(".")[0] != "_" and
-#                new_name[-3:] not in ("pyc", "pyo")):
-#                 # TODO: Bof when removing one option
-#                 new_pth = cur_dst_pth + "/" + new_name
-#                 if new_pth not in overwrite or overwrite[new_pth]:
-#                     src_content = get(cur_src_pth + "/" + name)
-#                     new_src_content = replace(src_content, handlers, pkg_cfg,
-#                                               get_comment_marker(new_name))
-#                     # overwrite file without any warning
-#                     write_file(new_pth, new_src_content, hashmap)
+
+def ensure_installed_packages(requirements, msg):
+    """ Ensure all packages in requirements are installed.
+
+    If not, ask user permission to install them.
+
+    args:
+     - requirements (list of str): list of package names to pip install
+                                   if needed
+    """
+    pip.utils.pkg_resources = imp.reload(pip.utils.pkg_resources)
+    installed = set(p.project_name for p in get_installed_distributions())
+    to_install = set(requirements) - installed
+    if len(to_install) > 0:
+        print(msg)
+        print("missing packages: " + ", ".join(to_install))
+        if get_user_permission("install"):
+            pip_install(['install'] + list(to_install))
+            return True
+        else:
+            return False
+    return True
 
 
 def update_opt(name, pkg_cfg, extra=None):
@@ -163,15 +74,10 @@ def update_opt(name, pkg_cfg, extra=None):
                 return pkg_cfg
 
     # find extra package requirements for setup
-    installed = set(p.project_name for p in get_installed_distributions())
-    to_install = [n for n in opt_require.setup if n not in installed]
-    if len(to_install) > 0:
-        print("this option requires additional packages to setup:")
-        print(", ".join(to_install))
-        if get_user_permission("install"):
-            pip_install(['install'] + to_install)
-        else:
-            return pkg_cfg
+    msg = "this option requires some packages to setup"
+    if not ensure_installed_packages(opt_require.setup, msg):
+        print("option installation stopped")
+        return pkg_cfg
 
     # execute main function to retrieve config options
     option_cfg = opt_cfg.main(pkg_cfg, extra)
@@ -184,6 +90,10 @@ def update_opt(name, pkg_cfg, extra=None):
         opt_cfg.after(pkg_cfg)
     except AttributeError:
         pass
+
+    # find extra package requirements for dvlpt
+    msg = "this option requires additional packages for developers"
+    ensure_installed_packages(opt_require.dvlpt, msg)
 
     return pkg_cfg
 

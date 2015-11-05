@@ -1,3 +1,4 @@
 option = ['pydist']
 setup = []
-install = ['tox']
+install = []
+dvlpt = ['tox']

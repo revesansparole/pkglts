@@ -1,3 +1,4 @@
 option = ['base']
 setup = []
-install = ['nose', 'mock']
+install = []
+dvlpt = ['nose', 'mock']

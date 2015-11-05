@@ -5,14 +5,28 @@ from pkglts.local import installed_options
 
 
 def requirements(txt, env):
-    """ Check all requirements for installed options
-    and add them to setup.py
+    """ Check all install requirements for installed options
     """
     reqs = set()
     for name in installed_options(env):
         try:
             opt_req = import_module("pkglts.option.%s.require" % name)
             reqs.update(opt_req.install)
+        except ImportError:
+            raise KeyError("option '%s' does not exists" % name)
+
+    reqs_str = "\n".join(reqs)
+    return "\n" + reqs_str + "\n"
+
+
+def dvlpt_requirements(txt, env):
+    """ Check all dvlpt requirements for installed options
+    """
+    reqs = set()
+    for name in installed_options(env):
+        try:
+            opt_req = import_module("pkglts.option.%s.require" % name)
+            reqs.update(opt_req.dvlpt)
         except ImportError:
             raise KeyError("option '%s' does not exists" % name)
 
@@ -74,5 +88,6 @@ def get_extra(txt, env):
 
 
 mapping = {"pydist.requirements": requirements,
+           "pydist.dvlpt_requirements": dvlpt_requirements,
            "pkg_url": get_url,
            "pydist.extra": get_extra}
