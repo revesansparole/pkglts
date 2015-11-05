@@ -1,4 +1,5 @@
 {
+    "./.coverage": [], 
     "./.coveragerc": [], 
     "./.gitignore": [
         "o662b+/mPheMG+ToERRuBkXbVUm06xjIYDxRmT5slOaOLWY1J7ORE0Z2xR+zmVsfqjSJEN45vBHfh0PZBC+4aw=="
@@ -72,9 +73,7 @@
     ], 
     "./src/pkglts/file_management.py": [], 
     "./src/pkglts/github.py": [], 
-    "./src/pkglts/local.py": [
-        "i7CoIMwiBpYFabCFdB3EQUGaQS0WgPAXnRvdvP3TDfh3exe26L+/fwWAnH5+e8+WVcKFLvsaZ5o8WRVB+q6uSw=="
-    ], 
+    "./src/pkglts/local.py": [], 
     "./src/pkglts/manage.py": [], 
     "./src/pkglts/manage_script.py": [], 
     "./src/pkglts/manage_tools.py": [], 

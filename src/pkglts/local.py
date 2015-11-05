@@ -6,7 +6,7 @@ from importlib import import_module
 from os.path import exists
 
 from .file_management import write_file
-from .templating import same
+from .templating import closing_marker, same, opening_marker
 
 
 def src_dir(pkg_cfg):
@@ -42,10 +42,10 @@ def installed_options(pkg_cfg):
 
 
 namespace_txt = """
-# {{pkglts,
+# %spkglts,
 __import__('pkg_resources').declare_namespace(__name__)
-# }}
-"""
+# %s
+""" % (opening_marker, closing_marker)
 
 
 def init_namespace_dir(pth, hashmap):

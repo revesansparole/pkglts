@@ -11,8 +11,11 @@ from .file_management import get_hash, write_file
 from .local import init_namespace_dir
 from .option_tools import get_user_permission
 from .rmtfile import get, ls
-from .templating import get_comment_marker, replace, swap_divs
+from .templating import (closing_marker, get_comment_marker, opening_marker,
+                         replace, swap_divs)
 
+
+tpl_src_name = "%skey, base.pkgname%s" % (opening_marker, closing_marker)
 
 # def check_tempering(cur_src_pth, cur_dst_pth, handlers, pkg_cfg, tf):
 #     """ Parse cur_src_pth assumed to be a directory
@@ -204,7 +207,7 @@ def clone_base_option_dir(src_dir, tgt_dir, pkg_cfg, handlers, overwrite_file):
         tgt_pth = tgt_dir + "/" + tgt_name
         # handle namespace
         if (is_dir and basename(src_dir) == 'src' and
-                    src_name == "pkglts"):
+                    src_name == tpl_src_name):
             namespace = pkg_cfg['base']['namespace']
             if namespace is not None:
                 ns_pth = tgt_dir + "/" + namespace
