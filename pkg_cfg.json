@@ -66,9 +66,8 @@
         "option": null
     }, 
     "version": {
-        "auto": "off", 
         "major": "0", 
         "minor": "1", 
-        "post": "3"
+        "post": "4"
     }
 }

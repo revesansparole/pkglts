@@ -2,42 +2,43 @@
     "./.coverage": [], 
     "./.coveragerc": [], 
     "./.gitignore": [
-        "o662b+/mPheMG+ToERRuBkXbVUm06xjIYDxRmT5slOaOLWY1J7ORE0Z2xR+zmVsfqjSJEN45vBHfh0PZBC+4aw=="
+        "oirSysYoCw5cmGezxI9cSMlGB0NqmZkPUc66rQCyqG1R2kyD2Osvx8cNpFmzPbsqbuePLTLW2pigd7hM6V0D4A=="
     ], 
     "./.pypirc": [
-        "QI4FwYv93xNNAhAeO7Sp0OgJx5uHoH6oSJCXvFx40MBPFCDiUB0N/kT+Fp2OugQ0wFeW4SSSh4gEQWk/ONYcrw=="
+        "C4VBZeyGsSLpNpCOnk88orc8kIzQVHze+Scb8Z5EuEUNUwD2c+zVeM7Ynp0ErkU509vzUk5VVN63dowd/da5lQ=="
     ], 
     "./.travis.yml": [
-        "LC4dfWtZnBeSymhAI47vwhEn8ejWiW0osfpfIK9GGTCC6UAv4aVpzdcOL2Qi7ERl2yor19mEmAH/QgeUd91Fiw=="
+        "izXs/LGoIysWFvJVMhcn8ONDH0U/t5tVCbFXK6Ny5Q5aNAJiOUGEHeJwFaivyW0iJKVpzEh1Pwk+z1YujXO9rw=="
     ], 
     "./AUTHORS.rst": [], 
     "./CONTRIBUTING.rst": [], 
     "./HISTORY.rst": [], 
     "./LICENSE": [
-        "kKVCXgB4QzVQXogGlDw3xpujPLSGdFUOJYH9bOlZt+AlAfD6QJLbyhyuIbh+OumGB/pQ00ebd60YwpeBoCcRfQ=="
+        "/iB6sOFrygt2Cav5v6hhVzr0NETYAV75tpyvX60aj7ZQwyN7vHvM2L8LASn8L7op2uvtBV+4eO72YQhiUpYl6Q=="
     ], 
     "./MANIFEST.in": [
-        "pWh+CFt4ReUukHvmHSc2iazaEO1YBSVAn2i0qwi5YQ6JkHJqlUaqM4kDHzC/z2wNnTh6bAQc4uFYH97SU90XEg=="
+        "iHMwD3cdCCLyO0KIJ3OnrqXmnGF/t6EVWxNAKDhNqcls8yMR0YGNJb5KHPwkbByxtJqNkOESNvWuZccoiGn43w=="
     ], 
     "./README.rst": [
-        "5L0NPIjU7lJn2URlg5PazE788XAX4oWlY62oHSQR6cYU1u/ZOEmqUF4eNQdfedYKSAGbb5NVGvsqzYIvOt4NMw=="
+        "wMXdUwSb8LEn/nklFbo4g3CQm4t0wCYm36XtUB9wnG6YSqvBRVNTwCfNdrWdwTLykGcUUYCModPaw+bDTlQuGg=="
     ], 
     "./doc/Makefile": [], 
     "./doc/README_body.rst": [], 
     "./doc/authors.rst": [], 
     "./doc/conf.py": [
-        "rkKPlv0ddJQ8yxVcTviYnADr4ApxhUMapDnMCO0C3dDUj6zFp+C0RzVdp45/wtLLQk6nlgGDj5i1T1MXA4UGcw=="
+        "XqcIE4bSktQ75Txt4ZVT3mw9pGeml+Z7LWZVde0yAlYlYB+3T5B9YQGIeLbOFiLZ5bQCvqmgEapGuuEgP6hWdw=="
     ], 
     "./doc/contributing.rst": [], 
     "./doc/history.rst": [], 
     "./doc/index.rst": [], 
     "./doc/installation.rst": [], 
     "./doc/make.bat": [
-        "BO4/+WO6IDftzVOIaQ2iPls6O1EPG7i8RtOJO4c2M7sLbiHpn7QadTNF8lQ3ViB4KrcWkapHMGmlptFHFJE0dw=="
+        "Tk/+eZHH7Ss0u6nDShjeISQZmDwP2+T79T9iaBXwWtSC2AJBYjifliRsFaupRval8lXgd0Jg4jNRMcDOC31oaw=="
     ], 
     "./doc/option_list.rst": [], 
     "./doc/readme.rst": [], 
     "./doc/tutorial/dvlpt_env.rst": [], 
+    "./doc/tutorial/migration.rst": [], 
     "./doc/tutorial/pypi.rst": [], 
     "./doc/tutorial/web_tools.rst": [], 
     "./doc/tutorials.rst": [], 
@@ -47,16 +48,16 @@
     "./pkg_cfg.json": [], 
     "./pkg_hash.json": [], 
     "./requirements.txt": [
-        "AL2eWved/SYXCf3d8u4eKHkm59wxda2BeloM0Jx/ozJRpEcTPfLwxXV+KpZVt25bzbtMKqSGiQE6qiP1DonggA=="
+        "T8kwzO/cHSZBmG+c3d8pl+14iG1Nqkpx0J+OjA5kKIFk8CEb1A1ZjcEUEkExvopEc5Eb6a4UkNiWtHJg/+9l0g=="
     ], 
     "./setup.cfg": [
-        "sFP4xM2AgPHd9KVHnv7Nhfo3B7BtcZ6spYbIKBSiLbvQkdei7C5i1y0GMV5BSdbvdHzwENumjKdCZiZzPkLXlg=="
+        "AceT0jzab5WkgiyG0lhA4oMUpq2t8vDdKg4f4G9h1q56nQjdtQ24XtebydlS+DvBf1kz6x6oCKLDuZ8KduBQ0Q=="
     ], 
     "./setup.py": [
-        "J4m4iPk4NZVkvDMbbhLPssHZa74UJfTLntsmADb4qeXvLCSlmeFfzX8cMSJ3ApQLoqZTE7Ox7zh2YEqURRGgEQ=="
+        "xMy/fTuFEG4ovQKQCS/I45UaIQTaonK2kUsG5G26bwJwnf/ngfsTuPu70QFM61uwq38KwtTTRyhardCldrIv7w=="
     ], 
     "./src/pkglts.egg-info/PKG-INFO": [
-        "wRdG9iOg5fyTZM9+so4WCiMr8UduAag9KTB/s4zEAUUPU2ktvvFmoe7XKq0TOk06jDqCHeMJXkhhuvZDWRkilQ=="
+        "Lqb49Dm+4RX/EJSPxTawqoMofttyywQjGlZNRy3MsB8gHxlmUWycOy5/EhwUmElvLkLtiMup5Gk+xdgPrAk6EA=="
     ], 
     "./src/pkglts.egg-info/SOURCES.txt": [], 
     "./src/pkglts.egg-info/dependency_links.txt": [], 
@@ -65,11 +66,11 @@
     "./src/pkglts.egg-info/requires.txt": [], 
     "./src/pkglts.egg-info/top_level.txt": [], 
     "./src/pkglts/__init__.py": [
-        "JlOpUAyLEQkIfDTBcR2zfc2AgU7RJCC+EnuUXW+nM+g+c+3/nFFBkQxVf1uX1UQgxhsqscOgMAisiaQIAuADdQ==", 
-        "LC9RpWCeFhH4FFaJgBRpWx/zbxv8PNjtZ/mv0WwKH2d6fK1jigX5BUwdqtEKp/2hMiUKojDdXdeFepoDFkRCRQ=="
+        "bXi4YRtInDLkaTvGi4V/ZIZpKXGCIgIw/Qm7wX5YZ+tM5kkkAAGCzzuDhxJDzcpoWKBE1UxDj7mT+40YH1DZQA==", 
+        "fIn+GWAvhWfY/9NV/Sw6VXI4UIvx1OTgGxXQ1U5+9JFQ4vhuETzkaQvz8W4M9rMDYlL0vAeRmP2p2DyMgcvb9A=="
     ], 
     "./src/pkglts/data_access.py": [
-        "wXZIHUGL0OE/2tDFMyLzjp042onGgNFfwLPXufmyqYc7Qzny/tAHLnNLmnOvMKoIjZ6GwMkAMeVbEKslImxJFQ=="
+        "IH09j1Qv3lGNdoder1ukkl0T1bu69D0Iiv/c49oMKjEVMnyvr49S+DtvhFcQtlECJ4QeD5mXet/RQQ6F4mTPBg=="
     ], 
     "./src/pkglts/file_management.py": [], 
     "./src/pkglts/github.py": [], 
@@ -204,10 +205,10 @@
     "./src/pkglts/rmtfile.py": [], 
     "./src/pkglts/templating.py": [], 
     "./src/pkglts/version.py": [
-        "C8/7sS2H8kpeZUptSsTdvwoEIAjavgj6WxBLn6Jb9gKGSGD4MnTapNN6cARGWt3kn1wKSanhdP/dw4Wv3xRe8A=="
+        "v0Yh0a1HekngE4y64eh3kbek0KGfvDKwrzqbAFireqJ1Obpxg3ymmS6cCy8qcEuZ39p7hcc/meWnExwAuhnysQ=="
     ], 
     "./src/pkglts/versioning.py": [], 
     "./tox.ini": [
-        "P2R3mB2bakoVROr4OCidYYizWe8Fu9P0wCjEyM2P+YIztkLHvrkP18OQqL1bSFaLrlNk79ggL1esvWzn9/FI0A=="
+        "WvAbSN5o1IXL35oNtMm1mfBHHPVBnU5239sNPj+O60+0yCiSzywdEVIMCeAJQdD2pJJGz8S8vrb8qJljpYMKDA=="
     ]
 }
