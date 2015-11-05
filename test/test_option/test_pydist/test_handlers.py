@@ -29,7 +29,7 @@ def test_handlers():
 
 def test_requirements():
     pkg_cfg = {}
-    assert requirements("txt", pkg_cfg) == ""
+    assert requirements("txt", pkg_cfg) == "\n" * 2
 
 
 def test_requirements_error_for_bad_options():

@@ -17,7 +17,7 @@ def requirements(txt, env):
             raise KeyError("option '%s' does not exists" % name)
 
     reqs_str = "\n".join(reqs)
-    return reqs_str
+    return "\n" + reqs_str + "\n"
 
 
 def get_url(txt, pkg_cfg):
@@ -66,13 +66,13 @@ def get_extra(txt, env):
                 items.append("        ],")
 
             items.append("    },\n")
-            return "\n".join(items)
+            return "\n" + "\n".join(items)
     except IOError:
         pass
 
     return txt
 
 
-mapping = {"requirements": requirements,
+mapping = {"pydist.requirements": requirements,
            "pkg_url": get_url,
            "pydist.extra": get_extra}

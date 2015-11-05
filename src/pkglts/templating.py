@@ -2,6 +2,9 @@
 """
 from os.path import splitext
 
+opening_marker = "{" + "{"  # used to allow regeneration of this file
+closing_marker = "}" + "}"
+
 
 class Node(object):
     """ Local class created to parse files
@@ -87,7 +90,7 @@ def find_fmt_chars(node, comment_marker):
 
 
 def parse(txt, comment_marker):
-    """ Parse a text for '{{class, bla }}' sections
+    """ Parse a text for 'class, bla' sections
     and construct a tree of nested sections
     """
     root = Node("root", None)
@@ -199,15 +202,15 @@ def div_replace(node, handlers, env, comment_marker):
 
     # handle formatting
     if node.key.split(" ")[0] == "pkglts":
-        pre = node.pre_fmt + "{{%s," % node.key
+        pre = node.pre_fmt + opening_marker + node.key + ","
         if not new_txt.startswith("\n"):
             pre += " "
         if new_txt.endswith("\n") and node.post_fmt == "":
-            post = node.pre_fmt + "}}"
+            post = node.pre_fmt + closing_marker
             if post[0] == "\n":
                 post = post[1:]
         else:
-            post = node.post_fmt + "}}"
+            post = node.post_fmt + closing_marker
     else:
         if comment_marker in node.pre_fmt:
             if comment_marker in node.post_fmt:  # block div
@@ -258,12 +261,12 @@ def reconstruct_txt_div(node):
         cnt = "".join(reconstruct_txt_div(child) for child in node.children)
         return cnt
     else:
-        txt = node.pre_fmt + "{{" + node.key + ","
+        txt = node.pre_fmt + opening_marker + node.key + ","
         cnt = "".join(reconstruct_txt_div(child) for child in node.children)
         if not cnt.startswith("\n"):
             txt += " "
         txt += cnt
-        txt += node.post_fmt + "}}"
+        txt += node.post_fmt + closing_marker
 
         return txt
 

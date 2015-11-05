@@ -306,6 +306,7 @@ def regenerate(pkg_cfg, target=".", overwrite=False):
 
     # check for potential conflicts
     hm_ref = get_pkg_hash(target)
+
     hm = package_hash_keys(pkg_cfg, target)
     conflicted = []
     for pth, ref_key in hm_ref.items():
@@ -332,11 +333,6 @@ def regenerate(pkg_cfg, target=".", overwrite=False):
     # regenerating pkglts divs on the way
     for option in installed_options(pkg_cfg):
         clone_base_option(option, pkg_cfg, handlers, target, overwrite_file)
-
-    init_file = pj(target, "src", "toto", "__init__.py")
-    if exists(init_file):
-        with open(init_file, 'r') as f:
-            print "INIT", f.read()
 
     # regenerate files
     regenerate_pkg(pkg_cfg, handlers, target, overwrite_file)
