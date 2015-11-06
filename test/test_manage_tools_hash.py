@@ -81,3 +81,16 @@ def test_pkg_hash_pkg_exclude_protected_dirs():
 
     for pth in pths[2:]:
         assert pth not in hm
+
+
+@with_setup(setup, teardown)
+def test_pkg_hash_pkg_exclude_hidden_dirs():
+    mkdir(pj(tmp_dir, ".mydir"))
+    pth = pj(tmp_dir, ".mydir", "toto.py").replace("\\", "/")
+
+    with open(pth, 'w') as f:
+        f.write(ref_txt)
+
+    hm = package_hash_keys({}, tmp_dir)
+
+    assert pth not in hm

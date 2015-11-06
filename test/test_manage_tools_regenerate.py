@@ -88,6 +88,28 @@ def test_regenerate_pkg_exclude_protected_dirs():
 
 
 @with_setup(setup, teardown)
+def test_regenerate_pkg_exclude_hidden_dirs():
+    ref_txt = "# {{upper, toto}}"
+    pths = [pj(tmp_dir, n) for n in ("test1.py", "test2.py",
+                                     ".tot/test3.py", ".tot/test4.py")]
+
+    for pth in pths:
+        ensure_path(pth)
+        with open(pth, 'w') as f:
+            f.write(ref_txt)
+
+    regenerate_pkg({}, {}, tmp_dir, {})
+
+    for pth in pths[:2]:
+        with open(pth, 'r') as f:
+            assert f.read() != ref_txt
+
+    for pth in pths[2:]:
+        with open(pth, 'r') as f:
+            assert f.read() == ref_txt
+
+
+@with_setup(setup, teardown)
 def test_regenerate_pkg_exclude_protected_files():
     ref_txt = "# {{upper, toto}}"
     pths = [pj(tmp_dir, n).replace("\\", "/")

@@ -212,7 +212,9 @@ def package_hash_keys(pkg_cfg, target):
     hm = {}
     for root, dnames, fnames in walk(target):
         for name in tuple(dnames):
-            if "regenerate.no" in listdir(root + "/" + name):
+            if name.startswith("."):
+                dnames.remove(name)
+            elif "regenerate.no" in listdir(root + "/" + name):
                 dnames.remove(name)
 
         for name in fnames:
@@ -249,7 +251,11 @@ def regenerate_pkg(pkg_cfg, handlers, target, overwrite_file):
         pth = target + "/" + name
         if isdir(pth):
             # exclusion rule
-            if "regenerate.no" not in listdir(pth):
+            if name.startswith("."):
+                pass
+            elif "regenerate.no" in listdir(pth):
+                pass
+            else:
                 # regenerate
                 regenerate_pkg(pkg_cfg, handlers, pth, overwrite_file)
         else:
