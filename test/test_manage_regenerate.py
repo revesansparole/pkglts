@@ -1,9 +1,8 @@
 import mock
-from nose.tools import assert_raises, with_setup
+from nose.tools import with_setup
 from os import mkdir, remove
 from os.path import exists
 from os.path import join as pj
-from hashlib import sha512
 from shutil import rmtree
 
 from pkglts.manage import (init_pkg, regenerate)

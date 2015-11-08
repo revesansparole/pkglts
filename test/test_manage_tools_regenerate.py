@@ -1,11 +1,10 @@
 from nose.tools import with_setup
-from os import listdir, mkdir, walk
+from os import mkdir
 from os.path import dirname, exists
 from os.path import join as pj
 from shutil import rmtree
 
 from pkglts.manage_tools import regenerate_file, regenerate_pkg
-from pkglts.templating import same
 
 
 print(__file__)

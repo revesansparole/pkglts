@@ -48,7 +48,7 @@ __import__('pkg_resources').declare_namespace(__name__)
 """ % (opening_marker, closing_marker)
 
 
-def init_namespace_dir(pth, hashmap):
+def init_namespace_dir(pth):
     """ Populate a directory with specific __init__.py
     for namespace packages.
 
@@ -58,7 +58,7 @@ def init_namespace_dir(pth, hashmap):
     """
     init_pth = pth + "/__init__.py"
     if not exists(init_pth):
-        write_file(init_pth, namespace_txt, hashmap)
+        write_file(init_pth, namespace_txt)
 
 
 def load_handlers(name):

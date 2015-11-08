@@ -124,7 +124,7 @@ def clone_base_option_dir(src_dir, tgt_dir, pkg_cfg, handlers, overwrite_file):
                 if not exists(ns_pth):
                     mkdir(ns_pth)
 
-                init_namespace_dir(ns_pth, None)
+                init_namespace_dir(ns_pth)
                 tgt_pth = ns_pth + "/" + tgt_name
 
         if is_dir:
@@ -148,10 +148,10 @@ def clone_base_option_dir(src_dir, tgt_dir, pkg_cfg, handlers, overwrite_file):
                         if content is None:
                             error_files.append(tgt_pth)
                         else:
-                            write_file(tgt_pth, content, None)
+                            write_file(tgt_pth, content)
                 else:
                     content = get(src_pth)
-                    write_file(tgt_pth, content, None)
+                    write_file(tgt_pth, content)
 
     return error_files
 
@@ -199,10 +199,10 @@ def clone_example(src_dir, tgt_dir, pkg_cfg, handlers):
                     print("conflict '%s'" % tgt_name)
                 else:
                     content = replace(get(src_pth), handlers, pkg_cfg)
-                    write_file(tgt_pth, content, None)
+                    write_file(tgt_pth, content)
 
 
-def package_hash_keys(pkg_cfg, target):
+def package_hash_keys(target):
     """ Walk all files in package and compute their hash key
 
     args:

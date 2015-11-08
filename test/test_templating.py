@@ -1,5 +1,3 @@
-from nose.tools import assert_raises
-
 from pkglts.templating import (get_comment_marker, parse,
                                reconstruct_txt_div, replace,
                                swap_divs)

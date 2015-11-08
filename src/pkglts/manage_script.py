@@ -1,12 +1,12 @@
 from argparse import ArgumentParser
 
-from local import installed_options
-from manage import (clean, get_pkg_config,
-                    init_pkg, install_example_files,
-                    regenerate,
-                    add_option, edit_option,
-                    update_option, update_pkg,
-                    write_pkg_config)
+from .local import installed_options
+from .manage import (clean, get_pkg_config,
+                     init_pkg, install_example_files,
+                     regenerate,
+                     add_option, edit_option,
+                     update_option, update_pkg,
+                     write_pkg_config)
 
 
 def main():

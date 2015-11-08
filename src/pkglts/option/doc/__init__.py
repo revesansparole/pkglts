@@ -3,4 +3,3 @@ def fmt_badge(badge, url, txt):
              "    :alt: %s" % txt,
              "    :target: https://%s" % url]
     return "\n" + "\n".join(lines)
-

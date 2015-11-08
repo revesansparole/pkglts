@@ -1,9 +1,8 @@
-from nose.tools import with_setup
 from os import remove
 from os.path import exists
 from string import Template
 
-from pkglts.file_management import get_hash, write_file
+from pkglts.file_management import get_hash
 
 print(__file__)
 

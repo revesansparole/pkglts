@@ -1,4 +1,4 @@
-from nose.tools import assert_raises, with_setup
+from nose.tools import with_setup
 from os import listdir, mkdir
 from os.path import exists
 from os.path import join as pj
