@@ -26,8 +26,14 @@ pkg_hash_file = "pkg_hash.json"
 def init_pkg(rep="."):
     """ Initialise a package in given directory
     """
-    if not exists(pj(rep, pkg_cfg_file)):
-        write_pkg_config({}, rep)
+    if exists(pj(rep, pkg_cfg_file)):
+        pkg_cfg = get_pkg_config(rep)
+    else:
+        pkg_cfg = {}
+    if 'pkglts' not in pkg_cfg:
+        pkg_cfg['pkglts'] = dict(use_prompts=False)
+    write_pkg_config(pkg_cfg, rep)
+
     if not exists(pj(rep, pkg_hash_file)):
         write_pkg_hash({}, rep)
 

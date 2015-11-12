@@ -33,6 +33,9 @@
         "project": "pkglts", 
         "year": "2015"
     }, 
+    "pkglts": {
+        "use_prompts": false
+    }, 
     "pydist": {
         "author_email": "revesansparole@gmail.com", 
         "author_name": "revesansparole", 
