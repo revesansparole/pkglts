@@ -6,12 +6,12 @@ def test_handlers():
 
 
 def test_get_classifiers():
-    pkg_cfg = dict(pydist={'intended_versions': [], 'classifiers': []})
+    pkg_cfg = dict(setup={'intended_versions': [], 'classifiers': []})
     assert get_classifiers("txt", pkg_cfg) == "\n"
 
 
 def test_get_classifiers_find_version_classifiers():
-    pkg_cfg = dict(pydist={'intended_versions': ["27"], 'classifiers': []})
+    pkg_cfg = dict(setup={'intended_versions': ["27"], 'classifiers': []})
     assert len(get_classifiers("txt", pkg_cfg).split("\n")) == 2
 
 

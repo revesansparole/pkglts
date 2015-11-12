@@ -12,14 +12,14 @@ you already installed the :doc:`../test/main` option and attached example files:
     (dvlpt)$ pmg add sphinx
     (dvlpt)$ pmg regenerate
 
-If you already installed the :doc:`../pydist/main` option::
+If you already installed the :doc:`../setup/main` option::
 
     (dvlpt)$ python setup.py build_sphinx
 
 will produce a set of html pages in 'build/sphinx'. Open the 'index.html' file in
 the 'html' sub directory to access the main index.
 
-If you don't want to install the :doc:`../pydist/main` option, you simply need to
+If you don't want to install the :doc:`../setup/main` option, you simply need to
 run the make command from the doc directory::
 
     (dvlpt)$ cd doc

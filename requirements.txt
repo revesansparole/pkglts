@@ -1,4 +1,4 @@
-# {{pkglts pydist.install_requirements,
+# {{pkglts setup.install_requirements,
 
 
 # }}

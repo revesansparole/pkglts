@@ -1,4 +1,4 @@
-# {{pkglts pydist.dvlpt_requirements,
+# {{pkglts setup.dvlpt_requirements,
 tox
 sphinx
 twine

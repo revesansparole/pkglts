@@ -97,7 +97,7 @@ already existing package:
  - doc: Add some documentation to your package
  - test: basic unitests using Nose_
  - coverage: add code coverage_ to the basic test configuration
- - pydist: make your package distributable with setuptools (i.e. setup.py)
+ - setup: make your package distributable with setuptools (i.e. setup.py)
  - data: will guide through all the steps to add non python files to a package
  - github: will guide through all the step to safely store the package on Github_
  - readthedocs: step by step guide to have your documentation on ReadTheDocs_
@@ -128,7 +128,7 @@ To install a new option call the 'add' action::
 The script will perform different tasks sequentially:
 
  - Check if this option requires other options in order to be installed:
-   e.g. the 'pydist' option requires all 'base, 'doc', 'test', 'license' and 'version'
+   e.g. the 'setup' option requires all 'base, 'doc', 'test', 'license' and 'version'
    in order to run properly.
  - Check if this option requires some extra packages in order to setup:
    e.g. the 'license' option depends on the lice_ package to function properly.

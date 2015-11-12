@@ -36,7 +36,13 @@
     "pkglts": {
         "use_prompts": false
     }, 
-    "pydist": {
+    "pypi": {
+        "option": null
+    }, 
+    "readthedocs": {
+        "project": "pkglts"
+    }, 
+    "setup": {
         "author_email": "revesansparole@gmail.com", 
         "author_name": "revesansparole", 
         "classifiers": [
@@ -51,12 +57,6 @@
             "27", 
             "34"
         ]
-    }, 
-    "pypi": {
-        "option": null
-    }, 
-    "readthedocs": {
-        "project": "pkglts"
     }, 
     "sphinx": {
         "option": null

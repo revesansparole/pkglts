@@ -13,4 +13,4 @@ def get_extra(txt, env):
     return txt
 
 
-mapping = {'github.ignore': get_extra}
+mapping = {'git.ignore': get_extra}

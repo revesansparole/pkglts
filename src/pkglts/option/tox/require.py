@@ -1,4 +1,4 @@
-option = ['pydist']
+option = ['setup']
 setup = []
 install = []
 dvlpt = ['tox']

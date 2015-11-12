@@ -1,4 +1,4 @@
-option = ['pydist', 'github']
+option = ['setup', 'git']
 setup = []
 install = []
 dvlpt = []

@@ -1,14 +1,14 @@
-pydist
-======
+setup
+=====
 
 Add a 'setup.py' to your package to make it compliant with setuptools_. This
 will allow an easy distribution of your package. Since this option requires most
 basic options, it's a good proxy to add to a newly created package to avoid
-multiple 'manage add -opt' commands.
+multiple 'manage add opt' commands.
 
 Quick setup::
 
-    (dvlpt)$ pmg add pydist
+    (dvlpt)$ pmg add setup
     > intended versions [27]:
     ...
     (dvlpt)$ pmg regenerate

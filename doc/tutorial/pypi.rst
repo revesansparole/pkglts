@@ -25,7 +25,7 @@ add options base, test, doc, version, license
 Make a distribution of your package
 ===================================
 
-Use of pydist option
+Use of setup option
 
 Check your code thoroughly
 ==========================

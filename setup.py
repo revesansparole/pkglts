@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# {{pkglts pydist,
+# {{pkglts setup,
 from os import walk
 from os.path import abspath, normpath
 from os.path import join as pj

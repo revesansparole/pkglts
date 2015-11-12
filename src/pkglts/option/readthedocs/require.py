@@ -1,4 +1,4 @@
-option = ['pydist', 'github', 'sphinx']
+option = ['setup', 'git', 'sphinx']
 setup = []
 install = []
 dvlpt = []

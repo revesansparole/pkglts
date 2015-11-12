@@ -1,4 +1,4 @@
-# {{pkglts pydist,
+# {{pkglts setup,
 include AUTHORS.rst
 {{github rm, include CONTRIBUTING.rst}}
 include HISTORY.rst

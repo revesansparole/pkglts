@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# {{pkglts pydist,
+# {{pkglts setup,
 from os import walk
 from os.path import abspath, normpath
 from os.path import join as pj
@@ -59,8 +59,8 @@ setup(
     # }}
     description=short_descr,
     long_description=readme + '\n\n' + history,
-    author="{{key, pydist.author_name}}",
-    author_email='{{key, pydist.author_email}}',
+    author="{{key, setup.author_name}}",
+    author_email='{{key, setup.author_email}}',
     url='{{pkg_url, }}',
     # {{license.setup,
     license="None",
@@ -75,7 +75,7 @@ setup(
     # }}
     install_requires=parse_requirements("requirements.txt"),
     tests_require=parse_requirements("dvlpt_requirements.txt"),
-    # {{plugin.setup pydist.extra rm,
+    # {{plugin.setup setup.extra rm,
     entry_points={
         # 'console_scripts': [
         #       'fake_script = openalea.fakepackage.amodule:console_script', ],

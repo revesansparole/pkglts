@@ -25,7 +25,7 @@ def list_python_envs(versions):
 
 def pyversions(txt, env):
     del txt  # unused
-    py_exe_list = list_python_envs(env['pydist']['intended_versions'])
+    py_exe_list = list_python_envs(env['setup']['intended_versions'])
     return ", ".join(py_exe_list)
 
 
