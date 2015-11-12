@@ -25,6 +25,11 @@ def test_src_dir():
     assert dir1 != dir2
 
 
+def test_installed_options_does_not_list_pkglts_as_option():
+    cfg = dict(pkglts={}, toto=None)
+    assert set(installed_options(cfg)) == {'toto'}
+
+
 def test_installed_options_handle_private_keys():
     cfg = {'toto': {}, 'titi': None}
     assert set(installed_options(cfg)) == {'toto', 'titi'}
