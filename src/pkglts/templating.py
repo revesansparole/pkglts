@@ -126,12 +126,15 @@ def parse(txt, comment_marker):
 def same(txt, env):
     """ local function created to handle no class hooks
     """
+    del env  # unused
     return txt
 
 
 def remove(txt, env):
     """ Return empty string
     """
+    del txt  # unused
+    del env  # unused
     return ""
 
 
@@ -139,6 +142,8 @@ def delete(txt, env):
     """ Return '_' string used by some function
     to recognize empty names
     """
+    del txt  # unused
+    del env  # unused
     return "_"
 
 

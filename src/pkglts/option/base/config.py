@@ -42,4 +42,5 @@ def main(pkg_cfg, extra):
 
 
 def after(pkg_cfg):
+    del pkg_cfg  # unused
     print("base: after main config")
