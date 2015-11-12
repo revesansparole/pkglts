@@ -2,7 +2,7 @@ from pkglts.option.doc import fmt_badge
 
 
 def badge(txt, env):
-    project = env['github']['project']
+    project = env['readthedocs']['project']
 
     url = "%s.readthedocs.org/en/latest/?badge=latest" % project
     img = "readthedocs.org/projects/%s/badge/?version=latest" % project

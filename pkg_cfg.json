@@ -53,7 +53,7 @@
         "option": null
     }, 
     "readthedocs": {
-        "option": null
+        "project": "pkglts"
     }, 
     "sphinx": {
         "option": null
