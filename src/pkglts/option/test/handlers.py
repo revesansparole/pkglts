@@ -1,4 +1,5 @@
 def twice(txt, env):
+    del env  # unused
     return txt * 2
 
 

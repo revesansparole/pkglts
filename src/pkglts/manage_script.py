@@ -1,41 +1,50 @@
 from argparse import ArgumentParser, RawTextHelpFormatter
 
-from .local import installed_options
+# from .local import installed_options
 from .manage import (clean, get_pkg_config,
                      init_pkg, install_example_files,
                      regenerate,
                      add_option, edit_option,
-                     update_option, update_pkg,
+                     # update_option, update_pkg,
                      write_pkg_config)
 
 
 def action_clean(*args, **kwds):
     """ Clean package of all un necessary files.
     """
+    del args  # unused
+    del kwds  # unused
     clean()
 
 
 def action_init(*args, **kwds):
     """ Initialize environment for use of pkglts.
     """
+    del args  # unused
+    del kwds  # unused
     init_pkg()
 
 
 def action_clear(*args, **kwds):
     """ Attempt to free the package from pkglts interactions.
     """
+    del args  # unused
+    del kwds  # unused
     print("TODO")
 
 
 def action_update(*args, **kwds):
     """ Check if a new version of pkglts is available.
     """
+    del args  # unused
+    del kwds  # unused
     print("TODO")
 
 
 def action_regenerate(*args, **kwds):
     """ Regenerate all files in the package.
     """
+    del args  # unused
     overwrite = 'overwrite' in kwds
 
     pkg_cfg = get_pkg_config()
@@ -47,6 +56,7 @@ def action_regenerate(*args, **kwds):
 def action_add(*args, **kwds):
     """ Add new options in the package.
     """
+    del kwds  # unused
     if len(args) == 0:
         raise UserWarning("need to specify at least one option name")
 
@@ -60,6 +70,7 @@ def action_add(*args, **kwds):
 def action_remove(*args, **kwds):
     """ Remove options from the package.
     """
+    del kwds  # unused
     if len(args) == 0:
         raise UserWarning("need to specify at least one option name")
 
@@ -69,6 +80,7 @@ def action_remove(*args, **kwds):
 def action_edit(*args, **kwds):
     """ Edit options already in the package.
     """
+    del kwds  # unused
     if len(args) == 0:
         raise UserWarning("need to specify at least one option name")
 
@@ -82,6 +94,7 @@ def action_edit(*args, **kwds):
 def action_example(*args, **kwds):
     """ Install example files associated with options.
     """
+    del kwds  # unused
     if len(args) == 0:
         raise UserWarning("need to specify at least one option name")
 

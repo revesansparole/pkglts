@@ -27,14 +27,17 @@ def requirements(pkg_cfg, requirement_name):
 
 
 def install_requirements(txt, env):
+    del txt  # unused
     return requirements(env, 'install')
 
 
 def dvlpt_requirements(txt, env):
+    del txt  # unused
     return requirements(env, 'dvlpt')
 
 
 def get_url(txt, pkg_cfg):
+    del txt  # unused
     try:
         url = pkg_cfg['base']['url']
         if url is not None:
@@ -69,6 +72,7 @@ def get_url(txt, pkg_cfg):
 def get_extra(txt, env):
     """ Fetch extra entry points
     """
+    del env  # unused
     try:
         with open("entry_points.json", 'r') as f:
             ep_def = json.load(f)

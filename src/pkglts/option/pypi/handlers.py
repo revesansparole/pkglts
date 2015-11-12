@@ -2,6 +2,7 @@ from pkglts.option.doc import fmt_badge
 
 
 def badge(txt, env):
+    del txt  # unused
     pkgname = env['base']['pkgname']
 
     url = "badge.fury.io/py/%s" % pkgname
@@ -10,6 +11,7 @@ def badge(txt, env):
 
 
 def get_classifiers(txt, env):
+    del txt  # unused
     cfg = env['pydist']
 
     items = [" " * 8 + "'%s'," % key for key in cfg['classifiers']]

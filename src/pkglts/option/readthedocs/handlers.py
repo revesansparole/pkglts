@@ -2,6 +2,7 @@ from pkglts.option.doc import fmt_badge
 
 
 def badge(txt, env):
+    del txt  # unused
     project = env['readthedocs']['project']
     project = project.replace(".", "")
 

@@ -4,6 +4,7 @@ from lice.core import generate_license, load_package_template
 def generate(txt, env):
     """ Ignore txt and generate a license
     """
+    del txt  # unused
     name = env['license']['name']
 
     ctx = env['license']
@@ -14,6 +15,7 @@ def generate(txt, env):
 
 
 def setup_handler(txt, env):
+    del txt  # unused
     return '\n    license="%s",' % env['license']['name']
 
 

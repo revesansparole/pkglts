@@ -1,6 +1,7 @@
 def get_extra(txt, env):
     """ Get extra ignore items
     """
+    del env  # unused
     try:
         with open(".gitignore.extra", 'r') as f:
             txt = f.read()

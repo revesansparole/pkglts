@@ -2,6 +2,7 @@ from pkglts.option.doc import fmt_badge
 
 
 def badge(txt, env):
+    del txt  # unused
     owner = env['base']['owner']
     project = env['github']['project']
 
