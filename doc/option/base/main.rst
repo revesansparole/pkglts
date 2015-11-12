@@ -11,8 +11,5 @@ Quick tutorial
 
 Follow these steps for a quick setup::
 
-    (dvlpt)$ manage add -opt base
-    (dvlpt)$ manage regenerate
-    (dvlpt)$ manage add -opt example
-    > option name [base]: base
-
+    (dvlpt)$ pmg add base
+    (dvlpt)$ pmg regenerate

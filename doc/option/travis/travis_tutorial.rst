@@ -17,8 +17,8 @@ the switch in front of your project. Now is the right time to add the 'travis' o
 to your package if you have not done it already. It will take care of creating the
 needed 'travis.yml' file::
 
-    (dvlpt)$ manage add -opt travis
-    (dvlpt)$ manage regenerate
+    (dvlpt)$ pmg add travis
+    (dvlpt)$ pmg regenerate
 
 A simple git push will trigger the first automatic rebuild::
 
@@ -38,10 +38,7 @@ Hopefully, you'll see the badge stating that your build is successful. If you
 currently have no modules in your package, now maybe the right time to add some
 examples::
 
-    (dvlpt)$ manage add -opt example
-    > option_name [plugin]: base
-    (dvlpt)$ manage add -opt example
-    > option_name [plugin]: test
+    (dvlpt)$ manage example test
 
     $ git add --all
     $ git commit -m"added some example files"

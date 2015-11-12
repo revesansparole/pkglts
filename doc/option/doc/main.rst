@@ -17,10 +17,8 @@ Quick tutorial
 
 Follow these steps to install this option and the associated files::
 
-     (dvlpt)$ manage add -opt doc
-     (dvlpt)$ manage regenerate
-     (dvlpt)$ manage add -opt example
-     > option name [base]: doc
+     (dvlpt)$ pmg add doc
+     (dvlpt)$ pmg regenerate
 
 Meaning of pieces of information
 --------------------------------
@@ -49,9 +47,7 @@ Contributing
 An example file describing how people can contribute to the package is available
 as an example::
 
-    (dvlpt)$ manage add -opt example
-    > option name [base]: doc
-    (dvlpt)$
+    (dvlpt)$ pmg example doc
 
 This file makes more sense if you already installed the 'github' option.
 

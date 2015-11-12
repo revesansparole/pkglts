@@ -9,8 +9,8 @@ Quick tutorial
 Follow these steps to build your first comprehensive documentation. I assume
 you already installed the :doc:`../test/main` option and attached example files::
 
-    (dvlpt)$ manage add -opt sphinx
-    (dvlpt)$ manage regenerate
+    (dvlpt)$ pmg add sphinx
+    (dvlpt)$ pmg regenerate
 
 If you already installed the :doc:`../pydist/main` option::
 

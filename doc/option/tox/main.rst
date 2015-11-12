@@ -7,8 +7,8 @@ regenerate your package it will check among all the 'intended_versions' that
 you registered with the :doc:`../pydist/main` option the python environments that
 actually exists on your machine and create a tox.ini file with the relevant options::
 
-    (dvlpt)$ manage add -opt tox
-    (dvlpt)$ manage regenerate
+    (dvlpt)$ pmg add tox
+    (dvlpt)$ pmg regenerate
 
 To invoke tox, just use the command line tool::
 

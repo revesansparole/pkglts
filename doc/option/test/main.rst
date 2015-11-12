@@ -18,10 +18,9 @@ Quick tutorial
 Follow these steps for a quick setup (do :doc:`../base/main` quick tutorial first
 if you haven't done it yet)::
 
-    (dvlpt)$ manage add -opt test
-    (dvlpt)$ manage regenerate
-    (dvlpt)$ manage add -opt example
-    > option name [base]: test
+    (dvlpt)$ pmg add test
+    (dvlpt)$ pmg regenerate
+    (dvlpt)$ pmg example test
 
     (dvlpt)$ nosetests
 

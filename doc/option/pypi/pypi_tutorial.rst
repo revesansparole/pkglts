@@ -18,15 +18,10 @@ and you'll have to redo this operation on the day you want to use the real
 PyPI.
 
 Once you have your credentials, if you don't want to re-enter them every time
-you submit your package on pypi, you can store them in a '.pypirc' file. Either
-located at the root of your package or in your 'home' folder. The 'pypi' option
-comes loaded with a pypirc example file::
-
-    (dvlpt)$ manage add -opt example
-    > option name [base]: pypi
-
-By default, even if you leave this file at the root of your package, it will be
-ignored by git. Hence no risk to store accidentally your credentials on github.
+you submit your package on pypi, you can store them in the '.pypirc' file that
+ was added to your package. By default, even if you leave this file at the root
+ of your package, it will be ignored by git. Hence no risk to store accidentally
+ your credentials on github.
 
 Once you are logged in you can register your package. Go on the 'Package Authors'
 section of the main page and click on the 'web form' link to register your package

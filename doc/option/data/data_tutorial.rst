@@ -4,8 +4,8 @@ Add data tutorial
 Regenerating your package after adding the option 'data' will create a
 'pkgname_data' in the 'src' directory::
 
-    (dvlpt)$ manage add -opt data
-    (dvlpt)$ manage regenerate
+    (dvlpt)$ pmg add data
+    (dvlpt)$ pmg regenerate
 
 Just copy all your data inside this directory and they will be packaged and
 installed along your package whatever method you choose to distribute your package::

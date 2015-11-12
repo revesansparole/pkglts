@@ -8,9 +8,9 @@ multiple 'manage add -opt' commands.
 
 Quick setup::
 
-    (dvlpt)$ manage add -opt pydist
+    (dvlpt)$ pmg add pydist
     > intended versions [27]:
     ...
-    (dvlpt)$ manage regenerate
+    (dvlpt)$ pmg regenerate
 
 .. _setuptools: https://pypi.python.org/pypi/setuptools

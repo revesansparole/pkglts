@@ -18,8 +18,8 @@ Quick tutorial
 Follow these steps to quickly install the option. I assume you already followed
 :doc:`../test/main` quick tutorial::
 
-    (dvlpt)$ manage add -opt coverage
-    (dvlpt)$ manage regenerate
+    (dvlpt)$ pmg add coverage
+    (dvlpt)$ pmg regenerate
 
 Nosetests
 ---------

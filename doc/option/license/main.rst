@@ -6,10 +6,10 @@ all available license can be found here_.
 
 Quick setup::
 
-    (dvlpt)$ manage add -opt license
+    (dvlpt)$ pmg add license
     > license.name [mit]:
     ...
-    (dvlpt)$ manage regenerate
+    (dvlpt)$ pmg regenerate
 
 
 .. _here: https://github.com/licenses/license-templates/tree/master/templates

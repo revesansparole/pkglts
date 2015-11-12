@@ -11,8 +11,8 @@ recommendations. This option install local configuration files but you still nee
 to register by hand. Have a look at the `Landscape Documentation`_ or
 :doc:`landscape_tutorial` tutorial for more information::
 
-    (dvlpt)$ manage add -opt landscape
-    (dvlpt)$ manage regenerate
+    (dvlpt)$ pmg add landscape
+    (dvlpt)$ pmg regenerate
 
     $ git add --all
     $ git commit -m"added landscape.io support"

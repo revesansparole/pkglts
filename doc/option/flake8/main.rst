@@ -3,8 +3,8 @@ flake8
 
 Test the compliance of your code with PEP8_ definitions::
 
-    (dvlpt)$ manage add -opt flake8
-    (dvlpt)$ manage regenerate
+    (dvlpt)$ pmg add flake8
+    (dvlpt)$ pmg regenerate
 
 Basic usage::
 

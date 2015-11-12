@@ -60,9 +60,9 @@ Create a directory for your package::
 Run 'manage' inside this directory::
 
     (dvlpt)$ cd toto
-    (dvlpt)toto$ manage init
-    (dvlpt)toto$ manage add -opt base
-    (dvlpt)toto$ manage regenerate
+    (dvlpt)toto$ pmg init
+    (dvlpt)toto$ pmg add base
+    (dvlpt)toto$ pmg regenerate
 
 This will create the bare basic minimum for a python package. Add more options
 (see the add_option_ for more options) afterward. Especially, since in the example

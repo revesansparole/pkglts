@@ -67,7 +67,7 @@ setup(
     tests_require=parse_requirements("dvlpt_requirements.txt"),
     entry_points={
         'console_scripts': [
-            'manage = pkglts.manage_script:main',
+            'pmg = pkglts.manage_script:main',
         ],
     },
 

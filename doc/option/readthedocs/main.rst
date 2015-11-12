@@ -10,8 +10,8 @@ service that will automatically compile and store your documentation. You still
 need to perform the registration by hand. Look at :doc:`readthedocs_tutorial` for
 a step by step guide::
 
-    (dvlpt)$ manage add -opt readthedocs
-    (dvlpt)$ manage regenerate
+    (dvlpt)$ pmg add readthedocs
+    (dvlpt)$ pmg regenerate
 
     $ git add --all
     $ git commit -m"added readthedocs support"

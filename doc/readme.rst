@@ -19,7 +19,7 @@ Packages generated with Package Builder contains three different types of files:
 A call to the 'update' command will check for new versions of the package or any
 available option::
 
-    (dvlpt)toto$ manage update
+    (dvlpt)toto$ pmg update
 
 This command requires an internet connection since local installation will be
 compared to current code on github.
@@ -31,7 +31,7 @@ of your installed options was upgraded in the process.
 If update is successful, a call to regenerate is mandatory to rebuilt the package
 structural files::
 
-    (dvlpt)toto$ manage regenerate
+    (dvlpt)toto$ pmg regenerate
 
 This phase will never overwrite any files you modified or created. You'll be prompted
 in case of conflicts but it is your responsibility to solve them and relaunch the
@@ -79,7 +79,7 @@ Install a new option
 
 To install a new option call the 'add' action::
 
-    (dvlpt)toto$ manage add -opt license
+    (dvlpt)toto$ pmg add license
 
 The script will perform different tasks sequentially:
 
@@ -97,7 +97,7 @@ The script will perform different tasks sequentially:
 Multiple call to add options can be serialized but you explicitly needs to call
 regenerate to see the action of the new options on your package::
 
-    (dvlpt)toto$ manage regenerate
+    (dvlpt)toto$ pmg regenerate
 
 
 .. _lice: https://github.com/licenses/lice
@@ -108,7 +108,7 @@ Install example files
 Some options come with example files that can be installed with the special
 directive::
 
-    (dvlpt)toto$ manage example -opt test
+    (dvlpt)toto$ pmg example test
 
 
 The files will be directly installed without the need to a regenerate call. You
@@ -119,7 +119,7 @@ Edit an option
 
 You can simply edit an option (e.g. license) by running the command::
 
-    (dvlpt)toto$ manage edit -opt license
+    (dvlpt)toto$ pmg edit license
 
 You'll be re-prompted for the values of arguments of this option with default to
 previously entered values.

@@ -1,4 +1,4 @@
-from argparse import ArgumentParser
+from argparse import ArgumentParser, RawTextHelpFormatter
 
 from .local import installed_options
 from .manage import (clean, get_pkg_config,
@@ -9,13 +9,113 @@ from .manage import (clean, get_pkg_config,
                      write_pkg_config)
 
 
-def main():
-    parser = ArgumentParser(description='Package structure manager')
-    parser.add_argument('action', metavar='action',
-                        help="action to perform on package")
+def action_clean(*args, **kwds):
+    """ Clean package of all un necessary files.
+    """
+    clean()
 
-    parser.add_argument('-opt', '--option', metavar='option_name',
-                        help="argument for action=add", dest='option')
+
+def action_init(*args, **kwds):
+    """ Initialize environment for use of pkglts.
+    """
+    init_pkg()
+
+
+def action_clear(*args, **kwds):
+    """ Attempt to free the package from pkglts interactions.
+    """
+    print("TODO")
+
+
+def action_update(*args, **kwds):
+    """ Check if a new version of pkglts is available.
+    """
+    print("TODO")
+
+
+def action_regenerate(*args, **kwds):
+    """ Regenerate all files in the package.
+    """
+    overwrite = 'overwrite' in kwds
+
+    pkg_cfg = get_pkg_config()
+    clean()
+    regenerate(pkg_cfg, overwrite=overwrite)
+    write_pkg_config(pkg_cfg)
+
+
+def action_add(*args, **kwds):
+    """ Add new options in the package.
+    """
+    if len(args) == 0:
+        raise UserWarning("need to specify at least one option name")
+
+    pkg_cfg = get_pkg_config()
+    for name in args:
+        pkg_cfg = add_option(name, pkg_cfg)
+
+    write_pkg_config(pkg_cfg)
+
+
+def action_remove(*args, **kwds):
+    """ Remove options from the package.
+    """
+    if len(args) == 0:
+        raise UserWarning("need to specify at least one option name")
+
+    print("TODO")
+
+
+def action_edit(*args, **kwds):
+    """ Edit options already in the package.
+    """
+    if len(args) == 0:
+        raise UserWarning("need to specify at least one option name")
+
+    pkg_cfg = get_pkg_config()
+    for name in args:
+        pkg_cfg = edit_option(name, pkg_cfg)
+
+    write_pkg_config(pkg_cfg)
+
+
+def action_example(*args, **kwds):
+    """ Install example files associated with options.
+    """
+    if len(args) == 0:
+        raise UserWarning("need to specify at least one option name")
+
+    pkg_cfg = get_pkg_config()
+    for name in args:
+        install_example_files(name, pkg_cfg)
+
+
+action = dict(clean=action_clean,
+              init=action_init,
+              clear=action_clear,
+              update=action_update,
+              regenerate=action_regenerate,
+              rg=action_regenerate,
+              add=action_add,
+              remove=action_remove,
+              edit=action_edit,
+              example=action_example)
+
+
+def main():
+    parser = ArgumentParser(description='Package structure manager',
+                            formatter_class=RawTextHelpFormatter)
+
+    act_help = "type of action performed by pmg, one of:\n"
+    for name, func in action.items():
+        act_help += "\n  - %s: %s" % (name, func.__doc__)
+
+    parser.add_argument('action', metavar='action',
+                        choices=tuple(action.keys()),
+                        help=act_help)
+
+    parser.add_argument('action_args', nargs='*',
+                        help="action to perform on the package")
 
     parser.add_argument('-e', metavar='extra', nargs=2, action='append',
                         help='extra arguments to pass to the action',
@@ -27,44 +127,7 @@ def main():
     else:
         extra = dict(args.extra)
 
-    if args.action == 'init':
-        print "init package"
-        init_pkg()
-    elif args.action == 'clean':
-        clean()
-    elif args.action == 'update':
-        pkg_cfg = get_pkg_config()
-        if args.option is None:
-            print "update package"
-            pkg_cfg = update_pkg(pkg_cfg)
-        elif args.option == 'all':
-            print "update all options"
-            for name in installed_options(pkg_cfg):
-                pkg_cfg = update_option(name, pkg_cfg)
-        else:
-            print "update option"
-            pkg_cfg = update_option(args.option, pkg_cfg)
-        write_pkg_config(pkg_cfg)
-    elif args.action in ('rg', 'regenerate'):
-        print "regenerate"
-        overwrite = 'overwrite' in extra
-        pkg_cfg = get_pkg_config()
-        clean()
-        regenerate(pkg_cfg, overwrite=overwrite)
-        write_pkg_config(pkg_cfg)
-    elif args.action == 'add':
-        pkg_cfg = get_pkg_config()
-        pkg_cfg = add_option(args.option, pkg_cfg, extra)
-        write_pkg_config(pkg_cfg)
-    elif args.action == 'edit':
-        pkg_cfg = get_pkg_config()
-        pkg_cfg = edit_option(args.option, pkg_cfg)
-        write_pkg_config(pkg_cfg)
-    elif args.action == 'example':
-        pkg_cfg = get_pkg_config()
-        install_example_files(args.option, pkg_cfg)
-    else:
-        print "unknown"
+    action[args.action](*args.action_args, **extra)
 
 
 if __name__ == '__main__':

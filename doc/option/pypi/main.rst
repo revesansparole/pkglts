@@ -3,8 +3,8 @@ pypi
 
 Format your package to upload on PyPi_::
 
-    (dvlpt)$ manage add -opt pypi
-    (dvlpt)$ manage regenerate
+    (dvlpt)$ pmg add pypi
+    (dvlpt)$ pmg regenerate
 
 Follow this simple tutorial: :doc:`pypi_tutorial`, to learn an easy way to register
 your package on PyPi_.

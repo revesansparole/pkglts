@@ -12,8 +12,8 @@ install local configuration files but you still need to register by hand. Have a
 look at the `Coveralls Documentation`_ or :doc:`coveralls_tutorial` tutorial for
 more information::
 
-    (dvlpt)$ manage add -opt coveralls
-    (dvlpt)$ manage regenerate
+    (dvlpt)$ pmg add coveralls
+    (dvlpt)$ pmg regenerate
 
     $ git add --all
     $ git commit -m"added coveralls support"
