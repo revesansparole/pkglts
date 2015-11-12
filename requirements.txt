@@ -1,4 +1,4 @@
-# {{pkglts setup.install_requirements,
+# {{pkglts pysetup.install_requirements,
 
 
 # }}

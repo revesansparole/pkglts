@@ -1,6 +1,6 @@
 import mock
 
-from pkglts.option.setup.config import main
+from pkglts.option.pysetup.config import main
 
 
 def test_config_is_self_sufficient():
@@ -28,7 +28,7 @@ def test_config_use_good_defaults():
                              classifiers=["class"]))
 
     # check that a second call provide right defaults
-    pkg_cfg['setup'] = cfg
+    pkg_cfg['pysetup'] = cfg
     with mock.patch("pkglts.option_tools.loc_input", return_value=''):
         new_cfg = main(pkg_cfg, {})
         assert cfg == new_cfg

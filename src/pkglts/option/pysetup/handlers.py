@@ -91,7 +91,7 @@ def get_extra(txt, env):
     return txt
 
 
-mapping = {"setup.install_requirements": install_requirements,
-           "setup.dvlpt_requirements": dvlpt_requirements,
+mapping = {"pysetup.install_requirements": install_requirements,
+           "pysetup.dvlpt_requirements": dvlpt_requirements,
            "pkg_url": get_url,
-           "setup.extra": get_extra}
+           "pysetup.extra": get_extra}

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# {{pkglts setup,
+# {{pkglts pysetup,
 from os import walk
 from os.path import abspath, normpath
 from os.path import join as pj
@@ -59,8 +59,8 @@ setup(
     # }}
     description=short_descr,
     long_description=readme + '\n\n' + history,
-    author="{{key, setup.author_name}}",
-    author_email='{{key, setup.author_email}}',
+    author="{{key, pysetup.author_name}}",
+    author_email='{{key, pysetup.author_email}}',
     url='{{pkg_url, }}',
     # {{license.setup,
     license="None",

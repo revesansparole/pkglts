@@ -1,4 +1,4 @@
-option = ['setup']
+option = ['pysetup']
 setup = []
 install = []
 dvlpt = ['tox']

@@ -12,7 +12,7 @@ def badge(txt, env):
 
 def get_classifiers(txt, env):
     del txt  # unused
-    cfg = env['setup']
+    cfg = env['pysetup']
 
     items = [" " * 8 + "'%s'," % key for key in cfg['classifiers']]
 

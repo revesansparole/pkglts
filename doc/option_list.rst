@@ -37,7 +37,7 @@ The base of distributing your code comes with:
 .. toctree::
    :maxdepth: 1
 
-   option/setup/main
+   option/pysetup/main
 
 
 In order to make your package easily accessible for others, these options help

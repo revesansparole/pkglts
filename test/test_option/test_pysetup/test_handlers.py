@@ -4,10 +4,10 @@ from os import chdir, mkdir
 from os.path import exists
 from shutil import rmtree
 
-from pkglts.option.setup.handlers import (get_extra, get_url,
-                                          mapping,
-                                          requirements, install_requirements,
-                                          dvlpt_requirements)
+from pkglts.option.pysetup.handlers import (get_extra, get_url,
+                                            mapping,
+                                            requirements, install_requirements,
+                                            dvlpt_requirements)
 
 tmp_dir = "tmp_hpydist"
 

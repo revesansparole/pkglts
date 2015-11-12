@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# {{pkglts setup,
+# {{pkglts pysetup,
 from os import walk
 from os.path import abspath, normpath
 from os.path import join as pj
@@ -65,12 +65,6 @@ setup(
     package_data={'pkglts_data': data_files},
     install_requires=parse_requirements("requirements.txt"),
     tests_require=parse_requirements("dvlpt_requirements.txt"),
-    entry_points={
-        'console_scripts': [
-            'pmg = pkglts.manage_script:main',
-        ],
-    },
-
     keywords='packaging, package builder',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',

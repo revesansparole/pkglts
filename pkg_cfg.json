@@ -39,10 +39,7 @@
     "pypi": {
         "option": null
     }, 
-    "readthedocs": {
-        "project": "pkglts"
-    }, 
-    "setup": {
+    "pysetup": {
         "author_email": "revesansparole@gmail.com", 
         "author_name": "revesansparole", 
         "classifiers": [
@@ -57,6 +54,9 @@
             "27", 
             "34"
         ]
+    }, 
+    "readthedocs": {
+        "project": "pkglts"
     }, 
     "sphinx": {
         "option": null

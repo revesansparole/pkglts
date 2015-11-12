@@ -1,4 +1,5 @@
 {
+    "./.coverage": [], 
     "./.coveragerc": [], 
     "./.gitignore": [
         "oirSysYoCw5cmGezxI9cSMlGB0NqmZkPUc66rQCyqG1R2kyD2Osvx8cNpFmzPbsqbuePLTLW2pigd7hM6V0D4A=="
@@ -58,7 +59,7 @@
         "Li7jVzsz+OmF22LUJUcVJUWuzDlfsjH1zd7LiTTJQzAmProBY+Q4ZAvV62bbdtmSXP6X4+OJdLyvtHQc3qbMBw=="
     ], 
     "./setup.py": [
-        "VkzK17N5DSf778nM7g19SVOJmWlQmXSCQJ9+c0a3X7MyyOjzU1LO4QoSx3e1TLQ93pK0b4Go2Ap/8IuF7Ane7A=="
+        "uxJ1h2oB4rMjXv0h/zSRCP5nVZJ/eO9AKvxZ0D2L6Se/F5bdMo+nRq00F+Jgr87HUeerw/qRYc0k55klypSUmA=="
     ], 
     "./src/pkglts/__init__.py": [
         "bXi4YRtInDLkaTvGi4V/ZIZpKXGCIgIw/Qm7wX5YZ+tM5kkkAAGCzzuDhxJDzcpoWKBE1UxDj7mT+40YH1DZQA==", 
@@ -146,6 +147,13 @@
     "./src/pkglts/option/pypi/handlers.pyc": [], 
     "./src/pkglts/option/pypi/require.py": [], 
     "./src/pkglts/option/pypi/require.pyc": [], 
+    "./src/pkglts/option/pysetup/__init__.py": [], 
+    "./src/pkglts/option/pysetup/__init__.pyc": [], 
+    "./src/pkglts/option/pysetup/config.py": [], 
+    "./src/pkglts/option/pysetup/handlers.py": [], 
+    "./src/pkglts/option/pysetup/handlers.pyc": [], 
+    "./src/pkglts/option/pysetup/require.py": [], 
+    "./src/pkglts/option/pysetup/require.pyc": [], 
     "./src/pkglts/option/readthedocs/__init__.py": [], 
     "./src/pkglts/option/readthedocs/__init__.pyc": [], 
     "./src/pkglts/option/readthedocs/config.py": [], 
@@ -153,13 +161,6 @@
     "./src/pkglts/option/readthedocs/handlers.pyc": [], 
     "./src/pkglts/option/readthedocs/require.py": [], 
     "./src/pkglts/option/readthedocs/require.pyc": [], 
-    "./src/pkglts/option/setup/__init__.py": [], 
-    "./src/pkglts/option/setup/__init__.pyc": [], 
-    "./src/pkglts/option/setup/config.py": [], 
-    "./src/pkglts/option/setup/handlers.py": [], 
-    "./src/pkglts/option/setup/handlers.pyc": [], 
-    "./src/pkglts/option/setup/require.py": [], 
-    "./src/pkglts/option/setup/require.pyc": [], 
     "./src/pkglts/option/sphinx/__init__.py": [], 
     "./src/pkglts/option/sphinx/__init__.pyc": [], 
     "./src/pkglts/option/sphinx/config.py": [], 

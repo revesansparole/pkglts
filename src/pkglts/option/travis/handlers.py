@@ -13,7 +13,7 @@ def badge(txt, env):
 
 def pyversions(txt, env):
     del txt  # unused
-    intended_versions = env['setup']['intended_versions']
+    intended_versions = env['pysetup']['intended_versions']
     items = ['   - "%s.%s"' % (ver[0], ver[1]) for ver in intended_versions]
     return "\n".join(items)
 
