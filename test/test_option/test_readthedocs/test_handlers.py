@@ -7,5 +7,5 @@ def test_handlers():
 
 def test_badge():
     pkg_cfg = dict(base={'pkgname': "pkg", 'owner': "moi"},
-                   github={'project': "project"})
+                   readthedocs={'project': "project"})
     assert ".. image:" in badge("txt", pkg_cfg)

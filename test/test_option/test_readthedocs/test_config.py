@@ -4,9 +4,9 @@ from pkglts.option.readthedocs.config import main
 
 
 def test_config_is_self_sufficient():
-    pkg_cfg = {}
+    pkg_cfg = dict(github={'project': 'project'})
     # call config a first time
-    cfg = main(pkg_cfg, dict(option=None))
+    cfg = main(pkg_cfg, dict(project="project"))
 
     # check that a second call with the same info provided
     # first does not require user input
@@ -17,9 +17,9 @@ def test_config_is_self_sufficient():
 
 
 def test_config_use_good_defaults():
-    pkg_cfg = {}
+    pkg_cfg = dict(github={'project': 'project'})
     # call config a first time
-    cfg = main(pkg_cfg, dict(option=None))
+    cfg = main(pkg_cfg, dict(project="project"))
 
     # check that a second call provide right defaults
     pkg_cfg['readthedocs'] = cfg
