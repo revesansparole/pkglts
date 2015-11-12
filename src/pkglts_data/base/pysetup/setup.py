@@ -75,7 +75,7 @@ setup(
     # }}
     install_requires=parse_requirements("requirements.txt"),
     tests_require=parse_requirements("dvlpt_requirements.txt"),
-    # {{plugin.setup setup.extra rm,
+    # {{plugin.setup pysetup.extra rm,
     entry_points={
         # 'console_scripts': [
         #       'fake_script = openalea.fakepackage.amodule:console_script', ],
