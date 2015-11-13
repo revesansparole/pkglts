@@ -16,7 +16,8 @@ def is_valid_identifier(name):
 
 def main(pkg_cfg, extra):
     parent_dir = basename(abspath("."))
-    pkg_fullname = ask_arg("base.pkg_fullname", pkg_cfg, parent_dir, extra)
+    pkg_fullname = ask_arg("base.pkg_fullname", pkg_cfg,
+                           parent_dir.lower().replace(" ", ""), extra)
 
     if "." in pkg_fullname:
         try:
