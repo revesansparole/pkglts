@@ -5,7 +5,8 @@ from os.path import exists
 from os.path import join as pj
 from shutil import rmtree
 
-from pkglts.manage import (init_pkg, regenerate)
+from pkglts.manage import (get_pkg_config, init_pkg, regenerate,
+                           write_pkg_config)
 
 
 print(__file__)
@@ -118,3 +119,24 @@ def test_regenerate_remove_user_files_do_not_generate_conflicts():
 
     regenerate(pkg_cfg, tmp_dir)
     assert not exists(new_pth)
+
+
+@with_setup(setup, teardown)
+def test_regenerate_do_not_touch_pkglts_cfg_files():
+    init_pkg(tmp_dir)
+    regenerate(pkg_cfg, tmp_dir)
+    new_pth = pj(tmp_dir, "src", "toto", "new_file.py")
+    with open(new_pth, 'w') as f:
+        f.write("{{key, base.pkgname}}")
+
+    cfg = get_pkg_config(tmp_dir)
+    cfg['extra'] = "{{key, base.pkgname}}"
+    write_pkg_config(cfg, tmp_dir)
+
+    regenerate(pkg_cfg, tmp_dir)
+    with open(new_pth, 'r') as f:
+        txt = f.read()
+        assert txt == "toto"
+
+    cfg = get_pkg_config(tmp_dir)
+    assert cfg['extra'] == "{{key, base.pkgname}}"
