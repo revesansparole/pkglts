@@ -273,6 +273,9 @@ def regenerate(pkg_cfg, target=".", overwrite=False):
             return False
 
     # regenerate files
+    overwrite_file[target + "/pkg_cfg.json"] = False
+    overwrite_file[target + "/pkg_hash.json"] = False
+
     regenerate_pkg(pkg_cfg, handlers, target, overwrite_file)
 
     # re create hash
