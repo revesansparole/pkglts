@@ -30,8 +30,8 @@ def init_pkg(rep="."):
         pkg_cfg = get_pkg_config(rep)
     else:
         pkg_cfg = {}
-    if 'pkglts' not in pkg_cfg:
-        pkg_cfg['pkglts'] = dict(use_prompts=False)
+    if '_pkglts' not in pkg_cfg:
+        pkg_cfg['_pkglts'] = dict(use_prompts=False)
     write_pkg_config(pkg_cfg, rep)
 
     if not exists(pj(rep, pkg_hash_file)):
@@ -48,9 +48,15 @@ def get_pkg_config(rep="."):
      - (dict of (str, dict)): option_name: options
     """
     with open(pj(rep, pkg_cfg_file), 'r') as f:
-        info = json.load(f)
+        pkg_cfg = json.load(f)
 
-    return info
+    # format template entries
+    for name, cfg in pkg_cfg.items():
+        for key, param in cfg.items():
+            if isinstance(param, str):
+                print key, param  # TODO change tests to only use dict of dict
+
+    return pkg_cfg
 
 
 def write_pkg_config(pkg_cfg, rep="."):
@@ -62,8 +68,9 @@ def write_pkg_config(pkg_cfg, rep="."):
     """
     cfg = dict(pkg_cfg)
     for key in tuple(cfg.keys()):
-        if key.startswith("_"):
-            del cfg[key]
+        pass
+        # if key.startswith("_"):
+        #     del cfg[key]
 
     with open(pj(rep, pkg_cfg_file), 'w') as f:
         json.dump(cfg, f, sort_keys=True, indent=4)
@@ -131,6 +138,10 @@ def update_pkg(pkg_cfg):
     """ Check if a new version of ltspkg exists
     """
     gth_ver = get_github_version()
+    if gth_ver is None:
+        print("Unable to fetch current github version")
+        return pkg_cfg
+
     loc_ver = get_local_version()
     if gth_ver <= loc_ver:
         print("package is up to date, nothing to do")

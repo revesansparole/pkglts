@@ -2,6 +2,13 @@ from os.path import abspath, basename
 
 from pkglts.option_tools import ask_arg
 
+parameters = [
+    ("pkg_fullname", basename(abspath("."))),
+    ("pkgname", "pkg"),
+    ("namespace", None),
+    ("owner", "moi")
+]
+
 
 def is_valid_identifier(name):
     """ Check that name is a valid python identifier

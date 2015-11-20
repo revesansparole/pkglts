@@ -11,7 +11,7 @@ from pip import main as pip_install
 
 from .file_management import get_hash, write_file
 from .local import init_namespace_dir
-from .option_tools import get_user_permission
+from .option_tools import ask_arg, get_user_permission
 from .rmtfile import get, ls
 from .templating import (closing_marker, get_comment_marker, opening_marker,
                          replace, swap_divs)
@@ -43,7 +43,7 @@ def ensure_installed_packages(requirements, msg):
     return True
 
 
-def update_opt(name, pkg_cfg, extra=None):
+def update_opt(name, pkg_cfg=None, extra=None):
     """ Update an option of this package. If the option
     does not exists yet, add it first.
     See the list of available option online
@@ -53,6 +53,9 @@ def update_opt(name, pkg_cfg, extra=None):
      - pkg_cfg (dict of (str, dict)): package configuration parameters
      - extra (dict): extra arguments for option configuration
     """
+    if pkg_cfg is None:
+        pkg_cfg = {}
+
     if extra is None:
         extra = {}
 
@@ -79,8 +82,19 @@ def update_opt(name, pkg_cfg, extra=None):
         print("option installation stopped")
         return pkg_cfg
 
-    # execute main function to retrieve config options
-    option_cfg = opt_cfg.main(pkg_cfg, extra)
+    # find parameters required by option config
+    try:
+        params = opt_cfg.parameters
+    except AttributeError:
+        params = []
+
+    option_cfg = {}
+    if pkg_cfg.get("_pkglts", {}).get("use_prompts", False):
+        for key, default in params:
+            option_cfg[key] = ask_arg(name + "." + key, pkg_cfg, default, extra)
+    else:
+        for key, default in params:
+            option_cfg[key] = default
 
     # write new pkg_info file
     if option_cfg is not None:

@@ -35,10 +35,6 @@ def installed_options(pkg_cfg):
     """
     opts = list(pkg_cfg.keys())
 
-    # delete pkglts entry
-    if 'pkglts' in opts:
-        opts.remove('pkglts')
-
     # handle private non option cfg
     opts = [k for k in opts if not k.startswith("_")]
 

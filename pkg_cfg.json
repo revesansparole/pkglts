@@ -1,4 +1,7 @@
 {
+    "_pkglts": {
+        "use_prompts": false
+    }, 
     "base": {
         "namespace": null, 
         "owner": "revesansparole", 
@@ -32,9 +35,6 @@
         "organization": "OpenAlea", 
         "project": "pkglts", 
         "year": "2015"
-    }, 
-    "pkglts": {
-        "use_prompts": false
     }, 
     "pypi": {
         "option": null
