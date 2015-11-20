@@ -1,3 +1,4 @@
+from base64 import b64encode
 import mock
 from nose.tools import assert_raises, with_setup
 from os import listdir, mkdir
@@ -51,15 +52,16 @@ def test_manage_pkg_config():
     assert new_cfg == cfg
 
 
-# @with_setup(setup, teardown)
-# def test_manage_pkg_config_fmt_templates():
-#     cfg = dict(toto={'base': 10, 'toto': "{{key, base}}"})
-#     write_pkg_config(cfg, tmp_dir)
-#
-#     cfg = get_pkg_config(tmp_dir)['toto']
-#     assert 'base' in cfg
-#     assert 'toto' in cfg
-#     assert cfg['toto'] == "10"
+@with_setup(setup, teardown)
+def test_manage_pkg_config_fmt_templates():
+    cfg = dict(base={'pkg': 'custom'},
+               toto={'base': 10, 'toto': "{{key, base.pkg}}"})
+    write_pkg_config(cfg, tmp_dir)
+
+    cfg = get_pkg_config(tmp_dir)['toto']
+    assert 'base' in cfg
+    assert 'toto' in cfg
+    assert cfg['toto'] == "custom"
 
 
 @with_setup(setup, teardown)
@@ -69,7 +71,7 @@ def test_manage_cfg_store_any_item():
 
     cfg = dict(simple=1,
                txt="lorem ipsum\n" * 4,
-               hash=algo.digest().decode("latin1"))
+               hash=b64encode(algo.digest()).decode('utf-8'))
 
     write_pkg_config(dict(toto=cfg), tmp_dir)
 
@@ -78,7 +80,8 @@ def test_manage_cfg_store_any_item():
 
     algo = sha512()
     algo.update(("lorem ipsum\n" * 10).encode("latin1"))
-    assert algo.digest() == new_cfg['hash'].encode("latin1")
+    sha = b64encode(algo.digest()).decode('utf-8')
+    assert sha == new_cfg['hash']
 
 
 @with_setup(setup, teardown)
@@ -88,3 +91,19 @@ def test_manage_cfg_do_store_private_item():
 
     new_cfg = get_pkg_config(tmp_dir)
     assert '_toto' in new_cfg
+
+
+@with_setup(setup, teardown)
+def test_manage_cfg_restore_templates_on_writing():
+    cfg = dict(base={'pkg': 'custom'},
+               toto={'base': 10, 'toto': "{{key, base.pkg}}"})
+    write_pkg_config(cfg, tmp_dir)
+
+    pkg_cfg = get_pkg_config(tmp_dir)
+    assert pkg_cfg['toto']['toto'] == "custom"
+
+    pkg_cfg['base']['pkg'] = "another"
+    write_pkg_config(pkg_cfg, tmp_dir)
+
+    pkg_cfg = get_pkg_config(tmp_dir)
+    assert pkg_cfg['toto']['toto'] == "another"
