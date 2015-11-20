@@ -1,6 +1,6 @@
-==========================
+======
 pkglts
-==========================
+======
 
 .. {{pkglts doc,
 
@@ -47,7 +47,8 @@ Create a virtual environment for development::
 
 Activate it::
 
-    $ dvlpt/Scripts/activate
+    $ (on windows)dvlpt\Scripts\activate
+    $ (on linux)dvlpt/bin/activate
 
 Install pkglts_::
 
