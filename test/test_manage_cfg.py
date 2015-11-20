@@ -1,16 +1,12 @@
 from base64 import b64encode
-import mock
-from nose.tools import assert_raises, with_setup
-from os import listdir, mkdir
+from nose.tools import with_setup
+from os import mkdir
 from os.path import exists
 from hashlib import sha512
 from shutil import rmtree
 
-from pkglts.versioning import get_local_version
-from pkglts.manage import (clean, get_pkg_config, get_pkg_hash,
+from pkglts.manage import (get_pkg_config, get_pkg_hash,
                            init_pkg,
-                           add_option, update_option, edit_option,
-                           update_pkg,
                            write_pkg_config)
 
 
