@@ -30,7 +30,7 @@ project_root = os.path.dirname(cwd)
 # Insert the project root dir as the first element in the PYTHONPATH.
 # This lets us ensure that the source package is imported, and that its
 # version is used.
-sys.path.insert(0, os.path.join(project_root, os.path.dirname('{{src_pth, }}')))
+sys.path.insert(0, os.path.join(project_root, os.path.dirname('{{base.src_pth, }}')))
 
 # import {{key, base.pkgname}} as mypkg
 
@@ -56,8 +56,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'{{key, base.pkg_fullname}}'
-copyright = u'2015, {{key, base.pkg_fullname}}'
+project = u'{{base.pkg_full_name, }}'
+copyright = u'2015, {{base.pkg_full_name, }}'
 
 # The version info for the project you're documenting, acts as replacement
 # for |version| and |release|, also used in various other places throughout
@@ -66,7 +66,7 @@ copyright = u'2015, {{key, base.pkg_fullname}}'
 # {{version rm,
 # find version number in /src/$pkg_pth/version.py
 pkgver = {}
-with open("../{{src_pth, }}/version.py") as fp:
+with open("../{{base.src_pth, }}/version.py") as fp:
     exec(fp.read(), pkgver)
 
 # The short X.Y version.

@@ -1,6 +1,6 @@
 from nose import with_setup
 
-from {{key, base.pkg_fullname}} import example as ex
+from {{base.pkg_full_name, }} import example as ex
 
 
 def setup_module():

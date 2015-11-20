@@ -1,6 +1,6 @@
 
-Welcome to {{key, base.pkg_fullname}}'s documentation!
-======================================================
+Welcome to {{base.pkg_full_name, }}'s documentation!
+====================================================
 
 Contents:
 

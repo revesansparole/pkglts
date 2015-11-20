@@ -16,6 +16,16 @@ def get_src_pth(txt, env):
     return src_dir(env)
 
 
+def pkg_full_name(txt, env):
+    del txt  # unused
+    namespace = env['base']['namespace']
+    if namespace is None:
+        return env['base']['pkgname']
+    else:
+        return namespace + "." + env['base']['pkgname']
+
+
 mapping = {'upper': upper,
            'lower': lower,
-           "src_pth": get_src_pth}
+           "base.src_pth": get_src_pth,
+           "base.pkg_full_name": pkg_full_name}
