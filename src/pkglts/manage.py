@@ -20,6 +20,11 @@ from .templating import replace
 from .versioning import get_github_version, get_local_version
 
 
+try:
+    string_type = basestring
+except NameError:
+    string_type = str
+
 pkg_cfg_file = "pkg_cfg.json"
 pkg_hash_file = "pkg_hash.json"
 
@@ -61,12 +66,11 @@ def get_pkg_config(rep="."):
     handlers = {}  # use only default handlers
     for name, cfg in tuple(pkg_cfg.items()):
         for key, param in tuple(cfg.items()):
-            if isinstance(param, (str, unicode)):
+            if isinstance(param, string_type):
                 new_value = replace(param, handlers, pkg_cfg)
                 if new_value == param:
                     cfg[key] = param
                 else:
-                    print "changed", key, repr(param), repr(new_value)
                     cfg[key] = FormattedString(new_value)
                     cfg[key].template = param
 
