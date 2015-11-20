@@ -184,9 +184,7 @@ def update_option(name, pkg_cfg):
     if name not in pkg_cfg:
         raise UserWarning("Option '%s' seems not to be installed" % name)
 
-    extra = pkg_cfg[name]  # one way to re-force already set args
-
-    return update_opt(name, pkg_cfg, extra)
+    return update_opt(name, pkg_cfg)
 
 
 def edit_option(name, pkg_cfg):
@@ -199,22 +197,23 @@ def edit_option(name, pkg_cfg):
     if name not in pkg_cfg:
         raise UserWarning("Option '%s' seems not to be installed" % name)
 
-    return update_opt(name, pkg_cfg)
+    print("edit pkg_cfg.json file by hand instead")
+    return pkg_cfg
+    # return update_opt(name, pkg_cfg)
 
 
-def add_option(name, pkg_cfg, extra=None):
+def add_option(name, pkg_cfg):
     """ Add a new option to this package.
     See the list of available option online
 
     args:
      - name (str): name of option to add
      - pkg_cfg (dict of (str, dict)): package configuration parameters
-     - extra (dict): extra arguments for option configuration
     """
     if name in pkg_cfg:
         raise UserWarning("option already included in this package")
 
-    return update_opt(name, pkg_cfg, extra)
+    return update_opt(name, pkg_cfg)
 
 
 def install_example_files(option, pkg_cfg, target="."):

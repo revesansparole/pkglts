@@ -43,7 +43,7 @@ def ensure_installed_packages(requirements, msg):
     return True
 
 
-def update_opt(name, pkg_cfg=None, extra=None):
+def update_opt(name, pkg_cfg=None):
     """ Update an option of this package. If the option
     does not exists yet, add it first.
     See the list of available option online
@@ -51,13 +51,9 @@ def update_opt(name, pkg_cfg=None, extra=None):
     args:
      - name (str): name of option to add
      - pkg_cfg (dict of (str, dict)): package configuration parameters
-     - extra (dict): extra arguments for option configuration
     """
     if pkg_cfg is None:
         pkg_cfg = {}
-
-    if extra is None:
-        extra = {}
 
     # test existence of option
     try:
@@ -70,9 +66,8 @@ def update_opt(name, pkg_cfg=None, extra=None):
     for option_name in opt_require.option:
         if option_name not in pkg_cfg:
             print("need to install option '%s' first" % option_name)
-            if (extra.get("install_option_dependencies", False) or
-                    get_user_permission("install")):
-                pkg_cfg = update_opt(option_name, pkg_cfg, extra)
+            if get_user_permission("install"):
+                pkg_cfg = update_opt(option_name, pkg_cfg)
             else:
                 return pkg_cfg
 
@@ -89,16 +84,12 @@ def update_opt(name, pkg_cfg=None, extra=None):
         params = []
 
     option_cfg = {}
-    if pkg_cfg.get("_pkglts", {}).get("use_prompts", False):
-        for key, default in params:
-            option_cfg[key] = ask_arg(name + "." + key, pkg_cfg, default, extra)
-    else:
-        for key, default in params:
-            option_cfg[key] = default
+    prev_cfg = pkg_cfg.get(name, {})
+    for key, default in params:
+        option_cfg[key] = prev_cfg.get(key, default)
 
     # write new pkg_info file
-    if option_cfg is not None:
-        pkg_cfg[name] = option_cfg
+    pkg_cfg[name] = option_cfg
 
     try:  # TODO: proper developer doc to expose this feature
         opt_cfg.after(pkg_cfg)
