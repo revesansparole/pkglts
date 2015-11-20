@@ -37,8 +37,7 @@ def test_manage_update_pkg_do_not_change_installed_options():
     ver = get_local_version()
     ver.version = (ver.version[0], ver.version[1] + 1, ver.version[2])
 
-    pkg_cfg = {'base': dict(pkg_fullname='toto',
-                            pkgname='toto',
+    pkg_cfg = {'base': dict(pkgname='toto',
                             namespace=None,
                             owner='owner')}
 

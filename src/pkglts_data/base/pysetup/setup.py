@@ -28,7 +28,7 @@ def parse_requirements(fname):
 # {{version rm,
 # find version number in /src/$pkg_pth/version.py
 version = {}
-with open("{{src_pth, }}/version.py") as fp:
+with open("{{base.src_pth, }}/version.py") as fp:
     exec(fp.read(), version)
 # }}
 
@@ -53,7 +53,7 @@ for root, dnames, fnames in walk("src/{{key, base.pkgname}}_data"):
 # }}
 
 setup(
-    name='{{key, base.pkg_fullname}}',
+    name='{{base.pkg_full_name, }}',
     # {{version rm,
     version=version["__version__"],
     # }}
