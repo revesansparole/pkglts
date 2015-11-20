@@ -1,5 +1,5 @@
 # {{pkglts github,
-*.py[cod]
+*.py[cod~]
 
 # Packages
 *.egg
