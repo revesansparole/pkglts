@@ -130,7 +130,7 @@ def test_regenerate_do_not_touch_pkglts_cfg_files():
         f.write("{{key, base.pkgname}}")
 
     cfg = get_pkg_config(tmp_dir)
-    cfg['extra'] = "{{key, base.pkgname}}"
+    cfg['extra'] = dict(toto="{{key, base.pkgname}}")
     write_pkg_config(cfg, tmp_dir)
 
     regenerate(pkg_cfg, tmp_dir)
@@ -139,4 +139,4 @@ def test_regenerate_do_not_touch_pkglts_cfg_files():
         assert txt == "toto"
 
     cfg = get_pkg_config(tmp_dir)
-    assert cfg['extra'] == "{{key, base.pkgname}}"
+    assert cfg['extra']['toto'] == "{{key, base.pkgname}}"
