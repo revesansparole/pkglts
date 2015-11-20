@@ -16,11 +16,18 @@ from .manage_tools import (package_hash_keys,
                            update_opt)
 from .option_tools import get_user_permission
 from .rmtfile import ls
+from .templating import replace
 from .versioning import get_github_version, get_local_version
 
 
 pkg_cfg_file = "pkg_cfg.json"
 pkg_hash_file = "pkg_hash.json"
+
+
+class FormattedString(str):
+    """Small class to hold both formatted string and its template
+    """
+    pass
 
 
 def init_pkg(rep="."):
@@ -51,10 +58,17 @@ def get_pkg_config(rep="."):
         pkg_cfg = json.load(f)
 
     # format template entries
-    for name, cfg in pkg_cfg.items():
-        for key, param in cfg.items():
-            if isinstance(param, str):
-                print key, param  # TODO change tests to only use dict of dict
+    handlers = {}  # use only default handlers
+    for name, cfg in tuple(pkg_cfg.items()):
+        for key, param in tuple(cfg.items()):
+            if isinstance(param, (str, unicode)):
+                new_value = replace(param, handlers, pkg_cfg)
+                if new_value == param:
+                    cfg[key] = param
+                else:
+                    print "changed", key, repr(param), repr(new_value)
+                    cfg[key] = FormattedString(new_value)
+                    cfg[key]._template = param
 
     return pkg_cfg
 
@@ -67,10 +81,11 @@ def write_pkg_config(pkg_cfg, rep="."):
      - rep (str): directory to search for info
     """
     cfg = dict(pkg_cfg)
-    for key in tuple(cfg.keys()):
-        pass
-        # if key.startswith("_"):
-        #     del cfg[key]
+    for name, params in tuple(cfg.items()):
+        for key, param in tuple(params.items()):
+            if isinstance(param, FormattedString):
+                print "W", key, param, param._template
+                params[key] = param._template
 
     with open(pj(rep, pkg_cfg_file), 'w') as f:
         json.dump(cfg, f, sort_keys=True, indent=4)
