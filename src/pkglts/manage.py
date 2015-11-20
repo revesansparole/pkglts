@@ -68,7 +68,7 @@ def get_pkg_config(rep="."):
                 else:
                     print "changed", key, repr(param), repr(new_value)
                     cfg[key] = FormattedString(new_value)
-                    cfg[key]._template = param
+                    cfg[key].template = param
 
     return pkg_cfg
 
@@ -84,8 +84,7 @@ def write_pkg_config(pkg_cfg, rep="."):
     for name, params in tuple(cfg.items()):
         for key, param in tuple(params.items()):
             if isinstance(param, FormattedString):
-                print "W", key, param, param._template
-                params[key] = param._template
+                params[key] = param.template
 
     with open(pj(rep, pkg_cfg_file), 'w') as f:
         json.dump(cfg, f, sort_keys=True, indent=4)

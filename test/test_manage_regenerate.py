@@ -139,4 +139,4 @@ def test_regenerate_do_not_touch_pkglts_cfg_files():
         assert txt == "toto"
 
     cfg = get_pkg_config(tmp_dir)
-    assert cfg['extra']['toto'] == "{{key, base.pkgname}}"
+    assert cfg['extra']['toto'].template == "{{key, base.pkgname}}"

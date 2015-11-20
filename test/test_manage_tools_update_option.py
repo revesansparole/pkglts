@@ -1,4 +1,3 @@
-import mock
 from nose.tools import assert_raises
 
 from pkglts.manage_tools import update_opt
