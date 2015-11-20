@@ -33,6 +33,7 @@ def test_manage_init_create_pkg_config():
     init_pkg(tmp_dir)
     cfg = get_pkg_config(tmp_dir)
     assert cfg is not None
+    assert "_pkglts" in cfg
 
 
 @with_setup(setup, teardown)
@@ -48,6 +49,17 @@ def test_manage_pkg_config():
     write_pkg_config(cfg, tmp_dir)
     new_cfg = get_pkg_config(tmp_dir)
     assert new_cfg == cfg
+
+
+@with_setup(setup, teardown)
+def test_manage_pkg_config_fmt_templates():
+    cfg = {'base': 10, 'toto': "{{key, base}}"}
+    write_pkg_config(cfg, tmp_dir)
+
+    cfg = get_pkg_config(tmp_dir)
+    assert 'base' in cfg
+    assert 'toto' in cfg
+    assert cfg['toto'] == "10"
 
 
 @with_setup(setup, teardown)
@@ -70,12 +82,12 @@ def test_manage_cfg_store_any_item():
 
 
 @with_setup(setup, teardown)
-def test_manage_cfg_do_not_store_private_item():
+def test_manage_cfg_do_store_private_item():
     cfg = {'toto': {}, '_toto': {}}
     write_pkg_config(cfg, tmp_dir)
 
     new_cfg = get_pkg_config(tmp_dir)
-    assert '_toto' not in new_cfg
+    assert '_toto' in new_cfg
 
 
 @with_setup(setup, teardown)
