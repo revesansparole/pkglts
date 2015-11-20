@@ -29,7 +29,7 @@ def ensure_installed_packages(requirements, msg):
      - requirements (list of str): list of package names to pip install
                                    if needed
     """
-    pip.utils.pkg_resources = imp.reload(pip.utils.pkg_resources)
+    pip.util.pkg_resources = imp.reload(pip.util.pkg_resources)
     installed = set(p.project_name for p in get_installed_distributions())
     to_install = set(requirements) - installed
     if len(to_install) > 0:
