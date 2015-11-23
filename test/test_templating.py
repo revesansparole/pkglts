@@ -7,10 +7,12 @@ print(__file__)
 
 
 def upper(txt, env):
+    del env
     return txt.upper()
 
 
 def use_env(txt, env):
+    del txt
     return env['toto']
 
 
@@ -660,7 +662,7 @@ after2 = 1
     assert new_txt == src_txt
 
 
-def test_swap_divs_returns_None_if_some_pkglts_divs_missing():
+def test_swap_divs_returns_none_if_some_pkglts_divs_missing():
     src_txt = """
 before = 1  # {{pkglts upper, inline = 1}}{{pkglts up2, inline = 3}}
 # {{pkglts lower,
@@ -681,3 +683,11 @@ after2 = 1
 """
     txt = swap_divs(src_txt, tgt_txt, "#")
     assert txt is None
+
+
+def test_template_core_handler_get_key_return_str():
+    src_txt = "{{key, base.param}}"
+    cfg = dict(base={'param': 0})
+    tgt_txt = replace(src_txt, {}, cfg)
+
+    assert tgt_txt == "0"
