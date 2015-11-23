@@ -36,8 +36,9 @@ lib64
 # }}
 
 # user defined
-example
+example/pkg_tata
+example/venv_toto
+example/wheels
 try
-.cookie.json
 feature_list.txt
 
