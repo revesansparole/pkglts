@@ -1,30 +1,10 @@
-import mock
-
-from pkglts.option.doc.config import main
+from pkglts.option.doc.config import check, parameters
 
 
-def test_config_is_self_sufficient():
-    pkg_cfg = {}
-    # call config a first time
-    cfg = main(pkg_cfg, dict(description="descr",
-                             keywords="keys"))
-
-    # check that a second call with the same info provided
-    # first does not require user input
-    new_cfg = main(pkg_cfg, cfg)
-
-    # second has not modified options
-    assert cfg == new_cfg
+def test_parameters():
+    assert len(parameters) == 2
 
 
-def test_config_use_good_defaults():
-    pkg_cfg = {}
-    # call config a first time
-    cfg = main(pkg_cfg, dict(description="descr",
-                             keywords="keys"))
-
-    # check that a second call provide right defaults
-    pkg_cfg['doc'] = cfg
-    with mock.patch("pkglts.option_tools.loc_input", return_value=''):
-        new_cfg = main(pkg_cfg, {})
-        assert cfg == new_cfg
+def test_config_check_description_exists():
+    pkg_cfg = dict(doc={'description': "", 'keywords': []})
+    assert 'description' in check(pkg_cfg)

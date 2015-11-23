@@ -1,16 +1,27 @@
-from pkglts.option_tools import ask_arg
+parameters = [
+    ("name", "mit"),
+    ("year", 2015),
+    ("organization", "organization"),
+    ("project", "{{key, base.pkgname}}")
+]
 
 
-def main(pkg_cfg, extra):
-    name = ask_arg("license.name", pkg_cfg, 'mit', extra)
-    year = ask_arg("license.year", pkg_cfg, 2015, extra)
-    organization = ask_arg("license.organization", pkg_cfg, "oa", extra)
-    project = ask_arg("license.project",
-                      pkg_cfg,
-                      pkg_cfg['base']['pkgname'],
-                      extra)
+def check(pkg_cfg):
+    """Check the validity of parameters in package configuration.
 
-    return dict(name=name.strip(),
-                year=year,
-                organization=organization,
-                project=project)
+    args:
+     - pkg_cfg (dict of str, dict of str, any)): package configuration
+
+    return:
+     - (list of str): list of faulty parameters
+    """
+    invalids = []
+    name = pkg_cfg['license']['name']
+    # year = pkg_cfg['license']['year']
+    # organization = pkg_cfg['license']['organization']
+    # project = pkg_cfg['license']['project']
+
+    if len(name) == 0:
+        invalids.append('name')
+
+    return invalids
