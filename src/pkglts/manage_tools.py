@@ -11,7 +11,7 @@ from pip import main as pip_install
 
 from .file_management import get_hash, write_file
 from .local import init_namespace_dir
-from .option_tools import ask_arg, get_user_permission
+from .option_tools import get_user_permission
 from .rmtfile import get, ls
 from .templating import (closing_marker, get_comment_marker, opening_marker,
                          replace, swap_divs)
@@ -85,7 +85,8 @@ def update_opt(name, pkg_cfg=None):
     for option_name in opt_require.option:
         if option_name not in pkg_cfg:
             print("need to install option '%s' first" % option_name)
-            if get_user_permission("install"):
+            if (pkg_cfg.get("_pkglts", {}).get("auto_install", False) or
+                    get_user_permission("install")):
                 pkg_cfg = update_opt(option_name, pkg_cfg)
             else:
                 return pkg_cfg
