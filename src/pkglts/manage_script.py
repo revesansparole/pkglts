@@ -1,4 +1,5 @@
 from argparse import ArgumentParser, RawTextHelpFormatter
+import logging
 
 # from .local import installed_options
 from .manage import (clean, get_pkg_config,
@@ -9,11 +10,15 @@ from .manage import (clean, get_pkg_config,
                      write_pkg_config)
 
 
+logger = logging.getLogger(__name__)
+
+
 def action_clean(*args, **kwds):
     """ Clean package of all un necessary files.
     """
     del args  # unused
     del kwds  # unused
+    logger.info("clean package")
     clean()
 
 
@@ -22,6 +27,7 @@ def action_init(*args, **kwds):
     """
     del args  # unused
     del kwds  # unused
+    logger.info("init package")
     init_pkg()
 
 
@@ -30,6 +36,7 @@ def action_clear(*args, **kwds):
     """
     del args  # unused
     del kwds  # unused
+    logger.info("clear")
     print("TODO")
 
 
@@ -38,6 +45,7 @@ def action_update(*args, **kwds):
     """
     del args  # unused
     del kwds  # unused
+    logger.info("update")
     print("TODO")
 
 
@@ -46,6 +54,8 @@ def action_regenerate(*args, **kwds):
     """
     del args  # unused
     overwrite = 'overwrite' in kwds
+
+    logger.info("regenerate")
 
     pkg_cfg = get_pkg_config()
     clean()
@@ -60,6 +70,7 @@ def action_add(*args, **kwds):
     if len(args) == 0:
         raise UserWarning("need to specify at least one option name")
 
+    logger.info("add option")
     pkg_cfg = get_pkg_config()
     for name in args:
         pkg_cfg = add_option(name, pkg_cfg)
@@ -74,6 +85,7 @@ def action_remove(*args, **kwds):
     if len(args) == 0:
         raise UserWarning("need to specify at least one option name")
 
+    logger.info("remove option")
     print("TODO")
 
 
@@ -98,6 +110,7 @@ def action_example(*args, **kwds):
     if len(args) == 0:
         raise UserWarning("need to specify at least one option name")
 
+    logger.info("install examples")
     pkg_cfg = get_pkg_config()
     for name in args:
         install_example_files(name, pkg_cfg)

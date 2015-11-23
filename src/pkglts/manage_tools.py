@@ -3,6 +3,7 @@
 
 import imp
 from importlib import import_module
+import logging
 from os import listdir, mkdir, walk
 from os.path import basename, exists, isdir
 import pip
@@ -16,6 +17,8 @@ from .rmtfile import get, ls
 from .templating import (closing_marker, get_comment_marker, opening_marker,
                          replace, swap_divs)
 
+
+logger = logging.getLogger(__name__)
 
 tpl_src_name = "%skey, base.pkgname%s" % (opening_marker, closing_marker)
 
@@ -34,9 +37,10 @@ def ensure_installed_packages(requirements, msg):
     to_install = set(requirements) - installed
     if len(to_install) > 0:
         print(msg)
-        print("missing packages: " + ", ".join(to_install))
+        logger.warning("missing packages: " + ", ".join(to_install))
         if get_user_permission("install"):
             pip_install(['install'] + list(to_install))
+            logger.info("pip install" + ", ".join(to_install))
             return True
         else:
             return False
@@ -71,6 +75,8 @@ def update_opt(name, pkg_cfg=None):
      - name (str): name of option to add
      - pkg_cfg (dict of (str, dict)): package configuration parameters
     """
+    logger.info("update option %s" % name)
+
     if pkg_cfg is None:
         pkg_cfg = {}
 
@@ -221,7 +227,7 @@ def clone_example(src_dir, tgt_dir, pkg_cfg, handlers):
             if (tgt_name.split(".")[0] != "_" and
                     tgt_name[-3:] not in ("pyc", "pyo")):
                 if exists(tgt_pth):
-                    print("conflict '%s'" % tgt_name)
+                    logger.warning("conflict '%s'" % tgt_name)
                 else:
                     content = replace(get(src_pth), handlers, pkg_cfg)
                     write_file(tgt_pth, content)

@@ -5,6 +5,7 @@ Use 'setup.py' for common tasks.
 """
 
 import json
+import logging
 from os import listdir, remove, walk
 from os.path import exists, splitext
 from os.path import join as pj
@@ -24,6 +25,8 @@ try:
     string_type = basestring
 except NameError:
     string_type = str
+
+logger = logging.getLogger(__name__)
 
 pkg_cfg_file = "pkg_cfg.json"
 pkg_hash_file = "pkg_hash.json"
@@ -85,6 +88,7 @@ def write_pkg_config(pkg_cfg, rep="."):
      - pkg_cfg (dict of (str, dict)): option_name, options
      - rep (str): directory to search for info
     """
+    logger.info("write package config")
     cfg = dict(pkg_cfg)
     for name, params in tuple(cfg.items()):
         for key, param in tuple(params.items()):
@@ -117,6 +121,7 @@ def write_pkg_hash(pkg_hash, rep="."):
      - pkg_hash (dict of (str, hash)): file path: hash key
      - rep (str): directory to search for info
     """
+    logger.info("write package hash")
     cfg = dict(pkg_hash)
 
     with open(pj(rep, pkg_hash_file), 'w') as f:
@@ -163,9 +168,9 @@ def update_pkg(pkg_cfg):
 
     loc_ver = get_local_version()
     if gth_ver <= loc_ver:
-        print("package is up to date, nothing to do")
+        logger.info("package is up to date, nothing to do")
     else:
-        print("newer version of package available")
+        logger.info("newer version of package available")
         if get_user_permission("install"):
             print("install")
             # TODO: perform installation
@@ -237,14 +242,14 @@ def add_option(name, pkg_cfg):
 
 def install_example_files(option, pkg_cfg, target="."):
     if option not in pkg_cfg:
-        print("please install option before example files")
+        logger.warning("please install option before example files")
         return False
 
     # get handlers
     h = load_all_handlers(pkg_cfg)
 
     if (option, True) not in ls("pkglts_data/example"):
-        print("option does not provide any example")
+        logger.info("option does not provide any example")
         return False
 
     root = "pkglts_data/example/%s" % option
@@ -268,9 +273,8 @@ def regenerate(pkg_cfg, target=".", overwrite=False):
 
     if len(invalids) > 0:
         for param in invalids:
-            print("param %s is not valid" % param)
+            logger.warning("param %s is not valid" % param)
 
-        # raise UserWarning("pkg_cfg invalid, correct it before relaunching cmd")
         return False
 
     # load handlers
@@ -304,13 +308,12 @@ def regenerate(pkg_cfg, target=".", overwrite=False):
     # copy all missing files for options
     # regenerating pkglts divs on the way
     for option in installed_options(pkg_cfg):
-        print("cloning option '%s'" % option)
+        logger.info("cloning option '%s'" % option)
         error_files = clone_base_option(option, pkg_cfg, handlers, target,
                                         overwrite_file)
         if len(error_files) > 0:
             for pth in error_files:
-                print("unable to resolve conflict in '%s'" % pth)
-                print("Maybe remove your copy and relaunch regenerate")
+                logger.warning("unable to resolve conflict in '%s'" % pth)
 
             return False
 
