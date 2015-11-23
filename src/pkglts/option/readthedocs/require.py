@@ -1,4 +1,4 @@
-option = ['pysetup', 'git', 'sphinx']
+option = ['pysetup', 'github', 'sphinx']
 setup = []
 install = []
 dvlpt = []
