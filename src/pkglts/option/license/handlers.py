@@ -7,7 +7,7 @@ def generate(txt, env):
     del txt  # unused
     name = env['license']['name']
 
-    ctx = env['license']
+    ctx = dict((k, str(v)) for k, v in env['license'].items())
     tpl = load_package_template(name)
 
     license_txt = generate_license(tpl, ctx)
