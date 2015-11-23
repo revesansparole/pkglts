@@ -11,9 +11,9 @@ def test_get_classifiers():
 
 
 def test_get_classifiers_find_version_classifiers():
-    pkg_cfg = dict(pysetup={'intended_versions': ["27"]},
+    pkg_cfg = dict(pysetup={'intended_versions': ["27", "34"]},
                    pypi={'classifiers': []})
-    assert len(get_classifiers("txt", pkg_cfg).split("\n")) == 2
+    assert len(get_classifiers("txt", pkg_cfg).split("\n")) == 6
 
 
 def test_badge():
