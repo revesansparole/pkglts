@@ -17,9 +17,7 @@ wng_ch = logging.StreamHandler()
 wng_ch.setLevel(logging.WARNING)
 wng_ch.setFormatter(fmt)
 
-info_ch = logging.handlers.RotatingFileHandler("../info.log",
-                                               maxBytes=1000,
-                                               backupCount=5)
+info_ch = logging.FileHandler("info.log")
 info_ch.setLevel(logging.INFO)
 info_ch.setFormatter(fmt)
 
