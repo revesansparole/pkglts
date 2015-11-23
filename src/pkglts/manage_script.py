@@ -27,7 +27,6 @@ def action_init(*args, **kwds):
     """
     del args  # unused
     del kwds  # unused
-    logger.info("init package")
     init_pkg()
 
 

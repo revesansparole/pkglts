@@ -45,6 +45,8 @@ def init_pkg(rep="."):
     if not exists(pj(rep, pkglts_dir)):
         mkdir(pj(rep, pkglts_dir))
 
+    logger.info("init package")
+
     for name in ("regenerate.no", "clean.no"):
         if not exists(pj(pkglts_dir, name)):
             with open(pj(pkglts_dir, name), 'w') as f:
