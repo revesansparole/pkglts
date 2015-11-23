@@ -43,6 +43,25 @@ def ensure_installed_packages(requirements, msg):
     return True
 
 
+def check_option_parameters(name, pkg_cfg):
+    """ Check that the parameters associated to an option are valid
+
+    Try to import Check function in option dir.
+
+    args:
+     - option (str): option name
+     - pkg_cfg (dict of (str, dict of (str, any))): package configuration
+    """
+    try:
+        opt_cfg = import_module("pkglts.option.%s.config" % name)
+        try:
+            return opt_cfg.check(pkg_cfg)
+        except AttributeError:
+            return []
+    except ImportError:
+        return []
+
+
 def update_opt(name, pkg_cfg=None):
     """ Update an option of this package. If the option
     does not exists yet, add it first.
