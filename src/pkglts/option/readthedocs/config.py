@@ -1,5 +1,5 @@
 parameters = [
-    ("project", "{{key, github.project")
+    ("project", "{{key, github.project}}")
 ]
 
 
