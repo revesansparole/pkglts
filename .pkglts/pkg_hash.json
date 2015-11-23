@@ -49,8 +49,7 @@
     ], 
     "./entry_points.json": [], 
     "./feature_list.txt": [], 
-    "./pkg_cfg.json": [], 
-    "./pkg_hash.json": [], 
+    "./info.log": [], 
     "./requirements.txt": [
         "AWuoxM/eZa+Zy1+ouKN+Lrc/SBs640mRZm3y4E/rbAOGZuvR7CtvYjlndWAzxwLd5fQj99R6tu0YJ/9TeDcx9w=="
     ], 

@@ -1,0 +1,20 @@
+2015-11-23 21:15:53,005 INFO (pkglts.manage_script): regenerate
+2015-11-23 21:15:53,288 INFO (pkglts.manage): cloning option 'pysetup'
+2015-11-23 21:15:53,293 INFO (pkglts.manage): cloning option 'version'
+2015-11-23 21:15:53,296 INFO (pkglts.manage): cloning option 'tox'
+2015-11-23 21:15:53,296 INFO (pkglts.manage): cloning option 'github'
+2015-11-23 21:15:53,298 INFO (pkglts.manage): cloning option 'coveralls'
+2015-11-23 21:15:53,299 INFO (pkglts.manage): cloning option 'license'
+2015-11-23 21:15:53,299 INFO (pkglts.manage): cloning option 'doc'
+2015-11-23 21:15:53,312 INFO (pkglts.manage): cloning option 'readthedocs'
+2015-11-23 21:15:53,312 INFO (pkglts.manage): cloning option 'pypi'
+2015-11-23 21:15:53,312 INFO (pkglts.manage): cloning option 'travis'
+2015-11-23 21:15:53,315 INFO (pkglts.manage): cloning option 'base'
+2015-11-23 21:15:53,315 INFO (pkglts.manage): cloning option 'coverage'
+2015-11-23 21:15:53,316 INFO (pkglts.manage): cloning option 'test'
+2015-11-23 21:15:53,319 INFO (pkglts.manage): cloning option 'sphinx'
+2015-11-23 21:15:53,329 INFO (pkglts.manage): cloning option 'data'
+2015-11-23 21:15:53,332 INFO (pkglts.manage): cloning option 'landscape'
+2015-11-23 21:15:53,334 INFO (pkglts.manage): cloning option 'flake8'
+2015-11-23 21:15:53,451 INFO (pkglts.manage): write package hash
+2015-11-23 21:15:53,453 INFO (pkglts.manage): write package config
