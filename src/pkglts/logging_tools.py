@@ -1,5 +1,8 @@
 import logging
 import logging.handlers
+from os import remove, rename
+from os.path import exists
+
 
 fmt = logging.Formatter('%(asctime)s %(levelname)s (%(name)s): %(message)s')
 
@@ -12,7 +15,19 @@ logger.setLevel(logging.DEBUG)
 logger.addHandler(wng_ch)
 
 try:
-    info_ch = logging.FileHandler(".pkglts/info.log")
+    n = 5
+    tpl = ".pkglts/info.log.%d"
+    if exists(tpl % n):
+        remove(tpl % n)
+
+    for i in range(n, 0, -1):
+        if exists(tpl % (i - 1)):
+            rename(tpl % (i - 1), tpl % i)
+
+    if exists(".pkglts/info.log"):
+        rename(".pkglts/info.log", tpl % 0)
+
+    info_ch = logging.FileHandler(".pkglts/info.log", 'w')
     info_ch.setLevel(logging.INFO)
     info_ch.setFormatter(fmt)
 
