@@ -84,7 +84,7 @@ setup(
         #      'wralea': wralea_entry_points
     },
     # }}
-    keywords='{{key, doc.keywords}}',
+    keywords='{{doc.setup_keywords, }}',
     # {{pypi rm,
     classifiers=[# {{pypi.classifiers,
         'Development Status :: 2 - Pre-Alpha',
