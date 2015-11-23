@@ -1,33 +1,29 @@
 from base64 import b64encode
 from nose.tools import with_setup
-from os import mkdir
-from os.path import exists
 from hashlib import sha512
-from shutil import rmtree
 
 from pkglts.manage import (get_pkg_config, get_pkg_hash,
                            init_pkg,
                            write_pkg_config)
 
+from .small_tools import ensure_created, rmdir
 
-print(__file__)
 
 tmp_dir = 'toto_manage_cfg'
 
 
 def setup():
-    if not exists(tmp_dir):
-        mkdir(tmp_dir)
+    ensure_created(tmp_dir)
+    init_pkg(tmp_dir)
 
 
 def teardown():
-    if exists(tmp_dir):
-        rmtree(tmp_dir)
+    rmdir(tmp_dir)
 
 
 @with_setup(setup, teardown)
 def test_manage_init_create_pkg_config():
-    init_pkg(tmp_dir)
+    # init_pkg(tmp_dir)
     cfg = get_pkg_config(tmp_dir)
     assert cfg is not None
     assert "_pkglts" in cfg

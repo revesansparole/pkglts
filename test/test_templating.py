@@ -3,9 +3,6 @@ from pkglts.templating import (get_comment_marker, parse,
                                swap_divs)
 
 
-print(__file__)
-
-
 def upper(txt, env):
     del env
     return txt.upper()

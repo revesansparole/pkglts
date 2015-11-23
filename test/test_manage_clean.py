@@ -1,24 +1,21 @@
 from nose.tools import with_setup
 from os import listdir, mkdir
 from os.path import exists
-from shutil import rmtree
 
 from pkglts.manage import clean
 
+from .small_tools import ensure_created, rmdir
 
-print(__file__)
 
 tmp_dir = 'toto_manage_clean'
 
 
 def setup():
-    if not exists(tmp_dir):
-        mkdir(tmp_dir)
+    ensure_created(tmp_dir)
 
 
 def teardown():
-    if exists(tmp_dir):
-        rmtree(tmp_dir)
+    rmdir(tmp_dir)
 
 
 @with_setup(setup, teardown)

@@ -1,13 +1,11 @@
 from nose.tools import with_setup
-from os import listdir, mkdir
+from os import listdir
 from os.path import exists
 from os.path import join as pj
-from shutil import rmtree
 
 from pkglts.manage_tools import clone_base_option
 
-
-print(__file__)
+from .small_tools import ensure_created, rmdir
 
 
 tmp_dir = "takapouet_clone"
@@ -28,13 +26,11 @@ def addendum():
 
 
 def setup():
-    if not exists(tmp_dir):
-        mkdir(tmp_dir)
+    ensure_created(tmp_dir)
 
 
 def teardown():
-    if exists(tmp_dir):
-        rmtree(tmp_dir)
+    rmdir(tmp_dir)
 
 
 @with_setup(setup, teardown)

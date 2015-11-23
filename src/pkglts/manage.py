@@ -6,7 +6,7 @@ Use 'setup.py' for common tasks.
 
 import json
 import logging
-from os import listdir, remove, walk
+from os import listdir, mkdir, remove, walk
 from os.path import exists, splitext
 from os.path import join as pj
 from shutil import rmtree
@@ -28,6 +28,7 @@ except NameError:
 
 logger = logging.getLogger(__name__)
 
+pkglts_dir = ".pkglts"
 pkg_cfg_file = "pkg_cfg.json"
 pkg_hash_file = "pkg_hash.json"
 
@@ -41,7 +42,15 @@ class FormattedString(str):
 def init_pkg(rep="."):
     """ Initialise a package in given directory
     """
-    if exists(pj(rep, pkg_cfg_file)):
+    if not exists(pj(rep, pkglts_dir)):
+        mkdir(pj(rep, pkglts_dir))
+
+    for name in ("regenerate.no", "clean.no"):
+        if not exists(pj(pkglts_dir, name)):
+            with open(pj(pkglts_dir, name), 'w') as f:
+                f.write("")
+
+    if exists(pj(rep, pkglts_dir, pkg_cfg_file)):
         pkg_cfg = get_pkg_config(rep)
     else:
         pkg_cfg = {}
@@ -50,7 +59,7 @@ def init_pkg(rep="."):
                                   auto_install=True)
     write_pkg_config(pkg_cfg, rep)
 
-    if not exists(pj(rep, pkg_hash_file)):
+    if not exists(pj(rep, pkglts_dir, pkg_hash_file)):
         write_pkg_hash({}, rep)
 
 
@@ -63,7 +72,7 @@ def get_pkg_config(rep="."):
     return:
      - (dict of (str, dict)): option_name: options
     """
-    with open(pj(rep, pkg_cfg_file), 'r') as f:
+    with open(pj(rep, pkglts_dir, pkg_cfg_file), 'r') as f:
         pkg_cfg = json.load(f)
 
     # format template entries
@@ -95,7 +104,7 @@ def write_pkg_config(pkg_cfg, rep="."):
             if isinstance(param, FormattedString):
                 params[key] = param.template
 
-    with open(pj(rep, pkg_cfg_file), 'w') as f:
+    with open(pj(rep, pkglts_dir, pkg_cfg_file), 'w') as f:
         json.dump(cfg, f, sort_keys=True, indent=4)
 
 
@@ -108,7 +117,7 @@ def get_pkg_hash(rep="."):
     return:
      - (dict of (str, hash)): file path: hash key
     """
-    with open(pj(rep, pkg_hash_file), 'r') as f:
+    with open(pj(rep, pkglts_dir, pkg_hash_file), 'r') as f:
         hm = json.load(f)
 
     return dict((pth, tuple(key)) for pth, key in hm.items())
@@ -124,7 +133,7 @@ def write_pkg_hash(pkg_hash, rep="."):
     logger.info("write package hash")
     cfg = dict(pkg_hash)
 
-    with open(pj(rep, pkg_hash_file), 'w') as f:
+    with open(pj(rep, pkglts_dir, pkg_hash_file), 'w') as f:
         json.dump(cfg, f, sort_keys=True, indent=4)
 
 
@@ -318,9 +327,8 @@ def regenerate(pkg_cfg, target=".", overwrite=False):
             return False
 
     # regenerate files
-    overwrite_file[target + "/pkg_cfg.json"] = False
-    overwrite_file[target + "/pkg_hash.json"] = False
-
+    # overwrite_file[target + "/pkg_cfg.json"] = False
+    # overwrite_file[target + "/pkg_hash.json"] = False
     regenerate_pkg(pkg_cfg, handlers, target, overwrite_file)
 
     # re create hash

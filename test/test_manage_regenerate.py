@@ -1,15 +1,14 @@
 import mock
 from nose.tools import with_setup
-from os import mkdir, remove
+from os import remove
 from os.path import exists
 from os.path import join as pj
-from shutil import rmtree
 
 from pkglts.manage import (get_pkg_config, init_pkg, regenerate,
                            write_pkg_config)
 
+from .small_tools import ensure_created, rmdir
 
-print(__file__)
 
 tmp_dir = 'toto_mg_rg'
 init_file = pj(tmp_dir, "src", "toto", "__init__.py")
@@ -29,13 +28,11 @@ def addendum():
 
 
 def setup():
-    if not exists(tmp_dir):
-        mkdir(tmp_dir)
+    ensure_created(tmp_dir)
 
 
 def teardown():
-    if exists(tmp_dir):
-        rmtree(tmp_dir)
+    rmdir(tmp_dir)
 
 
 @with_setup(setup, teardown)

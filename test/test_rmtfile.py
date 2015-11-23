@@ -1,9 +1,6 @@
 from pkglts.rmtfile import get, ls
 
 
-print(__file__)
-
-
 def test_rmtfile_ls():
     assert (set(ls('pkglts_data/test/test1')) ==
             {('subtest', True), ('titi.txt', False)})
