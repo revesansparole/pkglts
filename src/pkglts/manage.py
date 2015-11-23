@@ -43,7 +43,8 @@ def init_pkg(rep="."):
     else:
         pkg_cfg = {}
     if '_pkglts' not in pkg_cfg:
-        pkg_cfg['_pkglts'] = dict(use_prompts=False)
+        pkg_cfg['_pkglts'] = dict(use_prompts=False,
+                                  auto_install=True)
     write_pkg_config(pkg_cfg, rep)
 
     if not exists(pj(rep, pkg_hash_file)):
