@@ -11,7 +11,7 @@ from os.path import join as pj
 from shutil import rmtree
 
 from .local import load_all_handlers, installed_options
-from .manage_tools import (package_hash_keys,
+from .manage_tools import (check_option_parameters, package_hash_keys,
                            clone_base_option, clone_example, regenerate_pkg,
                            update_opt)
 from .option_tools import get_user_permission
@@ -260,6 +260,19 @@ def regenerate(pkg_cfg, target=".", overwrite=False):
      - overwrite (bool): default False, whether or not
                          to overwrite user modified files
     """
+    # check consistency of pkg_cfg
+    invalids = []
+    for option in installed_options(pkg_cfg):
+        invalids.extend(check_option_parameters(option, pkg_cfg))
+
+    if len(invalids) > 0:
+        for param in invalids:
+            print("param %s is not valid" % param)
+
+        # raise UserWarning("pkg_cfg invalid, correct it before relaunching cmd")
+        return False
+
+    # load handlers
     handlers = load_all_handlers(pkg_cfg)
 
     # check for potential conflicts

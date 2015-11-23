@@ -1,4 +1,4 @@
-option = []
+option = ['base']
 setup = []
 install = []
 dvlpt = []
