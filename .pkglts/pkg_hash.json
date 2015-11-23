@@ -49,7 +49,6 @@
     ], 
     "./entry_points.json": [], 
     "./feature_list.txt": [], 
-    "./info.log": [], 
     "./requirements.txt": [
         "AWuoxM/eZa+Zy1+ouKN+Lrc/SBs640mRZm3y4E/rbAOGZuvR7CtvYjlndWAzxwLd5fQj99R6tu0YJ/9TeDcx9w=="
     ], 
@@ -69,6 +68,7 @@
     "./src/pkglts/file_management.py": [], 
     "./src/pkglts/github.py": [], 
     "./src/pkglts/local.py": [], 
+    "./src/pkglts/logging_tools.py": [], 
     "./src/pkglts/manage.py": [], 
     "./src/pkglts/manage_script.py": [], 
     "./src/pkglts/manage_tools.py": [], 
