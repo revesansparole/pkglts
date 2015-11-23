@@ -1,8 +1,7 @@
 parameters = [
     ("author_name", "{{key, base.owner}}"),
     ("author_email", "moi@email.com"),
-    ("intended_versions", ["27"]),
-    ("classifiers", ["Intended Audience :: Developers"])
+    ("intended_versions", ["27"])
 ]
 
 

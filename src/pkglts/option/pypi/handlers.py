@@ -12,19 +12,32 @@ def badge(txt, env):
 
 def get_classifiers(txt, env):
     del txt  # unused
-    cfg = env['pysetup']
 
-    items = [" " * 8 + "'%s'," % key for key in cfg['classifiers']]
+    items = list(env['pypi']['classifiers'])
 
     # add license item
     # TODO
 
     # add intended versions items
-    ver_cla_tpl = " " * 8 + "'Programming Language :: Python :: %s.%s',"
-    for ver in cfg['intended_versions']:
-        items.append(ver_cla_tpl % (ver[0], ver[1]))
+    intended_versions = env['pysetup']['intended_versions']
+    if len(intended_versions) > 0:
+        items.append("Programming Language :: Python")
 
-    return "\n" + "\n".join(items)
+        ver_cla_tpl = "Programming Language :: Python :: %s.%s"
+        major_versions = set()
+        for ver in intended_versions:
+            items.append(ver_cla_tpl % (ver[0], ver[1]))
+            major_versions.add(ver[0])
+
+        ver_cla_tpl = "Programming Language :: Python :: %s"
+        for ver in major_versions:
+            items.append(ver_cla_tpl % ver)
+
+        if len(major_versions) == 1:
+            ver, = major_versions
+            items.append("Programming Language :: Python :: %s :: Only" % ver)
+
+    return "\n" + ",\n".join(" " * 8 + "'%s'" % it for it in sorted(items))
 
 
 mapping = {'pypi.badge': badge,
