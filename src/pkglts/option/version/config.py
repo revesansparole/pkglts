@@ -1,7 +1,7 @@
 parameters = [
-    ("major", "0"),
-    ("minor", "1"),
-    ("post", "0")
+    ("major", 0),
+    ("minor", 1),
+    ("post", 0)
 ]
 
 
@@ -19,17 +19,11 @@ def check(pkg_cfg):
     minor = pkg_cfg['version']['minor']
     post = pkg_cfg['version']['post']
 
-    try:
-        int(major)
-    except ValueError:
+    if not isinstance(major, int):
         invalids.append("major")
-    try:
-        int(minor)
-    except ValueError:
+    if not isinstance(minor, int):
         invalids.append("minor")
-    try:
-        int(post)
-    except ValueError:
+    if not isinstance(post, int):
         invalids.append("post")
 
     return invalids
