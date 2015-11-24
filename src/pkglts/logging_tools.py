@@ -15,19 +15,20 @@ logger.setLevel(logging.DEBUG)
 logger.addHandler(wng_ch)
 
 try:
-    n = 5
-    tpl = ".pkglts/info.log.%d"
-    if exists(tpl % n):
-        remove(tpl % n)
-
-    for i in range(n, 0, -1):
-        if exists(tpl % (i - 1)):
-            rename(tpl % (i - 1), tpl % i)
-
-    if exists(".pkglts/info.log"):
-        rename(".pkglts/info.log", tpl % 0)
-
-    info_ch = logging.FileHandler(".pkglts/info.log", 'w')
+    # n = 5
+    # tpl = ".pkglts/info.log.%d"
+    # if exists(tpl % n):
+    #     remove(tpl % n)
+    #
+    # for i in range(n, 0, -1):
+    #     if exists(tpl % (i - 1)):
+    #         rename(tpl % (i - 1), tpl % i)
+    #
+    # if exists(".pkglts/info.log"):
+    #     rename(".pkglts/info.log", tpl % 0)
+    #
+    # info_ch = logging.FileHandler(".pkglts/info.log", 'w')
+    info_ch = logging.StreamHandler()
     info_ch.setLevel(logging.INFO)
     info_ch.setFormatter(fmt)
 
