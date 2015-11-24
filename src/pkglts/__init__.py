@@ -8,4 +8,4 @@ __version__ = version.__version__
 'github'
 # }}
 
-import logging_tools
+from . import logging_tools
