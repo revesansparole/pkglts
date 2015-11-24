@@ -12,6 +12,7 @@ pkg_cfg = add_option('pysetup', pkg_cfg)
 pkg_cfg = add_option('data', pkg_cfg)
 
 pkg_cfg['base']['pkgname'] = 'toto'
+pkg_cfg['base']['namespace'] = 'oa'
 pkg_cfg['pysetup']['intended_versions'] = ["27", "34", "35"]
 
 write_pkg_config(pkg_cfg)
