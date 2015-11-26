@@ -1,14 +1,14 @@
 import mock
 from nose.tools import with_setup
-from os import mkdir, remove
+from os import remove
 from os.path import exists
 from os.path import join as pj
-from shutil import rmtree
 
-from pkglts.manage import (init_pkg, regenerate)
+from pkglts.manage import (get_pkg_config, init_pkg, regenerate,
+                           write_pkg_config)
 
+from .small_tools import ensure_created, rmdir
 
-print(__file__)
 
 tmp_dir = 'toto_mg_rg'
 init_file = pj(tmp_dir, "src", "toto", "__init__.py")
@@ -28,13 +28,11 @@ def addendum():
 
 
 def setup():
-    if not exists(tmp_dir):
-        mkdir(tmp_dir)
+    ensure_created(tmp_dir)
 
 
 def teardown():
-    if exists(tmp_dir):
-        rmtree(tmp_dir)
+    rmdir(tmp_dir)
 
 
 @with_setup(setup, teardown)
@@ -118,3 +116,24 @@ def test_regenerate_remove_user_files_do_not_generate_conflicts():
 
     regenerate(pkg_cfg, tmp_dir)
     assert not exists(new_pth)
+
+
+@with_setup(setup, teardown)
+def test_regenerate_do_not_touch_pkglts_cfg_files():
+    init_pkg(tmp_dir)
+    regenerate(pkg_cfg, tmp_dir)
+    new_pth = pj(tmp_dir, "src", "toto", "new_file.py")
+    with open(new_pth, 'w') as f:
+        f.write("{{key, base.pkgname}}")
+
+    cfg = get_pkg_config(tmp_dir)
+    cfg['extra'] = dict(toto="{{key, base.pkgname}}")
+    write_pkg_config(cfg, tmp_dir)
+
+    regenerate(pkg_cfg, tmp_dir)
+    with open(new_pth, 'r') as f:
+        txt = f.read()
+        assert txt == "toto"
+
+    cfg = get_pkg_config(tmp_dir)
+    assert cfg['extra']['toto'].template == "{{key, base.pkgname}}"

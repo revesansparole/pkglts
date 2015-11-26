@@ -1,0 +1,60 @@
+{
+    "_pkglts": {
+        "auto_install": true, 
+        "use_prompts": false
+    }, 
+    "base": {
+        "namespace": null, 
+        "owner": "revesansparole", 
+        "pkgname": "pkglts"
+    }, 
+    "coverage": {}, 
+    "coveralls": {}, 
+    "data": {}, 
+    "doc": {
+        "description": "Building packages with long term support", 
+        "keywords": [
+            "packaging", 
+            "package builder"
+        ]
+    }, 
+    "flake8": {}, 
+    "github": {
+        "project": "{{key, base.pkgname}}"
+    }, 
+    "landscape": {}, 
+    "license": {
+        "name": "mit", 
+        "organization": "OpenAlea", 
+        "project": "{{key, base.pkgname}}", 
+        "year": "2015"
+    }, 
+    "pypi": {
+        "classifiers": [
+            "Development Status :: 2 - Pre-Alpha", 
+            "Intended Audience :: Developers", 
+            "License :: OSI Approved :: BSD License", 
+            "Natural Language :: English"
+        ]
+    }, 
+    "pysetup": {
+        "author_email": "revesansparole@gmail.com", 
+        "author_name": "{{key, base.owner}}", 
+        "intended_versions": [
+            "27", 
+            "34"
+        ]
+    }, 
+    "readthedocs": {
+        "project": "{{key, github.project}}"
+    }, 
+    "sphinx": {}, 
+    "test": {}, 
+    "tox": {}, 
+    "travis": {}, 
+    "version": {
+        "major": 0, 
+        "minor": 1, 
+        "post": 8
+    }
+}

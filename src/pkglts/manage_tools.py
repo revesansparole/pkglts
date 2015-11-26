@@ -3,6 +3,7 @@
 
 import imp
 from importlib import import_module
+import logging
 from os import listdir, mkdir, walk
 from os.path import basename, exists, isdir
 import pip
@@ -16,6 +17,8 @@ from .rmtfile import get, ls
 from .templating import (closing_marker, get_comment_marker, opening_marker,
                          replace, swap_divs)
 
+
+logger = logging.getLogger(__name__)
 
 tpl_src_name = "%skey, base.pkgname%s" % (opening_marker, closing_marker)
 
@@ -34,16 +37,36 @@ def ensure_installed_packages(requirements, msg):
     to_install = set(requirements) - installed
     if len(to_install) > 0:
         print(msg)
-        print("missing packages: " + ", ".join(to_install))
+        logger.warning("missing packages: " + ", ".join(to_install))
         if get_user_permission("install"):
             pip_install(['install'] + list(to_install))
+            logger.info("pip install" + ", ".join(to_install))
             return True
         else:
             return False
     return True
 
 
-def update_opt(name, pkg_cfg, extra=None):
+def check_option_parameters(name, pkg_cfg):
+    """ Check that the parameters associated to an option are valid
+
+    Try to import Check function in option dir.
+
+    args:
+     - option (str): option name
+     - pkg_cfg (dict of (str, dict of (str, any))): package configuration
+    """
+    try:
+        opt_cfg = import_module("pkglts.option.%s.config" % name)
+        try:
+            return opt_cfg.check(pkg_cfg)
+        except AttributeError:
+            return []
+    except ImportError:
+        return []
+
+
+def update_opt(name, pkg_cfg=None):
     """ Update an option of this package. If the option
     does not exists yet, add it first.
     See the list of available option online
@@ -51,10 +74,11 @@ def update_opt(name, pkg_cfg, extra=None):
     args:
      - name (str): name of option to add
      - pkg_cfg (dict of (str, dict)): package configuration parameters
-     - extra (dict): extra arguments for option configuration
     """
-    if extra is None:
-        extra = {}
+    logger.info("update option %s" % name)
+
+    if pkg_cfg is None:
+        pkg_cfg = {}
 
     # test existence of option
     try:
@@ -67,9 +91,9 @@ def update_opt(name, pkg_cfg, extra=None):
     for option_name in opt_require.option:
         if option_name not in pkg_cfg:
             print("need to install option '%s' first" % option_name)
-            if (extra.get("install_option_dependencies", False) or
+            if (pkg_cfg.get("_pkglts", {}).get("auto_install", False) or
                     get_user_permission("install")):
-                pkg_cfg = update_opt(option_name, pkg_cfg, extra)
+                pkg_cfg = update_opt(option_name, pkg_cfg)
             else:
                 return pkg_cfg
 
@@ -79,12 +103,19 @@ def update_opt(name, pkg_cfg, extra=None):
         print("option installation stopped")
         return pkg_cfg
 
-    # execute main function to retrieve config options
-    option_cfg = opt_cfg.main(pkg_cfg, extra)
+    # find parameters required by option config
+    try:
+        params = opt_cfg.parameters
+    except AttributeError:
+        params = []
+
+    option_cfg = {}
+    prev_cfg = pkg_cfg.get(name, {})
+    for key, default in params:
+        option_cfg[key] = prev_cfg.get(key, default)
 
     # write new pkg_info file
-    if option_cfg is not None:
-        pkg_cfg[name] = option_cfg
+    pkg_cfg[name] = option_cfg
 
     try:  # TODO: proper developer doc to expose this feature
         opt_cfg.after(pkg_cfg)
@@ -196,7 +227,7 @@ def clone_example(src_dir, tgt_dir, pkg_cfg, handlers):
             if (tgt_name.split(".")[0] != "_" and
                     tgt_name[-3:] not in ("pyc", "pyo")):
                 if exists(tgt_pth):
-                    print("conflict '%s'" % tgt_name)
+                    logger.warning("conflict '%s'" % tgt_name)
                 else:
                     content = replace(get(src_pth), handlers, pkg_cfg)
                     write_file(tgt_pth, content)

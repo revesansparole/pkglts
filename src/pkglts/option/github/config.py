@@ -1,10 +1,21 @@
-from pkglts.option_tools import ask_arg
+parameters = [
+    ("project", "{{key, base.pkgname}}")
+]
 
 
-def main(pkg_cfg, extra):
-    project = ask_arg("github.project",
-                      pkg_cfg,
-                      pkg_cfg['base']['pkgname'],
-                      extra)
+def check(pkg_cfg):
+    """Check the validity of parameters in package configuration.
 
-    return dict(project=project)
+    args:
+     - pkg_cfg (dict of str, dict of str, any)): package configuration
+
+    return:
+     - (list of str): list of faulty parameters
+    """
+    invalids = []
+    project = pkg_cfg['github']['project']
+
+    if len(project) == 0:
+        invalids.append('project')
+
+    return invalids

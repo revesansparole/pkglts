@@ -1,33 +1,20 @@
 from nose.tools import with_setup
-from os import mkdir
-from os.path import dirname, exists
 from os.path import join as pj
-from shutil import rmtree
 
 from pkglts.manage_tools import regenerate_file, regenerate_pkg
 
-
-print(__file__)
+from .small_tools import ensure_created, ensure_path, rmdir
 
 
 tmp_dir = "takapouet"
 
 
 def setup():
-    if not exists(tmp_dir):
-        mkdir(tmp_dir)
+    ensure_created(tmp_dir)
 
 
 def teardown():
-    if exists(tmp_dir):
-        rmtree(tmp_dir)
-
-
-def ensure_path(pth):
-    dname = dirname(pth)
-    if not exists(dname):
-        ensure_path(dname)
-        mkdir(dname)
+    rmdir(tmp_dir)
 
 
 @with_setup(setup, teardown)

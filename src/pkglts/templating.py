@@ -156,7 +156,7 @@ def get_key(txt, env):
         for k in elms:
             d = d[k]
 
-        return d
+        return str(d)
     except KeyError:
         return txt
 

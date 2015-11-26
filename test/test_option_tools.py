@@ -4,7 +4,6 @@ from nose.tools import assert_raises
 from pkglts.option_tools import ask_arg, get_key, get_user_permission
 
 
-print(__file__)
 loc_input = 'pkglts.option_tools.loc_input'
 
 

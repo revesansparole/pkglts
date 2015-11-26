@@ -20,7 +20,7 @@ Simple usage:
 
 .. code-block:: python
 
-    from {{key, base.pkg_fullname}} import *
+    from {{base.pkg_full_name, }} import *
 
 {{github rm,
 Contribute

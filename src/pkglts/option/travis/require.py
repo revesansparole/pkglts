@@ -1,4 +1,4 @@
-option = ['pysetup', 'git']
+option = ['pysetup', 'github']
 setup = []
 install = []
 dvlpt = []

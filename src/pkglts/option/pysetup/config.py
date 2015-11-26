@@ -1,18 +1,27 @@
-from pkglts.option_tools import ask_arg
+parameters = [
+    ("author_name", "{{key, base.owner}}"),
+    ("author_email", "moi@email.com"),
+    ("intended_versions", ["27"])
+]
 
 
-def main(pkg_cfg, extra):
-    author_name = ask_arg("pysetup.author_name", pkg_cfg,
-                          pkg_cfg['base']['owner'], extra)
-    author_email = ask_arg("pysetup.author_email", pkg_cfg,
-                           "moi@email.com", extra)
-    pyvers = ask_arg("pysetup.intended_versions", pkg_cfg, ["27"], extra)
+def check(pkg_cfg):
+    """Check the validity of parameters in package configuration.
 
-    classifiers = ask_arg("pysetup.classifiers", pkg_cfg,
-                          ["Intended Audience :: Developers"],
-                          extra)
+    args:
+     - pkg_cfg (dict of str, dict of str, any)): package configuration
 
-    return dict(author_name=author_name,
-                author_email=author_email,
-                intended_versions=pyvers,
-                classifiers=classifiers)
+    return:
+     - (list of str): list of faulty parameters
+    """
+    invalids = []
+    cfg = pkg_cfg['pysetup']
+    author_name = cfg['author_name']
+    intended_versions = cfg['intended_versions']
+
+    if len(author_name) == 0:
+        invalids.append("author_name")
+    if len(intended_versions) == 0:
+        invalids.append("intended_versions")
+
+    return invalids

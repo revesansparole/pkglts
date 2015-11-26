@@ -1,13 +1,23 @@
-from pkglts.option_tools import ask_arg
+parameters = [
+    ("description", "belle petite description"),
+    ("keywords", [])
+]
 
 
-def main(pkg_cfg, extra):
-    description = ask_arg('doc.description',
-                          pkg_cfg,
-                          "belle petite description",
-                          extra)
+def check(pkg_cfg):
+    """Check the validity of parameters in package configuration.
 
-    keywords = ask_arg('doc.keywords', pkg_cfg, None, extra)
+    args:
+     - pkg_cfg (dict of str, dict of str, any)): package configuration
 
-    return dict(description=description,
-                keywords=keywords)
+    return:
+     - (list of str): list of faulty parameters
+    """
+    invalids = []
+    description = pkg_cfg['doc']['description']
+    # keywords = pkg_cfg['doc']['keywords']
+
+    if len(description) == 0:
+        invalids.append("description")
+
+    return invalids

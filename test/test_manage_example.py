@@ -1,22 +1,20 @@
 from nose.tools import with_setup
-from os import listdir, mkdir
-from os.path import exists
-from shutil import rmtree
+from os import listdir
 
 from pkglts.manage import install_example_files
+
+from .small_tools import ensure_created, rmdir
 
 
 tmp_dir = "tmp_cfgex"
 
 
 def setup_func():
-    if not exists(tmp_dir):
-        mkdir(tmp_dir)
+    ensure_created(tmp_dir)
 
 
 def teardown_func():
-    if exists(tmp_dir):
-        rmtree(tmp_dir)
+    rmdir(tmp_dir)
 
 
 @with_setup(setup_func, teardown_func)

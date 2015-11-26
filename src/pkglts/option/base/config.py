@@ -1,6 +1,11 @@
 from os.path import abspath, basename
 
-from pkglts.option_tools import ask_arg
+
+parameters = [
+    ("pkgname", basename(abspath("."))),
+    ("namespace", None),
+    ("owner", "moi")
+]
 
 
 def is_valid_identifier(name):
@@ -14,32 +19,31 @@ def is_valid_identifier(name):
         return False
 
 
-def main(pkg_cfg, extra):
-    parent_dir = basename(abspath("."))
-    pkg_fullname = ask_arg("base.pkg_fullname", pkg_cfg,
-                           parent_dir.lower().replace(" ", ""), extra)
+def check(pkg_cfg):
+    """Check the validity of parameters in package configuration.
 
-    if "." in pkg_fullname:
-        try:
-            namespace, pkgname = pkg_fullname.split(".")
-        except ValueError:
-            raise UserWarning("package name not valid: %s" % pkg_fullname)
+    args:
+     - pkg_cfg (dict of str, dict of str, any)): package configuration
 
-        if not is_valid_identifier(namespace) \
-                or not is_valid_identifier(pkgname):
-            raise UserWarning("package name not valid: %s" % pkg_fullname)
-    else:
-        namespace = None
-        pkgname = pkg_fullname
-        if not is_valid_identifier(pkg_fullname):
-            raise UserWarning("package name not valid: %s" % pkg_fullname)
+    return:
+     - (list of str): list of faulty parameters
+    """
+    invalids = []
+    pkgname = pkg_cfg['base']['pkgname']
+    namespace = pkg_cfg['base']['namespace']
 
-    owner = ask_arg("base.owner", pkg_cfg, "moi", extra)
+    if "." in pkgname:
+        invalids.append('pkgname')
+    elif not is_valid_identifier(pkgname):
+        invalids.append('pkgname')
 
-    return dict(pkg_fullname=pkg_fullname,
-                pkgname=pkgname,
-                namespace=namespace,
-                owner=owner)
+    if namespace is not None:
+        if "." in namespace:
+            invalids.append('namespace')
+        elif not is_valid_identifier(namespace):
+            invalids.append('namespace')
+
+    return invalids
 
 
 def after(pkg_cfg):
