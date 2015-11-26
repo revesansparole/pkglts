@@ -75,7 +75,7 @@ went smoothly::
 
     $ virtualenv testenv
     $ testenv/scripts/activate
-    (testenv)$ pip install name_of_your_package --extra-index-url https://testpypi.python.org
+    (testenv)$ pip install name_of_your_package --extra-index-url https://testpypi.python.org/pypi
 
 You can drop the 'extra-index-url' part if you used the regular pypi server. Now
 to test::
