@@ -4,12 +4,18 @@ this package data
 """
 
 from os import listdir
-from os.path import dirname, isdir
+from os.path import dirname, exists, isdir
 from os.path import join as pj
 
 
 pkg_root_dir = dirname(dirname(__file__))
 pkg_data_dir = pj(pkg_root_dir, "pkglts_data")
+if not exists(pkg_data_dir):
+    # we are certainly using a namespace
+    pkg_root_dir = dirname(pkg_root_dir)
+    pkg_data_dir = pj(pkg_root_dir, "pkglts_data")
+    if not exists(pkg_data_dir):
+        raise UserWarning("No data dir at this location: %s" % pkg_data_dir)
 
 
 def get_data_dir():
