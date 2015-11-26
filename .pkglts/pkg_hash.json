@@ -76,7 +76,7 @@
     "./src/pkglts/rmtfile.py": [], 
     "./src/pkglts/templating.py": [], 
     "./src/pkglts/version.py": [
-        "LVkVML0UmGTce2wjePOf9+TWeRllfr8Xm3nr5VhqerdbC0G5cHy8vGPxqUEB/SKlz7WVgi5hIFM+5Pt+vBqTtg=="
+        "EyN82cRbGwoqvkDehw781hypaLoMQeiQ63Fo+njsMrzx3YyF0Hxvl9dMvGec8G0otpJcbABsuG0WAyCsnzWmXQ=="
     ], 
     "./src/pkglts/versioning.py": [], 
     "./tox.ini": [
