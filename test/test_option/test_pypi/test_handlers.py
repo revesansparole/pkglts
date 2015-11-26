@@ -17,6 +17,6 @@ def test_get_classifiers_find_version_classifiers():
 
 
 def test_badge():
-    pkg_cfg = dict(base={'pkgname': "pkg", 'owner': "moi"},
+    pkg_cfg = dict(base={'pkgname': "pkg", 'namespace': None, 'owner': "moi"},
                    github={'project': "project"})
     assert ".. image:" in badge("txt", pkg_cfg)
