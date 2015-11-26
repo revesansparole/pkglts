@@ -1,11 +1,9 @@
+from pkglts.option.base.handlers import pkg_full_name
 from pkglts.option.doc import fmt_badge
 
 
 def badge(txt, env):
-    del txt  # unused
-    pkgname = env['base']['pkgname']
-
-    url = "badge.fury.io/py/%s" % pkgname
+    url = "badge.fury.io/py/%s" % pkg_full_name(txt, env)
     img = url + ".svg"
     return fmt_badge(img, url, "PyPI version")
 
