@@ -19,7 +19,7 @@ def teardown_func():
 
 def test_installed_packages():
     pkgs = set(installed_packages())
-    assert "pkglts" in pkgs
+    assert "wheel" in pkgs
 
 
 @with_setup(setup_func, teardown_func)

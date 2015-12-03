@@ -7,7 +7,7 @@ from os import listdir, mkdir, walk
 from os.path import basename, exists, isdir
 
 from .file_management import get_hash, write_file
-from install_env.load_front_end import get_install_front_end
+from .install_env.load_front_end import get_install_front_end
 from .local import init_namespace_dir
 from .option_tools import get_user_permission
 from .rmtfile import get, ls

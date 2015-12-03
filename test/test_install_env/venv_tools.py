@@ -7,6 +7,22 @@ import sys
 from time import sleep
 
 
+def _activate(name):
+    """Internal function used to activate a virtualenv
+    """
+    if "win" in sys.platform:
+        pth = "%s/Scripts/activate_this.py" % name
+    else:
+        pth = "%s/bin/activate_this.py" % name
+
+    try:  # python27
+        execfile(pth, dict(__file__=pth))
+    except NameError:  # python3.x
+        with open(pth) as f:
+            code = compile(f.read(), pth, 'exec')
+            exec(code, dict(__file__=pth))
+
+
 def create_venv(name, mem):
     """Create a new virtualenv with given name and activate it
 
@@ -33,8 +49,7 @@ def create_venv(name, mem):
     mem["sys.path"] = tuple(sys.path)
     mem["os.environ['PATH']"] = str(os.environ["PATH"])
 
-    execfile("%s/Scripts/activate_this.py" % name,
-             dict(__file__="%s/Scripts/activate_this.py" % name))
+    _activate(name)
 
 
 def clear_venv(name, mem):

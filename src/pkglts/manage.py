@@ -32,6 +32,10 @@ pkglts_dir = ".pkglts"
 pkg_cfg_file = "pkg_cfg.json"
 pkg_hash_file = "pkg_hash.json"
 
+default_cfg = dict(_pkglts=dict(use_prompts=False,
+                                auto_install=True,
+                                install_front_end='stdout'))
+
 
 class FormattedString(str):
     """Small class to hold both formatted string and its template
@@ -55,11 +59,11 @@ def init_pkg(rep="."):
     if exists(pj(rep, pkglts_dir, pkg_cfg_file)):
         pkg_cfg = get_pkg_config(rep)
     else:
-        pkg_cfg = {}
-    if '_pkglts' not in pkg_cfg:
-        pkg_cfg['_pkglts'] = dict(use_prompts=False,
-                                  auto_install=True,
-                                  install_front_end='pip')
+        pkg_cfg = default_cfg
+    # if '_pkglts' not in pkg_cfg:
+    #     pkg_cfg['_pkglts'] = dict(use_prompts=False,
+    #                               auto_install=True,
+    #                               install_front_end='pip')
     write_pkg_config(pkg_cfg, rep)
 
     if not exists(pj(rep, pkglts_dir, pkg_hash_file)):
