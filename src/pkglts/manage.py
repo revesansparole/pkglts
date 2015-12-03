@@ -84,7 +84,7 @@ def get_pkg_config(rep="."):
 
     # format template entries
     handlers = {}  # use only default handlers
-    for name, cfg in tuple(pkg_cfg.items()):
+    for cfg in tuple(pkg_cfg.values()):
         for key, param in tuple(cfg.items()):
             if isinstance(param, string_type):
                 new_value = replace(param, handlers, pkg_cfg)
