@@ -4,6 +4,7 @@ from pkglts.install_env.stdout_front_end import install, installed_packages
 
 from .venv_tools import clear_venv, create_venv
 
+__test__ = False
 
 venv = "tyti_stdout"
 mem = {}

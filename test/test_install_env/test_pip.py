@@ -4,6 +4,7 @@ from pkglts.install_env.pip_front_end import install, installed_packages
 
 from .venv_tools import clear_venv, create_venv
 
+__test__ = False
 
 venv = "tyti_pip"
 mem = {}
