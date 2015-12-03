@@ -79,7 +79,7 @@ Documentation
 More documentation can be found on readthedocs_. If you just intend to use this package
 you can start with some tutorials_. However, if the core functionality are
 not sufficient and you want to be part of the development you might be interested
-with he developer_ section of the doc.
+with the developer_ section of the doc.
 
 
 .. _readthedocs: https://pkglts.readthedocs.org/en/latest

@@ -1,16 +1,13 @@
 """ Specific helper function for manage script
 """
 
-import imp
 from importlib import import_module
 import logging
 from os import listdir, mkdir, walk
 from os.path import basename, exists, isdir
-import pip
-from pip import get_installed_distributions
-from pip import main as pip_install
 
 from .file_management import get_hash, write_file
+from .install_env.load_front_end import get_install_front_end
 from .local import init_namespace_dir
 from .option_tools import get_user_permission
 from .rmtfile import get, ls
@@ -23,27 +20,28 @@ logger = logging.getLogger(__name__)
 tpl_src_name = "%skey, base.pkgname%s" % (opening_marker, closing_marker)
 
 
-def ensure_installed_packages(requirements, msg):
+def ensure_installed_packages(requirements, msg, pkg_cfg):
     """ Ensure all packages in requirements are installed.
 
     If not, ask user permission to install them.
 
     args:
-     - requirements (list of str): list of package names to pip install
+     - requirements (list of str): list of package names to install
                                    if needed
+     - pkg_cfg (dict of (str, dict)): package configuration
+
+    return:
+     - (bool): whether all required packages are installed or not
     """
-    pip.utils.pkg_resources = imp.reload(pip.utils.pkg_resources)
-    installed = set(p.project_name for p in get_installed_distributions())
-    to_install = set(requirements) - installed
+    ife = get_install_front_end(pkg_cfg["_pkglts"]["install_front_end"])
+    to_install = set(requirements) - set(ife.installed_packages())
     if len(to_install) > 0:
         print(msg)
         logger.warning("missing packages: " + ", ".join(to_install))
-        if get_user_permission("install"):
-            pip_install(['install'] + list(to_install))
-            logger.info("pip install" + ", ".join(to_install))
-            return True
-        else:
-            return False
+        for name in to_install:
+            ife.install(name)
+            logger.info("install %s" % name)
+
     return True
 
 
@@ -99,7 +97,7 @@ def update_opt(name, pkg_cfg=None):
 
     # find extra package requirements for setup
     msg = "this option requires some packages to setup"
-    if not ensure_installed_packages(opt_require.setup, msg):
+    if not ensure_installed_packages(opt_require.setup, msg, pkg_cfg):
         print("option installation stopped")
         return pkg_cfg
 
@@ -124,7 +122,7 @@ def update_opt(name, pkg_cfg=None):
 
     # find extra package requirements for dvlpt
     msg = "this option requires additional packages for developers"
-    ensure_installed_packages(opt_require.dvlpt, msg)
+    ensure_installed_packages(opt_require.dvlpt, msg, pkg_cfg)
 
     return pkg_cfg
 

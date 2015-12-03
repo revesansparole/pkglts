@@ -1,5 +1,6 @@
 from nose.tools import assert_raises
 
+from pkglts.manage import default_cfg
 from pkglts.manage_tools import update_opt
 
 
@@ -11,7 +12,8 @@ def test_non_existing_option_raises_warning():
 
 
 def test_option_fetch_parameter_list_from_config():
-    pkg_cfg = update_opt('base')
+    pkg_cfg = dict(default_cfg)
+    pkg_cfg = update_opt('base', pkg_cfg)
     assert 'base' in pkg_cfg
     cfg = pkg_cfg['base']
     assert 'pkgname' in cfg
@@ -19,20 +21,24 @@ def test_option_fetch_parameter_list_from_config():
 
 
 def test_option_handle_no_parameter_list_in_config():
-    pkg_cfg = update_opt('test', dict(base=None))
+    pkg_cfg = dict(default_cfg)
+    pkg_cfg['base'] = None
+    pkg_cfg = update_opt('test', pkg_cfg)
     assert 'test' in pkg_cfg
     assert len(pkg_cfg['test']) == 0
 
 
 def test_option_use_default_from_config():
-    pkg_cfg = update_opt('base')
+    pkg_cfg = dict(default_cfg)
+    pkg_cfg = update_opt('base', pkg_cfg)
     assert 'base' in pkg_cfg
     cfg = pkg_cfg['base']
     assert cfg['owner'] == 'moi'
 
 
 def test_option_already_defined_params_override_default_in_config():
-    pkg_cfg = update_opt('base')
+    pkg_cfg = dict(default_cfg)
+    pkg_cfg = update_opt('base', pkg_cfg)
     cfg = pkg_cfg['base']
     cfg['owner'] = "custom"
 
