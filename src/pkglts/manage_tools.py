@@ -40,7 +40,7 @@ def ensure_installed_packages(requirements, msg, pkg_cfg):
         logger.warning("missing packages: " + ", ".join(to_install))
         for name in to_install:
             ife.install(name)
-            logger.info("install %s" % name)
+            logger.info("install %s", name)
 
     return True
 
@@ -73,7 +73,7 @@ def update_opt(name, pkg_cfg=None):
      - name (str): name of option to add
      - pkg_cfg (dict of (str, dict)): package configuration parameters
     """
-    logger.info("update option %s" % name)
+    logger.info("update option %s", name)
 
     if pkg_cfg is None:
         pkg_cfg = {}
@@ -225,7 +225,7 @@ def clone_example(src_dir, tgt_dir, pkg_cfg, handlers):
             if (tgt_name.split(".")[0] != "_" and
                     tgt_name[-3:] not in ("pyc", "pyo")):
                 if exists(tgt_pth):
-                    logger.warning("conflict '%s'" % tgt_name)
+                    logger.warning("conflict '%s'", tgt_name)
                 else:
                     content = replace(get(src_pth), handlers, pkg_cfg)
                     write_file(tgt_pth, content)

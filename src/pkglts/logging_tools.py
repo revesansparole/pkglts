@@ -1,7 +1,7 @@
 import logging
 import logging.handlers
-from os import remove, rename
-from os.path import exists
+# from os import remove, rename
+# from os.path import exists
 
 
 fmt = logging.Formatter('%(asctime)s %(levelname)s (%(name)s): %(message)s')

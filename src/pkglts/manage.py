@@ -106,7 +106,7 @@ def write_pkg_config(pkg_cfg, rep="."):
     """
     logger.info("write package config")
     cfg = dict(pkg_cfg)
-    for name, params in tuple(cfg.items()):
+    for params in tuple(cfg.values()):
         for key, param in tuple(params.items()):
             if isinstance(param, FormattedString):
                 params[key] = param.template
@@ -289,7 +289,7 @@ def regenerate(pkg_cfg, target=".", overwrite=False):
 
     if len(invalids) > 0:
         for param in invalids:
-            logger.warning("param %s is not valid" % param)
+            logger.warning("param %s is not valid", param)
 
         return False
 
@@ -324,12 +324,12 @@ def regenerate(pkg_cfg, target=".", overwrite=False):
     # copy all missing files for options
     # regenerating pkglts divs on the way
     for option in installed_options(pkg_cfg):
-        logger.info("cloning option '%s'" % option)
+        logger.info("cloning option '%s'", option)
         error_files = clone_base_option(option, pkg_cfg, handlers, target,
                                         overwrite_file)
         if len(error_files) > 0:
             for pth in error_files:
-                logger.warning("unable to resolve conflict in '%s'" % pth)
+                logger.warning("unable to resolve conflict in '%s'", pth)
 
             return False
 
