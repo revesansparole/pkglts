@@ -2,7 +2,7 @@
     "./.coverage": [], 
     "./.coveragerc": [], 
     "./.gitignore": [
-        "T01642p1keWZOXsf1vVwm0gLBK/jmAfZaagpRyRfnRICyeGUk5ruc/Rb6xNegD84OzhAo+SVpSjy6soX+5Oeqw=="
+        "0Kgn6jSwJAzZASIgRdsWj4/eDYyv8CtUFFs8K6zLWW6D0HddxSLWyqAK8OLfzDIryru4y2lNP/eT9RKVrkhA+Q=="
     ], 
     "./.landscape.yml": [], 
     "./.pypirc": [
@@ -67,6 +67,10 @@
     ], 
     "./src/pkglts/file_management.py": [], 
     "./src/pkglts/github.py": [], 
+    "./src/pkglts/install_env/__init__.py": [], 
+    "./src/pkglts/install_env/load_front_end.py": [], 
+    "./src/pkglts/install_env/pip_front_end.py": [], 
+    "./src/pkglts/install_env/stdout_front_end.py": [], 
     "./src/pkglts/local.py": [], 
     "./src/pkglts/logging_tools.py": [], 
     "./src/pkglts/manage.py": [], 
@@ -76,7 +80,7 @@
     "./src/pkglts/rmtfile.py": [], 
     "./src/pkglts/templating.py": [], 
     "./src/pkglts/version.py": [
-        "EyN82cRbGwoqvkDehw781hypaLoMQeiQ63Fo+njsMrzx3YyF0Hxvl9dMvGec8G0otpJcbABsuG0WAyCsnzWmXQ=="
+        "41K4oI7NENqrCfAvSk//u9gXtnHNXft3xj5CCL0S80ZsJ3ulqnCIVLodAtthbtbBwWA2c7CjwQJrNwg6C8DYXA=="
     ], 
     "./src/pkglts/versioning.py": [], 
     "./tox.ini": [

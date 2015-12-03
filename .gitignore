@@ -2,7 +2,7 @@
 *.py[cod]
 
 # pkglts files
-.pkglts
+.pkglts/log*
 
 # Packages
 *.egg

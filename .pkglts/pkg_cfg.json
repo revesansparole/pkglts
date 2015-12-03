@@ -1,7 +1,7 @@
 {
     "_pkglts": {
-        "auto_install": true,
-        "install_front_end": "pip",
+        "auto_install": true, 
+        "install_front_end": "pip", 
         "use_prompts": false
     }, 
     "base": {
@@ -56,6 +56,6 @@
     "version": {
         "major": 0, 
         "minor": 1, 
-        "post": 9
+        "post": 10
     }
 }
