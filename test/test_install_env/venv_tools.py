@@ -1,3 +1,4 @@
+import os
 from os import mkdir
 from os.path import exists
 from shutil import rmtree
@@ -6,18 +7,8 @@ import sys
 from time import sleep
 
 
-def activate_venv(venv_dir):
-    """Activate a virtualenv.
-
-    args:
-     - venv_dir (str): root directory of virtual env
-    """
-    execfile("%s/Scripts/activate_this.py" % venv_dir,
-             dict(__file__="%s/Scripts/activate_this.py" % venv_dir))
-
-
-def create_venv(name):
-    """Create a new virtualenv with given name
+def create_venv(name, mem):
+    """Create a new virtualenv with given name and activate it
 
     .. warning: create a directory with given name in local dir
 
@@ -25,6 +16,7 @@ def create_venv(name):
 
     args:
      - name (str): name of virtualenv to create
+     - mem (dict): a place to store values that will be modified
     """
     try:
         if exists(name):
@@ -37,13 +29,29 @@ def create_venv(name):
 
     call("virtualenv %s" % name, shell=True)
 
+    # Save state of path
+    mem["sys.path"] = tuple(sys.path)
+    mem["os.environ['PATH']"] = str(os.environ["PATH"])
 
-def clear_venv(name):
+    execfile("%s/Scripts/activate_this.py" % name,
+             dict(__file__="%s/Scripts/activate_this.py" % name))
+
+
+def clear_venv(name, mem):
     """Remove virtualenv from existence.
 
     args:
-         - name (str): name of virtualenv
+     - name (str): name of virtualenv
+     - mem (dict): a place of values that where modified
     """
+    # Restore state
+    del sys.path[:]
+    for item in mem["sys.path"]:
+        sys.path.append(item)
+
+    os.environ["PATH"] = str(mem["os.environ['PATH']"])
+
+    # remove directory
     for i in range(5):
         if exists(name):
             try:

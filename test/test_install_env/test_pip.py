@@ -2,18 +2,19 @@ from nose.tools import with_setup
 
 from pkglts.install_env.pip_front_end import install, installed_packages
 
-from .venv_tools import activate_venv, clear_venv, create_venv
+from .venv_tools import clear_venv, create_venv
 
 
 venv = "tyti_pip"
+mem = {}
 
 
 def setup_func():
-    create_venv(venv)
+    create_venv(venv, mem)
 
 
 def teardown_func():
-    clear_venv(venv)
+    clear_venv(venv, mem)
 
 
 def test_installed_packages():
@@ -24,7 +25,6 @@ def test_installed_packages():
 @with_setup(setup_func, teardown_func)
 def test_install():
     # create virtualenv
-    activate_venv(venv)
     assert "my-first-p" not in installed_packages()
 
     # install local wheel
