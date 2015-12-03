@@ -38,13 +38,10 @@ def ensure_installed_packages(requirements, msg, pkg_cfg):
     if len(to_install) > 0:
         print(msg)
         logger.warning("missing packages: " + ", ".join(to_install))
-        if get_user_permission("install"):
-            for name in to_install:
-                ife.install(name)
-                logger.info("install %s" % name)
-            return True
-        else:
-            return False
+        for name in to_install:
+            ife.install(name)
+            logger.info("install %s" % name)
+
     return True
 
 
