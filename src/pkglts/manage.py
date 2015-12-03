@@ -15,7 +15,7 @@ from .local import load_all_handlers, installed_options
 from .manage_tools import (check_option_parameters, package_hash_keys,
                            clone_base_option, clone_example, regenerate_pkg,
                            update_opt)
-from .option_tools import get_user_permission
+from .option_tools import edit_option_parameters, get_user_permission
 from .rmtfile import ls
 from .templating import replace
 from .versioning import get_github_version, get_local_version
@@ -237,7 +237,7 @@ def edit_option(name, pkg_cfg):
     if name not in pkg_cfg:
         raise UserWarning("Option '%s' seems not to be installed" % name)
 
-    print("edit pkg_cfg.json file by hand instead")
+    pkg_cfg = edit_option_parameters(name, pkg_cfg)
     return pkg_cfg
     # return update_opt(name, pkg_cfg)
 

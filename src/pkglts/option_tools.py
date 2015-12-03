@@ -112,3 +112,20 @@ def ask_arg(name, pkg_cfg=None, default=None, extra=None):
         if val is None:
             val = default
         return _ask_single_arg(name, val)
+
+
+def edit_option_parameters(name, pkg_cfg):
+    """Prompt user for parameters associated with option.
+
+    args:
+     - name (str): option name
+     - pkg_cfg (dict of (str, dict)): package configuration file
+
+    return:
+     - pkg_cfg (dict of (str, dict)): new package configuration
+    """
+    pkg_cfg = dict(pkg_cfg)
+    cfg = pkg_cfg[name]
+    for key, val in tuple(cfg.items()):
+        nval = _ask_single_arg(key, val)  # TODO problem with param type
+        raise NotImplementedError
