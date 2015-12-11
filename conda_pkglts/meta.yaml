@@ -1,0 +1,19 @@
+package:
+  name: pkglts
+  version: "0.1.10"
+
+source:
+  git_url: ../
+
+requirements:
+  build:
+    - python
+    - setuptools
+
+  run:
+    - python
+
+about:
+  summary: "Building packages with long term support"
+  license: "CeCILL-C"
+  license_file: LICENSE

@@ -56,7 +56,7 @@ setup(
     author="revesansparole",
     author_email='revesansparole@gmail.com',
     url='',
-    license="mit",
+    license="CeCILL-C",
     zip_safe=False,
 
     packages=find_packages('src'),
