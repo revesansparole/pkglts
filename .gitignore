@@ -39,9 +39,4 @@ lib64
 # }}
 
 # user defined
-example/pkg_tata
-example/venv_toto
-example/wheels
-try
-feature_list.txt
 
