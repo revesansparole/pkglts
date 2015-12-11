@@ -19,6 +19,8 @@ logger = logging.getLogger(__name__)
 
 tpl_src_name = "%skey, base.pkgname%s" % (opening_marker, closing_marker)
 
+non_bin_ext = ("", ".py", ".rst", ".bat", ".sh", ".yml", ".cfg", ".ini", ".no")
+
 
 def ensure_installed_packages(requirements, msg, pkg_cfg):
     """ Ensure all packages in requirements are installed.
@@ -163,7 +165,7 @@ def clone_base_option_dir(src_dir, tgt_dir, pkg_cfg, handlers, overwrite_file):
         else:
             fname, ext = splitext(tgt_name)
             if fname != "_":
-                if ext in (".py", ".rst", ".bat", ".sh"):
+                if ext in non_bin_ext:
                     if exists(tgt_pth):
                         if overwrite_file.get(tgt_pth, True):
                             src_cnt = get(src_pth)
@@ -230,13 +232,12 @@ def clone_example(src_dir, tgt_dir, pkg_cfg, handlers):
 
             clone_example(src_pth, tgt_pth, pkg_cfg, handlers)
         else:
-            if (tgt_name.split(".")[0] != "_" and
-                    tgt_name[-3:] not in ("pyc", "pyo")):
+            fname, ext = splitext(tgt_name)
+            if fname != "_" and ext not in (".pyc", ".pyo"):
                 if exists(tgt_pth):
                     logger.warning("conflict '%s'", tgt_name)
                 else:
-                    ext = splitext(tgt_pth)[1]
-                    if ext in (".py", ".rst", ".bat", ".sh"):
+                    if ext in non_bin_ext:
                         content = replace(get(src_pth), handlers, pkg_cfg)
                         write_file(tgt_pth, content)
                     else:

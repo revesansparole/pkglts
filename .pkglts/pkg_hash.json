@@ -29,7 +29,6 @@
     "./doc/conf.py": [
         "XqcIE4bSktQ75Txt4ZVT3mw9pGeml+Z7LWZVde0yAlYlYB+3T5B9YQGIeLbOFiLZ5bQCvqmgEapGuuEgP6hWdw=="
     ], 
-    "./doc/conf.pyc": [], 
     "./doc/contributing.rst": [], 
     "./doc/history.rst": [], 
     "./doc/index.rst": [], 
@@ -54,21 +53,18 @@
         "vmiIOMqGhuXJBom/KrWFzvETfJmbSMcLkvZ6XDTcFWl7XRHJgu1tcb4eHn97TgcziEqpfD96M5qO0DV3z3S+CQ=="
     ], 
     "./setup.cfg": [
-        "YNEmRwupHoiN6etN9yAOyeEuUNJf05Y2LUgSK5HvXQGMzctlkkeyr8gun0AwN0IfemNKHu6HSSHsYrbBJ/Vz3Q=="
+        "Li7jVzsz+OmF22LUJUcVJUWuzDlfsjH1zd7LiTTJQzAmProBY+Q4ZAvV62bbdtmSXP6X4+OJdLyvtHQc3qbMBw=="
     ], 
     "./setup.py": [
         "QXBMeRFX2G7V6nfu07XFUazI5jTUEH6AYLPs3hK8LLuJAUq42nBAWI7ka8gOIRjb2ugEmEK8S1xjf9duuFbI0A=="
     ], 
-    "./setup.pyc": [], 
     "./src/pkglts/__init__.py": [
         "bXi4YRtInDLkaTvGi4V/ZIZpKXGCIgIw/Qm7wX5YZ+tM5kkkAAGCzzuDhxJDzcpoWKBE1UxDj7mT+40YH1DZQA==", 
         "fIn+GWAvhWfY/9NV/Sw6VXI4UIvx1OTgGxXQ1U5+9JFQ4vhuETzkaQvz8W4M9rMDYlL0vAeRmP2p2DyMgcvb9A=="
     ], 
-    "./src/pkglts/__init__.pyc": [], 
     "./src/pkglts/data_access.py": [
         "f1G0f/Qo2xa8rNC7B7eA9YGU6Wqtm5HWB6jT1Klg2c6VV4zSdqqg6yno95BrFdMhSnx4l0Mh3hfNLBkqEYBLlw=="
     ], 
-    "./src/pkglts/data_access.pyc": [], 
     "./src/pkglts/file_management.py": [], 
     "./src/pkglts/github.py": [], 
     "./src/pkglts/install_env/__init__.py": [], 
@@ -86,9 +82,8 @@
     "./src/pkglts/version.py": [
         "41K4oI7NENqrCfAvSk//u9gXtnHNXft3xj5CCL0S80ZsJ3ulqnCIVLodAtthbtbBwWA2c7CjwQJrNwg6C8DYXA=="
     ], 
-    "./src/pkglts/version.pyc": [], 
     "./src/pkglts/versioning.py": [], 
     "./tox.ini": [
-        "RRkTdOV7lDydkHiOwGCGvIQMo3WPywglpgilZuYbb8AoM5o0Pcywltz6BDuIweTurzWBZaEZ0r1+7hlBk9Gtyg=="
+        "vVWIpwwtWUMv9A2BuNhJMdEapVl0sQJO/Y6gpb9Q+Uz9IOnZUtqetNDV79vRhZV65PKYaDoirxqhXssoWeCP6A=="
     ]
 }
