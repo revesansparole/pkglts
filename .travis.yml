@@ -21,8 +21,3 @@ after_success:
   coveralls
 
 # }}
-
-# blacklist
-branches:
-  except:
-    - wip_*

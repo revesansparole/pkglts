@@ -1,4 +1,4 @@
 option = ['base']
-setup = ['lice']
+setup = []
 install = []
-dvlpt = ['lice']
+dvlpt = []

@@ -22,17 +22,18 @@ def get_data_dir():
     return pkg_data_dir
 
 
-def get(file_name):
+def get(file_name, mode='r'):
     """ Retrieve the content of a given filename
     located in the data part of this package.
 
     args:
      - filename (str): name of the file to read
+     - mode (str): mode to use to read the file either 'r' or 'rb'
 
     return:
      - (str): content of the file red in 'r' mode
     """
-    with open(pj(pkg_data_dir, file_name), 'r') as f:
+    with open(pj(pkg_data_dir, file_name), mode) as f:
         cnt = f.read()
 
     return cnt
