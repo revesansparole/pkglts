@@ -1,5 +1,5 @@
-{{ project }}
-Copyright (C) {{ year }}  {{ organization }}
+{{key, license.project}}
+Copyright (C) {{key, license.year}}  {{key, license.organization}}
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

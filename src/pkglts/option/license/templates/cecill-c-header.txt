@@ -1,4 +1,4 @@
-Copyright or © or Copr. {{ organization }} ({{ year }})
+Copyright or ï¿½ or Copr. {{key, license.organization}} ({{key, license.year}})
 
 
 This software is governed by the CeCILL-C license under French law and

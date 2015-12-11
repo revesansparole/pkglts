@@ -1,6 +1,6 @@
-{{ project }} (c) {{ year }} by {{ organization }}
+{{key, license.project}} (c) {{key, license.year}} by {{key, license.organization}}
 
-{{ project }} is licensed under a
+{{key, license.project}} is licensed under a
 Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
 
 You should have received a copy of the license along with this
