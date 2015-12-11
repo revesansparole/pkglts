@@ -19,7 +19,8 @@ logger = logging.getLogger(__name__)
 
 tpl_src_name = "%skey, base.pkgname%s" % (opening_marker, closing_marker)
 
-non_bin_ext = ("", ".py", ".rst", ".bat", ".sh", ".yml", ".cfg", ".ini", ".no")
+non_bin_ext = ("", ".bat", ".cfg", ".ini", ".no", ".py", ".rst", ".sh",
+               ".txt", ".yml")
 
 
 def ensure_installed_packages(requirements, msg, pkg_cfg):
@@ -142,6 +143,9 @@ def clone_base_option_dir(src_dir, tgt_dir, pkg_cfg, handlers, overwrite_file):
     for src_name, is_dir in ls(src_dir):
         src_pth = src_dir + "/" + src_name
         tgt_name = replace(src_name, handlers, pkg_cfg)
+        if tgt_name.endswith(".tpl"):
+            tgt_name = tgt_name[:-4]
+
         tgt_pth = tgt_dir + "/" + tgt_name
         # handle namespace
         if (is_dir and basename(src_dir) == 'src' and
@@ -224,6 +228,9 @@ def clone_example(src_dir, tgt_dir, pkg_cfg, handlers):
         src_pth = src_dir + "/" + src_name
 
         tgt_name = replace(src_name, handlers, pkg_cfg)
+        if tgt_name.endswith(".tpl"):
+            tgt_name = tgt_name[:-4]
+
         tgt_pth = tgt_dir + "/" + tgt_name
 
         if is_dir:
