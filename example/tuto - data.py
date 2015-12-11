@@ -5,7 +5,8 @@ from tuto_tools import initialize, rg
 
 initialize()
 
-from pkglts.manage import add_option, get_pkg_config, write_pkg_config
+from pkglts.manage import (add_option, get_pkg_config, install_example_files,
+                           write_pkg_config)
 
 pkg_cfg = get_pkg_config()
 pkg_cfg = add_option('pysetup', pkg_cfg)
@@ -28,5 +29,8 @@ for name in ("toto.txt", "titi.txt", "sub/tata.txt"):
     with open(pth, 'w') as f:
         f.write("lorem ipsum\n")
 
-call("python setup.py install", shell=True)
-call("python ../test_data.py", shell=True)
+# call("python setup.py install", shell=True)
+# call("python ../test_data.py", shell=True)
+install_example_files("data", pkg_cfg)
+
+call("nosetests", shell=True)
