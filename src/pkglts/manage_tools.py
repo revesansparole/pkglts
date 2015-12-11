@@ -4,13 +4,13 @@
 from importlib import import_module
 import logging
 from os import listdir, mkdir, walk
-from os.path import basename, exists, isdir
+from os.path import basename, exists, isdir, splitext
 
+from .data_access import get, ls
 from .file_management import get_hash, write_file
 from .install_env.load_front_end import get_install_front_end
 from .local import init_namespace_dir
 from .option_tools import get_user_permission
-from .rmtfile import get, ls
 from .templating import (closing_marker, get_comment_marker, opening_marker,
                          replace, swap_divs)
 
@@ -64,7 +64,7 @@ def check_option_parameters(name, pkg_cfg):
         return []
 
 
-def update_opt(name, pkg_cfg=None):
+def update_opt(name, pkg_cfg):
     """ Update an option of this package. If the option
     does not exists yet, add it first.
     See the list of available option online
@@ -74,9 +74,6 @@ def update_opt(name, pkg_cfg=None):
      - pkg_cfg (dict of (str, dict)): package configuration parameters
     """
     logger.info("update option %s", name)
-
-    if pkg_cfg is None:
-        pkg_cfg = {}
 
     # test existence of option
     try:
@@ -164,23 +161,34 @@ def clone_base_option_dir(src_dir, tgt_dir, pkg_cfg, handlers, overwrite_file):
                                        overwrite_file)
             error_files.extend(ef)
         else:
-            if (tgt_name.split(".")[0] != "_" and
-                    tgt_name[-3:] not in ("pyc", "pyo")):
-                if exists(tgt_pth):
-                    if overwrite_file.get(tgt_pth, True):
-                        src_cnt = get(src_pth)
-                        with open(tgt_pth, 'r') as f:
-                            tgt_cnt = f.read()
+            fname, ext = splitext(tgt_name)
+            if fname != "_":
+                if ext in (".py", ".rst", ".bat", ".sh"):
+                    if exists(tgt_pth):
+                        if overwrite_file.get(tgt_pth, True):
+                            src_cnt = get(src_pth)
+                            with open(tgt_pth, 'r') as f:
+                                tgt_cnt = f.read()
 
-                        content = swap_divs(src_cnt, tgt_cnt,
-                                            get_comment_marker(src_pth))
-                        if content is None:
-                            error_files.append(tgt_pth)
-                        else:
-                            write_file(tgt_pth, content)
-                else:
-                    content = get(src_pth)
-                    write_file(tgt_pth, content)
+                            content = swap_divs(src_cnt, tgt_cnt,
+                                                get_comment_marker(src_pth))
+                            if content is None:
+                                error_files.append(tgt_pth)
+                            else:
+                                write_file(tgt_pth, content)
+                    else:
+                        content = get(src_pth)
+                        write_file(tgt_pth, content)
+                else:  # binary file
+                    if exists(tgt_pth):
+                        if overwrite_file.get(tgt_pth, True):
+                            content = get(src_pth, 'rb')
+                            with open(tgt_pth, 'wb') as fw:
+                                fw.write(content)
+                    else:
+                        content = get(src_pth, 'rb')
+                        with open(tgt_pth, 'wb') as fw:
+                            fw.write(content)
 
     return error_files
 
@@ -197,10 +205,10 @@ def clone_base_option(option, pkg_cfg, handlers, target, overwrite_file):
      - handlers (dict of func): associate keys to handler functions
      - target (str): path to copy files to
     """
-    if (option, True) not in ls("pkglts_data/base"):
+    if (option, True) not in ls("base"):
         return []  # nothing to do
 
-    option_root = "pkglts_data/base/%s" % option
+    option_root = "base/%s" % option
 
     return clone_base_option_dir(option_root, target, pkg_cfg, handlers,
                                  overwrite_file)
@@ -227,8 +235,14 @@ def clone_example(src_dir, tgt_dir, pkg_cfg, handlers):
                 if exists(tgt_pth):
                     logger.warning("conflict '%s'", tgt_name)
                 else:
-                    content = replace(get(src_pth), handlers, pkg_cfg)
-                    write_file(tgt_pth, content)
+                    ext = splitext(tgt_pth)[1]
+                    if ext in (".py", ".rst", ".bat", ".sh"):
+                        content = replace(get(src_pth), handlers, pkg_cfg)
+                        write_file(tgt_pth, content)
+                    else:
+                        content = get(src_pth, 'rb')
+                        with open(tgt_pth, 'wb') as fw:
+                            fw.write(content)
 
 
 def package_hash_keys(target):

@@ -32,6 +32,12 @@ def test_manage_update_pkg_do_not_change_installed_options():
             assert pkg_cfg['base'] == mem
 
 
+def test_manage_add_opt_raise_error_if_already_installed():
+    pkg_cfg = dict(default_cfg)
+    pkg_cfg = add_option("base", pkg_cfg)
+    assert_raises(UserWarning, lambda: add_option('base', pkg_cfg))
+
+
 def test_manage_update_opt_raise_error_if_not_already_installed():
     pkg_cfg = dict(default_cfg)
     assert_raises(UserWarning, lambda: update_option('base', pkg_cfg))
