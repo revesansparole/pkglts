@@ -32,4 +32,9 @@ def install(name):
     p = Popen(["conda", "install", name], stdin=PIPE, stdout=PIPE, stderr=PIPE)
     p.communicate("")
     rc = p.returncode
-    return rc == 0
+
+    if rc == 0:
+        return True
+    else:  # try to use pip if conda install fail
+        from .pip_front_end import install as pip_install
+        return pip_install(name)
