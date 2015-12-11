@@ -1,6 +1,6 @@
 package:
   name: {{base.pkg_full_name, }}
-  version: "{{key, version.major}}.{{key, version.minor}}"
+  version: "{{key, version.major}}.{{key, version.minor}}.{{key, version.post}}"
 
 source:
   git_url: ../
