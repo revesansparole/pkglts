@@ -40,7 +40,6 @@ def test_manage_init_create_pkg_hash():
 
 @with_setup(setup, teardown)
 def test_manage_init_protect_pkglts_dir_from_modif():
-    print "list", listdir(pj(tmp_dir, ".pkglts"))
     assert "regenerate.no" in listdir(pj(tmp_dir, ".pkglts"))
     assert "clean.no" in listdir(pj(tmp_dir, ".pkglts"))
 
