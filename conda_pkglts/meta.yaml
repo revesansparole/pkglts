@@ -15,5 +15,5 @@ requirements:
 
 about:
   summary: "Building packages with long term support"
-  license: "mit"
+  license: "CeCILL-C"
   license_file: LICENSE
