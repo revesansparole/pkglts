@@ -24,6 +24,9 @@
     "./README.rst": [
         "wMXdUwSb8LEn/nklFbo4g3CQm4t0wCYm36XtUB9wnG6YSqvBRVNTwCfNdrWdwTLykGcUUYCModPaw+bDTlQuGg=="
     ], 
+    "./conda_pkglts/bld.bat": [], 
+    "./conda_pkglts/build.sh": [], 
+    "./conda_pkglts/meta.yaml": [], 
     "./doc/Makefile": [], 
     "./doc/authors.rst": [], 
     "./doc/conf.py": [
