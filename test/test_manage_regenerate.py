@@ -4,15 +4,16 @@ from os import remove
 from os.path import exists
 from os.path import join as pj
 
-from pkglts.manage import (get_pkg_config, init_pkg, regenerate,
-                           write_pkg_config)
+from pkglts.manage import (add_option, default_cfg, get_pkg_config, init_pkg,
+                           regenerate, write_pkg_config)
 
 from .small_tools import ensure_created, rmdir
 
 
 tmp_dir = 'toto_mg_rg'
 init_file = pj(tmp_dir, "src", "toto", "__init__.py")
-pkg_cfg = dict(base={'pkgname': 'toto', 'namespace': None})
+pkg_cfg = dict(default_cfg)
+pkg_cfg = add_option("base", pkg_cfg)
 
 
 def addendum():
@@ -29,6 +30,9 @@ def addendum():
 
 def setup():
     ensure_created(tmp_dir)
+    init_pkg(tmp_dir)
+    pkg_cfg['base']['pkgname'] = 'toto'
+    regenerate(pkg_cfg, tmp_dir)
 
 
 def teardown():
@@ -43,10 +47,13 @@ def test_regenerate_pass():
 
 
 @with_setup(setup, teardown)
-def test_regenerate_handle_conflicts_keep():
-    init_pkg(tmp_dir)
-    regenerate(pkg_cfg, tmp_dir)
+def test_regenerate_check_pkg_cfg_validity():
+    pkg_cfg['base']['pkgname'] = '1toto'
+    assert not regenerate(pkg_cfg, tmp_dir)
 
+
+@with_setup(setup, teardown)
+def test_regenerate_handle_conflicts_keep():
     with open(init_file, 'w') as f:
         f.write("modified")
 
@@ -60,8 +67,6 @@ def test_regenerate_handle_conflicts_keep():
 
 @with_setup(setup, teardown)
 def test_regenerate_handle_conflicts_overwrite():
-    init_pkg(tmp_dir)
-    regenerate(pkg_cfg, tmp_dir)
     addendum()
 
     with mock.patch('pkglts.manage.get_user_permission',
@@ -75,8 +80,6 @@ def test_regenerate_handle_conflicts_overwrite():
 
 @with_setup(setup, teardown)
 def test_regenerate_handle_global_overwrite():
-    init_pkg(tmp_dir)
-    regenerate(pkg_cfg, tmp_dir)
     addendum()
 
     regenerate(pkg_cfg, tmp_dir, overwrite=True)
@@ -88,8 +91,6 @@ def test_regenerate_handle_global_overwrite():
 
 @with_setup(setup, teardown)
 def test_regenerate_new_files_do_not_generate_conflicts():
-    init_pkg(tmp_dir)
-    regenerate(pkg_cfg, tmp_dir)
     new_pth = pj(tmp_dir, "src", "toto", "new_file.py")
     with open(new_pth, 'w') as f:
         f.write("txt = 'addendum'")
@@ -104,8 +105,6 @@ def test_regenerate_new_files_do_not_generate_conflicts():
 
 @with_setup(setup, teardown)
 def test_regenerate_remove_user_files_do_not_generate_conflicts():
-    init_pkg(tmp_dir)
-    regenerate(pkg_cfg, tmp_dir)
     new_pth = pj(tmp_dir, "src", "toto", "new_file.py")
     with open(new_pth, 'w') as f:
         f.write("txt = 'addendum'")
@@ -119,9 +118,21 @@ def test_regenerate_remove_user_files_do_not_generate_conflicts():
 
 
 @with_setup(setup, teardown)
+def test_regenerate_fail_if_permanent_templated_section_has_been_modified():
+    with open(init_file, 'r') as f:
+        lines = f.readlines()
+
+    # lines.insert(1, "a = 1")
+    del lines[2:]
+
+    with open(init_file, 'w') as f:
+        f.write("\n".join(lines))
+
+    assert not regenerate(pkg_cfg, tmp_dir, overwrite=True)
+
+
+@with_setup(setup, teardown)
 def test_regenerate_do_not_touch_pkglts_cfg_files():
-    init_pkg(tmp_dir)
-    regenerate(pkg_cfg, tmp_dir)
     new_pth = pj(tmp_dir, "src", "toto", "new_file.py")
     with open(new_pth, 'w') as f:
         f.write("{{key, base.pkgname}}")

@@ -52,8 +52,8 @@ def init_pkg(rep="."):
     logger.info("init package")
 
     for name in ("regenerate.no", "clean.no"):
-        if not exists(pj(pkglts_dir, name)):
-            with open(pj(pkglts_dir, name), 'w') as f:
+        if not exists(pj(rep, pkglts_dir, name)):
+            with open(pj(rep, pkglts_dir, name), 'w') as f:
                 f.write("")
 
     if exists(pj(rep, pkglts_dir, pkg_cfg_file)):
