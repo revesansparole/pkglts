@@ -1,5 +1,4 @@
 {
-    "./.coverage": [], 
     "./.coveragerc": [], 
     "./.gitignore": [
         "Kn2lOmKMN+jefzJc3YLftmeAltG5xE+CwyhMsENJrqWpHFiqNVqsMM2l6MEBciyN5J9zyAsbdn6dcUyzRcw+jg=="
@@ -51,7 +50,6 @@
         "+0rCsgUH/i+KS0cdBXkd+wTjsLEKYPrCtkvYOwnMHfBQ6mPpCfYE3yGYotUl+B+IuTXSVKbL283hOpI+3DbwiA=="
     ], 
     "./entry_points.json": [], 
-    "./feature_list.txt": [], 
     "./requirements.txt": [
         "AWuoxM/eZa+Zy1+ouKN+Lrc/SBs640mRZm3y4E/rbAOGZuvR7CtvYjlndWAzxwLd5fQj99R6tu0YJ/9TeDcx9w=="
     ], 
@@ -61,6 +59,14 @@
     "./setup.py": [
         "O/aEf+6kissSsIo2KjC/4d3nqbAtDtgsRPBQMNzXqhxq4jp5FzADH1nrtVDqgLk/TS66tWIwH//gUDP7vAeZBg=="
     ], 
+    "./src/pkglts.egg-info/PKG-INFO": [
+        "Lqb49Dm+4RX/EJSPxTawqoMofttyywQjGlZNRy3MsB8gHxlmUWycOy5/EhwUmElvLkLtiMup5Gk+xdgPrAk6EA=="
+    ], 
+    "./src/pkglts.egg-info/SOURCES.txt": [], 
+    "./src/pkglts.egg-info/dependency_links.txt": [], 
+    "./src/pkglts.egg-info/entry_points.txt": [], 
+    "./src/pkglts.egg-info/not-zip-safe": [], 
+    "./src/pkglts.egg-info/top_level.txt": [], 
     "./src/pkglts/__init__.py": [
         "bXi4YRtInDLkaTvGi4V/ZIZpKXGCIgIw/Qm7wX5YZ+tM5kkkAAGCzzuDhxJDzcpoWKBE1UxDj7mT+40YH1DZQA==", 
         "fIn+GWAvhWfY/9NV/Sw6VXI4UIvx1OTgGxXQ1U5+9JFQ4vhuETzkaQvz8W4M9rMDYlL0vAeRmP2p2DyMgcvb9A=="
@@ -87,6 +93,6 @@
     ], 
     "./src/pkglts/versioning.py": [], 
     "./tox.ini": [
-        "vVWIpwwtWUMv9A2BuNhJMdEapVl0sQJO/Y6gpb9Q+Uz9IOnZUtqetNDV79vRhZV65PKYaDoirxqhXssoWeCP6A=="
+        "fxhy5XhSjaI/vAXAzRyLg5BszezPIcjJsTlQcq0R5bw9m7m/pTAi0ZxL2DgNdJ/cJD7bAhUcz8ulC6nAQjtHkQ=="
     ]
 }
