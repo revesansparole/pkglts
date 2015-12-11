@@ -4,13 +4,13 @@
 from importlib import import_module
 import logging
 from os import listdir, mkdir, walk
-from os.path import basename, exists, isdir
+from os.path import basename, exists, isdir, splitext
 
+from .data_access import get, ls
 from .file_management import get_hash, write_file
 from .install_env.load_front_end import get_install_front_end
 from .local import init_namespace_dir
 from .option_tools import get_user_permission
-from .rmtfile import get, ls
 from .templating import (closing_marker, get_comment_marker, opening_marker,
                          replace, swap_divs)
 
@@ -197,10 +197,10 @@ def clone_base_option(option, pkg_cfg, handlers, target, overwrite_file):
      - handlers (dict of func): associate keys to handler functions
      - target (str): path to copy files to
     """
-    if (option, True) not in ls("pkglts_data/base"):
+    if (option, True) not in ls("base"):
         return []  # nothing to do
 
-    option_root = "pkglts_data/base/%s" % option
+    option_root = "base/%s" % option
 
     return clone_base_option_dir(option_root, target, pkg_cfg, handlers,
                                  overwrite_file)
@@ -227,8 +227,14 @@ def clone_example(src_dir, tgt_dir, pkg_cfg, handlers):
                 if exists(tgt_pth):
                     logger.warning("conflict '%s'", tgt_name)
                 else:
-                    content = replace(get(src_pth), handlers, pkg_cfg)
-                    write_file(tgt_pth, content)
+                    ext = splitext(tgt_pth)[1]
+                    if ext in (".py", ".rst", ".bat", ".sh"):
+                        content = replace(get(src_pth), handlers, pkg_cfg)
+                        write_file(tgt_pth, content)
+                    else:
+                        content = get(src_pth, 'rb')
+                        with open(tgt_pth, 'wb') as fw:
+                            fw.write(content)
 
 
 def package_hash_keys(target):

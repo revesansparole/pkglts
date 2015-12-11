@@ -11,12 +11,12 @@ from os.path import exists, splitext
 from os.path import join as pj
 from shutil import rmtree
 
+from .data_access import ls
 from .local import load_all_handlers, installed_options
 from .manage_tools import (check_option_parameters, package_hash_keys,
                            clone_base_option, clone_example, regenerate_pkg,
                            update_opt)
 from .option_tools import get_user_permission
-from .rmtfile import ls
 from .templating import replace
 from .versioning import get_github_version, get_local_version
 
@@ -264,11 +264,11 @@ def install_example_files(option, pkg_cfg, target="."):
     # get handlers
     h = load_all_handlers(pkg_cfg)
 
-    if (option, True) not in ls("pkglts_data/example"):
+    if (option, True) not in ls("example"):
         logger.info("option does not provide any example")
         return False
 
-    root = "pkglts_data/example/%s" % option
+    root = "example/%s" % option
     # walk all files in example repo to copy them handling conflicts on the way
     clone_example(root, target, pkg_cfg, h)
 
