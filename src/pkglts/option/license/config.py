@@ -1,5 +1,10 @@
+from os.path import exists
+
+from .handlers import get_tpl_path
+
+
 parameters = [
-    ("name", "mit"),
+    ("name", "cecill-c"),
     ("year", 2015),
     ("organization", "organization"),
     ("project", "{{key, base.pkgname}}")
@@ -22,6 +27,8 @@ def check(pkg_cfg):
     # project = pkg_cfg['license']['project']
 
     if len(name) == 0:
+        invalids.append('name')
+    elif not exists(get_tpl_path(name)):
         invalids.append('name')
 
     return invalids

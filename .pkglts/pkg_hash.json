@@ -16,10 +16,10 @@
     "./CONTRIBUTING.rst": [], 
     "./HISTORY.rst": [], 
     "./LICENSE": [
-        "/iB6sOFrygt2Cav5v6hhVzr0NETYAV75tpyvX60aj7ZQwyN7vHvM2L8LASn8L7op2uvtBV+4eO72YQhiUpYl6Q=="
+        "1kx6w6d0FworiakCq6UWboIYvjUPwiBSw1sAWx8Sy4p0cVqQkGSLRIOP9eDtvp4o4W5SE47xUo+BiaFwy/6bxg=="
     ], 
     "./MANIFEST.in": [
-        "R1ynO14sl3hNsCw6Ms5waD7NK3MdKtjng9Adr/QaaC0yNYD2zg1L25bBAGU0XnUrEmtpKGWD3KMC+/ZMkoNJBQ=="
+        "R0QcyW9DsoBgVEEfkGh7pjiztY5XxLC1j8156m4uS3Zn9DoLaNF8HxvC8KwtPXdiW4X1wQJ4pJ9205STvgrOGA=="
     ], 
     "./README.rst": [
         "wMXdUwSb8LEn/nklFbo4g3CQm4t0wCYm36XtUB9wnG6YSqvBRVNTwCfNdrWdwTLykGcUUYCModPaw+bDTlQuGg=="
@@ -29,6 +29,7 @@
     "./doc/conf.py": [
         "XqcIE4bSktQ75Txt4ZVT3mw9pGeml+Z7LWZVde0yAlYlYB+3T5B9YQGIeLbOFiLZ5bQCvqmgEapGuuEgP6hWdw=="
     ], 
+    "./doc/conf.pyc": [], 
     "./doc/contributing.rst": [], 
     "./doc/history.rst": [], 
     "./doc/index.rst": [], 
@@ -45,29 +46,33 @@
     "./doc/tutorials.rst": [], 
     "./doc/usage.rst": [], 
     "./dvlpt_requirements.txt": [
-        "T8kwzO/cHSZBmG+c3d8pl+14iG1Nqkpx0J+OjA5kKIFk8CEb1A1ZjcEUEkExvopEc5Eb6a4UkNiWtHJg/+9l0g=="
+        "Y7xwyLieR5YCV+4d7TGQBcVVPIzfpPu1nn0ctmvAutz/J3KM7liHPTXG35BewkbwHCrS+yZYHPWOnWQI7lwz6Q=="
     ], 
     "./entry_points.json": [], 
     "./feature_list.txt": [], 
     "./requirements.txt": [
-        "AWuoxM/eZa+Zy1+ouKN+Lrc/SBs640mRZm3y4E/rbAOGZuvR7CtvYjlndWAzxwLd5fQj99R6tu0YJ/9TeDcx9w=="
+        "vmiIOMqGhuXJBom/KrWFzvETfJmbSMcLkvZ6XDTcFWl7XRHJgu1tcb4eHn97TgcziEqpfD96M5qO0DV3z3S+CQ=="
     ], 
     "./setup.cfg": [
-        "Li7jVzsz+OmF22LUJUcVJUWuzDlfsjH1zd7LiTTJQzAmProBY+Q4ZAvV62bbdtmSXP6X4+OJdLyvtHQc3qbMBw=="
+        "YNEmRwupHoiN6etN9yAOyeEuUNJf05Y2LUgSK5HvXQGMzctlkkeyr8gun0AwN0IfemNKHu6HSSHsYrbBJ/Vz3Q=="
     ], 
     "./setup.py": [
         "QXBMeRFX2G7V6nfu07XFUazI5jTUEH6AYLPs3hK8LLuJAUq42nBAWI7ka8gOIRjb2ugEmEK8S1xjf9duuFbI0A=="
     ], 
+    "./setup.pyc": [], 
     "./src/pkglts/__init__.py": [
         "bXi4YRtInDLkaTvGi4V/ZIZpKXGCIgIw/Qm7wX5YZ+tM5kkkAAGCzzuDhxJDzcpoWKBE1UxDj7mT+40YH1DZQA==", 
         "fIn+GWAvhWfY/9NV/Sw6VXI4UIvx1OTgGxXQ1U5+9JFQ4vhuETzkaQvz8W4M9rMDYlL0vAeRmP2p2DyMgcvb9A=="
     ], 
+    "./src/pkglts/__init__.pyc": [], 
     "./src/pkglts/data_access.py": [
-        "Mwen7JYjJXcntwt4Vhy5XKFQX0hInxzYm9hUo2BTe2d5uBMQLtTZf3XqOJFYccbLUMlHkk2TwKY2Oow8JfdCeg=="
+        "f1G0f/Qo2xa8rNC7B7eA9YGU6Wqtm5HWB6jT1Klg2c6VV4zSdqqg6yno95BrFdMhSnx4l0Mh3hfNLBkqEYBLlw=="
     ], 
+    "./src/pkglts/data_access.pyc": [], 
     "./src/pkglts/file_management.py": [], 
     "./src/pkglts/github.py": [], 
     "./src/pkglts/install_env/__init__.py": [], 
+    "./src/pkglts/install_env/conda_front_end.py": [], 
     "./src/pkglts/install_env/load_front_end.py": [], 
     "./src/pkglts/install_env/pip_front_end.py": [], 
     "./src/pkglts/install_env/stdout_front_end.py": [], 
@@ -77,13 +82,13 @@
     "./src/pkglts/manage_script.py": [], 
     "./src/pkglts/manage_tools.py": [], 
     "./src/pkglts/option_tools.py": [], 
-    "./src/pkglts/rmtfile.py": [], 
     "./src/pkglts/templating.py": [], 
     "./src/pkglts/version.py": [
         "41K4oI7NENqrCfAvSk//u9gXtnHNXft3xj5CCL0S80ZsJ3ulqnCIVLodAtthbtbBwWA2c7CjwQJrNwg6C8DYXA=="
     ], 
+    "./src/pkglts/version.pyc": [], 
     "./src/pkglts/versioning.py": [], 
     "./tox.ini": [
-        "vVWIpwwtWUMv9A2BuNhJMdEapVl0sQJO/Y6gpb9Q+Uz9IOnZUtqetNDV79vRhZV65PKYaDoirxqhXssoWeCP6A=="
+        "RRkTdOV7lDydkHiOwGCGvIQMo3WPywglpgilZuYbb8AoM5o0Pcywltz6BDuIweTurzWBZaEZ0r1+7hlBk9Gtyg=="
     ]
 }

@@ -285,7 +285,8 @@ def regenerate(pkg_cfg, target=".", overwrite=False):
     # check consistency of pkg_cfg
     invalids = []
     for option in installed_options(pkg_cfg):
-        invalids.extend(check_option_parameters(option, pkg_cfg))
+        for n in check_option_parameters(option, pkg_cfg):
+            invalids.append("%s.%s" % (option, n))
 
     if len(invalids) > 0:
         for param in invalids:
