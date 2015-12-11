@@ -1,16 +1,28 @@
 # {{pkglts pysetup,
+
 include AUTHORS.rst
-{{github rm, include CONTRIBUTING.rst}}
+include CONTRIBUTING.rst
 include HISTORY.rst
-include LICENSE
 include README.rst
+
+include LICENSE
 include requirements.txt
 include dvlpt_requirements.txt
 
 recursive-include test *
-{{data rm, recursive-include src/{{key, base.pkgname}}_data *}}
+# {{data rm,
+recursive-include src/{{key, base.pkgname}} *
+recursive-include src/{{key, base.pkgname}}_data *
+# }}
+
 recursive-exclude * __pycache__
 recursive-exclude * *.py[co]
 
-recursive-include doc *.rst{{sphinx rm,  conf.py Makefile make.bat}}
+recursive-include doc *.rst
+# {{sphinx rm,
+include doc/conf.py
+include doc/Makefile
+include doc/make.bat
+# }}
+
 # }}
