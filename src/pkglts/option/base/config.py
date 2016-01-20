@@ -4,7 +4,8 @@ from os.path import abspath, basename
 parameters = [
     ("pkgname", basename(abspath("."))),
     ("namespace", None),
-    ("owner", "moi")
+    ("owner", "moi"),
+    ("url", None)
 ]
 
 
