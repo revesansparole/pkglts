@@ -310,5 +310,6 @@ def regenerate_pkg(pkg_cfg, handlers, target, overwrite_file):
                 # regenerate
                 regenerate_pkg(pkg_cfg, handlers, pth, overwrite_file)
         else:
-            if overwrite_file.get(pth, True):
-                regenerate_file(pth, pkg_cfg, handlers)
+            if splitext(pth)[1] in non_bin_ext:
+                if overwrite_file.get(pth, True):
+                    regenerate_file(pth, pkg_cfg, handlers)
