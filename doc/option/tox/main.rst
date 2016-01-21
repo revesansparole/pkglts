@@ -17,3 +17,11 @@ To invoke tox, just use the command line tool::
 To produce a result like this one.
 
 .. image:: tox_report.png
+
+Modifications
+-------------
+
+.. raw:: html
+    :file: modifications.html
+
+

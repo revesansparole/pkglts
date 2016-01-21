@@ -12,5 +12,12 @@ Quick setup::
     (dvlpt)$ pmg regenerate
 
 
+Modifications
+-------------
+
+.. raw:: html
+    :file: modifications.html
+
+
 .. _here: https://github.com/licenses/license-templates/tree/master/templates
 .. _lice: https://github.com/licenses/lice

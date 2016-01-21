@@ -16,21 +16,7 @@ Modifications
 -------------
 
 .. raw:: html
-
-    <pre>.
-    ├── AUTHORS.rst
-    ├── CONTRIBUTING.rst
-    ├── HISTORY.rst
-    ├── README.rst
-    └── doc
-           └── authors.rst
-           └── contributing.rst
-           └── history.rst
-           └── index.rst
-           └── installation.rst
-           └── readme.rst
-           └── usage.rst
-    </pre>
+    :file: modifications.html
 
 
 Quick tutorial

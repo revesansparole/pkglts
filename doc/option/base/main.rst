@@ -9,27 +9,16 @@ Add some base functionality to a package, i.e.:
 Modifications
 -------------
 
+
 If namespace is None:
 
 .. raw:: html
-
-    <pre>.
-    └── src
-           └── pkgname
-                    └── __init__.py
-    </pre>
+    :file: modifications.html
 
 else:
 
 .. raw:: html
-
-    <pre>.
-    └── src
-           └── namespace
-                     ├── __init__.py
-                     └── pkgname
-                             └── __init__.py
-    </pre>
+    :file: modifications_namespace.html
 
 
 Quick tutorial

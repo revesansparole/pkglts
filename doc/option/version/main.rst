@@ -22,3 +22,10 @@ needs to be entered manually with a call to edit option::
           If your package is hosted on github you can set this option to
           go and fetch these numbers automatically each time you regenerate your
           package.
+
+Modifications
+-------------
+
+.. raw:: html
+    :file: modifications.html
+

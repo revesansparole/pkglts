@@ -12,6 +12,13 @@ or through the use of the 'nosetests' command line argument::
 
 Have a look at nose_cmd_ for more information on the way to use nose_.
 
+Modifications
+-------------
+
+.. raw:: html
+    :file: modifications.html
+
+
 Quick tutorial
 --------------
 

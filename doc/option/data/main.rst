@@ -10,11 +10,4 @@ Modifications
 -------------
 
 .. raw:: html
-
-    <pre>.
-    └── src
-           └── pkgname
-           |        └── data_access.py
-           └── pkgname_data
-                    └── __init__.py
-    </pre>
+    :file: modifications.html

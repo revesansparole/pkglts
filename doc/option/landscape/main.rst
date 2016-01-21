@@ -19,6 +19,13 @@ to register by hand. Have a look at the `Landscape Documentation`_ or
     $ git push
 
 
+Modifications
+-------------
+
+.. raw:: html
+    :file: modifications.html
+
+
 .. _Landscape_io: https://landscape.io/
 .. _PEP8: https://www.python.org/dev/peps/pep-0008/
 .. _`Landscape Documentation`: https://docs.landscape.io/

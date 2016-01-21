@@ -13,4 +13,11 @@ Quick setup::
     ...
     (dvlpt)$ pmg regenerate
 
+Modifications
+-------------
+
+.. raw:: html
+    :file: modifications.html
+
+
 .. _setuptools: https://pypi.python.org/pypi/setuptools

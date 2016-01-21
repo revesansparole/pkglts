@@ -16,10 +16,7 @@ Modifications
 -------------
 
 .. raw:: html
-
-    <pre>.
-    └── .coveragerc
-    </pre>
+    :file: modifications.html
 
 
 Quick tutorial

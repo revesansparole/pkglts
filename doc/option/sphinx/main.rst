@@ -3,6 +3,13 @@ sphinx
 
 Extend basic documentation to use the sphinx_ set of tools.
 
+Modifications
+-------------
+
+.. raw:: html
+    :file: modifications.html
+
+
 Quick tutorial
 --------------
 
