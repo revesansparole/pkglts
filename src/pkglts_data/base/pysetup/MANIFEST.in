@@ -11,7 +11,7 @@ include dvlpt_requirements.txt
 
 recursive-include test *
 # {{data rm,
-recursive-include src/{{key, base.pkgname}} *
+recursive-include {{base.src_pth, }} *
 recursive-include src/{{key, base.pkgname}}_data *
 # }}
 
