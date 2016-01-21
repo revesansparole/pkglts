@@ -1,5 +1,7 @@
+# coding: utf-8
+
 from os import listdir
-from os.path import abspath, basename, isdir
+from os.path import isdir
 from os.path import join as pj
 
 from pkglts.local import load_all_handlers
@@ -20,8 +22,6 @@ def nn(pth):
 
 
 def tree(dir, padding, txt):
-    txt += padding[:-1] + '+-' + nn(basename(abspath(dir))) + '/\n'
-    padding += ' '
     files = [(isdir(pj(dir, file)), file) for file in listdir(dir)]
     files.sort()
 
@@ -29,20 +29,20 @@ def tree(dir, padding, txt):
     for is_dir, file in files:
         count += 1
         txt += padding + '|\n'
+        fmt_name = nn(file)
+        txt += padding + '+-' + fmt_name
         path = pj(dir, file)
         if is_dir:
+            txt += "/\n"
             if count == len(files):
-                txt = tree(path, padding + ' ', txt)
+                txt = tree(path, padding + ' ' + ' ' * (len(fmt_name) / 2), txt)
             else:
-                txt = tree(path, padding + '|', txt)
+                txt = tree(path, padding + '|' + ' ' * (len(fmt_name) / 2), txt)
         else:
-            txt += padding + '+-' + nn(file) + '\n'
+            txt += '\n'
 
     return txt
 
 
 def fmt_tree(dir):
-    return tree(dir, ' ', "")
-
-# txt = tree("../src/pkglts_data/base", ' ', "")
-# print txt
+    return tree(dir, '', ".\n")
