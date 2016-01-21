@@ -6,6 +6,32 @@ Add some base functionality to a package, i.e.:
  - a src directory to store python files
  - some basic meta information like owner name and package name
 
+Modifications
+-------------
+
+If namespace is None:
+
+.. raw:: html
+
+    <pre>.
+    └── src
+           └── pkgname
+                    └── __init__.py
+    </pre>
+
+else:
+
+.. raw:: html
+
+    <pre>.
+    └── src
+           └── namespace
+                     ├── __init__.py
+                     └── pkgname
+                             └── __init__.py
+    </pre>
+
+
 Quick tutorial
 --------------
 

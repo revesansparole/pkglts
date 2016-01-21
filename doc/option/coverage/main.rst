@@ -12,6 +12,16 @@ by the system.
              to take the config into account. Use the `Nosetests command line`_
              approach if you don't want to add a setup.py to your package.
 
+Modifications
+-------------
+
+.. raw:: html
+
+    <pre>.
+    └── .coveragerc
+    </pre>
+
+
 Quick tutorial
 --------------
 

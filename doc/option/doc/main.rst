@@ -12,6 +12,27 @@ Add some documentation in your package:
 The examples associated with this option provide:
  - a basic readme file
 
+Modifications
+-------------
+
+.. raw:: html
+
+    <pre>.
+    ├── AUTHORS.rst
+    ├── CONTRIBUTING.rst
+    ├── HISTORY.rst
+    ├── README.rst
+    └── doc
+           └── authors.rst
+           └── contributing.rst
+           └── history.rst
+           └── index.rst
+           └── installation.rst
+           └── readme.rst
+           └── usage.rst
+    </pre>
+
+
 Quick tutorial
 --------------
 
