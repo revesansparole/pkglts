@@ -2,7 +2,7 @@ from pkglts.option.base.config import check, parameters
 
 
 def test_parameters():
-    assert len(parameters) == 3
+    assert len(parameters) == 4
 
 
 def test_config_check_pkg_names():
@@ -10,9 +10,11 @@ def test_config_check_pkg_names():
                 ' .mypkg', '.mypkg', 'None.mypkg', 'oa.o.mypkg'):
         pkg_cfg = dict(base={'pkgname': pkg,
                              'namespace': None,
-                             'owner': 'moi'})
+                             'owner': 'moi',
+                             'url': None})
         assert 'pkgname' in check(pkg_cfg)
         pkg_cfg = dict(base={'pkgname': 'toto',
                              'namespace': pkg,
-                             'owner': 'moi'})
+                             'owner': 'moi',
+                             'url': None})
         assert 'namespace' in check(pkg_cfg)

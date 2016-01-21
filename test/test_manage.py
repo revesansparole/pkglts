@@ -18,7 +18,8 @@ def test_manage_update_pkg_do_not_change_installed_options():
     pkg_cfg = dict(default_cfg)
     pkg_cfg['base'] = dict(pkgname='toto',
                            namespace=None,
-                           owner='owner')
+                           owner='owner',
+                           url=None)
 
     mem = dict(pkg_cfg['base'])
     nb = len(pkg_cfg)
