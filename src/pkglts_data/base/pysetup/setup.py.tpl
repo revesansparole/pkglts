@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# {{pkglts pysetup,
+# {{pkglts pysetup.kwds,
+# format setup arguments
 from os import walk
 from os.path import abspath, normpath
 from os.path import join as pj
@@ -52,7 +53,7 @@ for root, dnames, fnames in walk("src/{{key, base.pkgname}}_data"):
 
 # }}
 
-setup(
+setup_kwds = dict(
     name='{{base.pkg_full_name, }}',
     # {{version rm,
     version=version["__version__"],
@@ -75,15 +76,7 @@ setup(
     # }}
     install_requires=parse_requirements("requirements.txt"),
     tests_require=parse_requirements("dvlpt_requirements.txt"),
-    # {{plugin.setup pysetup.extra rm,
-    entry_points={
-        # 'console_scripts': [
-        #       'fake_script = openalea.fakepackage.amodule:console_script', ],
-        # 'gui_scripts': [
-        #      'fake_gui = openalea.fakepackage.amodule:gui_script',],
-        #      'wralea': wralea_entry_points
-    },
-    # }}
+    entry_points={},
     keywords='{{doc.setup_keywords, }}',
     # {{pypi rm,
     classifiers=[# {{pypi.classifiers,
@@ -97,4 +90,10 @@ setup(
     # }}
     test_suite='nose.collector',
 )
+# }}
+# change setup_kwds below before the next pkglts tag
+
+# do not change things below
+# {{pkglts pysetup.call,
+setup(**setup_kwds)
 # }}

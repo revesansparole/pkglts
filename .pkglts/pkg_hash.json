@@ -1,4 +1,5 @@
 {
+    "./.coverage": [], 
     "./.coveragerc": [], 
     "./.gitignore": [
         "Kn2lOmKMN+jefzJc3YLftmeAltG5xE+CwyhMsENJrqWpHFiqNVqsMM2l6MEBciyN5J9zyAsbdn6dcUyzRcw+jg=="
@@ -23,6 +24,7 @@
     "./README.rst": [
         "wMXdUwSb8LEn/nklFbo4g3CQm4t0wCYm36XtUB9wnG6YSqvBRVNTwCfNdrWdwTLykGcUUYCModPaw+bDTlQuGg=="
     ], 
+    "./avatar.png": [], 
     "./conda_pkglts/bld.bat": [], 
     "./conda_pkglts/build.sh": [], 
     "./conda_pkglts/meta.yaml": [], 
@@ -32,6 +34,7 @@
         "XqcIE4bSktQ75Txt4ZVT3mw9pGeml+Z7LWZVde0yAlYlYB+3T5B9YQGIeLbOFiLZ5bQCvqmgEapGuuEgP6hWdw=="
     ], 
     "./doc/contributing.rst": [], 
+    "./doc/generate.py": [], 
     "./doc/history.rst": [], 
     "./doc/index.rst": [], 
     "./doc/installation.rst": [], 
@@ -50,6 +53,7 @@
         "+0rCsgUH/i+KS0cdBXkd+wTjsLEKYPrCtkvYOwnMHfBQ6mPpCfYE3yGYotUl+B+IuTXSVKbL283hOpI+3DbwiA=="
     ], 
     "./entry_points.json": [], 
+    "./feature_list.txt": [], 
     "./requirements.txt": [
         "AWuoxM/eZa+Zy1+ouKN+Lrc/SBs640mRZm3y4E/rbAOGZuvR7CtvYjlndWAzxwLd5fQj99R6tu0YJ/9TeDcx9w=="
     ], 
@@ -57,16 +61,9 @@
         "Li7jVzsz+OmF22LUJUcVJUWuzDlfsjH1zd7LiTTJQzAmProBY+Q4ZAvV62bbdtmSXP6X4+OJdLyvtHQc3qbMBw=="
     ], 
     "./setup.py": [
-        "O/aEf+6kissSsIo2KjC/4d3nqbAtDtgsRPBQMNzXqhxq4jp5FzADH1nrtVDqgLk/TS66tWIwH//gUDP7vAeZBg=="
+        "P7No0O55+C0y9tTsKi6y37Wkb7n4LLFMTk2JhMsQoAhBuwlzYa5uMOoDlYVmb3tAxoklhSXYDXg3hIMn5eoatQ==", 
+        "6tA9s9cbDHz4mx0PGt+gMLM9HamuOYqFGjwc7LYZcM72XjiUaG0A7g6hNS+gy8cS0FyZDnf46GLNwx0mNZUs7Q=="
     ], 
-    "./src/pkglts.egg-info/PKG-INFO": [
-        "Lqb49Dm+4RX/EJSPxTawqoMofttyywQjGlZNRy3MsB8gHxlmUWycOy5/EhwUmElvLkLtiMup5Gk+xdgPrAk6EA=="
-    ], 
-    "./src/pkglts.egg-info/SOURCES.txt": [], 
-    "./src/pkglts.egg-info/dependency_links.txt": [], 
-    "./src/pkglts.egg-info/entry_points.txt": [], 
-    "./src/pkglts.egg-info/not-zip-safe": [], 
-    "./src/pkglts.egg-info/top_level.txt": [], 
     "./src/pkglts/__init__.py": [
         "bXi4YRtInDLkaTvGi4V/ZIZpKXGCIgIw/Qm7wX5YZ+tM5kkkAAGCzzuDhxJDzcpoWKBE1UxDj7mT+40YH1DZQA==", 
         "fIn+GWAvhWfY/9NV/Sw6VXI4UIvx1OTgGxXQ1U5+9JFQ4vhuETzkaQvz8W4M9rMDYlL0vAeRmP2p2DyMgcvb9A=="
@@ -88,11 +85,12 @@
     "./src/pkglts/manage_tools.py": [], 
     "./src/pkglts/option_tools.py": [], 
     "./src/pkglts/templating.py": [], 
+    "./src/pkglts/tree_ascii_fmt.py": [], 
     "./src/pkglts/version.py": [
         "41K4oI7NENqrCfAvSk//u9gXtnHNXft3xj5CCL0S80ZsJ3ulqnCIVLodAtthbtbBwWA2c7CjwQJrNwg6C8DYXA=="
     ], 
     "./src/pkglts/versioning.py": [], 
     "./tox.ini": [
-        "fxhy5XhSjaI/vAXAzRyLg5BszezPIcjJsTlQcq0R5bw9m7m/pTAi0ZxL2DgNdJ/cJD7bAhUcz8ulC6nAQjtHkQ=="
+        "vVWIpwwtWUMv9A2BuNhJMdEapVl0sQJO/Y6gpb9Q+Uz9IOnZUtqetNDV79vRhZV65PKYaDoirxqhXssoWeCP6A=="
     ]
 }

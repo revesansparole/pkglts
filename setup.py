@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# {{pkglts pysetup,
+# {{pkglts pysetup.kwds,
+# format setup arguments
 from os import walk
 from os.path import abspath, normpath
 from os.path import join as pj
@@ -48,7 +49,7 @@ for root, dnames, fnames in walk("src/pkglts_data"):
         data_files.append(data_rel_pth(pj(root, name)))
 
 
-setup(
+setup_kwds = dict(
     name='pkglts',
     version=version["__version__"],
     description=short_descr,
@@ -65,12 +66,7 @@ setup(
     package_data={'pkglts_data': data_files},
     install_requires=parse_requirements("requirements.txt"),
     tests_require=parse_requirements("dvlpt_requirements.txt"),
-    entry_points={
-        'console_scripts': [
-            'pmg = pkglts.manage_script:main',
-        ],
-    },
-
+    entry_points={},
     keywords='packaging, package builder',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
@@ -85,4 +81,12 @@ setup(
     ],
     test_suite='nose.collector',
 )
+# }}
+# change setup_kwds below before the next pkglts tag
+
+setup_kwds['entry_points']['console_scripts'] = ['pmg = pkglts.manage_script:main']
+
+# do not change things below
+# {{pkglts pysetup.call,
+setup(**setup_kwds)
 # }}
