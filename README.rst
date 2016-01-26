@@ -28,6 +28,10 @@ pkglts
 
 Building packages with long term support
 
+.. image:: https://raw.githubusercontent.com/revesansparole/pkglts/master/avatar.png
+    :align: right
+    :width: 256px
+
 The rationale behind the creation of this 'package builder' is to keep the life
 of a python programmer as easy as possible by providing three core functions:
 
