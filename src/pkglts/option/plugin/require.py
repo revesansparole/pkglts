@@ -1,4 +1,4 @@
 option = []
 setup = []
 install = []
-dvlpt = []
+dvlpt = ["funcsigs"]
