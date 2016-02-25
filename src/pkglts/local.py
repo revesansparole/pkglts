@@ -9,6 +9,20 @@ from .file_management import write_file
 from .templating import closing_marker, same, opening_marker
 
 
+def pkg_full_name(pkg_cfg):
+    """ Compute name of src dir according to pkgname
+    and namespace in info
+
+    Args:
+        pkg_cfg (dict of (str: dict)): package config info
+    """
+    namespace = pkg_cfg['base']['namespace']
+    if namespace is None:
+        return pkg_cfg['base']['pkgname']
+    else:
+        return namespace + "." + pkg_cfg['base']['pkgname']
+
+
 def src_dir(pkg_cfg):
     """ Compute name of src dir according to pkgname
     and namespace in info

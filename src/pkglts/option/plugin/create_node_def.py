@@ -22,9 +22,9 @@ def create_node_def(func):
 
     s = signature(func)
     for pname, p in s.parameters.items():
-        input = dict(name=pname, interface="IAny", description="")
+        port = dict(name=pname, interface="IAny", description="")
         if p.default != p.empty:
-            input["default"] = str(p.default)
-        node_def['inputs'].append(input)
+            port["default"] = str(p.default)
+        node_def['inputs'].append(port)
 
     return node_def

@@ -366,4 +366,4 @@ def regenerate_option(pkg_cfg, name, target="."):
     except ImportError:
         raise KeyError("option '%s' does not provide regeneration" % name)
 
-    opt_regenerate.main()
+    opt_regenerate.main(pkg_cfg)
