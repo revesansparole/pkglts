@@ -25,23 +25,20 @@ def create_node_def(func):
 
     s = signature(func)
     pycode = getsource(func)
-    print "pycode", pycode
     parsed = parse_docstring(func.__doc__)
     for pname, p in s.parameters.items():
         if pname in parsed['args']:
-            arg_type, descr = parsed['args']
+            arg_type, descr = parsed['args'][pname]
+        else:
+            arg_type = "any"
+            descr = ""
 
         if p.annotation == p.empty:
             interface = arg_type
-            if interface is None:
-                interface = "IAny"
         else:
             interface = str(p.annotation)
 
-        if descr is None:
-            description = ""
-        else:
-            description = str(descr)
+        description = str(descr)
 
         port = dict(name=pname, interface=interface, description=description)
         if p.default != p.empty:
