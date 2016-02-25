@@ -62,7 +62,7 @@ def parse_plugins(pkg):
                         idef['id'] = old_idef['id']
 
                     with open(pth, 'w') as f:
-                        json.dump(idef, f)
+                        json.dump(idef, f, indent=2)
 
 
 def main(pkg_cfg):
