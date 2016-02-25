@@ -4,6 +4,7 @@
 Use 'setup.py' for common tasks.
 """
 
+from importlib import import_module
 import json
 import logging
 from os import listdir, mkdir, remove, walk
@@ -342,3 +343,27 @@ def regenerate(pkg_cfg, target=".", overwrite=False):
     # re create hash
     hm = package_hash_keys(target)
     write_pkg_hash(hm, target)
+
+
+def regenerate_option(pkg_cfg, name, target="."):
+    """Call the regenerate function of a given option
+
+    Args:
+        pkg_cfg: (dict of (str, dict)) package configuration parameters
+        name: (str) name of option
+        target: (str) target directory to write into
+
+    Returns:
+        None
+    """
+    # test existence of option regenerate module
+    try:
+        opt = import_module("pkglts.option.%s" % name)
+    except ImportError:
+        raise KeyError("option '%s' does not exists" % name)
+    try:
+        opt_regenerate = import_module("pkglts.option.%s.regenerate" % name)
+    except ImportError:
+        raise KeyError("option '%s' does not provide regeneration" % name)
+
+    opt_regenerate.main()

@@ -4,7 +4,7 @@ import logging
 # from .local import installed_options
 from .manage import (clean, get_pkg_config,
                      init_pkg, install_example_files,
-                     regenerate,
+                     regenerate, regenerate_option,
                      add_option, edit_option,
                      # update_option, update_pkg,
                      write_pkg_config)
@@ -51,15 +51,18 @@ def action_update(*args, **kwds):
 def action_regenerate(*args, **kwds):
     """ Regenerate all files in the package.
     """
-    del args  # unused
-    overwrite = 'overwrite' in kwds
+    if len(args) == 0:
+        overwrite = 'overwrite' in kwds
 
-    logger.info("regenerate")
+        logger.info("regenerate")
 
-    pkg_cfg = get_pkg_config()
-    clean()
-    regenerate(pkg_cfg, overwrite=overwrite)
-    write_pkg_config(pkg_cfg)
+        pkg_cfg = get_pkg_config()
+        clean()
+        regenerate(pkg_cfg, overwrite=overwrite)
+        write_pkg_config(pkg_cfg)
+    else:
+        pkg_cfg = get_pkg_config()
+        regenerate_option(pkg_cfg, args[0])
 
 
 def action_add(*args, **kwds):
