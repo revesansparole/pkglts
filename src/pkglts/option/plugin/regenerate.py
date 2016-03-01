@@ -39,6 +39,7 @@ def parse_plugins(pkg):
         if ispkg:
             parse_plugins(mod)
         else:
+            root_pth = splitext(mod.__file__)[0]
             plugins = {}
             if hasattr(mod, '__all__'):
                 item_names = mod.__all__
@@ -49,12 +50,11 @@ def parse_plugins(pkg):
                 if isfunction(item):
                     for cat in find_plugin_categories(item.__doc__):
                         if cat == "node":
-                            plugins[item_name] = create_node_def(item)
+                            pth = "%s_%s.wkf" % (root_pth, item_name)
+                            plugins[item_name] = (pth, create_node_def(item))
 
             if len(plugins) > 0:
-                root_pth = splitext(mod.__file__)[0]
-                for item_name, idef in plugins.items():
-                    pth = "%s_%s.json" % (root_pth, item_name)
+                for item_name, (pth, idef) in plugins.items():
                     if exists(pth):
                         with open(pth, 'r') as f:
                             old_idef = json.load(f)
