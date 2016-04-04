@@ -21,17 +21,17 @@ def nn(pth):
     return tgt_name
 
 
-def tree(dir, padding, txt):
-    files = [(isdir(pj(dir, file)), file) for file in listdir(dir)]
+def tree(dname, padding, txt):
+    files = [(isdir(pj(dname, fname)), fname) for fname in listdir(dname)]
     files.sort()
 
     count = 0
-    for is_dir, file in files:
+    for is_dir, fname in files:
         count += 1
         txt += padding + '|\n'
-        fmt_name = nn(file)
+        fmt_name = nn(fname)
         txt += padding + '+-' + fmt_name
-        path = pj(dir, file)
+        path = pj(dname, fname)
         if is_dir:
             txt += "/\n"
             if count == len(files):
@@ -44,5 +44,5 @@ def tree(dir, padding, txt):
     return txt
 
 
-def fmt_tree(dir):
-    return tree(dir, '', ".\n")
+def fmt_tree(dname):
+    return tree(dname, '', ".\n")
