@@ -233,6 +233,18 @@ def clone_example(src_dir, tgt_dir, pkg_cfg, handlers):
 
         tgt_pth = tgt_dir + "/" + tgt_name
 
+        # handle namespace
+        if (is_dir and basename(src_dir) == 'src' and
+                    src_name == tpl_src_name):
+            namespace = pkg_cfg['base']['namespace']
+            if namespace is not None:
+                ns_pth = tgt_dir + "/" + namespace
+                if not exists(ns_pth):
+                    mkdir(ns_pth)
+
+                init_namespace_dir(ns_pth)
+                tgt_pth = ns_pth + "/" + tgt_name
+
         if is_dir:
             if tgt_name not in ("", "_") and not exists(tgt_pth):
                 mkdir(tgt_pth)

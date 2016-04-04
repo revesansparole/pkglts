@@ -1,6 +1,6 @@
 from nose.tools import with_setup
 from os import listdir
-from os.path import exists
+from os.path import exists, getsize
 from os.path import join as pj
 
 from pkglts.manage_tools import clone_base_option
@@ -47,13 +47,28 @@ def test_clone_copy_files_from_pkg_data():
 
 
 @with_setup(setup, teardown)
+def test_clone_copy_binary_files_from_pkg_data():
+    clone_base_option('for_testing_purpose', pkg_cfg, {}, tmp_dir, {})
+    assert len(listdir(tmp_dir)) > 0
+    assert exists(init_file)
+    assert exists(pj(tmp_dir, "src", "toto", "ext_data.png"))
+
+
+@with_setup(setup, teardown)
 def test_clone_do_overwrite_existing_files_by_default():
     clone_base_option('base', pkg_cfg, {}, tmp_dir, {})
+    bin_file = pj(tmp_dir, "src", "toto", "ext_data.png")
+    with open(bin_file, 'w') as f:
+        f.write("")
+
     addendum()
     clone_base_option('base', pkg_cfg, {}, tmp_dir, {})
+    clone_base_option('for_testing_purpose', pkg_cfg, {}, tmp_dir, {})
     with open(init_file, 'r') as f:
         txt = f.read()
         assert "addendum" not in txt
+
+    assert getsize(bin_file) > 0
 
 
 @with_setup(setup, teardown)
