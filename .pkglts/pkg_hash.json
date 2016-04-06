@@ -29,9 +29,10 @@
     "./conda_pkglts/build.sh": [], 
     "./conda_pkglts/meta.yaml": [], 
     "./doc/Makefile": [], 
+    "./doc/_static/readme.txt": [], 
     "./doc/authors.rst": [], 
     "./doc/conf.py": [
-        "XqcIE4bSktQ75Txt4ZVT3mw9pGeml+Z7LWZVde0yAlYlYB+3T5B9YQGIeLbOFiLZ5bQCvqmgEapGuuEgP6hWdw=="
+        "cheyemLQJWJi9JBjkfUXEdTXoMBk9eH70jhQGB8EL2ncjy8U0XXzfN1VX76eudMfmm/wn0K6yr5Zn6edLjshig=="
     ], 
     "./doc/contributing.rst": [], 
     "./doc/generate.py": [], 
