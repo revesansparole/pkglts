@@ -1,4 +1,4 @@
-option = ['test']
+option = ['doc', 'test']
 setup = []
 install = []
 dvlpt = ['sphinx']

@@ -1,7 +1,9 @@
 sphinx
 ======
 
-Extend basic documentation to use the sphinx_ set of tools.
+Extend basic documentation to use the sphinx_ set of tools. This option will use
+the 'default' theme by default instead of 'classic' to ensure that the right theme
+will be selected on readthedocs_.
 
 Modifications
 -------------
@@ -35,4 +37,5 @@ run the make command from the doc directory::
 This will produce a build directory with the same architecture as explained
 above.
 
+.. _readthedcos: http://docs.readthedocs.org/en/latest/index.html
 .. _sphinx: http://sphinx-doc.org/

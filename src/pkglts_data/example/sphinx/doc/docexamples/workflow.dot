@@ -1,0 +1,7 @@
+digraph {
+    node0 [label="some node", URL="http://127.0.0.1:6543/project_content/5bb51de1ead811e5941c308d99c16f56"]
+    node1 [label="mylabel", URL="http://127.0.0.1:6543/project_content/nodeab8cead211e586286003089581fc"]
+    node2 [label="node2", URL="http://127.0.0.1:6543/project_content/nodefailead211e586286003089581fc"]
+    node0 -> node2 [taillabel="out", headlabel="in1"]
+    node1 -> node2 [taillabel="out", headlabel="in2"]
+}

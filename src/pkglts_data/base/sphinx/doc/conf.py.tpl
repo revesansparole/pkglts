@@ -41,7 +41,24 @@ sys.path.insert(0, os.path.join(project_root, os.path.dirname('{{base.src_pth, }
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = ['sphinx.ext.autodoc', 'sphinx.ext.viewcode']
+extensions = [
+    'sphinx.ext.autodoc',
+    'sphinx.ext.autosummary',
+    'sphinx.ext.graphviz',
+    'sphinx.ext.intersphinx',
+    'sphinx.ext.todo',
+    'sphinx.ext.mathjax',
+    'sphinx.ext.ifconfig',
+    'sphinx.ext.inheritance_diagram',
+    'sphinx.ext.viewcode'
+]
+
+# default settings that can be redefined outside of the pkglts block
+todo_include_todos = True
+autosummary_generate = True
+intersphinx_mapping = {'python': ('https://docs.python.org/3.4', None)}
+inheritance_node_attrs = dict(shape='ellipse', fontsize=12,
+                              color='orange', style='filled')
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -119,7 +136,7 @@ pygments_style = 'sphinx'
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'default'
+html_theme = '{{key, sphinx.theme}}'
 
 # Theme options are theme-specific and customize the look and feel of a
 # theme further.  For a list of options available for each theme, see the
