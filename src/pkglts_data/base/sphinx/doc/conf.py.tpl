@@ -53,6 +53,16 @@ extensions = [
     'sphinx.ext.viewcode'
 ]
 
+# try to add more extensions which are not default
+# but still useful
+# based on the fact that the extension is installed on the system
+
+try:
+    import matplotlib.sphinxext.plot_directive
+    extensions.append('matplotlib.sphinxext.plot_directive')
+except ImportError:
+    pass
+
 # default settings that can be redefined outside of the pkglts block
 todo_include_todos = True
 autosummary_generate = True
