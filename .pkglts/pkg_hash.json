@@ -32,7 +32,7 @@
     "./doc/_static/readme.txt": [], 
     "./doc/authors.rst": [], 
     "./doc/conf.py": [
-        "cheyemLQJWJi9JBjkfUXEdTXoMBk9eH70jhQGB8EL2ncjy8U0XXzfN1VX76eudMfmm/wn0K6yr5Zn6edLjshig=="
+        "aUoLwyhlIiGE4VT8sOac1emhSLDsDlq3BFr3Urj3grMuOzwTpTBsNZpMrQsrBb0hMhs7bPFKenTLEb8eePE4MA=="
     ], 
     "./doc/contributing.rst": [], 
     "./doc/generate.py": [], 
@@ -44,6 +44,7 @@
     ], 
     "./doc/option_list.rst": [], 
     "./doc/readme.rst": [], 
+    "./doc/source.rst": [], 
     "./doc/tutorial/dvlpt_env.rst": [], 
     "./doc/tutorial/migration.rst": [], 
     "./doc/tutorial/pypi.rst": [], 
@@ -88,7 +89,7 @@
     "./src/pkglts/templating.py": [], 
     "./src/pkglts/tree_ascii_fmt.py": [], 
     "./src/pkglts/version.py": [
-        "41K4oI7NENqrCfAvSk//u9gXtnHNXft3xj5CCL0S80ZsJ3ulqnCIVLodAtthbtbBwWA2c7CjwQJrNwg6C8DYXA=="
+        "tsE6o8ydaZKunlAaO7bd2JnTm07FGTUmU/HbPdPWqKVF7DVRl4RVwPX71lvU0oyPnaCnetHHG3X883KN/HOP1g=="
     ], 
     "./src/pkglts/versioning.py": [], 
     "./tox.ini": [

@@ -41,7 +41,34 @@ sys.path.insert(0, os.path.join(project_root, os.path.dirname('src/pkglts')))
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = ['sphinx.ext.autodoc', 'sphinx.ext.viewcode']
+extensions = [
+    'sphinx.ext.autodoc',
+    'sphinx.ext.autosummary',
+    'sphinx.ext.graphviz',
+    'sphinx.ext.intersphinx',
+    'sphinx.ext.todo',
+    'sphinx.ext.mathjax',
+    'sphinx.ext.ifconfig',
+    'sphinx.ext.inheritance_diagram',
+    'sphinx.ext.viewcode'
+]
+
+# try to add more extensions which are not default
+# but still useful
+# based on the fact that the extension is installed on the system
+
+try:
+    import matplotlib.sphinxext.plot_directive
+    extensions.append('matplotlib.sphinxext.plot_directive')
+except ImportError:
+    pass
+
+# default settings that can be redefined outside of the pkglts block
+todo_include_todos = True
+autosummary_generate = True
+intersphinx_mapping = {'python': ('https://docs.python.org/3.4', None)}
+inheritance_node_attrs = dict(shape='ellipse', fontsize=12,
+                              color='orange', style='filled')
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']

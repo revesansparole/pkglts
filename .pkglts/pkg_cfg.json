@@ -51,13 +51,15 @@
     "readthedocs": {
         "project": "{{key, github.project}}"
     }, 
-    "sphinx": {}, 
+    "sphinx": {
+        "theme": "default"
+    }, 
     "test": {}, 
     "tox": {}, 
     "travis": {}, 
     "version": {
         "major": 0, 
-        "minor": 1, 
-        "post": 10
+        "minor": 2, 
+        "post": 0
     }
 }
