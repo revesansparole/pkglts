@@ -28,7 +28,9 @@
     "./conda_pkglts/bld.bat": [], 
     "./conda_pkglts/build.sh": [], 
     "./conda_pkglts/meta.yaml": [], 
-    "./doc/Makefile": [], 
+    "./doc/Makefile": [
+        "fCpQbGBjkltJc0kS1o3WrQeqpsOzMhUa8FlGTCab3LI4yYuTq7VnoQHXV7clRKyfu2105FRS7JfCEoePiVkMpQ=="
+    ], 
     "./doc/_static/readme.txt": [], 
     "./doc/authors.rst": [], 
     "./doc/conf.py": [
