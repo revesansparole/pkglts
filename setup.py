@@ -26,7 +26,7 @@ def parse_requirements(fname):
 
     return reqs
 
-# find version number in /src/$pkg_pth/version.py
+# find version number in src/pkglts/version.py
 version = {}
 with open("src/pkglts/version.py") as fp:
     exec(fp.read(), version)

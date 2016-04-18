@@ -34,7 +34,7 @@
     "./doc/_static/readme.txt": [], 
     "./doc/authors.rst": [], 
     "./doc/conf.py": [
-        "aUoLwyhlIiGE4VT8sOac1emhSLDsDlq3BFr3Urj3grMuOzwTpTBsNZpMrQsrBb0hMhs7bPFKenTLEb8eePE4MA=="
+        "AWF8J81Yu3dBNcmU8MNIHsV16C6udwkECAVFKtbdAg1/J5pkReS/a9+8gD5AP30lL4jTycn1wTy0eabN6PPVnw=="
     ], 
     "./doc/contributing.rst": [], 
     "./doc/generate.py": [], 
@@ -46,7 +46,6 @@
     ], 
     "./doc/option_list.rst": [], 
     "./doc/readme.rst": [], 
-    "./doc/source.rst": [], 
     "./doc/tutorial/dvlpt_env.rst": [], 
     "./doc/tutorial/migration.rst": [], 
     "./doc/tutorial/pypi.rst": [], 
@@ -65,7 +64,7 @@
         "Li7jVzsz+OmF22LUJUcVJUWuzDlfsjH1zd7LiTTJQzAmProBY+Q4ZAvV62bbdtmSXP6X4+OJdLyvtHQc3qbMBw=="
     ], 
     "./setup.py": [
-        "P7No0O55+C0y9tTsKi6y37Wkb7n4LLFMTk2JhMsQoAhBuwlzYa5uMOoDlYVmb3tAxoklhSXYDXg3hIMn5eoatQ==", 
+        "zd6lpzXV4fVyR9LxbgkWUbvLXNu7XhcbQvm/z5yQGmVKrcFb4ZoHpsXMHS8KOzCSUPuxqN1/nUDHhaSPvxqLqw==", 
         "6tA9s9cbDHz4mx0PGt+gMLM9HamuOYqFGjwc7LYZcM72XjiUaG0A7g6hNS+gy8cS0FyZDnf46GLNwx0mNZUs7Q=="
     ], 
     "./src/pkglts/__init__.py": [
