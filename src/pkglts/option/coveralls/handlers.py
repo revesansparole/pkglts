@@ -7,8 +7,8 @@ def badge(txt, env):
     project = env['github']['project']
 
     url = "coveralls.io/github/%s/%s?branch=master" % (owner, project)
-    img = ("coveralls.io/repos/%s/%s/" % (owner, project) +
-           "badge.svg?branch=master&service=github")
+    img = ("coveralls.io/repos/github/%s/%s/" % (owner, project) +
+           "badge.svg?branch=master")
     return fmt_badge(img, url, "Coverage report status")
 
 

@@ -12,7 +12,7 @@ pkglts
     :alt: Travis build status
     :target: https://travis-ci.org/revesansparole/pkglts
 
-.. image:: https://coveralls.io/repos/revesansparole/pkglts/badge.svg?branch=master&service=github
+.. image:: https://coveralls.io/repos/github/revesansparole/pkglts/badge.svg?branch=master
     :alt: Coverage report status
     :target: https://coveralls.io/github/revesansparole/pkglts?branch=master
 
