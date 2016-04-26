@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 tpl_src_name = "%skey, base.pkgname%s" % (opening_marker, closing_marker)
 
 non_bin_ext = ("", ".bat", ".cfg", ".in", ".ini", ".no", ".py", ".rst", ".sh",
-               ".txt", ".yml")
+               ".dblite", ".txt", ".yml")
 
 
 def ensure_installed_packages(requirements, msg, pkg_cfg):
