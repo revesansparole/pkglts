@@ -30,7 +30,7 @@ software.
 Final Academic User means the beneficiary of this License
 who is employed by a non-profit organization being
 aimed at conducting research works or teaching
-activities and hereafter referred to as “You”.
+activities and hereafter referred to as "You".
 
 Domain of the license means research and development
 activities aimed at the production of scientific
@@ -47,21 +47,21 @@ organization and the source code constitute trade
 secrets and confidential information that You are not
 allowed to use or disclose, except for the purposes
 mentioned in this agreement.
-b) The software is protected by the code de la propriété
+b) The software is protected by the code de la propriete
 intellectuelle in France and abroad by international
 agreements on authors rights. The breach of one of
-the author’s rights constitutes an infringement crime
+the author's rights constitutes an infringement crime
 punished in France by article L 335-2 of the code de
-la propriété intellectuelle and punished of 2 years in
-prison and a 150 000€ fine.
-c) The author –INRA- reserves all rights that are not
+la propriete intellectuelle and punished of 2 years in
+prison and a 150 000 euro fine.
+c) The author -INRA- reserves all rights that are not
 expressly cited in the present license agreement.
 
 2) License of the software
 a) INRA grants to You by this agreement a non-
 exclusive, world-wide and royalty-free license to
 use the software to the end described hereunder in
-the domain of the license, as long as Y o u will
+the domain of the license, as long as You will
 comply with the terms and conditions of this
 agreement.
 b) You are authorised to download, install, execute the
@@ -72,7 +72,7 @@ are not allowed to download, install or execute the
 software on a server.
 d) You are not authorised to rent, sell, sublease,
 distribute, assign, transfer, license, sublicense or
-otherwise share the software or one of INRA’s
+otherwise share the software or one of INRA's
 rights on the software.
 e) You may personalize the set up of the software or
 extend its functions. As well, You may translate,
@@ -90,7 +90,7 @@ The copy of the source code of the software or the
 translation of this code are totally forbidden even
 when they are essential for the good working order
 of the software with other softwares.
-Moreover, Y o u are not authorized to reverse
+Moreover, You are not authorized to reverse
 engineer, disassemble or decompile the software.
 Necessary information for good working order with
 other softwares is available by INRA, without
@@ -102,16 +102,16 @@ permanently or temporarily) whole or a part of the
 content of the software (data) onto an other
 medium, by any mean and in any form. Moreover,
 you are neither authorised to re-use (that is to put at
-the public’s disposal) whole or a part of the content
+the public's disposal) whole or a part of the content
 of the software (data) whatever the form may be.
 
 3) Limitation of warranty
 Except as expressly set forth in this agreement, the software
-is provided on a « as is » basis, without warranties or
+is provided on a "as is" basis, without warranties or
 conditions of any kind, either express or implied including,
 without limitation any warranties or conditions of title, non-
 infringement, merchantability or fitness for a particular
-purpose. Y o u are responsible for determining the
+purpose. You are responsible for determining the
 appropriateness of using the software and assume all risks
 associated with its exercise of rights under this agreement
 including but not limited to the risks and costs of program
@@ -149,7 +149,7 @@ competent.
 
 Contact :
 -------
-Michaël Chelle
+Michael Chelle
 UMR Environnement et Grandes cultures
 INRA
 78850 Thiverval-Grignon (France)
