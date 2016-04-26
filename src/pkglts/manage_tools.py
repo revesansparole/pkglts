@@ -266,11 +266,15 @@ def clone_example(src_dir, tgt_dir, pkg_cfg, handlers):
 
 
 def package_hash_keys(target):
-    """ Walk all files in package and compute their hash key
+    """Walk all files in package and compute their hash key.
 
-    args:
-     - pkg_cfg (dict of (str, dict)): package configuration parameters
-     - target (str): path to read files from
+    Notes: walk only recognized extensions files
+
+    Args:
+        target (str): path to read files from
+
+    Returns:
+        (dict of str: str): mapping file path, hash
     """
     hm = {}
     for root, dnames, fnames in walk(target):
@@ -282,7 +286,8 @@ def package_hash_keys(target):
 
         for name in fnames:
             pth = (root + "/" + name).replace("\\", "/")
-            hm[pth] = get_hash(pth)
+            if splitext(pth)[1] in non_bin_ext:
+                hm[pth] = get_hash(pth)
 
     return hm
 
