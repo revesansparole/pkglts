@@ -24,17 +24,18 @@ non_bin_ext = ("", ".bat", ".cfg", ".in", ".ini", ".no", ".py", ".rst", ".sh",
 
 
 def ensure_installed_packages(requirements, msg, pkg_cfg):
-    """ Ensure all packages in requirements are installed.
+    """Ensure all packages in requirements are installed.
 
     If not, ask user permission to install them.
 
-    args:
-     - requirements (list of str): list of package names to install
+    Args:
+        requirements (list of str): list of package names to install
                                    if needed
-     - pkg_cfg (dict of (str, dict)): package configuration
+        msg (str): error message to print
+        pkg_cfg (dict of str:dict): package configuration
 
-    return:
-     - (bool): whether all required packages are installed or not
+    Returns:
+        (bool): whether all required packages are installed or not
     """
     ife = get_install_front_end(pkg_cfg["_pkglts"]["install_front_end"])
     to_install = set(requirements) - set(ife.installed_packages())
@@ -49,13 +50,13 @@ def ensure_installed_packages(requirements, msg, pkg_cfg):
 
 
 def check_option_parameters(name, pkg_cfg):
-    """ Check that the parameters associated to an option are valid
+    """Check that the parameters associated to an option are valid.
 
     Try to import Check function in option dir.
 
-    args:
-     - option (str): option name
-     - pkg_cfg (dict of (str, dict of (str, any))): package configuration
+    Args:
+        name (str): option name
+        pkg_cfg (dict of str:dict): package configuration
     """
     try:
         opt_cfg = import_module("pkglts.option.%s.config" % name)
@@ -68,13 +69,14 @@ def check_option_parameters(name, pkg_cfg):
 
 
 def update_opt(name, pkg_cfg):
-    """ Update an option of this package. If the option
-    does not exists yet, add it first.
-    See the list of available option online
+    """Update an option of this package.
 
-    args:
-     - name (str): name of option to add
-     - pkg_cfg (dict of (str, dict)): package configuration parameters
+    Notes: If the option does not exists yet, add it first.
+           See the list of available option online
+
+    Args:
+        name (str): name of option to add
+        pkg_cfg (dict of str:dict): package configuration
     """
     logger.info("update option %s", name)
 
@@ -128,14 +130,14 @@ def update_opt(name, pkg_cfg):
 
 
 def clone_base_option_dir(src_dir, tgt_dir, pkg_cfg, handlers, overwrite_file):
-    """ Clone src_dir into tgt_dir
+    """Clone src_dir into tgt_dir.
 
-    args:
-     - src_dir (str): path to source directory
-     - tgt_dir (str): path to target directory in which to copy files
-     - pkg_cfg (dict of (str, dict)): package configuration parameters
-     - handlers (dict of func): associate keys to handler functions
-     - overwrite_files (dict of (str, bool)): whether to overwrite a specific
+    Args:
+        src_dir (str): path to source directory
+        tgt_dir (str): path to target directory in which to copy files
+        pkg_cfg (dict of str:dict): package configuration
+        handlers (dict of func): associate keys to handler functions
+        overwrite_file (dict of (str, bool)): whether to overwrite a specific
                                               path in case of conflict
     """
     error_files = []
@@ -200,16 +202,18 @@ def clone_base_option_dir(src_dir, tgt_dir, pkg_cfg, handlers, overwrite_file):
 
 
 def clone_base_option(option, pkg_cfg, handlers, target, overwrite_file):
-    """ Copy all files in option repository to target
+    """
 
-    Do not overwrite existing files, just ensure that
-    a clone of option repository exists.
+    Args:
+        option (str): name of option
+        pkg_cfg (dict of str:dict): package configuration
+        handlers (dict of func): associate keys to handler functions
+        target (str): path to copy files to
+        overwrite_file (dict of (str, bool)): whether to overwrite a specific
+                                              path in case of conflict
 
-    args:
-     - option (str): name of option
-     - pkg_cfg (dict of (str, dict)): package configuration parameters
-     - handlers (dict of func): associate keys to handler functions
-     - target (str): path to copy files to
+    Returns:
+
     """
     if (option, True) not in ls("base"):
         return []  # nothing to do
@@ -221,8 +225,17 @@ def clone_base_option(option, pkg_cfg, handlers, target, overwrite_file):
 
 
 def clone_example(src_dir, tgt_dir, pkg_cfg, handlers):
-    """ Clone an example directory into tgt_dir
+    """Clone an example directory into tgt_dir
     replacing text in files on the way.
+
+    Args:
+        src_dir (str): path to source directory
+        tgt_dir (str): path to target directory in which to copy files
+        pkg_cfg (dict of str:dict): package configuration
+        handlers (dict of func): associate keys to handler functions
+
+    Returns:
+
     """
     for src_name, is_dir in ls(src_dir):
         src_pth = src_dir + "/" + src_name
@@ -293,8 +306,17 @@ def package_hash_keys(target):
 
 
 def regenerate_file(pth, pkg_cfg, handlers):
-    """ Regenerate the content of a file, loading divs in
-    pkglts_data.base if necessary.
+    """Regenerate the content of a file.
+
+    Notes: loads divs in pkglts_data.base if necessary
+
+    Args:
+        pth (str): path to file
+        pkg_cfg (dict of str:dict): package configuration
+        handlers (dict of func): associate keys to handler functions
+
+    Returns:
+
     """
     with open(pth, 'r') as f:
         content = f.read()
@@ -306,14 +328,17 @@ def regenerate_file(pth, pkg_cfg, handlers):
 
 
 def regenerate_pkg(pkg_cfg, handlers, target, overwrite_file):
-    """ Walk all files in package and replace content
+    """Walk all files in package and replace content.
 
-    args:
-     - pkg_cfg (dict of (str, dict)): package configuration parameters
-     - handlers (dict of func): associate keys to handler functions
-     - target (str): path to copy files to
-     - overwrite_file (dict of (str, bool)): whether or not to overwrite
-                                              a specific file
+    Args:
+        pkg_cfg (dict of str:dict): package configuration
+        handlers (dict of func): associate keys to handler functions
+        target (str): path to copy files to
+        overwrite_file (dict of str:bool): whether or not to overwrite
+                                           a specific file
+
+    Returns:
+
     """
     for name in listdir(target):
         pth = target + "/" + name
