@@ -30,3 +30,19 @@ def get_local_version():
     """
     import pkglts
     return StrictVersion(pkglts.__version__)
+
+
+def upgrade_pkg_cfg_version(pkg_cfg, version):
+    """Upgrade the version of pkg_cfg file from version to version +1
+
+    Args:
+        pkg_cfg (dict of str: any): package configuration
+        version (int): current version of file
+
+    Returns:
+        (dict of str: any): a reference to an updated pkg_cfg
+    """
+    if version == 0:
+        pkg_cfg['_pkglts']['version'] = pkg_cfg['_pkglts'].get('version', 1)
+
+    return pkg_cfg

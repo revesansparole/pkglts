@@ -2,7 +2,8 @@
     "_pkglts": {
         "auto_install": true, 
         "install_front_end": "pip", 
-        "use_prompts": false
+        "use_prompts": false, 
+        "version": 1
     }, 
     "base": {
         "namespace": null, 

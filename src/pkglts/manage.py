@@ -19,7 +19,8 @@ from .manage_tools import (check_option_parameters, package_hash_keys,
                            update_opt)
 from .option_tools import get_user_permission
 from .templating import replace
-from .versioning import get_github_version, get_local_version
+from .versioning import (get_github_version, get_local_version,
+                         upgrade_pkg_cfg_version)
 
 
 try:
@@ -31,6 +32,7 @@ logger = logging.getLogger(__name__)
 
 pkglts_dir = ".pkglts"
 pkg_cfg_file = "pkg_cfg.json"
+current_pkg_cfg_version = 1
 pkg_hash_file = "pkg_hash.json"
 
 default_cfg = dict(_pkglts=dict(use_prompts=False,
@@ -61,10 +63,6 @@ def init_pkg(rep="."):
         pkg_cfg = get_pkg_config(rep)
     else:
         pkg_cfg = default_cfg
-    # if '_pkglts' not in pkg_cfg:
-    #     pkg_cfg['_pkglts'] = dict(use_prompts=False,
-    #                               auto_install=True,
-    #                               install_front_end='pip')
     write_pkg_config(pkg_cfg, rep)
 
     if not exists(pj(rep, pkglts_dir, pkg_hash_file)):
@@ -82,6 +80,11 @@ def get_pkg_config(rep="."):
     """
     with open(pj(rep, pkglts_dir, pkg_cfg_file), 'r') as f:
         pkg_cfg = json.load(f)
+
+    # update version of pkg_config
+    file_version = pkg_cfg['_pkglts'].get('version', 0)
+    for i in range(file_version, current_pkg_cfg_version):
+        upgrade_pkg_cfg_version(pkg_cfg, i)
 
     # format template entries
     handlers = {}  # use only default handlers
