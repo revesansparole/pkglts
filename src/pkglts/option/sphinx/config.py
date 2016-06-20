@@ -1,6 +1,7 @@
 
 parameters = [
-    ("theme", 'default')
+    ("theme", 'default'),
+    ("autodoc-dvlpt", True)
 ]
 
 

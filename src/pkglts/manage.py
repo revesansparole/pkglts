@@ -32,12 +32,13 @@ logger = logging.getLogger(__name__)
 
 pkglts_dir = ".pkglts"
 pkg_cfg_file = "pkg_cfg.json"
-current_pkg_cfg_version = 1
+current_pkg_cfg_version = 2
 pkg_hash_file = "pkg_hash.json"
 
 default_cfg = dict(_pkglts=dict(use_prompts=False,
                                 auto_install=True,
-                                install_front_end='stdout'))
+                                install_front_end='stdout',
+                                version=current_pkg_cfg_version))
 
 
 class FormattedString(str):

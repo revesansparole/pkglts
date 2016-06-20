@@ -3,7 +3,7 @@
         "auto_install": true, 
         "install_front_end": "pip", 
         "use_prompts": false, 
-        "version": 1
+        "version": 2
     }, 
     "base": {
         "namespace": null, 
@@ -53,6 +53,7 @@
         "project": "{{key, github.project}}"
     }, 
     "sphinx": {
+        "autodoc-dvlpt": true, 
         "theme": "default"
     }, 
     "test": {}, 
