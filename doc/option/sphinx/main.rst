@@ -40,5 +40,5 @@ run the make command from the doc directory::
 This will produce a build directory with the same architecture as explained
 above.
 
-.. _readthedcos: http://docs.readthedocs.org/en/latest/index.html
+.. _readthedocs: http://docs.readthedocs.org/en/latest/index.html
 .. _sphinx: http://sphinx-doc.org/

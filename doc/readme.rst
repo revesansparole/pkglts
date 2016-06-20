@@ -11,7 +11,7 @@ Packages generated with Package Builder contains three different types of files:
    change and not meant to be modified by user. These files are generated
    automatically by the package builder using templates provided with the package.
  - developer data and modules edited by hand which contains the actual python
-   code of the package independently of the structure of the package. pkglts_
+   code of the package independently of the structure of the package. pkglts_git_
    will never touch them. If they conflict with some files used by a newly
    added option, the user will be prompted and will have to solve the conflict
    to install the option.
@@ -37,7 +37,7 @@ This phase will never overwrite any files you modified or created. You'll be pro
 in case of conflicts but it is your responsibility to solve them and relaunch the
 command.
 
-.. _pkglts: https://github.com/revesansparole/pkglts
+.. _pkglts_git: https://github.com/revesansparole/pkglts
 
 .. _pkg_struct_func:
 

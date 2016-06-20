@@ -80,12 +80,12 @@ your code in it.
 Documentation
 =============
 
-More documentation can be found on readthedocs_. If you just intend to use this package
+More documentation can be found on readthedocs_pkglts_. If you just intend to use this package
 you can start with some tutorials_. However, if the core functionality are
 not sufficient and you want to be part of the development you might be interested
 with the developer_ section of the doc.
 
 
-.. _readthedocs: https://pkglts.readthedocs.org/en/latest
+.. _readthedocs_pkglts: https://pkglts.readthedocs.org/en/latest
 .. _tutorials: https://pkglts.readthedocs.org/en/latest/tutorials.html
 .. _developer: https://pkglts.readthedocs.org/en/latest
