@@ -8,7 +8,7 @@ from importlib import import_module
 import json
 import logging
 from os import listdir, mkdir, remove, walk
-from os.path import exists, splitext
+from os.path import exists, normpath, splitext
 from os.path import join as pj
 from shutil import rmtree
 
@@ -153,8 +153,8 @@ def clean(rep="."):
     args:
      - rep (str): default ".", top directory to clean
     """
-    for name in ("build", "dist"):
-        pth = pj(rep, name)
+    for name in ("build", "dist", "doc/_dvlpt", "doc/build"):
+        pth = normpath(pj(rep, name))
         if exists(pth):
             rmtree(pth)
 

@@ -36,6 +36,12 @@ lib64
 # pypi rc file
 .pypirc
 
+
+
+# sphinx autogen file
+doc/_dvlpt
+
+
 # }}
 
 # user defined

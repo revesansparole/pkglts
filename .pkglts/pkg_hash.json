@@ -2,7 +2,7 @@
     "./.coverage": [], 
     "./.coveragerc": [], 
     "./.gitignore": [
-        "Kn2lOmKMN+jefzJc3YLftmeAltG5xE+CwyhMsENJrqWpHFiqNVqsMM2l6MEBciyN5J9zyAsbdn6dcUyzRcw+jg=="
+        "H5Rv+Z6Y5Pew1W/gay6xAMgwnhF81HE+O6/usD6ItE/cymzGni6Iy/g5PH0LzQhR8Z2LqOalS3c5HywdZ20c3A=="
     ], 
     "./.landscape.yml": [], 
     "./.pypirc": [
@@ -24,17 +24,15 @@
     "./README.rst": [
         "EnFnU9t7DCRiAKQljOP8/kz+QWTUTFT8xRHWdJsYGXpTyzq0M9GyofQNqSyp/pWyQ3H4VI+t5sbKiCLKgs0UPA=="
     ], 
-    "./avatar.png": [], 
     "./conda_pkglts/bld.bat": [], 
     "./conda_pkglts/build.sh": [], 
-    "./conda_pkglts/meta.yaml": [], 
     "./doc/Makefile": [
         "fCpQbGBjkltJc0kS1o3WrQeqpsOzMhUa8FlGTCab3LI4yYuTq7VnoQHXV7clRKyfu2105FRS7JfCEoePiVkMpQ=="
     ], 
     "./doc/_static/readme.txt": [], 
     "./doc/authors.rst": [], 
     "./doc/conf.py": [
-        "AWF8J81Yu3dBNcmU8MNIHsV16C6udwkECAVFKtbdAg1/J5pkReS/a9+8gD5AP30lL4jTycn1wTy0eabN6PPVnw=="
+        "9c4kkgN6LS344bU1QRkJPxXNppyG48sCu9mNC0rOw3495Kj/MXVLBY/zcwUCYe4u+MQgFmjMGIYB971WuGbOjQ=="
     ], 
     "./doc/contributing.rst": [], 
     "./doc/generate.py": [], 
@@ -55,7 +53,6 @@
     "./dvlpt_requirements.txt": [
         "+0rCsgUH/i+KS0cdBXkd+wTjsLEKYPrCtkvYOwnMHfBQ6mPpCfYE3yGYotUl+B+IuTXSVKbL283hOpI+3DbwiA=="
     ], 
-    "./entry_points.json": [], 
     "./feature_list.txt": [], 
     "./requirements.txt": [
         "AWuoxM/eZa+Zy1+ouKN+Lrc/SBs640mRZm3y4E/rbAOGZuvR7CtvYjlndWAzxwLd5fQj99R6tu0YJ/9TeDcx9w=="

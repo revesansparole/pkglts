@@ -309,4 +309,32 @@ texinfo_documents = [
 # If true, do not generate a @detailmenu in the "Top" node's menu.
 # texinfo_no_detailmenu = False
 
+# use apidoc to generate developer doc
+import os
+from os import path
+from sphinx.apidoc import create_modules_toc_file, recurse_tree
+
+
+class Opt(object):
+    pass
+
+
+rootpath = path.abspath(path.join(project_root, "src"))
+opts = Opt()
+opts.modulefirst = None
+opts.separatemodules = None
+opts.noheadings = None
+opts.destdir = path.abspath(path.join(project_root, "doc", "_dvlpt"))
+opts.suffix = source_suffix
+opts.dryrun = None
+opts.force = None
+opts.header = 'src'
+opts.maxdepth = 4
+
+if not path.isdir(opts.destdir):
+    os.makedirs(opts.destdir)
+
+modules = recurse_tree(rootpath, [], opts)
+create_modules_toc_file(modules, opts)
+
 # }}
