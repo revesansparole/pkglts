@@ -6,7 +6,7 @@ pkglts
 
 .. image:: https://readthedocs.org/projects/pkglts/badge/?version=latest
     :alt: Documentation status
-    :target: https://pkglts.readthedocs.org/en/latest/?badge=latest
+    :target: https://pkglts.readthedocs.io/en/latest/?badge=latest
 
 .. image:: https://travis-ci.org/revesansparole/pkglts.svg?branch=master
     :alt: Travis build status
