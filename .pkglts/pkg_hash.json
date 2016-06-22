@@ -1,96 +1,72 @@
 {
-    "./.coverage": [], 
-    "./.coveragerc": [], 
-    "./.gitignore": [
-        "H5Rv+Z6Y5Pew1W/gay6xAMgwnhF81HE+O6/usD6ItE/cymzGni6Iy/g5PH0LzQhR8Z2LqOalS3c5HywdZ20c3A=="
-    ], 
-    "./.landscape.yml": [], 
-    "./.pypirc": [
-        "nriHqyg0tZfJFzsWieR7xycUgCTFzHouvN5qvVWyEOMrf1J/z+hjfg/cJLXKbVOXKZce/CjIsONfHsrvI3R7rA==", 
-        "A/psVrrS7dUCsFN8HRQOYonTTb/pEVXipsvQ7dUjKtvtImZiaPZ+WQj/VojxFWOpW7b9p+piouCPi9zfKa8f1A=="
-    ], 
-    "./.travis.yml": [
-        "MFYhtcePtBUKPq9/sePu7t5KrGIlouOL5fQEK5oAVq6dJVYPS1ix4TSII7FuNw2Q2bFmLeymGp8icNZSszj+NA=="
-    ], 
-    "./AUTHORS.rst": [], 
-    "./CONTRIBUTING.rst": [], 
-    "./HISTORY.rst": [], 
-    "./LICENSE": [
-        "K+/cXPOoUd3kCV74oh3eAd4jEM1Zl5ycOadeYhk++UgVDTAptzaSeEuVaeT1wD8qp3mxw2UXkNVnXY9uD0bEtg=="
-    ], 
-    "./MANIFEST.in": [
-        "R0QcyW9DsoBgVEEfkGh7pjiztY5XxLC1j8156m4uS3Zn9DoLaNF8HxvC8KwtPXdiW4X1wQJ4pJ9205STvgrOGA=="
-    ], 
-    "./README.rst": [
-        "sCXViIQJxW36rCEy7OZdzx+Mx1KyU9IsD36mACF/SuyMrt2omDvGCtAX8kJIFE/Ff7u/zmr/63/+q3ssYNOtMQ=="
-    ], 
-    "./conda_pkglts/bld.bat": [], 
-    "./conda_pkglts/build.sh": [], 
-    "./doc/Makefile": [
-        "fCpQbGBjkltJc0kS1o3WrQeqpsOzMhUa8FlGTCab3LI4yYuTq7VnoQHXV7clRKyfu2105FRS7JfCEoePiVkMpQ=="
-    ], 
-    "./doc/_static/readme.txt": [], 
-    "./doc/authors.rst": [], 
-    "./doc/conf.py": [
-        "9c4kkgN6LS344bU1QRkJPxXNppyG48sCu9mNC0rOw3495Kj/MXVLBY/zcwUCYe4u+MQgFmjMGIYB971WuGbOjQ=="
-    ], 
-    "./doc/contributing.rst": [], 
-    "./doc/generate.py": [], 
-    "./doc/history.rst": [], 
-    "./doc/index.rst": [], 
-    "./doc/installation.rst": [], 
-    "./doc/make.bat": [
-        "Tk/+eZHH7Ss0u6nDShjeISQZmDwP2+T79T9iaBXwWtSC2AJBYjifliRsFaupRval8lXgd0Jg4jNRMcDOC31oaw=="
-    ], 
-    "./doc/option_list.rst": [], 
-    "./doc/readme.rst": [], 
-    "./doc/tutorial/dvlpt_env.rst": [], 
-    "./doc/tutorial/migration.rst": [], 
-    "./doc/tutorial/pypi.rst": [], 
-    "./doc/tutorial/web_tools.rst": [], 
-    "./doc/tutorials.rst": [], 
-    "./doc/usage.rst": [], 
-    "./dvlpt_requirements.txt": [
-        "+0rCsgUH/i+KS0cdBXkd+wTjsLEKYPrCtkvYOwnMHfBQ6mPpCfYE3yGYotUl+B+IuTXSVKbL283hOpI+3DbwiA=="
-    ], 
-    "./feature_list.txt": [], 
-    "./requirements.txt": [
-        "AWuoxM/eZa+Zy1+ouKN+Lrc/SBs640mRZm3y4E/rbAOGZuvR7CtvYjlndWAzxwLd5fQj99R6tu0YJ/9TeDcx9w=="
-    ], 
-    "./setup.cfg": [
-        "Li7jVzsz+OmF22LUJUcVJUWuzDlfsjH1zd7LiTTJQzAmProBY+Q4ZAvV62bbdtmSXP6X4+OJdLyvtHQc3qbMBw=="
-    ], 
-    "./setup.py": [
-        "zd6lpzXV4fVyR9LxbgkWUbvLXNu7XhcbQvm/z5yQGmVKrcFb4ZoHpsXMHS8KOzCSUPuxqN1/nUDHhaSPvxqLqw==", 
-        "6tA9s9cbDHz4mx0PGt+gMLM9HamuOYqFGjwc7LYZcM72XjiUaG0A7g6hNS+gy8cS0FyZDnf46GLNwx0mNZUs7Q=="
-    ], 
-    "./src/pkglts/__init__.py": [
-        "bXi4YRtInDLkaTvGi4V/ZIZpKXGCIgIw/Qm7wX5YZ+tM5kkkAAGCzzuDhxJDzcpoWKBE1UxDj7mT+40YH1DZQA==", 
-        "fIn+GWAvhWfY/9NV/Sw6VXI4UIvx1OTgGxXQ1U5+9JFQ4vhuETzkaQvz8W4M9rMDYlL0vAeRmP2p2DyMgcvb9A=="
-    ], 
-    "./src/pkglts/data_access.py": [
-        "f1G0f/Qo2xa8rNC7B7eA9YGU6Wqtm5HWB6jT1Klg2c6VV4zSdqqg6yno95BrFdMhSnx4l0Mh3hfNLBkqEYBLlw=="
-    ], 
-    "./src/pkglts/file_management.py": [], 
-    "./src/pkglts/github.py": [], 
-    "./src/pkglts/install_env/__init__.py": [], 
-    "./src/pkglts/install_env/conda_front_end.py": [], 
-    "./src/pkglts/install_env/load_front_end.py": [], 
-    "./src/pkglts/install_env/pip_front_end.py": [], 
-    "./src/pkglts/install_env/stdout_front_end.py": [], 
-    "./src/pkglts/local.py": [], 
-    "./src/pkglts/logging_tools.py": [], 
-    "./src/pkglts/manage.py": [], 
-    "./src/pkglts/manage_script.py": [], 
-    "./src/pkglts/manage_tools.py": [], 
-    "./src/pkglts/option_tools.py": [], 
-    "./src/pkglts/templating.py": [], 
-    "./src/pkglts/tree_ascii_fmt.py": [], 
-    "./src/pkglts/version.py": [
-        "tsE6o8ydaZKunlAaO7bd2JnTm07FGTUmU/HbPdPWqKVF7DVRl4RVwPX71lvU0oyPnaCnetHHG3X883KN/HOP1g=="
-    ], 
-    "./src/pkglts/versioning.py": [], 
-    "./tox.ini": [
-        "vVWIpwwtWUMv9A2BuNhJMdEapVl0sQJO/Y6gpb9Q+Uz9IOnZUtqetNDV79vRhZV65PKYaDoirxqhXssoWeCP6A=="
-    ]
+    ".coveragerc": {}, 
+    ".gitignore": {
+        "github": "pDLSRjBMnEscyxs5NRfmDYtEKG3kLLAsSkJAi27NJGiUNfM/3LpMXb+oWmOqWxo0ZbO2lvck0xQV+STUb9/YXw=="
+    }, 
+    ".landscape.yml": {}, 
+    ".pypirc": {
+        "pypi1": "2NY8qKq6AEMWhHocVeMN8DUHkza6rCDCVLCpKoQ4Y8NsHyHgvDfznKJo/+3qXWxOF2azATTm9vO4jB58sNVrlA==", 
+        "pypi2": "zWBcGMyChxCuXPMsosS2ktztvIXlHRzYwkMZ3rZivm7W3l/sEqvUrhHagBw9CL72Alod3KL7aE/WIRoK3FeqfA=="
+    }, 
+    ".travis.yml": {
+        "travis": "B+Xa91lGsi3X+n9vu7Si3YfnSPZBME46wqy3NWksUc/5hrtNZ0AvnXK+Y6oHMQMs4Vrk/L2ZKcAXo1DsbYN2Yw=="
+    }, 
+    "AUTHORS.rst": {}, 
+    "CONTRIBUTING.rst": {}, 
+    "HISTORY.rst": {}, 
+    "LICENSE": {
+        "license": "21ExMhSzB2uXQuU1VoH7++nrb4u6TbesqGtJDpM39OLPWft9SJ2tJ956R6foYmkI9VuJay7SUrhFLPxxMEHLxg=="
+    }, 
+    "MANIFEST.in": {
+        "pysetup": "rXYO8bx4bxYF1wwxwZ2Hd7qeyEIfCqYm3Dc1QI8ZjyeSsQlWxqaySRYdfUPEzZ/VnaPnCOrI0nLJuhiCoaYTPg=="
+    }, 
+    "README.rst": {
+        "doc": "N9kQCgEdDz/n2PladE1BTgw6e0ThFVWFp+GZoEC6dqtFdGIUzwTrWal6GBx0nKUthM14LhzKrOmpUDxXWGLEAg=="
+    }, 
+    "conda_pkglts/bld.bat": {}, 
+    "conda_pkglts/build.sh": {}, 
+    "conda_pkglts/meta.yaml": {}, 
+    "doc/Makefile": {
+        "sphinx": "C58jxdu8XJNOoaWOw7VWy4LwFmS8lTQt/JeZLt5JozMSJ503plOZchucx+vAEzELbx/Czs/h9pshe9s+9HeOeQ=="
+    }, 
+    "doc/authors.rst": {}, 
+    "doc/conf.py": {
+        "sphinx": "B7xI8UXYV45LBJi2WkdbfX+IsWMP5Btw75JStX2cI69GTq5qpyq2CTy67OduILMCS6yFuVoPAVeMSu9a9eC+dg=="
+    }, 
+    "doc/contributing.rst": {}, 
+    "doc/history.rst": {}, 
+    "doc/index.rst": {}, 
+    "doc/installation.rst": {}, 
+    "doc/make.bat": {
+        "sphinx": "oA67PK7JSR3w9u1V0gOXFZAb8qgfgUJ0wQ46cVXu7M3iJyAbLf76WkEqw6Y1r5Q6EvHAogcjmImdGsOpiYZ22g=="
+    }, 
+    "doc/readme.rst": {}, 
+    "doc/usage.rst": {}, 
+    "dvlpt_requirements.txt": {
+        "pysetup": "zXvJvQ121kUkGLUcsiijIO2TugplbugS72E3mK0OnVilR4mLojkSobarXifBQA8RpjnInBXVlhJLN1I7a75nyg=="
+    }, 
+    "requirements.txt": {
+        "pysetup": "z4PhNX7vuL3xVChQ1m2AB9Yg5AULVxXcg/SpIdNs6c5H0NE8XYXysP+DGNKHfuwvY7kxvUdBeoGlODJ6+SfaPg=="
+    }, 
+    "setup.cfg": {
+        "pysetup": "dHzB0Ge359hiqFRIgMMXRlEjcGN3Cj+kkkz4PDfNdjXjGNJP0X4DsEcMr1+yO2LfDD03elqZS6VfN2Cf+ihLNA=="
+    }, 
+    "setup.py": {
+        "pysetup.call": "2wHuP94SpWKZpqOzExkQGTxnhGPgBHK3qOdPn0Ncstj5FkZ7FBGGM/inqAXaI4QLKQtTNlOUYRGSkYUWAUcf1w==", 
+        "pysetup.kwds": "wDvNDoII50rvrd7uvLrUM+C7YWt3vqwNtvWpQ4mI69l38CHXe7h0m3Y4nAnhwyrB5cNh8vIen9zmrApdxrGK2Q=="
+    }, 
+    "src/pkglts/__init__.py": {
+        "base": "gR33dW0qqYmsV9NSNB+DD8XmuxnC2t0mKjnMoU5728qh97fSER6MbX+3QKxpZDLByZToaAay4xhx8acxketJmA=="
+    }, 
+    "src/pkglts/data_access.py": {
+        "data": "vplS1+8sAuTPMtddHusyNPCylIy3z8DqtLJXaardk6OTP8sx+kM9nSOtkfaSzls8FcHt2SgcBK2gpepRFkeoMg=="
+    }, 
+    "src/pkglts/version.py": {
+        "version": "MZQTyEWit00FyaHwKsLqNb75QNv3vLclB89WuWGu6O4JykKb6Sq0P0oJvi7GG8nww7FI5CvJKXnZBkvF1PFJXg=="
+    }, 
+    "src/pkglts_data/__init__.py": {}, 
+    "test/__init__.py": {}, 
+    "tox.ini": {
+        "tox": "oVrgK/hOSr1XF0SORNcNIaXdJIa2g2x+072dahFMs1XRpw1RXsseCXGGZPQrLlteeI1StY5eydutisSmysXs4Q=="
+    }
 }

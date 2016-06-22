@@ -1,17 +1,18 @@
-# {{pkglts travis,
+# {# pkglts, travis
 # Config file for automatic testing at travis-ci.org
 
 language: python
 
 python:
-   - "2.7"
-   - "3.4"
+  - "2.7"
+  - "3.4"
 
 # command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
 install:
  - pip install -r requirements.txt
  - pip install -r dvlpt_requirements.txt
  - pip install coveralls
+
 
 # command to run tests, e.g. python setup.py test
 script: nosetests
@@ -20,7 +21,7 @@ script: nosetests
 after_success:
   coveralls
 
-# }}
+# #}
 # blacklist
 branches:
   except:

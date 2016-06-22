@@ -104,7 +104,7 @@ Before you submit a pull request, check that it meets these guidelines:
    your new functionality into a function with a docstring, and add the
    feature to the list in README.rst.
 3. The pull request should work for Python 2.7, 3.4, and 3.5. Check
-   https://travis-ci.org/github.owner/pkglts/pull_requests
+   https://travis-ci.org/revesansparole/pkglts/pull_requests
    and make sure that the tests pass for all supported Python versions.
 
 Tips
@@ -116,5 +116,5 @@ To run a subset of tests::
 
 
 
-.. _issues: github.url/issues
+.. _issues: https://github.com/revesansparole/pkglts/issues
 .. _virtualenv: https://pypi.python.org/pypi/virtualenv

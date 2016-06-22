@@ -1,4 +1,4 @@
-{{pkglts license.generate,
+{{# pkglts, license
 
 CeCILL-C FREE SOFTWARE LICENSE AGREEMENT
 
@@ -516,4 +516,5 @@ jurisdiction, by the more diligent Party.
 
 
 Version 1.0 dated 2006-09-05.
-}}
+
+#}

@@ -6,9 +6,11 @@
         "version": 2
     }, 
     "base": {
+        "authors": [
+            ["revesansparole", "revesansparole@gmail.com"]
+        ],
         "namespace": null, 
-        "owner": "revesansparole", 
-        "pkgname": "pkglts", 
+        "pkgname": "pkglts",
         "url": null
     }, 
     "conda": {}, 
@@ -24,13 +26,15 @@
     }, 
     "flake8": {}, 
     "github": {
-        "project": "{{key, base.pkgname}}"
+        "owner": "{{ base.authors[0][0] }}",
+        "project": "{{ base.pkgname }}",
+        "url": "https://github.com/{{ github.owner }}/{{ github.project }}"
     }, 
     "landscape": {}, 
     "license": {
         "name": "CeCILL-C", 
         "organization": "OpenAlea", 
-        "project": "{{key, base.pkgname}}", 
+        "project": "{{ base.pkgname }}",
         "year": "2015"
     }, 
     "pypi": {
@@ -42,18 +46,16 @@
         ]
     }, 
     "pysetup": {
-        "author_email": "revesansparole@gmail.com", 
-        "author_name": "{{key, base.owner}}", 
         "intended_versions": [
             "27", 
             "34"
         ]
     }, 
     "readthedocs": {
-        "project": "{{key, github.project}}"
+        "project": "{{ github.project }}"
     }, 
     "sphinx": {
-        "autodoc-dvlpt": true, 
+        "autodoc_dvlpt": true,
         "theme": "default"
     }, 
     "test": {}, 

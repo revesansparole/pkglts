@@ -1,11 +1,11 @@
-# {{pkglts pysetup.dvlpt_requirements,
-tox
-sphinx
-github3.py
-twine
-nose
-coverage
-mock
-flake8
+# {# pkglts, pysetup
 
-# }}
+coverage
+flake8
+github3.py
+mock
+nose
+sphinx
+tox
+twine
+# #}

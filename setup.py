@@ -1,11 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# {{pkglts pysetup.kwds,
+# {# pkglts, pysetup.kwds
 # format setup arguments
+
 from os import walk
 from os.path import abspath, normpath
 from os.path import join as pj
+
 from setuptools import setup, find_packages
 
 
@@ -54,39 +56,41 @@ setup_kwds = dict(
     version=version["__version__"],
     description=short_descr,
     long_description=readme + '\n\n' + history,
-    author="revesansparole",
-    author_email='revesansparole@gmail.com',
-    url='',
-    license="CeCILL-C",
+    author="revesansparole, ",
+    author_email="revesansparole@gmail.com, ",
+    url='https://github.com/revesansparole/pkglts',
+    license='CeCILL-C',
     zip_safe=False,
 
     packages=find_packages('src'),
     package_dir={'': 'src'},
+    
     include_package_data=True,
     package_data={'pkglts_data': data_files},
     install_requires=parse_requirements("requirements.txt"),
     tests_require=parse_requirements("dvlpt_requirements.txt"),
     entry_points={},
     keywords='packaging, package builder',
+    
     classifiers=[
-        'Development Status :: 2 - Pre-Alpha',
-        'Intended Audience :: Developers',
-        'License :: OSI Approved :: BSD License',
-        'Natural Language :: English',
-        'Programming Language :: Python',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4'
+        "Development Status :: 2 - Pre-Alpha",
+        "Intended Audience :: Developers",
+        "License :: OSI Approved :: BSD License",
+        "Natural Language :: English",
+        "Programming Language :: Python",
+        "Programming Language :: Python :: 2",
+        "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.4",
     ],
     test_suite='nose.collector',
 )
-# }}
+# #}
 # change setup_kwds below before the next pkglts tag
 
 setup_kwds['entry_points']['console_scripts'] = ['pmg = pkglts.manage_script:main']
 
 # do not change things below
-# {{pkglts pysetup.call,
+# {# pkglts, pysetup.call
 setup(**setup_kwds)
-# }}
+# #}

@@ -1,6 +1,6 @@
-=======================================================
-Welcome to Packaging Long Term service's documentation!
-=======================================================
+
+Welcome to pkglts's documentation!
+====================================================
 
 Contents:
 
