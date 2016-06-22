@@ -1,4 +1,4 @@
-# {{pkglts pysetup,
+# {# pkglts, pysetup
 
 include AUTHORS.rst
 include CONTRIBUTING.rst
@@ -10,19 +10,19 @@ include requirements.txt
 include dvlpt_requirements.txt
 
 recursive-include test *
-# {{data rm,
-recursive-include {{base.src_pth, }} *
-recursive-include src/{{key, base.pkgname}}_data *
-# }}
+{% if 'data' is available %}
+recursive-include {{ base.src_pth }} *
+recursive-include src/{{ base.pkgname }}_data *
+{% endif %}
 
 recursive-exclude * __pycache__
 recursive-exclude * *.py[co]
 
 recursive-include doc *.rst
-# {{sphinx rm,
+{% if 'sphinx' is available %}
 include doc/conf.py
 include doc/Makefile
 include doc/make.bat
-# }}
+{% endif %}
 
-# }}
+# #}

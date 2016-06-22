@@ -7,21 +7,21 @@ parameters = [
     ("name", "cecill-c"),
     ("year", 2015),
     ("organization", "organization"),
-    ("project", "{{key, base.pkgname}}")
+    ("project", "{{ base.pkgname }}")
 ]
 
 
-def check(pkg_cfg):
-    """Check the validity of parameters in package configuration.
+def check(env):
+    """Check the validity of parameters in working environment.
 
-    args:
-     - pkg_cfg (dict of str, dict of str, any)): package configuration
+    Args:
+        env (jinja2.Environment):  current working environment
 
-    return:
-     - (list of str): list of faulty parameters
+    Returns:
+        (list of str): list of faulty parameters
     """
     invalids = []
-    name = pkg_cfg['license']['name']
+    name = env.globals['license'].name
     # year = pkg_cfg['license']['year']
     # organization = pkg_cfg['license']['organization']
     # project = pkg_cfg['license']['project']

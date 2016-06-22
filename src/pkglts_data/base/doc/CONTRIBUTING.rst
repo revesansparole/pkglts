@@ -5,7 +5,7 @@ Contributing
 Contributions are welcome, and they are greatly appreciated! Every
 little bit helps, and credit will always be given.
 
-{{github rm,
+{% if 'github' is available %}
 You can contribute in many ways:
 
 Types of Contributions
@@ -56,12 +56,12 @@ If you are proposing a feature:
 Get Started!
 ------------
 
-Ready to contribute? Here's how to set up `{{key, base.pkgname}}` for local development.
+Ready to contribute? Here's how to set up `{{ base.pkgname }}` for local development.
 
-1. Fork the `{{key, base.pkgname}}` repo on GitHub.
+1. Fork the `{{ base.pkgname }}` repo on GitHub.
 2. Clone your fork locally::
 
-    $ git clone git@github.com:your_name_here/{{key, base.pkgname}}.git
+    $ git clone git@github.com:your_name_here/{{ base.pkgname }}.git
 
 3. Install your local copy into a virtualenv. Assuming you have virtualenv_
 installed, this is how you set up your fork for local development::
@@ -79,10 +79,10 @@ installed, this is how you set up your fork for local development::
 5. When you're done making changes, check that your changes pass flake8 and the
 tests, including testing other Python versions with tox::
 
-    (dvlpt)$ cd {{key, base.pkgname}}
-    (dvlpt) {{key, base.pkgname}}$ flake8
-    (dvlpt) {{key, base.pkgname}}$ nosetests
-    (dvlpt) {{key, base.pkgname}}$ tox
+    (dvlpt)$ cd {{ base.pkgname }}
+    (dvlpt) {{ base.pkgname }}$ flake8
+    (dvlpt) {{ base.pkgname }}$ nosetests
+    (dvlpt) {{ base.pkgname }}$ tox
 
    To get flake8 and tox, just pip install them into your virtualenv.
 
@@ -104,7 +104,7 @@ Before you submit a pull request, check that it meets these guidelines:
    your new functionality into a function with a docstring, and add the
    feature to the list in README.rst.
 3. The pull request should work for Python 2.7, 3.4, and 3.5. Check
-   https://travis-ci.org/{{key, github.owner}}/{{key, github.project}}/pull_requests
+   https://travis-ci.org/{{ github.owner }}/{{ github.project }}/pull_requests
    and make sure that the tests pass for all supported Python versions.
 
 Tips
@@ -116,6 +116,6 @@ To run a subset of tests::
 
 
 
-.. _issues: {{key, github.url}}/issues
+.. _issues: {{ github.url }}/issues
 .. _virtualenv: https://pypi.python.org/pypi/virtualenv
-}}
+{% endif %}

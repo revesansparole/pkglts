@@ -1,12 +1,12 @@
 from os.path import basename
 from os.path import join as pj
 
-from {{base.pkg_full_name, }}.data_access import get, get_data_dir, ls
-from {{base.pkg_full_name, }}.list_data import list_data
+from {{ base.pkg_full_name }}.data_access import get, get_data_dir, ls
+from {{ base.pkg_full_name }}.list_data import list_data
 
 
 def test_data_access():
-    assert basename(get_data_dir()) == "{{key, base.pkgname}}_data"
+    assert basename(get_data_dir()) == "{{ base.pkgname }}_data"
     assert get("ext_data.txt").startswith("lorem ipsum")
 
 

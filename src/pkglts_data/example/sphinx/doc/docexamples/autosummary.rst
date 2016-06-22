@@ -4,7 +4,7 @@ Example of 'autosummary' usage
 
 see `autosummary extension page`_ for more documentation.
 
-.. currentmodule:: {{base.pkg_full_name, }}
+.. currentmodule:: {{ base.pkg_full_name }}
 
 
 bla bla

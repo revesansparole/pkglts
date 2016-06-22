@@ -1,4 +1,4 @@
-# {{pkglts data,
+# {# pkglts, data
 """ Set of function to work with resources that are located inside
 this package data
 """
@@ -9,11 +9,11 @@ from os.path import join as pj
 
 
 pkg_root_dir = dirname(dirname(__file__))
-pkg_data_dir = pj(pkg_root_dir, "{{key, base.pkgname}}_data")
+pkg_data_dir = pj(pkg_root_dir, "{{ base.pkgname }}_data")
 if not exists(pkg_data_dir):
     # we are certainly using a namespace
     pkg_root_dir = dirname(pkg_root_dir)
-    pkg_data_dir = pj(pkg_root_dir, "{{key, base.pkgname}}_data")
+    pkg_data_dir = pj(pkg_root_dir, "{{ base.pkgname }}_data")
     if not exists(pkg_data_dir):
         raise UserWarning("No data dir at this location: %s" % pkg_data_dir)
 
@@ -54,4 +54,4 @@ def ls(dir_name):
     pth = pj(pkg_data_dir, dir_name)
     return [(n, isdir(pj(pth, n))) for n in listdir(pth)]
 
-# }}
+# #}

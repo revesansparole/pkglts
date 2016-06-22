@@ -6,7 +6,7 @@ Download source then, at the command line::
 
     $ python setup.py
 
-{{pypi rm,
+{% if 'pypi' is available %}
 Alternatively the command line::
 
     $ easy_install pkglts
@@ -21,4 +21,4 @@ Preferred method use virtual environments::
     $ myenv/scripts/activate
     (myenv)$ pip install pkglts
 
-}}
+{% endif %}

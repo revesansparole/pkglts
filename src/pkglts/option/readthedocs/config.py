@@ -1,19 +1,19 @@
 parameters = [
-    ("project", "{{key, github.project}}")
+    ("project", "{{ github.project }}")
 ]
 
 
-def check(pkg_cfg):
-    """Check the validity of parameters in package configuration.
+def check(env):
+    """Check the validity of parameters in working environment.
 
-    args:
-     - pkg_cfg (dict of str, dict of str, any)): package configuration
+    Args:
+        env (jinja2.Environment):  current working environment
 
-    return:
-     - (list of str): list of faulty parameters
+    Returns:
+        (list of str): list of faulty parameters
     """
     invalids = []
-    project = pkg_cfg['readthedocs']['project']
+    project = env.globals['readthedocs'].project
 
     if len(project) == 0:
         invalids.append("project")

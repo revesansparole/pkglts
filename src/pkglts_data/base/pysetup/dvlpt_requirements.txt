@@ -1,1 +1,5 @@
-# {{pkglts pysetup.dvlpt_requirements, }}
+# {# pkglts, pysetup
+{%- for name in pysetup.requirements('dvlpt') %}
+{{ name }}
+{%- endfor %}
+# #}

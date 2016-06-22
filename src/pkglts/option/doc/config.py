@@ -4,18 +4,18 @@ parameters = [
 ]
 
 
-def check(pkg_cfg):
-    """Check the validity of parameters in package configuration.
+def check(env):
+    """Check the validity of parameters in working environment.
 
-    args:
-     - pkg_cfg (dict of str, dict of str, any)): package configuration
+    Args:
+        env (jinja2.Environment):  current working environment
 
-    return:
-     - (list of str): list of faulty parameters
+    Returns:
+        (list of str): list of faulty parameters
     """
     invalids = []
-    description = pkg_cfg['doc']['description']
-    # keywords = pkg_cfg['doc']['keywords']
+    description = env.globals['doc'].description
+    # keywords = env.globals['doc'].keywords
 
     if len(description) == 0:
         invalids.append("description")

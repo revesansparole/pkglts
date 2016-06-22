@@ -1,21 +1,21 @@
 
 parameters = [
     ("theme", 'default'),
-    ("autodoc-dvlpt", True)
+    ("autodoc_dvlpt", True)
 ]
 
 
-def check(pkg_cfg):
-    """Check the validity of parameters in package configuration.
+def check(env):
+    """Check the validity of parameters in working environment.
 
     Args:
-        pkg_cfg (dict of str, dict of str, any)): package configuration
+        env (jinja2.Environment):  current working environment
 
     Returns:
         (list of str): list of faulty parameters
     """
     invalids = []
-    theme = pkg_cfg['sphinx']['theme']
+    theme = env.globals['sphinx'].theme
     if theme != str(theme):
         invalids.append('theme')
 

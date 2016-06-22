@@ -1,20 +1,17 @@
 from argparse import ArgumentParser, RawTextHelpFormatter
 import logging
 
-# from .local import installed_options
-from .manage import (clean, get_pkg_config,
-                     init_pkg, install_example_files,
-                     regenerate, regenerate_option,
-                     add_option, edit_option,
-                     # update_option, update_pkg,
-                     write_pkg_config)
+from .config_managment import (get_pkg_config, installed_options,
+                               write_pkg_config)
+from .manage import (clean, init_pkg, install_example_files,
+                     regenerate_package, regenerate_option, add_option)
 
 
 logger = logging.getLogger(__name__)
 
 
 def action_clean(*args, **kwds):
-    """ Clean package of all un necessary files.
+    """Clean package of all un necessary files.
     """
     del args  # unused
     del kwds  # unused
@@ -23,7 +20,7 @@ def action_clean(*args, **kwds):
 
 
 def action_init(*args, **kwds):
-    """ Initialize environment for use of pkglts.
+    """Initialize environment for use of pkglts.
     """
     del args  # unused
     del kwds  # unused
@@ -31,7 +28,7 @@ def action_init(*args, **kwds):
 
 
 def action_clear(*args, **kwds):
-    """ Attempt to free the package from pkglts interactions.
+    """Attempt to free the package from pkglts interactions.
     """
     del args  # unused
     del kwds  # unused
@@ -40,7 +37,7 @@ def action_clear(*args, **kwds):
 
 
 def action_update(*args, **kwds):
-    """ Check if a new version of pkglts is available.
+    """Check if a new version of pkglts is available.
     """
     del args  # unused
     del kwds  # unused
@@ -49,39 +46,39 @@ def action_update(*args, **kwds):
 
 
 def action_regenerate(*args, **kwds):
-    """ Regenerate all files in the package.
+    """Regenerate all files in the package.
     """
+    overwrite = 'overwrite' in kwds
+
+    env = get_pkg_config()
+    clean()
+
     if len(args) == 0:
-        overwrite = 'overwrite' in kwds
-
-        logger.info("regenerate")
-
-        pkg_cfg = get_pkg_config()
-        clean()
-        regenerate(pkg_cfg, overwrite=overwrite)
-        write_pkg_config(pkg_cfg)
+        logger.info("regenerate package")
+        regenerate_package(env, overwrite=overwrite)
     else:
-        pkg_cfg = get_pkg_config()
-        regenerate_option(pkg_cfg, args[0])
+        name = [args[0]]
+        logger.info("regenerate '%s'" % name)
+        regenerate_option(env, name, overwrite=overwrite)
 
 
 def action_add(*args, **kwds):
-    """ Add new options in the package.
+    """Add new options in the package.
     """
     del kwds  # unused
     if len(args) == 0:
         raise UserWarning("need to specify at least one option name")
 
     logger.info("add option")
-    pkg_cfg = get_pkg_config()
+    env = get_pkg_config()
     for name in args:
-        pkg_cfg = add_option(name, pkg_cfg)
+        env = add_option(name, env)
 
-    write_pkg_config(pkg_cfg)
+    write_pkg_config(env)
 
 
 def action_remove(*args, **kwds):
-    """ Remove options from the package.
+    """Remove options from the package.
     """
     del kwds  # unused
     if len(args) == 0:
@@ -91,31 +88,17 @@ def action_remove(*args, **kwds):
     print("TODO")
 
 
-def action_edit(*args, **kwds):
-    """ Edit options already in the package.
-    """
-    del kwds  # unused
-    if len(args) == 0:
-        raise UserWarning("need to specify at least one option name")
-
-    pkg_cfg = get_pkg_config()
-    for name in args:
-        pkg_cfg = edit_option(name, pkg_cfg)
-
-    write_pkg_config(pkg_cfg)
-
-
 def action_example(*args, **kwds):
-    """ Install example files associated with options.
+    """Install example files associated with options.
     """
     del kwds  # unused
     if len(args) == 0:
         raise UserWarning("need to specify at least one option name")
 
     logger.info("install examples")
-    pkg_cfg = get_pkg_config()
+    env = get_pkg_config()
     for name in args:
-        install_example_files(name, pkg_cfg)
+        install_example_files(name, env)
 
 
 action = dict(clean=action_clean,
@@ -126,7 +109,6 @@ action = dict(clean=action_clean,
               rg=action_regenerate,
               add=action_add,
               remove=action_remove,
-              edit=action_edit,
               example=action_example)
 
 

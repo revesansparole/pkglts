@@ -1,20 +1,24 @@
 parameters = [
-    ("classifiers", ["Intended Audience :: Developers"])
+    ("classifiers", [
+            "Development Status :: 2 - Pre-Alpha",
+            "Intended Audience :: Developers",
+            "License :: OSI Approved :: BSD License",
+            "Natural Language :: English"
+        ])
 ]
 
 
-def check(pkg_cfg):
-    """Check the validity of parameters in package configuration.
+def check(env):
+    """Check the validity of parameters in working environment.
 
-    args:
-     - pkg_cfg (dict of str, dict of str, any)): package configuration
+    Args:
+        env (jinja2.Environment):  current working environment
 
-    return:
-     - (list of str): list of faulty parameters
+    Returns:
+        (list of str): list of faulty parameters
     """
     invalids = []
-    cfg = pkg_cfg['pypi']
-    classifiers = cfg['classifiers']
+    classifiers = env.globals['pypi'].classifiers
 
     if len(classifiers) == 0:
         invalids.append("classifiers")

@@ -1,31 +1,14 @@
-from pkglts.local import src_dir
+from pkglts.local import pkg_full_name, src_dir
 
 
-def upper(txt, env):
-    del env  # unused
-    return txt.upper()
+def environment_extensions(env):
+    """Add more functionality to an environment.
 
+    Args:
+        env (jinja2.Environment):
 
-def lower(txt, env):
-    del env  # unused
-    return txt.lower()
-
-
-def get_src_pth(txt, env):
-    del txt  # unused
-    return src_dir(env)
-
-
-def pkg_full_name(txt, env):
-    del txt  # unused
-    namespace = env['base']['namespace']
-    if namespace is None:
-        return env['base']['pkgname']
-    else:
-        return namespace + "." + env['base']['pkgname']
-
-
-mapping = {'upper': upper,
-           'lower': lower,
-           "base.src_pth": get_src_pth,
-           "base.pkg_full_name": pkg_full_name}
+    Returns:
+        dict of str: any
+    """
+    return {"pkg_full_name": pkg_full_name(env),
+            "src_pth": src_dir(env)}

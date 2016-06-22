@@ -7,4 +7,3 @@
 #
 #
 # mapping = {'version.fetch_github': fetch_github_version}
-mapping = {}
