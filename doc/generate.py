@@ -14,7 +14,7 @@ doc_pth = "doc/option"
 for option in listdir(base_pth):
     option_base_pth = pj(base_pth, option)
     if isdir(option_base_pth):
-        print option
+        print(option)
         option_doc_pth = pj(doc_pth, option)
         if not isdir(option_doc_pth):
             raise UserWarning("no doc found for %s" % option)

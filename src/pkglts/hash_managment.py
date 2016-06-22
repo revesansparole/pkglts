@@ -83,7 +83,6 @@ def modified_file_hash(pth, pkg_hash):
     Returns:
         (bool): whether this file has been modified or not
     """
-    print "check", pth
     ref_blocks = pkg_hash[pth_as_key(pth)]
 
     with open(pth, 'r') as f:

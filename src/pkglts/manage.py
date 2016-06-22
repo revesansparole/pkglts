@@ -177,7 +177,6 @@ def regenerate_package(env, target=".", overwrite=False):
                 print("A non editable section of %s has been modified" % name)
                 overwrite_file[pth_as_key(name)] = get_user_permission("overwrite", False)
 
-    print "over", overwrite_file
     # render files for all options
     hm = {}
     for name in installed_options(env):

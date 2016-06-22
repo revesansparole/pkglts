@@ -177,7 +177,7 @@ def regenerate_dir(src_dir, tgt_dir, env, overwrite_file):
                     hm[kp] = dict((bid, compute_hash(cnt)) for bid, cnt in blocks)
                 else:  # binary file
                     if exists(tgt_pth):
-                        print "overwrite?"
+                        print("overwrite? %s" % tgt_pth)
                     else:
                         with open(src_pth, 'rb') as fr:
                             content = fr.read()

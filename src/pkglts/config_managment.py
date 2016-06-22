@@ -127,7 +127,7 @@ def pkg_env(pkg_cfg):
             try:
                 opt_handlers = import_module("pkglts.option.%s.handlers" % name)
                 if not hasattr(opt_handlers, "environment_extensions"):
-                    print "option %s do not define any extension" % name
+                    logger.debug("option %s do not define any extension" % name)
                 else:
                     extensions = opt_handlers.environment_extensions(env)
                     for k, v in extensions.items():
