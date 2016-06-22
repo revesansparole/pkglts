@@ -106,7 +106,6 @@ def create_env(pkg_cfg):
                 try:
                     extensions = opt_handlers.environment_extensions(env)
                     for k, v in extensions.items():
-                        print "handler", k
                         setattr(env.globals[name], k, v)
                 except AttributeError:
                     print "option %s do not define any extension" % name

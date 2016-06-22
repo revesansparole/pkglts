@@ -64,7 +64,7 @@ def render(env, src_pth, tgt_pth):
         tgt_pth (str): path to potentially non existent yet target file
 
     Returns:
-        None
+        (list of (str, str)): key, cnt for preserved blocks
     """
     # parse src file to find 'preserved' blocks
     with open(src_pth, 'r') as f:
@@ -95,6 +95,7 @@ def render(env, src_pth, tgt_pth):
 
     # regenerate preserved block content
     # print "blocks", [bid for bid, bef, cnt, aft in blocks]
+    preserved = []
     tgt = ""
     for bid, bef, cnt, aft in blocks:
         if bid is None:
@@ -103,6 +104,7 @@ def render(env, src_pth, tgt_pth):
             # format cnt
             template = env.from_string(cnt)
             cnt = template.render()
+            preserved.append((bid, cnt))
             # rewrite preserved tag if necessary
             tgt += bef + "{" + "# pkglts, %s\n" % bid
             tgt += cnt
@@ -112,3 +114,5 @@ def render(env, src_pth, tgt_pth):
 
     with open(tgt_pth, 'w') as f:
         f.write(tgt)
+
+    return preserved

@@ -3,12 +3,25 @@ from hashlib import sha512
 import json
 import logging
 from os.path import join as pj
+from os.path import normpath
 
 from .config import pkglts_dir, pkg_hash_file
 from .templating import parse_source
 
 
 logger = logging.getLogger(__name__)
+
+
+def pth_as_key(pth):
+    """Normalize path to enable to use them as keys
+
+    Args:
+        pth (str):
+
+    Returns:
+        (str)
+    """
+    return normpath(pth).replace("\\", "/")
 
 
 def compute_hash(txt):
@@ -70,7 +83,8 @@ def modified_file_hash(pth, pkg_hash):
     Returns:
         (bool): whether this file has been modified or not
     """
-    ref_blocks = pkg_hash[pth]
+    print "check", pth
+    ref_blocks = pkg_hash[pth_as_key(pth)]
 
     with open(pth, 'r') as f:
         blocks = parse_source(f.read())

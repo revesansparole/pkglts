@@ -9,6 +9,7 @@ from os.path import join as pj
 
 from .data_access import get, get_data_dir, ls
 from .config_managment import ConfigSection, installed_options
+from .hash_managment import compute_hash, pth_as_key
 from .install_env.load_front_end import get_install_front_end
 from .local import init_namespace_dir
 from .option_tools import get_user_permission
@@ -140,9 +141,9 @@ def render_dir(src_dir, tgt_dir, env, overwrite_file):
                              files
 
     Returns:
-        (list of str): list of all error files
+        (dict of str: map): hash key of preserved sections
     """
-    error_files = []
+    hm = {}
 
     for src_name, is_dir in ls(src_dir):
         print "cur", src_name
@@ -168,18 +169,21 @@ def render_dir(src_dir, tgt_dir, env, overwrite_file):
             if tgt_name not in ("", "_") and not exists(tgt_pth):
                 mkdir(tgt_pth)
 
-            ef = render_dir(src_pth, tgt_pth, env, overwrite_file)
-            error_files.extend(ef)
+            sub_hm = render_dir(src_pth, tgt_pth, env, overwrite_file)
+            hm.update(sub_hm)
         else:
-            fname, ext = splitext(tgt_name)
-            if ext in non_bin_ext:
-                render(env, pj(get_data_dir(), src_pth), tgt_pth)
-            else:  # binary file
-                if exists(tgt_pth):
-                    print "overwrite?"
-                else:
-                    content = get(src_pth, 'rb')
-                    with open(tgt_pth, 'wb') as fw:
-                        fw.write(content)
+            kp = pth_as_key(tgt_pth)
+            if overwrite_file.get(kp, True):
+                fname, ext = splitext(tgt_name)
+                if ext in non_bin_ext:
+                    blocks = render(env, pj(get_data_dir(), src_pth), tgt_pth)
+                    hm[kp] = dict((bid, compute_hash(cnt)) for bid, cnt in blocks)
+                else:  # binary file
+                    if exists(tgt_pth):
+                        print "overwrite?"
+                    else:
+                        content = get(src_pth, 'rb')
+                        with open(tgt_pth, 'wb') as fw:
+                            fw.write(content)
 
-    return error_files
+    return hm

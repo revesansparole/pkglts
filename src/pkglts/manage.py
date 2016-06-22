@@ -16,7 +16,8 @@ from .data_access import get_data_dir, ls
 from .config_managment import (create_env, default_cfg,
                                get_pkg_config, installed_options,
                                write_pkg_config)
-from .hash_managment import get_pkg_hash, modified_file_hash, write_pkg_hash
+from .hash_managment import (get_pkg_hash, modified_file_hash,
+                             pth_as_key, write_pkg_hash)
 from .manage_tools import (check_option_parameters,
                            render_dir, update_opt)
 from .option_tools import get_user_permission
@@ -169,20 +170,26 @@ def regenerate_package(env, target=".", overwrite=False):
         if overwrite:
             for name in conflicted:
                 logger.debug("conflicted, '%s'" % name)
-                overwrite_file[name] = True
+                overwrite_file[pth_as_key(name)] = True
         else:
             for name in conflicted:
                 print("A non editable section of %s has been modified" % name)
-                overwrite_file[name] = get_user_permission("overwrite", False)
+                overwrite_file[pth_as_key(name)] = get_user_permission("overwrite", False)
 
+    print "over", overwrite_file
     # render files for all options
+    hm = {}
     for name in installed_options(env):
         opt_ref_dir = pj(get_data_dir(), 'base', name)
         if not exists(opt_ref_dir):
             logger.debug("option %s do not provide files" % name)
         else:
             logger.info("rendering option %s" % name)
-            render_dir(opt_ref_dir, target, env, overwrite_file)
+            loc_hm = render_dir(opt_ref_dir, target, env, overwrite_file)
+            hm.update(loc_hm)
+
+    hm_ref.update(hm)
+    write_pkg_hash(hm_ref, target)
 
 
 def regenerate_option(env, name, target=".", overwrite=False):
