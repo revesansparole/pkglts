@@ -19,7 +19,7 @@ from .config_managment import (pkg_env, default_cfg,
 from .hash_managment import (get_pkg_hash, modified_file_hash,
                              pth_as_key, write_pkg_hash)
 from .manage_tools import (check_option_parameters,
-                           render_dir, update_opt)
+                           regenerate_dir, update_opt)
 from .option_tools import get_user_permission
 
 
@@ -125,8 +125,9 @@ def install_example_files(option, env, target="."):
         logger.info("option does not provide any example")
         return False
 
-    root = "example/%s" % option
-    render_dir(root, target, env, {})
+    root = pj(get_data_dir(), 'example', option)
+    regenerate_dir(root, target, env, {})
+    return True
 
 
 def regenerate_package(env, target=".", overwrite=False):
@@ -162,7 +163,7 @@ def regenerate_package(env, target=".", overwrite=False):
         if exists(pth) and modified_file_hash(pth, hm_ref):
             conflicted.append(pth)
         else:
-            # file disappeared, render_dir will reload it if managed by pkglts
+            # file disappeared, regenerate_dir will reload it if managed by pkglts
             pass
 
     overwrite_file = {}
@@ -185,7 +186,7 @@ def regenerate_package(env, target=".", overwrite=False):
             logger.debug("option %s do not provide files" % name)
         else:
             logger.info("rendering option %s" % name)
-            loc_hm = render_dir(opt_ref_dir, target, env, overwrite_file)
+            loc_hm = regenerate_dir(opt_ref_dir, target, env, overwrite_file)
             hm.update(loc_hm)
 
     hm_ref.update(hm)

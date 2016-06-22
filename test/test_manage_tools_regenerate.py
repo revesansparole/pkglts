@@ -1,7 +1,11 @@
 from nose.tools import with_setup
 from os.path import join as pj
+from os.path import exists
+from random import random
 
-from pkglts.manage_tools import regenerate_file, regenerate_pkg
+from pkglts.config_managment import create_env, default_cfg
+from pkglts.hash_managment import pth_as_key
+from pkglts.manage_tools import regenerate_dir
 
 from .small_tools import ensure_created, ensure_path, rmdir
 
@@ -11,6 +15,8 @@ tmp_dir = "takapouet"
 
 def setup():
     ensure_created(tmp_dir)
+    ensure_created(pj(tmp_dir, "src"))
+    ensure_created(pj(tmp_dir, "tgt"))
 
 
 def teardown():
@@ -18,221 +24,153 @@ def teardown():
 
 
 @with_setup(setup, teardown)
-def test_regenerate_file_replace_divs():
-    fname = pj(tmp_dir, "test.py")
-    ref_txt = "# {{upper, toto}}"
-    with open(fname, 'w') as f:
-        f.write(ref_txt)
+def test_regenerate_dir_walk_all_files_in_src_dir():
+    ensure_created(pj(tmp_dir, "src", "sub"))
+    fnames = ('toto.txt', 'titi.txt', 'sub/toto.txt')
+    for fname in fnames:
+        pth = pj(tmp_dir, "src", fname)
+        with open(pth, 'w') as f:
+            f.write("lorem ipsum")
 
-    regenerate_file(fname, {}, {})
+    env = create_env(default_cfg)
+    regenerate_dir(pj(tmp_dir, 'src'), pj(tmp_dir, 'tgt'), env, {})
 
-    with open(fname, 'r') as f:
-        assert f.read() != ref_txt
+    for fname in fnames:
+        assert exists(pj(tmp_dir, 'tgt', fname))
 
 
 @with_setup(setup, teardown)
-def test_regenerate_pkg_walk_all_files_by_default():
-    ref_txt = "# {{upper, toto}}"
-    pths = [pj(tmp_dir, n) for n in ("test1.py", "test2.py",
-                                     "tot/test3.py", "tot/test4.py")]
+def test_regenerate_dir_render_file_content():
+    pth = pj(tmp_dir, "src", "test.txt")
+    with open(pth, 'w') as f:
+        f.write("{{ 'lorem ipsum'|upper }}")
 
-    for pth in pths:
-        ensure_path(pth)
-        with open(pth, 'w') as f:
-            f.write(ref_txt)
+    env = create_env(default_cfg)
+    regenerate_dir(pj(tmp_dir, 'src'), pj(tmp_dir, 'tgt'), env, {})
 
-    regenerate_pkg({}, {}, tmp_dir, {})
-
-    for pth in pths:
-        with open(pth, 'r') as f:
-            assert f.read() != ref_txt
+    pth = pj(tmp_dir, "tgt", "test.txt")
+    with open(pth, 'r') as f:
+        cnt = f.read()
+        assert cnt == 'LOREM IPSUM'
 
 
 @with_setup(setup, teardown)
-def test_regenerate_pkg_exclude_protected_dirs():
-    ref_txt = "# {{upper, toto}}"
-    pths = [pj(tmp_dir, n) for n in ("test1.py", "test2.py",
-                                     "tot/test3.py", "tot/test4.py")]
-
-    for pth in pths:
-        ensure_path(pth)
+def test_regenerate_dir_render_path_names():
+    ensure_created(pj(tmp_dir, "src", "{{ custom_name }}"))
+    fnames = ('{{ custom_name }}.txt', 'titi.txt',
+              '{{ custom_name }}/{{ custom_name }}.txt')
+    for fname in fnames:
+        pth = pj(tmp_dir, "src", fname)
         with open(pth, 'w') as f:
-            f.write(ref_txt)
+            f.write("lorem ipsum")
 
-    with open(pj(tmp_dir, "tot", "regenerate.no"), 'w') as f:
-        f.write("")
+    env = create_env(default_cfg)
+    env.globals['custom_name'] = 'toto'
+    regenerate_dir(pj(tmp_dir, 'src'), pj(tmp_dir, 'tgt'), env, {})
 
-    regenerate_pkg({}, {}, tmp_dir, {})
-
-    for pth in pths[:2]:
-        with open(pth, 'r') as f:
-            assert f.read() != ref_txt
-
-    for pth in pths[2:]:
-        with open(pth, 'r') as f:
-            assert f.read() == ref_txt
+    fnames = ('toto.txt', 'titi.txt', 'toto/toto.txt')
+    for fname in fnames:
+        assert exists(pj(tmp_dir, 'tgt', fname))
 
 
 @with_setup(setup, teardown)
-def test_regenerate_pkg_exclude_hidden_dirs():
-    ref_txt = "# {{upper, toto}}"
-    pths = [pj(tmp_dir, n) for n in ("test1.py", "test2.py",
-                                     ".tot/test3.py", ".tot/test4.py")]
+def test_regenerate_handle_src_directory_no_namespace():
+    pth = pj(tmp_dir, "src", "src", "{{ base.pkgname }}", "test.txt")
+    ensure_path(pth)
+    with open(pth, 'w') as f:
+        f.write("lorem ipsum")
 
-    for pth in pths:
-        ensure_path(pth)
-        with open(pth, 'w') as f:
-            f.write(ref_txt)
+    cfg = dict(default_cfg)
+    cfg['base'] = dict(pkgname='toto', namespace=None)
+    env = create_env(cfg)
+    regenerate_dir(pj(tmp_dir, 'src'), pj(tmp_dir, 'tgt'), env, {})
 
-    regenerate_pkg({}, {}, tmp_dir, {})
-
-    for pth in pths[:2]:
-        with open(pth, 'r') as f:
-            assert f.read() != ref_txt
-
-    for pth in pths[2:]:
-        with open(pth, 'r') as f:
-            assert f.read() == ref_txt
+    tgt = pj(tmp_dir, "tgt", "src", "toto", "test.txt")
+    assert exists(tgt)
 
 
 @with_setup(setup, teardown)
-def test_regenerate_pkg_exclude_protected_files():
-    ref_txt = "# {{upper, toto}}"
-    pths = [pj(tmp_dir, n).replace("\\", "/")
-            for n in ("test1.py", "test2.py", "tot/test3.py", "tot/test4.py")]
+def test_regenerate_handle_src_directory_with_namespace():
+    pth = pj(tmp_dir, "src", "src", "{{ base.pkgname }}", "test.txt")
+    ensure_path(pth)
+    with open(pth, 'w') as f:
+        f.write("lorem ipsum")
 
-    for pth in pths:
-        ensure_path(pth)
-        with open(pth, 'w') as f:
-            f.write(ref_txt)
+    cfg = dict(default_cfg)
+    cfg['base'] = dict(pkgname='toto', namespace='myns')
+    env = create_env(cfg)
+    regenerate_dir(pj(tmp_dir, 'src'), pj(tmp_dir, 'tgt'), env, {})
 
-    regenerate_pkg({}, {}, tmp_dir, dict((pth, False) for pth in pths[1:3]))
-
-    for pth in pths[1:3]:
-        with open(pth, 'r') as f:
-            assert f.read() == ref_txt
-
-    for pth in pths[:1] + pths[3:]:
-        with open(pth, 'r') as f:
-            assert f.read() != ref_txt
+    tgt_dir = pj(tmp_dir, "tgt")
+    assert exists(tgt_dir + "/src")
+    assert exists(tgt_dir + "/src/myns")
+    assert exists(tgt_dir + "/src/myns/__init__.py")
+    assert exists(tgt_dir + "/src/myns/toto")
+    assert exists(tgt_dir + "/src/myns/toto/test.txt")
 
 
-# @with_setup(setup, teardown)
-# def test_regenerate_walk_files_in_ltpkgbuilder_data():
-#     pkg_cfg = {'hash': {}}
-#     handlers = {}
-#
-#     regenerate_dir("pkglts_data/test/test1", tmp_dir, handlers, pkg_cfg)
-#
-#     ref_fnames = {"titi.txt", "tutu.txt", "subtest"}
-#
-#     crt_fnames = set()
-#     for r, ds, fs in walk(tmp_dir):
-#         crt_fnames.update(ds)
-#         crt_fnames.update(fs)
-#
-#     assert ref_fnames == crt_fnames
-#
-#
-# @with_setup(setup, teardown)
-# def test_regenerate_walk_files_except_pyc():
-#     pkg_cfg = {'hash': {}}
-#     handlers = {}
-#
-#     regenerate_dir("pkglts_data/test/test3", tmp_dir, handlers, pkg_cfg)
-#
-#     ref_fnames = {"titi.txt", "tutu.txt", "subtest"}
-#
-#     crt_fnames = set()
-#     for r, ds, fs in walk(tmp_dir):
-#         crt_fnames.update(ds)
-#         crt_fnames.update(fs)
-#
-#     assert ref_fnames == crt_fnames
-#
-#
-# @with_setup(setup, teardown)
-# def test_regenerate_replace_directory_names():
-#     pkg_cfg = {'hash': {}}
-#     handlers = {}
-#
-#     regenerate_dir("pkglts_data/test", tmp_dir, handlers, pkg_cfg)
-#
-#     assert not exists(tmp_dir + "/{{rm, tok}}tok")
-#     assert exists(tmp_dir + "/tok")
-#     assert not exists(tmp_dir + "/{{toto, tik}}tik")
-#     assert exists(tmp_dir + "/tiktik")
-#
-#
-# @with_setup(setup, teardown)
-# def test_regenerate_do_not_create_directory_with_empty_name():
-#     pkg_cfg = {'hash': {}}
-#     handlers = {}
-#
-#     regenerate_dir("pkglts_data/test", tmp_dir, handlers, pkg_cfg)
-#
-#     assert not exists(tmp_dir + "/{{rm, tak}}")
-#     assert not exists(tmp_dir + "/tak")
-#
-#
-# @with_setup(setup, teardown)
-# def test_regenerate_replace_file_names():
-#     pkg_cfg = {'hash': {}}
-#     handlers = {'doc': same}
-#
-#     regenerate_dir("pkglts_data/test", tmp_dir, handlers, pkg_cfg)
-#
-#     assert not exists(tmp_dir + "/{{rm, ta}}ta.txt")
-#     assert not exists(tmp_dir + "/tata.txt")
-#     assert exists(tmp_dir + "/ta.txt")
-#
-#
-# @with_setup(setup, teardown)
-# def test_regenerate_do_not_create_file_with_empty_name():
-#     pkg_cfg = {'hash': {}}
-#     handlers = {'doc': same}
-#
-#     regenerate_dir("pkglts_data/test", tmp_dir, handlers, pkg_cfg)
-#
-#     assert not exists(tmp_dir + "/tok/{{del, toto.txt}}")
-#     assert not exists(tmp_dir + "/tok/toto.txt")
-#     assert not exists(tmp_dir + "/tok/{{del, titi}}.txt")
-#     assert not exists(tmp_dir + "/tok/titi.txt")
-#     assert len(listdir(tmp_dir + "/tok")) == 0
-#
-#
-# @with_setup(setup, teardown)
-# def test_regenerate_replace_file_content():
-#     pkg_cfg = {'hash': {}}
-#     handlers = {'upper': lambda s, env: s.upper()}
-#
-#     regenerate_dir("pkglts_data/test", tmp_dir, handlers, pkg_cfg)
-#
-#     assert exists(tmp_dir + "/tutu.txt")
-#     with open(tmp_dir + "/tutu.txt", 'r') as f:
-#         txt = f.read()
-#         assert txt == "lorem ipsum NOTHING lorem ipsum"
-#
-#
-# @with_setup(setup, teardown)
-# def test_regenerate_handle_src_directory_no_namespace():
-#     pkg_cfg = {'hash': {}, 'base': {'namespace': None, 'pkgname': 'mypkg'}}
-#     handlers = {'base': same}
-#
-#     regenerate_dir("pkglts_data/test", tmp_dir, handlers, pkg_cfg)
-#
-#     assert exists(tmp_dir + "/src")
-#     assert exists(tmp_dir + "/src/mypkg")
-#
-#
-# @with_setup(setup, teardown)
-# def test_regenerate_handle_src_directory_with_namespace():
-#     pkg_cfg = {'hash': {}, 'base': {'namespace': 'myns', 'pkgname': 'mypkg'}}
-#     handlers = {'base': same}
-#
-#     regenerate_dir("pkglts_data/test", tmp_dir, handlers, pkg_cfg)
-#
-#     assert exists(tmp_dir + "/src")
-#     assert exists(tmp_dir + "/src/myns")
-#     assert exists(tmp_dir + "/src/myns/__init__.py")
-#     assert exists(tmp_dir + "/src/myns/mypkg")
+@with_setup(setup, teardown)
+def test_regenerate_do_overwrite_unprotected_files():
+    pth = pj(tmp_dir, "src", "test.txt")
+    with open(pth, 'w') as f:
+        f.write("{# pkglts, b0\n{{ random() }}\n#}")
+
+    env = create_env(default_cfg)
+    env.globals['random'] = random
+    regenerate_dir(pj(tmp_dir, 'src'), pj(tmp_dir, 'tgt'), env, {})
+
+    pth = pj(tmp_dir, "tgt", "test.txt")
+    with open(pth, 'r') as f:
+        cnt0 = f.read()
+
+    regenerate_dir(pj(tmp_dir, 'src'), pj(tmp_dir, 'tgt'), env, {})
+
+    pth = pj(tmp_dir, "tgt", "test.txt")
+    with open(pth, 'r') as f:
+        cnt1 = f.read()
+
+    assert cnt0 != cnt1
+
+
+@with_setup(setup, teardown)
+def test_regenerate_do_not_overwrite_protected_files():
+    pth = pj(tmp_dir, "src", "test.txt")
+    with open(pth, 'w') as f:
+        f.write("{# pkglts, b0\n{{ random() }}\n#}")
+
+    env = create_env(default_cfg)
+    env.globals['random'] = random
+    regenerate_dir(pj(tmp_dir, 'src'), pj(tmp_dir, 'tgt'), env, {})
+
+    pth = pj(tmp_dir, "tgt", "test.txt")
+    with open(pth, 'r') as f:
+        cnt0 = f.read()
+
+    overwrite = {pth_as_key(pth): False}
+    regenerate_dir(pj(tmp_dir, 'src'), pj(tmp_dir, 'tgt'), env, overwrite)
+
+    pth = pj(tmp_dir, "tgt", "test.txt")
+    with open(pth, 'r') as f:
+        cnt1 = f.read()
+
+    assert cnt0 == cnt1
+
+
+@with_setup(setup, teardown)
+def test_regenerate_do_not_overwrite_outside_protected_blocks():
+    pth = pj(tmp_dir, "src", "test.txt")
+    with open(pth, 'w') as f:
+        f.write("{# pkglts, b0\nLOREM IPSUM\n#}")
+
+    pth = pj(tmp_dir, "tgt", "test.txt")
+    with open(pth, 'w') as f:
+        f.write("Toto start\n{# pkglts, b0\nWTF?\n#}\nToto end\n")
+
+    env = create_env(default_cfg)
+    regenerate_dir(pj(tmp_dir, 'src'), pj(tmp_dir, 'tgt'), env, {})
+
+    with open(pth, 'r') as f:
+        cnt = f.read()
+
+    assert cnt == "Toto start\n{# pkglts, b0\nLOREM IPSUM\n#}\nToto end\n"
+

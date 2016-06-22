@@ -3,11 +3,9 @@
 
 from importlib import import_module
 import logging
-from os import mkdir
-from os.path import basename, exists, splitext
-from os.path import join as pj
+from os import listdir, mkdir
+from os.path import basename, exists, isdir, splitext
 
-from .data_access import get, get_data_dir, ls
 from .config_managment import ConfigSection, installed_options
 from .hash_managment import compute_hash, pth_as_key
 from .install_env.load_front_end import get_install_front_end
@@ -130,7 +128,7 @@ def update_opt(name, env):
     return env
 
 
-def render_dir(src_dir, tgt_dir, env, overwrite_file):
+def regenerate_dir(src_dir, tgt_dir, env, overwrite_file):
     """Walk all files in src_dir and create/update them on tgt_dir
 
     Args:
@@ -145,8 +143,7 @@ def render_dir(src_dir, tgt_dir, env, overwrite_file):
     """
     hm = {}
 
-    for src_name, is_dir in ls(src_dir):
-        print "cur", src_name
+    for src_name in listdir(src_dir):
         src_pth = src_dir + "/" + src_name
         tgt_name = env.from_string(src_name).render()
         if tgt_name.endswith(".tpl"):
@@ -154,7 +151,7 @@ def render_dir(src_dir, tgt_dir, env, overwrite_file):
 
         tgt_pth = tgt_dir + "/" + tgt_name
         # handle namespace
-        if (is_dir and basename(src_dir) == 'src' and
+        if (isdir(src_pth) and basename(src_dir) == 'src' and
                     src_name == tpl_src_name):
             namespace = env.globals['base'].namespace
             if namespace is not None:
@@ -165,24 +162,25 @@ def render_dir(src_dir, tgt_dir, env, overwrite_file):
                 init_namespace_dir(ns_pth)
                 tgt_pth = ns_pth + "/" + tgt_name
 
-        if is_dir:
+        if isdir(src_pth):
             if tgt_name not in ("", "_") and not exists(tgt_pth):
                 mkdir(tgt_pth)
 
-            sub_hm = render_dir(src_pth, tgt_pth, env, overwrite_file)
+            sub_hm = regenerate_dir(src_pth, tgt_pth, env, overwrite_file)
             hm.update(sub_hm)
         else:
             kp = pth_as_key(tgt_pth)
             if overwrite_file.get(kp, True):
                 fname, ext = splitext(tgt_name)
                 if ext in non_bin_ext:
-                    blocks = render(env, pj(get_data_dir(), src_pth), tgt_pth)
+                    blocks = render(env, src_pth, tgt_pth)
                     hm[kp] = dict((bid, compute_hash(cnt)) for bid, cnt in blocks)
                 else:  # binary file
                     if exists(tgt_pth):
                         print "overwrite?"
                     else:
-                        content = get(src_pth, 'rb')
+                        with open(src_pth, 'rb') as fr:
+                            content = fr.read()
                         with open(tgt_pth, 'wb') as fw:
                             fw.write(content)
 
