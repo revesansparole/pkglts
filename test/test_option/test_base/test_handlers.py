@@ -1,28 +1,15 @@
-from pkglts.local import src_dir
-from pkglts.option.base.handlers import (upper, lower,
-                                         get_src_pth, mapping, pkg_full_name)
+from pkglts.config_managment import pkg_env
 
 
-def test_mapping():
-    assert len(mapping) == 4
-
-
-def test_upper():
-    assert upper("toto", {}) == "TOTO"
-
-
-def test_lower():
-    assert lower("ToTo", {}) == "toto"
-
-
-def test_get_src_pth():
-    cfg = {'base': {'pkgname': 'toto', 'namespace': 'oa'}}
-    assert src_dir(cfg) == get_src_pth("whatever", cfg)
+def test_src_pth():
+    env = pkg_env({'base': {'pkgname': 'toto', 'namespace': None}})
+    assert env.globals['base'].src_pth == "src/toto"
+    env = pkg_env({'base': {'pkgname': 'toto', 'namespace': 'oa'}})
+    assert env.globals['base'].src_pth == "src/oa/toto"
 
 
 def test_pkg_full_name():
-    cfg = {'base': {'pkgname': 'toto', 'namespace': 'oa'}}
-    assert pkg_full_name("whatever", cfg) == 'oa.toto'
-
-    cfg = {'base': {'pkgname': 'toto', 'namespace': None}}
-    assert pkg_full_name("whatever", cfg) == 'toto'
+    env = pkg_env({'base': {'pkgname': 'toto', 'namespace': None}})
+    assert env.globals['base'].pkg_full_name == "toto"
+    env = pkg_env({'base': {'pkgname': 'toto', 'namespace': 'oa'}})
+    assert env.globals['base'].pkg_full_name == "oa.toto"

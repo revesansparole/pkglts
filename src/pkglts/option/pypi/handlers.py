@@ -1,4 +1,4 @@
-from pkglts.option.base.handlers import pkg_full_name
+from pkglts.local import pkg_full_name
 from pkglts.option.doc import fmt_badge
 
 

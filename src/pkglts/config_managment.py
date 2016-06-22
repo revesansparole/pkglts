@@ -59,6 +59,8 @@ class ConfigSection(object):
 def create_env(pkg_cfg):
     """Create a jinja2.Environment from a package configuration
 
+    Notes: do not load option handlers
+
     Args:
         pkg_cfg (dict of str: any): package configuration
 
@@ -97,26 +99,41 @@ def create_env(pkg_cfg):
             msg += "%s:%s '%s'\n" % item
         raise UserWarning(msg)
 
-    # load option specific handlers
+    # add global filters and test
     env.globals['today'] = lambda: "TODAY"  # TODO
-    for name in pkg_cfg:
-        if not name.startswith("_"):
-            try:
-                opt_handlers = import_module("pkglts.option.%s.handlers" % name)
-                try:
-                    extensions = opt_handlers.environment_extensions(env)
-                    for k, v in extensions.items():
-                        setattr(env.globals[name], k, v)
-                except AttributeError:
-                    print "option %s do not define any extension" % name
-            except ImportError:
-                raise KeyError("option '%s' does not exists" % name)
 
-    # add specific tests
     def is_available(opt_param):
         return opt_param in installed_options(env)
 
     env.tests['available'] = is_available
+
+    return env
+
+
+def pkg_env(pkg_cfg):
+    """Create a jinja2.Environment from a package configuration
+
+    Args:
+        pkg_cfg (dict of str: any): package configuration
+
+    Returns:
+        (jinja2.Environment)
+    """
+    env = create_env(pkg_cfg)
+
+    # load option specific handlers
+    for name in pkg_cfg:
+        if not name.startswith("_"):
+            try:
+                opt_handlers = import_module("pkglts.option.%s.handlers" % name)
+                if not hasattr(opt_handlers, "environment_extensions"):
+                    print "option %s do not define any extension" % name
+                else:
+                    extensions = opt_handlers.environment_extensions(env)
+                    for k, v in extensions.items():
+                        setattr(env.globals[name], k, v)
+            except ImportError:
+                raise KeyError("option '%s' does not exists" % name)
 
     return env
 
@@ -139,7 +156,7 @@ def get_pkg_config(rep="."):
         upgrade_pkg_cfg_version(pkg_cfg, i)
 
     # create jinja2 Environment
-    return create_env(pkg_cfg)
+    return pkg_env(pkg_cfg)
 
 
 def write_pkg_config(env, rep="."):

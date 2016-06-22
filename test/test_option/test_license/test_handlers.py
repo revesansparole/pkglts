@@ -1,6 +1,6 @@
 from nose.tools import assert_raises
 
-from pkglts.option.license.handlers import generate, setup_handler
+from pkglts.config_managment import pkg_env
 
 
 def test_generate():
@@ -8,9 +8,8 @@ def test_generate():
                year="2015",
                organization="org",
                project="project")
-    txt = generate("txt", dict(license=cfg))
-    assert len(txt) > 0
-    assert txt != "txt"
+    env = pkg_env(dict(license=cfg))
+    assert len(env.globals['license'].full_text) > 0
 
 
 def test_generate_raise_error_if_license_do_not_exists():
@@ -18,14 +17,4 @@ def test_generate_raise_error_if_license_do_not_exists():
                year="2015",
                organization="org",
                project="project")
-    assert_raises(IOError, lambda: generate("txt", dict(license=cfg)))
-
-
-def test_setup():
-    cfg = dict(name='mit',
-               year="2015",
-               organization="org",
-               project="project")
-    txt = setup_handler("txt", dict(license=cfg))
-    assert len(txt) > 0
-    assert txt != "txt"
+    assert_raises(IOError, lambda: pkg_env(dict(license=cfg)))

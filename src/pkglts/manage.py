@@ -13,7 +13,7 @@ from shutil import rmtree
 
 from .config import pkglts_dir, pkg_cfg_file, pkg_hash_file
 from .data_access import get_data_dir, ls
-from .config_managment import (create_env, default_cfg,
+from .config_managment import (pkg_env, default_cfg,
                                get_pkg_config, installed_options,
                                write_pkg_config)
 from .hash_managment import (get_pkg_hash, modified_file_hash,
@@ -48,7 +48,7 @@ def init_pkg(rep="."):
     if exists(pj(rep, pkglts_dir, pkg_cfg_file)):
         env = get_pkg_config(rep)
     else:
-        env = create_env(default_cfg)
+        env = pkg_env(default_cfg)
     write_pkg_config(env, rep)
 
     if not exists(pj(rep, pkglts_dir, pkg_hash_file)):
