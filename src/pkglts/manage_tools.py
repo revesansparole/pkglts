@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 tpl_src_name = "{" + "{ base.pkgname }" + "}"
 
 non_bin_ext = ("", ".bat", ".cfg", ".in", ".ini", ".no", ".py", ".rst", ".sh",
-               ".txt", ".yml")
+               ".txt", ".yml", ".yaml")
 
 
 def ensure_installed_packages(requirements, msg, env):

@@ -77,9 +77,6 @@ setup_kwds = dict(
     keywords='{{ doc.keywords|join(", ") }}',
     {% if 'pypi' is available %}
     classifiers=[
-        {%- for kwd in pypi.classifiers %}
-        "{{ kwd }}",
-        {%- endfor %}
         {%- for kwd in pypi.auto_classifiers %}
         "{{ kwd }}",
         {%- endfor %}

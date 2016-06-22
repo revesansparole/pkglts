@@ -3,26 +3,25 @@ from importlib import import_module
 from pkglts.config_managment import installed_options
 
 
-def requirements(pkg_cfg, requirement_name):
-    """ Check all requirements for installed options
+def requirements(env, requirement_name):
+    """Check all requirements for installed options.
 
-    args:
-     - pkg_cfg (dict of (str, dict)): option_name, options
-     - requirement_name (str): type of requirement 'install', 'dvlpt'
+    Args:
+        env (jinja2.Environment):
+        requirement_name (str): type of requirement 'install', 'dvlpt'
 
-    return:
-     - (str): one requirement per line
+    Returns:
+        (list of str): list of required packages names
     """
     reqs = set()
-    for name in installed_options(pkg_cfg):
+    for name in installed_options(env):
         try:
             opt_req = import_module("pkglts.option.%s.require" % name)
             reqs.update(getattr(opt_req, requirement_name))
         except ImportError:
             raise KeyError("option '%s' does not exists" % name)
 
-    reqs_str = "\n".join(reqs)
-    return "\n" + reqs_str + "\n"
+    return sorted(reqs)
 
 
 def pkg_url(env):
@@ -66,8 +65,8 @@ def environment_extensions(env):
     Returns:
         dict of str: any
     """
-    req_install = ['install1', 'install2']
-    req_dvlpt = ['dvlpt1', 'dvlpt2']
+    req_install = requirements(env, 'install')
+    req_dvlpt = requirements(env, 'dvlpt')
 
     def req(name):
         if name == 'install':

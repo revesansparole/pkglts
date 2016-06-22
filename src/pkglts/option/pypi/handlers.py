@@ -3,7 +3,7 @@ from pkglts.option.doc import fmt_badge
 
 
 def auto_classifiers(env):
-    items = list(env.globals['pypi'].classifiers)
+    items = set(env.globals['pypi'].classifiers)
 
     # add license item
     # TODO
@@ -11,21 +11,21 @@ def auto_classifiers(env):
     # add intended versions items
     intended_versions = env.globals['pysetup'].intended_versions
     if len(intended_versions) > 0:
-        items.append("Programming Language :: Python")
+        items.add("Programming Language :: Python")
 
         ver_cla_tpl = "Programming Language :: Python :: %s.%s"
         major_versions = set()
         for ver in intended_versions:
-            items.append(ver_cla_tpl % (ver[0], ver[1]))
+            items.add(ver_cla_tpl % (ver[0], ver[1]))
             major_versions.add(ver[0])
 
         ver_cla_tpl = "Programming Language :: Python :: %s"
         for ver in major_versions:
-            items.append(ver_cla_tpl % ver)
+            items.add(ver_cla_tpl % ver)
 
         if len(major_versions) == 1:
             ver, = major_versions
-            items.append("Programming Language :: Python :: %s :: Only" % ver)
+            items.add("Programming Language :: Python :: %s :: Only" % ver)
 
     return sorted(items)
 
