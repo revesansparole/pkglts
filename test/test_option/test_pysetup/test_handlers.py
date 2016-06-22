@@ -26,5 +26,6 @@ def test_requirements():
     cfg = dict(test={},
                pysetup={'intended_versions': ["27"]})
     env = pkg_env(cfg)
-    assert len(env.globals['pysetup'].requirements('install')) == 2
-    # TODO
+    assert len(env.globals['pysetup'].requirements('install')) == 0
+    assert len(env.globals['pysetup'].requirements('dvlpt')) == 2
+
