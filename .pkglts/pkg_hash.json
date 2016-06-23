@@ -4,6 +4,10 @@
         "github": "pDLSRjBMnEscyxs5NRfmDYtEKG3kLLAsSkJAi27NJGiUNfM/3LpMXb+oWmOqWxo0ZbO2lvck0xQV+STUb9/YXw=="
     }, 
     ".landscape.yml": {}, 
+    ".pypirc": {
+        "pypi": "2NY8qKq6AEMWhHocVeMN8DUHkza6rCDCVLCpKoQ4Y8NsHyHgvDfznKJo/+3qXWxOF2azATTm9vO4jB58sNVrlA==", 
+        "pypi.test": "zWBcGMyChxCuXPMsosS2ktztvIXlHRzYwkMZ3rZivm7W3l/sEqvUrhHagBw9CL72Alod3KL7aE/WIRoK3FeqfA=="
+    }, 
     ".travis.yml": {
         "travis": "zsZcmaZAiefAinxbWV3uelYpV6VsTxt+IpwBR3orcDPueJOhXwC5UVy+MYPuy2Ex7CNqC4ZptXGG8gA9PXhLgQ=="
     }, 
