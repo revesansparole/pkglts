@@ -4,12 +4,8 @@
         "github": "pDLSRjBMnEscyxs5NRfmDYtEKG3kLLAsSkJAi27NJGiUNfM/3LpMXb+oWmOqWxo0ZbO2lvck0xQV+STUb9/YXw=="
     }, 
     ".landscape.yml": {}, 
-    ".pypirc": {
-        "pypi1": "2NY8qKq6AEMWhHocVeMN8DUHkza6rCDCVLCpKoQ4Y8NsHyHgvDfznKJo/+3qXWxOF2azATTm9vO4jB58sNVrlA==", 
-        "pypi2": "zWBcGMyChxCuXPMsosS2ktztvIXlHRzYwkMZ3rZivm7W3l/sEqvUrhHagBw9CL72Alod3KL7aE/WIRoK3FeqfA=="
-    }, 
     ".travis.yml": {
-        "travis": "B+Xa91lGsi3X+n9vu7Si3YfnSPZBME46wqy3NWksUc/5hrtNZ0AvnXK+Y6oHMQMs4Vrk/L2ZKcAXo1DsbYN2Yw=="
+        "travis": "zsZcmaZAiefAinxbWV3uelYpV6VsTxt+IpwBR3orcDPueJOhXwC5UVy+MYPuy2Ex7CNqC4ZptXGG8gA9PXhLgQ=="
     }, 
     "AUTHORS.rst": {}, 
     "CONTRIBUTING.rst": {}, 
@@ -53,7 +49,7 @@
     }, 
     "setup.py": {
         "pysetup.call": "2wHuP94SpWKZpqOzExkQGTxnhGPgBHK3qOdPn0Ncstj5FkZ7FBGGM/inqAXaI4QLKQtTNlOUYRGSkYUWAUcf1w==", 
-        "pysetup.kwds": "wDvNDoII50rvrd7uvLrUM+C7YWt3vqwNtvWpQ4mI69l38CHXe7h0m3Y4nAnhwyrB5cNh8vIen9zmrApdxrGK2Q=="
+        "pysetup.kwds": "Lsl1K83WUDBHCHYC4FQzhQvhzjImPRis8oQEJn0Ho4vG0ZlO2tvPbbFA3SVP+NTPX5Ns4SHpETeRMiO99A434A=="
     }, 
     "src/pkglts/__init__.py": {
         "base": "gR33dW0qqYmsV9NSNB+DD8XmuxnC2t0mKjnMoU5728qh97fSER6MbX+3QKxpZDLByZToaAay4xhx8acxketJmA=="
@@ -67,6 +63,6 @@
     "src/pkglts_data/__init__.py": {}, 
     "test/__init__.py": {}, 
     "tox.ini": {
-        "tox": "oVrgK/hOSr1XF0SORNcNIaXdJIa2g2x+072dahFMs1XRpw1RXsseCXGGZPQrLlteeI1StY5eydutisSmysXs4Q=="
+        "tox": "Z1X85SO+MgbIuOjmTr+J5rwdgXMqgu1axDaRwP6EkgNm3MFPqV2UMYUGGgdlIQI3Zny6QIU3hDO7BYemsAJYaA=="
     }
 }

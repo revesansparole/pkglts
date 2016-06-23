@@ -21,6 +21,6 @@ script: nosetests
 
 {% if 'coveralls' is available %}
 after_success:
-  coveralls
+  - coveralls
 {% endif %}
 # #}

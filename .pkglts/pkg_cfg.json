@@ -48,7 +48,7 @@
     "pysetup": {
         "intended_versions": [
             "27", 
-            "34"
+            "35"
         ]
     }, 
     "readthedocs": {
