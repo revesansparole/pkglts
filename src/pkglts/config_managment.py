@@ -180,7 +180,7 @@ def write_pkg_config(env, rep="."):
                 pkg_cfg[opt_name][key] = val
 
     with open(pj(rep, pkglts_dir, pkg_cfg_file), 'w') as f:
-        json.dump(pkg_cfg, f, sort_keys=True, indent=4)
+        json.dump(pkg_cfg, f, sort_keys=True, indent=2)
 
 
 def upgrade_pkg_cfg_version(pkg_cfg, version):

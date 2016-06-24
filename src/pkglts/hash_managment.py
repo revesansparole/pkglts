@@ -69,7 +69,7 @@ def write_pkg_hash(pkg_hash, rep="."):
     cfg = dict(pkg_hash)
 
     with open(pj(rep, pkglts_dir, pkg_hash_file), 'w') as f:
-        json.dump(cfg, f, sort_keys=True, indent=4)
+        json.dump(cfg, f, sort_keys=True, indent=2)
 
 
 def modified_file_hash(pth, pkg_hash):
