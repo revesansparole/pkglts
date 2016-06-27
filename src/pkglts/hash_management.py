@@ -83,7 +83,11 @@ def modified_file_hash(pth, pkg_hash):
     Returns:
         (bool): whether this file has been modified or not
     """
-    ref_blocks = pkg_hash[pth_as_key(pth)]
+    key = pth_as_key(pth)
+    if key not in pkg_hash:
+        raise IOError("%s not under check" % key)
+
+    ref_blocks = pkg_hash[key]
 
     with open(pth, 'r') as f:
         blocks = parse_source(f.read())
@@ -94,6 +98,7 @@ def modified_file_hash(pth, pkg_hash):
         return True
     else:
         for bid, cnt in lts_blocks.items():
+            print "block", bid, repr(cnt)
             sha = compute_hash(cnt)
             if sha != ref_blocks[bid]:
                 return True

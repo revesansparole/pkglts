@@ -110,8 +110,6 @@ def render(env, src_pth, tgt_pth):
             tgt += cnt
             tgt += "\n" + aft + "#" + "}\n"
 
-            # save new content hash
-
     with open(tgt_pth, 'w') as f:
         f.write(tgt)
 

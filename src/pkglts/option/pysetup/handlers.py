@@ -1,6 +1,6 @@
 from importlib import import_module
 
-from pkglts.config_managment import installed_options
+from pkglts.config_management import installed_options
 
 
 def requirements(env, requirement_name):

@@ -1,6 +1,6 @@
 from nose.tools import assert_raises
 
-from pkglts.config_managment import pkg_env
+from pkglts.config_management import pkg_env
 
 
 def test_generate():

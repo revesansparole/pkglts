@@ -1,4 +1,4 @@
-from pkglts.config_managment import create_env
+from pkglts.config_management import create_env
 from pkglts.option.base.config import check, parameters
 
 
