@@ -98,7 +98,6 @@ def modified_file_hash(pth, pkg_hash):
         return True
     else:
         for bid, cnt in lts_blocks.items():
-            print "block", bid, repr(cnt)
             sha = compute_hash(cnt)
             if sha != ref_blocks[bid]:
                 return True

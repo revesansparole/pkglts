@@ -193,16 +193,10 @@ def upgrade_pkg_cfg_version(pkg_cfg, version):
     Returns:
         (dict of str: any): a reference to an updated pkg_cfg
     """
-    # if version == 0:
-    #     pkg_cfg['_pkglts']['version'] = 1
-    # elif version == 1:
-    #     try:
-    #         sphinx_cfg = pkg_cfg['sphinx']
-    #         sphinx_cfg['autodoc-dvlpt'] = sphinx_cfg.get('autodoc-dvlpt', True)
-    #     except KeyError:
-    #         pass
-    #
-    #     pkg_cfg['_pkglts']['version'] = 2
+    if version == 0:
+        pkg_cfg['_pkglts']['version'] = 1
+    elif version == 1:
+        pkg_cfg['_pkglts']['version'] = 2
 
     return pkg_cfg
 
