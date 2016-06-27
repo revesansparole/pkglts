@@ -1,4 +1,6 @@
 # {# pkglts, github
+# Byte-compiled / optimized / DLL files
+__pycache__/
 *.py[cod]
 
 # pkglts files
@@ -7,20 +9,48 @@
 # Packages
 *.egg
 *.egg-info
-dist
-build
-eggs
-parts
-bin
-var
-sdist
-develop-eggs
+.eggs
+.Python
+dist/
+build/
+env/
+downloads/
+eggs/
+parts/
+bin/
+var/
+sdist/
+develop-eggs/
 .installed.cfg
-lib
-lib64
+lib/
+lib64/
 
 # editors
-.idea
+.idea/
+
+# C extensions
+*.so
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+
+# PyBuilder
+target/
+
 
 {% if 'coverage' is available %}
 # coverage
@@ -29,7 +59,7 @@ lib64
 
 {%- if 'tox' is available %}
 # tox
-.tox
+.tox/
 {% endif -%}
 
 {%- if 'pypi' is available %}
@@ -39,7 +69,7 @@ lib64
 
 {%- if 'sphinx' is available %}
 # sphinx autogen file
-doc/_dvlpt
+doc/_dvlpt/
 {% endif %}
 
 # #}
