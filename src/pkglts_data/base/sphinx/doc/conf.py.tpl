@@ -44,6 +44,7 @@ sys.path.insert(0, os.path.join(project_root, 'src'))
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.autosummary',
+    'sphinx.ext.doctest',
     'sphinx.ext.graphviz',
     'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
@@ -331,6 +332,7 @@ opts.dryrun = None
 opts.force = None
 opts.header = 'src'
 opts.maxdepth = 4
+opts.includeprivate = False
 
 if not path.isdir(opts.destdir):
     os.makedirs(opts.destdir)
