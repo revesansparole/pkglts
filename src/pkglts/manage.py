@@ -13,15 +13,14 @@ from shutil import rmtree
 
 from .config import pkglts_dir, pkg_cfg_file, pkg_hash_file
 from .data_access import get_data_dir, ls
-from .config_managment import (pkg_env, default_cfg,
-                               get_pkg_config, installed_options,
-                               write_pkg_config)
-from .hash_managment import (get_pkg_hash, modified_file_hash,
-                             pth_as_key, write_pkg_hash)
+from .config_management import (pkg_env, default_cfg,
+                                get_pkg_config, installed_options,
+                                write_pkg_config)
+from .hash_management import (get_pkg_hash, modified_file_hash,
+                              pth_as_key, write_pkg_hash)
 from .manage_tools import (check_option_parameters,
                            regenerate_dir, update_opt)
 from .option_tools import get_user_permission
-
 
 logger = logging.getLogger(__name__)
 

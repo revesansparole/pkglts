@@ -4,7 +4,7 @@ from os import listdir
 from os.path import isdir
 from os.path import join as pj
 
-from pkglts.config_managment import create_env
+from pkglts.config_management import create_env
 
 
 def nn(env, pth):

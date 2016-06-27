@@ -1,11 +1,3 @@
 # {# pkglts, pysetup
 
-coverage
-flake8
-github3.py
-mock
-nose
-sphinx
-tox
-twine
 # #}

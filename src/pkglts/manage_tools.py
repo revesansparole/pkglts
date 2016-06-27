@@ -6,8 +6,8 @@ import logging
 from os import listdir, mkdir
 from os.path import basename, exists, isdir, splitext
 
-from .config_managment import ConfigSection, installed_options
-from .hash_managment import compute_hash, pth_as_key
+from .config_management import ConfigSection, installed_options
+from .hash_management import compute_hash, pth_as_key
 from .install_env.load_front_end import get_install_front_end
 from .local import init_namespace_dir
 from .option_tools import get_user_permission
