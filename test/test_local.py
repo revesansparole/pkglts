@@ -1,55 +1,31 @@
 from nose.tools import assert_raises
 
-from pkglts.local import (load_handlers, load_all_handlers,
-                          installed_options, src_dir)
+from pkglts.config_managment import create_env
+from pkglts.local import (pkg_full_name, src_dir)
 
 
 print(__file__)
 
 
+def test_pkg_full_name():
+    cfg = {}
+    assert_raises(KeyError, lambda: pkg_full_name(create_env(cfg)))
+
+    cfg['base'] = dict(pkgname='toto', namespace=None)
+    name1 = pkg_full_name(create_env(cfg))
+    cfg['base']['namespace'] = 'oa'
+    name2 = pkg_full_name(create_env(cfg))
+
+    assert name1 != name2
+
+
 def test_src_dir():
-    pkg_cfg = {}
-    assert_raises(KeyError, lambda: src_dir(pkg_cfg))
+    cfg = {}
+    assert_raises(KeyError, lambda: src_dir(create_env(cfg)))
 
-    pkg_cfg['base'] = {}
-    assert_raises(KeyError, lambda: src_dir(pkg_cfg))
-
-    pkg_cfg['base']['pkgname'] = 'toto'
-    assert_raises(KeyError, lambda: src_dir(pkg_cfg))
-
-    pkg_cfg['base']['namespace'] = None
-    dir1 = src_dir(pkg_cfg)
-    pkg_cfg['base']['namespace'] = 'oa'
-    dir2 = src_dir(pkg_cfg)
+    cfg['base'] = dict(pkgname='toto', namespace=None)
+    dir1 = src_dir(create_env(cfg))
+    cfg['base']['namespace'] = 'oa'
+    dir2 = src_dir(create_env(cfg))
 
     assert dir1 != dir2
-
-
-# def test_installed_options_does_not_list_pkglts_as_option():
-#     cfg = dict(pkglts={}, toto=None)
-#     assert set(installed_options(cfg)) == {'toto'}
-
-
-def test_installed_options_handle_private_keys():
-    cfg = {'toto': {}, 'titi': None}
-    assert set(installed_options(cfg)) == {'toto', 'titi'}
-
-    cfg['_key'] = {}
-    assert set(installed_options(cfg)) == {'toto', 'titi'}
-
-
-def test_load_handlers_fail_if_unknown_option():
-    assert_raises(KeyError, lambda: load_handlers('toto'))
-
-
-def test_load_handlers_load_functions_in_config_handlers():
-    h = load_handlers('base')
-    assert 'base' in h
-    assert 'upper' in h
-
-
-def test_load_all_handlers():
-    pkg_cfg = {'base': {}, 'doc': {}}
-    h = load_all_handlers(pkg_cfg)
-    assert 'base' in h
-    assert 'doc' in h

@@ -1,4 +1,4 @@
-# {{pkglts github,
+# {# pkglts, github
 *.py[cod]
 
 # pkglts files
@@ -22,27 +22,27 @@ lib64
 # editors
 .idea
 
-{{coverage rm,
+{% if 'coverage' is available %}
 # coverage
 .coverage
-}}
+{% endif -%}
 
-{{tox rm,
+{%- if 'tox' is available %}
 # tox
 .tox
-}}
+{% endif -%}
 
-{{pypi rm,
-# pypi rc file
+{%- if 'pypi' is available %}
+'# pypi rc file
 .pypirc
-}}
+{% endif -%}
 
-{{sphinx rm,
+{%- if 'sphinx' is available %}
 # sphinx autogen file
 doc/_dvlpt
-}}
+{% endif %}
 
-# }}
+# #}
 
-# user defined
+# user custom filters
 

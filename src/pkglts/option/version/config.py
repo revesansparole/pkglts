@@ -5,19 +5,19 @@ parameters = [
 ]
 
 
-def check(pkg_cfg):
-    """Check the validity of parameters in package configuration.
+def check(env):
+    """Check the validity of parameters in working environment.
 
-    args:
-     - pkg_cfg (dict of str, dict of str, any)): package configuration
+    Args:
+        env (jinja2.Environment):  current working environment
 
-    return:
-     - (list of str): list of faulty parameters
+    Returns:
+        (list of str): list of faulty parameters
     """
     invalids = []
-    major = pkg_cfg['version']['major']
-    minor = pkg_cfg['version']['minor']
-    post = pkg_cfg['version']['post']
+    major = env.globals['version'].major
+    minor = env.globals['version'].minor
+    post = env.globals['version'].post
 
     if not isinstance(major, int):
         invalids.append("major")

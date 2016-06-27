@@ -1,14 +1,20 @@
 from pkglts.option.doc import fmt_badge
 
 
-def badge(txt, env):
-    del txt  # unused
-    owner = env['base']['owner']
-    project = env['github']['project']
+def environment_extensions(env):
+    """Add more functionality to an environment.
+
+    Args:
+        env (jinja2.Environment):
+
+    Returns:
+        dict of str: any
+    """
+    owner = env.globals['github'].owner
+    project = env.globals['github'].project
 
     url = "landscape.io/github/%s/%s/master" % (owner, project)
     img = url + "/landscape.svg?style=flat"
-    return fmt_badge(img, url, "Code health status")
+    badge = fmt_badge(img, url, "Code health status")
 
-
-mapping = {'landscape.badge': badge}
+    return {"badge": badge}

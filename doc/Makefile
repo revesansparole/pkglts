@@ -1,4 +1,4 @@
-# {{pkglts sphinx,
+# {# pkglts, sphinx
 # Makefile for Sphinx documentation
 #
 
@@ -177,4 +177,4 @@ pseudoxml:
 	@echo
 	@echo "Build finished. The pseudo-XML files are in $(BUILDDIR)/pseudoxml."
 
-# }}
+# #}

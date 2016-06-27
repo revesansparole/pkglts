@@ -1,10 +1,11 @@
+from pkglts.config_managment import create_env
 from pkglts.option.github.config import check, parameters
 
 
 def test_parameters():
-    assert len(parameters) == 1
+    assert len(parameters) == 3
 
 
 def test_config_check_project_exists():
-    pkg_cfg = dict(github={'project': ""})
-    assert 'project' in check(pkg_cfg)
+    env = create_env(dict(github={'owner': "", 'project': "", "url": ""}))
+    assert 'project' in check(env)

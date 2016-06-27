@@ -3,27 +3,26 @@
 
 from importlib import import_module
 import logging
-from os import listdir, mkdir, walk
+from os import listdir, mkdir
 from os.path import basename, exists, isdir, splitext
 
-from .data_access import get, ls
-from .file_management import get_hash, write_file
+from .config_managment import ConfigSection, installed_options
+from .hash_managment import compute_hash, pth_as_key
 from .install_env.load_front_end import get_install_front_end
 from .local import init_namespace_dir
 from .option_tools import get_user_permission
-from .templating import (closing_marker, get_comment_marker, opening_marker,
-                         replace, swap_divs)
+from .templating import render
 
 
 logger = logging.getLogger(__name__)
 
-tpl_src_name = "%skey, base.pkgname%s" % (opening_marker, closing_marker)
+tpl_src_name = "{" + "{ base.pkgname }" + "}"
 
 non_bin_ext = ("", ".bat", ".cfg", ".in", ".ini", ".no", ".py", ".rst", ".sh",
-               ".txt", ".yml")
+               ".txt", ".yml", ".yaml")
 
 
-def ensure_installed_packages(requirements, msg, pkg_cfg):
+def ensure_installed_packages(requirements, msg, env):
     """Ensure all packages in requirements are installed.
 
     If not, ask user permission to install them.
@@ -32,12 +31,12 @@ def ensure_installed_packages(requirements, msg, pkg_cfg):
         requirements (list of str): list of package names to install
                                    if needed
         msg (str): error message to print
-        pkg_cfg (dict of str:dict): package configuration
+        env (jinja2.Environment): current working environment
 
     Returns:
         (bool): whether all required packages are installed or not
     """
-    ife = get_install_front_end(pkg_cfg["_pkglts"]["install_front_end"])
+    ife = get_install_front_end(env.globals["_pkglts"].install_front_end)
     to_install = set(requirements) - set(ife.installed_packages())
     if len(to_install) > 0:
         print(msg)
@@ -49,26 +48,26 @@ def ensure_installed_packages(requirements, msg, pkg_cfg):
     return True
 
 
-def check_option_parameters(name, pkg_cfg):
+def check_option_parameters(name, env):
     """Check that the parameters associated to an option are valid.
 
     Try to import Check function in option dir.
 
     Args:
         name (str): option name
-        pkg_cfg (dict of str:dict): package configuration
+        env (jinja2.Environment): current working environment
     """
     try:
         opt_cfg = import_module("pkglts.option.%s.config" % name)
         try:
-            return opt_cfg.check(pkg_cfg)
+            return opt_cfg.check(env)
         except AttributeError:
             return []
     except ImportError:
         return []
 
 
-def update_opt(name, pkg_cfg):
+def update_opt(name, env):
     """Update an option of this package.
 
     Notes: If the option does not exists yet, add it first.
@@ -76,7 +75,7 @@ def update_opt(name, pkg_cfg):
 
     Args:
         name (str): name of option to add
-        pkg_cfg (dict of str:dict): package configuration
+        env (jinja2.Environment): current working environment
     """
     logger.info("update option %s", name)
 
@@ -89,19 +88,19 @@ def update_opt(name, pkg_cfg):
 
     # find other option requirements in repository
     for option_name in opt_require.option:
-        if option_name not in pkg_cfg:
+        if option_name not in installed_options(env):
             print("need to install option '%s' first" % option_name)
-            if (pkg_cfg.get("_pkglts", {}).get("auto_install", False) or
+            if (env.globals["_pkglts"].auto_install or
                     get_user_permission("install")):
-                pkg_cfg = update_opt(option_name, pkg_cfg)
+                env = update_opt(option_name, env)
             else:
-                return pkg_cfg
+                return env
 
     # find extra package requirements for setup
     msg = "this option requires some packages to setup"
-    if not ensure_installed_packages(opt_require.setup, msg, pkg_cfg):
+    if not ensure_installed_packages(opt_require.setup, msg, env):
         print("option installation stopped")
-        return pkg_cfg
+        return env
 
     # find parameters required by option config
     try:
@@ -109,249 +108,80 @@ def update_opt(name, pkg_cfg):
     except AttributeError:
         params = []
 
-    option_cfg = {}
-    prev_cfg = pkg_cfg.get(name, {})
+    option_cfg = ConfigSection()
+    prev_cfg = env.globals.get(name, {})
     for key, default in params:
-        option_cfg[key] = prev_cfg.get(key, default)
+        option_cfg.add_param(key, getattr(prev_cfg, key, default))
 
     # write new pkg_info file
-    pkg_cfg[name] = option_cfg
+    env.globals[name] = option_cfg
 
     try:  # TODO: proper developer doc to expose this feature
-        opt_cfg.after(pkg_cfg)
+        opt_cfg.after(env)
     except AttributeError:
         pass
 
     # find extra package requirements for dvlpt
     msg = "this option requires additional packages for developers"
-    ensure_installed_packages(opt_require.dvlpt, msg, pkg_cfg)
+    ensure_installed_packages(opt_require.dvlpt, msg, env)
 
-    return pkg_cfg
-
-
-def clone_base_option_dir(src_dir, tgt_dir, pkg_cfg, handlers, overwrite_file):
-    """Clone src_dir into tgt_dir.
-
-    Args:
-        src_dir (str): path to source directory
-        tgt_dir (str): path to target directory in which to copy files
-        pkg_cfg (dict of str:dict): package configuration
-        handlers (dict of func): associate keys to handler functions
-        overwrite_file (dict of (str, bool)): whether to overwrite a specific
-                                              path in case of conflict
-    """
-    error_files = []
-
-    for src_name, is_dir in ls(src_dir):
-        src_pth = src_dir + "/" + src_name
-        tgt_name = replace(src_name, handlers, pkg_cfg)
-        if tgt_name.endswith(".tpl"):
-            tgt_name = tgt_name[:-4]
-
-        tgt_pth = tgt_dir + "/" + tgt_name
-        # handle namespace
-        if (is_dir and basename(src_dir) == 'src' and
-                    src_name == tpl_src_name):
-            namespace = pkg_cfg['base']['namespace']
-            if namespace is not None:
-                ns_pth = tgt_dir + "/" + namespace
-                if not exists(ns_pth):
-                    mkdir(ns_pth)
-
-                init_namespace_dir(ns_pth)
-                tgt_pth = ns_pth + "/" + tgt_name
-
-        if is_dir:
-            if tgt_name not in ("", "_") and not exists(tgt_pth):
-                mkdir(tgt_pth)
-
-            ef = clone_base_option_dir(src_pth, tgt_pth, pkg_cfg, handlers,
-                                       overwrite_file)
-            error_files.extend(ef)
-        else:
-            fname, ext = splitext(tgt_name)
-            if fname != "_":
-                if ext in non_bin_ext:
-                    if exists(tgt_pth):
-                        if overwrite_file.get(tgt_pth, True):
-                            src_cnt = get(src_pth)
-                            with open(tgt_pth, 'r') as f:
-                                tgt_cnt = f.read()
-
-                            content = swap_divs(src_cnt, tgt_cnt,
-                                                get_comment_marker(src_pth))
-                            if content is None:
-                                error_files.append(tgt_pth)
-                            else:
-                                write_file(tgt_pth, content)
-                    else:
-                        content = get(src_pth)
-                        write_file(tgt_pth, content)
-                else:  # binary file
-                    if exists(tgt_pth):
-                        if overwrite_file.get(tgt_pth, True):
-                            content = get(src_pth, 'rb')
-                            with open(tgt_pth, 'wb') as fw:
-                                fw.write(content)
-                    else:
-                        content = get(src_pth, 'rb')
-                        with open(tgt_pth, 'wb') as fw:
-                            fw.write(content)
-
-    return error_files
+    return env
 
 
-def clone_base_option(option, pkg_cfg, handlers, target, overwrite_file):
-    """
+def regenerate_dir(src_dir, tgt_dir, env, overwrite_file):
+    """Walk all files in src_dir and create/update them on tgt_dir
 
     Args:
-        option (str): name of option
-        pkg_cfg (dict of str:dict): package configuration
-        handlers (dict of func): associate keys to handler functions
-        target (str): path to copy files to
-        overwrite_file (dict of (str, bool)): whether to overwrite a specific
-                                              path in case of conflict
+        src_dir (str): path to reference files
+        tgt_dir (str): path to target where files will be written
+        env (jinja2.Environment): current working environment
+        overwrite_file (dict of str:bool): whether or not to overwrite some
+                             files
 
     Returns:
-
-    """
-    if (option, True) not in ls("base"):
-        return []  # nothing to do
-
-    option_root = "base/%s" % option
-
-    return clone_base_option_dir(option_root, target, pkg_cfg, handlers,
-                                 overwrite_file)
-
-
-def clone_example(src_dir, tgt_dir, pkg_cfg, handlers):
-    """Clone an example directory into tgt_dir
-    replacing text in files on the way.
-
-    Args:
-        src_dir (str): path to source directory
-        tgt_dir (str): path to target directory in which to copy files
-        pkg_cfg (dict of str:dict): package configuration
-        handlers (dict of func): associate keys to handler functions
-
-    Returns:
-
-    """
-    for src_name, is_dir in ls(src_dir):
-        src_pth = src_dir + "/" + src_name
-
-        tgt_name = replace(src_name, handlers, pkg_cfg)
-        if tgt_name.endswith(".tpl"):
-            tgt_name = tgt_name[:-4]
-
-        tgt_pth = tgt_dir + "/" + tgt_name
-
-        # handle namespace
-        if (is_dir and basename(src_dir) == 'src' and
-                    src_name == tpl_src_name):
-            namespace = pkg_cfg['base']['namespace']
-            if namespace is not None:
-                ns_pth = tgt_dir + "/" + namespace
-                if not exists(ns_pth):
-                    mkdir(ns_pth)
-
-                init_namespace_dir(ns_pth)
-                tgt_pth = ns_pth + "/" + tgt_name
-
-        if is_dir:
-            if tgt_name not in ("", "_") and not exists(tgt_pth):
-                mkdir(tgt_pth)
-
-            clone_example(src_pth, tgt_pth, pkg_cfg, handlers)
-        else:
-            fname, ext = splitext(tgt_name)
-            if fname != "_" and ext not in (".pyc", ".pyo"):
-                if exists(tgt_pth):
-                    logger.warning("conflict '%s'", tgt_name)
-                else:
-                    if ext in non_bin_ext:
-                        content = replace(get(src_pth), handlers, pkg_cfg)
-                        write_file(tgt_pth, content)
-                    else:
-                        content = get(src_pth, 'rb')
-                        with open(tgt_pth, 'wb') as fw:
-                            fw.write(content)
-
-
-def package_hash_keys(target):
-    """Walk all files in package and compute their hash key.
-
-    Notes: walk only recognized extensions files
-
-    Args:
-        target (str): path to read files from
-
-    Returns:
-        (dict of str: str): mapping file path, hash
+        (dict of str: map): hash key of preserved sections
     """
     hm = {}
-    for root, dnames, fnames in walk(target):
-        for name in tuple(dnames):
-            if name.startswith("."):
-                dnames.remove(name)
-            elif "regenerate.no" in listdir(root + "/" + name):
-                dnames.remove(name)
 
-        for name in fnames:
-            pth = (root + "/" + name).replace("\\", "/")
-            if splitext(pth)[1] in non_bin_ext:
-                hm[pth] = get_hash(pth)
+    for src_name in listdir(src_dir):
+        src_pth = src_dir + "/" + src_name
+        tgt_name = env.from_string(src_name).render()
+        if tgt_name.endswith(".tpl"):
+            tgt_name = tgt_name[:-4]
+
+        tgt_pth = tgt_dir + "/" + tgt_name
+        # handle namespace
+        if (isdir(src_pth) and basename(src_dir) == 'src' and
+                    src_name == tpl_src_name):
+            namespace = env.globals['base'].namespace
+            if namespace is not None:
+                ns_pth = tgt_dir + "/" + namespace
+                if not exists(ns_pth):
+                    mkdir(ns_pth)
+
+                init_namespace_dir(ns_pth)
+                tgt_pth = ns_pth + "/" + tgt_name
+
+        if isdir(src_pth):
+            if tgt_name not in ("", "_") and not exists(tgt_pth):
+                mkdir(tgt_pth)
+
+            sub_hm = regenerate_dir(src_pth, tgt_pth, env, overwrite_file)
+            hm.update(sub_hm)
+        else:
+            kp = pth_as_key(tgt_pth)
+            if overwrite_file.get(kp, True):
+                fname, ext = splitext(tgt_name)
+                if ext in non_bin_ext:
+                    blocks = render(env, src_pth, tgt_pth)
+                    hm[kp] = dict((bid, compute_hash(cnt)) for bid, cnt in blocks)
+                else:  # binary file
+                    if exists(tgt_pth):
+                        print("overwrite? %s" % tgt_pth)
+                    else:
+                        with open(src_pth, 'rb') as fr:
+                            content = fr.read()
+                        with open(tgt_pth, 'wb') as fw:
+                            fw.write(content)
 
     return hm
-
-
-def regenerate_file(pth, pkg_cfg, handlers):
-    """Regenerate the content of a file.
-
-    Notes: loads divs in pkglts_data.base if necessary
-
-    Args:
-        pth (str): path to file
-        pkg_cfg (dict of str:dict): package configuration
-        handlers (dict of func): associate keys to handler functions
-
-    Returns:
-
-    """
-    with open(pth, 'r') as f:
-        content = f.read()
-
-    new_content = replace(content, handlers, pkg_cfg, get_comment_marker(pth))
-
-    with open(pth, 'w') as f:
-        f.write(new_content)
-
-
-def regenerate_pkg(pkg_cfg, handlers, target, overwrite_file):
-    """Walk all files in package and replace content.
-
-    Args:
-        pkg_cfg (dict of str:dict): package configuration
-        handlers (dict of func): associate keys to handler functions
-        target (str): path to copy files to
-        overwrite_file (dict of str:bool): whether or not to overwrite
-                                           a specific file
-
-    Returns:
-
-    """
-    for name in listdir(target):
-        pth = target + "/" + name
-        if isdir(pth):
-            # exclusion rule
-            if name.startswith("."):
-                pass
-            elif "regenerate.no" in listdir(pth):
-                pass
-            else:
-                # regenerate
-                regenerate_pkg(pkg_cfg, handlers, pth, overwrite_file)
-        else:
-            if splitext(pth)[1] in non_bin_ext:
-                if overwrite_file.get(pth, True):
-                    regenerate_file(pth, pkg_cfg, handlers)

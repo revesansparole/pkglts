@@ -1,15 +1,21 @@
 from pkglts.option.doc import fmt_badge
 
 
-def badge(txt, env):
-    del txt  # unused
-    owner = env['base']['owner']
-    project = env['github']['project']
+def environment_extensions(env):
+    """Add more functionality to an environment.
+
+    Args:
+        env (jinja2.Environment):
+
+    Returns:
+        dict of str: any
+    """
+    owner = env.globals['github'].owner
+    project = env.globals['github'].project
 
     url = "coveralls.io/github/%s/%s?branch=master" % (owner, project)
     img = ("coveralls.io/repos/github/%s/%s/" % (owner, project) +
            "badge.svg?branch=master")
-    return fmt_badge(img, url, "Coverage report status")
+    badge = fmt_badge(img, url, "Coverage report status")
 
-
-mapping = {'coveralls.badge': badge}
+    return {"badge": badge}

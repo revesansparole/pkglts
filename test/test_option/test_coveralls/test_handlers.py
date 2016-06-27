@@ -1,11 +1,7 @@
-from pkglts.option.coveralls.handlers import badge, mapping
-
-
-def test_handlers():
-    assert len(mapping) == 1
+from pkglts.config_managment import pkg_env
 
 
 def test_badge():
-    pkg_cfg = dict(base={'pkgname': "pkg", 'owner': "moi"},
-                   github={'project': "project"})
-    assert ".. image:" in badge("txt", pkg_cfg)
+    env = pkg_env(dict(coveralls={},
+                          github={'owner': "moi", 'project': "project"}))
+    assert ".. image:" in env.globals['coveralls'].badge

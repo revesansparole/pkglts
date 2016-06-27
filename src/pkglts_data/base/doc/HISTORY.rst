@@ -3,9 +3,7 @@
 History
 -------
 
-{{doc.history,
-creation ({{key, doc.creation_date}})
--------------------------------------
+creation ({{ today() }})
+------------------------
 
 * First release on PyPI.
-}}

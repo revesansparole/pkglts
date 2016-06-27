@@ -5,50 +5,35 @@ Use 'setup.py' for common tasks.
 """
 
 from importlib import import_module
-import json
 import logging
 from os import listdir, mkdir, remove, walk
 from os.path import exists, normpath, splitext
 from os.path import join as pj
 from shutil import rmtree
 
-from .data_access import ls
-from .local import load_all_handlers, installed_options
-from .manage_tools import (check_option_parameters, package_hash_keys,
-                           clone_base_option, clone_example, regenerate_pkg,
-                           update_opt)
+from .config import pkglts_dir, pkg_cfg_file, pkg_hash_file
+from .data_access import get_data_dir, ls
+from .config_managment import (pkg_env, default_cfg,
+                               get_pkg_config, installed_options,
+                               write_pkg_config)
+from .hash_managment import (get_pkg_hash, modified_file_hash,
+                             pth_as_key, write_pkg_hash)
+from .manage_tools import (check_option_parameters,
+                           regenerate_dir, update_opt)
 from .option_tools import get_user_permission
-from .templating import replace
-from .versioning import (get_github_version, get_local_version,
-                         upgrade_pkg_cfg_version)
 
-
-try:
-    string_type = basestring
-except NameError:
-    string_type = str
 
 logger = logging.getLogger(__name__)
 
-pkglts_dir = ".pkglts"
-pkg_cfg_file = "pkg_cfg.json"
-current_pkg_cfg_version = 2
-pkg_hash_file = "pkg_hash.json"
-
-default_cfg = dict(_pkglts=dict(use_prompts=False,
-                                auto_install=True,
-                                install_front_end='stdout',
-                                version=current_pkg_cfg_version))
-
-
-class FormattedString(str):
-    """Small class to hold both formatted string and its template
-    """
-    pass
-
 
 def init_pkg(rep="."):
-    """ Initialise a package in given directory
+    """Initialise a package in given directory.
+
+    Args:
+        rep (str): directory to create pkg into, default current
+
+    Returns:
+        None
     """
     if not exists(pj(rep, pkglts_dir)):
         mkdir(pj(rep, pkglts_dir))
@@ -61,101 +46,25 @@ def init_pkg(rep="."):
                 f.write("")
 
     if exists(pj(rep, pkglts_dir, pkg_cfg_file)):
-        pkg_cfg = get_pkg_config(rep)
+        env = get_pkg_config(rep)
     else:
-        pkg_cfg = default_cfg
-    write_pkg_config(pkg_cfg, rep)
+        env = pkg_env(default_cfg)
+    write_pkg_config(env, rep)
 
     if not exists(pj(rep, pkglts_dir, pkg_hash_file)):
         write_pkg_hash({}, rep)
 
 
-def get_pkg_config(rep="."):
-    """ Read pkg_cfg file associated to this package
-
-    args:
-     - rep (str): directory to search for info
-
-    return:
-     - (dict of (str, dict)): option_name: options
-    """
-    with open(pj(rep, pkglts_dir, pkg_cfg_file), 'r') as f:
-        pkg_cfg = json.load(f)
-
-    # update version of pkg_config
-    file_version = pkg_cfg['_pkglts'].get('version', 0)
-    for i in range(file_version, current_pkg_cfg_version):
-        upgrade_pkg_cfg_version(pkg_cfg, i)
-
-    # format template entries
-    handlers = {}  # use only default handlers
-    for cfg in tuple(pkg_cfg.values()):
-        for key, param in tuple(cfg.items()):
-            if isinstance(param, string_type):
-                new_value = replace(param, handlers, pkg_cfg)
-                if new_value == param:
-                    cfg[key] = param
-                else:
-                    cfg[key] = FormattedString(new_value)
-                    cfg[key].template = param
-
-    return pkg_cfg
-
-
-def write_pkg_config(pkg_cfg, rep="."):
-    """ Store config associated to this package on disk
-
-    args:
-     - pkg_cfg (dict of (str, dict)): option_name, options
-     - rep (str): directory to search for info
-    """
-    logger.info("write package config")
-    cfg = dict(pkg_cfg)
-    for params in tuple(cfg.values()):
-        for key, param in tuple(params.items()):
-            if isinstance(param, FormattedString):
-                params[key] = param.template
-
-    with open(pj(rep, pkglts_dir, pkg_cfg_file), 'w') as f:
-        json.dump(cfg, f, sort_keys=True, indent=4)
-
-
-def get_pkg_hash(rep="."):
-    """ Read pkg_hash file associated to this package
-
-    args:
-     - rep (str): directory to search for info
-
-    return:
-     - (dict of (str, hash)): file path: hash key
-    """
-    with open(pj(rep, pkglts_dir, pkg_hash_file), 'r') as f:
-        hm = json.load(f)
-
-    return dict((pth, tuple(key)) for pth, key in hm.items())
-
-
-def write_pkg_hash(pkg_hash, rep="."):
-    """ Store hash associated to this package on disk
-
-    args:
-     - pkg_hash (dict of (str, hash)): file path: hash key
-     - rep (str): directory to search for info
-    """
-    logger.info("write package hash")
-    cfg = dict(pkg_hash)
-
-    with open(pj(rep, pkglts_dir, pkg_hash_file), 'w') as f:
-        json.dump(cfg, f, sort_keys=True, indent=4)
-
-
 def clean(rep="."):
-    """ Thorough cleaning of all arborescence rooting at rep.
+    """Thorough cleaning of all arborescence rooting at rep.
 
-    # TODO: exception list instead of hardcoded one
+    Todo: exception list instead of hardcoded one
 
-    args:
-     - rep (str): default ".", top directory to clean
+    Args:
+        rep (str): default ".", top directory to clean
+
+    Returns:
+        None
     """
     for name in ("build", "dist", "doc/_dvlpt", "doc/build"):
         pth = normpath(pj(rep, name))
@@ -179,118 +88,64 @@ def clean(rep="."):
                     remove(pj(root, name))
 
 
-def update_pkg(pkg_cfg):
-    """ Check if a new version of ltspkg exists
+def add_option(name, env):
+    """Add a new option to this package.
+
+    Notes: See the list of available options online
+
+    Args:
+        name (str): name of option to add
+        env (jinja2.Environment): current working environment
+
+    Returns:
+        None
     """
-    gth_ver = get_github_version()
-    if gth_ver is None:
-        print("Unable to fetch current github version")
-        return pkg_cfg
-
-    loc_ver = get_local_version()
-    if gth_ver <= loc_ver:
-        logger.info("package is up to date, nothing to do")
-    else:
-        logger.info("newer version of package available")
-        if get_user_permission("install"):
-            print("install")
-            # TODO: perform installation
-            # if get_user_permission('develop mode'):
-            #     print("update your code before continuing")
-            #     get_user_permission("continue")
-            # else:
-            #     pip_args = ['-vvv']
-            #     proxy = os.environ['http_proxy']
-            #     if proxy:
-            #         pip_args.append('--proxy')
-            #         pip_args.append(proxy)
-            #     pip_args.append('install')
-            #     pip_args.append('pkglts')
-            #     pip.main(pip_args)
-        else:
-            return pkg_cfg
-
-        # relaunch config for each installed option
-        for opt_name in installed_options(pkg_cfg):
-            pkg_cfg = update_option(opt_name, pkg_cfg)
-
-        # regenerate will be called explicitly
-
-    return pkg_cfg
-
-
-def update_option(name, pkg_cfg):
-    """ Update an already installed option
-
-    args:
-     - name (str): name of option to update
-     - pkg_cfg (dict of (str, dict)): option_name, options
-    """
-    if name not in pkg_cfg:
-        raise UserWarning("Option '%s' seems not to be installed" % name)
-
-    return update_opt(name, pkg_cfg)
-
-
-def edit_option(name, pkg_cfg):
-    """ Edit an already installed option
-
-    args:
-     - name (str): name of option to update
-     - pkg_cfg (dict of (str, dict)): option_name, options
-    """
-    if name not in pkg_cfg:
-        raise UserWarning("Option '%s' seems not to be installed" % name)
-
-    print("edit pkg_cfg.json file by hand instead")
-    return pkg_cfg
-    # return update_opt(name, pkg_cfg)
-
-
-def add_option(name, pkg_cfg):
-    """ Add a new option to this package.
-    See the list of available option online
-
-    args:
-     - name (str): name of option to add
-     - pkg_cfg (dict of (str, dict)): package configuration parameters
-    """
-    if name in pkg_cfg:
+    if name in installed_options(env):
         raise UserWarning("option already included in this package")
 
-    return update_opt(name, pkg_cfg)
+    return update_opt(name, env)
 
 
-def install_example_files(option, pkg_cfg, target="."):
-    if option not in pkg_cfg:
+def install_example_files(option, env, target="."):
+    """Install example files associated to an option.
+
+    Args:
+        option (str): name of option
+        env (jinja2.Environment): current working environment
+        target (str): target directory to write into
+
+    Returns:
+        None
+    """
+    if option not in installed_options(env):
         logger.warning("please install option before example files")
         return False
-
-    # get handlers
-    h = load_all_handlers(pkg_cfg)
 
     if (option, True) not in ls("example"):
         logger.info("option does not provide any example")
         return False
 
-    root = "example/%s" % option
-    # walk all files in example repo to copy them handling conflicts on the way
-    clone_example(root, target, pkg_cfg, h)
+    root = pj(get_data_dir(), 'example', option)
+    regenerate_dir(root, target, env, {})
+    return True
 
 
-def regenerate(pkg_cfg, target=".", overwrite=False):
-    """ Rebuild all automatically generated files
+def regenerate_package(env, target=".", overwrite=False):
+    """Rebuild all automatically generated files.
 
-    args:
-     - pkg_cfg (dict of (str, dict)): package configuration parameters
-     - target (str): target directory to write into
-     - overwrite (bool): default False, whether or not
+    Args:
+        env (jinja2.Environment): current working environment
+        target (str): target directory to write into
+        overwrite (bool): default False, whether or not
                          to overwrite user modified files
+
+    Returns:
+        None
     """
-    # check consistency of pkg_cfg
+    # check consistency of env params
     invalids = []
-    for option in installed_options(pkg_cfg):
-        for n in check_option_parameters(option, pkg_cfg):
+    for option in installed_options(env):
+        for n in check_option_parameters(option, env):
             invalids.append("%s.%s" % (option, n))
 
     if len(invalids) > 0:
@@ -299,70 +154,60 @@ def regenerate(pkg_cfg, target=".", overwrite=False):
 
         return False
 
-    # load handlers
-    handlers = load_all_handlers(pkg_cfg)
-
     # check for potential conflicts
     hm_ref = get_pkg_hash(target)
 
-    hm = package_hash_keys(target)
     conflicted = []
-    for pth, ref_key in hm_ref.items():
-        try:
-            key = hm[pth]
-            if key != ref_key:
-                conflicted.append(pth)
-        except KeyError:
-            # file disappeared, clone will reload it if managed by pkglts
+    for file_pth in hm_ref:
+        pth = pj(target, file_pth)
+        if exists(pth) and modified_file_hash(pth, hm_ref):
+            conflicted.append(pth)
+        else:
+            # file disappeared, regenerate_dir will reload it if managed by pkglts
             pass
 
     overwrite_file = {}
     if len(conflicted) > 0:
-        print("conflicted", conflicted)
         if overwrite:
             for name in conflicted:
-                overwrite_file[name] = True
+                logger.debug("conflicted, '%s'" % name)
+                overwrite_file[pth_as_key(name)] = True
         else:
             for name in conflicted:
                 print("A non editable section of %s has been modified" % name)
-                overwrite_file[name] = get_user_permission("overwrite", False)
+                overwrite_file[pth_as_key(name)] = get_user_permission("overwrite", False)
 
-    # copy all missing files for options
-    # regenerating pkglts divs on the way
-    for option in installed_options(pkg_cfg):
-        logger.info("cloning option '%s'", option)
-        error_files = clone_base_option(option, pkg_cfg, handlers, target,
-                                        overwrite_file)
-        if len(error_files) > 0:
-            for pth in error_files:
-                logger.warning("unable to resolve conflict in '%s'", pth)
+    # render files for all options
+    hm = {}
+    for name in installed_options(env):
+        opt_ref_dir = pj(get_data_dir(), 'base', name)
+        if not exists(opt_ref_dir):
+            logger.debug("option %s do not provide files" % name)
+        else:
+            logger.info("rendering option %s" % name)
+            loc_hm = regenerate_dir(opt_ref_dir, target, env, overwrite_file)
+            hm.update(loc_hm)
 
-            return False
-
-    # regenerate files
-    # overwrite_file[target + "/pkg_cfg.json"] = False
-    # overwrite_file[target + "/pkg_hash.json"] = False
-    regenerate_pkg(pkg_cfg, handlers, target, overwrite_file)
-
-    # re create hash
-    hm = package_hash_keys(target)
-    write_pkg_hash(hm, target)
+    hm_ref.update(hm)
+    write_pkg_hash(hm_ref, target)
 
 
-def regenerate_option(pkg_cfg, name, target="."):
+def regenerate_option(env, name, target=".", overwrite=False):
     """Call the regenerate function of a given option
 
     Args:
-        pkg_cfg: (dict of (str, dict)) package configuration parameters
+        env (jinja2.Environment): current working environment
         name: (str) name of option
         target: (str) target directory to write into
+        overwrite (bool): default False, whether or not
+                         to overwrite user modified files
 
     Returns:
         None
     """
     # test existence of option regenerate module
     try:
-        opt = import_module("pkglts.option.%s" % name)
+        import_module("pkglts.option.%s" % name)
     except ImportError:
         raise KeyError("option '%s' does not exists" % name)
     try:
@@ -370,4 +215,4 @@ def regenerate_option(pkg_cfg, name, target="."):
     except ImportError:
         raise KeyError("option '%s' does not provide regeneration" % name)
 
-    opt_regenerate.main(pkg_cfg)
+    opt_regenerate.main(env, target, overwrite)

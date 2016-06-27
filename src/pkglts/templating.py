@@ -1,366 +1,118 @@
-""" Templating tools
-"""
-from os.path import splitext
+from os.path import exists
+import re
 
-opening_marker = "{" + "{"  # used to allow regeneration of this file
-closing_marker = "}" + "}"
+opening_marker = "{" + "#"
+closing_marker = "#" + "}"
+
+block_re = re.compile(r"\{#[ ]pkglts,[ ](?P<key>.*?)\n(?P<cnt>.*?)#\}",
+                      re.DOTALL | re.MULTILINE)
 
 
-class Node(object):
-    """ Local class created to parse files
+def parse_source(txt):
+    """Parse text to find preserved blocks
+
+    Args:
+        txt (str): full text to parse
+
+    Returns:
+        (list of (str, str, str, str)): ordered list of blocks:
+                    - block_id (or None if content is not preserved
+                    - line start before start for preserved content
+                    - content
+                    - line start before end for preserved content
     """
-    def __init__(self, typ, parent):
-        self.typ = typ
-        self.key = None
-        self.parent = parent
-        self.children = []
-        self.data = []
-        self.pre_fmt = ""
-        self.post_fmt = ""
+    blocks = []
+    last_end = 0
 
-        if parent is not None:
-            parent.children.append(self)
+    for res in block_re.finditer(txt):
+        i = res.start()
+        while i > last_end and txt[i] != "\n":
+            i -= 1
 
-    def clone(self, new_parent):
-        """ Clone this node to produce a new node
-        with same attributes but different parent.
+        if i >= last_end:
+            blocks.append((None, "", txt[last_end: (i + 1)], ""))
 
-        .. warning: also clone all children
+        bef = txt[(i + 1): res.start()]
 
-        .. warning: same reference on node.data
-        """
-        new_node = Node(self.typ, None)
-        new_node.key = self.key
-        new_node.parent = new_parent
-        new_node.data = self.data
-        new_node.pre_fmt = self.pre_fmt
-        new_node.post_fmt = self.post_fmt
-        new_node.children = [child.clone(new_node) for child in self.children]
+        bid = res.group('key')
 
-        return new_node
+        cnt = res.group('cnt')
 
+        i = len(cnt) - 1
+        while i > 0 and cnt[i] != "\n":
+            i -= 1
+        aft = cnt[(i + 1): len(cnt)]
+        cnt = cnt[:i]
+        last_end = res.end() + 1
 
-space_chars = (" ", "\t", "\n")
+        blocks.append((bid, bef, cnt, aft))
+
+    if last_end < len(txt):
+        blocks.append((None, "", txt[last_end: len(txt)], ""))
+
+    return blocks
 
 
-def end_with_comment(data, comment_marker):
-    nb = len(comment_marker)
-    if len(data) >= nb:
-        test = "".join(data[-nb:])
-        return test == comment_marker
-    else:
-        return False
+def render(env, src_pth, tgt_pth):
+    """Render src_pth templated file into tgt_pth
 
+    Notes: keeps 'preserved' block structure
 
-def find_fmt_chars(node, comment_marker):
-    """ Consume all characters in node.data up to a comment marker
-    more or less
+    Args:
+        env (jinja2.Environment): current pkg environment
+        src_pth (str): path to reference file
+        tgt_pth (str): path to potentially non existent yet target file
 
-    returns:
-      - (str): string of consumed characters
+    Returns:
+        (list of (str, str)): key, cnt for preserved blocks
     """
-    fmt = []
-    has_marker = False
-    nb_new_line = 0
-    cont = True
-    while cont and len(node.data) > 0:
-        if end_with_comment(node.data, comment_marker):
-            has_marker = True
-            for s in comment_marker:
-                fmt.insert(0, node.data[-1])
-                del node.data[-1]
-        elif node.data[-1] in space_chars:
-            if has_marker:
-                if node.data[-1] == "\n":
-                    if nb_new_line == 0:
-                        nb_new_line = 1
-                    else:
-                        cont = False
-            if cont:
-                fmt.insert(0, node.data[-1])
-                del node.data[-1]
+    # parse src file to find 'preserved' blocks
+    with open(src_pth, 'r') as f:
+        src_blocks = parse_source(f.read())
+
+    blocks = []
+    if exists(tgt_pth):  # retrieves preserved blocks from source
+        # parse tgt file to find 'preserved' blocks
+        with open(tgt_pth, 'r') as f:
+            tgt_blocks = parse_source(f.read())
+
+        src_blocks = dict((bid, cnt) for (bid, bef, cnt, aft) in src_blocks
+                          if bid is not None)
+        for bid, bef, cnt, aft in tgt_blocks:
+            # check stored content hash
+
+            if bid is not None:
+                cnt = src_blocks[bid]
+
+            blocks.append((bid, bef, cnt, aft))
+    else:  # format non preserved blocks for the first and only time
+        for bid, bef, cnt, aft in src_blocks:
+            if bid is None:
+                template = env.from_string(cnt)
+                cnt = template.render()
+
+            blocks.append((bid, bef, cnt, aft))
+
+    # regenerate preserved block content
+    # print "blocks", [bid for bid, bef, cnt, aft in blocks]
+    preserved = []
+    tgt = ""
+    for bid, bef, cnt, aft in blocks:
+        if bid is None:
+            tgt += cnt
         else:
-            cont = False
+            # format cnt
+            template = env.from_string(cnt)
+            cnt = template.render()
+            preserved.append((bid, cnt))
+            # rewrite preserved tag if necessary
+            tgt += bef + "{" + "# pkglts, %s\n" % bid
+            tgt += cnt
+            tgt += "\n" + aft + "#" + "}\n"
 
-    if has_marker:
-        return "".join(fmt)
-    else:
-        node.data.extend(fmt)
-        return ""
+            # save new content hash
 
+    with open(tgt_pth, 'w') as f:
+        f.write(tgt)
 
-def parse(txt, comment_marker):
-    """ Parse a text for 'class, bla' sections
-    and construct a tree of nested sections
-    """
-    root = Node("root", None)
-    root.key = ""
-    cur_node = Node("txt", root)
-
-    i = 0
-    while i < len(txt):
-        if txt[i] == "{" and ((i + 1) < len(txt) and txt[i + 1] == "{"):
-            div_node = Node("div", cur_node.parent)
-            div_node.pre_fmt = find_fmt_chars(cur_node, comment_marker)
-
-            cur_node = Node("txt", div_node)
-            i += 2
-
-            # find key
-            ind = txt[i:].find(",")
-            div_node.key = txt[i:][:ind]
-            i += ind + 1
-            if txt[i] == " ":
-                i += 1  # strip space after comma
-        elif txt[i] == "}" and ((i + 1) < len(txt) and txt[i + 1] == "}"):
-            cur_node.parent.post_fmt = find_fmt_chars(cur_node, comment_marker)
-            cur_node = Node("txt", cur_node.parent.parent)
-            i += 2
-        else:
-            cur_node.data.append(txt[i])
-            i += 1
-
-    return root
-
-
-def same(txt, env):
-    """ local function created to handle no class hooks
-    """
-    del env  # unused
-    return txt
-
-
-def remove(txt, env):
-    """ Return empty string
-    """
-    del txt  # unused
-    del env  # unused
-    return ""
-
-
-def delete(txt, env):
-    """ Return '_' string used by some function
-    to recognize empty names
-    """
-    del txt  # unused
-    del env  # unused
-    return "_"
-
-
-def get_key(txt, env):
-    """ Fetch a specific key in env
-    """
-    try:
-        elms = txt.split(".")
-        d = env
-        for k in elms:
-            d = d[k]
-
-        return str(d)
-    except KeyError:
-        return txt
-
-
-loc_handlers = {'remove': remove,
-                'rm': remove,
-                'del': delete,
-                'key': get_key}
-
-
-def get_handler(key, handlers):
-    """ Return an instance of a handler
-    handler(txt, env) -> modified txt
-    """
-    all_hands = dict(loc_handlers)
-    all_hands.update(handlers)
-    for k in key.split(" "):
-        if k in all_hands:
-            return all_hands[k]
-
-    return same
-
-
-def div_replace(node, handlers, env, comment_marker):
-    """ Reconstruct the whole text inside the text
-    attribute of the node and return a version
-    of it transformed according to the class attribute.
-
-    args:
-     - node (Node): current node to explore
-     - handlers (dict of (str: handler)): map of key handlers to use
-     - env (dict of (str: dict)): extra info to pass to handlers
-     - comment_marker (str|re): characters used to mark inline comment
-
-    return:
-     - (str): newly formatted text
-    """
-    txt = ""
-    for child in node.children:
-        if child.typ == 'txt':
-            txt += "".join(child.data)
-        else:  # by construction it must be a div node or root?
-            txt += div_replace(child, handlers, env, comment_marker)
-
-    # replace txt
-    handler = get_handler(node.key, handlers)
-    new_txt = handler(txt, env)
-
-    # handle formatting
-    if node.key.split(" ")[0] == "pkglts":
-        pre = node.pre_fmt + opening_marker + node.key + ","
-        if not new_txt.startswith("\n"):
-            pre += " "
-        if new_txt.endswith("\n") and node.post_fmt == "":
-            post = node.pre_fmt + closing_marker
-            if post[0] == "\n":
-                post = post[1:]
-        else:
-            post = node.post_fmt + closing_marker
-    else:
-        if comment_marker in node.pre_fmt:
-            if comment_marker in node.post_fmt:  # block div
-                # remove pre and post formatting characters
-                pre = ""
-                post = ""
-            else:  # inline div
-                pre = node.pre_fmt[:node.pre_fmt.index(comment_marker)]
-                post = ""
-        else:
-            pre = node.pre_fmt
-            post = node.post_fmt
-
-    return pre + new_txt + post
-
-
-def replace(txt, handlers, env, comment_marker="#"):
-    """ Parse a txt for div elements and reconstruct it
-    handling the txt inside the div elements if necessary.
-
-    args:
-     - txt (str): current txt to explore
-     - handlers (dict of (str: handler)): map of key handlers to use
-     - env (dict of (str: dict)): extra info to pass to handlers
-     - comment_marker (str|re): characters used to mark inline comment
-
-    return:
-     - (str): newly formatted text
-    """
-    root = parse(txt, comment_marker)
-    txt = div_replace(root, handlers, env, comment_marker)
-    return txt
-
-
-def flatten_divs(node):
-    nodes = [node]
-    for div in node.children:
-        if div.typ == "div":
-            nodes.extend(flatten_divs(div))
-
-    return nodes
-
-
-def reconstruct_txt_div(node):
-    if node.typ == "txt":
-        return "".join(node.data)
-    elif node.typ == "root":
-        cnt = "".join(reconstruct_txt_div(child) for child in node.children)
-        return cnt
-    else:
-        txt = node.pre_fmt + opening_marker + node.key + ","
-        cnt = "".join(reconstruct_txt_div(child) for child in node.children)
-        if not cnt.startswith("\n"):
-            txt += " "
-        txt += cnt
-        txt += node.post_fmt + closing_marker
-
-        return txt
-
-
-def _swap_div(node, dm):
-    """ Swap current div if div_id in dm
-    """
-    if node.typ == "txt":
-        pass
-    else:  # root or div
-        keys = node.key.split(" ")
-        if keys[0] == "pkglts":
-            if len(keys) == 1:
-                div_id = None
-            else:
-                div_id = keys[1]
-
-            node.children = [div.clone(node) for div in dm.get(div_id, [])]
-        else:
-            for child in node.children:
-                _swap_div(child, dm)
-
-
-def swap_divs(src_content, tgt_content, comment_marker):
-    """ Find pkglts divs in both content and replace
-    data in tgt with data in src
-
-    args:
-     - src_content (str): source content used as ref
-     - tgt_content (str): content to replace
-    """
-    # create map of divs: data
-    src_root = parse(src_content, comment_marker)
-    dm = {}
-    for div in flatten_divs(src_root):
-        keys = div.key.split(" ")
-        if keys[0] == "pkglts":
-            if len(keys) == 1:
-                div_id = None
-            else:
-                div_id = keys[1]
-            dm[div_id] = div.children
-
-    # replace divs in tgt
-    tgt_root = parse(tgt_content, comment_marker)
-    _swap_div(tgt_root, dm)
-
-    # test for missing divs in tgt
-    tgt_dm = {}
-    for div in flatten_divs(tgt_root):
-        keys = div.key.split(" ")
-        if keys[0] == "pkglts":
-            if len(keys) == 1:
-                div_id = None
-            else:
-                div_id = keys[1]
-            tgt_dm[div_id] = div.children
-
-    if tuple(tgt_dm.keys()) != tuple(dm.keys()):
-        # msg = ["missing pkglts divs in tgt file",
-        #        "Maybe remove file and relaunch command"]
-        # raise UserWarning("\n".join(msg))
-        return None
-
-    # reconstruct text
-    txt = reconstruct_txt_div(tgt_root)
-    return txt
-
-
-def get_comment_marker(filename):
-    """ Try to guess the characters used to signify comments
-    in the given file.
-
-    Based solely on the extension of filename.
-
-    args:
-     - filename (str): name used to infer type of marker
-
-    return:
-     - marker (str): string of characters used to mark inline comments
-    """
-    ext = splitext(filename)[1].lower()
-    if ext == ".bat":
-        return "REM "
-    elif ext == ".ini":
-        return "#"
-    elif ext == ".py":
-        return "#"
-    elif ext == ".rst":
-        return ".. "
-    else:
-        return "#"  # default
+    return preserved

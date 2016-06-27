@@ -1,4 +1,4 @@
-# {{pkglts github,
+# {# pkglts, github
 *.py[cod]
 
 # pkglts files
@@ -26,28 +26,21 @@ lib64
 # coverage
 .coverage
 
-
-
 # tox
 .tox
 
-
-
-# pypi rc file
+'# pypi rc file
 .pypirc
-
-
 
 # sphinx autogen file
 doc/_dvlpt
 
 
-# }}
+# #}
 
-# user defined
+# user custom filters
 example/pkg_tata
 example/venv_toto
 example/wheels
 try
 feature_list.txt
-

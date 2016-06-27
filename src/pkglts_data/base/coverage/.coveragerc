@@ -1,9 +1,9 @@
 [html]
-title = {{base.pkg_full_name, }}'s coverage
+title = {{ base.pkg_full_name }}'s coverage
 directory = build/htmlcov
 
 [run]
-source = {{base.pkg_full_name, }}
+source = {{ base.pkg_full_name }}
 
 [report]
 exclude_lines =

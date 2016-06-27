@@ -7,12 +7,12 @@ Download sources and use setup::
     or
     $ python setup.py develop
 
-{{pypi rm,
+{% if 'pypi' is available %}
 Use pip to install this package::
 
-    $ pip install {{key, base.pkgname}}
+    $ pip install {{ base.pkgname }}
 
-}}
+{% endif %}
 Use
 ===
 
@@ -20,17 +20,17 @@ Simple usage:
 
 .. code-block:: python
 
-    from {{base.pkg_full_name, }} import *
+    from {{ base.pkg_full_name }} import *
 
-{{github rm,
+{% if 'github' is available %}
 Contribute
 ==========
 
 Fork this project on github_
 
-.. _github: https://github.com/{{key, github.user}}/{{key, github.project}}
+.. _github: {{ github.url }}
 
-}}
+{% endif %}
 
 Acknowledgments
 ===============

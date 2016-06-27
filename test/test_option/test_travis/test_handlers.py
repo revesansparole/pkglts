@@ -1,17 +1,7 @@
-from pkglts.option.travis.handlers import badge, mapping, pyversions
-
-
-def test_mapping():
-    assert len(mapping) == 2
-
-
-def test_handlers():
-    pkg_cfg = dict(pysetup={'intended_versions': ["27"]})
-    txt = pyversions("txt", pkg_cfg)
-    assert txt != "txt"
+from pkglts.config_managment import pkg_env
 
 
 def test_badge():
-    pkg_cfg = dict(base={'pkgname': "pkg", 'owner': "moi"},
-                   github={'project': "project"})
-    assert ".. image:" in badge("txt", pkg_cfg)
+    env = pkg_env(dict(travis={},
+                       github={'owner': "moi", 'project': "project"}))
+    assert ".. image:" in env.globals['travis'].badge

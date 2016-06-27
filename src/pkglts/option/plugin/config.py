@@ -1,15 +1,14 @@
-
 parameters = []
 
 
-def check(pkg_cfg):
-    """Check the validity of parameters in package configuration.
+def check(env):
+    """Check the validity of parameters in working environment.
 
-    args:
-     - pkg_cfg (dict of str, dict of str, any)): package configuration
+    Args:
+        env (jinja2.Environment):  current working environment
 
-    return:
-     - (list of str): list of faulty parameters
+    Returns:
+        (list of str): list of faulty parameters
     """
-    del pkg_cfg
+    del env
     return []

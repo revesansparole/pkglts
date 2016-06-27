@@ -1,66 +1,53 @@
 from importlib import import_module
-import json
 
-from pkglts.local import installed_options
+from pkglts.config_managment import installed_options
 
 
-def requirements(pkg_cfg, requirement_name):
-    """ Check all requirements for installed options
+def requirements(env, requirement_name):
+    """Check all requirements for installed options.
 
-    args:
-     - pkg_cfg (dict of (str, dict)): option_name, options
-     - requirement_name (str): type of requirement 'install', 'dvlpt'
+    Args:
+        env (jinja2.Environment):
+        requirement_name (str): type of requirement 'install', 'dvlpt'
 
-    return:
-     - (str): one requirement per line
+    Returns:
+        (list of str): list of required packages names
     """
     reqs = set()
-    for name in installed_options(pkg_cfg):
+    for name in installed_options(env):
         try:
             opt_req = import_module("pkglts.option.%s.require" % name)
             reqs.update(getattr(opt_req, requirement_name))
         except ImportError:
             raise KeyError("option '%s' does not exists" % name)
 
-    reqs_str = "\n".join(reqs)
-    return "\n" + reqs_str + "\n"
+    return sorted(reqs)
 
 
-def install_requirements(txt, env):
-    del txt  # unused
-    return requirements(env, 'install')
-
-
-def dvlpt_requirements(txt, env):
-    del txt  # unused
-    return requirements(env, 'dvlpt')
-
-
-def get_url(txt, pkg_cfg):
-    del txt  # unused
+def pkg_url(env):
     try:
-        url = pkg_cfg['base']['url']
+        url = env.globals['base'].url
         if url is not None:
             return url
     except KeyError:
         pass
 
     try:
-        url = pkg_cfg['github']['url']
+        url = env.globals['github'].url
         if url is not None:
             return url
     except KeyError:
         pass
 
     try:
-        url = pkg_cfg['pypi']['url']
+        url = env.globals['pypi'].url
         if url is not None:
             return url
     except KeyError:
         pass
 
     try:
-        url = pkg_cfg['readthedocs']['url']
+        url = env.globals['readthedocs'].url
         if url is not None:
             return url
     except KeyError:
@@ -69,29 +56,25 @@ def get_url(txt, pkg_cfg):
     return ""
 
 
-def get_extra(txt, env):
-    """ Fetch extra entry points
+def environment_extensions(env):
+    """Add more functionality to an environment.
+
+    Args:
+        env (jinja2.Environment):
+
+    Returns:
+        dict of str: any
     """
-    del env  # unused
-    try:
-        with open("entry_points.json", 'r') as f:
-            ep_def = json.load(f)
-            items = ["    entry_points={"]
-            for gr, eps in ep_def.items():
-                items.append("        '%s': [" % gr)
-                for ep in eps:
-                    items.append("            '%s'," % ep)
-                items.append("        ],")
+    req_install = requirements(env, 'install')
+    req_dvlpt = requirements(env, 'dvlpt')
 
-            items.append("    },\n")
-            return "\n" + "\n".join(items)
-    except IOError:
-        pass
+    def req(name):
+        if name == 'install':
+            return req_install
+        elif name == 'dvlpt':
+            return req_dvlpt
+        else:
+            raise UserWarning("WTF")
 
-    return txt
-
-
-mapping = {"pysetup.install_requirements": install_requirements,
-           "pysetup.dvlpt_requirements": dvlpt_requirements,
-           "pkg_url": get_url,
-           "pysetup.extra": get_extra}
+    return {"pkg_url": pkg_url(env),
+            "requirements": req}

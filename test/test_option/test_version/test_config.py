@@ -1,3 +1,4 @@
+from pkglts.config_managment import create_env
 from pkglts.option.version.config import check, parameters
 
 
@@ -6,17 +7,17 @@ def test_parameters():
 
 
 def test_config_check_version_numbers_are_valid():
-    pkg_cfg = dict(version={'major': "", 'minor': "", 'post': ""})
-    assert 'major' in check(pkg_cfg)
-    assert 'minor' in check(pkg_cfg)
-    assert 'post' in check(pkg_cfg)
-    pkg_cfg = dict(version={'major': "a", 'minor': "a", 'post': "a"})
-    assert 'major' in check(pkg_cfg)
-    assert 'minor' in check(pkg_cfg)
-    assert 'post' in check(pkg_cfg)
-    pkg_cfg = dict(version={'major': "1", 'minor': "1", 'post': "1"})
-    assert 'major' in check(pkg_cfg)
-    assert 'minor' in check(pkg_cfg)
-    assert 'post' in check(pkg_cfg)
-    pkg_cfg = dict(version={'major': 1, 'minor': 0, 'post': "2.dev"})
-    assert 'post' in check(pkg_cfg)
+    env = create_env(dict(version={'major': "", 'minor': "", 'post': ""}))
+    assert 'major' in check(env)
+    assert 'minor' in check(env)
+    assert 'post' in check(env)
+    env = create_env(dict(version={'major': "a", 'minor': "a", 'post': "a"}))
+    assert 'major' in check(env)
+    assert 'minor' in check(env)
+    assert 'post' in check(env)
+    env = create_env(dict(version={'major': "1", 'minor': "1", 'post': "1"}))
+    assert 'major' in check(env)
+    assert 'minor' in check(env)
+    assert 'post' in check(env)
+    env = create_env(dict(version={'major': 1, 'minor': 0, 'post': "2.dev"}))
+    assert 'post' in check(env)

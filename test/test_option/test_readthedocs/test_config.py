@@ -1,3 +1,4 @@
+from pkglts.config_managment import create_env
 from pkglts.option.readthedocs.config import check, parameters
 
 
@@ -6,5 +7,5 @@ def test_parameters():
 
 
 def test_config_check_project_exists():
-    pkg_cfg = dict(readthedocs={'project': ""})
-    assert 'project' in check(pkg_cfg)
+    env = create_env(dict(readthedocs={'project': ""}))
+    assert 'project' in check(env)
