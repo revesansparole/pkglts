@@ -1,6 +1,6 @@
 from nose.tools import assert_raises
 
-from pkglts.config_managment import create_env
+from pkglts.config_management import create_env
 from pkglts.local import (pkg_full_name, src_dir)
 
 

@@ -1,4 +1,4 @@
-from pkglts.config_managment import create_env
+from pkglts.config_management import create_env
 from pkglts.manage import default_cfg
 from pkglts.manage_tools import check_option_parameters
 

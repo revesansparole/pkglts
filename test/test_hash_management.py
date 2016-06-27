@@ -1,20 +1,10 @@
-from nose.tools import with_setup
-from os import remove
-from os.path import exists
-
-from pkglts.file_management import write_file
+from pkglts.hash_management import pth_as_key
 
 
-ex_file = 'toto.txt'
+def test_pth_as_key_produce_unique_path():
+    pth1 = pth_as_key("./toto/titi/")
+    pth2 = pth_as_key("toto/titi")
+    pth3 = pth_as_key("./toto/../toto/titi")
 
-
-def teardown():
-    if exists(ex_file):
-        remove(ex_file)
-
-
-@with_setup(teardown=teardown)
-def test_write_file():
-    write_file(ex_file, "lorem ipsum")
-    assert exists(ex_file)
-
+    assert pth1 == pth2
+    assert pth1 == pth3

@@ -6,7 +6,7 @@ from os.path import exists
 from os.path import join as pj
 
 from pkglts.config import pkglts_dir, pkg_cfg_file
-from pkglts.config_managment import create_env, get_pkg_config, write_pkg_config
+from pkglts.config_management import create_env, get_pkg_config, write_pkg_config
 from pkglts.manage import (init_pkg, regenerate_package)
 
 from .small_tools import ensure_created, rmdir

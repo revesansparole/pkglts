@@ -3,8 +3,8 @@ from os.path import join as pj
 from os.path import exists
 from random import random
 
-from pkglts.config_managment import create_env, default_cfg
-from pkglts.hash_managment import pth_as_key
+from pkglts.config_management import create_env, default_cfg
+from pkglts.hash_management import pth_as_key
 from pkglts.manage_tools import regenerate_dir
 
 from .small_tools import ensure_created, ensure_path, rmdir

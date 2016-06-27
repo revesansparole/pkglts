@@ -1,6 +1,6 @@
 from nose.tools import assert_raises
 
-from pkglts.config_managment import create_env
+from pkglts.config_management import create_env
 from pkglts.manage import default_cfg
 from pkglts.manage_tools import update_opt
 

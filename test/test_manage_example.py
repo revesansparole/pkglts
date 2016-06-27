@@ -4,7 +4,7 @@ from os import listdir
 from os.path import exists
 from os.path import join as pj
 
-from pkglts.config_managment import create_env, default_cfg, pkg_env
+from pkglts.config_management import create_env, default_cfg, pkg_env
 from pkglts.manage import install_example_files
 
 from .small_tools import ensure_created, rmdir
