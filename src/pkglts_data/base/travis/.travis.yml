@@ -7,20 +7,25 @@ python:
 {%- for pyver in pysetup.intended_versions %}
   - "{{ pyver[0] }}.{{ pyver[1] }}"
 {%- endfor %}
+# #}
 
-# command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
+# {# pkglts, travis.install
 install:
  - pip install -r requirements.txt
  - pip install -r dvlpt_requirements.txt
 {%- if 'coveralls' is available %}
  - pip install coveralls
 {% endif %}
+# #}
 
-# command to run tests, e.g. python setup.py test
-script: nosetests
+# {# pkglts, travis.script
+script:
+ - nosetests
+# #}
 
-{% if 'coveralls' is available %}
+# {# pkglts, travis.after
 after_success:
+{% if 'coveralls' is available %}
   - coveralls
 {% endif %}
 # #}
