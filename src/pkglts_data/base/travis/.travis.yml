@@ -9,13 +9,19 @@ python:
 {%- endfor %}
 # #}
 
+# {# pkglts, travis.addons
+addons:
+  apt:
+    packages:
+# #}
+
 # {# pkglts, travis.install
 install:
  - pip install -r requirements.txt
  - pip install -r dvlpt_requirements.txt
 {%- if 'coveralls' is available %}
  - pip install coveralls
-{% endif %}
+{%- endif %}
 # #}
 
 # {# pkglts, travis.script
@@ -25,7 +31,7 @@ script:
 
 # {# pkglts, travis.after
 after_success:
-{% if 'coveralls' is available %}
+{%- if 'coveralls' is available %}
   - coveralls
-{% endif %}
+{%- endif %}
 # #}
