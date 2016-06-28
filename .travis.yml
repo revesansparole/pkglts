@@ -8,27 +8,28 @@ python:
   - "3.5"
 # #}
 
-# {# pkglts, travis.addons
 addons:
   apt:
     packages:
-# #}
+# {# pkglts, travis.addons
 
-# {# pkglts, travis.install
+ #}
+
 install:
+# {# pkglts, travis.install
  - pip install -r requirements.txt
  - pip install -r dvlpt_requirements.txt
  - pip install coveralls
 # #}
 
-# {# pkglts, travis.script
 script:
+# {# pkglts, travis.script
  - nosetests
 # #}
 
-# {# pkglts, travis.after
 after_success:
-  - coveralls
+# {# pkglts, travis.after
+- coveralls
 # #}
 # blacklist
 branches:
