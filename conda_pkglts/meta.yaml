@@ -1,6 +1,6 @@
 package:
-  name: {{base.pkg_full_name, }}
-  version: "{{key, version.major}}.{{key, version.minor}}.{{key, version.post}}"
+  name: pkglts
+  version: "1.0.0"
 
 source:
   git_url: ../
@@ -14,6 +14,6 @@ requirements:
     - python
 
 about:
-  summary: "{{key, doc.description}}"
-  license: "{{key, license.name}}"
+  summary: "Building packages with long term support"
+  license: "CeCILL-C"
   license_file: LICENSE
