@@ -5,9 +5,11 @@ Credits
 Development Lead
 ----------------
 
-{% for name, email in base.authors %}
+{# pkglts, doc
+{% for name, email in base.authors -%}
 * {{ name }}, <{{ email }}>
-{% endfor %}
+{%- endfor %}
+#}
 
 Contributors
 ------------

@@ -17,7 +17,9 @@
     "travis.install": "U4i0bmQEXFiuURACUise2uk6YJYGBr2w59cztrAPJlNzSNP8i8PHX7v73EQyHqb9Y9Wi27RkhV4GWRHWKH39vA==", 
     "travis.script": "QcLr2RY8uvDdHBZjwk2D6R7wO0KXucLhnclomGtohT61RSEC8PX5z+mFHLUZmfrsVzLdRdhVCm9tYo0Tx9RIMw=="
   }, 
-  "AUTHORS.rst": {}, 
+  "AUTHORS.rst": {
+    "doc": "MjZGPjjb1K4gdGidYCaLz9kaQ28JxdCQLIXeSxXS3TYnnB33oooXPA+EFOCdnyocKjxYJMC91vSlDfLDhhGC2A=="
+  }, 
   "CONTRIBUTING.rst": {}, 
   "HISTORY.rst": {}, 
   "LICENSE": {
