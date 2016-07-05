@@ -2,7 +2,7 @@ from funcsigs import signature
 from inspect import getsource
 from uuid import uuid1
 
-from parse_doc import parse_docstring
+from .parse_doc import parse_docstring
 
 
 def create_node_def(func):

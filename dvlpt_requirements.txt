@@ -2,6 +2,7 @@
 
 coverage
 flake8
+funcsigs
 mock
 nose
 sphinx

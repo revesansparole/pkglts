@@ -6,7 +6,7 @@ from pkgutil import walk_packages
 
 from pkglts.local import pkg_full_name
 
-from create_node_def import create_node_def
+from .create_node_def import create_node_def
 
 
 def find_plugin_categories(txt):

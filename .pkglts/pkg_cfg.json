@@ -1,69 +1,73 @@
 {
-    "_pkglts": {
-        "auto_install": true, 
-        "install_front_end": "pip", 
-        "use_prompts": false, 
-        "version": 2
-    }, 
-    "base": {
-        "authors": [
-            ["revesansparole", "revesansparole@gmail.com"]
-        ],
-        "namespace": null, 
-        "pkgname": "pkglts",
-        "url": null
-    }, 
-    "conda": {}, 
-    "coverage": {}, 
-    "coveralls": {}, 
-    "data": {}, 
-    "doc": {
-        "description": "Building packages with long term support", 
-        "keywords": [
-            "packaging", 
-            "package builder"
-        ]
-    }, 
-    "flake8": {}, 
-    "github": {
-        "owner": "{{ base.authors[0][0] }}",
-        "project": "{{ base.pkgname }}",
-        "url": "https://github.com/{{ github.owner }}/{{ github.project }}"
-    }, 
-    "landscape": {}, 
-    "license": {
-        "name": "CeCILL-C", 
-        "organization": "OpenAlea", 
-        "project": "{{ base.pkgname }}",
-        "year": "2015"
-    }, 
-    "pypi": {
-        "classifiers": [
-            "Development Status :: 2 - Pre-Alpha", 
-            "Intended Audience :: Developers", 
-            "License :: OSI Approved :: BSD License", 
-            "Natural Language :: English"
-        ]
-    }, 
-    "pysetup": {
-        "intended_versions": [
-            "27", 
-            "35"
-        ]
-    }, 
-    "readthedocs": {
-        "project": "{{ github.project }}"
-    }, 
-    "sphinx": {
-        "autodoc_dvlpt": true,
-        "theme": "default"
-    }, 
-    "test": {}, 
-    "tox": {}, 
-    "travis": {}, 
-    "version": {
-        "major": 1,
-        "minor": 0,
-        "post": 0
-    }
+  "_pkglts": {
+    "auto_install": true, 
+    "install_front_end": "pip", 
+    "use_prompts": false, 
+    "version": 2
+  }, 
+  "base": {
+    "authors": [
+      [
+        "revesansparole", 
+        "revesansparole@gmail.com"
+      ]
+    ], 
+    "namespace": null, 
+    "pkgname": "pkglts", 
+    "url": null
+  }, 
+  "conda": {}, 
+  "coverage": {}, 
+  "coveralls": {}, 
+  "data": {}, 
+  "doc": {
+    "description": "Building packages with long term support", 
+    "keywords": [
+      "packaging", 
+      "package builder"
+    ]
+  }, 
+  "flake8": {}, 
+  "github": {
+    "owner": "{{ base.authors[0][0] }}", 
+    "project": "{{ base.pkgname }}", 
+    "url": "https://github.com/{{ github.owner }}/{{ github.project }}"
+  }, 
+  "landscape": {}, 
+  "license": {
+    "name": "CeCILL-C", 
+    "organization": "OpenAlea", 
+    "project": "{{ base.pkgname }}", 
+    "year": "2015"
+  }, 
+  "plugin": {}, 
+  "pypi": {
+    "classifiers": [
+      "Development Status :: 2 - Pre-Alpha", 
+      "Intended Audience :: Developers", 
+      "License :: OSI Approved :: BSD License", 
+      "Natural Language :: English"
+    ]
+  }, 
+  "pysetup": {
+    "intended_versions": [
+      "27", 
+      "35"
+    ]
+  }, 
+  "readthedocs": {
+    "project": "{{ github.project }}"
+  }, 
+  "sphinx": {
+    "autodoc_dvlpt": true, 
+    "theme": "default"
+  }, 
+  "test": {}, 
+  "tox": {}, 
+  "travis": {}, 
+  "version": {
+    "major": 1, 
+    "minor": 0, 
+    "post": 0
+  }
 }
