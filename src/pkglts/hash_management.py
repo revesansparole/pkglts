@@ -16,7 +16,7 @@ def pth_as_key(pth):
     """Normalize path to enable to use them as keys
 
     Args:
-        pth (str):
+        pth (str): path to normalize
 
     Returns:
         (str)
@@ -28,10 +28,10 @@ def compute_hash(txt):
     """Compute hash summary of a text
 
     Args:
-        txt:
+        txt (str): content to hash
 
     Returns:
-
+        (str): hash key
     """
     algo = sha512()
     algo.update(txt.encode('utf-8'))  # TODO bad if non utf-8 encoded file
@@ -45,7 +45,7 @@ def get_pkg_hash(rep="."):
         rep (str): directory to search for info
 
     Returns:
-        (dict of str: list): hash map of preserved sections in this
+        (dict of str, list): hash map of preserved sections in this
                              package
     """
     with open(pj(rep, pkglts_dir, pkg_hash_file), 'r') as f:
@@ -58,7 +58,7 @@ def write_pkg_hash(pkg_hash, rep="."):
     """Store hash associated to this package on disk.
 
     Args:
-        pkg_hash (dict of str: list): hash map of preserved sections in this
+        pkg_hash (dict of str, list): hash map of preserved sections in this
                                      package
         rep (str): directory to search for info
 
@@ -77,7 +77,7 @@ def modified_file_hash(pth, pkg_hash):
 
     Args:
         pth (str): path to file to test
-        pkg_hash (dict of str: list): hash map of preserved sections in this
+        pkg_hash (dict of str, list): hash map of preserved sections in this
                                      package
 
     Returns:

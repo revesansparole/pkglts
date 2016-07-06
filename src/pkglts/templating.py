@@ -15,7 +15,7 @@ def parse_source(txt):
         txt (str): full text to parse
 
     Returns:
-        (list of (str, str, str, str)): ordered list of blocks:
+        (list of [str, str, str, str]): ordered list of blocks:
                     - block_id (or None if content is not preserved
                     - line start before start for preserved content
                     - content
@@ -64,7 +64,7 @@ def render(env, src_pth, tgt_pth):
         tgt_pth (str): path to potentially non existent yet target file
 
     Returns:
-        (list of (str, str)): key, cnt for preserved blocks
+        (list of [str, str]): key, cnt for preserved blocks
     """
     # parse src file to find 'preserved' blocks
     with open(src_pth, 'r') as f:

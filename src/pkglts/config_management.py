@@ -38,7 +38,7 @@ class ConfigSection(object):
 
         Args:
             key (str): python valid identifier
-            val (any):
+            val (any): actual value of the parameter
 
         Returns:
             (None)
@@ -50,7 +50,7 @@ class ConfigSection(object):
         """Iterates on couple key, values stored as attributes
 
         Returns:
-            (iter of str: any)
+            (iter of {str, any})
         """
         for key in self._params:
             yield key, getattr(self, key)
@@ -114,7 +114,7 @@ def pkg_env(pkg_cfg):
     """Create a jinja2.Environment from a package configuration
 
     Args:
-        pkg_cfg (dict of str: any): package configuration
+        pkg_cfg (dict of str, any): package configuration
 
     Returns:
         (jinja2.Environment)
@@ -187,7 +187,7 @@ def upgrade_pkg_cfg_version(pkg_cfg, version):
     """Upgrade the version of pkg_cfg file from version to version +1
 
     Args:
-        pkg_cfg (dict of str: any): package configuration
+        pkg_cfg (dict of str, any): package configuration
         version (int): current version of file
 
     Returns:

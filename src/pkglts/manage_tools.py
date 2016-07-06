@@ -135,11 +135,11 @@ def regenerate_dir(src_dir, tgt_dir, env, overwrite_file):
         src_dir (str): path to reference files
         tgt_dir (str): path to target where files will be written
         env (jinja2.Environment): current working environment
-        overwrite_file (dict of str:bool): whether or not to overwrite some
+        overwrite_file (dict of str, bool): whether or not to overwrite some
                              files
 
     Returns:
-        (dict of str: map): hash key of preserved sections
+        (dict of str, map): hash key of preserved sections
     """
     hm = {}
 
