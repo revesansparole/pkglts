@@ -1,7 +1,7 @@
-.. :changelog:
+.. _changelog:
 
 History
--------
+=======
 
 creation ({{ today() }})
 ------------------------
