@@ -3,9 +3,9 @@
 # edit .pkglts/pkg_cfg instead
 # section pysetup
 
-{% for repo, name in pysetup.requirements('install') %}
-  {%- if repo == 'pip' or repo == None %}
+{% for repo, name in pysetup.requirements('install') -%}
+{% if repo == 'pip' or repo == None %}
     {{- name }}
-  {%- endif %}
+{% endif %}
 {%- endfor %}
 # #}
