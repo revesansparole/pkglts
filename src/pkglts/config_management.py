@@ -11,7 +11,7 @@ try:
 except NameError:
     string_type = str
 
-current_pkg_cfg_version = 2
+current_pkg_cfg_version = 3
 
 logger = logging.getLogger(__name__)
 
@@ -156,7 +156,11 @@ def get_pkg_config(rep="."):
         upgrade_pkg_cfg_version(pkg_cfg, i)
 
     # create jinja2 Environment
-    return pkg_env(pkg_cfg)
+    env = pkg_env(pkg_cfg)
+    if file_version < current_pkg_cfg_version:
+        write_pkg_config(env, rep)
+
+    return env
 
 
 def write_pkg_config(env, rep="."):
@@ -197,6 +201,11 @@ def upgrade_pkg_cfg_version(pkg_cfg, version):
         pkg_cfg['_pkglts']['version'] = 1
     elif version == 1:
         pkg_cfg['_pkglts']['version'] = 2
+    elif version == 2:
+        pkg_cfg['_pkglts']['version'] = 3
+        if 'pysetup' in pkg_cfg:
+            section = pkg_cfg['pysetup']
+            section['require'] = section.get('require', [])
 
     return pkg_cfg
 
