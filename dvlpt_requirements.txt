@@ -1,11 +1,12 @@
 # {# pkglts, pysetup
-
 coverage
 flake8
 funcsigs
 mock
 nose
 sphinx
+coveralls
 tox
 twine
+
 # #}

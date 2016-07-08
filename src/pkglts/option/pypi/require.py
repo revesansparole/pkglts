@@ -1,4 +1,4 @@
 option = ['pysetup']
 setup = []
 install = []
-dvlpt = ['twine']
+dvlpt = [('pip', 'twine')]

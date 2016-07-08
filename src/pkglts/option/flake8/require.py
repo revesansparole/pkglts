@@ -1,4 +1,4 @@
 option = ['base']
 setup = []
 install = []
-dvlpt = ['flake8']
+dvlpt = [(None, 'flake8')]

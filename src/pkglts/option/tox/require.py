@@ -1,4 +1,4 @@
 option = ['pysetup']
 setup = []
 install = []
-dvlpt = ['tox']
+dvlpt = [('pip', 'tox')]

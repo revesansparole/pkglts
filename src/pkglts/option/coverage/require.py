@@ -1,4 +1,4 @@
 option = ['test']
 setup = []
 install = []
-dvlpt = ['coverage']
+dvlpt = [(None, 'coverage')]

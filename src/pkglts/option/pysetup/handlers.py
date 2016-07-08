@@ -66,6 +66,9 @@ def environment_extensions(env):
         dict of str: any
     """
     req_install = requirements(env, 'install')
+    for tup in env.globals['pysetup'].require:
+        req_install.append(tup)
+
     req_dvlpt = requirements(env, 'dvlpt')
 
     def req(name):

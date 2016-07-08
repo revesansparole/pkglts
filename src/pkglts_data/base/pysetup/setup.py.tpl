@@ -16,18 +16,6 @@ readme = open('README.rst').read()
 history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 
 
-def parse_requirements(fname):
-    with open(fname, 'r') as f:
-        txt = f.read()
-
-    reqs = []
-    for line in txt.splitlines():
-        line = line.strip()
-        if len(line) > 0 and not line.startswith("#"):
-            reqs.append(line)
-
-    return reqs
-
 # find version number in {{ base.src_pth }}/version.py
 version = {}
 with open("{{ base.src_pth }}/version.py") as fp:
@@ -71,8 +59,18 @@ setup_kwds = dict(
     include_package_data=True,
     package_data={'{{ base.pkgname }}_data': data_files},
     {% endif -%}
-    install_requires=parse_requirements("requirements.txt"),
-    tests_require=parse_requirements("dvlpt_requirements.txt"),
+    install_requires=[
+        {% for repo, name in pysetup.requirements('install') -%}
+        {% if repo == 'pip' or repo == None -%}
+        "{{ name }}",
+        {% endif -%}
+        {%- endfor %}],
+    tests_require=[
+        {% for repo, name in pysetup.requirements('dvlpt') -%}
+        {% if repo == 'pip' or repo == None -%}
+        "{{ name }}",
+        {% endif -%}
+        {%- endfor %}],
     entry_points={},
     keywords='{{ doc.keywords|join(", ") }}',
     {% if 'pypi' is available %}

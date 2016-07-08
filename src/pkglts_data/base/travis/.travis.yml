@@ -36,16 +36,25 @@ install:
   - conda create -q -n myenv python=$TRAVIS_PYTHON_VERSION
   - source activate myenv
 
-{%- for name in pysetup.requirements('install') %}
+{% for repo, name in pysetup.requirements('install') %}
+  {%- if repo == 'conda' or repo == None %}
   - conda install {{ name }}
-{%- endfor %}
-{%- for name in pysetup.requirements('dvlpt') %}
-  - conda install {{ name }}
+  {%- elif repo == 'pip' %}
+  - pip install {{ name }}
+  {%- elif repo == 'git' %}
+  - pip install git+https://github.com/{{ name }}
+  {%- endif %}
 {%- endfor %}
 
-{%- if 'coveralls' is available %}
-  - pip install coveralls
-{%- endif %}
+{%- for repo, name in pysetup.requirements('dvlpt') %}
+  {%- if repo == 'conda' or repo == None %}
+  - conda install {{ name }}
+  {%- elif repo == 'pip' %}
+  - pip install {{ name }}
+  {%- elif repo == 'git' %}
+  - pip install git+https://github.com/{{ name }}
+  {%- endif %}
+{%- endfor %}
 
   - python setup.py install
 # #}

@@ -1,4 +1,4 @@
 option = ['coverage', 'travis']
 setup = []
 install = []
-dvlpt = []
+dvlpt = [('pip', 'coveralls')]

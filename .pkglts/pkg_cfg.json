@@ -3,7 +3,7 @@
     "auto_install": true, 
     "install_front_end": "pip", 
     "use_prompts": false, 
-    "version": 2
+    "version": 3
   }, 
   "base": {
     "authors": [
@@ -53,7 +53,8 @@
     "intended_versions": [
       "27", 
       "35"
-    ]
+    ], 
+    "require": []
   }, 
   "readthedocs": {
     "project": "{{ github.project }}"

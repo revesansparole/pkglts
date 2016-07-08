@@ -36,8 +36,11 @@ def ensure_installed_packages(requirements, msg, env):
     Returns:
         (bool): whether all required packages are installed or not
     """
-    ife = get_install_front_end(env.globals["_pkglts"].install_front_end)
-    to_install = set(requirements) - set(ife.installed_packages())
+    ife_name = env.globals["_pkglts"].install_front_end
+    req = [name for repo, name in requirements
+           if repo is None or repo == ife_name]
+    ife = get_install_front_end(ife_name)
+    to_install = set(req) - set(ife.installed_packages())
     if len(to_install) > 0:
         print(msg)
         logger.warning("missing packages: " + ", ".join(to_install))
