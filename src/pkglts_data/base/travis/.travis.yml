@@ -7,6 +7,10 @@ python:
 {%- for pyver in pysetup.intended_versions %}
   - "{{ pyver[0] }}.{{ pyver[1] }}"
 {%- endfor %}
+
+virtualenv:
+    system_site_packages: true
+
 # #}
 
 addons:
