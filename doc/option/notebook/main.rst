@@ -1,7 +1,7 @@
 notebook
 ========
 
-This option allow to convert recursively each notebook (.ipynb) in the
+This option allow to convert recursively each notebook (.ipynb) specified in the
 src_directory parameters of notebook option (default : "example") to rst format.
 
 After that, each rst file is write in "doc/_notebook" folder. (The previous
@@ -10,5 +10,7 @@ referencing all the rst file generated.
 
 Command line
 ------------
+
+.. code::
 
     (dvlpt)$ pmg rg notebook
