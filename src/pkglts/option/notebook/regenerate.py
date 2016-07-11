@@ -2,6 +2,7 @@ import os
 import os.path
 import fnmatch
 import nbconvert
+import shutil
 
 
 def write_rst_file(filename, body):
@@ -50,6 +51,9 @@ def main(env, target=".", overwrite=False):
 
     # define documentation rst notebook directory
     dst_rst_directory = os.path.join("doc", "_notebook")
+    # remove previous folder
+    if os.path.exists(dst_rst_directory):
+        shutil.rmtree(dst_rst_directory)
 
     index_body = """\
 ========
