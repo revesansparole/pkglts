@@ -56,9 +56,9 @@ def action_regenerate(*args, **kwds):
         logger.info("regenerate package")
         regenerate_package(env, overwrite=overwrite)
     else:
-        name = [args[0]]
-        logger.info("regenerate '%s'" % name)
-        regenerate_option(env, name, overwrite=overwrite)
+        for name in args:
+            logger.info("regenerate '%s'" % name)
+            regenerate_option(env, name, overwrite=overwrite)
 
 
 def action_add(*args, **kwds):

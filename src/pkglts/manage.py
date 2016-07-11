@@ -97,7 +97,7 @@ def add_option(name, env):
         env (jinja2.Environment): current working environment
 
     Returns:
-        None
+        (jinja2.Environment): updated environment
     """
     if name in installed_options(env):
         raise UserWarning("option already included in this package")

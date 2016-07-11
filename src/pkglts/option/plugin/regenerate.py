@@ -65,11 +65,16 @@ def parse_plugins(pkg):
                         json.dump(idef, f, indent=2)
 
 
-def main(pkg_cfg):
+def main(env, target=".", overwrite=False):
     """Main function called to walk the package
 
     Args:
-        pkg_cfg: (dict of (str, dict)) package configuration parameters
+        env: (dict of (str, dict)) package configuration parameters
+        target (str): place to write plugin def into
+        overwrite (bool): whether or not to overwrite previous definition
+                          files. Default to False.
     """
-    pkg = import_module(pkg_full_name(pkg_cfg))
+    del target
+    del overwrite
+    pkg = import_module(pkg_full_name(env))
     parse_plugins(pkg)
