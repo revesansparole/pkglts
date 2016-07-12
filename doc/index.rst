@@ -15,7 +15,6 @@ Contents:
    contributing
    authors
    history
-   _notebook/index
 
 Indices and tables
 ==================
