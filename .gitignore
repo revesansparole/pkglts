@@ -94,8 +94,6 @@ target/
 # sphinx autogen file
 doc/_dvlpt/
 
-doc/_notebook/
-
 
 # #}
 
