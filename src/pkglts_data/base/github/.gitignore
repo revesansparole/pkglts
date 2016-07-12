@@ -99,6 +99,9 @@ target/
 {%- if 'sphinx' is available %}
 # sphinx autogen file
 doc/_dvlpt/
+{% if 'notebook' is available %}
+doc/_notebook/
+{% endif -%}
 {% endif %}
 
 # #}

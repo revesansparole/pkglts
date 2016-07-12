@@ -62,6 +62,7 @@ setup_kwds = dict(
         "flake8",
         "funcsigs",
         "mock",
+        "nbconvert",
         "nose",
         "sphinx",
         "coveralls",

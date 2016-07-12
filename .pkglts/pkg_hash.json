@@ -3,7 +3,7 @@
     "coverage": "/blR5tKvhr060wWwWPI0+3og4FhzenUH7GfiVUcvpGDKXsU47p2Vg7U95RT1uPXUlPCre738NpB+vlGs74EPrA=="
   }, 
   ".gitignore": {
-    "github": "soOJcD1sn5wu3b3DtZT9FxZR/Cz+UrmoScKtJl+wava3Qej5jKS1kjIG2GohZxemfF92OKdtg82FDEBKyzaK8Q=="
+    "github": "sXEK0JTRQ4FFpyQkdx+KBL27Hie0ZCJyS8lXYoooVYAnJGLprVSlqdiQPCWfoCkxoSVwbHP+IKhGQIGWnWxQBQ=="
   }, 
   ".landscape.yml": {}, 
   ".pypirc": {
@@ -14,7 +14,7 @@
     "travis": "0bzjApZcIzWJpNgghcOaXojz0THMfLe8nDWhhvtX3kCGCLV/1vajcqK8RAz76HnxGThJHQhEkZbDYU+E4N88pw==", 
     "travis.addons": "z4PhNX7vuL3xVChQ1m2AB9Yg5AULVxXcg/SpIdNs6c5H0NE8XYXysP+DGNKHfuwvY7kxvUdBeoGlODJ6+SfaPg==", 
     "travis.after": "NK0ZmP0FuAXWFohzr7Peg6h/JISQ/QkBMmwK1DvwqCyGKNhw5rprqhyARHDyc6LRyq+oqid/4e4MiviIsNoZKA==", 
-    "travis.install": "UFnSpXewMT9zthV5iKvBKpzJMtSh2UCSeROPWgIRSOOoPgsQXbFhUueycvRUgdJtAH/f1IX6fKRUO5llSG5vIQ==", 
+    "travis.install": "3db49gLrsK6Mn/9i7syHapJYwXUM4xpcz7zKFIYhKZqzFDKb+TChrPGoNf77QUeQKAfYz38tEc6MMh2+eNjmqQ==", 
     "travis.script": "STjpu3u3YoOeTz4mBIflZ58OodPdFRPFtLt6c8CUciNwe/fYhCTxlKTMB/S7VL1ippUsQVIfrFGl+OQ/ALWmPQ=="
   }, 
   "AUTHORS.rst": {
@@ -52,7 +52,7 @@
   "doc/readme.rst": {}, 
   "doc/usage.rst": {}, 
   "dvlpt_requirements.txt": {
-    "pysetup": "khmkpAlS4oFyT2PFz8+ZdJgnUWxzIUfJACP4mLaQH+4fxzs0JFjsF5sv281tLIav/8Bu+NtjHSa3gjBQN05QQQ=="
+    "pysetup": "6GxjmGyu9HgU3Wwea6th6HqAMAHKItdjuAO8iT44cz/sqKj2J+A081WI/cOwom3MF1mB9+eNZk1FjLCeucnvRw=="
   }, 
   "requirements.txt": {
     "pysetup": "/5djJXLbrvuFk7LIgtfgYR8RnQrY5BEmOB4zEd0PrKeswR/8sQkzj4yKy7Zl3LAdRzYjPDhWiRkS1oMCG4FX7Q=="
@@ -62,7 +62,7 @@
   }, 
   "setup.py": {
     "pysetup.call": "2wHuP94SpWKZpqOzExkQGTxnhGPgBHK3qOdPn0Ncstj5FkZ7FBGGM/inqAXaI4QLKQtTNlOUYRGSkYUWAUcf1w==", 
-    "pysetup.kwds": "cmcBzVWzHHHEAgq83fyX64O67pwqCHtzPjX0YxhXlXiPhQkUhfUUJZFMW6eagcodQI8hf5USo8eIZ8Fw1YaXLQ=="
+    "pysetup.kwds": "oCQIL7a0SYgqw8I0p6NwDEdPSzFvlEecflXcae4HDYxJOAkHqrIZAMo9Jmf/hwj19PqTbVz0pE2/f64x82xAqQ=="
   }, 
   "src/pkglts/__init__.py": {
     "base": "gR33dW0qqYmsV9NSNB+DD8XmuxnC2t0mKjnMoU5728qh97fSER6MbX+3QKxpZDLByZToaAay4xhx8acxketJmA=="

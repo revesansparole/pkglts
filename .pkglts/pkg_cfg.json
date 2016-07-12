@@ -40,6 +40,9 @@
     "project": "{{ base.pkgname }}", 
     "year": "2015"
   }, 
+  "notebook": {
+    "src_directory": "example"
+  }, 
   "plugin": {}, 
   "pypi": {
     "classifiers": [
@@ -68,7 +71,7 @@
   "travis": {}, 
   "version": {
     "major": 1, 
-    "minor": 1,
+    "minor": 1, 
     "post": 0
   }
 }

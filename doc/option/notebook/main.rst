@@ -1,12 +1,13 @@
 notebook
 ========
 
-This option allow to convert recursively each notebook (.ipynb) specified in the
-src_directory parameters of notebook option (default : "example") to rst format.
+This option allows to convert all notebooks (.ipynb) specified in the
+src_directory parameter of the 'notebook' option (default : "example") to
+RestructuredText (.rst) format.
 
-After that, each rst file is write in "doc/_notebook" folder. (The previous
-files organization is kept in this folder). More, a index.rst is generated,
-referencing all the rst file generated.
+Each rst file produced is writen in "doc/_notebook" folder reproducing the
+hierarchy of files found in src_directory. An 'index.rst' file is also generated
+to list all the notebooks.
 
 Command line
 ------------
@@ -14,3 +15,9 @@ Command line
 .. code::
 
     (dvlpt)$ pmg rg notebook
+
+Then you need to rebuild the documentation to integrate the notebooks:
+
+.. code::
+
+    (dvlpt)$ python setup.py build_sphinx
