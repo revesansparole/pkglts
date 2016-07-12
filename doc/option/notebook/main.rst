@@ -14,3 +14,8 @@ Command line
 .. code::
 
     (dvlpt)$ pmg rg notebook
+
+User Warnings
+-------------
+
+1. Each notebook need a title to be referenced in the index
