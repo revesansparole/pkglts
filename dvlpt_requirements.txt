@@ -3,6 +3,7 @@ coverage
 flake8
 funcsigs
 mock
+nbconvert
 nose
 sphinx
 coveralls

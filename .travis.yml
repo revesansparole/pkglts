@@ -41,6 +41,7 @@ install:
   - conda install flake8
   - conda install funcsigs
   - conda install mock
+  - conda install nbconvert
   - conda install nose
   - conda install sphinx
   - pip install coveralls

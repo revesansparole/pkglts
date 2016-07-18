@@ -27,6 +27,7 @@ basic functionalities.
    :maxdepth: 1
 
    option/sphinx/main
+   option/notebook/main
    option/data/main
 
 Distributing your code
