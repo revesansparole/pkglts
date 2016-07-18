@@ -5,7 +5,21 @@ import nbconvert
 import shutil
 
 
-def write_rst_file(filename, body):
+def write_rst_file_with_resources(body, resources):
+
+    # Create folder if the path not exists
+    if not os.path.exists(resources["metadata"]["path"]):
+        os.makedirs(resources["metadata"]["path"])
+
+    # Keep resources metadata like image in the rst
+    writer = nbconvert.writers.FilesWriter()
+    writer.write(body, resources, notebook_name=resources["metadata"]["name"])
+
+
+def write_rst_file_with_filename(body, filename):
+    """
+    Warning, This write not save image in the transformation to rst format.
+    """
     # Create folder if the path not exists
     if not os.path.exists(os.path.dirname(filename)):
         os.makedirs(os.path.dirname(filename))
@@ -51,6 +65,7 @@ def main(env, target=".", overwrite=False):
 
     # define documentation rst notebook directory
     dst_rst_directory = os.path.join("doc", "_notebook")
+
     # remove previous folder
     if os.path.exists(dst_rst_directory):
         shutil.rmtree(dst_rst_directory)
@@ -72,21 +87,24 @@ Notebook
         # Convert each notebook to rst
         body, resources = rst_exporter.from_filename(nb_filename)
 
-        output_rst_file_name = os.path.join(
-            resources["metadata"]["path"],
-            resources["metadata"]["name"] + resources["output_extension"])
-
         # Remove basename src_directory in the path
-        output_rst_file_name = output_rst_file_name[len_src_directory + 1:]
+        resources["metadata"]["path"] = \
+            resources["metadata"]["path"][len_src_directory + 1:]
+
+        # Get the local file_path of the notebook write
+        local_file_path = os.path.join(resources["metadata"]["path"],
+                                       resources["metadata"]["name"])
 
         # Add dst_rst_directory in the path
-        rst_filename = os.path.join(dst_rst_directory, output_rst_file_name)
+        resources["metadata"]["path"] = os.path.join(
+            dst_rst_directory, resources["metadata"]["path"])
 
-        write_rst_file(rst_filename, body)
+        # Write rst with this resources
+        write_rst_file_with_resources(body, resources)
 
-        # Update rst_index body
-        index_body += "    " + output_rst_file_name.replace("\\", "/") + "\n"
+        # Save the notebook rst position in the index body
+        index_body += "    " + local_file_path.replace("\\", "/") + "\n"
 
     # Write rst_index body in the root src directory
     rst_index_filename = os.path.join(dst_rst_directory, "index.rst")
-    write_rst_file(rst_index_filename, index_body)
+    write_rst_file_with_filename(index_body, rst_index_filename)
