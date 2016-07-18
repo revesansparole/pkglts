@@ -6,4 +6,4 @@ Notebook
     :glob:
     :caption: Notebook
 
-    example.rst
+    example
