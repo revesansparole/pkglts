@@ -37,7 +37,7 @@ install:
   - source activate myenv
 
 {% for repo, name in pysetup.requirements('install') %}
-  {%- if repo == 'conda' or repo == None %}
+  {%- if repo == 'conda' or repo == 'none' %}
   - conda install {{ name }}
   {%- elif repo == 'pip' %}
   - pip install {{ name }}
@@ -47,7 +47,7 @@ install:
 {%- endfor %}
 
 {%- for repo, name in pysetup.requirements('dvlpt') %}
-  {%- if repo == 'conda' or repo == None %}
+  {%- if repo == 'conda' or repo == 'none' %}
   - conda install {{ name }}
   {%- elif repo == 'pip' %}
   - pip install {{ name }}
