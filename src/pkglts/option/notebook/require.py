@@ -1,4 +1,4 @@
 option = ["sphinx"]
 setup = []
 install = []
-dvlpt = [(None, "nbconvert")]
+dvlpt = [("none", "nbconvert")]

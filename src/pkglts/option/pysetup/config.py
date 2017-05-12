@@ -21,7 +21,7 @@ def check(env):
 
     require = env.globals['pysetup'].require
 
-    valid_methods = (None, "pip", "conda", "git")
+    valid_methods = ("none", "pip", "conda", "git")
     if any(imeth not in valid_methods for imeth, name in require):
         invalids.append("require")
 

@@ -6,6 +6,7 @@ language: python
 python:
   - "2.7"
   - "3.5"
+  - "3.6"
 
 # #}
 
@@ -37,13 +38,6 @@ install:
   - source activate myenv
 
 
-  - conda install coverage
-  - conda install flake8
-  - conda install funcsigs
-  - conda install mock
-  - conda install nbconvert
-  - conda install nose
-  - conda install sphinx
   - pip install coveralls
   - pip install tox
   - pip install twine

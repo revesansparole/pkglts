@@ -1,7 +1,7 @@
 {
   "_pkglts": {
     "auto_install": true, 
-    "install_front_end": "pip", 
+    "install_front_end": "stdout",
     "use_prompts": false, 
     "version": 3
   }, 
@@ -55,7 +55,8 @@
   "pysetup": {
     "intended_versions": [
       "27", 
-      "35"
+      "35",
+      "36"
     ], 
     "require": []
   }, 
@@ -71,7 +72,7 @@
   "travis": {}, 
   "version": {
     "major": 1, 
-    "minor": 1, 
+    "minor": 2,
     "post": 0
   }
 }

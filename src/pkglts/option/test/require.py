@@ -1,4 +1,4 @@
 option = ['base']
 setup = []
 install = []
-dvlpt = [(None, 'nose'), (None, 'mock')]
+dvlpt = [("none", 'nose'), ("none", 'mock')]
