@@ -60,7 +60,6 @@ setup_kwds = dict(
     tests_require=[
         "coverage",
         "flake8",
-        "funcsigs",
         "mock",
         "nbconvert",
         "nose",

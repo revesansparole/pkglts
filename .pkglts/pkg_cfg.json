@@ -43,7 +43,6 @@
   "notebook": {
     "src_directory": "example"
   }, 
-  "plugin": {}, 
   "pypi": {
     "classifiers": [
       "Development Status :: 2 - Pre-Alpha", 

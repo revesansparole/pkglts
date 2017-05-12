@@ -40,7 +40,6 @@ install:
 
   - conda install coverage
   - conda install flake8
-  - conda install funcsigs
   - conda install mock
   - conda install nbconvert
   - conda install nose
