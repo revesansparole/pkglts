@@ -12,7 +12,7 @@ Contents:
     usage
 {%- if 'notebook' is available %}
     _notebook/index
-{% endif -%}
+{%- endif %}
     contributing
     authors
     history
