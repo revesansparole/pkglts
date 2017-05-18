@@ -16,15 +16,13 @@ Command line
 
     (dvlpt)$ pmg rg notebook
 
-<<<<<<< HEAD
 User Warnings
 -------------
 
 1. Each notebook need a title to be referenced in the index
-=======
+
 Then you need to rebuild the documentation to integrate the notebooks:
 
 .. code::
 
     (dvlpt)$ python setup.py build_sphinx
->>>>>>> 838ed2b115c014056e0e06ad364e3aeb1a89797e
