@@ -26,3 +26,11 @@ Then you need to rebuild the documentation to integrate the notebooks:
 .. code::
 
     (dvlpt)$ python setup.py build_sphinx
+
+Example
+-------
+
+.. toctree::
+   :maxdepth: 2
+
+   ../../_notebook/index
