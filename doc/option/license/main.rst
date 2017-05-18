@@ -33,7 +33,10 @@ The list of templates for all available licenses in former project lice_ can be
 found here_. They have been copied and extended into this project.
 Available licenses:
 
-.. include:: license_list.rst
+.. toctree::
+   :maxdepth: 1
+
+   license_list
 
 .. _here: https://github.com/licenses/license-templates/tree/master/templates
 .. _lice: https://github.com/licenses/lice
