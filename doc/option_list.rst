@@ -59,6 +59,13 @@ Then you can use the 'pypi' option to help you put your package on the cheese sh
 
    option/pypi/main
 
+Alternatively, if you chose to use 'conda' as your package manager:
+
+.. toctree::
+   :maxdepth: 1
+
+   option/conda/main
+
 
 Web services
 ============
