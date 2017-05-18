@@ -16,6 +16,15 @@ Contents:
    authors
    history
 
+
+Sources
+=======
+
+.. toctree::
+   :maxdepth: 2
+
+   _dvlpt/modules
+
 Indices and tables
 ==================
 
