@@ -10,4 +10,4 @@ def test_check_handle_option_config_not_existing():
 
 def test_check_handle_option_defines_no_check():
     env = create_env(default_cfg)
-    assert len(check_option_parameters("test", env)) == 0
+    assert len(check_option_parameters("data", env)) == 0

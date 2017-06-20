@@ -41,7 +41,7 @@ def test_install_example_ok_if_option_do_not_provide_examples():
 def test_install_example_copy_files():
     cfg = deepcopy(default_cfg)
     cfg['base'] = dict(pkgname='toto', namespace=None)
-    cfg['test'] = dict()
+    cfg['test'] = dict(suite_name='nose')
     env = pkg_env(cfg)
 
     assert len(listdir(tmp_dir)) == 0
@@ -68,7 +68,7 @@ def test_install_example_copy_binary_files():
 def test_install_example_do_not_complain_if_file_already_exists():
     cfg = deepcopy(default_cfg)
     cfg['base'] = dict(pkgname='toto', namespace=None)
-    cfg['test'] = dict()
+    cfg['test'] = dict(suite_name='nose')
     env = pkg_env(cfg)
 
     assert install_example_files('test', env, tmp_dir)
@@ -79,7 +79,7 @@ def test_install_example_do_not_complain_if_file_already_exists():
 def test_install_example_handles_namespace():
     cfg = deepcopy(default_cfg)
     cfg['base'] = dict(pkgname='toto', namespace='oa')
-    cfg['test'] = dict()
+    cfg['test'] = dict(suite_name='nose')
     env = pkg_env(cfg)
 
     install_example_files('test', env, tmp_dir)

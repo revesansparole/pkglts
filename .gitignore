@@ -80,8 +80,6 @@ target/
 
 # svn
 .svn
-
-
 # coverage
 .coverage
 
