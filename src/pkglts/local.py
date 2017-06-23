@@ -53,7 +53,7 @@ __import__('pkg_resources').declare_namespace(__name__)
 """ % (opening_marker, closing_marker)
 
 
-def init_namespace_dir(pth):
+def init_namespace_dir(pth, env):
     """Populate a directory with specific __init__.py
     for namespace packages.
 
