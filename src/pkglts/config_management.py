@@ -11,7 +11,7 @@ try:
 except NameError:
     string_type = str
 
-current_pkg_cfg_version = 3
+current_pkg_cfg_version = 4
 
 logger = logging.getLogger(__name__)
 
@@ -206,6 +206,11 @@ def upgrade_pkg_cfg_version(pkg_cfg, version):
         if 'pysetup' in pkg_cfg:
             section = pkg_cfg['pysetup']
             section['require'] = section.get('require', [])
+    elif version == 3:
+        pkg_cfg['_pkglts']['version'] = 4
+        if 'test' in pkg_cfg:
+            section = pkg_cfg['test']
+            section['suite_name'] = section.get('suite_name', "pytest")
 
     return pkg_cfg
 

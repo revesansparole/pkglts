@@ -55,6 +55,8 @@ setup_kwds = dict(
     
     include_package_data=True,
     package_data={'pkglts_data': data_files},
+    setup_requires=[
+        ],
     install_requires=[
         ],
     tests_require=[
@@ -63,6 +65,8 @@ setup_kwds = dict(
         "mock",
         "nbconvert",
         "nose",
+        "pytest",
+        "pytest-cov",
         "sphinx",
         "coveralls",
         "tox",
@@ -83,8 +87,9 @@ setup_kwds = dict(
         "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
     ],
+    
     test_suite='nose.collector',
-)
+    )
 # #}
 # change setup_kwds below before the next pkglts tag
 

@@ -25,9 +25,9 @@ def test_option_fetch_parameter_list_from_config():
 def test_option_handle_no_parameter_list_in_config():
     env = create_env(default_cfg)
     env.globals['base'] = None
-    env = update_opt('test', env)
-    assert 'test' in env.globals
-    assert len(tuple(env.globals['test'].items())) == 0
+    env = update_opt('data', env)
+    assert 'data' in env.globals
+    assert len(tuple(env.globals['data'].items())) == 0
 
 
 def test_option_use_default_from_config():

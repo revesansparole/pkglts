@@ -1,8 +1,10 @@
+{%- if test.suite_name == 'nose' -%}
 from nose import with_setup
 
+{% endif -%}
 from {{ base.pkg_full_name }} import example as ex
 
-
+{% if test.suite_name == 'nose' %}
 def setup_module():
     """ Some code executed before launching functions in this module.
     """
@@ -32,7 +34,7 @@ def test_main():
     """ test ...
     """
     ex.main()
-
+{% endif %}
 
 def test_example_func_default_to_beau_texte():
     assert ex.example_func() == "beau texte"
@@ -48,8 +50,7 @@ def test_example_class_creation():
 
 
 class TestExampleClass(object):
-    def __init__(self):
-        self.eg = None
+    eg = None
 
     def setup(self):
         """setup called when instance is created."""

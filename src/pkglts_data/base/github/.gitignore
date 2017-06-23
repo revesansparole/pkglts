@@ -81,6 +81,12 @@ target/
 # svn
 .svn
 
+{%- if 'test' is available %}
+{%- if test.suite_name == 'pytest' %}
+.cache/
+{% endif -%}
+{% endif -%}
+
 {% if 'coverage' is available %}
 # coverage
 .coverage

@@ -59,6 +59,13 @@ setup_kwds = dict(
     include_package_data=True,
     package_data={'{{ base.pkgname }}_data': data_files},
     {% endif -%}
+    setup_requires=[
+        {% if 'test' is available -%}
+        {% if test.suite_name == 'pytest' -%}
+        "pytest-runner",
+        {% endif -%}
+        {% endif -%}
+    ],
     install_requires=[
         {% for repo, name in pysetup.requirements('install') -%}
         {% if repo == 'pip' or repo == 'none' -%}
@@ -80,7 +87,11 @@ setup_kwds = dict(
         {%- endfor %}
     ],
     {% endif -%}
+    {% if 'test' is available -%}
+    {% if test.suite_name == 'nose' %}
     test_suite='nose.collector',
+    {% endif -%}
+    {% endif -%}
 )
 # #}
 # change setup_kwds below before the next pkglts tag

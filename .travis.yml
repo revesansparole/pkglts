@@ -43,6 +43,8 @@ install:
   - conda install mock
   - conda install nbconvert
   - conda install nose
+  - conda install pytest
+  - conda install pytest-cov
   - conda install sphinx
   - pip install coveralls
   - pip install tox
@@ -53,6 +55,7 @@ install:
 
 script:
 # {# pkglts, travis.script
+
   - nosetests
 # #}
 

@@ -315,31 +315,15 @@ texinfo_documents = [
 # use apidoc to generate developer doc
 import os
 from os import path
-from sphinx.apidoc import create_modules_toc_file, recurse_tree
-
-
-class Opt(object):
-    pass
+from sphinx.apidoc import main
 
 
 rootpath = path.abspath(path.join(project_root, "src"))
-opts = Opt()
-opts.modulefirst = None
-opts.separatemodules = None
-opts.noheadings = None
-opts.destdir = path.abspath(path.join(project_root, "doc", "_dvlpt"))
-opts.suffix = source_suffix[1:]
-opts.dryrun = None
-opts.force = None
-opts.header = 'src'
-opts.maxdepth = 4
-opts.includeprivate = False
-opts.implicit_namespaces = False
+destdir = path.abspath(path.join(project_root, "doc", "_dvlpt"))
 
-if not path.isdir(opts.destdir):
-    os.makedirs(opts.destdir)
+if not path.isdir(destdir):
+    os.makedirs(destdir)
 
-modules = recurse_tree(rootpath, [], opts)
-create_modules_toc_file(modules, opts)
+main(['-e', '-o', destdir, '-d', '4', '-s', source_suffix[1:], '--force', rootpath])
 
 # #}

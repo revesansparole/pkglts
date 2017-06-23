@@ -61,7 +61,14 @@ install:
 
 script:
 # {# pkglts, travis.script
+  {%- if 'test' is available -%}
+  {%- if test.suite_name == 'nose' %}
   - nosetests
+  {%- endif -%}
+  {%- if test.suite_name == 'pytest' %}
+  - pytest
+  {%- endif -%}
+  {%- endif %}
 # #}
 
 after_success:
