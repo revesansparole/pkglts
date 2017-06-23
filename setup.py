@@ -66,6 +66,7 @@ setup_kwds = dict(
         "nbconvert",
         "nose",
         "pytest",
+        "pytest-cov",
         "sphinx",
         "coveralls",
         "tox",

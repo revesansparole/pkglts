@@ -5,6 +5,7 @@ mock
 nbconvert
 nose
 pytest
+pytest-cov
 sphinx
 coveralls
 tox
