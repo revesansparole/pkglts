@@ -43,6 +43,7 @@ install:
   - conda install mock
   - conda install nbconvert
   - conda install nose
+  - conda install pytest
   - conda install sphinx
   - pip install coveralls
   - pip install tox

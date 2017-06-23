@@ -65,6 +65,7 @@ setup_kwds = dict(
         "mock",
         "nbconvert",
         "nose",
+        "pytest",
         "sphinx",
         "coveralls",
         "tox",

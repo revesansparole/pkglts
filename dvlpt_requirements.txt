@@ -4,6 +4,7 @@ flake8
 mock
 nbconvert
 nose
+pytest
 sphinx
 coveralls
 tox
