@@ -54,6 +54,9 @@ setup_kwds = dict(
     zip_safe=False,
 
     packages=find_packages('src'),
+    {%- if base.namespace is not none %}
+    namespace_packages=['{{ base.namespace }}'],
+    {%- endif %}
     package_dir={'': 'src'},
     {% if 'data' is available %}
     include_package_data=True,
