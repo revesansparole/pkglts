@@ -2,11 +2,8 @@
 inside a package. Just a way to normalize pre defined paths.
 """
 
-from os.path import exists
-
 from .data_access import get_data_dir
-from .file_management import write_file
-from .templating import closing_marker, opening_marker, render
+from .templating import render
 
 
 def pkg_full_name(env):
