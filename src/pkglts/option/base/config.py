@@ -45,7 +45,7 @@ def check(env):
         elif not is_valid_identifier(namespace):
             invalids.append('namespace')
 
-    if env.globals['base'].namespace_method not in ("pkg_util", "setuptools", "init"):
+    if env.globals['base'].namespace_method not in ("pkg_util", "setuptools", "P3.3>"):
         invalids.append("namespace_method")
 
     return invalids
