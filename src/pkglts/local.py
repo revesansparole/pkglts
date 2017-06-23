@@ -46,11 +46,11 @@ def src_dir(env):
     return rep
 
 
-namespace_txt = """
-# %spkglts,
-__import__('pkg_resources').declare_namespace(__name__)
-# %s
-""" % (opening_marker, closing_marker)
+namespace_txt = (
+    "# %spkglts,"
+    "__import__('pkg_resources').declare_namespace(__name__)"
+    "# %s" % (opening_marker, closing_marker)
+)
 
 
 def init_namespace_dir(pth, env):
