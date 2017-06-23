@@ -3,7 +3,7 @@
     "coverage": "/blR5tKvhr060wWwWPI0+3og4FhzenUH7GfiVUcvpGDKXsU47p2Vg7U95RT1uPXUlPCre738NpB+vlGs74EPrA=="
   },
   ".gitignore": {
-    "github": "+NJn2M788JNirKFBvyshCd5tCrF2eIC2TRdrdp4NyTFL/lRpTny8ygX4doGI+LWw30+RV1vB7CCW64Zy2r23bA=="
+    "github": "/hJaMpx2+92hi8xucixEJHNjHJwOOpxbAXaELArSD/iz7Ge0/FeNrRQgLRG18IWBPgwVFd4rG3kWf80QvkIJZw=="
   },
   ".landscape.yml": {},
   ".pypirc": {
@@ -15,7 +15,7 @@
     "travis.addons": "z4PhNX7vuL3xVChQ1m2AB9Yg5AULVxXcg/SpIdNs6c5H0NE8XYXysP+DGNKHfuwvY7kxvUdBeoGlODJ6+SfaPg==",
     "travis.after": "NK0ZmP0FuAXWFohzr7Peg6h/JISQ/QkBMmwK1DvwqCyGKNhw5rprqhyARHDyc6LRyq+oqid/4e4MiviIsNoZKA==",
     "travis.install": "BZcYBsDpbQO88gkTW2p7IzRK7H7/X+3oOOVheBUU9yaD2zz0b6wgLAZR8e3lTkDr1zL8wGcz6VWB4JpmaSMAuw==",
-    "travis.script": "QhH3ZSwLGNhVNYWnpBAe43aAV80udOh91KitdSGQFcFtH3o8EKXxP6mEUWQJDig6EauuIb4WgCYgSRmvuzI0AQ=="
+    "travis.script": "DuMVu20DK3x0WVdVZxihdiYnEkfDqmOlMUuCHohyYvi4fv3Ew8OeAca6AdKM/ZCSZvVS9tywx+PhPrmDexl6hg=="
   },
   "AUTHORS.rst": {
     "doc": "w6jfJjf36UAGY5xtLYQpKySd2EqWvvRiIPKeQFXiSTyCT3hLg/amjRE062vPZXvZTVKefknIXchZTe6xS0SCfQ=="
@@ -58,11 +58,11 @@
     "pysetup": "/5djJXLbrvuFk7LIgtfgYR8RnQrY5BEmOB4zEd0PrKeswR/8sQkzj4yKy7Zl3LAdRzYjPDhWiRkS1oMCG4FX7Q=="
   },
   "setup.cfg": {
-    "pysetup": "/COKehCY8XlPobHcGkOclAaROaznLuwgGB3D19T3IyD+Ak6GRbDFevXj4m8Mo+b2a4AhprC4dW30nofk5g7sQw=="
+    "pysetup": "6pUgSWDpw/kpBgNeHXThr5j3koys2ht2mDdQfE8905CQzaGY+58XDkPlC7LURCyMNQHpaecUnsqwhn+TaCkVuw=="
   },
   "setup.py": {
     "pysetup.call": "2wHuP94SpWKZpqOzExkQGTxnhGPgBHK3qOdPn0Ncstj5FkZ7FBGGM/inqAXaI4QLKQtTNlOUYRGSkYUWAUcf1w==",
-    "pysetup.kwds": "/tVGv4YLATWUuj0ZeikRyTpJ8ily/YTKeJxuIBhClXMTmokjxn5/2CknvtkZMGXnuuyaKE4ft2eu4YOQobc4Sw=="
+    "pysetup.kwds": "41Be1XEiJfWxgsb7GVcObR06qPnn8Z6wLs2ay3fHj69E/H/wOQzBAQF5JHOL5fE2pXvXTifzZNtqGUQyqAspWQ=="
   },
   "src/pkglts/__init__.py": {
     "base": "gR33dW0qqYmsV9NSNB+DD8XmuxnC2t0mKjnMoU5728qh97fSER6MbX+3QKxpZDLByZToaAay4xhx8acxketJmA=="
@@ -76,6 +76,6 @@
   "src/pkglts_data/__init__.py": {},
   "test/__init__.py": {},
   "tox.ini": {
-    "tox": "0+PIOVMNOPowBQTS0f8P1Zaj3d+tsndmgwXpgFxb8YBURSZdjqRm1+yigUBjk1UZl17/ztbmWfY6gckyFU4xUQ=="
+    "tox": "lNsVQhM6iz1Zn4tKANbJtJmri+WsCrWxvjnYhZrIu1l7ZHNMpktlmcCa6ZkDs7PqrbR/9yi2Spb3qxvEGxlyOw=="
   }
 }

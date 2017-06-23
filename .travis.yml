@@ -56,7 +56,7 @@ install:
 script:
 # {# pkglts, travis.script
 
-  - nosetests
+  - pytest
 # #}
 
 after_success:
