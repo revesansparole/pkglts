@@ -53,6 +53,7 @@ def init_namespace_dir(pth, env):
 
     Args:
         pth (str): path in which to create the files
+        env (jinja2.Environment): current working environment
 
     Returns:
         None
