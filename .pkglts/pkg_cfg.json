@@ -3,7 +3,7 @@
     "auto_install": true,
     "install_front_end": "stdout",
     "use_prompts": false,
-    "version": 4
+    "version": 5
   },
   "base": {
     "authors": [
@@ -13,6 +13,7 @@
       ]
     ],
     "namespace": null,
+    "namespace_method": "pkg_util",
     "pkgname": "pkglts",
     "url": null
   },
