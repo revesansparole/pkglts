@@ -97,7 +97,7 @@ def test_regenerate_handle_src_directory_with_namespace():
         f.write("lorem ipsum")
 
     cfg = dict(default_cfg)
-    cfg['base'] = dict(pkgname='toto', namespace='myns')
+    cfg['base'] = dict(pkgname='toto', namespace='myns', namespace_method='pkg_utils')
     env = create_env(cfg)
     regenerate_dir(pj(tmp_dir, 'src'), pj(tmp_dir, 'tgt'), env, {})
 

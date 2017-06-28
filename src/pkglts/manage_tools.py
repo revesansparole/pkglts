@@ -162,7 +162,7 @@ def regenerate_dir(src_dir, tgt_dir, env, overwrite_file):
                 if not exists(ns_pth):
                     mkdir(ns_pth)
 
-                init_namespace_dir(ns_pth)
+                init_namespace_dir(ns_pth, env)
                 tgt_pth = ns_pth + "/" + tgt_name
 
         if isdir(src_pth):

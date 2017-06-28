@@ -2,10 +2,8 @@
 inside a package. Just a way to normalize pre defined paths.
 """
 
-from os.path import exists
-
-from .file_management import write_file
-from .templating import closing_marker, opening_marker
+from .data_access import get_data_dir
+from .templating import render
 
 
 def pkg_full_name(env):
@@ -46,23 +44,17 @@ def src_dir(env):
     return rep
 
 
-namespace_txt = """
-# %spkglts,
-__import__('pkg_resources').declare_namespace(__name__)
-# %s
-""" % (opening_marker, closing_marker)
-
-
-def init_namespace_dir(pth):
+def init_namespace_dir(pth, env):
     """Populate a directory with specific __init__.py
     for namespace packages.
 
     Args:
         pth (str): path in which to create the files
+        env (jinja2.Environment): current working environment
 
     Returns:
         None
     """
-    init_pth = pth + "/__init__.py"
-    if not exists(init_pth):
-        write_file(init_pth, namespace_txt)
+    src_pth = get_data_dir() + "/base/namespace__init__.py.tpl"
+    tgt_pth = pth + "/__init__.py"
+    render(env, src_pth, tgt_pth)

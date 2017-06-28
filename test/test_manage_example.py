@@ -78,7 +78,7 @@ def test_install_example_do_not_complain_if_file_already_exists():
 @with_setup(setup_func, teardown_func)
 def test_install_example_handles_namespace():
     cfg = deepcopy(default_cfg)
-    cfg['base'] = dict(pkgname='toto', namespace='oa')
+    cfg['base'] = dict(pkgname='toto', namespace='oa', namespace_method='pkg_utils')
     cfg['test'] = dict(suite_name='nose')
     env = pkg_env(cfg)
 
