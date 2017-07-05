@@ -3,7 +3,7 @@ from os import mkdir, rmdir
 from os.path import exists
 
 from pkglts.config_management import create_env
-from pkglts.option.notebook.config import parameters, check
+from pkglts.option.notebook.config import parameters, check, require
 
 tmp_dir = "nb_test_config"
 
@@ -28,3 +28,13 @@ def test_config_check_src_directory():
 
     env = create_env(dict(notebook={'src_directory': tmp_dir}))
     assert 'src_directory' not in check(env)
+
+
+def test_require():
+    cfg = dict(notebook={})
+    env = create_env(cfg)
+
+    assert len(require('option', env)) == 1
+    assert len(require('setup', env)) == 0
+    assert len(require('install', env)) == 0
+    assert len(require('dvlpt', env)) == 1
