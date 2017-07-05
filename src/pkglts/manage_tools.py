@@ -89,7 +89,8 @@ def update_opt(name, env):
         raise KeyError("option '%s' does not exists" % name)
 
     # find other option requirements in repository
-    for option_name in opt_cfg.require('option', env):
+    for dep in opt_cfg.require('option', env):
+        option_name = dep.name
         if option_name not in installed_options(env):
             print("need to install option '%s' first" % option_name)
             if (env.globals["_pkglts"].auto_install or
