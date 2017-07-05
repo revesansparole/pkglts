@@ -6,3 +6,6 @@ class Dependency(object):
         self.name = name  # name of dependency
         self.package_manager = pkg_mng  # either conda, pip or git url
         self.channel = channel  # place to find the dependency depends on package_manager
+
+    def __str__(self):
+        return self.name
