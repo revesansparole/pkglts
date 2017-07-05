@@ -1,6 +1,7 @@
 from importlib import import_module
 
 from pkglts.config_management import installed_options
+from pkglts.dependency import Dependency
 
 
 def requirements(env, requirement_name):
@@ -16,8 +17,8 @@ def requirements(env, requirement_name):
     reqs = set()
     for name in installed_options(env):
         try:
-            opt_req = import_module("pkglts.option.%s.require" % name)
-            reqs.update(getattr(opt_req, requirement_name))
+            opt_cfg = import_module("pkglts.option.%s.config" % name)
+            reqs.update(getattr(opt_cfg.require(requirement_name, env)))
         except ImportError:
             raise KeyError("option '%s' does not exists" % name)
 
@@ -66,8 +67,8 @@ def environment_extensions(env):
         dict of str: any
     """
     req_install = requirements(env, 'install')
-    for tup in env.globals['pysetup'].require:
-        req_install.append(tup)
+    for pkg_mng, name in env.globals['pysetup'].require:
+        req_install.append(Dependency(name, pkg_mng))
 
     req_dvlpt = requirements(env, 'dvlpt')
 

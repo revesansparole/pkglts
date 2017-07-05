@@ -70,14 +70,14 @@ setup_kwds = dict(
         {% endif -%}
     ],
     install_requires=[
-        {% for repo, name in pysetup.requirements('install') -%}
-        {% if repo == 'pip' or repo == 'none' -%}
+        {% for dep in pysetup.requirements('install') -%}
+        {% if dep.package_manager == 'pip' or dep.package_manager == 'none' -%}
         "{{ name }}",
         {% endif -%}
         {%- endfor %}],
     tests_require=[
-        {% for repo, name in pysetup.requirements('dvlpt') -%}
-        {% if repo == 'pip' or repo == 'none' -%}
+        {% for dep in pysetup.requirements('dvlpt') -%}
+        {% if dep.package_manager == 'pip' or dep.package_manager == 'none' -%}
         "{{ name }}",
         {% endif -%}
         {%- endfor %}],
