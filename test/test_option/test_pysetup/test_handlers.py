@@ -25,10 +25,10 @@ def test_pkg_url_look_multiple_places():
 
 
 def test_requirements():
-    cfg = dict(test={},
+    cfg = dict(test={'suite_name': 'pytest'},
                pysetup={'intended_versions': ["27"],
                         'require': []})
     env = pkg_env(cfg)
     assert len(env.globals['pysetup'].requirements('install')) == 0
-    assert len(env.globals['pysetup'].requirements('dvlpt')) == 3
+    assert len(env.globals['pysetup'].requirements('dvlpt')) == 1
 

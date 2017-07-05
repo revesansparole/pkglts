@@ -14,15 +14,16 @@ def requirements(env, requirement_name):
     Returns:
         (list of str): list of required packages names
     """
-    reqs = set()
+    reqs = {}
     for name in installed_options(env):
         try:
             opt_cfg = import_module("pkglts.option.%s.config" % name)
-            reqs.update(getattr(opt_cfg.require(requirement_name, env)))
+            for dep in opt_cfg.require(requirement_name, env):
+                reqs[dep.name] = dep
         except ImportError:
             raise KeyError("option '%s' does not exists" % name)
 
-    return sorted(reqs)
+    return [reqs[name] for name in sorted(reqs)]
 
 
 def pkg_url(env):
