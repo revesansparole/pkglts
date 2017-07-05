@@ -34,7 +34,7 @@ def require(purpose, env):
     """List of requirements for this option for a given purpose.
 
     Args:
-        purpose (str): either 'option', 'setup', 'install' or 'develop'
+        purpose (str): either 'option', 'setup', 'install' or 'dvlpt'
         env (jinja2.Environment):  current working environment
 
     Returns:
