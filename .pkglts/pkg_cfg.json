@@ -58,7 +58,11 @@
       "35",
       "36"
     ],
-    "require": []
+    "require": [
+      {
+        "name": "jinja2"
+      }
+    ]
   },
   "readthedocs": {
     "project": "{{ github.project }}"

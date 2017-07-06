@@ -38,9 +38,11 @@ install:
   - source activate myenv
 
 
+  - conda install jinja2
   - conda install coverage
   - pip install coveralls
   - conda install flake8
+  - conda install mock
   - conda install nbconvert
   - conda install pytest
   - conda install pytest-cov

@@ -30,5 +30,5 @@ def test_requirements():
                         'require': []})
     env = pkg_env(cfg)
     assert len(env.globals['pysetup'].requirements('install')) == 0
-    assert len(env.globals['pysetup'].requirements('dvlpt')) == 1
+    assert len(env.globals['pysetup'].requirements('dvlpt')) == 2
 

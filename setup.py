@@ -59,11 +59,13 @@ setup_kwds = dict(
         "pytest-runner",
         ],
     install_requires=[
+        "jinja2",
         ],
     tests_require=[
         "coverage",
         "coveralls",
         "flake8",
+        "mock",
         "nbconvert",
         "pytest",
         "pytest-cov",

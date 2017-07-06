@@ -38,10 +38,14 @@ def require(purpose, env):
         return [Dependency(name) for name in options]
 
     if purpose == 'dvlpt':
+        deps = [Dependency('mock')]
+
         test_suite = env.globals['test'].suite_name
         if test_suite == 'pytest':
-            return [Dependency('pytest')]
+            deps.append(Dependency('pytest'))
         if test_suite == 'nose':
-            return [Dependency('nose')]
+            deps.append(Dependency('nose'))
+
+        return deps
 
     return []
