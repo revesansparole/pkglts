@@ -2,6 +2,7 @@ from glob import glob
 from importlib import import_module
 from os import path
 
+from pkglts.config_management import create_env
 from pkglts.data_access import get_data_dir
 
 
@@ -33,18 +34,21 @@ def test_handlers_exists():
 
 
 def test_require_correctly_defined():
+    cfg = dict(base={}, test={'suite_name': 'pytest'})
+    env = create_env(cfg)
+
     # walk through all possible options
     option_basedir = path.join(path.dirname(get_data_dir()), 'pkglts', 'option')
     for pth in glob("{}/*/".format(option_basedir)):
         option_name = path.basename(path.dirname(pth))
         if not option_name.startswith("_"):
-            # check 'require' module exists for each option
+            # check 'require' function exists for each option
             try:
-                opt_req = import_module("pkglts.option.%s.require" % option_name)
-                assert len(getattr(opt_req, 'option')) >= 0
-                assert len(getattr(opt_req, 'setup')) >= 0
-                assert len(getattr(opt_req, 'install')) >= 0
-                assert len(getattr(opt_req, 'dvlpt')) >= 0
+                opt_cfg = import_module("pkglts.option.%s.config" % option_name)
+                assert len(opt_cfg.require('option', env)) >= 0
+                assert len(opt_cfg.require('setup', env)) >= 0
+                assert len(opt_cfg.require('install', env)) >= 0
+                assert len(opt_cfg.require('dvlpt', env)) >= 0
             except ImportError:
                 assert False
 
