@@ -1,4 +1,4 @@
-from nose.tools import assert_raises
+import pytest
 
 from pkglts.config_management import create_env
 from pkglts.manage import default_cfg
@@ -10,7 +10,8 @@ print(__file__)
 
 def test_non_existing_option_raises_warning():
     env = create_env({})
-    assert_raises(KeyError, lambda: update_opt('toto', env))
+    with pytest.raises(KeyError):
+        update_opt('toto', env)
 
 
 def test_option_fetch_parameter_list_from_config():

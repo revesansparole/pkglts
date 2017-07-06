@@ -1,5 +1,5 @@
 import mock
-from nose.tools import assert_raises
+import pytest
 
 from pkglts.option_tools import get_user_permission
 
