@@ -114,7 +114,7 @@ def install_example_files(option, env, target="."):
         target (str): target directory to write into
 
     Returns:
-        None
+        (bool): whether operation succeeded or not
     """
     if option not in installed_options(env):
         logger.warning("please install option before example files")

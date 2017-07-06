@@ -1,9 +1,9 @@
 import json
 import mock
-from nose.tools import assert_raises, with_setup
 from os import remove
 from os.path import exists
 from os.path import join as pj
+import pytest
 
 from pkglts.config import pkglts_dir, pkg_cfg_file
 from pkglts.config_management import create_env, get_pkg_config, write_pkg_config

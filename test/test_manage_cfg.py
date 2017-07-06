@@ -1,6 +1,6 @@
-from nose.tools import with_setup
 from os import listdir
 from os.path import join as pj
+import pytest
 
 from pkglts.manage import (get_pkg_config, get_pkg_hash,
                            init_pkg)
@@ -8,35 +8,31 @@ from pkglts.manage import (get_pkg_config, get_pkg_hash,
 from .small_tools import ensure_created, rmdir
 
 
-tmp_dir = 'toto_manage_cfg'
+@pytest.fixture()
+def tmp_dir():
+    pth = 'toto_manage_cfg'
+    ensure_created(pth)
+    init_pkg(pth)
+
+    yield pth
+
+    rmdir(pth)
 
 
-def setup():
-    ensure_created(tmp_dir)
-    init_pkg(tmp_dir)
-
-
-def teardown():
-    rmdir(tmp_dir)
-
-
-@with_setup(setup, teardown)
-def test_manage_init_create_pkg_config():
+def test_manage_init_create_pkg_config(tmp_dir):
     # init_pkg(tmp_dir)
     env = get_pkg_config(tmp_dir)
     assert env is not None
     assert "_pkglts" in env.globals
 
 
-@with_setup(setup, teardown)
-def test_manage_init_create_pkg_hash():
+def test_manage_init_create_pkg_hash(tmp_dir):
     init_pkg(tmp_dir)
     hm = get_pkg_hash(tmp_dir)
     assert hm is not None
 
 
-@with_setup(setup, teardown)
-def test_manage_init_protect_pkglts_dir_from_modif():
+def test_manage_init_protect_pkglts_dir_from_modif(tmp_dir):
     assert "regenerate.no" in listdir(pj(tmp_dir, ".pkglts"))
     assert "clean.no" in listdir(pj(tmp_dir, ".pkglts"))
 
