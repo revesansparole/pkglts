@@ -1,7 +1,9 @@
 test
 ====
 
-Simple testing facilities making extensive use of test frameworks to run tests. By default pytest_ is selected but this can be customized in the option of the 'test' section of the configuration file attached to the project.
+Simple testing facilities making extensive use of test frameworks to run tests.
+By default pytest_ is selected but this can be customized in the option of the
+'test' section of the configuration file attached to the project.
 
 For the moment only two frameworks are supported: pytest_ and nose_.
 
@@ -33,7 +35,7 @@ if you haven't done it yet)::
     (dvlpt)$ pmg regenerate
     (dvlpt)$ pmg example test
 
-    (dvlpt)$ nosetests
+    (dvlpt)$ pytest
 
 .. image:: test_nosetests_result.png
 

@@ -26,6 +26,7 @@ Quick tutorial
 
 Follow these steps for a quick setup::
 
+    (dvlpt)$ pmg init
     (dvlpt)$ pmg add base
 
 Edit your package config file ('pkg_cfg.json' in ".pkglts" directory at the root
@@ -38,11 +39,19 @@ of your package) using your favorite json editor (a normal text editor will do).
             "auto_install": true,
             "install_front_end": "stdout",
             "use_prompts": false
+            "version": 6
         },
         "base": {
+            "authors": [
+              [
+                "moi",
+                "moi@email.com"
+              ]
+            ],
             "namespace": null,
-            "owner": "moi",
-            "pkgname": "name"
+            "namespace_method": "pkg_util",
+            "pkgname": "name",
+            "url": null
         }
     }
 
@@ -54,9 +63,16 @@ in which you started to code).
 .. code-block:: javascript
 
     "base": {
+        "authors": [
+          [
+            "revesansparole",
+            "revesansparole@gmail.com"
+          ]
+        ],
         "namespace": null,
-        "owner": "revesansparole",
+        "namespace_method": "pkg_util",
         "pkgname": "mypkg"
+        "url": null
     }
 
 Then::
