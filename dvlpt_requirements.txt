@@ -1,13 +1,11 @@
 # {# pkglts, pysetup
 coverage
+coveralls
 flake8
-mock
 nbconvert
-nose
 pytest
 pytest-cov
 sphinx
-coveralls
 tox
 twine
 
