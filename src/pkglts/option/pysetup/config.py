@@ -23,8 +23,8 @@ def check(env):
 
     require = env.globals['pysetup'].require
 
-    valid_methods = ("none", "pip", "conda", "git")
-    if any(dep.get('pkg_mng', 'none') not in valid_methods for dep in require):
+    valid_methods = (None, "pip", "conda", "git")
+    if any(dep.get('pkg_mng') not in valid_methods for dep in require):
         invalids.append("require")
 
     return invalids

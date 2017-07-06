@@ -12,7 +12,7 @@ def test_config_check_intended_version_exists():
     assert 'require' not in check(env)
 
     env = create_env(dict(pysetup={'intended_versions': ["27"],
-                                   'require': [('walou', 'numpy')]}))
+                                   'require': [{'pkg_mng': 'walou', 'name': 'numpy'}]}))
     assert 'require' in check(env)
 
 
