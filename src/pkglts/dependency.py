@@ -8,4 +8,4 @@ class Dependency(object):
         self.channel = channel  # place to find the dependency depends on package_manager
 
     def __str__(self):
-        return self.name
+        return "dep: {}".format(self.name)
