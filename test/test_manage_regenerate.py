@@ -1,9 +1,9 @@
 import json
 import mock
-from nose.tools import assert_raises, with_setup
 from os import remove
 from os.path import exists
 from os.path import join as pj
+import pytest
 
 from pkglts.config import pkglts_dir, pkg_cfg_file
 from pkglts.config_management import create_env, get_pkg_config, write_pkg_config
@@ -12,11 +12,7 @@ from pkglts.manage import (init_pkg, regenerate_package)
 from .small_tools import ensure_created, rmdir
 
 
-tmp_dir = 'toto_mg_rg'
-init_file = pj(tmp_dir, "src", "toto", "__init__.py")
-
-
-def addendum():
+def addendum(init_file):
     """ modify init_file in first pkglts div
     """
     with open(init_file, 'r') as f:
@@ -28,25 +24,29 @@ def addendum():
         f.write("\n".join(lines))
 
 
-def setup():
-    ensure_created(tmp_dir)
-    init_pkg(tmp_dir)
-    with open(pj(tmp_dir, pkglts_dir, pkg_cfg_file), 'r') as f:
+@pytest.fixture()
+def tmp_pths():
+    pth = 'toto_mg_rg'
+    ensure_created(pth)
+    init_pkg(pth)
+    with open(pj(pth, pkglts_dir, pkg_cfg_file), 'r') as f:
         cfg = json.load(f)
 
     cfg['base'] = dict(pkgname='toto', namespace=None,
                        authors=[('moi', 'moi@email.com')], url=None)
     env = create_env(cfg)
-    write_pkg_config(env, tmp_dir)
-    regenerate_package(env, tmp_dir)
+    write_pkg_config(env, pth)
+    regenerate_package(env, pth)
+
+    init_file = pj(pth, "src", "toto", "__init__.py")
+
+    yield pth, init_file
+
+    rmdir(pth)
 
 
-def teardown():
-    rmdir(tmp_dir)
-
-
-@with_setup(setup, teardown)
-def test_regenerate_pass():
+def test_regenerate_pass(tmp_pths):
+    tmp_dir, init_file = tmp_pths
     with open(pj(tmp_dir, pkglts_dir, pkg_cfg_file), 'r') as f:
         cfg = json.load(f)
 
@@ -57,8 +57,8 @@ def test_regenerate_pass():
     assert exists(init_file)
 
 
-@with_setup(setup, teardown)
-def test_regenerate_check_pkg_cfg_validity():
+def test_regenerate_check_pkg_cfg_validity(tmp_pths):
+    tmp_dir, init_file = tmp_pths
     with open(pj(tmp_dir, pkglts_dir, pkg_cfg_file), 'r') as f:
         cfg = json.load(f)
 
@@ -68,8 +68,8 @@ def test_regenerate_check_pkg_cfg_validity():
     assert not regenerate_package(env, tmp_dir)
 
 
-@with_setup(setup, teardown)
-def test_regenerate_handle_conflicts_keep():
+def test_regenerate_handle_conflicts_keep(tmp_pths):
+    tmp_dir, init_file = tmp_pths
     env = get_pkg_config(tmp_dir)
 
     with open(init_file, 'w') as f:
@@ -83,11 +83,11 @@ def test_regenerate_handle_conflicts_keep():
         assert f.read() == "modified"
 
 
-@with_setup(setup, teardown)
-def test_regenerate_handle_conflicts_overwrite():
+def test_regenerate_handle_conflicts_overwrite(tmp_pths):
+    tmp_dir, init_file = tmp_pths
     env = get_pkg_config(tmp_dir)
 
-    addendum()
+    addendum(init_file)
 
     with mock.patch('pkglts.manage.get_user_permission',
                     return_value=True):
@@ -98,11 +98,11 @@ def test_regenerate_handle_conflicts_overwrite():
         assert "modified" not in txt
 
 
-@with_setup(setup, teardown)
-def test_regenerate_handle_global_overwrite():
+def test_regenerate_handle_global_overwrite(tmp_pths):
+    tmp_dir, init_file = tmp_pths
     env = get_pkg_config(tmp_dir)
 
-    addendum()
+    addendum(init_file)
 
     regenerate_package(env, tmp_dir, overwrite=True)
 
@@ -111,8 +111,8 @@ def test_regenerate_handle_global_overwrite():
         assert "modified" not in txt
 
 
-@with_setup(setup, teardown)
-def test_regenerate_new_files_do_not_generate_conflicts():
+def test_regenerate_new_files_do_not_generate_conflicts(tmp_pths):
+    tmp_dir, init_file = tmp_pths
     env = get_pkg_config(tmp_dir)
 
     new_pth = pj(tmp_dir, "src", "toto", "new_file.py")
@@ -127,8 +127,8 @@ def test_regenerate_new_files_do_not_generate_conflicts():
         assert txt == "txt = 'addendum'"
 
 
-@with_setup(setup, teardown)
-def test_regenerate_remove_user_files_do_not_generate_conflicts():
+def test_regenerate_remove_user_files_do_not_generate_conflicts(tmp_pths):
+    tmp_dir, init_file = tmp_pths
     env = get_pkg_config(tmp_dir)
 
     new_pth = pj(tmp_dir, "src", "toto", "new_file.py")
@@ -143,11 +143,12 @@ def test_regenerate_remove_user_files_do_not_generate_conflicts():
     assert not exists(new_pth)
 
 
-@with_setup(setup, teardown)
-def test_regenerate_fail_if_permanent_section_ids_have_been_modified():
+def test_regenerate_fail_if_permanent_section_ids_have_been_modified(tmp_pths):
+    tmp_dir, init_file = tmp_pths
     env = get_pkg_config(tmp_dir)
 
     with open(init_file, 'a') as f:
         f.write("\n# {# pkglts, test\na = 1\n# #}\n")
 
-    assert_raises(KeyError, lambda: regenerate_package(env, tmp_dir, overwrite=True))
+    with pytest.raises(KeyError):
+        regenerate_package(env, tmp_dir, overwrite=True)

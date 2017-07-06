@@ -36,23 +36,23 @@ install:
   - conda create -q -n myenv python=$TRAVIS_PYTHON_VERSION
   - source activate myenv
 
-{% for repo, name in pysetup.requirements('install') %}
-  {%- if repo == 'conda' or repo == 'none' %}
-  - conda install {{ name }}
-  {%- elif repo == 'pip' %}
-  - pip install {{ name }}
-  {%- elif repo == 'git' %}
-  - pip install git+https://github.com/{{ name }}
+{% for dep in pysetup.requirements('install') %}
+  {%- if dep.package_manager == 'conda' or dep.package_manager is none %}
+  - conda install {{ dep.name }}
+  {%- elif dep.package_manager == 'pip' %}
+  - pip install {{ dep.name }}
+  {%- elif dep.package_manager == 'git' %}
+  - pip install git+https://github.com/{{ dep.name }}
   {%- endif %}
 {%- endfor %}
 
-{%- for repo, name in pysetup.requirements('dvlpt') %}
-  {%- if repo == 'conda' or repo == 'none' %}
-  - conda install {{ name }}
-  {%- elif repo == 'pip' %}
-  - pip install {{ name }}
-  {%- elif repo == 'git' %}
-  - pip install git+https://github.com/{{ name }}
+{%- for dep in pysetup.requirements('dvlpt') %}
+  {%- if dep.package_manager == 'conda' or dep.package_manager is none %}
+  - conda install {{ dep.name }}
+  {%- elif dep.package_manager == 'pip' %}
+  - pip install {{ dep.name }}
+  {%- elif dep.package_manager == 'git' %}
+  - pip install git+https://github.com/{{ dep.name }}
   {%- endif %}
 {%- endfor %}
 

@@ -1,6 +1,6 @@
-from nose.tools import with_setup
 from os.path import join as pj
 from os.path import exists
+import pytest
 from random import random
 
 from pkglts.config_management import create_env, default_cfg
@@ -10,21 +10,20 @@ from pkglts.manage_tools import regenerate_dir
 from .small_tools import ensure_created, ensure_path, rmdir
 
 
-tmp_dir = "takapouet"
+@pytest.fixture()
+def tmp_dir():
+    pth = "takapouet"
+
+    ensure_created(pth)
+    ensure_created(pj(pth, "src"))
+    ensure_created(pj(pth, "tgt"))
+
+    yield pth
+
+    rmdir(pth)
 
 
-def setup():
-    ensure_created(tmp_dir)
-    ensure_created(pj(tmp_dir, "src"))
-    ensure_created(pj(tmp_dir, "tgt"))
-
-
-def teardown():
-    rmdir(tmp_dir)
-
-
-@with_setup(setup, teardown)
-def test_regenerate_dir_walk_all_files_in_src_dir():
+def test_regenerate_dir_walk_all_files_in_src_dir(tmp_dir):
     ensure_created(pj(tmp_dir, "src", "sub"))
     fnames = ('toto.txt', 'titi.txt', 'sub/toto.txt')
     for fname in fnames:
@@ -39,8 +38,7 @@ def test_regenerate_dir_walk_all_files_in_src_dir():
         assert exists(pj(tmp_dir, 'tgt', fname))
 
 
-@with_setup(setup, teardown)
-def test_regenerate_dir_render_file_content():
+def test_regenerate_dir_render_file_content(tmp_dir):
     pth = pj(tmp_dir, "src", "test.txt")
     with open(pth, 'w') as f:
         f.write("{{ 'lorem ipsum'|upper }}")
@@ -54,8 +52,7 @@ def test_regenerate_dir_render_file_content():
         assert cnt == 'LOREM IPSUM'
 
 
-@with_setup(setup, teardown)
-def test_regenerate_dir_render_path_names():
+def test_regenerate_dir_render_path_names(tmp_dir):
     ensure_created(pj(tmp_dir, "src", "{{ custom_name }}"))
     fnames = ('{{ custom_name }}.txt', 'titi.txt',
               '{{ custom_name }}/{{ custom_name }}.txt')
@@ -73,8 +70,7 @@ def test_regenerate_dir_render_path_names():
         assert exists(pj(tmp_dir, 'tgt', fname))
 
 
-@with_setup(setup, teardown)
-def test_regenerate_handle_src_directory_no_namespace():
+def test_regenerate_handle_src_directory_no_namespace(tmp_dir):
     pth = pj(tmp_dir, "src", "src", "{{ base.pkgname }}", "test.txt")
     ensure_path(pth)
     with open(pth, 'w') as f:
@@ -89,8 +85,7 @@ def test_regenerate_handle_src_directory_no_namespace():
     assert exists(tgt)
 
 
-@with_setup(setup, teardown)
-def test_regenerate_handle_src_directory_with_namespace():
+def test_regenerate_handle_src_directory_with_namespace(tmp_dir):
     pth = pj(tmp_dir, "src", "src", "{{ base.pkgname }}", "test.txt")
     ensure_path(pth)
     with open(pth, 'w') as f:
@@ -109,8 +104,7 @@ def test_regenerate_handle_src_directory_with_namespace():
     assert exists(tgt_dir + "/src/myns/toto/test.txt")
 
 
-@with_setup(setup, teardown)
-def test_regenerate_do_overwrite_unprotected_files():
+def test_regenerate_do_overwrite_unprotected_files(tmp_dir):
     pth = pj(tmp_dir, "src", "test.txt")
     with open(pth, 'w') as f:
         f.write("{# pkglts, b0\n{{ random() }}\n#}")
@@ -132,8 +126,7 @@ def test_regenerate_do_overwrite_unprotected_files():
     assert cnt0 != cnt1
 
 
-@with_setup(setup, teardown)
-def test_regenerate_do_not_overwrite_protected_files():
+def test_regenerate_do_not_overwrite_protected_files(tmp_dir):
     pth = pj(tmp_dir, "src", "test.txt")
     with open(pth, 'w') as f:
         f.write("{# pkglts, b0\n{{ random() }}\n#}")
@@ -156,8 +149,7 @@ def test_regenerate_do_not_overwrite_protected_files():
     assert cnt0 == cnt1
 
 
-@with_setup(setup, teardown)
-def test_regenerate_do_not_overwrite_outside_protected_blocks():
+def test_regenerate_do_not_overwrite_outside_protected_blocks(tmp_dir):
     pth = pj(tmp_dir, "src", "test.txt")
     with open(pth, 'w') as f:
         f.write("{# pkglts, b0\nLOREM IPSUM\n#}")

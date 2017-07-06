@@ -1,3 +1,4 @@
+from pkglts.dependency import Dependency
 
 parameters = [
     ("theme", 'default'),
@@ -20,3 +21,25 @@ def check(env):
         invalids.append('theme')
 
     return invalids
+
+
+def require(purpose, env):
+    """List of requirements for this option for a given purpose.
+
+    Args:
+        purpose (str): either 'option', 'setup', 'install' or 'dvlpt'
+        env (jinja2.Environment):  current working environment
+
+    Returns:
+        (list of Dependency)
+    """
+    del env
+
+    if purpose == 'option':
+        options = ['test', 'doc']
+        return [Dependency(name) for name in options]
+
+    if purpose == 'dvlpt':
+        return [Dependency('sphinx')]
+
+    return []

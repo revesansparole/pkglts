@@ -3,7 +3,7 @@
 # edit .pkglts/pkg_cfg instead
 # section pysetup
 
-{% for repo, name in pysetup.requirements('install') -%}
-{% if repo != 'pip' and repo != 'none' %}# {% endif %}{{ name }}
+{% for dep in pysetup.requirements('install') -%}
+{% if dep.package_manager != 'pip' and dep.package_manager is not none %}# {% endif %}{{ dep.name }}
 {% endfor %}
 # #}

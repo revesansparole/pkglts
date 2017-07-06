@@ -5,13 +5,14 @@ import logging
 from os.path import join as pj
 
 from .config import pkglts_dir, pkg_cfg_file
+from .dependency import Dependency
 
 try:
     string_type = basestring
 except NameError:
     string_type = str
 
-current_pkg_cfg_version = 5
+current_pkg_cfg_version = 6
 
 logger = logging.getLogger(__name__)
 
@@ -216,6 +217,17 @@ def upgrade_pkg_cfg_version(pkg_cfg, version):
         if 'base' in pkg_cfg:
             section = pkg_cfg['base']
             section['namespace_method'] = section.get('namespace_method', "pkg_util")
+    elif version == 5:
+        pkg_cfg['_pkglts']['version'] = 6
+        if 'pysetup' in pkg_cfg:
+            section = pkg_cfg['pysetup']
+            deps = []
+            for pkg_mng, name in section.get('require', []):
+                if pkg_mng == 'none':
+                    deps.append(dict(name=name))
+                else:
+                    deps.append(dict(name=name, pkg_mng=pkg_mng))
+            section['require'] = deps
 
     return pkg_cfg
 

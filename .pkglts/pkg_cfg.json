@@ -3,7 +3,7 @@
     "auto_install": true,
     "install_front_end": "stdout",
     "use_prompts": false,
-    "version": 5
+    "version": 6
   },
   "base": {
     "authors": [
@@ -58,7 +58,11 @@
       "35",
       "36"
     ],
-    "require": []
+    "require": [
+      {
+        "name": "jinja2"
+      }
+    ]
   },
   "readthedocs": {
     "project": "{{ github.project }}"

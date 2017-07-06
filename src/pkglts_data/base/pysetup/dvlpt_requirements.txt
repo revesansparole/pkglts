@@ -1,5 +1,5 @@
 # {# pkglts, pysetup
-{% for repo, name in pysetup.requirements('dvlpt') -%}
-{% if repo != 'pip' and repo != 'none' %}# {% endif %}{{ name }}
+{% for dep in pysetup.requirements('dvlpt') -%}
+{% if dep.package_manager != 'pip' and dep.package_manager is not none %}# {% endif %}{{ dep.name }}
 {% endfor %}
 # #}

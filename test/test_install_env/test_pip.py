@@ -1,4 +1,4 @@
-from nose.tools import with_setup
+import pytest
 
 from pkglts.install_env.pip_front_end import install, installed_packages
 
@@ -6,15 +6,16 @@ from .venv_tools import clear_venv, create_venv
 
 __test__ = False
 
-venv = "tyti_pip"
-mem = {}
 
+@pytest.fixture()
+def venv():
+    name = "tyti_pip"
+    mem = {}
 
-def setup_func():
     create_venv(venv, mem)
 
+    yield name
 
-def teardown_func():
     clear_venv(venv, mem)
 
 
@@ -23,8 +24,7 @@ def test_installed_packages():
     assert "wheel" in pkgs
 
 
-@with_setup(setup_func, teardown_func)
-def test_install():
+def test_install(venv):
     # create virtualenv
     assert "my-first-p" not in installed_packages()
 

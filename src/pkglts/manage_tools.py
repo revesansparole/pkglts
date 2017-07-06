@@ -37,8 +37,8 @@ def ensure_installed_packages(requirements, msg, env):
         (bool): whether all required packages are installed or not
     """
     ife_name = env.globals["_pkglts"].install_front_end
-    req = [name for repo, name in requirements
-           if repo is None or repo == ife_name]
+    req = [dep.name for dep in requirements
+           if dep.package_manager is None or dep.package_manager == ife_name]
     ife = get_install_front_end(ife_name)
     to_install = set(req) - set(ife.installed_packages())
     if len(to_install) > 0:
@@ -84,13 +84,13 @@ def update_opt(name, env):
 
     # test existence of option
     try:
-        opt_require = import_module("pkglts.option.%s.require" % name)
         opt_cfg = import_module("pkglts.option.%s.config" % name)
     except ImportError:
         raise KeyError("option '%s' does not exists" % name)
 
     # find other option requirements in repository
-    for option_name in opt_require.option:
+    for dep in opt_cfg.require('option', env):
+        option_name = dep.name
         if option_name not in installed_options(env):
             print("need to install option '%s' first" % option_name)
             if (env.globals["_pkglts"].auto_install or
@@ -101,7 +101,7 @@ def update_opt(name, env):
 
     # find extra package requirements for setup
     msg = "this option requires some packages to setup"
-    if not ensure_installed_packages(opt_require.setup, msg, env):
+    if not ensure_installed_packages(opt_cfg.require('setup', env), msg, env):
         print("option installation stopped")
         return env
 
@@ -126,7 +126,7 @@ def update_opt(name, env):
 
     # find extra package requirements for dvlpt
     msg = "this option requires additional packages for developers"
-    ensure_installed_packages(opt_require.dvlpt, msg, env)
+    ensure_installed_packages(opt_cfg.require('dvlpt', env), msg, env)
 
     return env
 

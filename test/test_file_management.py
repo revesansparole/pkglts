@@ -1,20 +1,20 @@
-from nose.tools import with_setup
 from os import remove
 from os.path import exists
+import pytest
 
 from pkglts.file_management import write_file
 
 
-ex_file = 'toto.txt'
+@pytest.fixture()
+def tmp_pth():
+    pth = 'toto.txt'
+
+    yield pth
+
+    if exists(pth):
+        remove(pth)
 
 
-def teardown():
-    if exists(ex_file):
-        remove(ex_file)
-
-
-@with_setup(teardown=teardown)
-def test_write_file():
-    write_file(ex_file, "lorem ipsum")
-    assert exists(ex_file)
-
+def test_write_file(tmp_pth):
+    write_file(tmp_pth, "lorem ipsum")
+    assert exists(tmp_pth)

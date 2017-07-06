@@ -3,5 +3,6 @@
 # edit .pkglts/pkg_cfg instead
 # section pysetup
 
+jinja2
 
 # #}

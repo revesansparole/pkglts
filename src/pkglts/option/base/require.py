@@ -1,4 +1,0 @@
-option = []
-setup = []
-install = []
-dvlpt = []

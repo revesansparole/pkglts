@@ -1,4 +1,4 @@
-from nose.tools import assert_raises
+import pytest
 
 from pkglts.install_env.load_front_end import get_install_front_end
 
@@ -14,4 +14,5 @@ def test_load_pip_exists():
 
 
 def test_load_raise_import_error_if_not_available_name():
-    assert_raises(ImportError, lambda: get_install_front_end("takapouet"))
+    with pytest.raises(ImportError):
+        get_install_front_end("takapouet")

@@ -1,4 +1,4 @@
-from nose.tools import assert_raises
+import pytest
 
 from pkglts.config_management import pkg_env
 
@@ -17,4 +17,5 @@ def test_generate_raise_error_if_license_do_not_exists():
                year="2015",
                organization="org",
                project="project")
-    assert_raises(IOError, lambda: pkg_env(dict(license=cfg)))
+    with pytest.raises(IOError):
+        pkg_env(dict(license=cfg))

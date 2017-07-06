@@ -1,6 +1,7 @@
 from importlib import import_module
 
 from pkglts.config_management import installed_options
+from pkglts.dependency import Dependency
 
 
 def requirements(env, requirement_name):
@@ -13,15 +14,16 @@ def requirements(env, requirement_name):
     Returns:
         (list of str): list of required packages names
     """
-    reqs = set()
+    reqs = {}
     for name in installed_options(env):
         try:
-            opt_req = import_module("pkglts.option.%s.require" % name)
-            reqs.update(getattr(opt_req, requirement_name))
+            opt_cfg = import_module("pkglts.option.%s.config" % name)
+            for dep in opt_cfg.require(requirement_name, env):
+                reqs[dep.name] = dep
         except ImportError:
             raise KeyError("option '%s' does not exists" % name)
 
-    return sorted(reqs)
+    return [reqs[name] for name in sorted(reqs)]
 
 
 def pkg_url(env):
@@ -66,8 +68,8 @@ def environment_extensions(env):
         dict of str: any
     """
     req_install = requirements(env, 'install')
-    for tup in env.globals['pysetup'].require:
-        req_install.append(tup)
+    for dep in env.globals['pysetup'].require:
+        req_install.append(Dependency(**dep))
 
     req_dvlpt = requirements(env, 'dvlpt')
 
