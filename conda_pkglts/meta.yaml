@@ -1,9 +1,15 @@
 package:
   name: pkglts
-  version: "1.0.0"
+  version: "1.2.1"
 
 source:
-  git_url: ../
+  path: ../
+
+build:
+  number: 0
+  entry_points:
+    - pmg = pkglts.manage_script:main
+  script: python setup.py install --single-version-externally-managed --record record.txt
 
 requirements:
   build:
@@ -12,6 +18,14 @@ requirements:
 
   run:
     - python
+    - jinja2
+
+test:
+  imports:
+    - pkglts
+
+  commands:
+    - pmg --help
 
 about:
   summary: "Building packages with long term support"
