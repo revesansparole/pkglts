@@ -7,8 +7,11 @@ from pkglts.config_management import (create_env, current_pkg_cfg_version,
                                       default_cfg, get_pkg_config,
                                       installed_options, pkg_env,
                                       write_pkg_config)
+from pkglts.option_tools import find_available_options
 
 from .small_tools import ensure_created, rmdir
+
+find_available_options()
 
 
 @pytest.fixture()

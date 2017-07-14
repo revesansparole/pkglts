@@ -8,8 +8,11 @@ import pytest
 from pkglts.config import pkglts_dir, pkg_cfg_file
 from pkglts.config_management import create_env, get_pkg_config, write_pkg_config
 from pkglts.manage import (init_pkg, regenerate_package)
+from pkglts.option_tools import find_available_options
 
 from .small_tools import ensure_created, rmdir
+
+find_available_options()
 
 
 def addendum(init_file):
@@ -33,7 +36,9 @@ def tmp_pths():
         cfg = json.load(f)
 
     cfg['base'] = dict(pkgname='toto', namespace=None,
-                       authors=[('moi', 'moi@email.com')], url=None)
+                       authors=[('moi', 'moi@email.com')],
+                       namespace_method="pkg_util",
+                       url=None)
     env = create_env(cfg)
     write_pkg_config(env, pth)
     regenerate_package(env, pth)
@@ -51,7 +56,9 @@ def test_regenerate_pass(tmp_pths):
         cfg = json.load(f)
 
     cfg['base'] = dict(pkgname='toto', namespace=None,
-                       authors=[('moi', 'moi@email.com')], url=None)
+                       authors=[('moi', 'moi@email.com')],
+                       namespace_method="pkg_util",
+                       url=None)
     env = create_env(cfg)
     regenerate_package(env, tmp_dir)
     assert exists(init_file)
@@ -63,7 +70,9 @@ def test_regenerate_check_pkg_cfg_validity(tmp_pths):
         cfg = json.load(f)
 
     cfg['base'] = dict(pkgname='1toto', namespace=None,
-                       authors=[('moi', 'moi@email.com')], url=None)
+                       authors=[('moi', 'moi@email.com')],
+                       namespace_method="pkg_util",
+                       url=None)
     env = create_env(cfg)
     assert not regenerate_package(env, tmp_dir)
 
