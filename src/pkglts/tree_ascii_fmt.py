@@ -4,11 +4,11 @@ from os import listdir
 from os.path import isdir
 from os.path import join as pj
 
-from pkglts.config_management import create_env
+from pkglts.config_management import Config
 
 
-def nn(env, pth):
-    tgt_name = env.from_string(pth).render()
+def nn(cfg, pth):
+    tgt_name = cfg.render(pth)
     if tgt_name.endswith(".tpl"):
         tgt_name = tgt_name[:-4]
 
@@ -21,7 +21,7 @@ def tree(dname, padding, txt):
                          "pkgname": "pkgname",
                          "url": None})
 
-    env = create_env(pkg_cfg)
+    cfg = Config(pkg_cfg)
 
     files = [(isdir(pj(dname, fname)), fname) for fname in listdir(dname)]
     files.sort()
@@ -30,7 +30,7 @@ def tree(dname, padding, txt):
     for is_dir, fname in files:
         count += 1
         txt += padding + '|\n'
-        fmt_name = nn(env, fname)
+        fmt_name = nn(cfg, fname)
         txt += padding + '+-' + fmt_name
         path = pj(dname, fname)
         if is_dir:

@@ -1,8 +1,7 @@
 from argparse import ArgumentParser, RawTextHelpFormatter
 import logging
 
-from .config_management import (get_pkg_config, installed_options,
-                                write_pkg_config)
+from .config_management import (get_pkg_config, write_pkg_config)
 from .manage import (clean, init_pkg, install_example_files,
                      regenerate_package, regenerate_option, add_option)
 from .option_tools import find_available_options
@@ -20,12 +19,12 @@ def action_info(*args, **kwds):
     print(available_options)
     base = available_options['base']
     from pkglts.config_management import get_pkg_config
-    env = get_pkg_config()
+    cfg = get_pkg_config()
     print(base.parameters)
-    print(tuple(env.globals['base'].items()))
-    print(base.check(env))
-    print(base.require('option', env))
-    print(base.environment_extensions(env))
+    print(tuple(cfg['base'].items()))
+    print(base.check(cfg))
+    print(base.require('option', cfg))
+    print(base.environment_extensions(cfg))
 
 
 def action_clean(*args, **kwds):
@@ -68,16 +67,16 @@ def action_regenerate(*args, **kwds):
     """
     overwrite = 'overwrite' in kwds
 
-    env = get_pkg_config()
+    cfg = get_pkg_config()
     clean()
 
     if len(args) == 0:
         logger.info("regenerate package")
-        regenerate_package(env, overwrite=overwrite)
+        regenerate_package(cfg, overwrite=overwrite)
     else:
         for name in args:
             logger.info("regenerate '%s'" % name)
-            regenerate_option(env, name, overwrite=overwrite)
+            regenerate_option(cfg, name, overwrite=overwrite)
 
 
 def action_add(*args, **kwds):
@@ -88,11 +87,11 @@ def action_add(*args, **kwds):
         raise UserWarning("need to specify at least one option name")
 
     logger.info("add option")
-    env = get_pkg_config()
+    cfg = get_pkg_config()
     for name in args:
-        env = add_option(name, env)
+        cfg = add_option(name, cfg)
 
-    write_pkg_config(env)
+    write_pkg_config(cfg)
 
 
 def action_remove(*args, **kwds):
@@ -114,9 +113,9 @@ def action_example(*args, **kwds):
         raise UserWarning("need to specify at least one option name")
 
     logger.info("install examples")
-    env = get_pkg_config()
+    cfg = get_pkg_config()
     for name in args:
-        install_example_files(name, env)
+        install_example_files(name, cfg)
 
 
 action = dict(

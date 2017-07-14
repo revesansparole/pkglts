@@ -2,14 +2,14 @@ from pkglts.local import pkg_full_name
 from pkglts.option.doc import fmt_badge
 
 
-def auto_classifiers(env):
-    items = set(env.globals['pypi'].classifiers)
+def auto_classifiers(cfg):
+    items = set(cfg['pypi']['classifiers'])
 
     # add license item
     # TODO
 
     # add intended versions items
-    intended_versions = env.globals['pysetup'].intended_versions
+    intended_versions = cfg['pysetup']['intended_versions']
     if len(intended_versions) > 0:
         items.add("Programming Language :: Python")
 
@@ -30,18 +30,18 @@ def auto_classifiers(env):
     return sorted(items)
 
 
-def environment_extensions(env):
+def environment_extensions(cfg):
     """Add more functionality to an environment.
 
     Args:
-        env (jinja2.Environment):
+        cfg (Config):  current package configuration
 
     Returns:
         dict of str: any
     """
-    url = "badge.fury.io/py/%s" % pkg_full_name(env)
+    url = "badge.fury.io/py/%s" % pkg_full_name(cfg)
     img = url + ".svg"
     badge = fmt_badge(img, url, "PyPI version")
 
     return {"badge": badge,
-            "auto_classifiers": auto_classifiers(env)}
+            "auto_classifiers": auto_classifiers(cfg)}

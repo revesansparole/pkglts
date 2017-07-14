@@ -46,11 +46,11 @@ def find_notebook_file(root_directory):
     return matches
 
 
-def main(env, target=".", overwrite=False):
+def main(cfg, target=".", overwrite=False):
     """Main function called to walk the package
 
     Args:
-        env: (dict of (str, dict)) package configuration parameters
+        cfg (Config):  current package configuration
         target (str): place to write plugin def into
         overwrite (bool): whether or not to overwrite previous definition
                           files. Default to False.
@@ -58,7 +58,7 @@ def main(env, target=".", overwrite=False):
     del target
     del overwrite
 
-    src_directory = env.globals["notebook"].src_directory
+    src_directory = cfg["notebook"]['src_directory']
     len_src_directory = len(src_directory)
 
     nb_filenames = find_notebook_file(src_directory)

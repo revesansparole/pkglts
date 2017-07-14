@@ -3,12 +3,12 @@ from pkglts.dependency import Dependency
 parameters = []
 
 
-def require(purpose, env):
+def require(purpose, cfg):
     """List of requirements for this option for a given purpose.
 
     Args:
         purpose (str): either 'option', 'setup', 'install' or 'dvlpt'
-        env (jinja2.Environment):  current working environment
+        cfg (Config):  current package configuration
 
     Returns:
         (list of Dependency)
@@ -19,7 +19,7 @@ def require(purpose, env):
 
     if purpose == 'dvlpt':
         deps = [Dependency('coverage')]
-        test_suite = env.globals['test'].suite_name
+        test_suite = cfg['test']['suite_name']
         if test_suite == 'pytest':
             deps.append(Dependency('pytest-cov'))
 

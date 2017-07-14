@@ -1,17 +1,17 @@
 from pkglts.option.doc import fmt_badge
 
 
-def environment_extensions(env):
+def environment_extensions(cfg):
     """Add more functionality to an environment.
 
     Args:
-        env (jinja2.Environment):
+        cfg (Config):  current package configuration
 
     Returns:
         dict of str: any
     """
-    owner = env.globals['github'].owner
-    project = env.globals['github'].project
+    owner = cfg['github']['owner']
+    project = cfg['github']['project']
 
     url = "travis-ci.org/%s/%s" % (owner, project)
     img = url + ".svg?branch=master"

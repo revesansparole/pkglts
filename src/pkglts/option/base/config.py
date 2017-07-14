@@ -22,18 +22,18 @@ def is_valid_identifier(name):
         return False
 
 
-def check(env):
+def check(cfg):
     """Check the validity of parameters in working environment.
 
     Args:
-        env (jinja2.Environment):  current working environment
+        cfg (Config):  current package configuration
 
     Returns:
         (list of str): list of faulty parameters
     """
     invalids = []
-    pkgname = env.globals['base'].pkgname
-    namespace = env.globals['base'].namespace
+    pkgname = cfg['base']['pkgname']
+    namespace = cfg['base']['namespace']
 
     if "." in pkgname:
         invalids.append('pkgname')
@@ -46,7 +46,7 @@ def check(env):
         elif not is_valid_identifier(namespace):
             invalids.append('namespace')
 
-    if env.globals['base'].namespace_method not in ("pkg_util", "setuptools", "P3.3>"):
+    if cfg['base']['namespace_method'] not in ("pkg_util", "setuptools", "P3.3>"):
         invalids.append("namespace_method")
 
     return invalids
@@ -57,16 +57,16 @@ def after(pkg_cfg):
     print("base: after main config")
 
 
-def require(purpose, env):
+def require(purpose, cfg):
     """List of requirements for this option for a given purpose.
 
     Args:
         purpose (str): either 'option', 'setup', 'install' or 'dvlpt'
-        env (jinja2.Environment):  current working environment
+        cfg (Config):  current package configuration
 
     Returns:
         (list of Dependency)
     """
-    del env, purpose
+    del cfg, purpose
 
     return []

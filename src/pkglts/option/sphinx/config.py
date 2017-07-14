@@ -6,34 +6,34 @@ parameters = [
 ]
 
 
-def check(env):
+def check(cfg):
     """Check the validity of parameters in working environment.
 
     Args:
-        env (jinja2.Environment):  current working environment
+        cfg (Config):  current package configuration
 
     Returns:
         (list of str): list of faulty parameters
     """
     invalids = []
-    theme = env.globals['sphinx'].theme
+    theme = cfg['sphinx']['theme']
     if theme != str(theme):
         invalids.append('theme')
 
     return invalids
 
 
-def require(purpose, env):
+def require(purpose, cfg):
     """List of requirements for this option for a given purpose.
 
     Args:
         purpose (str): either 'option', 'setup', 'install' or 'dvlpt'
-        env (jinja2.Environment):  current working environment
+        cfg (Config):  current package configuration
 
     Returns:
         (list of Dependency)
     """
-    del env
+    del cfg
 
     if purpose == 'option':
         options = ['test', 'doc']

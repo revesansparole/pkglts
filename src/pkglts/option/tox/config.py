@@ -3,17 +3,17 @@ from pkglts.dependency import Dependency
 parameters = []
 
 
-def require(purpose, env):
+def require(purpose, cfg):
     """List of requirements for this option for a given purpose.
 
     Args:
         purpose (str): either 'option', 'setup', 'install' or 'dvlpt'
-        env (jinja2.Environment):  current working environment
+        cfg (Config):  current package configuration
 
     Returns:
         (list of Dependency)
     """
-    del env
+    del cfg
 
     if purpose == 'option':
         options = ['pysetup']

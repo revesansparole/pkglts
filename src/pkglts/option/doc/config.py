@@ -6,17 +6,17 @@ parameters = [
 ]
 
 
-def check(env):
+def check(cfg):
     """Check the validity of parameters in working environment.
 
     Args:
-        env (jinja2.Environment):  current working environment
+        cfg (Config):  current package configuration
 
     Returns:
         (list of str): list of faulty parameters
     """
     invalids = []
-    description = env.globals['doc'].description
+    description = cfg['doc']['description']
     # keywords = env.globals['doc'].keywords
 
     if len(description) == 0:
@@ -25,17 +25,17 @@ def check(env):
     return invalids
 
 
-def require(purpose, env):
+def require(purpose, cfg):
     """List of requirements for this option for a given purpose.
 
     Args:
         purpose (str): either 'option', 'setup', 'install' or 'dvlpt'
-        env (jinja2.Environment):  current working environment
+        cfg (Config):  current package configuration
 
     Returns:
         (list of Dependency)
     """
-    del env
+    del cfg
 
     if purpose == 'option':
         options = ['base']
