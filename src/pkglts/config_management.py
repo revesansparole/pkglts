@@ -34,7 +34,8 @@ class Config(dict):
     """
 
     def __init__(self, *args, **kwds):
-        dict.__init__(self, *args, **kwds)
+        dict.__init__(self)
+        self._tpl = dict(*args, **kwds)
 
         # initialise associated Jinja2 environment
         self._env = Environment(undefined=StrictUndefined)
@@ -44,6 +45,9 @@ class Config(dict):
         self._env.globals['today'] = lambda: "TODAY"  # TODO
 
         self._env.tests['available'] = self._is_available
+
+    def template(self):
+        return self._tpl
 
     def _is_available(self, opt_name):
         return opt_name in self
@@ -59,6 +63,7 @@ class Config(dict):
         Returns:
             None
         """
+        self[opt_name][param_name] = param_value
         setattr(self._env.globals[opt_name], param_name, param_value)
 
     def resolve(self):
@@ -67,17 +72,14 @@ class Config(dict):
         Returns:
             None
         """
-        resolved = {}
-
         to_eval = []
         for opt_name, cfg in self.items():
-            resolved[opt_name] = {}
+            self[opt_name] = {}
             self._env.globals[opt_name] = ConfigSection()
             for key, param in cfg.items():
                 if isinstance(param, string_type):
                     to_eval.append((opt_name, key, param))
                 else:
-                    resolved[opt_name][key] = param
                     self._add_param(opt_name, key, param)
 
         nb_iter_max = len(to_eval) ** 2
@@ -87,7 +89,6 @@ class Config(dict):
             opt_name, key, param = to_eval.pop(0)
             try:
                 txt = self.render(param)
-                resolved[opt_name][key] = txt
                 self._add_param(opt_name, key, txt)
             except UndefinedError:
                 to_eval.append((opt_name, key, param))
@@ -97,8 +98,6 @@ class Config(dict):
             for item in to_eval:
                 msg += "%s:%s '%s'\n" % item
             raise UserWarning(msg)
-
-        return resolved
 
     def load_extra(self):
         """load option specific handlers.
@@ -178,7 +177,7 @@ def write_pkg_config(cfg, rep="."):
         None
     """
     logger.info("write package config")
-    pkg_cfg = dict(cfg)
+    pkg_cfg = dict(cfg.template())
 
     with open(pj(rep, pkglts_dir, pkg_cfg_file), 'w') as f:
         json.dump(pkg_cfg, f, sort_keys=True, indent=2)
