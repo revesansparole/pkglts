@@ -2,13 +2,26 @@ from os.path import abspath, basename
 
 from pkglts.dependency import Dependency
 
-parameters = [
-    ("pkgname", basename(abspath("."))),
-    ("namespace", None),
-    ("namespace_method", "pkg_util"),
-    ("url", None),
-    ("authors", [("moi", "moi@email.com")])
-]
+
+def update_parameters(cfg):
+    """Update config with parameters necessary for this option.
+
+    Notes: create a section with option name to store params.
+
+    Args:
+        cfg (dict): dict of option parameters as seen in pkg_cfg.json
+
+    Returns:
+        None: update in place
+    """
+    sec = dict(
+        pkgname=basename(abspath(".")),
+        namespace=None,
+        namespace_method="pkg_util",
+        url=None,
+        authors=[("moi", "moi@email.com")]
+    )
+    cfg['base'] = sec
 
 
 def is_valid_identifier(name):

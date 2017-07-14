@@ -101,8 +101,7 @@ def update_opt(name, cfg):
         return cfg
 
     # find parameters required by option config
-    tpl = cfg.template()
-    tpl[name] = dict(opt.parameters)
+    opt.update_parameters(cfg.template())
     cfg.resolve()
 
     # find extra package requirements for dvlpt

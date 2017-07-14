@@ -1,9 +1,22 @@
 from pkglts.dependency import Dependency
 
-parameters = [
-    ("theme", 'default'),
-    ("autodoc_dvlpt", True)
-]
+
+def update_parameters(cfg):
+    """Update config with parameters necessary for this option.
+
+    Notes: create a section with option name to store params.
+
+    Args:
+        cfg (dict): dict of option parameters as seen in pkg_cfg.json
+
+    Returns:
+        None: update in place
+    """
+    sec = dict(
+        theme='default',
+        autodoc_dvlpt=True
+    )
+    cfg['sphinx'] = sec
 
 
 def check(cfg):

@@ -1,7 +1,5 @@
 from pkglts.dependency import Dependency
 
-parameters = []
-
 
 def require(purpose, cfg):
     """List of requirements for this option for a given purpose.

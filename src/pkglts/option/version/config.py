@@ -1,10 +1,23 @@
 from pkglts.dependency import Dependency
 
-parameters = [
-    ("major", 0),
-    ("minor", 1),
-    ("post", 0)
-]
+
+def update_parameters(cfg):
+    """Update config with parameters necessary for this option.
+
+    Notes: create a section with option name to store params.
+
+    Args:
+        cfg (dict): dict of option parameters as seen in pkg_cfg.json
+
+    Returns:
+        None: update in place
+    """
+    sec = dict(
+        major=0,
+        minor=0,
+        post=1,
+    )
+    cfg['version'] = sec
 
 
 def check(cfg):

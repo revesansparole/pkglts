@@ -4,12 +4,25 @@ from pkglts.dependency import Dependency
 
 from .handlers import get_tpl_path
 
-parameters = [
-    ("name", "cecill-c"),
-    ("year", 2015),
-    ("organization", "organization"),
-    ("project", "{{ base.pkgname }}")
-]
+
+def update_parameters(cfg):
+    """Update config with parameters necessary for this option.
+
+    Notes: create a section with option name to store params.
+
+    Args:
+        cfg (dict): dict of option parameters as seen in pkg_cfg.json
+
+    Returns:
+        None: update in place
+    """
+    sec = dict(
+        name="cecill-c",
+        year=2017,
+        organization="organization",
+        project="{{ base.pkgname }}"
+    )
+    cfg['license'] = sec
 
 
 def check(cfg):

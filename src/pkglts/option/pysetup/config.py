@@ -1,9 +1,22 @@
 from pkglts.dependency import Dependency
 
-parameters = [
-    ("intended_versions", ["27"]),
-    ("require", [])
-]
+
+def update_parameters(cfg):
+    """Update config with parameters necessary for this option.
+
+    Notes: create a section with option name to store params.
+
+    Args:
+        cfg (dict): dict of option parameters as seen in pkg_cfg.json
+
+    Returns:
+        None: update in place
+    """
+    sec = dict(
+        intended_versions=["36"],
+        require=[]
+    )
+    cfg['pysetup'] = sec
 
 
 def check(cfg):

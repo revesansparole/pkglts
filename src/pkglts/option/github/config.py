@@ -1,10 +1,23 @@
 from pkglts.dependency import Dependency
 
-parameters = [
-    ("owner", "{{ base.authors[0][0] }}"),
-    ("project", "{{ base.pkgname }}"),
-    ("url", "https://github.com/{{ github.owner }}/{{ github.project }}")
-]
+
+def update_parameters(cfg):
+    """Update config with parameters necessary for this option.
+
+    Notes: create a section with option name to store params.
+
+    Args:
+        cfg (dict): dict of option parameters as seen in pkg_cfg.json
+
+    Returns:
+        None: update in place
+    """
+    sec = dict(
+        owner="{{ base.authors[0][0] }}",
+        project="{{ base.pkgname }}",
+        url="https://github.com/{{ github.owner }}/{{ github.project }}"
+    )
+    cfg['github'] = sec
 
 
 def check(cfg):

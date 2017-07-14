@@ -1,9 +1,22 @@
 from pkglts.dependency import Dependency
 
-parameters = [
-    ("description", "belle petite description"),
-    ("keywords", [])
-]
+
+def update_parameters(cfg):
+    """Update config with parameters necessary for this option.
+
+    Notes: create a section with option name to store params.
+
+    Args:
+        cfg (dict): dict of option parameters as seen in pkg_cfg.json
+
+    Returns:
+        None: update in place
+    """
+    sec = dict(
+        description="belle petite description",
+        keywords=[]
+    )
+    cfg['doc'] = sec
 
 
 def check(cfg):

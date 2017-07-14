@@ -1,8 +1,21 @@
 from pkglts.dependency import Dependency
 
-parameters = [
-    ("project", "{{ github.project }}")
-]
+
+def update_parameters(cfg):
+    """Update config with parameters necessary for this option.
+
+    Notes: create a section with option name to store params.
+
+    Args:
+        cfg (dict): dict of option parameters as seen in pkg_cfg.json
+
+    Returns:
+        None: update in place
+    """
+    sec = dict(
+        project="{{ github.project }}"
+    )
+    cfg['readthedocs'] = sec
 
 
 def check(cfg):

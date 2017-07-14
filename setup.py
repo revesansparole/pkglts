@@ -94,7 +94,7 @@ setup_kwds = dict(
 
 setup_kwds['entry_points']['console_scripts'] = ['pmg = pkglts.manage_script:main']
 setup_kwds['entry_points']['pkglts'] = [
-    'base.parameters = pkglts.option.base.config:parameters',
+    'base.update_parameters = pkglts.option.base.config:update_parameters',
     'base.check = pkglts.option.base.config:check',
     'base.require = pkglts.option.base.config:require',
     'base.environment_extensions = pkglts.option.base.handlers:environment_extensions',
@@ -108,49 +108,49 @@ setup_kwds['entry_points']['pkglts'] = [
 
     'data.require = pkglts.option.data.config:require',
 
-    'doc.parameters = pkglts.option.doc.config:parameters',
+    'doc.update_parameters = pkglts.option.doc.config:update_parameters',
     'doc.check = pkglts.option.doc.config:check',
     'doc.require = pkglts.option.doc.config:require',
 
     'flake8.require = pkglts.option.flake8.config:require',
 
-    'github.parameters = pkglts.option.github.config:parameters',
+    'github.update_parameters = pkglts.option.github.config:update_parameters',
     'github.check = pkglts.option.github.config:check',
     'github.require = pkglts.option.github.config:require',
 
     'landscape.require = pkglts.option.landscape.config:require',
     'landscape.environment_extensions = pkglts.option.landscape.handlers:environment_extensions',
 
-    'license.parameters = pkglts.option.license.config:parameters',
+    'license.update_parameters = pkglts.option.license.config:update_parameters',
     'license.check = pkglts.option.license.config:check',
     'license.require = pkglts.option.license.config:require',
     'license.environment_extensions = pkglts.option.license.handlers:environment_extensions',
 
-    'notebook.parameters = pkglts.option.notebook.config:parameters',
+    'notebook.update_parameters = pkglts.option.notebook.config:update_parameters',
     'notebook.check = pkglts.option.notebook.config:check',
     'notebook.require = pkglts.option.notebook.config:require',
     'notebook.regenerate = pkglts.option.notebook.regenerate:main',
 
-    'pypi.parameters = pkglts.option.pypi.config:parameters',
+    'pypi.update_parameters = pkglts.option.pypi.config:update_parameters',
     'pypi.check = pkglts.option.pypi.config:check',
     'pypi.require = pkglts.option.pypi.config:require',
     'pypi.environment_extensions = pkglts.option.pypi.handlers:environment_extensions',
 
-    'pysetup.parameters = pkglts.option.pysetup.config:parameters',
+    'pysetup.update_parameters = pkglts.option.pysetup.config:update_parameters',
     'pysetup.check = pkglts.option.pysetup.config:check',
     'pysetup.require = pkglts.option.pysetup.config:require',
     'pysetup.environment_extensions = pkglts.option.pysetup.handlers:environment_extensions',
 
-    'readthedocs.parameters = pkglts.option.readthedocs.config:parameters',
+    'readthedocs.update_parameters = pkglts.option.readthedocs.config:update_parameters',
     'readthedocs.check = pkglts.option.readthedocs.config:check',
     'readthedocs.require = pkglts.option.readthedocs.config:require',
     'readthedocs.environment_extensions = pkglts.option.readthedocs.handlers:environment_extensions',
 
-    'sphinx.parameters = pkglts.option.sphinx.config:parameters',
+    'sphinx.update_parameters = pkglts.option.sphinx.config:update_parameters',
     'sphinx.check = pkglts.option.sphinx.config:check',
     'sphinx.require = pkglts.option.sphinx.config:require',
 
-    'test.parameters = pkglts.option.test.config:parameters',
+    'test.update_parameters = pkglts.option.test.config:update_parameters',
     'test.check = pkglts.option.test.config:check',
     'test.require = pkglts.option.test.config:require',
 
@@ -159,7 +159,7 @@ setup_kwds['entry_points']['pkglts'] = [
     'travis.require = pkglts.option.travis.config:require',
     'travis.environment_extensions = pkglts.option.travis.handlers:environment_extensions',
 
-    'version.parameters = pkglts.option.version.config:parameters',
+    'version.update_parameters = pkglts.option.version.config:update_parameters',
     'version.check = pkglts.option.version.config:check',
     'version.require = pkglts.option.version.config:require',
 ]

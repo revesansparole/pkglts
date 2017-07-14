@@ -18,16 +18,17 @@ class Option(object):
     """
 
     def __init__(self):
-        self.parameters = []
+        self._name = None
+        self._update_parameters = None
         self._check = None
         self._require = None
         self._environment_extensions = None
         self._regenerate = None
 
     def from_entry_point(self, ep):
-        func_name = ep.name.split(".")[-1]
-        if func_name == "parameters":
-            self.parameters = ep.load()
+        self._name, func_name = ep.name.split(".")
+        if func_name == "update_parameters":
+            self._update_parameters = ep
         elif func_name == "check":
             self._check = ep
         elif func_name == "require":
@@ -39,6 +40,16 @@ class Option(object):
         else:
             # silently ignore other type of entry points
             logger.error("unknown entry point attribute: '{}'".format(func_name))
+
+    def update_parameters(self, cfg):
+        if self._update_parameters is None:
+            cfg[self._name] = {}
+            return
+
+        if isinstance(self._update_parameters, pkg_resources.EntryPoint):
+            self._update_parameters = self._update_parameters.load()
+
+        return self._update_parameters(cfg)
 
     def check(self, *args, **kwds):
         if self._check is None:

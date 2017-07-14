@@ -1,8 +1,21 @@
 from pkglts.dependency import Dependency
 
-parameters = [
-    ("suite_name", "pytest")
-]
+
+def update_parameters(cfg):
+    """Update config with parameters necessary for this option.
+
+    Notes: create a section with option name to store params.
+
+    Args:
+        cfg (dict): dict of option parameters as seen in pkg_cfg.json
+
+    Returns:
+        None: update in place
+    """
+    sec = dict(
+        suite_name="pytest",
+    )
+    cfg['test'] = sec
 
 
 def check(cfg):
