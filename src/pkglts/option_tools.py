@@ -24,7 +24,7 @@ class Option(object):
         self._require = None
         self._environment_extensions = None
         self._regenerate = None
-        self._src = None
+        self._files_dir = None
 
     def from_entry_point(self, ep):
         self._name, func_name = ep.name.split(".")
@@ -38,8 +38,8 @@ class Option(object):
             self._environment_extensions = ep
         elif func_name == "regenerate":
             self._regenerate = ep
-        elif func_name == "src":
-            self._src = ep
+        elif func_name == "files_dir":
+            self._files_dir = ep
         else:
             # silently ignore other type of entry points
             logger.error("unknown entry point attribute: '{}'".format(func_name))
@@ -90,14 +90,14 @@ class Option(object):
 
         return self._regenerate(*args, **kwds)
 
-    def src(self):
-        if self._src is None:
+    def files_dir(self):
+        if self._files_dir is None:
             return None
 
-        if isinstance(self._src, pkg_resources.EntryPoint):
-            self._src = self._src.load().__file__
+        if isinstance(self._files_dir, pkg_resources.EntryPoint):
+            self._files_dir = self._files_dir.load().__file__
 
-        return self._src
+        return self._files_dir
 
 
 def find_available_options():
