@@ -3,15 +3,11 @@ from os.path import exists
 from os.path import join as pj
 import pytest
 
-from pkglts.config_management import (create_env, current_pkg_cfg_version,
+from pkglts.config_management import (Config, current_pkg_cfg_version,
                                       default_cfg, get_pkg_config,
-                                      installed_options, pkg_env,
                                       write_pkg_config)
-from pkglts.option_tools import find_available_options
 
 from .small_tools import ensure_created, rmdir
-
-find_available_options()
 
 
 @pytest.fixture()
@@ -27,95 +23,90 @@ def tmp_dir():
 
 
 def test_create_env():
-    env = create_env(default_cfg)
-    assert len(tuple(installed_options(env))) == 0
+    cfg = Config(default_cfg)
+    assert len(tuple(cfg.installed_options())) == 0
 
-    cfg = dict(default_cfg)
-    cfg['base'] = dict(a=1, b=2)
-    env = create_env(cfg)
-    assert len(tuple(installed_options(env))) == 1
-    assert env.globals['base'].a == 1
-    assert env.globals['base'].b == 2
+    pkg_cfg = dict(default_cfg)
+    pkg_cfg['base'] = dict(a=1, b=2)
+    cfg = Config(pkg_cfg)
+    assert len(tuple(cfg.installed_options())) == 1
+    assert cfg['base']['a'] == 1
+    assert cfg['base']['b'] == 2
 
 
 def test_create_env_render_templates():
-    cfg = dict(default_cfg)
-    cfg['base'] = dict(a="a", b="b")
-    cfg['tpl'] = dict(tpl1="{{ base.a }}",
-                      tpl2="{{ base.b }} and {{ tpl.tpl1 }}")
+    pkg_cfg = dict(default_cfg)
+    pkg_cfg['base'] = dict(a="a", b="b")
+    pkg_cfg['tpl'] = dict(tpl1="{{ base.a }}",
+                          tpl2="{{ base.b }} and {{ tpl.tpl1 }}")
 
-    env = create_env(cfg)
-    assert env.globals['tpl'].tpl1 == "a"
-    assert env.globals['tpl'].tpl2 == "b and a"
+    cfg = Config(pkg_cfg)
+    assert cfg['tpl']['tpl1'] == "a"
+    assert cfg['tpl']['tpl2'] == "b and a"
 
 
 def test_create_env_raise_error_if_unable_to_fully_render_templates():
-    cfg = dict(default_cfg)
+    pkg_cfg = dict(default_cfg)
+    pkg_cfg['base'] = dict(a="{{ base.b }}", b="{{ base.a }}")
 
-    cfg['base'] = dict(a="{{ base.b }}", b="{{ base.a }}")
     with pytest.raises(UserWarning):
-        create_env(cfg)
+        Config(pkg_cfg)
 
 
 def test_pkg_env_raise_error_if_option_not_defined():
-    cfg = dict(default_cfg)
-    cfg['babou'] = dict(a="a", b="b")
+    pkg_cfg = dict(default_cfg)
+    pkg_cfg['babou'] = dict(a="a", b="b")
 
     with pytest.raises(KeyError):
-        pkg_env(cfg)
+        Config(pkg_cfg).load_extra()
 
 
 def test_pkg_env_loads_specific_handlers_from_options():
-    cfg = dict(default_cfg)
-    cfg['base'] = dict(pkgname="toto", namespace="nm",
-                       url=None, authors=[("moi", "moi@aussi")])
+    pkg_cfg = dict(default_cfg)
+    pkg_cfg['base'] = dict(pkgname="toto", namespace="nm",
+                           url=None, authors=[("moi", "moi@aussi")])
 
-    env = pkg_env(cfg)
-    assert hasattr(env.globals['base'], "pkg_full_name")
+    cfg = Config(pkg_cfg)
+    cfg.load_extra()
+    assert hasattr(cfg._env.globals['base'], "pkg_full_name")
 
 
 def test_get_pkg_config_read_cfg(tmp_dir):
-    cfg = dict(default_cfg)
-    cfg['base'] = dict(pkgname="toto", namespace="nm",
-                       url=None, authors=[("moi", "moi@aussi")])
-    with open(pj(tmp_dir, ".pkglts/pkg_cfg.json"), 'w') as f:
-        json.dump(cfg, f)
+    pkg_cfg = dict(default_cfg)
+    pkg_cfg['base'] = dict(pkgname="toto", namespace="nm",
+                           url=None, authors=[("moi", "moi@aussi")])
+    json.dump(pkg_cfg, open(pj(tmp_dir, ".pkglts/pkg_cfg.json"), 'w'))
 
-    env = get_pkg_config(tmp_dir)
-    assert 'base' in env.globals
+    cfg = get_pkg_config(tmp_dir)
+    assert 'base' in cfg
 
 
 def test_get_pkg_config_handle_versions(tmp_dir):
-    cfg = dict(default_cfg)
-    cfg["_pkglts"]["version"] = 0
-    with open(pj(tmp_dir, ".pkglts/pkg_cfg.json"), 'w') as f:
-        json.dump(cfg, f)
+    pkg_cfg = dict(default_cfg)
+    pkg_cfg["_pkglts"]["version"] = 0
+    json.dump(pkg_cfg, open(pj(tmp_dir, ".pkglts/pkg_cfg.json"), 'w'))
 
-    env = get_pkg_config(tmp_dir)
-    assert env.globals["_pkglts"].version == current_pkg_cfg_version
+    cfg = get_pkg_config(tmp_dir)
+    assert cfg["_pkglts"]['version'] == current_pkg_cfg_version
 
 
 def test_pkg_cfg_read_write_maintains_templates(tmp_dir):
-    cfg = dict(default_cfg)
-    cfg['base'] = dict(pkgname="toto", namespace="nm",
-                       url=None, authors=[("moi", "moi@aussi")])
-    cfg['license'] = dict(name="CeCILL-C", organization="org",
-                          project="{{ base.pkgname }}", year="2015")
+    pkg_cfg = dict(default_cfg)
+    pkg_cfg['base'] = dict(pkgname="toto", namespace="nm",
+                           url=None, authors=[("moi", "moi@aussi")])
+    pkg_cfg['license'] = dict(name="CeCILL-C", organization="org",
+                              project="{{ base.pkgname }}", year="2015")
 
-    with open(pj(tmp_dir, ".pkglts/pkg_cfg.json"), 'w') as f:
-        json.dump(cfg, f)
+    json.dump(pkg_cfg, open(pj(tmp_dir, ".pkglts/pkg_cfg.json"), 'w'))
 
-    env = get_pkg_config(tmp_dir)
-    assert env.globals['license'].project == "toto"
+    cfg = get_pkg_config(tmp_dir)
+    assert cfg['license']['project'] == "toto"
 
-    write_pkg_config(env, tmp_dir)
-    with open(pj(tmp_dir, ".pkglts/pkg_cfg.json"), 'r') as f:
-        cfg = json.load(f)
+    write_pkg_config(cfg, tmp_dir)
+    pkg_cfg = json.load(open(pj(tmp_dir, ".pkglts/pkg_cfg.json")))
+    pkg_cfg["base"]["pkgname"] = "tutu"
 
-    cfg["base"]["pkgname"] = "tutu"
+    json.dump(pkg_cfg, open(pj(tmp_dir, ".pkglts/pkg_cfg.json"), 'w'))
 
-    with open(pj(tmp_dir, ".pkglts/pkg_cfg.json"), 'w') as f:
-        json.dump(cfg, f)
-
-    env = get_pkg_config(tmp_dir)
-    assert env.globals['license'].project == "tutu"
+    cfg = get_pkg_config(tmp_dir)
+    assert cfg['license']['project'] == "tutu"

@@ -2,7 +2,7 @@ from os import mkdir, rmdir
 from os.path import exists
 import pytest
 
-from pkglts.config_management import create_env
+from pkglts.config_management import Config
 from pkglts.option.notebook.config import parameters, check, require
 
 
@@ -22,18 +22,17 @@ def test_parameters():
 
 
 def test_config_check_src_directory(tmp_dir):
-    env = create_env(dict(notebook={'src_directory': "failed_nb"}))
-    assert 'src_directory' in check(env)
+    cfg = Config(dict(notebook={'src_directory': "failed_nb"}))
+    assert 'src_directory' in check(cfg)
 
-    env = create_env(dict(notebook={'src_directory': tmp_dir}))
-    assert 'src_directory' not in check(env)
+    cfg = Config(dict(notebook={'src_directory': tmp_dir}))
+    assert 'src_directory' not in check(cfg)
 
 
 def test_require():
-    cfg = dict(notebook={})
-    env = create_env(cfg)
+    cfg = Config(dict(notebook={}))
 
-    assert len(require('option', env)) == 1
-    assert len(require('setup', env)) == 0
-    assert len(require('install', env)) == 0
-    assert len(require('dvlpt', env)) == 1
+    assert len(require('option', cfg)) == 1
+    assert len(require('setup', cfg)) == 0
+    assert len(require('install', cfg)) == 0
+    assert len(require('dvlpt', cfg)) == 1

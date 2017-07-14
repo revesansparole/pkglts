@@ -4,7 +4,7 @@ import logging
 from os.path import join as pj
 
 from .config import pkglts_dir, pkg_cfg_file
-from .option_tools import available_options
+from .option_tools import available_options, find_available_options
 
 try:
     string_type = basestring
@@ -19,6 +19,8 @@ default_cfg = dict(_pkglts=dict(use_prompts=False,
                                 auto_install=True,
                                 install_front_end='stdout',
                                 version=current_pkg_cfg_version))
+
+find_available_options()
 
 
 class ConfigSection(object):
@@ -159,7 +161,6 @@ def get_pkg_config(rep="."):
 
     # create Config object
     cfg = Config(pkg_cfg)
-    cfg.resolve()
     cfg.load_extra()
 
     # write back config if version has been updated

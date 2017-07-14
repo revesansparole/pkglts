@@ -21,9 +21,9 @@ def tmp_dir():
 
 def test_manage_init_create_pkg_config(tmp_dir):
     # init_pkg(tmp_dir)
-    env = get_pkg_config(tmp_dir)
-    assert env is not None
-    assert "_pkglts" in env.globals
+    cfg = get_pkg_config(tmp_dir)
+    assert cfg is not None
+    assert "_pkglts" in cfg
 
 
 def test_manage_init_create_pkg_hash(tmp_dir):

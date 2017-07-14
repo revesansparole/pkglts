@@ -1,12 +1,11 @@
-from pkglts.config_management import create_env
+from pkglts.config_management import Config
 from pkglts.option.landscape.config import require
 
 
 def test_require():
-    cfg = dict(landscape={})
-    env = create_env(cfg)
+    cfg = Config(dict(landscape={}))
 
-    assert len(require('option', env)) == 2
-    assert len(require('setup', env)) == 0
-    assert len(require('install', env)) == 0
-    assert len(require('dvlpt', env)) == 0
+    assert len(require('option', cfg)) == 2
+    assert len(require('setup', cfg)) == 0
+    assert len(require('install', cfg)) == 0
+    assert len(require('dvlpt', cfg)) == 0

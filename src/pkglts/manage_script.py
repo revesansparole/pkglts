@@ -4,7 +4,6 @@ import logging
 from .config_management import (get_pkg_config, write_pkg_config)
 from .manage import (clean, init_pkg, install_example_files,
                      regenerate_package, regenerate_option, add_option)
-from .option_tools import find_available_options
 
 logger = logging.getLogger(__name__)
 
@@ -157,9 +156,6 @@ def main():
         extra = {}
     else:
         extra = dict(args.extra)
-
-    # initialize pkglts
-    find_available_options()
 
     # perform action
     action[args.action](*args.action_args, **extra)

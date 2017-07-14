@@ -1,6 +1,7 @@
-from pkglts.config_management import pkg_env
+from pkglts.config_management import Config
 
 
 def test_badge():
-    env = pkg_env(dict(readthedocs={'project': "project"}))
-    assert ".. image:" in env.globals['readthedocs'].badge
+    cfg = Config(dict(readthedocs={'project': "project"}))
+    cfg.load_extra()
+    assert ".. image:" in cfg._env.globals['readthedocs'].badge

@@ -6,13 +6,10 @@ from os.path import join as pj
 import pytest
 
 from pkglts.config import pkglts_dir, pkg_cfg_file
-from pkglts.config_management import create_env, get_pkg_config, write_pkg_config
+from pkglts.config_management import Config, get_pkg_config, write_pkg_config
 from pkglts.manage import (init_pkg, regenerate_package)
-from pkglts.option_tools import find_available_options
 
 from .small_tools import ensure_created, rmdir
-
-find_available_options()
 
 
 def addendum(init_file):
@@ -33,15 +30,15 @@ def tmp_pths():
     ensure_created(pth)
     init_pkg(pth)
     with open(pj(pth, pkglts_dir, pkg_cfg_file), 'r') as f:
-        cfg = json.load(f)
+        pkg_cfg = json.load(f)
 
-    cfg['base'] = dict(pkgname='toto', namespace=None,
-                       authors=[('moi', 'moi@email.com')],
-                       namespace_method="pkg_util",
-                       url=None)
-    env = create_env(cfg)
-    write_pkg_config(env, pth)
-    regenerate_package(env, pth)
+    pkg_cfg['base'] = dict(pkgname='toto', namespace=None,
+                           authors=[('moi', 'moi@email.com')],
+                           namespace_method="pkg_util",
+                           url=None)
+    cfg = Config(pkg_cfg)
+    write_pkg_config(cfg, pth)
+    regenerate_package(cfg, pth)
 
     init_file = pj(pth, "src", "toto", "__init__.py")
 
@@ -53,40 +50,40 @@ def tmp_pths():
 def test_regenerate_pass(tmp_pths):
     tmp_dir, init_file = tmp_pths
     with open(pj(tmp_dir, pkglts_dir, pkg_cfg_file), 'r') as f:
-        cfg = json.load(f)
+        pkg_cfg = json.load(f)
 
-    cfg['base'] = dict(pkgname='toto', namespace=None,
-                       authors=[('moi', 'moi@email.com')],
-                       namespace_method="pkg_util",
-                       url=None)
-    env = create_env(cfg)
-    regenerate_package(env, tmp_dir)
+    pkg_cfg['base'] = dict(pkgname='toto', namespace=None,
+                           authors=[('moi', 'moi@email.com')],
+                           namespace_method="pkg_util",
+                           url=None)
+    cfg = Config(pkg_cfg)
+    regenerate_package(cfg, tmp_dir)
     assert exists(init_file)
 
 
 def test_regenerate_check_pkg_cfg_validity(tmp_pths):
     tmp_dir, init_file = tmp_pths
     with open(pj(tmp_dir, pkglts_dir, pkg_cfg_file), 'r') as f:
-        cfg = json.load(f)
+        pkg_cfg = json.load(f)
 
-    cfg['base'] = dict(pkgname='1toto', namespace=None,
-                       authors=[('moi', 'moi@email.com')],
-                       namespace_method="pkg_util",
-                       url=None)
-    env = create_env(cfg)
-    assert not regenerate_package(env, tmp_dir)
+    pkg_cfg['base'] = dict(pkgname='1toto', namespace=None,
+                           authors=[('moi', 'moi@email.com')],
+                           namespace_method="pkg_util",
+                           url=None)
+    cfg = Config(pkg_cfg)
+    assert not regenerate_package(cfg, tmp_dir)
 
 
 def test_regenerate_handle_conflicts_keep(tmp_pths):
     tmp_dir, init_file = tmp_pths
-    env = get_pkg_config(tmp_dir)
+    cfg = get_pkg_config(tmp_dir)
 
     with open(init_file, 'w') as f:
         f.write("modified")
 
     with mock.patch('pkglts.manage.get_user_permission',
                     return_value=False):
-        regenerate_package(env, tmp_dir)
+        regenerate_package(cfg, tmp_dir)
 
     with open(init_file, 'r') as f:
         assert f.read() == "modified"
@@ -94,13 +91,13 @@ def test_regenerate_handle_conflicts_keep(tmp_pths):
 
 def test_regenerate_handle_conflicts_overwrite(tmp_pths):
     tmp_dir, init_file = tmp_pths
-    env = get_pkg_config(tmp_dir)
+    cfg = get_pkg_config(tmp_dir)
 
     addendum(init_file)
 
     with mock.patch('pkglts.manage.get_user_permission',
                     return_value=True):
-        regenerate_package(env, tmp_dir)
+        regenerate_package(cfg, tmp_dir)
 
     with open(init_file, 'r') as f:
         txt = f.read()
@@ -109,11 +106,11 @@ def test_regenerate_handle_conflicts_overwrite(tmp_pths):
 
 def test_regenerate_handle_global_overwrite(tmp_pths):
     tmp_dir, init_file = tmp_pths
-    env = get_pkg_config(tmp_dir)
+    cfg = get_pkg_config(tmp_dir)
 
     addendum(init_file)
 
-    regenerate_package(env, tmp_dir, overwrite=True)
+    regenerate_package(cfg, tmp_dir, overwrite=True)
 
     with open(init_file, 'r') as f:
         txt = f.read()
@@ -122,13 +119,13 @@ def test_regenerate_handle_global_overwrite(tmp_pths):
 
 def test_regenerate_new_files_do_not_generate_conflicts(tmp_pths):
     tmp_dir, init_file = tmp_pths
-    env = get_pkg_config(tmp_dir)
+    cfg = get_pkg_config(tmp_dir)
 
     new_pth = pj(tmp_dir, "src", "toto", "new_file.py")
     with open(new_pth, 'w') as f:
         f.write("txt = 'addendum'")
 
-    regenerate_package(env, tmp_dir)
+    regenerate_package(cfg, tmp_dir)
 
     assert exists(new_pth)
     with open(new_pth, 'r') as f:
@@ -138,26 +135,26 @@ def test_regenerate_new_files_do_not_generate_conflicts(tmp_pths):
 
 def test_regenerate_remove_user_files_do_not_generate_conflicts(tmp_pths):
     tmp_dir, init_file = tmp_pths
-    env = get_pkg_config(tmp_dir)
+    cfg = get_pkg_config(tmp_dir)
 
     new_pth = pj(tmp_dir, "src", "toto", "new_file.py")
     with open(new_pth, 'w') as f:
         f.write("txt = 'addendum'")
 
-    regenerate_package(env, tmp_dir)
+    regenerate_package(cfg, tmp_dir)
 
     remove(new_pth)
 
-    regenerate_package(env, tmp_dir)
+    regenerate_package(cfg, tmp_dir)
     assert not exists(new_pth)
 
 
 def test_regenerate_fail_if_permanent_section_ids_have_been_modified(tmp_pths):
     tmp_dir, init_file = tmp_pths
-    env = get_pkg_config(tmp_dir)
+    cfg = get_pkg_config(tmp_dir)
 
     with open(init_file, 'a') as f:
         f.write("\n# {# pkglts, test\na = 1\n# #}\n")
 
     with pytest.raises(KeyError):
-        regenerate_package(env, tmp_dir, overwrite=True)
+        regenerate_package(cfg, tmp_dir, overwrite=True)
