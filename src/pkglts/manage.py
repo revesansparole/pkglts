@@ -4,7 +4,6 @@
 Use 'setup.py' for common tasks.
 """
 
-from importlib import import_module
 import logging
 from os import listdir, mkdir, remove, walk
 from os.path import exists, normpath, splitext
@@ -20,7 +19,7 @@ from .hash_management import (get_pkg_hash, modified_file_hash,
                               pth_as_key, write_pkg_hash)
 from .manage_tools import (check_option_parameters,
                            regenerate_dir, update_opt)
-from .option_tools import get_user_permission
+from .option_tools import available_options, get_user_permission
 
 logger = logging.getLogger(__name__)
 
@@ -206,12 +205,7 @@ def regenerate_option(env, name, target=".", overwrite=False):
     """
     # test existence of option regenerate module
     try:
-        import_module("pkglts.option.%s" % name)
+        opt = available_options[name]
+        opt.regenerate(env, target, overwrite)
     except ImportError:
         raise KeyError("option '%s' does not exists" % name)
-    try:
-        opt_regenerate = import_module("pkglts.option.%s.regenerate" % name)
-    except ImportError:
-        raise KeyError("option '%s' does not provide regeneration" % name)
-
-    opt_regenerate.main(env, target, overwrite)
