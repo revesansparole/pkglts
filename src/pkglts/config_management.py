@@ -21,10 +21,6 @@ default_cfg = dict(_pkglts=dict(use_prompts=False,
                                 version=current_pkg_cfg_version))
 
 
-def is_available(opt_name):
-    return opt_name in available_options
-
-
 class ConfigSection(object):
     """Small class to allow accessing parameters using the dot
     method instead of ['param_name'] method
@@ -37,10 +33,8 @@ class Config(dict):
     its resolution and a jinja2 environment that reflect the config.
     """
 
-    def __init__(self):
-        dict.__init__(self)
-        self._config_tpl = {}
-        self._config = {}
+    def __init__(self, *args, **kwds):
+        dict.__init__(self, *args, **kwds)
 
         # initialise associated Jinja2 environment
         self._env = Environment(undefined=StrictUndefined)
@@ -49,7 +43,10 @@ class Config(dict):
         # add global filters and test
         self._env.globals['today'] = lambda: "TODAY"  # TODO
 
-        self._env.tests['available'] = is_available
+        self._env.tests['available'] = self._is_available
+
+    def _is_available(self, opt_name):
+        return opt_name in self
 
     def _add_param(self, opt_name, param_name, param_value):
         """Add a new parameter value in the config
@@ -103,6 +100,31 @@ class Config(dict):
 
         return resolved
 
+    def load_extra(self):
+        """load option specific handlers.
+
+        Returns:
+            None
+        """
+        for name in self:
+            if not name.startswith("_"):
+                try:
+                    opt = available_options[name]
+                    for k, v in opt.environment_extensions(self).items():
+                        setattr(self._env.globals[name], k, v)
+                except KeyError:
+                    raise KeyError("option '%s' does not exists" % name)
+
+    def installed_options(self):
+        """List all installed options.
+
+        Returns:
+            (iter of str)
+        """
+        for key in self:
+            if not key.startswith("_"):
+                yield key
+
     def render(self, txt):
         """Use items in config to render text
 
@@ -116,84 +138,6 @@ class Config(dict):
         return self._env.from_string(txt).render()
 
 
-def create_env(pkg_cfg):
-    """Create a jinja2.Environment from a package configuration
-
-    Notes: do not load option handlers
-
-    Args:
-        pkg_cfg (dict of str: any): package configuration
-
-    Returns:
-        (jinja2.Environment)
-    """
-    env = Environment(undefined=StrictUndefined)
-    env.keep_trailing_newline = True
-
-    to_eval = []
-    for opt_name, cfg in pkg_cfg.items():
-        env.globals[opt_name] = ConfigSection()
-        for key, param in cfg.items():
-            if isinstance(param, string_type):
-                to_eval.append((opt_name, key, param))
-            else:
-                env.globals[opt_name].add_param(key, param)
-
-    nb_iter_max = len(to_eval) ** 2
-    cur_iter = 0
-    while len(to_eval) > 0 and cur_iter < nb_iter_max:
-        cur_iter += 1
-        opt_name, key, param = to_eval.pop(0)
-        try:
-            txt = env.from_string(param).render()
-            if txt != param:
-                txt = FormattedString(txt)
-                txt.template = param
-            env.globals[opt_name].add_param(key, txt)
-        except UndefinedError:
-            to_eval.append((opt_name, key, param))
-
-    if len(to_eval) > 0:
-        msg = "unable to fully render config\n"
-        for item in to_eval:
-            msg += "%s:%s '%s'\n" % item
-        raise UserWarning(msg)
-
-    # add global filters and test
-    env.globals['today'] = lambda: "TODAY"  # TODO
-
-    def is_available(opt_param):
-        return opt_param in installed_options(env)
-
-    env.tests['available'] = is_available
-
-    return env
-
-
-def pkg_env(pkg_cfg):
-    """Create a jinja2.Environment from a package configuration
-
-    Args:
-        pkg_cfg (dict of str, any): package configuration
-
-    Returns:
-        (jinja2.Environment)
-    """
-    env = create_env(pkg_cfg)
-
-    # load option specific handlers
-    for name in pkg_cfg:
-        if not name.startswith("_"):
-            try:
-                opt = available_options[name]
-                for k, v in opt.environment_extensions(env).items():
-                    setattr(env.globals[name], k, v)
-            except KeyError:
-                raise KeyError("option '%s' does not exists" % name)
-
-    return env
-
-
 def get_pkg_config(rep="."):
     """Read pkg_cfg file associated to this package.
 
@@ -201,7 +145,7 @@ def get_pkg_config(rep="."):
         rep (str): directory to search for info
 
     Returns:
-        (jinja2.Environment): env.globals initialized with pkg_config
+        (Config): Config initialized with pkg_config
     """
     with open(pj(rep, pkglts_dir, pkg_cfg_file), 'r') as f:
         pkg_cfg = json.load(f)
@@ -211,33 +155,30 @@ def get_pkg_config(rep="."):
     for i in range(file_version, current_pkg_cfg_version):
         upgrade_pkg_cfg_version(pkg_cfg, i)
 
-    # create jinja2 Environment
-    env = pkg_env(pkg_cfg)
+    # create Config object
+    cfg = Config(pkg_cfg)
+    cfg.resolve()
+    cfg.load_extra()
+
+    # write back config if version has been updated
     if file_version < current_pkg_cfg_version:
-        write_pkg_config(env, rep)
+        write_pkg_config(cfg, rep)
 
-    return env
+    return cfg
 
 
-def write_pkg_config(env, rep="."):
+def write_pkg_config(cfg, rep="."):
     """Store config associated to this package on disk.
 
     Args:
-        env (jinja2.Environment): current working environment
+        cfg (Config): current working config
         rep (str): directory to search for info
 
     Returns:
         None
     """
     logger.info("write package config")
-    pkg_cfg = {}
-    for opt_name, cfg in env.globals.items():
-        if isinstance(cfg, ConfigSection):
-            pkg_cfg[opt_name] = {}
-            for key, val in cfg.items():
-                if isinstance(val, FormattedString):
-                    val = val.template
-                pkg_cfg[opt_name][key] = val
+    pkg_cfg = dict(cfg)
 
     with open(pj(rep, pkglts_dir, pkg_cfg_file), 'w') as f:
         json.dump(pkg_cfg, f, sort_keys=True, indent=2)
@@ -285,17 +226,3 @@ def upgrade_pkg_cfg_version(pkg_cfg, version):
             section['require'] = deps
 
     return pkg_cfg
-
-
-def installed_options(env):
-    """List all installed options according to current environment
-
-    Args:
-        env (jinja2.Environment):  current working environment
-
-    Returns:
-        (iter of str)
-    """
-    for key, cfg in env.globals.items():
-        if isinstance(cfg, ConfigSection) and not key.startswith("_"):
-            yield key
