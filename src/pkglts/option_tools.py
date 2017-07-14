@@ -1,6 +1,9 @@
 """ Some helpers for options
 """
+import logging
 import pkg_resources
+
+logger = logging.getLogger(__name__)
 
 available_options = {}
 
@@ -14,6 +17,10 @@ def empty_list(*args):
     return []
 
 
+def empty_dict(*args):
+    return {}
+
+
 class Option(object):
     """Base class to store information associated with an option
     """
@@ -22,7 +29,7 @@ class Option(object):
         self.parameters = []
         self.check = empty_list
         self.require = empty_list
-        self.handlers = {}
+        self.environment_extensions = empty_dict
 
     def from_entry_point(self, ep):
         func_name = ep.name.split(".")[-1]
@@ -32,8 +39,11 @@ class Option(object):
             self.check = ep.load()
         elif func_name == "require":
             self.require = ep.load()
+        elif func_name == "environment_extensions":
+            self.environment_extensions = ep.load()
         else:
-            self.handlers[func_name] = ep.load()
+            # silently ignore other type of entry points
+            logger.error("unknown entry point attribute: '{}'".format(func_name))
 
 
 def find_available_options():

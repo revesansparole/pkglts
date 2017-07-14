@@ -93,6 +93,12 @@ setup_kwds = dict(
 # change setup_kwds below before the next pkglts tag
 
 setup_kwds['entry_points']['console_scripts'] = ['pmg = pkglts.manage_script:main']
+setup_kwds['entry_points']['pkglts'] = [
+    'base.parameters = pkglts.option.base.config:parameters',
+    'base.check = pkglts.option.base.config:check',
+    'base.require = pkglts.option.base.config:require',
+    'base.environment_extensions = pkglts.option.base.handlers:environment_extensions',
+]
 
 # do not change things below
 # {# pkglts, pysetup.call

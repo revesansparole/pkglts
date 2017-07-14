@@ -18,6 +18,14 @@ def action_info(*args, **kwds):
     logger.info("package info")
     from pkglts.option_tools import available_options
     print(available_options)
+    base = available_options['base']
+    from pkglts.config_management import get_pkg_config
+    env = get_pkg_config()
+    print(base.parameters)
+    print(tuple(env.globals['base'].items()))
+    print(base.check(env))
+    print(base.require('option', env))
+    print(base.environment_extensions(env))
 
 
 def action_clean(*args, **kwds):
