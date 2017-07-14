@@ -1,7 +1,7 @@
 """ Some helpers for options
 """
 import logging
-from os.path import dirname
+from os.path import dirname, join as pj
 import pkg_resources
 
 logger = logging.getLogger(__name__)
@@ -96,7 +96,7 @@ class Option(object):
             return None
 
         if isinstance(self._files_dir, pkg_resources.EntryPoint):
-            self._files_dir = dirname(self._files_dir.load().__file__)
+            self._files_dir = pj(dirname(self._files_dir.load().__file__), self._name)
 
         return self._files_dir
 
