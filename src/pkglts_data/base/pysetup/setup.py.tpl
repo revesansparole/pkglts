@@ -98,7 +98,12 @@ setup_kwds = dict(
 )
 # #}
 # change setup_kwds below before the next pkglts tag
-
+{% if 'plugin_project' is available %}
+setup_kwds['entry_points']['pkglts'] = [
+    '{{ base.pkg_full_name }}.require = {{ base.pkg_full_name }}.config:require',
+    '{{ base.pkg_full_name }}.files_dir = {{ base.pkg_full_name }}_data',
+]
+{% endif %}
 # do not change things below
 # {# pkglts, pysetup.call
 setup(**setup_kwds)

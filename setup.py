@@ -142,6 +142,9 @@ setup_kwds['entry_points']['pkglts'] = [
     'notebook.regenerate = pkglts.option.notebook.regenerate:main',
     'notebook.files_dir = pkglts_data.base',
 
+    'plugin_project.require = pkglts.option.plugin_project.config:require',
+    'plugin_project.files_dir = pkglts_data.base',
+
     'pypi.update_parameters = pkglts.option.pypi.config:update_parameters',
     'pypi.check = pkglts.option.pypi.config:check',
     'pypi.require = pkglts.option.pypi.config:require',
