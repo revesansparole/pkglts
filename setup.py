@@ -98,70 +98,89 @@ setup_kwds['entry_points']['pkglts'] = [
     'base.check = pkglts.option.base.config:check',
     'base.require = pkglts.option.base.config:require',
     'base.environment_extensions = pkglts.option.base.handlers:environment_extensions',
+    'base.files_dir = pkglts_data.base',
 
     'conda.require = pkglts.option.conda.config:require',
+    'conda.files_dir = pkglts_data.base',
 
     'coverage.require = pkglts.option.coverage.config:require',
+    'coverage.files_dir = pkglts_data.base',
 
     'coveralls.require = pkglts.option.coveralls.config:require',
     'coveralls.environment_extensions = pkglts.option.coveralls.handlers:environment_extensions',
+    'coveralls.files_dir = pkglts_data.base',
 
     'data.require = pkglts.option.data.config:require',
+    'data.files_dir = pkglts_data.base',
 
     'doc.update_parameters = pkglts.option.doc.config:update_parameters',
     'doc.check = pkglts.option.doc.config:check',
     'doc.require = pkglts.option.doc.config:require',
+    'doc.files_dir = pkglts_data.base',
 
     'flake8.require = pkglts.option.flake8.config:require',
+    'flake8.files_dir = pkglts_data.base',
 
     'github.update_parameters = pkglts.option.github.config:update_parameters',
     'github.check = pkglts.option.github.config:check',
     'github.require = pkglts.option.github.config:require',
+    'github.files_dir = pkglts_data.base',
 
     'landscape.require = pkglts.option.landscape.config:require',
     'landscape.environment_extensions = pkglts.option.landscape.handlers:environment_extensions',
+    'landscape.files_dir = pkglts_data.base',
 
     'license.update_parameters = pkglts.option.license.config:update_parameters',
     'license.check = pkglts.option.license.config:check',
     'license.require = pkglts.option.license.config:require',
     'license.environment_extensions = pkglts.option.license.handlers:environment_extensions',
+    'license.files_dir = pkglts_data.base',
 
     'notebook.update_parameters = pkglts.option.notebook.config:update_parameters',
     'notebook.check = pkglts.option.notebook.config:check',
     'notebook.require = pkglts.option.notebook.config:require',
     'notebook.regenerate = pkglts.option.notebook.regenerate:main',
+    'notebook.files_dir = pkglts_data.base',
 
     'pypi.update_parameters = pkglts.option.pypi.config:update_parameters',
     'pypi.check = pkglts.option.pypi.config:check',
     'pypi.require = pkglts.option.pypi.config:require',
     'pypi.environment_extensions = pkglts.option.pypi.handlers:environment_extensions',
+    'pypi.files_dir = pkglts_data.base',
 
     'pysetup.update_parameters = pkglts.option.pysetup.config:update_parameters',
     'pysetup.check = pkglts.option.pysetup.config:check',
     'pysetup.require = pkglts.option.pysetup.config:require',
     'pysetup.environment_extensions = pkglts.option.pysetup.handlers:environment_extensions',
+    'pysetup.files_dir = pkglts_data.base',
 
     'readthedocs.update_parameters = pkglts.option.readthedocs.config:update_parameters',
     'readthedocs.check = pkglts.option.readthedocs.config:check',
     'readthedocs.require = pkglts.option.readthedocs.config:require',
     'readthedocs.environment_extensions = pkglts.option.readthedocs.handlers:environment_extensions',
+    'readthedocs.files_dir = pkglts_data.base',
 
     'sphinx.update_parameters = pkglts.option.sphinx.config:update_parameters',
     'sphinx.check = pkglts.option.sphinx.config:check',
     'sphinx.require = pkglts.option.sphinx.config:require',
+    'sphinx.files_dir = pkglts_data.base',
 
     'test.update_parameters = pkglts.option.test.config:update_parameters',
     'test.check = pkglts.option.test.config:check',
     'test.require = pkglts.option.test.config:require',
+    'test.files_dir = pkglts_data.base',
 
     'tox.require = pkglts.option.tox.config:require',
+    'tox.files_dir = pkglts_data.base',
 
     'travis.require = pkglts.option.travis.config:require',
     'travis.environment_extensions = pkglts.option.travis.handlers:environment_extensions',
+    'travis.files_dir = pkglts_data.base',
 
     'version.update_parameters = pkglts.option.version.config:update_parameters',
     'version.check = pkglts.option.version.config:check',
     'version.require = pkglts.option.version.config:require',
+    'version.files_dir = pkglts_data.base',
 ]
 
 # do not change things below

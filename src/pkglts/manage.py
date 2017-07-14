@@ -177,9 +177,10 @@ def regenerate_package(cfg, target=".", overwrite=False):
     # render files for all options
     hm = {}
     for name in cfg.installed_options():
-        opt_ref_dir = pj(get_data_dir(), 'base', name)
-        if not exists(opt_ref_dir):
-            logger.debug("option %s do not provide files" % name)
+        opt = available_options[name]
+        opt_ref_dir = opt.files_dir()
+        if opt_ref_dir is None:
+            logger.info("option %s does not provide files" % name)
         else:
             logger.info("rendering option %s" % name)
             loc_hm = regenerate_dir(opt_ref_dir, target, cfg, overwrite_file)
