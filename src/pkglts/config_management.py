@@ -46,6 +46,9 @@ class Config(dict):
 
         self._env.tests['available'] = self._is_available
 
+        # resolve
+        self.resolve()
+
     def template(self):
         return self._tpl
 
