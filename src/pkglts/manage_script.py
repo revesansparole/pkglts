@@ -37,9 +37,10 @@ def action_clean(*args, **kwds):
 def action_init(*args, **kwds):
     """Initialize environment for use of pkglts.
     """
-    del args  # unused
-    del kwds  # unused
     init_pkg()
+
+    if len(args) > 0:
+        action_add(*args, **kwds)
 
 
 def action_clear(*args, **kwds):
