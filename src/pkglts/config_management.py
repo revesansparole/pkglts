@@ -6,6 +6,7 @@ from os.path import join as pj
 
 from .config import pkglts_dir, pkg_cfg_file
 from .dependency import Dependency
+from .option_tools import available_options
 
 try:
     string_type = basestring
@@ -126,13 +127,9 @@ def pkg_env(pkg_cfg):
     for name in pkg_cfg:
         if not name.startswith("_"):
             try:
-                opt_handlers = import_module("pkglts.option.%s.handlers" % name)
-                if not hasattr(opt_handlers, "environment_extensions"):
-                    logger.debug("option %s do not define any extension" % name)
-                else:
-                    extensions = opt_handlers.environment_extensions(env)
-                    for k, v in extensions.items():
-                        setattr(env.globals[name], k, v)
+                opt = available_options[name]
+                for k, v in opt.environment_extensions(env).items():
+                    setattr(env.globals[name], k, v)
             except ImportError:
                 raise KeyError("option '%s' does not exists" % name)
 
