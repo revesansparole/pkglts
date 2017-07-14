@@ -129,6 +129,7 @@ setup_kwds['entry_points']['pkglts'] = [
     'notebook.parameters = pkglts.option.notebook.config:parameters',
     'notebook.check = pkglts.option.notebook.config:check',
     'notebook.require = pkglts.option.notebook.config:require',
+    'notebook.regenerate = pkglts.option.notebook.regenerate:main',
 
     'pypi.parameters = pkglts.option.pypi.config:parameters',
     'pypi.check = pkglts.option.pypi.config:check',

@@ -30,6 +30,7 @@ class Option(object):
         self.check = empty_list
         self.require = empty_list
         self.environment_extensions = empty_dict
+        self.regenerate = empty_list
 
     def from_entry_point(self, ep):
         func_name = ep.name.split(".")[-1]
@@ -41,6 +42,8 @@ class Option(object):
             self.require = ep.load()
         elif func_name == "environment_extensions":
             self.environment_extensions = ep.load()
+        elif func_name == "regenerate":
+            self.regenerate = ep.load()
         else:
             # silently ignore other type of entry points
             logger.error("unknown entry point attribute: '{}'".format(func_name))
