@@ -12,10 +12,12 @@ def test_options_expose_parameters():
     for pth in glob("{}/*/".format(option_basedir)):
         option_name = path.basename(path.dirname(pth))
         if not option_name.startswith("_"):
-            # check 'config' module exists for each option
+            # check 'update_parameters' exists for each option
             try:
                 opt = available_options[option_name]
-                assert len(opt.parameters) >= 0
+                cfg = {}
+                opt.update_parameters(cfg)
+                assert len(cfg) == 1
             except KeyError:
                 assert False
 

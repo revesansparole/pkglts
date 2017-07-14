@@ -3,7 +3,7 @@ from os.path import exists
 import pytest
 
 from pkglts.config_management import Config
-from pkglts.option.notebook.config import parameters, check, require
+from pkglts.option.notebook.config import check, require, update_parameters
 
 
 @pytest.fixture()
@@ -17,8 +17,10 @@ def tmp_dir():
         rmdir(pth)
 
 
-def test_parameters():
-    assert len(parameters) == 1
+def test_update_parameters():
+    cfg = {}
+    update_parameters(cfg)
+    assert len(cfg['notebook']) == 1
 
 
 def test_config_check_src_directory(tmp_dir):

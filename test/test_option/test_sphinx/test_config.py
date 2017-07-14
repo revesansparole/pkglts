@@ -1,9 +1,11 @@
 from pkglts.config_management import Config
-from pkglts.option.sphinx.config import check, parameters, require
+from pkglts.option.sphinx.config import check, require, update_parameters
 
 
-def test_parameters():
-    assert len(parameters) == 2
+def test_update_parameters():
+    cfg = {}
+    update_parameters(cfg)
+    assert len(cfg['sphinx']) == 2
 
 
 def test_config_check_sphinx_theme():

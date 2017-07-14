@@ -65,11 +65,6 @@ def check(cfg):
     return invalids
 
 
-def after(pkg_cfg):
-    del pkg_cfg  # unused
-    print("base: after main config")
-
-
 def require(purpose, cfg):
     """List of requirements for this option for a given purpose.
 
