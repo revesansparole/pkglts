@@ -1,7 +1,6 @@
-from importlib import import_module
-
 from pkglts.config_management import installed_options
 from pkglts.dependency import Dependency
+from pkglts.option_tools import available_options
 
 
 def requirements(env, requirement_name):
@@ -17,8 +16,8 @@ def requirements(env, requirement_name):
     reqs = {}
     for name in installed_options(env):
         try:
-            opt_cfg = import_module("pkglts.option.%s.config" % name)
-            for dep in opt_cfg.require(requirement_name, env):
+            opt = available_options[name]
+            for dep in opt.require(requirement_name, env):
                 reqs[dep.name] = dep
         except ImportError:
             raise KeyError("option '%s' does not exists" % name)
