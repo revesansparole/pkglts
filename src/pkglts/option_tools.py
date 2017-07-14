@@ -24,6 +24,7 @@ class Option(object):
         self._require = None
         self._environment_extensions = None
         self._regenerate = None
+        self._src = None
 
     def from_entry_point(self, ep):
         self._name, func_name = ep.name.split(".")
@@ -37,6 +38,8 @@ class Option(object):
             self._environment_extensions = ep
         elif func_name == "regenerate":
             self._regenerate = ep
+        elif func_name == "src":
+            self._src = ep
         else:
             # silently ignore other type of entry points
             logger.error("unknown entry point attribute: '{}'".format(func_name))
@@ -86,6 +89,15 @@ class Option(object):
             self._regenerate = self._regenerate.load()
 
         return self._regenerate(*args, **kwds)
+
+    def src(self):
+        if self._src is None:
+            return None
+
+        if isinstance(self._src, pkg_resources.EntryPoint):
+            self._src = self._src.load().__file__
+
+        return self._src
 
 
 def find_available_options():
