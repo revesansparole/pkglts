@@ -129,7 +129,7 @@ def pkg_env(pkg_cfg):
                 opt = available_options[name]
                 for k, v in opt.environment_extensions(env).items():
                     setattr(env.globals[name], k, v)
-            except ImportError:
+            except KeyError:
                 raise KeyError("option '%s' does not exists" % name)
 
     return env

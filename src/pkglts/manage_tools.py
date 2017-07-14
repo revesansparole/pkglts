@@ -62,7 +62,7 @@ def check_option_parameters(name, env):
     try:
         opt = available_options[name]
         return opt.check(env)
-    except ImportError:
+    except KeyError:
         return []
 
 
@@ -81,7 +81,7 @@ def update_opt(name, env):
     # test existence of option
     try:
         opt = available_options[name]
-    except ImportError:
+    except KeyError:
         raise KeyError("option '%s' does not exists" % name)
 
     # find other option requirements in repository

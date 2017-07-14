@@ -19,7 +19,7 @@ def requirements(env, requirement_name):
             opt = available_options[name]
             for dep in opt.require(requirement_name, env):
                 reqs[dep.name] = dep
-        except ImportError:
+        except KeyError:
             raise KeyError("option '%s' does not exists" % name)
 
     return [reqs[name] for name in sorted(reqs)]

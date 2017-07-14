@@ -207,5 +207,5 @@ def regenerate_option(env, name, target=".", overwrite=False):
     try:
         opt = available_options[name]
         opt.regenerate(env, target, overwrite)
-    except ImportError:
+    except KeyError:
         raise KeyError("option '%s' does not exists" % name)
