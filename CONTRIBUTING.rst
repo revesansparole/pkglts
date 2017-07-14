@@ -22,6 +22,17 @@ If you are reporting a bug, please include:
 * Any details about your local setup that might be helpful in troubleshooting.
 * Detailed steps to reproduce the bug.
 
+Implement your own option
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You can easily extend `pkglts` by implementing your own option as a plugin. There are two types
+of plugins:
+
+* options that implement a new feature useful for everybody. Don't hesitate to contact us or submit a
+pull request if you want to insert it into the main pkglts repo.
+* plugins that implement a way to create packages specific to your organization. Don't hesitate to make
+your life easier if you always create projects with the same options.
+
 Fix Bugs
 ~~~~~~~~
 

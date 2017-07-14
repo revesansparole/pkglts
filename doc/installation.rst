@@ -22,3 +22,10 @@ Preferred method use virtual environments::
     (myenv)$ pip install pkglts
 
 
+or conda_ environments::
+
+    $ conda create -n toto python
+    $ activate toto
+    (toto) $ pip install pkglts
+
+.. _conda: https://conda.io/miniconda.html
