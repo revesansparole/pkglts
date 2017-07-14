@@ -1,7 +1,6 @@
 """ Specific helper function for manage script
 """
 
-from importlib import import_module
 import logging
 from os import listdir, mkdir
 from os.path import basename, exists, isdir, splitext
@@ -10,7 +9,7 @@ from .config_management import ConfigSection, installed_options
 from .hash_management import compute_hash, pth_as_key
 from .install_env.load_front_end import get_install_front_end
 from .local import init_namespace_dir
-from .option_tools import get_user_permission
+from .option_tools import available_options, get_user_permission
 from .templating import render
 
 
@@ -61,11 +60,8 @@ def check_option_parameters(name, env):
         env (jinja2.Environment): current working environment
     """
     try:
-        opt_cfg = import_module("pkglts.option.%s.config" % name)
-        try:
-            return opt_cfg.check(env)
-        except AttributeError:
-            return []
+        opt = available_options[name]
+        return opt.check(env)
     except ImportError:
         return []
 
@@ -84,12 +80,12 @@ def update_opt(name, env):
 
     # test existence of option
     try:
-        opt_cfg = import_module("pkglts.option.%s.config" % name)
+        opt = available_options[name]
     except ImportError:
         raise KeyError("option '%s' does not exists" % name)
 
     # find other option requirements in repository
-    for dep in opt_cfg.require('option', env):
+    for dep in opt.require('option', env):
         option_name = dep.name
         if option_name not in installed_options(env):
             print("need to install option '%s' first" % option_name)
@@ -101,15 +97,12 @@ def update_opt(name, env):
 
     # find extra package requirements for setup
     msg = "this option requires some packages to setup"
-    if not ensure_installed_packages(opt_cfg.require('setup', env), msg, env):
+    if not ensure_installed_packages(opt.require('setup', env), msg, env):
         print("option installation stopped")
         return env
 
     # find parameters required by option config
-    try:
-        params = opt_cfg.parameters
-    except AttributeError:
-        params = []
+    params = opt.parameters
 
     option_cfg = ConfigSection()
     prev_cfg = env.globals.get(name, {})
@@ -119,14 +112,9 @@ def update_opt(name, env):
     # write new pkg_info file
     env.globals[name] = option_cfg
 
-    try:  # TODO: proper developer doc to expose this feature
-        opt_cfg.after(env)
-    except AttributeError:
-        pass
-
     # find extra package requirements for dvlpt
     msg = "this option requires additional packages for developers"
-    ensure_installed_packages(opt_cfg.require('dvlpt', env), msg, env)
+    ensure_installed_packages(opt.require('dvlpt', env), msg, env)
 
     return env
 
