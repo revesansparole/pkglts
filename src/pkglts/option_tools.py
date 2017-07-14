@@ -13,40 +13,68 @@ except NameError:
     loc_input = input
 
 
-def empty_list(*args):
-    return []
-
-
-def empty_dict(*args):
-    return {}
-
-
 class Option(object):
     """Base class to store information associated with an option
     """
 
     def __init__(self):
         self.parameters = []
-        self.check = empty_list
-        self.require = empty_list
-        self.environment_extensions = empty_dict
-        self.regenerate = empty_list
+        self._check = None
+        self._require = None
+        self._environment_extensions = None
+        self._regenerate = None
 
     def from_entry_point(self, ep):
         func_name = ep.name.split(".")[-1]
         if func_name == "parameters":
             self.parameters = ep.load()
         elif func_name == "check":
-            self.check = ep.load()
+            self._check = ep
         elif func_name == "require":
-            self.require = ep.load()
+            self._require = ep
         elif func_name == "environment_extensions":
-            self.environment_extensions = ep.load()
+            self._environment_extensions = ep
         elif func_name == "regenerate":
-            self.regenerate = ep.load()
+            self._regenerate = ep
         else:
             # silently ignore other type of entry points
             logger.error("unknown entry point attribute: '{}'".format(func_name))
+
+    def check(self, *args, **kwds):
+        if self._check is None:
+            return []
+
+        if isinstance(self._check, pkg_resources.EntryPoint):
+            self._check = self._check.load()
+
+        return self._check(*args, **kwds)
+
+    def require(self, *args, **kwds):
+        if self._require is None:
+            return []
+
+        if isinstance(self._require, pkg_resources.EntryPoint):
+            self._require = self._require.load()
+
+        return self._require(*args, **kwds)
+
+    def environment_extensions(self, *args, **kwds):
+        if self._environment_extensions is None:
+            return {}
+
+        if isinstance(self._environment_extensions, pkg_resources.EntryPoint):
+            self._environment_extensions = self._environment_extensions.load()
+
+        return self._environment_extensions(*args, **kwds)
+
+    def regenerate(self, *args, **kwds):
+        if self._regenerate is None:
+            return None
+
+        if isinstance(self._regenerate, pkg_resources.EntryPoint):
+            self._regenerate = self._regenerate.load()
+
+        return self._regenerate(*args, **kwds)
 
 
 def find_available_options():
