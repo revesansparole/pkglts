@@ -5,8 +5,19 @@ from .config_management import (get_pkg_config, installed_options,
                                 write_pkg_config)
 from .manage import (clean, init_pkg, install_example_files,
                      regenerate_package, regenerate_option, add_option)
+from .option_tools import find_available_options
 
 logger = logging.getLogger(__name__)
+
+
+def action_info(*args, **kwds):
+    """Display info on package for debug purpose.
+    """
+    del args  # unused
+    del kwds  # unused
+    logger.info("package info")
+    from pkglts.option_tools import available_options
+    print(available_options)
 
 
 def action_clean(*args, **kwds):
@@ -100,18 +111,22 @@ def action_example(*args, **kwds):
         install_example_files(name, env)
 
 
-action = dict(clean=action_clean,
-              init=action_init,
-              clear=action_clear,
-              update=action_update,
-              regenerate=action_regenerate,
-              rg=action_regenerate,
-              add=action_add,
-              remove=action_remove,
-              example=action_example)
+action = dict(
+    info=action_info,
+    clean=action_clean,
+    init=action_init,
+    clear=action_clear,
+    update=action_update,
+    regenerate=action_regenerate,
+    rg=action_regenerate,
+    add=action_add,
+    remove=action_remove,
+    example=action_example
+)
 
 
 def main():
+    # parse argument line
     parser = ArgumentParser(description='Package structure manager',
                             formatter_class=RawTextHelpFormatter)
 
@@ -136,6 +151,10 @@ def main():
     else:
         extra = dict(args.extra)
 
+    # initialize pkglts
+    find_available_options()
+
+    # perform action
     action[args.action](*args.action_args, **extra)
 
 

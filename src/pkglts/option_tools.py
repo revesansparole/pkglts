@@ -1,9 +1,49 @@
 """ Some helpers for options
 """
+import pkg_resources
+
+available_options = {}
+
 try:
     loc_input = raw_input
 except NameError:
     loc_input = input
+
+
+def empty_list(*args):
+    return []
+
+
+class Option(object):
+    """Base class to store information associated with an option
+    """
+
+    def __init__(self):
+        self.parameters = []
+        self.check = empty_list
+        self.require = empty_list
+        self.handlers = {}
+
+    def from_entry_point(self, ep):
+        func_name = ep.name.split(".")[-1]
+        if func_name == "parameters":
+            self.parameters = ep.load()
+        elif func_name == "check":
+            self.check = ep.load()
+        elif func_name == "require":
+            self.require = ep.load()
+        else:
+            self.handlers[func_name] = ep.load()
+
+
+def find_available_options():
+    for ep in pkg_resources.iter_entry_points(group='pkglts'):
+        option_name = ep.name.split(".")[0]
+        if option_name not in available_options:
+            available_options[option_name] = Option()
+
+        opt = available_options[option_name]
+        opt.from_entry_point(ep)
 
 
 def get_user_permission(action_name, default_true=True):
