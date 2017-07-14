@@ -15,15 +15,14 @@ def action_info(*args, **kwds):
     del kwds  # unused
     logger.info("package info")
     from pkglts.option_tools import available_options
-    print(available_options)
-    base = available_options['base']
+    print("available_options:")
+    for opt_name in available_options:
+        print("  ", opt_name)
     from pkglts.config_management import get_pkg_config
     cfg = get_pkg_config()
-    print(base.parameters)
-    print(tuple(cfg['base'].items()))
-    print(base.check(cfg))
-    print(base.require('option', cfg))
-    print(base.environment_extensions(cfg))
+    print("current config (after resolution)")
+    for opt_name, opt_params in cfg.items():
+        print(opt_name, opt_params)
 
 
 def action_clean(*args, **kwds):
