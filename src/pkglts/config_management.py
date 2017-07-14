@@ -4,7 +4,6 @@ import logging
 from os.path import join as pj
 
 from .config import pkglts_dir, pkg_cfg_file
-from .dependency import Dependency
 from .option_tools import available_options
 
 try:
@@ -22,39 +21,99 @@ default_cfg = dict(_pkglts=dict(use_prompts=False,
                                 version=current_pkg_cfg_version))
 
 
-class FormattedString(str):
-    """Small class to hold both formatted string and its template
+def is_available(opt_name):
+    return opt_name in available_options
+
+
+class ConfigSection(object):
+    """Small class to allow accessing parameters using the dot
+    method instead of ['param_name'] method
     """
     pass
 
 
-class ConfigSection(object):
-    """Small class to gather config keys
+class Config(dict):
+    """Object used to store both a templated version of the config as a dict interface
+    its resolution and a jinja2 environment that reflect the config.
     """
-    def __init__(self):
-        self._params = []
 
-    def add_param(self, key, val):
-        """Add a new attribute to this section
+    def __init__(self):
+        dict.__init__(self)
+        self._config_tpl = {}
+        self._config = {}
+
+        # initialise associated Jinja2 environment
+        self._env = Environment(undefined=StrictUndefined)
+        self._env.keep_trailing_newline = True
+
+        # add global filters and test
+        self._env.globals['today'] = lambda: "TODAY"  # TODO
+
+        self._env.tests['available'] = is_available
+
+    def _add_param(self, opt_name, param_name, param_value):
+        """Add a new parameter value in the config
 
         Args:
-            key (str): python valid identifier
-            val (any): actual value of the parameter
+            opt_name (str): Option name
+            param_name (str): parameter name
+            param_value (any): parameter value
 
         Returns:
-            (None)
+            None
         """
-        self._params.append(key)
-        setattr(self, key, val)
+        setattr(self._env.globals[opt_name], param_name, param_value)
 
-    def items(self):
-        """Iterates on couple key, values stored as attributes
+    def resolve(self):
+        """Try to resolve all templated items.
 
         Returns:
-            (iter of {str, any})
+            None
         """
-        for key in self._params:
-            yield key, getattr(self, key)
+        resolved = {}
+
+        to_eval = []
+        for opt_name, cfg in self.items():
+            resolved[opt_name] = {}
+            self._env.globals[opt_name] = ConfigSection()
+            for key, param in cfg.items():
+                if isinstance(param, string_type):
+                    to_eval.append((opt_name, key, param))
+                else:
+                    resolved[opt_name][key] = param
+                    self._add_param(opt_name, key, param)
+
+        nb_iter_max = len(to_eval) ** 2
+        cur_iter = 0
+        while len(to_eval) > 0 and cur_iter < nb_iter_max:
+            cur_iter += 1
+            opt_name, key, param = to_eval.pop(0)
+            try:
+                txt = self.render(param)
+                resolved[opt_name][key] = txt
+                self._add_param(opt_name, key, txt)
+            except UndefinedError:
+                to_eval.append((opt_name, key, param))
+
+        if len(to_eval) > 0:
+            msg = "unable to fully render config\n"
+            for item in to_eval:
+                msg += "%s:%s '%s'\n" % item
+            raise UserWarning(msg)
+
+        return resolved
+
+    def render(self, txt):
+        """Use items in config to render text
+
+        Args:
+            txt (str): templated text to render
+
+        Returns:
+            (str): same text where all templated parts have been replaced
+                   by their values.
+        """
+        return self._env.from_string(txt).render()
 
 
 def create_env(pkg_cfg):
