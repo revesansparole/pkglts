@@ -98,6 +98,69 @@ setup_kwds['entry_points']['pkglts'] = [
     'base.check = pkglts.option.base.config:check',
     'base.require = pkglts.option.base.config:require',
     'base.environment_extensions = pkglts.option.base.handlers:environment_extensions',
+
+    'conda.require = pkglts.option.conda.config:require',
+
+    'coverage.require = pkglts.option.coverage.config:require',
+
+    'coveralls.require = pkglts.option.coveralls.config:require',
+    'coveralls.environment_extensions = pkglts.option.coveralls.handlers:environment_extensions',
+
+    'data.require = pkglts.option.data.config:require',
+
+    'doc.parameters = pkglts.option.doc.config:parameters',
+    'doc.check = pkglts.option.doc.config:check',
+    'doc.require = pkglts.option.doc.config:require',
+
+    'flake8.require = pkglts.option.flake8.config:require',
+
+    'github.parameters = pkglts.option.github.config:parameters',
+    'github.check = pkglts.option.github.config:check',
+    'github.require = pkglts.option.github.config:require',
+
+    'landscape.require = pkglts.option.landscape.config:require',
+    'landscape.environment_extensions = pkglts.option.landscape.handlers:environment_extensions',
+
+    'license.parameters = pkglts.option.license.config:parameters',
+    'license.check = pkglts.option.license.config:check',
+    'license.require = pkglts.option.license.config:require',
+    'license.environment_extensions = pkglts.option.license.handlers:environment_extensions',
+
+    'notebook.parameters = pkglts.option.notebook.config:parameters',
+    'notebook.check = pkglts.option.notebook.config:check',
+    'notebook.require = pkglts.option.notebook.config:require',
+
+    'pypi.parameters = pkglts.option.pypi.config:parameters',
+    'pypi.check = pkglts.option.pypi.config:check',
+    'pypi.require = pkglts.option.pypi.config:require',
+    'pypi.environment_extensions = pkglts.option.pypi.handlers:environment_extensions',
+
+    'pysetup.parameters = pkglts.option.pysetup.config:parameters',
+    'pysetup.check = pkglts.option.pysetup.config:check',
+    'pysetup.require = pkglts.option.pysetup.config:require',
+    'pysetup.environment_extensions = pkglts.option.pysetup.handlers:environment_extensions',
+
+    'readthedocs.parameters = pkglts.option.readthedocs.config:parameters',
+    'readthedocs.check = pkglts.option.readthedocs.config:check',
+    'readthedocs.require = pkglts.option.readthedocs.config:require',
+    'readthedocs.environment_extensions = pkglts.option.readthedocs.handlers:environment_extensions',
+
+    'sphinx.parameters = pkglts.option.sphinx.config:parameters',
+    'sphinx.check = pkglts.option.sphinx.config:check',
+    'sphinx.require = pkglts.option.sphinx.config:require',
+
+    'test.parameters = pkglts.option.test.config:parameters',
+    'test.check = pkglts.option.test.config:check',
+    'test.require = pkglts.option.test.config:require',
+
+    'tox.require = pkglts.option.tox.config:require',
+
+    'travis.require = pkglts.option.travis.config:require',
+    'travis.environment_extensions = pkglts.option.travis.handlers:environment_extensions',
+
+    'version.parameters = pkglts.option.version.config:parameters',
+    'version.check = pkglts.option.version.config:check',
+    'version.require = pkglts.option.version.config:require',
 ]
 
 # do not change things below
