@@ -73,7 +73,7 @@ class Config(dict):
             None
         """
         to_eval = []
-        for opt_name, cfg in self.items():
+        for opt_name, cfg in self._tpl.items():
             self[opt_name] = {}
             self._env.globals[opt_name] = ConfigSection()
             for key, param in cfg.items():
