@@ -65,7 +65,7 @@ def require(purpose, cfg):
     del cfg
 
     if purpose == 'option':
-        options = ['pysetup', 'data']
+        options = ['pysetup', 'data', 'github']
         return [Dependency(name) for name in options]
 
     if purpose == 'install':
