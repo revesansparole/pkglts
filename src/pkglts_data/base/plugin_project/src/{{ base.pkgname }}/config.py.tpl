@@ -16,7 +16,7 @@ def update_parameters(cfg):
     # but be careful not to mess up with other options
 
     # add a parameter to the option
-    cfg['{{ base.pkgname }}'] = dict(myparam='custom_param')
+    cfg['{{ plugin_project.plugin_name }}'] = dict(myparam='custom_param')
 
 
 def check(cfg):
@@ -29,7 +29,7 @@ def check(cfg):
         (list of str): list of faulty parameters
     """
     invalids = []
-    myparam = cfg['{{ base.pkgname }}']['myparam']
+    myparam = cfg['{{ plugin_project.plugin_name }}']['myparam']
 
     if myparam != 'custom_param':
         invalids.append("myparam")
@@ -50,8 +50,7 @@ def require(purpose, cfg):
     del cfg
 
     if purpose == 'option':
-        options = ['pysetup', 'data']
-        return [Dependency(name) for name in options]
+        return [Dependency('base')]
 
     if purpose == 'install':
         return [Dependency('pkglts')]

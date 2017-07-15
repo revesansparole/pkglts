@@ -12,11 +12,44 @@ def update_parameters(cfg):
     Returns:
         None: update in place
     """
-    cfg['plugin_project'] = {}
+    cfg['plugin_project'] = {
+        "plugin_name": "{{ base.pkgname }}"
+    }
     # empty project just for construction
     # so does nothing
     # del cfg
     # return
+
+
+def is_valid_identifier(name):
+    """ Check that name is a valid python identifier
+    sort of back port of "".isidentifier()
+    """
+    try:
+        compile("%s=1" % name, "test", 'single')
+        return True
+    except SyntaxError:
+        return False
+
+
+def check(cfg):
+    """Check the validity of parameters in working environment.
+
+    Args:
+        cfg (Config):  current package configuration
+
+    Returns:
+        (list of str): list of faulty parameters
+    """
+    invalids = []
+    plugin_name = cfg['plugin_project']['plugin_name']
+
+    if "." in plugin_name:
+        invalids.append('plugin_name')
+    elif not is_valid_identifier(plugin_name):
+        invalids.append('plugin_name')
+
+    return invalids
 
 
 def require(purpose, cfg):
