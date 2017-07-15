@@ -108,7 +108,6 @@ setup_kwds['entry_points']['pkglts'] = [
 
     'coveralls.require = pkglts.option.coveralls.config:require',
     'coveralls.environment_extensions = pkglts.option.coveralls.handlers:environment_extensions',
-    'coveralls.files_dir = pkglts_data.base',
 
     'data.require = pkglts.option.data.config:require',
     'data.files_dir = pkglts_data.base',
@@ -119,7 +118,6 @@ setup_kwds['entry_points']['pkglts'] = [
     'doc.files_dir = pkglts_data.base',
 
     'flake8.require = pkglts.option.flake8.config:require',
-    'flake8.files_dir = pkglts_data.base',
 
     'github.update_parameters = pkglts.option.github.config:update_parameters',
     'github.check = pkglts.option.github.config:check',
@@ -140,7 +138,6 @@ setup_kwds['entry_points']['pkglts'] = [
     'notebook.check = pkglts.option.notebook.config:check',
     'notebook.require = pkglts.option.notebook.config:require',
     'notebook.regenerate = pkglts.option.notebook.regenerate:main',
-    'notebook.files_dir = pkglts_data.base',
 
     'plugin_project.update_parameters = pkglts.option.plugin_project.config:update_parameters',
     'plugin_project.check = pkglts.option.plugin_project.config:check',
@@ -163,7 +160,6 @@ setup_kwds['entry_points']['pkglts'] = [
     'readthedocs.check = pkglts.option.readthedocs.config:check',
     'readthedocs.require = pkglts.option.readthedocs.config:require',
     'readthedocs.environment_extensions = pkglts.option.readthedocs.handlers:environment_extensions',
-    'readthedocs.files_dir = pkglts_data.base',
 
     'sphinx.update_parameters = pkglts.option.sphinx.config:update_parameters',
     'sphinx.check = pkglts.option.sphinx.config:check',
