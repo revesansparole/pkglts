@@ -1,21 +1,23 @@
-from pkglts.config_management import pkg_env
+from pkglts.config_management import Config
 
 
 def test_badge():
-    env = pkg_env(dict(base={'pkgname': "pkg", 'namespace': None,
-                             "url": "http://toto"},
-                       pysetup={"intended_versions": ["27", "28"],
-                                'require': []},
-                       pypi={'classifiers': []}))
-    assert ".. image:" in env.globals['pypi'].badge
+    cfg = Config(dict(base={'pkgname': "pkg", 'namespace': None,
+                            "url": "http://toto"},
+                      pysetup={"intended_versions": ["27", "28"],
+                               'require': []},
+                      pypi={'classifiers': []}))
+    cfg.load_extra()
+    assert ".. image:" in cfg._env.globals['pypi'].badge
 
 
 def test_auto_classifiers():
-    env = pkg_env(dict(base={'pkgname': "pkg", 'namespace': None,
-                             "url": "http://toto"},
-                       pysetup={"intended_versions": ["27", "28"],
-                                'require': []},
-                       pypi={'classifiers': []}))
-    section = env.globals['pypi']
+    cfg = Config(dict(base={'pkgname': "pkg", 'namespace': None,
+                            "url": "http://toto"},
+                      pysetup={"intended_versions": ["27", "28"],
+                               'require': []},
+                      pypi={'classifiers': []}))
+    cfg.load_extra()
+    section = cfg._env.globals['pypi']
     assert "Programming Language :: Python" in section.auto_classifiers
     assert "Programming Language :: Python :: 2.7" in section.auto_classifiers

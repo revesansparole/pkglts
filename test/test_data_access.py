@@ -8,8 +8,7 @@ def test_data_access_data_dir():
 
 
 def test_data_access_ls():
-    assert (set(ls('test/test1')) ==
-            {('subtest', True), ('titi.txt', False)})
+    assert (set(ls('test/test1')) == {('subtest', True), ('titi.txt', False)})
 
 
 def test_data_access_get():

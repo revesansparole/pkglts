@@ -1,16 +1,16 @@
 from pkglts.option.doc import fmt_badge
 
 
-def environment_extensions(env):
+def environment_extensions(cfg):
     """Add more functionality to an environment.
 
     Args:
-        env (jinja2.Environment):
+        cfg (Config):  current package configuration
 
     Returns:
         dict of str: any
     """
-    project = env.globals['readthedocs'].project
+    project = cfg['readthedocs']['project']
     project = project.replace(".", "")
     url = "%s.readthedocs.io/en/latest/?badge=latest" % project
     img = "readthedocs.org/projects/%s/badge/?version=latest" % project

@@ -53,13 +53,13 @@ def parse_source(txt):
     return blocks
 
 
-def render(env, src_pth, tgt_pth):
+def render(cfg, src_pth, tgt_pth):
     """Render src_pth templated file into tgt_pth
 
     Notes: keeps 'preserved' block structure
 
     Args:
-        env (jinja2.Environment): current pkg environment
+        cfg (Config):  current package configuration
         src_pth (str): path to reference file
         tgt_pth (str): path to potentially non existent yet target file
 
@@ -88,8 +88,7 @@ def render(env, src_pth, tgt_pth):
     else:  # format non preserved blocks for the first and only time
         for bid, bef, cnt, aft in src_blocks:
             if bid is None:
-                template = env.from_string(cnt)
-                cnt = template.render()
+                cnt = cfg.render(cnt)
 
             blocks.append((bid, bef, cnt, aft))
 
@@ -102,8 +101,7 @@ def render(env, src_pth, tgt_pth):
             tgt += cnt
         else:
             # format cnt
-            template = env.from_string(cnt)
-            cnt = template.render()
+            cnt = cfg.render(cnt)
             preserved.append((bid, cnt))
             # rewrite preserved tag if necessary
             tgt += bef + "{" + "# pkglts, %s\n" % bid

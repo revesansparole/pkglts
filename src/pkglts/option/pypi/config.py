@@ -1,26 +1,39 @@
 from pkglts.dependency import Dependency
 
-parameters = [
-    ("classifiers", [
-        "Development Status :: 2 - Pre-Alpha",
-        "Intended Audience :: Developers",
-        "License :: OSI Approved :: BSD License",
-        "Natural Language :: English"
-    ])
-]
+
+def update_parameters(cfg):
+    """Update config with parameters necessary for this option.
+
+    Notes: create a section with option name to store params.
+
+    Args:
+        cfg (dict): dict of option parameters as seen in pkg_cfg.json
+
+    Returns:
+        None: update in place
+    """
+    sec = dict(
+        classifiers=[
+            "Development Status :: 2 - Pre-Alpha",
+            "Intended Audience :: Developers",
+            "License :: OSI Approved :: BSD License",
+            "Natural Language :: English"
+        ]
+    )
+    cfg['pypi'] = sec
 
 
-def check(env):
+def check(cfg):
     """Check the validity of parameters in working environment.
 
     Args:
-        env (jinja2.Environment):  current working environment
+        cfg (Config):  current package configuration
 
     Returns:
         (list of str): list of faulty parameters
     """
     invalids = []
-    classifiers = env.globals['pypi'].classifiers
+    classifiers = cfg['pypi']['classifiers']
 
     if len(classifiers) == 0:
         invalids.append("classifiers")
@@ -28,17 +41,17 @@ def check(env):
     return invalids
 
 
-def require(purpose, env):
+def require(purpose, cfg):
     """List of requirements for this option for a given purpose.
 
     Args:
         purpose (str): either 'option', 'setup', 'install' or 'dvlpt'
-        env (jinja2.Environment):  current working environment
+        cfg (Config):  current package configuration
 
     Returns:
         (list of Dependency)
     """
-    del env
+    del cfg
 
     if purpose == 'option':
         options = ['pysetup']

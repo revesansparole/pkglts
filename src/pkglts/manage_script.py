@@ -1,12 +1,28 @@
 from argparse import ArgumentParser, RawTextHelpFormatter
 import logging
 
-from .config_management import (get_pkg_config, installed_options,
-                                write_pkg_config)
+from .config_management import (get_pkg_config, write_pkg_config)
 from .manage import (clean, init_pkg, install_example_files,
                      regenerate_package, regenerate_option, add_option)
 
 logger = logging.getLogger(__name__)
+
+
+def action_info(*args, **kwds):
+    """Display info on package for debug purpose.
+    """
+    del args  # unused
+    del kwds  # unused
+    logger.info("package info")
+    from pkglts.option_tools import available_options
+    print("available_options:")
+    for opt_name in available_options:
+        print("  ", opt_name)
+    from pkglts.config_management import get_pkg_config
+    cfg = get_pkg_config()
+    print("current config (after resolution)")
+    for opt_name, opt_params in cfg.items():
+        print(opt_name, opt_params)
 
 
 def action_clean(*args, **kwds):
@@ -21,9 +37,10 @@ def action_clean(*args, **kwds):
 def action_init(*args, **kwds):
     """Initialize environment for use of pkglts.
     """
-    del args  # unused
-    del kwds  # unused
     init_pkg()
+
+    if len(args) > 0:
+        action_add(*args, **kwds)
 
 
 def action_clear(*args, **kwds):
@@ -49,16 +66,16 @@ def action_regenerate(*args, **kwds):
     """
     overwrite = 'overwrite' in kwds
 
-    env = get_pkg_config()
+    cfg = get_pkg_config()
     clean()
 
     if len(args) == 0:
         logger.info("regenerate package")
-        regenerate_package(env, overwrite=overwrite)
+        regenerate_package(cfg, overwrite=overwrite)
     else:
         for name in args:
             logger.info("regenerate '%s'" % name)
-            regenerate_option(env, name, overwrite=overwrite)
+            regenerate_option(cfg, name, overwrite=overwrite)
 
 
 def action_add(*args, **kwds):
@@ -69,11 +86,11 @@ def action_add(*args, **kwds):
         raise UserWarning("need to specify at least one option name")
 
     logger.info("add option")
-    env = get_pkg_config()
+    cfg = get_pkg_config()
     for name in args:
-        env = add_option(name, env)
+        cfg = add_option(name, cfg)
 
-    write_pkg_config(env)
+    write_pkg_config(cfg)
 
 
 def action_remove(*args, **kwds):
@@ -95,23 +112,27 @@ def action_example(*args, **kwds):
         raise UserWarning("need to specify at least one option name")
 
     logger.info("install examples")
-    env = get_pkg_config()
+    cfg = get_pkg_config()
     for name in args:
-        install_example_files(name, env)
+        install_example_files(name, cfg)
 
 
-action = dict(clean=action_clean,
-              init=action_init,
-              clear=action_clear,
-              update=action_update,
-              regenerate=action_regenerate,
-              rg=action_regenerate,
-              add=action_add,
-              remove=action_remove,
-              example=action_example)
+action = dict(
+    info=action_info,
+    clean=action_clean,
+    init=action_init,
+    clear=action_clear,
+    update=action_update,
+    regenerate=action_regenerate,
+    rg=action_regenerate,
+    add=action_add,
+    remove=action_remove,
+    example=action_example
+)
 
 
 def main():
+    # parse argument line
     parser = ArgumentParser(description='Package structure manager',
                             formatter_class=RawTextHelpFormatter)
 
@@ -136,6 +157,7 @@ def main():
     else:
         extra = dict(args.extra)
 
+    # perform action
     action[args.action](*args.action_args, **extra)
 
 

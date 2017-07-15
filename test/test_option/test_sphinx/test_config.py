@@ -1,22 +1,23 @@
-from pkglts.config_management import create_env
-from pkglts.option.sphinx.config import check, parameters, require
+from pkglts.config_management import Config
+from pkglts.option.sphinx.config import check, require, update_parameters
 
 
-def test_parameters():
-    assert len(parameters) == 2
+def test_update_parameters():
+    cfg = {}
+    update_parameters(cfg)
+    assert len(cfg['sphinx']) == 2
 
 
 def test_config_check_sphinx_theme():
     for theme in (1, None,):
-        env = create_env(dict(sphinx={'theme': theme}))
-        assert 'theme' in check(env)
+        cfg = Config(dict(sphinx={'theme': theme}))
+        assert 'theme' in check(cfg)
 
 
 def test_require():
-    cfg = dict(sphinx={})
-    env = create_env(cfg)
+    cfg = Config(dict(sphinx={}))
 
-    assert len(require('option', env)) == 2
-    assert len(require('setup', env)) == 0
-    assert len(require('install', env)) == 0
-    assert len(require('dvlpt', env)) == 1
+    assert len(require('option', cfg)) == 2
+    assert len(require('setup', cfg)) == 0
+    assert len(require('install', cfg)) == 0
+    assert len(require('dvlpt', cfg)) == 1

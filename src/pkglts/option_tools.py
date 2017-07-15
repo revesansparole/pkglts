@@ -1,9 +1,114 @@
 """ Some helpers for options
 """
+import logging
+from os.path import dirname, join as pj
+import pkg_resources
+
+logger = logging.getLogger(__name__)
+
+available_options = {}
+
 try:
     loc_input = raw_input
 except NameError:
     loc_input = input
+
+
+class Option(object):
+    """Base class to store information associated with an option
+    """
+
+    def __init__(self):
+        self._name = None
+        self._update_parameters = None
+        self._check = None
+        self._require = None
+        self._environment_extensions = None
+        self._regenerate = None
+        self._files_dir = None
+
+    def from_entry_point(self, ep):
+        self._name, func_name = ep.name.split(".")
+        if func_name == "update_parameters":
+            self._update_parameters = ep
+        elif func_name == "check":
+            self._check = ep
+        elif func_name == "require":
+            self._require = ep
+        elif func_name == "environment_extensions":
+            self._environment_extensions = ep
+        elif func_name == "regenerate":
+            self._regenerate = ep
+        elif func_name == "files_dir":
+            self._files_dir = ep
+        else:
+            # silently ignore other type of entry points
+            logger.error("unknown entry point attribute: '{}'".format(func_name))
+
+    def update_parameters(self, cfg):
+        if self._update_parameters is None:
+            cfg[self._name] = {}
+            return
+
+        if isinstance(self._update_parameters, pkg_resources.EntryPoint):
+            self._update_parameters = self._update_parameters.load()
+
+        return self._update_parameters(cfg)
+
+    def check(self, *args, **kwds):
+        if self._check is None:
+            return []
+
+        if isinstance(self._check, pkg_resources.EntryPoint):
+            self._check = self._check.load()
+
+        return self._check(*args, **kwds)
+
+    def require(self, *args, **kwds):
+        if self._require is None:
+            return []
+
+        if isinstance(self._require, pkg_resources.EntryPoint):
+            self._require = self._require.load()
+
+        return self._require(*args, **kwds)
+
+    def environment_extensions(self, *args, **kwds):
+        if self._environment_extensions is None:
+            return {}
+
+        if isinstance(self._environment_extensions, pkg_resources.EntryPoint):
+            self._environment_extensions = self._environment_extensions.load()
+
+        return self._environment_extensions(*args, **kwds)
+
+    def regenerate(self, *args, **kwds):
+        if self._regenerate is None:
+            return None
+
+        if isinstance(self._regenerate, pkg_resources.EntryPoint):
+            self._regenerate = self._regenerate.load()
+
+        return self._regenerate(*args, **kwds)
+
+    def files_dir(self):
+        if self._files_dir is None:
+            return None
+
+        if isinstance(self._files_dir, pkg_resources.EntryPoint):
+            self._files_dir = pj(dirname(self._files_dir.load().__file__), self._name)
+
+        return self._files_dir
+
+
+def find_available_options():
+    for ep in pkg_resources.iter_entry_points(group='pkglts'):
+        option_name = ep.name.split(".")[0]
+        if option_name not in available_options:
+            available_options[option_name] = Option()
+
+        opt = available_options[option_name]
+        opt.from_entry_point(ep)
 
 
 def get_user_permission(action_name, default_true=True):

@@ -1,55 +1,53 @@
-from importlib import import_module
-
-from pkglts.config_management import installed_options
 from pkglts.dependency import Dependency
+from pkglts.option_tools import available_options
 
 
-def requirements(env, requirement_name):
+def requirements(cfg, requirement_name):
     """Check all requirements for installed options.
 
     Args:
-        env (jinja2.Environment):
+        cfg (Config):  current package configuration
         requirement_name (str): type of requirement 'install', 'dvlpt'
 
     Returns:
         (list of str): list of required packages names
     """
     reqs = {}
-    for name in installed_options(env):
+    for name in cfg.installed_options():
         try:
-            opt_cfg = import_module("pkglts.option.%s.config" % name)
-            for dep in opt_cfg.require(requirement_name, env):
+            opt = available_options[name]
+            for dep in opt.require(requirement_name, cfg):
                 reqs[dep.name] = dep
-        except ImportError:
+        except KeyError:
             raise KeyError("option '%s' does not exists" % name)
 
     return [reqs[name] for name in sorted(reqs)]
 
 
-def pkg_url(env):
+def pkg_url(cfg):
     try:
-        url = env.globals['base'].url
+        url = cfg['base']['url']
         if url is not None:
             return url
     except KeyError:
         pass
 
     try:
-        url = env.globals['github'].url
+        url = cfg['github']['url']
         if url is not None:
             return url
     except KeyError:
         pass
 
     try:
-        url = env.globals['pypi'].url
+        url = cfg['pypi']['url']
         if url is not None:
             return url
     except KeyError:
         pass
 
     try:
-        url = env.globals['readthedocs'].url
+        url = cfg['readthedocs']['url']
         if url is not None:
             return url
     except KeyError:
@@ -58,20 +56,20 @@ def pkg_url(env):
     return ""
 
 
-def environment_extensions(env):
+def environment_extensions(cfg):
     """Add more functionality to an environment.
 
     Args:
-        env (jinja2.Environment):
+        cfg (Config):  current package configuration
 
     Returns:
         dict of str: any
     """
-    req_install = requirements(env, 'install')
-    for dep in env.globals['pysetup'].require:
+    req_install = requirements(cfg, 'install')
+    for dep in cfg['pysetup']['require']:
         req_install.append(Dependency(**dep))
 
-    req_dvlpt = requirements(env, 'dvlpt')
+    req_dvlpt = requirements(cfg, 'dvlpt')
 
     def req(name):
         if name == 'install':
@@ -81,5 +79,5 @@ def environment_extensions(env):
         else:
             raise UserWarning("WTF")
 
-    return {"pkg_url": pkg_url(env),
+    return {"pkg_url": pkg_url(cfg),
             "requirements": req}

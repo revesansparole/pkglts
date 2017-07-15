@@ -23,29 +23,29 @@ def get_tpl_path(name):
     return tpl_pth
 
 
-def full_text(env):
+def full_text(cfg):
     """Generate a license
     """
-    name = env.globals['license'].name
+    name = cfg['license']['name']
 
     # open template
     try:
         with open(get_tpl_path(name), 'r') as f:
             cnt = f.read()
 
-        return env.from_string(cnt).render()
+        return cfg.render(cnt)
     except IOError as e:
         logger.error("unable to find template for given license")
         raise e
 
 
-def environment_extensions(env):
+def environment_extensions(cfg):
     """Add more functionality to an environment.
 
     Args:
-        env (jinja2.Environment):
+        cfg (Config):  current package configuration
 
     Returns:
         dict of str: any
     """
-    return {"full_text": full_text(env)}
+    return {"full_text": full_text(cfg)}

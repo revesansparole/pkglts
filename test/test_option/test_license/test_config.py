@@ -1,26 +1,27 @@
-from pkglts.config_management import create_env
-from pkglts.option.license.config import check, parameters, require
+from pkglts.config_management import Config
+from pkglts.option.license.config import check, require, update_parameters
 
 
-def test_parameters():
-    assert len(parameters) == 4
+def test_update_parameters():
+    cfg = {}
+    update_parameters(cfg)
+    assert len(cfg['license']) == 4
 
 
 def test_config_check_license_name_exists():
-    env = create_env(dict(license={'name': "", 'year': 2015,
-                                   'organization': "oa", 'project': "project"}))
-    assert 'name' in check(env)
+    cfg = Config(dict(license={'name': "", 'year': 2015,
+                               'organization': "oa", 'project': "project"}))
+    assert 'name' in check(cfg)
 
-    env = create_env(dict(license={'name': "tugudu", 'year': 2015,
-                                   'organization': "oa", 'project': "project"}))
-    assert 'name' in check(env)
+    cfg = Config(dict(license={'name': "tugudu", 'year': 2015,
+                               'organization': "oa", 'project': "project"}))
+    assert 'name' in check(cfg)
 
 
 def test_require():
-    cfg = dict(license={})
-    env = create_env(cfg)
+    cfg = Config(dict(license={}))
 
-    assert len(require('option', env)) == 1
-    assert len(require('setup', env)) == 0
-    assert len(require('install', env)) == 0
-    assert len(require('dvlpt', env)) == 0
+    assert len(require('option', cfg)) == 1
+    assert len(require('setup', cfg)) == 0
+    assert len(require('install', cfg)) == 0
+    assert len(require('dvlpt', cfg)) == 0

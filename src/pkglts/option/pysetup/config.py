@@ -1,27 +1,40 @@
 from pkglts.dependency import Dependency
 
-parameters = [
-    ("intended_versions", ["27"]),
-    ("require", [])
-]
+
+def update_parameters(cfg):
+    """Update config with parameters necessary for this option.
+
+    Notes: create a section with option name to store params.
+
+    Args:
+        cfg (dict): dict of option parameters as seen in pkg_cfg.json
+
+    Returns:
+        None: update in place
+    """
+    sec = dict(
+        intended_versions=["36"],
+        require=[]
+    )
+    cfg['pysetup'] = sec
 
 
-def check(env):
+def check(cfg):
     """Check the validity of parameters in working environment.
 
     Args:
-        env (jinja2.Environment):  current working environment
+        cfg (Config):  current package configuration
 
     Returns:
         (list of str): list of faulty parameters
     """
     invalids = []
-    intended_versions = env.globals['pysetup'].intended_versions
+    intended_versions = cfg['pysetup']['intended_versions']
 
     if len(intended_versions) == 0:
         invalids.append("intended_versions")
 
-    require = env.globals['pysetup'].require
+    require = cfg['pysetup']['require']
 
     valid_methods = (None, "pip", "conda", "git")
     if any(dep.get('pkg_mng') not in valid_methods for dep in require):
@@ -30,17 +43,17 @@ def check(env):
     return invalids
 
 
-def require(purpose, env):
+def require(purpose, cfg):
     """List of requirements for this option for a given purpose.
 
     Args:
         purpose (str): either 'option', 'setup', 'install' or 'dvlpt'
-        env (jinja2.Environment):  current working environment
+        cfg (Config):  current package configuration
 
     Returns:
         (list of Dependency)
     """
-    del env
+    del cfg
 
     if purpose == 'option':
         options = ['base', 'test', 'doc', 'license', 'version']

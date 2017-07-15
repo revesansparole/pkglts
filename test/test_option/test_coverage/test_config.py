@@ -1,16 +1,14 @@
-from pkglts.config_management import create_env
+from pkglts.config_management import Config
 from pkglts.option.coverage.config import require
 
 
 def test_require():
-    cfg = dict(coverage={}, test={'suite_name': 'pytest'})
-    env = create_env(cfg)
+    cfg = Config(dict(coverage={}, test={'suite_name': 'pytest'}))
 
-    assert len(require('option', env)) == 1
-    assert len(require('setup', env)) == 0
-    assert len(require('install', env)) == 0
-    assert len(require('dvlpt', env)) == 2
+    assert len(require('option', cfg)) == 1
+    assert len(require('setup', cfg)) == 0
+    assert len(require('install', cfg)) == 0
+    assert len(require('dvlpt', cfg)) == 2
 
-    cfg = dict(coverage={}, test={'suite_name': 'nose'})
-    env = create_env(cfg)
-    assert len(require('dvlpt', env)) == 1
+    cfg = Config(dict(coverage={}, test={'suite_name': 'nose'}))
+    assert len(require('dvlpt', cfg)) == 1

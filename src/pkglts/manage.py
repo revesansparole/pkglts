@@ -4,7 +4,6 @@
 Use 'setup.py' for common tasks.
 """
 
-from importlib import import_module
 import logging
 from os import listdir, mkdir, remove, walk
 from os.path import exists, normpath, splitext
@@ -13,14 +12,13 @@ from shutil import rmtree
 
 from .config import pkglts_dir, pkg_cfg_file, pkg_hash_file
 from .data_access import get_data_dir, ls
-from .config_management import (pkg_env, default_cfg,
-                                get_pkg_config, installed_options,
-                                write_pkg_config)
+from .config_management import (Config, default_cfg,
+                                get_pkg_config, write_pkg_config)
 from .hash_management import (get_pkg_hash, modified_file_hash,
                               pth_as_key, write_pkg_hash)
 from .manage_tools import (check_option_parameters,
                            regenerate_dir, update_opt)
-from .option_tools import get_user_permission
+from .option_tools import available_options, get_user_permission
 
 logger = logging.getLogger(__name__)
 
@@ -45,10 +43,10 @@ def init_pkg(rep="."):
                 f.write("")
 
     if exists(pj(rep, pkglts_dir, pkg_cfg_file)):
-        env = get_pkg_config(rep)
+        cfg = get_pkg_config(rep)
     else:
-        env = pkg_env(default_cfg)
-    write_pkg_config(env, rep)
+        cfg = Config(default_cfg)
+    write_pkg_config(cfg, rep)
 
     if not exists(pj(rep, pkglts_dir, pkg_hash_file)):
         write_pkg_hash({}, rep)
@@ -87,36 +85,36 @@ def clean(rep="."):
                     remove(pj(root, name))
 
 
-def add_option(name, env):
+def add_option(name, cfg):
     """Add a new option to this package.
 
     Notes: See the list of available options online
 
     Args:
         name (str): name of option to add
-        env (jinja2.Environment): current working environment
+        cfg (Config):  current package configuration
 
     Returns:
-        (jinja2.Environment): updated environment
+        (Config): updated package configuration
     """
-    if name in installed_options(env):
+    if name in cfg.installed_options():
         raise UserWarning("option already included in this package")
 
-    return update_opt(name, env)
+    return update_opt(name, cfg)
 
 
-def install_example_files(option, env, target="."):
+def install_example_files(option, cfg, target="."):
     """Install example files associated to an option.
 
     Args:
         option (str): name of option
-        env (jinja2.Environment): current working environment
+        cfg (Config):  current package configuration
         target (str): target directory to write into
 
     Returns:
         (bool): whether operation succeeded or not
     """
-    if option not in installed_options(env):
+    if option not in cfg.installed_options():
         logger.warning("please install option before example files")
         return False
 
@@ -125,15 +123,15 @@ def install_example_files(option, env, target="."):
         return False
 
     root = pj(get_data_dir(), 'example', option)
-    regenerate_dir(root, target, env, {})
+    regenerate_dir(root, target, cfg, {})
     return True
 
 
-def regenerate_package(env, target=".", overwrite=False):
+def regenerate_package(cfg, target=".", overwrite=False):
     """Rebuild all automatically generated files.
 
     Args:
-        env (jinja2.Environment): current working environment
+        cfg (Config):  current package configuration
         target (str): target directory to write into
         overwrite (bool): default False, whether or not
                          to overwrite user modified files
@@ -143,8 +141,8 @@ def regenerate_package(env, target=".", overwrite=False):
     """
     # check consistency of env params
     invalids = []
-    for option in installed_options(env):
-        for n in check_option_parameters(option, env):
+    for option in cfg.installed_options():
+        for n in check_option_parameters(option, cfg):
             invalids.append("%s.%s" % (option, n))
 
     if len(invalids) > 0:
@@ -178,24 +176,25 @@ def regenerate_package(env, target=".", overwrite=False):
 
     # render files for all options
     hm = {}
-    for name in installed_options(env):
-        opt_ref_dir = pj(get_data_dir(), 'base', name)
-        if not exists(opt_ref_dir):
-            logger.debug("option %s do not provide files" % name)
+    for name in cfg.installed_options():
+        opt = available_options[name]
+        opt_ref_dir = opt.files_dir()
+        if opt_ref_dir is None:
+            logger.info("option %s does not provide files" % name)
         else:
             logger.info("rendering option %s" % name)
-            loc_hm = regenerate_dir(opt_ref_dir, target, env, overwrite_file)
+            loc_hm = regenerate_dir(opt_ref_dir, target, cfg, overwrite_file)
             hm.update(loc_hm)
 
     hm_ref.update(hm)
     write_pkg_hash(hm_ref, target)
 
 
-def regenerate_option(env, name, target=".", overwrite=False):
+def regenerate_option(cfg, name, target=".", overwrite=False):
     """Call the regenerate function of a given option
 
     Args:
-        env (jinja2.Environment): current working environment
+        cfg (Config):  current package configuration
         name: (str) name of option
         target: (str) target directory to write into
         overwrite (bool): default False, whether or not
@@ -206,12 +205,7 @@ def regenerate_option(env, name, target=".", overwrite=False):
     """
     # test existence of option regenerate module
     try:
-        import_module("pkglts.option.%s" % name)
-    except ImportError:
+        opt = available_options[name]
+        opt.regenerate(cfg, target, overwrite)
+    except KeyError:
         raise KeyError("option '%s' does not exists" % name)
-    try:
-        opt_regenerate = import_module("pkglts.option.%s.regenerate" % name)
-    except ImportError:
-        raise KeyError("option '%s' does not provide regeneration" % name)
-
-    opt_regenerate.main(env, target, overwrite)

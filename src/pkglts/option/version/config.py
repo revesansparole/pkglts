@@ -1,25 +1,38 @@
 from pkglts.dependency import Dependency
 
-parameters = [
-    ("major", 0),
-    ("minor", 1),
-    ("post", 0)
-]
+
+def update_parameters(cfg):
+    """Update config with parameters necessary for this option.
+
+    Notes: create a section with option name to store params.
+
+    Args:
+        cfg (dict): dict of option parameters as seen in pkg_cfg.json
+
+    Returns:
+        None: update in place
+    """
+    sec = dict(
+        major=0,
+        minor=0,
+        post=1,
+    )
+    cfg['version'] = sec
 
 
-def check(env):
+def check(cfg):
     """Check the validity of parameters in working environment.
 
     Args:
-        env (jinja2.Environment):  current working environment
+        cfg (Config):  current package configuration
 
     Returns:
         (list of str): list of faulty parameters
     """
     invalids = []
-    major = env.globals['version'].major
-    minor = env.globals['version'].minor
-    post = env.globals['version'].post
+    major = cfg['version']['major']
+    minor = cfg['version']['minor']
+    post = cfg['version']['post']
 
     if not isinstance(major, int):
         invalids.append("major")
@@ -31,17 +44,17 @@ def check(env):
     return invalids
 
 
-def require(purpose, env):
+def require(purpose, cfg):
     """List of requirements for this option for a given purpose.
 
     Args:
         purpose (str): either 'option', 'setup', 'install' or 'dvlpt'
-        env (jinja2.Environment):  current working environment
+        cfg (Config):  current package configuration
 
     Returns:
         (list of Dependency)
     """
-    del env
+    del cfg
 
     if purpose == 'option':
         options = ['base']

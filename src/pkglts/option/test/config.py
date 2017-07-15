@@ -1,21 +1,34 @@
 from pkglts.dependency import Dependency
 
-parameters = [
-    ("suite_name", "pytest")
-]
+
+def update_parameters(cfg):
+    """Update config with parameters necessary for this option.
+
+    Notes: create a section with option name to store params.
+
+    Args:
+        cfg (dict): dict of option parameters as seen in pkg_cfg.json
+
+    Returns:
+        None: update in place
+    """
+    sec = dict(
+        suite_name="pytest",
+    )
+    cfg['test'] = sec
 
 
-def check(env):
+def check(cfg):
     """Check the validity of parameters in working environment.
 
     Args:
-        env (jinja2.Environment):  current working environment
+        cfg (Config):  current package configuration
 
     Returns:
         (list of str): list of faulty parameters
     """
     invalids = []
-    name = env.globals['test'].suite_name
+    name = cfg['test']['suite_name']
 
     if name not in ("pytest", "nose"):
         invalids.append('suite_name')
@@ -23,12 +36,12 @@ def check(env):
     return invalids
 
 
-def require(purpose, env):
+def require(purpose, cfg):
     """List of requirements for this option for a given purpose.
 
     Args:
         purpose (str): either 'option', 'setup', 'install' or 'dvlpt'
-        env (jinja2.Environment):  current working environment
+        cfg (Config):  current package configuration
 
     Returns:
         (list of Dependency)
@@ -40,7 +53,7 @@ def require(purpose, env):
     if purpose == 'dvlpt':
         deps = [Dependency('mock')]
 
-        test_suite = env.globals['test'].suite_name
+        test_suite = cfg['test']['suite_name']
         if test_suite == 'pytest':
             deps.append(Dependency('pytest'))
         if test_suite == 'nose':

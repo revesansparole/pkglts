@@ -1,7 +1,8 @@
-from pkglts.config_management import pkg_env
+from pkglts.config_management import Config
 
 
 def test_badge():
-    env = pkg_env(dict(coveralls={},
-                          github={'owner': "moi", 'project': "project"}))
-    assert ".. image:" in env.globals['coveralls'].badge
+    cfg = Config(dict(coveralls={},
+                      github={'owner': "moi", 'project': "project"}))
+    cfg.load_extra()
+    assert ".. image:" in cfg._env.globals['coveralls'].badge

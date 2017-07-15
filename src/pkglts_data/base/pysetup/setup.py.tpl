@@ -98,7 +98,15 @@ setup_kwds = dict(
 )
 # #}
 # change setup_kwds below before the next pkglts tag
-
+{% if 'plugin_project' is available %}
+setup_kwds['entry_points']['pkglts'] = [
+    '{{ plugin_project.plugin_name }}.update_parameters = {{ base.pkg_full_name }}.config:update_parameters',
+    '{{ plugin_project.plugin_name }}.check = {{ base.pkg_full_name }}.config:check',
+    '{{ plugin_project.plugin_name }}.require = {{ base.pkg_full_name }}.config:require',
+    '{{ plugin_project.plugin_name }}.environment_extensions = {{ base.pkg_full_name }}.handlers:environment_extensions',
+    '{{ plugin_project.plugin_name }}.files_dir = {{ base.pkg_full_name }}_data',
+]
+{% endif %}
 # do not change things below
 # {# pkglts, pysetup.call
 setup(**setup_kwds)

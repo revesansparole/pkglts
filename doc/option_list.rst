@@ -84,12 +84,15 @@ already developed online tools:
 External options
 ================
 
-Options developped for specific purposes. Why not consider adding your option?
+Options developed for specific purposes. Why not consider adding your option? You can easily
+customize  `pkglts` for your very own purpose by creating a plugin. The `plugin_project`
+option allow you to easily create such package for extending `pkglts`.
 
 .. toctree::
    :maxdepth: 1
 
-   option/plugin/main
+   option/plugin_project/main
+
 
 .. _GitHub: https://github.com/
 .. _PyPi: https://pypi.python.org/pypi

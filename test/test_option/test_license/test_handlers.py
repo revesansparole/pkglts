@@ -1,15 +1,17 @@
 import pytest
 
-from pkglts.config_management import pkg_env
+from pkglts.config_management import Config
 
 
 def test_generate():
-    cfg = dict(name='mit',
-               year="2015",
-               organization="org",
-               project="project")
-    env = pkg_env(dict(license=cfg))
-    assert len(env.globals['license'].full_text) > 0
+    cfg = Config(dict(license=dict(
+        name='mit',
+        year="2015",
+        organization="org",
+        project="project"))
+    )
+    cfg.load_extra()
+    assert len(cfg._env.globals['license'].full_text) > 0
 
 
 def test_generate_raise_error_if_license_do_not_exists():
@@ -18,4 +20,4 @@ def test_generate_raise_error_if_license_do_not_exists():
                organization="org",
                project="project")
     with pytest.raises(IOError):
-        pkg_env(dict(license=cfg))
+        Config(dict(license=cfg)).load_extra()
