@@ -36,9 +36,9 @@ def tree(dname, padding, txt):
         if is_dir:
             txt += "/\n"
             if count == len(files):
-                txt = tree(path, padding + ' ' + ' ' * (len(fmt_name) / 2), txt)
+                txt = tree(path, padding + ' ' + ' ' * int(len(fmt_name) / 2), txt)
             else:
-                txt = tree(path, padding + '|' + ' ' * (len(fmt_name) / 2), txt)
+                txt = tree(path, padding + '|' + ' ' * int(len(fmt_name) / 2), txt)
         else:
             txt += '\n'
 
