@@ -33,3 +33,7 @@ in which you started to code).
 Then::
 
     (dvlpt) \plugin_name\$ pmg rg
+
+If you want your plugin to generate some files, you can install an example of them using::
+
+    (dvlpt) \plugin_name\$ pmg example plugin_project
