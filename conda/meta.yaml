@@ -20,15 +20,15 @@ requirements:
     - python
     - jinja2
     - coverage
-    - coveralls
     - flake8
     - mock
     - nbconvert
     - pytest
     - pytest-cov
     - sphinx
-    - tox
-    - twine
+    # - tox # virtualenv
+    # - twine
+    # - coveralls
 
 build:
   script: python setup.py install --single-version-externally-managed --record=record.txt
