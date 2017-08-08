@@ -49,7 +49,7 @@ def require(purpose, cfg):
     del cfg
 
     if purpose == 'option':
-        options = ['test', 'doc']
+        options = ['test', 'doc', 'license']
         return [Dependency(name) for name in options]
 
     if purpose == 'dvlpt':
