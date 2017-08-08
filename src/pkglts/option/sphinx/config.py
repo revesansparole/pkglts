@@ -13,8 +13,9 @@ def update_parameters(cfg):
         None: update in place
     """
     sec = dict(
-        theme='default',
-        autodoc_dvlpt=True
+        theme="default",
+        autodoc_dvlpt=True,
+        build_dir="build/sphinx"
     )
     cfg['sphinx'] = sec
 

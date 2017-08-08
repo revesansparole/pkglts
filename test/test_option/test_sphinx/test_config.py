@@ -5,7 +5,7 @@ from pkglts.option.sphinx.config import check, require, update_parameters
 def test_update_parameters():
     cfg = {}
     update_parameters(cfg)
-    assert len(cfg['sphinx']) == 2
+    assert len(cfg['sphinx']) == 3
 
 
 def test_config_check_sphinx_theme():
