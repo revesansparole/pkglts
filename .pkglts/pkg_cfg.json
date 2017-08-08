@@ -3,7 +3,7 @@
     "auto_install": true,
     "install_front_end": "stdout",
     "use_prompts": false,
-    "version": 6
+    "version": 7
   },
   "base": {
     "authors": [
@@ -69,6 +69,7 @@
   },
   "sphinx": {
     "autodoc_dvlpt": true,
+    "build_dir": "build/sphinx",
     "theme": "default"
   },
   "test": {
