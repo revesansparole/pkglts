@@ -17,7 +17,7 @@ def test_config_check_sphinx_theme():
 def test_require():
     cfg = Config(dict(sphinx={}))
 
-    assert len(require('option', cfg)) == 2
+    assert len(require('option', cfg)) == 3
     assert len(require('setup', cfg)) == 0
     assert len(require('install', cfg)) == 0
     assert len(require('dvlpt', cfg)) == 1
