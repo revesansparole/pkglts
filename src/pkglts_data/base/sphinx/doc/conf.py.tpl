@@ -86,7 +86,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'{{ base.pkg_full_name }}'
-copyright = u'2015, {{ base.pkg_full_name }}'
+copyright = u'{{ license.year }}, {{ base.pkg_full_name }}'
 
 # The version info for the project you're documenting, acts as replacement
 # for |version| and |release|, also used in various other places throughout
