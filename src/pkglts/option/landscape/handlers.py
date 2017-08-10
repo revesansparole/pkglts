@@ -15,6 +15,6 @@ def environment_extensions(cfg):
 
     url = "landscape.io/github/%s/%s/master" % (owner, project)
     img = url + "/landscape.svg?style=flat"
-    badge = fmt_badge(img, url, "Code health status")
+    badge = fmt_badge(img, url, "Code health status", cfg['doc']['fmt'])
 
     return {"badge": badge}
