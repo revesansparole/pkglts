@@ -124,9 +124,9 @@ def render(cfg, src_pth, tgt_pth):
             cnt = cfg.render(block.content)
             preserved.append((block.bid, cnt))
             # rewrite preserved tag if necessary
-            tgt += block.before_header + "{" + "# pkglts, %s\n" % block.bid
+            tgt += block.before_header + "{" + "# pkglts, %s" % block.bid + "%s\n" % block.after_header
             tgt += cnt
-            tgt += "\n" + block.before_footer + "#" + "}\n"
+            tgt += "\n" + block.before_footer + "#" + "}%s\n" % block.after_footer
     
     with open(tgt_pth, 'w') as f:
         f.write(tgt)
