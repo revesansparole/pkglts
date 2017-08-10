@@ -15,6 +15,6 @@ def environment_extensions(cfg):
 
     url = "travis-ci.org/%s/%s" % (owner, project)
     img = url + ".svg?branch=master"
-    badge = fmt_badge(img, url, "Travis build status")
+    badge = fmt_badge(img, url, "Travis build status", cfg['doc']['fmt'])
 
     return {"badge": badge}

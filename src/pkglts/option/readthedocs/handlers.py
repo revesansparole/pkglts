@@ -14,6 +14,6 @@ def environment_extensions(cfg):
     project = project.replace(".", "")
     url = "%s.readthedocs.io/en/latest/?badge=latest" % project
     img = "readthedocs.org/projects/%s/badge/?version=latest" % project
-    badge = fmt_badge(img, url, "Documentation status")
+    badge = fmt_badge(img, url, "Documentation status", cfg['doc']['fmt'])
 
     return {"badge": badge}
