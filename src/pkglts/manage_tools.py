@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 tpl_src_name = "{" + "{ base.pkgname }" + "}"
 
-non_bin_ext = ("", ".bat", ".cfg", ".in", ".ini", ".no", ".py", ".rst", ".sh",
+non_bin_ext = ("", ".bat", ".cfg", ".in", ".ini", ".md", ".no", ".py", ".rst", ".sh",
                ".txt", ".yml", ".yaml")
 
 
