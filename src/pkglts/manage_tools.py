@@ -152,19 +152,20 @@ def regenerate_dir(src_dir, tgt_dir, cfg, overwrite_file):
             sub_hm = regenerate_dir(src_pth, tgt_pth, cfg, overwrite_file)
             hm.update(sub_hm)
         else:
-            kp = pth_as_key(tgt_pth)
-            if overwrite_file.get(kp, True):
-                fname, ext = splitext(tgt_name)
-                if ext in non_bin_ext:
-                    blocks = render(cfg, src_pth, tgt_pth)
-                    hm[kp] = dict((bid, compute_hash(cnt)) for bid, cnt in blocks)
-                else:  # binary file
-                    if exists(tgt_pth):
-                        print("overwrite? %s" % tgt_pth)
-                    else:
-                        with open(src_pth, 'rb') as fr:
-                            content = fr.read()
-                        with open(tgt_pth, 'wb') as fw:
-                            fw.write(content)
+            if splitext(tgt_name)[0] != "_":
+                kp = pth_as_key(tgt_pth)
+                if overwrite_file.get(kp, True):
+                    fname, ext = splitext(tgt_name)
+                    if ext in non_bin_ext:
+                        blocks = render(cfg, src_pth, tgt_pth)
+                        hm[kp] = dict((bid, compute_hash(cnt)) for bid, cnt in blocks)
+                    else:  # binary file
+                        if exists(tgt_pth):
+                            print("overwrite? %s" % tgt_pth)
+                        else:
+                            with open(src_pth, 'rb') as fr:
+                                content = fr.read()
+                            with open(tgt_pth, 'wb') as fw:
+                                fw.write(content)
 
     return hm
