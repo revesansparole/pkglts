@@ -4,9 +4,9 @@
 
 [//]: # ({# pkglts, doc)
 
-{% for name, email in base.authors -%}
+{%- for name, email in base.authors -%}
 * {{ name }}, <{{ email }}>
-{% endfor %}
+{% endfor -%}
 
 [//]: # (#})
 
