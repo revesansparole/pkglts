@@ -17,6 +17,18 @@ Contents:
     authors
     history
 
+{% if 'sphinx' is available %}
+{% if sphinx.autodoc_dvlpt %}
+Sources
+=======
+
+.. toctree::
+   :maxdepth: 2
+
+   _dvlpt/modules
+{% endif %}
+{% endif %}
+
 Indices and tables
 ==================
 
