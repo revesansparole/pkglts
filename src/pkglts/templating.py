@@ -4,7 +4,7 @@ import re
 opening_marker = "{" + "#"
 closing_marker = "#" + "}"
 
-block_re = re.compile(r"\{#[ ]pkglts,[ ](?P<key>.*?)\n(?P<cnt>.*?)#\}",
+block_re = re.compile(r"\{#[ ]pkglts,[ ](?P<key>[a-zA-Z0-9.]*)(?P<aft_head>.*?)\n(?P<cnt>.*?)#\}(?P<aft_foot>.*?(?=\n))",
                       re.DOTALL | re.MULTILINE)
 
 
@@ -18,6 +18,14 @@ class TplBlock(object):
         self.content = ""
         self.before_footer = ""
         self.after_footer = ""
+    
+    def __str__(self):
+        return "Block(\n|%s|%s|%s|\n|%s|\n|%s|%s|\n)" % (self.before_header,
+                                                         self.bid,
+                                                         self.after_header,
+                                                         repr(self.content),
+                                                         self.before_footer,
+                                                         self.after_footer)
 
 
 def parse_source(txt):
@@ -50,8 +58,9 @@ def parse_source(txt):
         bef = txt[(i + 1): res.start()]
         
         bid = res.group('key')
-        
+        aft_head = res.group('aft_head')
         cnt = res.group('cnt')
+        aft_foot = res.group('aft_foot')
         
         i = len(cnt) - 1
         while i > 0 and cnt[i] != "\n":
@@ -63,8 +72,10 @@ def parse_source(txt):
         b = TplBlock()
         b.bid = bid
         b.before_header = bef
+        b.after_header = aft_head
         b.content = cnt
         b.before_footer = aft
+        b.after_footer = aft_foot
         blocks.append(b)
     
     if last_end < len(txt):
