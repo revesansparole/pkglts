@@ -11,7 +11,7 @@ try:
 except NameError:
     string_type = str
 
-current_pkg_cfg_version = 7
+current_pkg_cfg_version = 8
 
 logger = logging.getLogger(__name__)
 
@@ -232,5 +232,10 @@ def upgrade_pkg_cfg_version(pkg_cfg, version):
         if 'sphinx' in pkg_cfg:
             section = pkg_cfg['sphinx']
             section['build_dir'] = section.get('build_dir', "build/sphinx")
+    elif version == 7:
+        pkg_cfg['_pkglts']['version'] = 8
+        if 'doc' in pkg_cfg:
+            section = pkg_cfg['doc']
+            section['fmt'] = section.get('fmt', 'rst')
 
     return pkg_cfg

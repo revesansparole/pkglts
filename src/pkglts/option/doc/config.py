@@ -14,6 +14,7 @@ def update_parameters(cfg):
     """
     sec = dict(
         description="belle petite description",
+        fmt="rst",
         keywords=[]
     )
     cfg['doc'] = sec
@@ -30,10 +31,14 @@ def check(cfg):
     """
     invalids = []
     description = cfg['doc']['description']
+    fmt = cfg['doc']['fmt']
     # keywords = env.globals['doc'].keywords
 
     if len(description) == 0:
         invalids.append("description")
+    
+    if fmt not in ('rst', 'md'):
+        invalids.append("fmt")
 
     return invalids
 
