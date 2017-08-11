@@ -77,7 +77,9 @@ tests, including testing other Python versions with tox::
 ```
 (dvlpt)$ cd {{ base.pkgname }}
 (dvlpt) {{ base.pkgname }}$ flake8
+{% if 'test' is available -%}
 (dvlpt) {{ base.pkgname }}$ {% if test.suite_name == 'nose' %}nosetests{% else %}pytest{% endif %}
+{% endif %}
 (dvlpt) {{ base.pkgname }}$ tox
 ```
    To get flake8 and tox, just pip install them into your virtualenv.
@@ -106,11 +108,12 @@ Before you submit a pull request, check that it meets these guidelines:
 {% endif %}
 ## Tips
 
+{% if 'test' is available %}
 To run a subset of tests::
 ```
 $ {% if test.suite_name == 'nose' %}nosetests{% else %}pytest{% endif %} test/test_XXX
 ```
-
+{% endif %}
 
 [issues]: {{ github.url }}/issues
 [virtualenv]: https://pypi.python.org/pypi/virtualenv
