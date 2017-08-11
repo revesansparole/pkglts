@@ -1,5 +1,7 @@
-.. _changelog:
+.. {# pkglts, doc
+.. #}
 
+=======
 History
 =======
 

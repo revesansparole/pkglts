@@ -41,7 +41,7 @@ def environment_extensions(cfg):
     """
     url = "badge.fury.io/py/%s" % pkg_full_name(cfg)
     img = url + ".svg"
-    badge = fmt_badge(img, url, "PyPI version")
+    badge = fmt_badge(img, url, "PyPI version", cfg['doc']['fmt'])
 
     return {"badge": badge,
             "auto_classifiers": auto_classifiers(cfg)}

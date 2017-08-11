@@ -1,0 +1,18 @@
+# {# pkglts, doc
+
+site_name: {{ base.pkgname }}
+# TODO
+repo_url: https://gitlab.itkweb.fr/agro/doc
+site_description: {{ doc.description }}
+site_author: {{ base.authors[0][0] }}
+{% if 'license' is available %}
+copyright: {{ license.organization }}
+{% endif %}
+theme: readthedocs
+
+docs_dir: doc
+site_dir: build/html
+
+use_directory_urls: false
+strict: true
+# #}

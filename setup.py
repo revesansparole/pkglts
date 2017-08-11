@@ -13,7 +13,7 @@ from setuptools import setup, find_packages
 
 short_descr = "Building packages with long term support"
 readme = open('README.rst').read()
-history = open('HISTORY.rst').read().replace('.. :changelog:', '')
+history = open('HISTORY.rst').read()
 
 
 # find version number in src/pkglts/version.py

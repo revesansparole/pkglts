@@ -12,6 +12,7 @@ def test_pkg_url_empty_default():
 
 def test_pkg_url_look_multiple_places():
     tpl_cfg = dict(base={'pkgname': 'toto', 'namespace': 'oa', 'url': None},
+                   doc={'fmt': 'rst'},
                    github={'url': None},
                    pypi={'classifiers': [], 'url': None},
                    readthedocs={'project': 'project'},

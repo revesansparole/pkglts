@@ -9,8 +9,9 @@ Add some documentation in your package:
  - history
  - contributing
 
-The examples associated with this option provide:
- - a basic readme file
+The examples associated with this option provide a scaffold for a more complete
+documentation in the doc directory:
+ - a basic index file
 
 Modifications
 -------------
@@ -18,6 +19,14 @@ Modifications
 .. raw:: html
     :file: modifications.html
 
+Configuration
+-------------
+
+You need to decide rapidly (aka before regenerating the package) the format you
+intend to use to write the documentation:
+ - Complete documentation of code, use the default 'rst' (only one that actually
+ work with sphinx).
+ - webpages (aka user oriented documentation), then you can use 'md'
 
 Quick tutorial
 --------------

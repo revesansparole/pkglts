@@ -12,8 +12,8 @@ from setuptools import setup, find_packages
 
 
 short_descr = "{{ doc.description }}"
-readme = open('README.rst').read()
-history = open('HISTORY.rst').read().replace('.. :changelog:', '')
+readme = open('README.{{ doc.fmt }}').read()
+history = open('HISTORY.{{ doc.fmt }}').read()
 
 
 # find version number in {{ base.src_pth }}/version.py

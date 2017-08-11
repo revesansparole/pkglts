@@ -30,6 +30,9 @@ def check(cfg):
         (list of str): list of faulty parameters
     """
     invalids = []
+    if cfg['doc']['fmt'] != 'rst':
+        invalids.append('doc.fmt')
+    
     theme = cfg['sphinx']['theme']
     if theme != str(theme):
         invalids.append('sphinx.theme')

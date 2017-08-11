@@ -92,8 +92,8 @@ def modified_file_hash(pth, pkg_hash):
     with open(pth, 'r') as f:
         blocks = parse_source(f.read())
 
-    lts_blocks = dict((bid, cnt) for bid, bef, cnt, aft in blocks
-                      if bid is not None)
+    lts_blocks = dict((block.bid, block.content) for block in blocks
+                      if block.bid is not None)
     if set(lts_blocks) != set(ref_blocks):
         return True
     else:

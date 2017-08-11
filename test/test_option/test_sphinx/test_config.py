@@ -10,7 +10,7 @@ def test_update_parameters():
 
 def test_config_check_sphinx_theme():
     for theme in (1, None,):
-        cfg = Config(dict(sphinx={'theme': theme}))
+        cfg = Config(dict(doc={'fmt': 'rst'}, sphinx={'theme': theme}))
         assert 'sphinx.theme' in check(cfg)
 
 
