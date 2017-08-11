@@ -31,7 +31,7 @@ def check(cfg):
     project = cfg['readthedocs']['project']
 
     if len(project) == 0:
-        invalids.append("project")
+        invalids.append("readthedocs.project")
 
     return invalids
 

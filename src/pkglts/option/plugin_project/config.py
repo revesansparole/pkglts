@@ -45,9 +45,9 @@ def check(cfg):
     plugin_name = cfg['plugin_project']['plugin_name']
 
     if "." in plugin_name:
-        invalids.append('plugin_name')
+        invalids.append('plugin.plugin_name')
     elif not is_valid_identifier(plugin_name):
-        invalids.append('plugin_name')
+        invalids.append('plugin.plugin_name')
 
     return invalids
 

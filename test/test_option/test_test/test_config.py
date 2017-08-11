@@ -11,7 +11,7 @@ def test_update_parameters():
 def test_config_check_suite_names():
     for name in ('walou', ' nose'):
         cfg = Config(dict(test={'suite_name': name}))
-        assert 'suite_name' in check(cfg)
+        assert 'test.suite_name' in check(cfg)
 
 
 def test_require():

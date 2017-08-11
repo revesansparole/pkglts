@@ -10,12 +10,12 @@ def test_update_parameters():
 
 def test_config_check_intended_version_exists():
     cfg = Config(dict(pysetup={'intended_versions': [], 'require': []}))
-    assert 'intended_versions' in check(cfg)
-    assert 'require' not in check(cfg)
+    assert 'pysetup.intended_versions' in check(cfg)
+    assert 'pysetup.require' not in check(cfg)
 
     cfg = Config(dict(pysetup={'intended_versions': ["27"],
                                'require': [{'pkg_mng': 'walou', 'name': 'numpy'}]}))
-    assert 'require' in check(cfg)
+    assert 'pysetup.require' in check(cfg)
 
 
 def test_require():

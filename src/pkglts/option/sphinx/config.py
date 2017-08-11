@@ -32,7 +32,7 @@ def check(cfg):
     invalids = []
     theme = cfg['sphinx']['theme']
     if theme != str(theme):
-        invalids.append('theme')
+        invalids.append('sphinx.theme')
 
     return invalids
 

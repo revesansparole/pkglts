@@ -31,7 +31,7 @@ def check(cfg):
     name = cfg['test']['suite_name']
 
     if name not in ("pytest", "nose"):
-        invalids.append('suite_name')
+        invalids.append('test.suite_name')
 
     return invalids
 

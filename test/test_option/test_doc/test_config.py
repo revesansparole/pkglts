@@ -11,18 +11,18 @@ def test_update_parameters():
 def test_config_check_description_exists():
     cfg = Config(dict(doc={'description': "mydescr", 'keywords': []}))
     assert cfg['doc']['description'] == "mydescr"
-    assert 'description' not in check(cfg)
+    assert 'doc.description' not in check(cfg)
 
 
 def test_config_check_description_valid():
     cfg = Config(dict(doc={'description': "", 'keywords': []}))
-    assert 'description' in check(cfg)
+    assert 'doc.description' in check(cfg)
 
 
 def test_config_check_keywords_exists():
     cfg = Config(dict(doc={'description': "mydescr", 'keywords': []}))
     assert len(cfg['doc']['keywords']) == 0
-    assert 'keywords' not in check(cfg)
+    assert 'doc.keywords' not in check(cfg)
 
 
 def test_require():

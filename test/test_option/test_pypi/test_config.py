@@ -10,7 +10,7 @@ def test_update_parameters():
 
 def test_config_check_classifiers_exists():
     cfg = Config(dict(pypi={'classifiers': []}))
-    assert 'classifiers' in check(cfg)
+    assert 'pypi.classifiers' in check(cfg)
 
 
 def test_require():

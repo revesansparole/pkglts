@@ -33,7 +33,7 @@ def check(cfg):
     src_directory = cfg['notebook']['src_directory']
 
     if not exists(src_directory):
-        invalids.append("src_directory")
+        invalids.append("notebook.src_directory")
 
     return invalids
 
