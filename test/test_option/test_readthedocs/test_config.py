@@ -10,7 +10,7 @@ def test_update_parameters():
 
 def test_config_check_project_exists():
     cfg = Config(dict(readthedocs={'project': ""}))
-    assert 'project' in check(cfg)
+    assert 'readthedocs.project' in check(cfg)
 
 
 def test_require():

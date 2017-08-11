@@ -25,10 +25,10 @@ def test_update_parameters():
 
 def test_config_check_src_directory(tmp_dir):
     cfg = Config(dict(notebook={'src_directory': "failed_nb"}))
-    assert 'src_directory' in check(cfg)
+    assert 'notebook.src_directory' in check(cfg)
 
     cfg = Config(dict(notebook={'src_directory': tmp_dir}))
-    assert 'src_directory' not in check(cfg)
+    assert 'notebook.src_directory' not in check(cfg)
 
 
 def test_require():

@@ -10,19 +10,19 @@ def test_update_parameters():
 
 def test_config_check_version_numbers_are_valid():
     cfg = Config(dict(version={'major': "", 'minor': "", 'post': ""}))
-    assert 'major' in check(cfg)
-    assert 'minor' in check(cfg)
-    assert 'post' in check(cfg)
+    assert 'version.major' in check(cfg)
+    assert 'version.minor' in check(cfg)
+    assert 'version.post' in check(cfg)
     cfg = Config(dict(version={'major': "a", 'minor': "a", 'post': "a"}))
-    assert 'major' in check(cfg)
-    assert 'minor' in check(cfg)
-    assert 'post' in check(cfg)
+    assert 'version.major' in check(cfg)
+    assert 'version.minor' in check(cfg)
+    assert 'version.post' in check(cfg)
     cfg = Config(dict(version={'major': "1", 'minor': "1", 'post': "1"}))
-    assert 'major' in check(cfg)
-    assert 'minor' in check(cfg)
-    assert 'post' in check(cfg)
+    assert 'version.major' in check(cfg)
+    assert 'version.minor' in check(cfg)
+    assert 'version.post' in check(cfg)
     cfg = Config(dict(version={'major': 1, 'minor': 0, 'post': "2.dev"}))
-    assert 'post' in check(cfg)
+    assert 'version.post' in check(cfg)
 
 
 def test_require():
