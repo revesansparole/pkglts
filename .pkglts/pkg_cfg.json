@@ -3,7 +3,7 @@
     "auto_install": true,
     "install_front_end": "stdout",
     "use_prompts": false,
-    "version": 7
+    "version": 8
   },
   "base": {
     "authors": [
@@ -23,6 +23,7 @@
   "data": {},
   "doc": {
     "description": "Building packages with long term support",
+    "fmt": "rst",
     "keywords": [
       "packaging",
       "package builder"
