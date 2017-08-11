@@ -143,11 +143,11 @@ def regenerate_package(cfg, target=".", overwrite=False):
     invalids = []
     for option in cfg.installed_options():
         for n in check_option_parameters(option, cfg):
-            invalids.append("%s.%s" % (option, n))
+            invalids.append((option, n))
 
     if len(invalids) > 0:
-        for param in invalids:
-            logger.warning("param %s is not valid", param)
+        for option, param in invalids:
+            logger.warning("param %s is not valid for '%s'", param, option)
 
         return False
 
