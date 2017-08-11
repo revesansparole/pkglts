@@ -53,10 +53,12 @@ def require(purpose, cfg):
     Returns:
         (list of Dependency)
     """
-    del cfg
-
     if purpose == 'option':
         options = ['base']
         return [Dependency(name) for name in options]
+
+    if purpose == 'dvlpt':
+        if cfg['doc']['fmt'] == 'md':
+            return [Dependency('mkdocs', 'pip')]
 
     return []
