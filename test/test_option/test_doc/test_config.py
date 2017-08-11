@@ -30,6 +30,11 @@ def test_config_check_fmt_valid():
     assert 'fmt' in check(cfg)
 
 
+def test_config_check_fmt_valid():
+    cfg = Config(dict(doc={'description': "mydescr", 'fmt': 'walou', 'keywords': []}))
+    assert 'fmt' in check(cfg)
+
+
 def test_require():
     cfg = Config(dict(base={}, doc={}))
     

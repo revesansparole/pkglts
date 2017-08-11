@@ -33,13 +33,13 @@ def check(cfg):
     description = cfg['doc']['description']
     fmt = cfg['doc']['fmt']
     # keywords = env.globals['doc'].keywords
-
+    
     if len(description) == 0:
         invalids.append("doc.description")
     
     if fmt not in ('rst', 'md'):
         invalids.append("doc.fmt")
-
+    
     return invalids
 
 
@@ -56,9 +56,9 @@ def require(purpose, cfg):
     if purpose == 'option':
         options = ['base']
         return [Dependency(name) for name in options]
-
+    
     if purpose == 'dvlpt':
         if cfg['doc']['fmt'] == 'md':
             return [Dependency('mkdocs', 'pip')]
-
+    
     return []
