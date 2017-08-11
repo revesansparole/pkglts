@@ -30,9 +30,9 @@ is open to whoever wants to implement it.
 
 ### Write Documentation
 
-pkglts could always use more documentation, whether as part of the
-official pkglts docs, in docstrings, or even on the web in blog posts,
-articles, and such.
+**{{ base.pkg_full_name }}** could always use more documentation, whether as
+part of the official **{{ base.pkg_full_name }}** docs, in docstrings, or even
+on the web in blog posts, articles, and such.
 
 ### Submit Feedback
 
@@ -47,7 +47,8 @@ If you are proposing a feature:
 
 ## Get Started!
 
-Ready to contribute? Here's how to set up `{{ base.pkgname }}` for local development.
+Ready to contribute? Here's how to set up `{{ base.pkgname }}` for local
+development.
 
 1. Fork the `{{ base.pkgname }}` repo on GitHub.
 2. Clone your fork locally::
@@ -72,7 +73,7 @@ tests, including testing other Python versions with tox::
 ```
 (dvlpt)$ cd {{ base.pkgname }}
 (dvlpt) {{ base.pkgname }}$ flake8
-(dvlpt) {{ base.pkgname }}$ nosetests
+(dvlpt) {{ base.pkgname }}$ {% if test.suite_name == 'nose' %}nosetests{% else %}pytest{% endif %}
 (dvlpt) {{ base.pkgname }}$ tox
 ```
    To get flake8 and tox, just pip install them into your virtualenv.
@@ -93,15 +94,17 @@ Before you submit a pull request, check that it meets these guidelines:
 2. If the pull request adds functionality, the docs should be updated. Put
    your new functionality into a function with a docstring, and add the
    feature to the list in README.rst.
-3. The pull request should work for Python 2.7, 3.4, and 3.5. Check
-   https://travis-ci.org/{{ github.owner }}/{{ github.project }}/pull_requests
+{% if 'pysetup' is available %}
+3. The pull request should work for Python {{ pysetup.intended_versions|join(", ") }}.
+   Check
+   [Travis](https://travis-ci.org/{{ github.owner }}/{{ github.project }}/pull_requests)
    and make sure that the tests pass for all supported Python versions.
-
+{% endif %}
 ## Tips
 
 To run a subset of tests::
 ```
-$ nosetests test/test_XXX
+$ {% if test.suite_name == 'nose' %}nosetests{% else %}pytest{% endif %} test/test_XXX
 ```
 
 
