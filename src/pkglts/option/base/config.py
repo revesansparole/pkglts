@@ -49,18 +49,18 @@ def check(cfg):
     namespace = cfg['base']['namespace']
 
     if "." in pkgname:
-        invalids.append('pkgname')
+        invalids.append('base.pkgname')
     elif not is_valid_identifier(pkgname):
-        invalids.append('pkgname')
+        invalids.append('base.pkgname')
 
     if namespace is not None:
         if "." in namespace:
-            invalids.append('namespace')
+            invalids.append('base.namespace')
         elif not is_valid_identifier(namespace):
-            invalids.append('namespace')
+            invalids.append('base.namespace')
 
     if cfg['base']['namespace_method'] not in ("pkg_util", "setuptools", "P3.3>"):
-        invalids.append("namespace_method")
+        invalids.append("base.namespace_method")
 
     return invalids
 

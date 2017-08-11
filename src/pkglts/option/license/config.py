@@ -41,9 +41,9 @@ def check(cfg):
     # project = pkg_cfg['license']['project']
 
     if len(name) == 0:
-        invalids.append('name')
+        invalids.append('license.name')
     elif not exists(get_tpl_path(name)):
-        invalids.append('name')
+        invalids.append('license.name')
 
     return invalids
 

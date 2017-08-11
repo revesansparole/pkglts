@@ -33,7 +33,7 @@ def check(cfg):
     project = cfg['github']['project']
 
     if len(project) == 0:
-        invalids.append('project')
+        invalids.append('github.project')
 
     return invalids
 

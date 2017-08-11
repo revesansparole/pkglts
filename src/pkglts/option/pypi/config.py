@@ -36,7 +36,7 @@ def check(cfg):
     classifiers = cfg['pypi']['classifiers']
 
     if len(classifiers) == 0:
-        invalids.append("classifiers")
+        invalids.append("pypi.classifiers")
 
     return invalids
 

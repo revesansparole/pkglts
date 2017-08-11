@@ -32,13 +32,13 @@ def check(cfg):
     intended_versions = cfg['pysetup']['intended_versions']
 
     if len(intended_versions) == 0:
-        invalids.append("intended_versions")
+        invalids.append("pysetup.intended_versions")
 
     require = cfg['pysetup']['require']
 
     valid_methods = (None, "pip", "conda", "git")
     if any(dep.get('pkg_mng') not in valid_methods for dep in require):
-        invalids.append("require")
+        invalids.append("pysetup.require")
 
     return invalids
 

@@ -33,7 +33,7 @@ def check(cfg):
     # keywords = env.globals['doc'].keywords
 
     if len(description) == 0:
-        invalids.append("description")
+        invalids.append("doc.description")
 
     return invalids
 

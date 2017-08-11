@@ -35,11 +35,11 @@ def check(cfg):
     post = cfg['version']['post']
 
     if not isinstance(major, int):
-        invalids.append("major")
+        invalids.append("version.major")
     if not isinstance(minor, int):
-        invalids.append("minor")
+        invalids.append("version.minor")
     if not isinstance(post, int):
-        invalids.append("post")
+        invalids.append("version.post")
 
     return invalids
 
