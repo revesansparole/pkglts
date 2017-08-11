@@ -31,7 +31,7 @@ def check(cfg):
     """
     invalids = []
     if cfg['doc']['fmt'] != 'rst':
-        invalids.append('fmt')
+        invalids.append('doc.fmt')
     
     theme = cfg['sphinx']['theme']
     if theme != str(theme):
