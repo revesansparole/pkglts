@@ -23,7 +23,7 @@ def test_options_expose_parameters():
 
 
 def test_require_correctly_defined():
-    cfg = Config(dict(base={}, test={'suite_name': 'pytest'}))
+    cfg = Config(dict(base={}, doc={'fmt': 'rst'}, test={'suite_name': 'pytest'}))
 
     # walk through all possible options
     option_basedir = path.join(path.dirname(get_data_dir()), 'pkglts', 'option')

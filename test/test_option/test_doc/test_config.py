@@ -27,18 +27,21 @@ def test_config_check_keywords_exists():
 
 def test_config_check_fmt_valid():
     cfg = Config(dict(doc={'description': "mydescr", 'fmt': 'walou', 'keywords': []}))
-    assert 'fmt' in check(cfg)
+    assert 'doc.fmt' in check(cfg)
 
 
 def test_config_check_fmt_valid():
     cfg = Config(dict(doc={'description': "mydescr", 'fmt': 'walou', 'keywords': []}))
-    assert 'fmt' in check(cfg)
+    assert 'doc.fmt' in check(cfg)
 
 
 def test_require():
-    cfg = Config(dict(base={}, doc={}))
+    cfg = Config(dict(base={}, doc={'fmt': 'rst'}))
     
     assert len(require('option', cfg)) == 1
     assert len(require('setup', cfg)) == 0
     assert len(require('install', cfg)) == 0
     assert len(require('dvlpt', cfg)) == 0
+
+    cfg = Config(dict(base={}, doc={'fmt': 'md'}))
+    assert len(require('dvlpt', cfg)) == 1

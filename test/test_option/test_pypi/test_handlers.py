@@ -4,6 +4,7 @@ from pkglts.config_management import Config
 def test_badge():
     cfg = Config(dict(base={'pkgname': "pkg", 'namespace': None,
                             "url": "http://toto"},
+                      doc={'fmt': 'rst'},
                       pysetup={"intended_versions": ["27", "28"],
                                'require': []},
                       pypi={'classifiers': []}))
@@ -14,6 +15,7 @@ def test_badge():
 def test_auto_classifiers():
     cfg = Config(dict(base={'pkgname': "pkg", 'namespace': None,
                             "url": "http://toto"},
+                      doc={'fmt': 'rst'},
                       pysetup={"intended_versions": ["27", "28"],
                                'require': []},
                       pypi={'classifiers': []}))
