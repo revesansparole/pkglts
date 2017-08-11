@@ -107,7 +107,7 @@ def test_regenerate_handle_src_directory_with_namespace(tmp_dir):
 def test_regenerate_do_overwrite_unprotected_files(tmp_dir):
     pth = pj(tmp_dir, "src", "test.txt")
     with open(pth, 'w') as f:
-        f.write("{# pkglts, b0\n{{ random() }}\n#}")
+        f.write("{# pkglts, b0\n{{ random() }}\n#}\n")
 
     cfg = Config(default_cfg)
     cfg._env.globals['random'] = random
@@ -129,7 +129,7 @@ def test_regenerate_do_overwrite_unprotected_files(tmp_dir):
 def test_regenerate_do_not_overwrite_protected_files(tmp_dir):
     pth = pj(tmp_dir, "src", "test.txt")
     with open(pth, 'w') as f:
-        f.write("{# pkglts, b0\n{{ random() }}\n#}")
+        f.write("{# pkglts, b0\n{{ random() }}\n#}\n")
 
     cfg = Config(default_cfg)
     cfg._env.globals['random'] = random
@@ -152,7 +152,7 @@ def test_regenerate_do_not_overwrite_protected_files(tmp_dir):
 def test_regenerate_do_not_overwrite_outside_protected_blocks(tmp_dir):
     pth = pj(tmp_dir, "src", "test.txt")
     with open(pth, 'w') as f:
-        f.write("{# pkglts, b0\nLOREM IPSUM\n#}")
+        f.write("{# pkglts, b0\nLOREM IPSUM\n#}\n")
 
     pth = pj(tmp_dir, "tgt", "test.txt")
     with open(pth, 'w') as f:
