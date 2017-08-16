@@ -1,9 +1,9 @@
 # {# pkglts, pysetup
 
-include AUTHORS.rst
-include CONTRIBUTING.rst
-include HISTORY.rst
-include README.rst
+include AUTHORS.{{ doc.fmt }}
+include CONTRIBUTING.{{ doc.fmt }}
+include HISTORY.{{ doc.fmt }}
+include README.{{ doc.fmt }}
 
 include LICENSE
 include requirements.txt
@@ -18,7 +18,7 @@ recursive-include src/{{ base.pkgname }}_data *
 recursive-exclude * __pycache__
 recursive-exclude * *.py[co]
 
-recursive-include doc *.rst
+recursive-include doc *.{{ doc.fmt }}
 {% if 'sphinx' is available %}
 include doc/conf.py
 include doc/Makefile
