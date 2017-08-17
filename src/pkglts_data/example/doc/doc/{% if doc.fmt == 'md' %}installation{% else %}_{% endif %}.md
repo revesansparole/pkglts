@@ -2,7 +2,7 @@
 
 Download source then, at the command line::
 ```
-$ python setup.py
+$ python setup.py install
 ```
 {% if 'pypi' is available %}
 Alternatively the command line::
