@@ -19,11 +19,10 @@ Contents:
 
 {% if 'sphinx' is available %}
 {% if sphinx.autodoc_dvlpt %}
-Sources
-=======
+Developper's documentation
+==========================
 
 .. toctree::
-   :maxdepth: 2
 
    _dvlpt/modules
 {% endif %}
