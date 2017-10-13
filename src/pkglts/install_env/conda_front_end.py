@@ -1,4 +1,4 @@
-"""Pip front end to install package in current environment.
+"""Conda front end to install package in current environment.
 """
 from json import loads
 from subprocess import Popen, PIPE
