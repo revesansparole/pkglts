@@ -1,13 +1,13 @@
 # {# pkglts, pysetup
-coverage
-coveralls
-flake8
-mock
-nbconvert
-pytest
-pytest-cov
-sphinx
-tox
-twine
+coverage # conda install coverage
+coveralls # pip install coveralls
+flake8 # conda install flake8
+mock # conda install mock
+nbconvert # conda install nbconvert
+pytest # conda install pytest
+pytest-cov # conda install pytest-cov
+sphinx # conda install sphinx
+tox # pip install tox
+twine # pip install twine
 
 # #}

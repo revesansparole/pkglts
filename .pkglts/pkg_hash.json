@@ -52,10 +52,10 @@
   "doc/readme.rst": {},
   "doc/usage.rst": {},
   "dvlpt_requirements.txt": {
-    "pysetup": "LEJMZGJ4r4AXvlSZKWQ2JrsEAl6E5eqzqYJSnxKC/80LHcx/WauV3BaR+9bHfxClN60RpSkRg8UeH7/Hedps+g=="
+    "pysetup": "rGbMAtRqXwJAPfCJeVDR0eUOpfIpzAPEkXSgKYehto039I/5eSDz94sy09hx1WMLskm1jck+wWawuNHho90JkQ=="
   },
   "requirements.txt": {
-    "pysetup": "7QS++JibPVTukUnWb2hhr+0EWTg9TaU2mBQN0oixiqgfDOexSjSryHc6nuOgPxsEIWQjnkRXK/KD7bpvfIwUvA=="
+    "pysetup": "zi54Yzk0F5nFBcs8L3tiXq3OIItyBUd9MfEcGscFKngU0njOw7/+GvOWV+j3a6osi1HJ3y7MZCATYA5N3cqPlw=="
   },
   "setup.cfg": {
     "pysetup": "rSxB5Xpqz+HnegVpJdGwcXjDocvplTEJ6P/zBySQ0kwOBt6h0nt1fHNAi6kXLiH8T0aB1eWnNNug5cuYdDg9Iw=="
@@ -71,7 +71,7 @@
     "data": "wwgLuV/OqHWjWbssvDHa4LNg+7C+tuNiKHOxkO+9UAl9opI/HfPyJAq2fPhUeTmVvb/E6MkqDJIli9m8n5/V0Q=="
   },
   "src/pkglts/version.py": {
-    "version": "TwkMt78YGr5gaBUqIfVMLkiGDu4tdfh2BgBW+BNyP2GOtuqi9v1Jz9hJQJ9JLbZDdl1lgGuIJLJn0gImuTkkhg=="
+    "version": "ds/+uDBN5S5QkPLBIGJPFV4JMJBAvDS9wHvG7DqjA//ZHOkCSt2Xj/izl9MXtr6X6ituu8gQMg4Bn95NnKkwTA=="
   },
   "src/pkglts_data/__init__.py": {},
   "test/__init__.py": {},
