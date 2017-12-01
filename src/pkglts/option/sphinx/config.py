@@ -50,13 +50,15 @@ def require(purpose, cfg):
     Returns:
         (list of Dependency)
     """
-    del cfg
-
     if purpose == 'option':
         options = ['test', 'doc', 'license']
         return [Dependency(name) for name in options]
 
     if purpose == 'dvlpt':
-        return [Dependency('sphinx')]
+        deps = [Dependency('sphinx')]
+        if cfg["sphinx"]["theme"] == "sphinx_rtd_theme":
+            deps.append(Dependency('sphinx_rtd_theme'))
+        
+        return deps
 
     return []
