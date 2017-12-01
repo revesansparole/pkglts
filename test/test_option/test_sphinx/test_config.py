@@ -15,7 +15,7 @@ def test_config_check_sphinx_theme():
 
 
 def test_require():
-    cfg = Config(dict(sphinx={}))
+    cfg = Config(dict(sphinx={'theme': "default"}))
 
     assert len(require('option', cfg)) == 3
     assert len(require('setup', cfg)) == 0
