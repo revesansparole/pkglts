@@ -15,7 +15,8 @@ def update_parameters(cfg):
     sec = dict(
         owner="{{ base.authors[0][0] }}",
         project="{{ base.pkgname }}",
-        url="https://framagit.org/{{ gitlab.owner }}/{{ gitlab.project }}"
+        server="framagit.org",
+        url="https://{{ gitlab.server }}/{{ gitlab.owner }}/{{ gitlab.project }}"
     )
     cfg['gitlab'] = sec
 
