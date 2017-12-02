@@ -5,11 +5,11 @@ from pkglts.option.gitlab.config import check, require, update_parameters
 def test_update_parameters():
     cfg = {}
     update_parameters(cfg)
-    assert len(cfg['gitlab']) == 3
+    assert len(cfg['gitlab']) == 4
 
 
 def test_config_check_project_exists():
-    cfg = Config(dict(gitlab={'owner': "", 'project': "", "url": ""}))
+    cfg = Config(dict(gitlab={'owner': "", 'project': "", 'server': "", "url": ""}))
     assert 'gitlab.project' in check(cfg)
 
 

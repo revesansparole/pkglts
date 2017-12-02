@@ -14,12 +14,13 @@ def test_pkg_url_look_multiple_places():
     tpl_cfg = dict(base={'pkgname': 'toto', 'namespace': 'oa', 'url': None},
                    doc={'fmt': 'rst'},
                    github={'url': None},
+                   gitlab={'url': None},
                    pypi={'classifiers': [], 'url': None},
                    readthedocs={'project': 'project'},
                    pysetup={'intended_versions': ["27"],
                             'require': []})
 
-    for name in ("base", "github", "pypi", "readthedocs"):
+    for name in ("base", "github", "gitlab", "pypi", "readthedocs"):
         loc_cfg = deepcopy(tpl_cfg)
         loc_cfg[name]['url'] = name
         cfg = Config(loc_cfg)
