@@ -54,7 +54,8 @@ If you are proposing a feature:
 Ready to contribute? Here's how to set up `{{ base.pkgname }}` for local
 development.
 
-1. Fork the `{{ base.pkgname }}` repo on {% if 'github' is available %}GitHub{% elif 'gitlab' is available %}.
+1. Fork the `{{ base.pkgname }}` repo on {% if 'github' is available %}GitHub{% elif 'gitlab' is available %}
+Gitlab{% endif %}.
 2. Clone your fork locally::
 ```
 {% if 'github' is available %}$ git clone git@github.com:your_name_here/{{ base.pkgname }}.git
