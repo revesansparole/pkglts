@@ -54,6 +54,7 @@ already existing package:
  - :doc:`option/pysetup/main`: make your package distributable with setuptools (i.e. setup.py)
  - :doc:`option/data/main`: will guide through all the steps to add non python files to a package
  - :doc:`option/github/main`: will guide through all the step to safely store the package on Github_
+ - :doc:`option/gitlab/main`: will guide through all the step to safely store the package on a Gitlab_ repo
  - :doc:`option/readthedocs/main`: step by step guide to have your documentation on ReadTheDocs_
  - :doc:`option/travis/main`: will guide through all the steps to use Travis-CI_ for continuous integration of your package
  - :doc:`option/tox/main`: defines config files to use multi environment testing, Tox_
@@ -66,6 +67,7 @@ already existing package:
 .. _Sphinx: http://sphinx-doc.org/
 .. _ReadTheDocs: https://readthedocs.org/
 .. _Github: https://github.com/
+.. _Gitlab: https://framagit.org/
 .. _Nose: http://nose.readthedocs.io/en/latest/index.html
 .. _coverage: https://pypi.python.org/pypi/coverage
 .. _Flake8: https://pypi.python.org/pypi/flake8

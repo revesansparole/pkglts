@@ -54,7 +54,7 @@ Authors
 The author list is automatically generated from the author_name, author_email
 information stored in the 'base' part of the package configuration.
 
-If your package is stored on GitHub, the complete list of authors and contributors
+If your package is stored on GitHub or Gitlab, the complete list of authors and contributors
 will be retrieved from the website.
 
 Contributing
@@ -65,10 +65,10 @@ as an example::
 
     (dvlpt)$ pmg example doc
 
-This file makes more sense if you already installed the 'github' option.
+This file makes more sense if you already installed the 'github' or 'gitlab' option.
 
 History
 *******
 
-History of your package is generated automatically from the github commit tags
+History of your package is generated automatically from the github or gitlab commit tags
 and messages if possible.
