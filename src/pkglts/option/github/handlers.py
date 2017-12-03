@@ -21,11 +21,5 @@ def environment_extensions(cfg):
     contrib_list = r.json()
     contributors = []
     for contributor in contrib_list:
-        r_user = requests.get(contributor['url'])
-        if r_user.status_code != 200:
-            contributors.append('%s' % (contrib_list['login']))
-        else:
-            contrib_detail = r_user.json()
-            contributors.append('%s, %s, <%s>' % (contrib_detail['login'], contrib_detail['name'],
-                                                  contrib_detail['email']))
+        contributors.append('%s, %s' % (contributor['login'], contributor['html_url']))
     return {'contributors': contributors}
