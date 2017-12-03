@@ -1,4 +1,5 @@
 from copy import deepcopy
+import mock
 
 from pkglts.config_management import Config
 
@@ -13,19 +14,24 @@ def test_pkg_url_empty_default():
 def test_pkg_url_look_multiple_places():
     tpl_cfg = dict(base={'pkgname': 'toto', 'namespace': 'oa', 'url': None},
                    doc={'fmt': 'rst'},
-                   github={'url': None},
-                   gitlab={'url': None},
+                   github={'url': None, 'project': 'project', 'owner': 'toto'},
+                   gitlab={'url': None, 'project': 'project', 'owner': 'toto'},
                    pypi={'classifiers': [], 'url': None},
                    readthedocs={'project': 'project'},
                    pysetup={'intended_versions': ["27"],
                             'require': []})
-
-    for name in ("base", "github", "gitlab", "pypi", "readthedocs"):
-        loc_cfg = deepcopy(tpl_cfg)
-        loc_cfg[name]['url'] = name
-        cfg = Config(loc_cfg)
-        cfg.load_extra()
-        assert cfg._env.globals['pysetup'].pkg_url == name
+    
+    class MockResponse:
+        def __init__(self):
+            self.status_code = 500
+    
+    with mock.patch('requests.get', return_value=MockResponse()):
+        for name in ("base", "github", "gitlab", "pypi", "readthedocs"):
+            loc_cfg = deepcopy(tpl_cfg)
+            loc_cfg[name]['url'] = name
+            cfg = Config(loc_cfg)
+            cfg.load_extra()
+            assert cfg._env.globals['pysetup'].pkg_url == name
 
 
 def test_requirements():
