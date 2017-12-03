@@ -161,6 +161,9 @@ setup_kwds['entry_points']['pkglts'] = [
     'readthedocs.require = pkglts.option.readthedocs.config:require',
     'readthedocs.environment_extensions = pkglts.option.readthedocs.handlers:environment_extensions',
 
+    'requires.require = pkglts.option.requires.config:require',
+    'requires.environment_extensions = pkglts.option.requires.handlers:environment_extensions',
+
     'sphinx.update_parameters = pkglts.option.sphinx.config:update_parameters',
     'sphinx.check = pkglts.option.sphinx.config:check',
     'sphinx.require = pkglts.option.sphinx.config:require',
