@@ -16,6 +16,9 @@
 {%- if 'pypi' is available %}
 {{ pypi.badge }}
 {% endif -%}
+{%- if 'requires' is available %}
+{{ requires.badge }}
+{% endif -%}
 
 [//]: # (#})
 
