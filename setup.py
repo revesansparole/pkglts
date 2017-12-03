@@ -122,6 +122,7 @@ setup_kwds['entry_points']['pkglts'] = [
     'github.update_parameters = pkglts.option.github.config:update_parameters',
     'github.check = pkglts.option.github.config:check',
     'github.require = pkglts.option.github.config:require',
+    'github.environment_extensions = pkglts.option.github.handlers:environment_extensions',
     'github.files_dir = pkglts_data.base',
 
     'gitlab.update_parameters = pkglts.option.gitlab.config:update_parameters',
