@@ -46,6 +46,7 @@ install:
   - conda install nbconvert
   - conda install pytest
   - conda install pytest-cov
+  - conda install requests
   - conda install sphinx
   - pip install tox
   - pip install twine

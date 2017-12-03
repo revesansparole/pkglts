@@ -6,6 +6,7 @@ mock # conda install mock
 nbconvert # conda install nbconvert
 pytest # conda install pytest
 pytest-cov # conda install pytest-cov
+requests # conda install requests
 sphinx # conda install sphinx
 tox # pip install tox
 twine # pip install twine

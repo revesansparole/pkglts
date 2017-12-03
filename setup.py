@@ -69,6 +69,7 @@ setup_kwds = dict(
         "nbconvert",
         "pytest",
         "pytest-cov",
+        "requests",
         "sphinx",
         "tox",
         "twine",

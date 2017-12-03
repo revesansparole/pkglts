@@ -1,3 +1,5 @@
+.. {# pkglts, doc
+
 =======
 Credits
 =======
@@ -5,13 +7,15 @@ Credits
 Development Lead
 ----------------
 
-{# pkglts, doc
-
 * revesansparole, <revesansparole@gmail.com>
 
-#}
 
 Contributors
 ------------
 
-None yet. Why not be the first?
+* revesansparole, https://github.com/revesansparole
+* artzet-s, https://github.com/artzet-s
+
+
+.. #}
+
