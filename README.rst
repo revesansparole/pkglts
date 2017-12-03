@@ -29,6 +29,11 @@ pkglts
     :alt: PyPI version
     :target: https://badge.fury.io/py/pkglts
 
+
+.. image:: https://requires.io/github/revesansparole/pkglts/requirements.svg?branch=master
+    :alt: Requirements status
+    :target: https://requires.io/github/revesansparole/pkglts/requirements/?branch=master
+
 .. #}
 
 Building packages with long term support
