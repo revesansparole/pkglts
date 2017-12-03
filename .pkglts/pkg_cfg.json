@@ -68,6 +68,7 @@
   "readthedocs": {
     "project": "{{ github.project }}"
   },
+  "requires": {},
   "sphinx": {
     "autodoc_dvlpt": true,
     "build_dir": "build/sphinx",
