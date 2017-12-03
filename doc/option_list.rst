@@ -80,6 +80,7 @@ already developed online tools:
    option/readthedocs/main
    option/landscape/main
    option/coveralls/main
+   option/requires/main
 
 External options
 ================
