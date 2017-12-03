@@ -8,6 +8,7 @@ from pkglts.config_management import Config
 
 
 def nn(cfg, pth):
+    print("pth:", pth)
     tgt_name = cfg.render(pth)
     if tgt_name.endswith(".tpl"):
         tgt_name = tgt_name[:-4]
@@ -19,7 +20,9 @@ def tree(dname, padding, txt):
     pkg_cfg = dict(base={"namespace": None,
                          "owner": "owner",
                          "pkgname": "pkgname",
-                         "url": None})
+                         "url": None},
+                   doc={"fmt": "rst"},
+                   plugin_project={"plugin_name": "plugin"})
 
     cfg = Config(pkg_cfg)
 
