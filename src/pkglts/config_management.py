@@ -1,3 +1,4 @@
+from datetime import date
 from jinja2 import Environment, StrictUndefined, UndefinedError
 import json
 import logging
@@ -44,7 +45,7 @@ class Config(dict):
         self._env.keep_trailing_newline = True
 
         # add global filters and test
-        self._env.globals['today'] = lambda: "TODAY"  # TODO
+        self._env.globals['today'] = lambda: date.today().isoformat()
 
         self._env.tests['available'] = self._is_available
 
