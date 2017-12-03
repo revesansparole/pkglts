@@ -1,4 +1,8 @@
-import requests
+import logging
+import re
+import subprocess
+
+logger = logging.getLogger(__name__)
 
 
 def environment_extensions(cfg):
@@ -10,16 +14,13 @@ def environment_extensions(cfg):
     Returns:
         dict of str: any
     """
-    owner = cfg['github']['owner']
-    project = cfg['github']['project']
-    url = "https://api.github.com/repos/%s/%s/contributors" % (owner, project)
+    try:
+        log = subprocess.check_output('git log --all').decode('utf-8')
+    except KeyError:
+        logger.warning("Please add git to your $PATH")
+        return {'contributors': ["I failed to construct the contributor list"]}
 
-    r = requests.get(url)
-    if r.status_code != 200:
-        return {'contributors': ["I failed to download the contributor list"]}
-
-    contrib_list = r.json()
-    contributors = []
-    for contributor in contrib_list:
-        contributors.append('%s, %s' % (contributor['login'], contributor['html_url']))
-    return {'contributors': contributors}
+    commits = log.split('commit')
+    contributors = [contributor for commit in commits
+                    for contributor in re.findall(r'Author: (.* <.*@.*>)\n', commit)]
+    return {'contributors': set(contributors)}

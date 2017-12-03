@@ -19,4 +19,4 @@ def test_require():
     assert len(require('option', cfg)) == 1
     assert len(require('setup', cfg)) == 0
     assert len(require('install', cfg)) == 0
-    assert len(require('dvlpt', cfg)) == 1
+    assert len(require('dvlpt', cfg)) == 2

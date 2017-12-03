@@ -20,17 +20,12 @@ def test_pkg_url_look_multiple_places():
                    pysetup={'intended_versions': ["27"],
                             'require': []})
 
-    class MockResponse:
-        def __init__(self):
-            self.status_code = 500
-
-    with mock.patch('requests.get', return_value=MockResponse()):
-        for name in ("base", "github", "pypi", "readthedocs"):
-            loc_cfg = deepcopy(tpl_cfg)
-            loc_cfg[name]['url'] = name
-            cfg = Config(loc_cfg)
-            cfg.load_extra()
-            assert cfg._env.globals['pysetup'].pkg_url == name
+    for name in ("base", "github", "pypi", "readthedocs"):
+        loc_cfg = deepcopy(tpl_cfg)
+        loc_cfg[name]['url'] = name
+        cfg = Config(loc_cfg)
+        cfg.load_extra()
+        assert cfg._env.globals['pysetup'].pkg_url == name
 
 
 def test_requirements():
