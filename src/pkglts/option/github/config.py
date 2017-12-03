@@ -54,4 +54,7 @@ def require(purpose, cfg):
         options = ['base']
         return [Dependency(name) for name in options]
 
+    if purpose == 'dvlpt':
+        return [Dependency('requests')]
+
     return []
