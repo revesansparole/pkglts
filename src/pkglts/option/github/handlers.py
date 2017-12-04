@@ -15,7 +15,7 @@ def environment_extensions(cfg):
         dict of str: any
     """
     try:
-        log = subprocess.check_output('git log --all').decode('utf-8')
+        log = subprocess.check_output(['git', 'log', '--all']).decode('utf-8')
     except KeyError:
         logger.warning("Please add git to your $PATH")
         return {'contributors': ["I failed to construct the contributor list"]}
