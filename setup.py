@@ -70,7 +70,6 @@ setup_kwds = dict(
         "pytest",
         "pytest-cov",
         "sphinx",
-        "subprocess",
         "tox",
         "twine",
         ],

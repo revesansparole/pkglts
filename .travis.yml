@@ -47,7 +47,6 @@ install:
   - conda install pytest
   - conda install pytest-cov
   - conda install sphinx
-  - conda install subprocess
   - pip install tox
   - pip install twine
 
