@@ -1,10 +1,10 @@
-{{ base.pkgname }} - Terms and conditions
+{{ license.project }} - Terms and conditions
 
-1) Preamble: This Agreement, signed on {{ today() }} (hereinafter: Effective Date)
+1) Preamble: This Agreement, signed on {{ license.year }} (hereinafter: Effective Date)
 governs the relationship between any Business Entity, (hereinafter: Licensee) and
 {{ license.organization }}, a duly registered company (hereinafter: Licensor).
 This Agreement sets the terms, rights, restrictions and obligations on using
-{{ base.pkgname }} (hereinafter: The Software) created and owned by Licensor, as
+{{ license.project }} (hereinafter: The Software) created and owned by Licensor, as
 detailed herein
 
 2 )License Grant: Licensor hereby grants Licensee a Personal, Non-assignable &
