@@ -55,7 +55,7 @@ def require(purpose, cfg):
         return [Dependency(name) for name in options]
 
     if purpose == 'dvlpt':
-        dvlpt = ['subprocess', 're']
+        dvlpt = ['subprocess']
         return [Dependency(name) for name in dvlpt]
 
     return []

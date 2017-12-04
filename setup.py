@@ -69,7 +69,6 @@ setup_kwds = dict(
         "nbconvert",
         "pytest",
         "pytest-cov",
-        "re",
         "sphinx",
         "subprocess",
         "tox",

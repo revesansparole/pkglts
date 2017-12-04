@@ -46,7 +46,6 @@ install:
   - conda install nbconvert
   - conda install pytest
   - conda install pytest-cov
-  - conda install re
   - conda install sphinx
   - conda install subprocess
   - pip install tox
