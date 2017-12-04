@@ -39,7 +39,7 @@ other legal restrictions set forth in 3rd party software used while running Soft
 Licensor may terminate this Agreement, including Licensee’s license in the case
 where Licensee :
     3.1) became insolvent or otherwise entered into any liquidation process; or
-    3.2) exported The Software to any jurisdiction where licensor may not enforce
+    3.2) exported The Software to any jurisdiction where Licensor may not enforce
     his rights under this agreements in; or
     3.3) Licensee was in breach of any of this license's terms and conditions and
     such breach was not cured, immediately upon notification; or
