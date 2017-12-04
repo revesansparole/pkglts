@@ -20,7 +20,5 @@ def environment_extensions(cfg):
         logger.warning("Please add git to your $PATH")
         return {'contributors': ["I failed to construct the contributor list"]}
 
-    commits = log.split('commit')
-    contributors = [contributor for commit in commits
-                    for contributor in re.findall(r'Author: (.* <.*@.*>)\n', commit)]
+    contributors = re.findall(r'Author: (.* <.*@.*>)\n', log)
     return {'contributors': set(contributors)}
