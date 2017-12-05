@@ -31,7 +31,7 @@ Fork this project on {% if 'github' is available %}github_{% elif 'gitlab' is av
 {% if 'github' is available %}
 .. _github: {{ github.url }}
 {% elif 'gitlab' is available %}
-.. _gitlab: {{ github.url }}
+.. _gitlab: {{ gitlab.url }}
 {% endif %}
 
 {% endif %}
