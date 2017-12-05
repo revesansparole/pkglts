@@ -1,5 +1,4 @@
 from copy import deepcopy
-import mock
 
 from pkglts.config_management import Config
 
