@@ -5,13 +5,17 @@ Credits
 Development Lead
 ----------------
 
-{# pkglts, doc
-
+.. {# pkglts, doc.authors
 * revesansparole, <revesansparole@gmail.com>
 
-#}
+.. #}
 
 Contributors
 ------------
 
-None yet. Why not be the first?
+.. {# pkglts, doc.contributors
+* revesansparole <revesansparole@gmail.com>
+* ThT12 <ThT12@ThT12.fr>
+* Simon Artzet <simon.artzet@gmail.com>
+
+.. #}
