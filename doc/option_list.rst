@@ -43,7 +43,16 @@ The base of distributing your code comes with:
 
 
 In order to make your package easily accessible for others, these options help
-you organize the structure to be PyPi_ ready:
+you host your code on a distant server:
+
+.. toctree::
+   :maxdepth: 1
+
+   option/github/main
+   option/gitlab/main
+
+
+These options help you organize the structure to be PyPi_ ready:
 
 .. toctree::
    :maxdepth: 1
@@ -51,8 +60,6 @@ you organize the structure to be PyPi_ ready:
    option/coverage/main
    option/tox/main
    option/flake8/main
-   option/github/main
-   option/gitlab/main
 
 Then you can use the 'pypi' option to help you put your package on the cheese shop:
 
