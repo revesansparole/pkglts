@@ -12,7 +12,7 @@ try:
 except NameError:
     string_type = str
 
-current_pkg_cfg_version = 8
+current_pkg_cfg_version = 9
 
 logger = logging.getLogger(__name__)
 
@@ -238,5 +238,10 @@ def upgrade_pkg_cfg_version(pkg_cfg, version):
         if 'doc' in pkg_cfg:
             section = pkg_cfg['doc']
             section['fmt'] = section.get('fmt', 'rst')
+    elif version == 8:
+        pkg_cfg['_pkglts']['version'] = 9
+        if 'github' in pkg_cfg or 'gitlab' in pkg_cfg:
+            print("please remove '.gitignore file and regenerate package")
+            pkg_cfg['git'] = {}
 
     return pkg_cfg
