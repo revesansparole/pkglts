@@ -54,8 +54,8 @@ Authors
 The author list is automatically generated from the author_name, author_email
 information stored in the 'base' part of the package configuration.
 
-If your package is stored on GitHub or Gitlab, the complete list of authors and contributors
-will be retrieved from the website.
+If your package is stored on GitHub or Gitlab, the complete list of authors and
+contributors will be retrieved from the website.
 
 Contributing
 ************
@@ -70,5 +70,5 @@ This file makes more sense if you already installed the 'github' or 'gitlab' opt
 History
 *******
 
-History of your package is generated automatically from the github or gitlab commit tags
-and messages if possible.
+History of your package is generated automatically from the github or gitlab
+commit tags and messages if possible.

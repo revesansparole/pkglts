@@ -117,12 +117,22 @@ Before you submit a pull request, check that it meets these guidelines:
 
 {% if 'test' is available %}
 To run a subset of tests::
+{% if test.suite_name == 'nose' %}
 ```
-$ {% if test.suite_name == 'nose' %}nosetests{% else %}pytest{% endif %} test/test_XXX
+$ nosetests test/test_XXX
+```
+{% else %}
+```
+$ pytest test/test_XXX
 ```
 {% endif %}
+{% endif %}
 
-[issues]: {% if 'github' is available %}{{ github.url }}{% elif  'gitlab' is available %}{{ gitlab.url }}{% endif %}
-/issues
+{% if 'github' is available %}
+[issues]: {{ github.url }}/issues
+{% elif  'gitlab' is available %}
+[issues]: {{ gitlab.url }}/issues
+{% endif %}
+
 [virtualenv]: https://pypi.python.org/pypi/virtualenv
 {% endif %}

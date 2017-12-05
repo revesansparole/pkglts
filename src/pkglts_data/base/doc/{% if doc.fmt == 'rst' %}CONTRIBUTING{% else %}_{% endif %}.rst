@@ -127,10 +127,17 @@ Tips
 {% if 'test' is available %}
 To run a subset of tests::
 
-    $ {% if test.suite_name == 'nose' %}nosetests{% else %}pytest{% endif %} test/test_XXX
+{% if test.suite_name == 'nose' %}
+    $ nosetests test/test_XXX
+{% else %}
+    $ pytest test/test_XXX
+{% endif %}
 
 {% endif %}
-.. _issues: {% if 'github' is available %}{{ github.url }}{% elif  'gitlab' is available %}{{ gitlab.url }}{% endif %}
-/issues
+{% if 'github' is available %}
+.. _issues: {{ github.url }}/issues
+{% elif  'gitlab' is available %}
+.. _issues: {{ gitlab.url }}/issues
+{% endif %}
 .. _virtualenv: https://pypi.python.org/pypi/virtualenv
 {% endif %}

@@ -1,8 +1,7 @@
 github
 ======
 
-Add the relevant files to make your package ready for hosting on a Gitlab_. This
-option is the base for all web related options.
+Add the relevant files to make your package ready for hosting on a Gitlab_.
 
 This option takes care of the local package side of gitlab (e.g. .gitignore file)
 but you still need to register your project on gitlab. See :doc:`gitlab_tutorial`

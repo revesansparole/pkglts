@@ -3,8 +3,6 @@ Register on Gitlab
 
 First step, you need to create yourself an account on Gitlab_.
 
-.. _Gitlab: https://framagit.org/
-
 In the following I will assume that you now have a login and that you are logged on.
 
 Personal package
@@ -76,4 +74,5 @@ The gitlab option is responsible for maintaining a proper '.gitignore'. Therefor
 you can safely assume that no unwanted files will be covered when you 'add --all'
 which makes one life easier to add new modules in a package.
 
+.. _Gitlab: https://framagit.org/
 .. _tutorials: https://fr.atlassian.com/git/
