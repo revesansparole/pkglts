@@ -3,7 +3,7 @@
     "auto_install": true,
     "install_front_end": "stdout",
     "use_prompts": false,
-    "version": 8
+    "version": 9
   },
   "base": {
     "authors": [
@@ -30,6 +30,7 @@
     ]
   },
   "flake8": {},
+  "git": {},
   "github": {
     "owner": "{{ base.authors[0][0] }}",
     "project": "{{ base.pkgname }}",
