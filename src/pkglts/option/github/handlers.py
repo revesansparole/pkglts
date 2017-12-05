@@ -17,7 +17,7 @@ def environment_extensions(cfg):
     del cfg
     
     try:
-        log = subprocess.check_output(['git', 'log', '--all']).decode('utf-8')
+        log = subprocess.check_output(['git', 'log', '--all', '--use-mailmap']).decode('utf-8')
         contributors = re.findall(r'Author: (.* <.*@.*>)\n', log)
     except KeyError:
         logger.warning("Please add git to your $PATH")
