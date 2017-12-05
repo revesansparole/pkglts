@@ -14,6 +14,8 @@ def environment_extensions(cfg):
     Returns:
         dict of str: any
     """
+    del cfg
+    
     try:
         log = subprocess.check_output(['git', 'log', '--all']).decode('utf-8')
     except KeyError:
