@@ -24,6 +24,7 @@ These tutorials are specific to a single option.
    option/coveralls/coveralls_tutorial
    option/data/data_tutorial
    option/github/github_tutorial
+   option/gitlab/gitlab_tutorial
    option/landscape/landscape_tutorial
    option/plugin/plugin_tutorial
    option/pypi/pypi_tutorial

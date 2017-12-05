@@ -51,6 +51,7 @@ you organize the structure to be PyPi_ ready:
    option/tox/main
    option/flake8/main
    option/github/main
+   option/gitlab/main
 
 Then you can use the 'pypi' option to help you put your package on the cheese shop:
 

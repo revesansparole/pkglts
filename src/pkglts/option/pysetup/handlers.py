@@ -40,6 +40,13 @@ def pkg_url(cfg):
         pass
 
     try:
+        url = cfg['gitlab']['url']
+        if url is not None:
+            return url
+    except KeyError:
+        pass
+
+    try:
         url = cfg['pypi']['url']
         if url is not None:
             return url

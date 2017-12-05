@@ -9,5 +9,7 @@ __version__ = version.__version__
 # {# pkglts, base2
 {% if 'github' is available %}
 'github'
+{% elif 'gitlab' is available %}
+'gitlab'
 {% endif %}
 # #}
