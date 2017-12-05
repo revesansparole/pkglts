@@ -18,9 +18,11 @@ def environment_extensions(cfg):
     
     try:
         log = subprocess.check_output(['git', 'log', '--all']).decode('utf-8')
+        contributors = re.findall(r'Author: (.* <.*@.*>)\n', log)
     except KeyError:
         logger.warning("Please add git to your $PATH")
-        return {'contributors': ["I failed to construct the contributor list"]}
-
-    contributors = re.findall(r'Author: (.* <.*@.*>)\n', log)
+        contributors = ["I failed to construct the contributor list"]
+    except subprocess.CalledProcessError as e:
+        contributors = ["Pb with git, %s" % str(e)]
+    
     return {'contributors': set(contributors)}
