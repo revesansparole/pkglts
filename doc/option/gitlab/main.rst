@@ -1,4 +1,4 @@
-github
+gitlab
 ======
 
 Add the relevant files to make your package ready for hosting on a Gitlab_.
