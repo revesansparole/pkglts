@@ -11,8 +11,8 @@
 ## Contributors
 
 [//]: # ({# pkglts, doc.contributors)
-{% if 'github' is available -%}
-{% for contributor in github.contributors -%}
+{% if 'git' is available -%}
+{% for contributor in git.contributors -%}
 * {{ contributor }}
 {% endfor %}
 {%- else %}

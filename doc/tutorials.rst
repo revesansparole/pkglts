@@ -29,4 +29,5 @@ These tutorials are specific to a single option.
    option/plugin/plugin_tutorial
    option/pypi/pypi_tutorial
    option/readthedocs/readthedocs_tutorial
+   option/requires/requires_tutorial
    option/travis/travis_tutorial

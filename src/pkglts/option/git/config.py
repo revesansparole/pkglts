@@ -12,12 +12,7 @@ def update_parameters(cfg):
     Returns:
         None: update in place
     """
-    sec = dict(
-        owner="{{ base.authors[0][0] }}",
-        project="{{ base.pkgname }}",
-        url="https://github.com/{{ github.owner }}/{{ github.project }}"
-    )
-    cfg['github'] = sec
+    cfg['git'] = {}
 
 
 def check(cfg):
@@ -29,11 +24,8 @@ def check(cfg):
     Returns:
         (list of str): list of faulty parameters
     """
+    del cfg
     invalids = []
-    project = cfg['github']['project']
-
-    if len(project) == 0:
-        invalids.append('github.project')
 
     return invalids
 
@@ -51,7 +43,7 @@ def require(purpose, cfg):
     del cfg
 
     if purpose == 'option':
-        options = ['git']
+        options = ['base']
         return [Dependency(name) for name in options]
 
     return []
