@@ -2,7 +2,7 @@
 
 ## Development Lead
 
-[//]: # ({# pkglts, doc_authors)
+[//]: # ({# pkglts, doc.authors)
 {%- for name, email in base.authors -%}
 * {{ name }}, <{{ email }}>
 {% endfor -%}
@@ -10,7 +10,7 @@
 
 ## Contributors
 
-[//]: # ({# pkglts, doc_contributors)
+[//]: # ({# pkglts, doc.contributors)
 {% if 'github' is available -%}
 {% for contributor in github.contributors -%}
 * {{ contributor }}
