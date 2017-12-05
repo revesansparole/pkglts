@@ -52,7 +52,7 @@ def require(purpose, cfg):
     del cfg
 
     if purpose == 'option':
-        options = ['base']
+        options = ['git']
         return [Dependency(name) for name in options]
 
     return []

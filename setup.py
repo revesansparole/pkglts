@@ -119,16 +119,19 @@ setup_kwds['entry_points']['pkglts'] = [
 
     'flake8.require = pkglts.option.flake8.config:require',
 
+    'git.update_parameters = pkglts.option.git.config:update_parameters',
+    'git.check = pkglts.option.git.config:check',
+    'git.require = pkglts.option.git.config:require',
+    'git.environment_extensions = pkglts.option.git.handlers:environment_extensions',
+    'git.files_dir = pkglts_data.base',
+
     'github.update_parameters = pkglts.option.github.config:update_parameters',
     'github.check = pkglts.option.github.config:check',
     'github.require = pkglts.option.github.config:require',
-    'github.environment_extensions = pkglts.option.github.handlers:environment_extensions',
-    'github.files_dir = pkglts_data.base',
 
     'gitlab.update_parameters = pkglts.option.gitlab.config:update_parameters',
     'gitlab.check = pkglts.option.gitlab.config:check',
     'gitlab.require = pkglts.option.gitlab.config:require',
-    'gitlab.files_dir = pkglts_data.base',
 
     'landscape.require = pkglts.option.landscape.config:require',
     'landscape.environment_extensions = pkglts.option.landscape.handlers:environment_extensions',

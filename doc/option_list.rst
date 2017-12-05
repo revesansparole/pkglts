@@ -16,6 +16,7 @@ functionality in your package.
    option/doc/main
    option/license/main
    option/version/main
+   option/git/main
 
 Extended
 ========
