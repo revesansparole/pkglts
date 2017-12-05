@@ -241,7 +241,9 @@ def upgrade_pkg_cfg_version(pkg_cfg, version):
     elif version == 8:
         pkg_cfg['_pkglts']['version'] = 9
         if 'github' in pkg_cfg or 'gitlab' in pkg_cfg:
+            print("#" * 20 + "\n" * 2)
             print("please remove '.gitignore file and regenerate package")
+            print("\n" * 2 + "#" * 20)
             pkg_cfg['git'] = {}
 
     return pkg_cfg
