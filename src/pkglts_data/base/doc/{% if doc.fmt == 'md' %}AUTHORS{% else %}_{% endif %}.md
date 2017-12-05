@@ -14,7 +14,7 @@
 {% if 'github' is available -%}
 {% for contributor in github.contributors -%}
 * {{ contributor }}
-{%- endfor %}
+{% endfor %}
 {%- else %}
 None yet. Why not be the first?
 {% endif %}
