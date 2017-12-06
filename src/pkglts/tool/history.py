@@ -113,9 +113,9 @@ def action_history(*args, **kwds):
         return
     
     if 'gitlab' in cfg.installed_options():
-        server = "gitlab.itkweb.fr"  # cfg['gitlab']['server']
-        owner = "agro"  # cfg['gitlab']['owner']
-        project = "agrosim"  # cfg['gitlab']['project']
+        server = cfg['gitlab']['server']
+        owner = cfg['gitlab']['owner']
+        project = cfg['gitlab']['project']
         tags = gitlab_tag_list(server, "%s/%s" % (owner, project), "URFqxvqV8Zn51qsZGSNZ")
     elif 'github' in cfg.installed_options():
         logger.info("Github option not supported yet")
