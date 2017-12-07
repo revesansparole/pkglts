@@ -66,7 +66,9 @@ setup_kwds = dict(
     {%- endif %}
     package_dir={'': 'src'},
     {% if 'data' is available %}
+    {% if data.use_ext_dir %}
     include_package_data=True,
+    {% endif %}
     package_data=pkg_data,
     {% endif -%}
     setup_requires=[
