@@ -32,7 +32,7 @@ data_rel_pth = lambda pth: normpath(abspath(pth))[nb:]
 data_files = []
 for root, dnames, fnames in walk("src/pkglts"):
     for name in fnames:
-        if splitext(name)[-1] in ['.json', '.ini']:
+        if splitext(name)[-1] in ['', '.bat', '.cfg', '.json', '.md', '.in', '.ini', '.png', '.rst', '.sh', '.tpl', '.txt', '.yaml', '.yml']:
             data_files.append(data_rel_pth(pj(root, name)))
 
 
