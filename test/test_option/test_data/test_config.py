@@ -5,7 +5,7 @@ from pkglts.option.data.config import require, update_parameters
 def test_update_parameters():
     cfg = {}
     update_parameters(cfg)
-    assert len(cfg['data']) == 1
+    assert len(cfg['data']) == 2
 
 
 def test_require():

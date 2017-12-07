@@ -24,6 +24,9 @@ with open("{{ base.src_pth }}/version.py") as fp:
 pkgs = find_packages('src')
 
 {% if 'data' is available -%}
+pkg_data = {pkgname: {{ data.filetype }} for pkgname in pkgs}
+
+{% if data.use_ext_dir %}
 data_files = []
 
 nb = len(normpath(abspath("src/{{ base.pkgname }}_data"))) + 1
@@ -41,8 +44,8 @@ for root, dnames, fnames in walk("src/{{ base.pkgname }}_data"):
         data_files.append(data_rel_pth(pj(root, name)))
 
 
-pkg_data = {pkgname: {{ data.filetype }} for pkgname in pkgs}
 pkg_data['{{ base.pkgname }}_data'] = data_files
+{% endif %}
 {% endif %}
 
 setup_kwds = dict(

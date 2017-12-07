@@ -267,5 +267,6 @@ def upgrade_pkg_cfg_version(pkg_cfg, version):
         if 'data' in pkg_cfg:
             section = pkg_cfg['data']
             section['filetype'] = section.get('filetype', ["*.json", "*.ini"])
+            section['use_ext_dir'] = section.get('use_ext_dir', False)
     
     return pkg_cfg
