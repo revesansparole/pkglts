@@ -146,11 +146,12 @@ def regenerate_dir(src_dir, tgt_dir, cfg, overwrite_file):
                 tgt_pth = ns_pth + "/" + tgt_name
 
         if isdir(src_pth):
-            if tgt_name not in ("", "_") and not exists(tgt_pth):
-                mkdir(tgt_pth)
+            if tgt_name not in ("", "_"):
+                if not exists(tgt_pth):
+                    mkdir(tgt_pth)
 
-            sub_hm = regenerate_dir(src_pth, tgt_pth, cfg, overwrite_file)
-            hm.update(sub_hm)
+                sub_hm = regenerate_dir(src_pth, tgt_pth, cfg, overwrite_file)
+                hm.update(sub_hm)
         else:
             if splitext(tgt_name)[0] != "_":
                 kp = pth_as_key(tgt_pth)
