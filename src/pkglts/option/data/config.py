@@ -13,7 +13,7 @@ def update_parameters(cfg):
         None: update in place
     """
     sec = dict(
-        filetype=["*.json", "*.ini"],
+        filetype=[".json", ".ini"],
         use_ext_dir=False
     )
     cfg['data'] = sec
