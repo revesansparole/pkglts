@@ -38,8 +38,13 @@ def gitlab_tag_list(server, project, token):
     
     r = requests.get(url)
     print("status", r.status_code)
-    tags = dict((tag['name'][1:], tag) for tag in r.json() if tag['name'].startswith("v"))
-    # print("tags", tags)
+    tags = {}
+    for tag in r.json():
+        if tag['name'].startswith("v"):
+            tags[tag['name'][1:]] = dict(name=tag['name'],
+                                         date=tag['commit']['committed_date'][:10],
+                                         title=tag['message'],
+                                         body=tag['release']['description'])
     
     return tags
 
@@ -69,9 +74,8 @@ def write_changelog(tags, fmt):
         txt = "# History\n\n"
         for ver in ver_list:
             tag = tags[ver]
-            txt += "## %s - <small>*(%s)*</small> - %s\n\n" % (
-            tag['name'], tag['commit']['committed_date'][:10], tag['message'])
-            txt += tag['release']['description']
+            txt += "## %s - <small>*(%s)*</small> - %s\n\n" % (tag['name'], tag['date'], tag['title'])
+            txt += tag['body']
             txt += "\n\n"
         
         for name in ("CHANGELOG.md", "HISTORY.md"):
@@ -84,10 +88,10 @@ def write_changelog(tags, fmt):
         txt = "=======\nHistory\n=======\n\n"
         for ver in ver_list:
             tag = tags[ver]
-            tag_title = "%s - *(%s)* - %s" % (tag['name'], tag['commit']['committed_date'][:10], tag['message'])
+            tag_title = "%s - *(%s)* - %s" % (tag['name'], tag['date'], tag['title'])
             txt += tag_title + "\n"
             txt += "=" * len(tag_title) + "\n\n"
-            txt += tag['release']['description']
+            txt += tag['body']
             txt += "\n\n"
         
         for name in ("CHANGELOG.rst", "HISTORY.rst"):
