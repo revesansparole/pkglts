@@ -12,7 +12,9 @@ include dvlpt_requirements.txt
 recursive-include test *
 
 recursive-include src/pkglts *
+
 recursive-include src/pkglts_data *
+
 
 
 recursive-exclude * __pycache__

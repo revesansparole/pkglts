@@ -5,7 +5,7 @@
 # format setup arguments
 
 from os import walk
-from os.path import abspath, normpath
+from os.path import abspath, normpath, splitext
 from os.path import join as pj
 
 from setuptools import setup, find_packages
@@ -21,23 +21,32 @@ version = {}
 with open("src/pkglts/version.py") as fp:
     exec(fp.read(), version)
 
+# find packages
+pkgs = find_packages('src')
+
+pkg_data = {}
+
+nb = len(normpath(abspath("src/pkglts"))) + 1
+data_rel_pth = lambda pth: normpath(abspath(pth))[nb:]
 
 data_files = []
+for root, dnames, fnames in walk("src/pkglts"):
+    for name in fnames:
+        if splitext(name)[-1] in ['.json', '.ini']:
+            data_files.append(data_rel_pth(pj(root, name)))
 
+
+pkg_data['pkglts'] = data_files
 nb = len(normpath(abspath("src/pkglts_data"))) + 1
+data_rel_pth = lambda pth: normpath(abspath(pth))[nb:]
 
-
-def data_rel_pth(pth):
-    """ Return path relative to pkg_data
-    """
-    abs_pth = normpath(abspath(pth))
-    return abs_pth[nb:]
-
-
+data_files = []
 for root, dnames, fnames in walk("src/pkglts_data"):
     for name in fnames:
         data_files.append(data_rel_pth(pj(root, name)))
 
+
+pkg_data['pkglts_data'] = data_files
 
 setup_kwds = dict(
     name='pkglts',
@@ -50,11 +59,13 @@ setup_kwds = dict(
     license='CeCILL-C',
     zip_safe=False,
 
-    packages=find_packages('src'),
+    packages=pkgs,
     package_dir={'': 'src'},
     
+    
     include_package_data=True,
-    package_data={'pkglts_data': data_files},
+    
+    package_data=pkg_data,
     setup_requires=[
         "pytest-runner",
         ],
