@@ -25,7 +25,7 @@ with open("{{ base.src_pth }}/version.py") as fp:
 pkgs = find_packages('src')
 
 {% if 'data' is available -%}
-pkg_data = {pkgname: {{ data.filetype }} for pkgname in pkgs}
+pkg_data = {'': {{ data.filetype }} }
 
 {% if data.use_ext_dir %}
 data_files = []
