@@ -109,6 +109,8 @@ setup_kwds['entry_points']['pkglts'] = [
     'coveralls.require = pkglts.option.coveralls.config:require',
     'coveralls.environment_extensions = pkglts.option.coveralls.handlers:environment_extensions',
 
+    'data.update_parameters = pkglts.option.data.config:update_parameters',
+    'data.check = pkglts.option.data.config:check',
     'data.require = pkglts.option.data.config:require',
     'data.files_dir = pkglts_data.base',
 

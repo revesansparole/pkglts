@@ -9,4 +9,4 @@ def test_check_handle_option_config_not_existing():
 
 def test_check_handle_option_defines_no_check():
     cfg = Config(default_cfg)
-    assert len(check_option_parameters("data", cfg)) == 0
+    assert len(check_option_parameters("coverage", cfg)) == 0
