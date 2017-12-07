@@ -5,7 +5,7 @@
 # format setup arguments
 {% if 'data' is available %}
 from os import walk
-from os.path import abspath, normpath
+from os.path import abspath, normpath, splitext
 from os.path import join as pj
 {% endif %}
 from setuptools import setup, find_packages
@@ -25,29 +25,31 @@ with open("{{ base.src_pth }}/version.py") as fp:
 pkgs = find_packages('src')
 
 {% if 'data' is available -%}
-pkg_data = {'': {{ data.filetype }} }
+nb = len(normpath(abspath("{{ base.src_pth }}"))) + 1
+data_rel_pth = lambda pth: normpath(abspath(pth))[nb:]
 
-{% if data.use_ext_dir %}
 data_files = []
+for root, dnames, fnames in walk("{{ base.src_pth }}"):
+    for name in fnames:
+        if splitext(name)[-1] in {{ data.filetype }}:
+            data_files.append(data_rel_pth(pj(root, name)))
 
+
+pkg_data['{{ base.pkg_full_name }}'] = data_files
+
+{%- if data.use_ext_dir %}
 nb = len(normpath(abspath("src/{{ base.pkgname }}_data"))) + 1
+data_rel_pth = lambda pth: normpath(abspath(pth))[nb:]
 
-
-def data_rel_pth(pth):
-    """ Return path relative to pkg_data
-    """
-    abs_pth = normpath(abspath(pth))
-    return abs_pth[nb:]
-
-
+data_files = []
 for root, dnames, fnames in walk("src/{{ base.pkgname }}_data"):
     for name in fnames:
         data_files.append(data_rel_pth(pj(root, name)))
 
 
 pkg_data['{{ base.pkgname }}_data'] = data_files
-{% endif %}
-{% endif %}
+{%- endif -%}
+{%- endif %}
 
 setup_kwds = dict(
     name='{{ base.pkg_full_name }}',
