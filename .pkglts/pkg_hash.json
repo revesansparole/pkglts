@@ -7,8 +7,8 @@
   },
   ".landscape.yml": {},
   ".pypirc": {
-    "pypi": "lmhwMqAKKm27U4uHAnP8eZha2SYPb4HvrKi1As/5kvJxSEqMTv6slvfqc7sVzHGZGSt26EBL/y+DoYIkvDEBhg==",
-    "pypi.test": "zWBcGMyChxCuXPMsosS2ktztvIXlHRzYwkMZ3rZivm7W3l/sEqvUrhHagBw9CL72Alod3KL7aE/WIRoK3FeqfA=="
+    "pypi.serverdescr": "Xwmy6dIeZ8dRPhYNKBwoBU+vXof53eeATlBeDYhO3dbdM2nu5f+i7KADpDKewMsy4vaw07SlvZcvrkNxIQGdOw==",
+    "pypi.serverlist": "BGltL3W0iQd15DvEGmiS0N1SxLtu7rF4EZH1YZjfi7ct3IwdAvMuRVdebtxnsCAas/tgs29gbmyZA06lW7hzQg=="
   },
   ".travis.yml": {
     "travis": "G8RJ3Ab2mF28579gVhB+tdzqRXGAB4yi2jUj5bbE6kNNP4MU3Ii0u2y12GGaShQVcOLpeImwlO87dygbLng/Gw==",
