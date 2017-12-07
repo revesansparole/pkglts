@@ -5,7 +5,7 @@ from pkglts.option.pypi.config import check, require, update_parameters
 def test_update_parameters():
     cfg = {}
     update_parameters(cfg)
-    assert len(cfg['pypi']) == 1
+    assert len(cfg['pypi']) == 2
 
 
 def test_config_check_classifiers_exists():

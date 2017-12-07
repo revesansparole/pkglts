@@ -18,7 +18,11 @@ def update_parameters(cfg):
             "Intended Audience :: Developers",
             "License :: OSI Approved :: BSD License",
             "Natural Language :: English"
-        ]
+        ],
+        servers={
+            "pypi": dict(url="https://upload.pypi.org/legacy/"),
+            "test": dict(url="https://testpypi.python.org/pypi")
+        }
     )
     cfg['pypi'] = sec
 
