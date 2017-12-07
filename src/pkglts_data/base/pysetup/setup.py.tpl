@@ -21,6 +21,7 @@ version = {}
 with open("{{ base.src_pth }}/version.py") as fp:
     exec(fp.read(), version)
 
+# find packages
 pkgs = find_packages('src')
 
 {% if 'data' is available -%}
