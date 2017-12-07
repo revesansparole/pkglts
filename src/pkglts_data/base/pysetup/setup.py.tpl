@@ -21,6 +21,7 @@ version = {}
 with open("{{ base.src_pth }}/version.py") as fp:
     exec(fp.read(), version)
 
+pkgs = find_packages('src')
 
 {% if 'data' is available -%}
 data_files = []
@@ -40,7 +41,9 @@ for root, dnames, fnames in walk("src/{{ base.pkgname }}_data"):
         data_files.append(data_rel_pth(pj(root, name)))
 
 
-{% endif -%}
+pkg_data = {pkgname: {{ data.filetype }} for pkgname in pkgs}
+pkg_data['{{ base.pkgname }}_data'] = data_files
+{% endif %}
 
 setup_kwds = dict(
     name='{{ base.pkg_full_name }}',
@@ -53,14 +56,14 @@ setup_kwds = dict(
     license='{{ license.name }}',
     zip_safe=False,
 
-    packages=find_packages('src'),
+    packages=pkgs,
     {%- if base.namespace is not none %}
     namespace_packages=['{{ base.namespace }}'],
     {%- endif %}
     package_dir={'': 'src'},
     {% if 'data' is available %}
     include_package_data=True,
-    package_data={'{{ base.pkgname }}_data': data_files},
+    package_data=pkg_data,
     {% endif -%}
     setup_requires=[
         {% if 'test' is available -%}
