@@ -26,7 +26,7 @@ def test_option_handle_no_parameter_list_in_config():
     cfg._env.globals['base'] = None
     cfg = update_opt('data', cfg)
     assert 'data' in cfg
-    assert len(tuple(cfg['data'].items())) == 0
+    assert len(tuple(cfg['data'].items())) == 1
 
 
 def test_option_use_default_from_config():
