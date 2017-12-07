@@ -1,9 +1,9 @@
-.. :changelog:
-
+=======
 History
--------
+=======
 
-creation (TODAY)
-------------------------
+v2.1.0 - *(2017-12-06)* - better dependencies
+=============================================
 
-* First release on PyPI.
+ - handle pkg manager for dependencies
+

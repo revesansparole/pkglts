@@ -14,6 +14,34 @@ from ..config_management import get_pkg_config
 logger = logging.getLogger(__name__)
 
 
+def github_tag_list(project):
+    """Retrieve tag list from project.
+    
+    Notes: release tag format
+        a release tag is of the form vX.X.X where
+        X.X.X stands for package version
+    
+    Args:
+        project (str): name of project (e.g. "revesansparole/pkglts")
+
+    Returns:
+        (dict of (str|dict)): tag name, tag info
+    """
+    base_url = "https://api.github.com"
+    url = base_url + "/repos/%s/releases" % project
+    r = requests.get(url)
+    print("status", r.status_code)
+    tags = {}
+    for tag in r.json():
+        if tag['tag_name'].startswith("v"):
+            tags[tag['tag_name'][1:]] = dict(name=tag['tag_name'],
+                                             date=tag['created_at'][:10],
+                                             title=tag['name'],
+                                             body=tag['body'])
+    
+    return tags
+
+
 def gitlab_tag_list(server, project, token):
     """Retrieve tag list from project.
     
@@ -33,7 +61,7 @@ def gitlab_tag_list(server, project, token):
     repo_id = quote_plus(project)
     print("repo_id", repo_id)
     
-    url = base_url + repo_id + "/repository/tags" + "?private_token={}".format(token)
+    url = base_url + repo_id + "/repository/tags" + "?private_token=%s" % token
     print("url", url)
     
     r = requests.get(url)
@@ -80,7 +108,7 @@ def write_changelog(tags, fmt):
         
         for name in ("CHANGELOG.md", "HISTORY.md"):
             if os.path.exists(name):
-                logger.info("write changelog in {}".format(name))
+                logger.info("write changelog in %s" % name)
                 with open(name, 'w') as f:
                     f.write(txt)
     
@@ -96,7 +124,7 @@ def write_changelog(tags, fmt):
         
         for name in ("CHANGELOG.rst", "HISTORY.rst"):
             if os.path.exists(name):
-                logger.info("write changelog in {}".format(name))
+                logger.info("write changelog in %s" % name)
                 with open(name, 'w') as f:
                     f.write(txt)
     else:
@@ -122,8 +150,9 @@ def action_history(*args, **kwds):
         project = cfg['gitlab']['project']
         tags = gitlab_tag_list(server, "%s/%s" % (owner, project), "URFqxvqV8Zn51qsZGSNZ")
     elif 'github' in cfg.installed_options():
-        logger.info("Github option not supported yet")
-        tags = {}
+        owner = cfg['github']['owner']
+        project = cfg['github']['project']
+        tags = github_tag_list("%s/%s" % (owner, project))
     else:
         logger.info("git only option not supported yet")
         tags = {}
