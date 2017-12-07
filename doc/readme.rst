@@ -113,8 +113,12 @@ directive::
 The files will be directly installed without the need to a regenerate call. You
 can reinstall them at any time (you'll be prompted for action if conflicts occur).
 
-Extra services
-==============
+Extra tools
+===========
+
+Pkglts comes with a set of tools to make the life of package manager easier.
+
+- :doc:`tool/history/main`: Regenerate the history of your package from associated tags
 
 .. warning:: Work In Progress
 
