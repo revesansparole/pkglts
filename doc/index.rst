@@ -12,6 +12,7 @@ Contents:
    usage
    tutorials
    option_list
+   tool_list
    contributing
    authors
    history
