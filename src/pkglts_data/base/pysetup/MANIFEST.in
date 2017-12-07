@@ -12,7 +12,9 @@ include dvlpt_requirements.txt
 recursive-include test *
 {% if 'data' is available %}
 recursive-include {{ base.src_pth }} *
+{% if data.use_ext_dir %}
 recursive-include src/{{ base.pkgname }}_data *
+{% endif %}
 {% endif %}
 
 recursive-exclude * __pycache__
