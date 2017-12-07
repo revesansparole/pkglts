@@ -25,6 +25,8 @@ with open("{{ base.src_pth }}/version.py") as fp:
 pkgs = find_packages('src')
 
 {% if 'data' is available -%}
+pkg_data = {}
+
 nb = len(normpath(abspath("{{ base.src_pth }}"))) + 1
 data_rel_pth = lambda pth: normpath(abspath(pth))[nb:]
 
