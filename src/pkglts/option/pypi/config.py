@@ -19,10 +19,10 @@ def update_parameters(cfg):
             "License :: OSI Approved :: BSD License",
             "Natural Language :: English"
         ],
-        servers=[
-            dict(name="pypi", url="https://upload.pypi.org/legacy/"),
-            dict(name="test", url="https://testpypi.python.org/pypi")
-        ]
+        servers={
+            "pypi": dict(url="https://upload.pypi.org/legacy/"),
+            "test": dict(url="https://testpypi.python.org/pypi")
+        }
     )
     cfg['pypi'] = sec
 

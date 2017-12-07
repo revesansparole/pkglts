@@ -7,13 +7,14 @@ from os.path import join as pj
 from .config import pkglts_dir, pkg_cfg_file
 from .option_tools import available_options, find_available_options
 from .option.git.config import update_parameters as git_update_parameters
+from .option.pypi.config import update_parameters as pypi_update_parameters
 
 try:
     string_type = basestring
 except NameError:
     string_type = str
 
-current_pkg_cfg_version = 9
+current_pkg_cfg_version = 10
 
 logger = logging.getLogger(__name__)
 
@@ -246,5 +247,20 @@ def upgrade_pkg_cfg_version(pkg_cfg, version):
             print("please remove '.gitignore file and regenerate package")
             print("\n" * 2 + "#" * 20)
             git_update_parameters(pkg_cfg)
+    elif version == 9:
+        pkg_cfg['_pkglts']['version'] = 10
+        if 'pypi' in pkg_cfg:
+            print("#" * 20 + "\n" * 2)
+            print("please remove '.pypirc file and regenerate package")
+            print("\n" * 2 + "#" * 20)
+            # save section
+            mem = dict(pkg_cfg["pypi"])
+            # get newly defined list of servers
+            pypi_update_parameters(pkg_cfg)
+            servers = dict(pkg_cfg["pypi"]["servers"])
+            # update option
+            pkg_cfg["pypi"] = mem
+            pkg_cfg["pypi"]["servers"] = pkg_cfg["pypi"].get("servers", {})
+            pkg_cfg["pypi"]["servers"].update(servers)
     
     return pkg_cfg
