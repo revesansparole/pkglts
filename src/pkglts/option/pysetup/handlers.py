@@ -51,7 +51,8 @@ def pkg_url(cfg):
         pass
 
     try:
-        url = cfg['gitlab']['url']
+        # TODO: Better way to access gitlab url ?
+        url = cfg._env.globals['gitlab'].url
         if url is not None:
             return url
     except KeyError:

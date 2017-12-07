@@ -14,7 +14,7 @@ def test_pkg_url_look_multiple_places():
     tpl_cfg = dict(base={'pkgname': 'toto', 'namespace': 'oa', 'url': None},
                    doc={'fmt': 'rst'},
                    github={'url': None, 'project': 'project', 'owner': 'toto'},
-                   gitlab={'url': None, 'project': 'project', 'owner': 'toto'},
+                   gitlab={'project_url': None, 'project': 'project', 'owner': 'toto'},
                    pypi={'classifiers': [], 'url': None},
                    readthedocs={'project': 'project'},
                    pysetup={'intended_versions': ["27"],
@@ -22,7 +22,10 @@ def test_pkg_url_look_multiple_places():
     
     for name in ("base", "github", "gitlab", "pypi", "readthedocs"):
         loc_cfg = deepcopy(tpl_cfg)
-        loc_cfg[name]['url'] = name
+        if name == "gitlab":
+            loc_cfg[name]['project_url'] = name
+        else:
+            loc_cfg[name]['url'] = name
         cfg = Config(loc_cfg)
         cfg.load_extra()
         assert cfg._env.globals['pysetup'].pkg_url == name

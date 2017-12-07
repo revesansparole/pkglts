@@ -19,7 +19,8 @@ def update_parameters(cfg):
         owner="{{ base.authors[0][0] }}",
         project="{{ base.pkgname }}",
         server="framagit.org",
-        url="https://{{ gitlab.server }}/{{ gitlab.owner }}/{{ gitlab.project }}"
+        sub_group=None,
+        project_url="Auto"
     )
     cfg['gitlab'] = sec
 

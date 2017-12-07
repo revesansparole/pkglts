@@ -146,6 +146,7 @@ setup_kwds['entry_points']['pkglts'] = [
     'gitlab.update_parameters = pkglts.option.gitlab.config:update_parameters',
     'gitlab.check = pkglts.option.gitlab.config:check',
     'gitlab.require = pkglts.option.gitlab.config:require',
+    'gitlab.environment_extensions = pkglts.option.gitlab.handlers:environment_extensions',
 
     'landscape.root = pkglts.option.landscape',
     'landscape.require = pkglts.option.landscape.config:require',
