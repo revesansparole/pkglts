@@ -39,6 +39,7 @@ install:
 
 
   - conda install jinja2
+  - conda install unidecode
   - conda install coverage
   - pip install coveralls
   - conda install flake8

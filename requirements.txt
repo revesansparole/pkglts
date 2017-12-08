@@ -4,5 +4,6 @@
 # section pysetup
 
 jinja2 # conda install jinja2
+unidecode # conda install unidecode
 
 # #}

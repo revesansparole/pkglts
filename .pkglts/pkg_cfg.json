@@ -89,6 +89,9 @@
     "require": [
       {
         "name": "jinja2"
+      },
+      {
+        "name": "unidecode"
       }
     ]
   },
