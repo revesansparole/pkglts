@@ -59,6 +59,7 @@ setup_kwds = dict(
         ],
     install_requires=[
         "jinja2",
+        "unidecode",
         ],
     tests_require=[
         "coverage",
