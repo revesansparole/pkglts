@@ -2,6 +2,8 @@ import logging
 import re
 import subprocess
 
+from unidecode import unidecode
+
 logger = logging.getLogger(__name__)
 
 
@@ -18,7 +20,7 @@ def environment_extensions(cfg):
     
     try:
         log = subprocess.check_output(['git', 'log', '--all', '--use-mailmap']).decode('utf-8')
-        commiters = re.findall(r'Author: (.* <.*@.*>)\n', log)
+        commiters = re.findall(r'Author: (.* <.*@.*>)\n', unidecode(log))
         cc = [(commiters.count(name), name) for name in set(commiters)]
         contributors = [name for nb, name in sorted(cc, reverse=True)]
     except KeyError:
