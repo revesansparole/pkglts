@@ -53,8 +53,6 @@ setup_kwds = dict(
     package_dir={'': 'src'},
     
     
-    include_package_data=True,
-    
     package_data=pkg_data,
     setup_requires=[
         "pytest-runner",

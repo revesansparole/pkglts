@@ -27,7 +27,7 @@
     "license": "21ExMhSzB2uXQuU1VoH7++nrb4u6TbesqGtJDpM39OLPWft9SJ2tJ956R6foYmkI9VuJay7SUrhFLPxxMEHLxg=="
   },
   "MANIFEST.in": {
-    "pysetup": "YG1qMRVFBbP+5dZlvMyy4Jj4MYZtat8mDILl5Gcsr0XjRtU9jAdhHcN2akdG2mQpeEcV625oiIgjj0iCjLNb2A=="
+    "pysetup": "psgypH2rS1U8zm/+1e5ZlOpirmjJkBjlR8wcPFifhf3NhP2MkmP7yyYp+Gloshy40cDY7l2tAeGkV8hcu5GjpQ=="
   },
   "README.rst": {
     "doc": "ymc0VSFORY4OIdPdiVEm8kT9iExjge9QD17KVEhgezgHLwRaXhzePiVCTvG+dsNxxlQHlirfIdkVYUJagjZ8zQ=="
@@ -63,7 +63,7 @@
   },
   "setup.py": {
     "pysetup.call": "2wHuP94SpWKZpqOzExkQGTxnhGPgBHK3qOdPn0Ncstj5FkZ7FBGGM/inqAXaI4QLKQtTNlOUYRGSkYUWAUcf1w==",
-    "pysetup.kwds": "fp+38A+7eT4ONYbfCp/tmxT8nPH3Rnvbe0xpVhul8XaeCpucDl4XkKv9Pi67JeRh+h0CrJbO2Ez3c09JjBvamA=="
+    "pysetup.kwds": "EzFWWEIUgTbwM/8a4H2YpqjTHf+bb0CZk34RyTAI4gE1p23uwILnjmS35KslNvxPcb6EJPO/gcNSN0E4S373fw=="
   },
   "src/pkglts/__init__.py": {
     "base": "gR33dW0qqYmsV9NSNB+DD8XmuxnC2t0mKjnMoU5728qh97fSER6MbX+3QKxpZDLByZToaAay4xhx8acxketJmA=="
