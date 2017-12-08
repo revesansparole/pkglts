@@ -37,7 +37,7 @@
       ".yaml",
       ".yml"
     ],
-    "use_ext_dir": true
+    "use_ext_dir": false
   },
   "doc": {
     "description": "Building packages with long term support",

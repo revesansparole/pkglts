@@ -1,7 +1,7 @@
 """ Some helpers for options
 """
 import logging
-from os.path import dirname, join as pj
+from os.path import dirname, exists, join as pj
 import pkg_resources
 
 logger = logging.getLogger(__name__)
@@ -20,6 +20,7 @@ class Option(object):
 
     def __init__(self):
         self._name = None
+        self._root_dir = None
         self._update_parameters = None
         self._check = None
         self._require = None
@@ -29,7 +30,9 @@ class Option(object):
 
     def from_entry_point(self, ep):
         self._name, func_name = ep.name.split(".")
-        if func_name == "update_parameters":
+        if func_name == "root":
+            self._root_dir = ep
+        elif func_name == "update_parameters":
             self._update_parameters = ep
         elif func_name == "check":
             self._check = ep
@@ -39,11 +42,32 @@ class Option(object):
             self._environment_extensions = ep
         elif func_name == "regenerate":
             self._regenerate = ep
-        elif func_name == "files_dir":
-            self._files_dir = ep
         else:
             # silently ignore other type of entry points
             logger.error("unknown entry point attribute: '{}'".format(func_name))
+
+    def root_dir(self):
+        if self._root_dir is None:
+            raise UserWarning("Need to associate entry point first")
+
+        if isinstance(self._root_dir, pkg_resources.EntryPoint):
+            self._root_dir = dirname(self._root_dir.load().__file__)
+
+        return self._root_dir
+    
+    def example_dir(self):
+        pth = pj(self.root_dir(), 'example')
+        if exists(pth):
+            return pth
+        else:
+            return None
+
+    def resource_dir(self):
+        pth = pj(self.root_dir(), 'resource')
+        if exists(pth):
+            return pth
+        else:
+            return None
 
     def update_parameters(self, cfg):
         if self._update_parameters is None:
@@ -90,15 +114,6 @@ class Option(object):
             self._regenerate = self._regenerate.load()
 
         return self._regenerate(*args, **kwds)
-
-    def files_dir(self):
-        if self._files_dir is None:
-            return None
-
-        if isinstance(self._files_dir, pkg_resources.EntryPoint):
-            self._files_dir = pj(dirname(self._files_dir.load().__file__), self._name)
-
-        return self._files_dir
 
 
 def find_available_options():
