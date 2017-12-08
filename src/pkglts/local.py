@@ -1,8 +1,8 @@
 """Regroup set of functions that make use of local environment
 inside a package. Just a way to normalize pre defined paths.
 """
+from os import path
 
-from .data_access import get_data_dir
 from .templating import render
 
 
@@ -55,6 +55,6 @@ def init_namespace_dir(pth, cfg):
     Returns:
         None
     """
-    src_pth = get_data_dir() + "/base/namespace__init__.py.tpl"
+    src_pth = path.dirname(__file__) + "/resource/namespace__init__.py.tpl"
     tgt_pth = pth + "/__init__.py"
     render(cfg, src_pth, tgt_pth)

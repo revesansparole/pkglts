@@ -1,14 +1,14 @@
 from glob import glob
 from os import path
 
+import pkglts
 from pkglts.config_management import Config
-from pkglts.data_access import get_data_dir
 from pkglts.option_tools import available_options
 
 
 def test_options_expose_parameters():
     # walk through all possible options defined by pkglts
-    option_basedir = path.join(path.dirname(get_data_dir()), 'pkglts', 'option')
+    option_basedir = path.join(path.dirname(pkglts.__file__), 'option')
     for pth in glob("{}/*/".format(option_basedir)):
         option_name = path.basename(path.dirname(pth))
         if not option_name.startswith("_"):
@@ -26,7 +26,7 @@ def test_require_correctly_defined():
     cfg = Config(dict(base={}, doc={'fmt': 'rst'}, sphinx={'theme': 'default'}, test={'suite_name': 'pytest'}))
 
     # walk through all possible options
-    option_basedir = path.join(path.dirname(get_data_dir()), 'pkglts', 'option')
+    option_basedir = path.join(path.dirname(pkglts.__file__), 'option')
     for pth in glob("{}/*/".format(option_basedir)):
         option_name = path.basename(path.dirname(pth))
         if not option_name.startswith("_"):

@@ -10,8 +10,7 @@ from os.path import exists, normpath, splitext
 from os.path import join as pj
 from shutil import rmtree
 
-from .config import pkglts_dir, pkg_cfg_file, pkg_hash_file
-from .data_access import get_data_dir, ls
+from .config import pkg_cfg_file, pkg_hash_file, pkglts_dir
 from .config_management import (Config, default_cfg,
                                 get_pkg_config, write_pkg_config)
 from .hash_management import (get_pkg_hash, modified_file_hash,
@@ -34,20 +33,20 @@ def init_pkg(rep="."):
     """
     if not exists(pj(rep, pkglts_dir)):
         mkdir(pj(rep, pkglts_dir))
-
+    
     logger.info("init package")
-
+    
     for name in ("regenerate.no", "clean.no"):
         if not exists(pj(rep, pkglts_dir, name)):
             with open(pj(rep, pkglts_dir, name), 'w') as f:
                 f.write("")
-
+    
     if exists(pj(rep, pkglts_dir, pkg_cfg_file)):
         cfg = get_pkg_config(rep)
     else:
         cfg = Config(default_cfg)
     write_pkg_config(cfg, rep)
-
+    
     if not exists(pj(rep, pkglts_dir, pkg_hash_file)):
         write_pkg_hash({}, rep)
 
@@ -67,7 +66,7 @@ def clean(rep="."):
         pth = normpath(pj(rep, name))
         if exists(pth):
             rmtree(pth)
-
+    
     for root, dnames, fnames in walk(rep):
         # do not walk directories starting with "."
         for name in tuple(dnames):
@@ -78,7 +77,7 @@ def clean(rep="."):
             elif name == "__pycache__":
                 rmtree(pj(root, name))
                 dnames.remove(name)
-
+        
         for name in fnames:
             if not name.startswith("."):
                 if splitext(name)[1] in [".pyc", ".pyo"]:
@@ -99,7 +98,7 @@ def add_option(name, cfg):
     """
     if name in cfg.installed_options():
         raise UserWarning("option already included in this package")
-
+    
     return update_opt(name, cfg)
 
 
@@ -117,13 +116,14 @@ def install_example_files(option, cfg, target="."):
     if option not in cfg.installed_options():
         logger.warning("please install option before example files")
         return False
-
-    if (option, True) not in ls("example"):
+    
+    opt = available_options[option]
+    ex_dir = opt.example_dir()
+    if ex_dir is None:
         logger.info("option does not provide any example")
         return False
-
-    root = pj(get_data_dir(), 'example', option)
-    regenerate_dir(root, target, cfg, {})
+    
+    regenerate_dir(ex_dir, target, cfg, {})
     return True
 
 
@@ -144,16 +144,16 @@ def regenerate_package(cfg, target=".", overwrite=False):
     for option in cfg.installed_options():
         for n in check_option_parameters(option, cfg):
             invalids.append((option, n))
-
+    
     if len(invalids) > 0:
         for option, param in invalids:
             logger.warning("param %s is not valid for '%s'", param, option)
-
+        
         return False
-
+    
     # check for potential conflicts
     hm_ref = get_pkg_hash(target)
-
+    
     conflicted = []
     for file_pth in hm_ref:
         pth = pj(target, file_pth)
@@ -162,7 +162,7 @@ def regenerate_package(cfg, target=".", overwrite=False):
         else:
             # file disappeared, regenerate_dir will reload it if managed by pkglts
             pass
-
+    
     overwrite_file = {}
     if len(conflicted) > 0:
         if overwrite:
@@ -173,19 +173,19 @@ def regenerate_package(cfg, target=".", overwrite=False):
             for name in conflicted:
                 print("A non editable section of %s has been modified" % name)
                 overwrite_file[pth_as_key(name)] = get_user_permission("overwrite", False)
-
+    
     # render files for all options
     hm = {}
     for name in cfg.installed_options():
         opt = available_options[name]
-        opt_ref_dir = opt.files_dir()
-        if opt_ref_dir is None:
+        resource_dir = opt.resource_dir()
+        if resource_dir is None:
             logger.info("option %s does not provide files" % name)
         else:
             logger.info("rendering option %s" % name)
-            loc_hm = regenerate_dir(opt_ref_dir, target, cfg, overwrite_file)
+            loc_hm = regenerate_dir(resource_dir, target, cfg, overwrite_file)
             hm.update(loc_hm)
-
+    
     hm_ref.update(hm)
     write_pkg_hash(hm_ref, target)
 

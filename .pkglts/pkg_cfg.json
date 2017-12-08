@@ -3,7 +3,7 @@
     "auto_install": true,
     "install_front_end": "stdout",
     "use_prompts": false,
-    "version": 10
+    "version": 11
   },
   "base": {
     "authors": [
@@ -20,7 +20,25 @@
   "conda": {},
   "coverage": {},
   "coveralls": {},
-  "data": {},
+  "data": {
+    "filetype": [
+      "",
+      ".bat",
+      ".cfg",
+      ".json",
+      ".md",
+      ".in",
+      ".ini",
+      ".png",
+      ".rst",
+      ".sh",
+      ".tpl",
+      ".txt",
+      ".yaml",
+      ".yml"
+    ],
+    "use_ext_dir": false
+  },
   "doc": {
     "description": "Building packages with long term support",
     "fmt": "rst",
