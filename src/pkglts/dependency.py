@@ -19,11 +19,33 @@ class Dependency(object):
     def __str__(self):
         return "dep: {}".format(self.name)
     
-    def is_conda(self):
-        return self.package_manager is None or self.package_manager == 'conda'
+    def is_conda(self, strict=True):
+        """Check whether this dependency can be managed by conda
+        
+        Args:
+            strict (bool): whether only conda can manage this dep
+
+        Returns:
+            (bool)
+        """
+        if strict:
+            return self.package_manager == 'conda'
+        else:
+            return self.package_manager is None or self.package_manager == 'conda'
     
-    def is_pip(self):
-        return self.package_manager == 'pip'
+    def is_pip(self, strict=True):
+        """Check whether this dependency can be managed by pip
+        
+        Args:
+            strict (bool): whether only pip can manage this dep
+
+        Returns:
+            (bool)
+        """
+        if strict:
+            return self.package_manager == 'pip'
+        else:
+            return self.package_manager is None or self.package_manager == 'pip'
     
     def fmt_requirement(self):
         """Format dependency for requirements files

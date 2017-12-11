@@ -86,10 +86,7 @@ def environment_extensions(cfg):
         else:
             raise UserWarning("WTF")
     
-    def is_pip_filter(dep):
-        return dep.is_pip()
-    
-    cfg.add_test('is_pip_dep', is_pip_filter)
+    cfg.add_test('is_pip_dep', Dependency.is_pip)
     
     return {"pkg_url": pkg_url(cfg),
             "requirements": req}
