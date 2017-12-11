@@ -90,8 +90,7 @@ $ git add .
 $ git commit -m "Your detailed description of your changes."
 $ git push origin wip_name-of-your-bugfix-or-feature
 ```
-7. Submit a pull request through the {% if 'github' is available %}GitHub{% elif 'gitlab' is available %}Gitlab
-{% endif %} website.
+7. Submit a pull request through the {% if 'github' is available %}GitHub{% elif 'gitlab' is available %}Gitlab{% endif %} website.
 
 ## Pull Request Guidelines
 
