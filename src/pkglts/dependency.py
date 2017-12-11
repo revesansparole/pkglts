@@ -1,3 +1,8 @@
+import logging
+
+logger = logging.getLogger(__name__)
+
+
 class Dependency(object):
     """Simple container to keep track of all the required
     info to install a dependency.
@@ -58,14 +63,24 @@ class Dependency(object):
         else:
             pkg_mng = self.package_manager
         
+        if self.version is None:
+            full_name = self.name
+        else:
+            version = self.version
+            if pkg_mng == 'conda':
+                if version[:2] in ('==', '>=', '<=', "~="):
+                    logger.warning("bad version specification for '{}' with conda, use '=' by default".format(self.name))
+                    version = "=" + self.version[2:]
+            full_name = "{}{}".format(self.name, version)
+        
         if pkg_mng == "conda":
             if self.channel is None:
-                install_cmd = "conda install {}".format(self.name)
+                install_cmd = "conda install {}".format(full_name)
             else:
-                install_cmd = "conda install -c {} {}".format(self.channel, self.name)
+                install_cmd = "conda install -c {} {}".format(self.channel, full_name)
         elif pkg_mng == "pip":
-            install_cmd = "pip install {}".format(self.name)
+            install_cmd = "pip install {}".format(full_name)
         else:  # assume valid git url
             install_cmd = "pip install git+{}".format(pkg_mng)
         
-        return "{} # {}".format(self.name, install_cmd)
+        return "{} # {}".format(full_name, install_cmd)
