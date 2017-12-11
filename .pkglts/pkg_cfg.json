@@ -91,6 +91,13 @@
         "name": "jinja2"
       },
       {
+        "name": "requests"
+      },
+      {
+        "name": "semver",
+        "pkg_mng": "pip"
+      },
+      {
         "name": "unidecode"
       }
     ]
@@ -112,6 +119,6 @@
   "version": {
     "major": 2,
     "minor": 2,
-    "post": 0
+    "post": 1
   }
 }

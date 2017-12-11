@@ -59,6 +59,8 @@ setup_kwds = dict(
         ],
     install_requires=[
         "jinja2",
+        "requests",
+        "semver",
         "unidecode",
         ],
     tests_require=[
