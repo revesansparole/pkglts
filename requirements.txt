@@ -4,6 +4,8 @@
 # section pysetup
 
 jinja2 # conda install jinja2
+requests # conda install requests
+semver # pip install semver
 unidecode # conda install unidecode
 
 # #}

@@ -39,6 +39,8 @@ install:
 
 
   - conda install jinja2
+  - conda install requests
+  - pip install semver
   - conda install unidecode
   - conda install coverage
   - pip install coveralls
