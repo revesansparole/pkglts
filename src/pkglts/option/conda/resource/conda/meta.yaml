@@ -1,9 +1,14 @@
+# {# pkglts, conda.package
 package:
   name: {{ base.pkg_full_name }}
   version: "{{ version.major }}.{{ version.minor }}.{{ version.post }}"
+# #}
 
+# {# pkglts, conda.src
 source:
-  path: ../
+  path:
+    ../
+# #}
 
 requirements:
   build:
@@ -16,7 +21,9 @@ requirements:
 build:
   script: python setup.py install --single-version-externally-managed --record=record.txt
 
+# {# pkglts, conda.about
 about:
   summary: "{{ doc.description }}"
   license: "{{ license.name }}"
   license_file: LICENSE
+# #}
