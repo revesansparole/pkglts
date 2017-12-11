@@ -3,20 +3,18 @@
 # edit .pkglts/pkg_cfg instead
 # section pysetup
 channels:
-    defaults
+- defaults
 
 dependencies:
-{%- for dep in pysetup.requirements('install') -%}
-    {%- if dep.is_conda() %}
-    {{ dep.name }}
-    {%- endif %}
+{%- for dep in pysetup.requirements('install') if dep.is_conda() %}
+- {{ dep.name }}
 {%- endfor %}
 
-pip:
-{%- for dep in pysetup.requirements('install') -%}
-    {%- if dep.is_pip() %}
-    {{ dep.name }}
-    {%- endif %}
+{%- set pip_deps = pysetup.requirements('install')|select("is_pip_dep")|list -%}
+{%- if pip_deps|length > 0 %}
+- pip:
+{%- for dep in pip_deps %}
+  - {{ dep.name }}
 {%- endfor %}
-
+{% endif %}
 # #}

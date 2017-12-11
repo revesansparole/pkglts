@@ -85,6 +85,11 @@ def environment_extensions(cfg):
             return req_dvlpt
         else:
             raise UserWarning("WTF")
+    
+    def is_pip_filter(dep):
+        return dep.is_pip()
+    
+    cfg.add_test('is_pip_dep',is_pip_filter)
 
     return {"pkg_url": pkg_url(cfg),
             "requirements": req}

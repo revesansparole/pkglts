@@ -49,13 +49,25 @@ class Config(dict):
         # add global filters and test
         self._env.globals['today'] = lambda: date.today().isoformat()
         
-        self._env.tests['available'] = self._is_available
+        self.add_test('available', self._is_available)
         
         # resolve
         self.resolve()
     
     def template(self):
         return self._tpl
+    
+    def add_test(self, name, func):
+        """Add a new test in jinja2 environment.
+        
+        Args:
+            name (str): name of test (must be unique)
+            func (callable): function use for test
+
+        Returns:
+            None
+        """
+        self._env.tests[name] = func
     
     def _is_available(self, opt_name):
         return opt_name in self
