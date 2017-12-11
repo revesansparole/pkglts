@@ -59,6 +59,6 @@ def require(purpose, cfg):
     
     if purpose == 'dvlpt':
         if cfg['doc']['fmt'] == 'md':
-            return [Dependency('mkdocs', 'pip')]
+            return [Dependency('mkdocs', pkg_mng='pip')]
     
     return []

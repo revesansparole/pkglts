@@ -18,6 +18,6 @@ def require(purpose, cfg):
         return [Dependency(name) for name in options]
 
     if purpose == 'dvlpt':
-        return [Dependency('tox', 'pip')]
+        return [Dependency('tox', pkg_mng='pip')]
 
     return []
