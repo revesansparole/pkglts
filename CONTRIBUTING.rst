@@ -18,9 +18,9 @@ Report bugs at issues_.
 
 If you are reporting a bug, please include:
 
-* Your operating system name and version.
-* Any details about your local setup that might be helpful in troubleshooting.
-* Detailed steps to reproduce the bug.
+  * Your operating system name and version.
+  * Any details about your local setup that might be helpful in troubleshooting.
+  * Detailed steps to reproduce the bug.
 
 Implement your own option
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -29,9 +29,9 @@ You can easily extend `pkglts` by implementing your own option as a plugin. Ther
 of plugins:
 
 * options that implement a new feature useful for everybody. Don't hesitate to contact us or submit a
-pull request if you want to insert it into the main pkglts repo.
+  pull request if you want to insert it into the main pkglts repo.
 * plugins that implement a way to create packages specific to your organization. Don't hesitate to make
-your life easier if you always create projects with the same options.
+  your life easier if you always create projects with the same options.
 
 Fix Bugs
 ~~~~~~~~
@@ -59,10 +59,10 @@ The best way to send feedback is to file an issue at issues_.
 
 If you are proposing a feature:
 
-* Explain in detail how it would work.
-* Keep the scope as narrow as possible, to make it easier to implement.
-* Remember that this is a volunteer-driven project, and that contributions
-  are welcome :)
+  * Explain in detail how it would work.
+  * Keep the scope as narrow as possible, to make it easier to implement.
+  * Remember that this is a volunteer-driven project, and that contributions
+    are welcome :)
 
 Get Started!
 ------------
@@ -115,7 +115,7 @@ Before you submit a pull request, check that it meets these guidelines:
    your new functionality into a function with a docstring, and add the
    feature to the list in README.rst.
 3. The pull request should work for Python 2.7, 3.4, and 3.5. Check
-   https://travis-ci.org/revesansparole/pkglts/pull_requests
+   `Travis-CI <https://travis-ci.org/revesansparole/pkglts/pull_requests>`_
    and make sure that the tests pass for all supported Python versions.
 
 Tips

@@ -18,9 +18,9 @@ Report bugs at issues_.
 
 If you are reporting a bug, please include:
 
-* Your operating system name and version.
-* Any details about your local setup that might be helpful in troubleshooting.
-* Detailed steps to reproduce the bug.
+  * Your operating system name and version.
+  * Any details about your local setup that might be helpful in troubleshooting.
+  * Detailed steps to reproduce the bug.
 
 Fix Bugs
 ~~~~~~~~
@@ -48,10 +48,10 @@ The best way to send feedback is to file an issue at issues_.
 
 If you are proposing a feature:
 
-* Explain in detail how it would work.
-* Keep the scope as narrow as possible, to make it easier to implement.
-* Remember that this is a volunteer-driven project, and that contributions
-  are welcome :)
+  * Explain in detail how it would work.
+  * Keep the scope as narrow as possible, to make it easier to implement.
+  * Remember that this is a volunteer-driven project, and that contributions
+    are welcome :)
 
 Get Started!
 ------------
@@ -106,24 +106,22 @@ Pull Request Guidelines
 
 Before you submit a pull request, check that it meets these guidelines:
 
-1. The pull request should include tests.
-2. If the pull request adds functionality, the docs should be updated. Put
-   your new functionality into a function with a docstring, and add the
-   feature to the list in README.rst.
-{% if 'pysetup' is available %}
-3. The pull request should work for Python {{ pysetup.intended_versions|join(", ") }}.
-   {% if 'github' is available %}
-   Check
-   `Travis <https://travis-ci.org/{{ github.owner }}/{{ github.project }}/pull_requests>`_
-   and make sure that the tests pass for all supported Python versions.
-   {% endif %}
+  1. The pull request should include tests.
+  2. If the pull request adds functionality, the docs should be updated. Put
+     your new functionality into a function with a docstring, and add the
+     feature to the list in README.rst.
+{%- if 'pysetup' is available %}
+  3. The pull request should work for Python {{ pysetup.intended_versions|join(", ") }}.
+     {% if 'github' is available -%}
+     Check `Travis <https://travis-ci.org/{{ github.owner }}/{{ github.project }}/pull_requests>`_
+     and make sure that the tests pass for all supported Python versions.
+     {% endif %}
 {% endif %}
 Tips
 ----
 
 {% if 'test' is available %}
 To run a subset of tests::
-
 {% if test.suite_name == 'nose' %}
     $ nosetests test/test_XXX
 {% else %}

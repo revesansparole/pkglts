@@ -17,5 +17,6 @@ Contributors
 * revesansparole <revesansparole@gmail.com>
 * ThT12 <ThT12@ThT12.fr>
 * Simon Artzet <simon.artzet@gmail.com>
+* pradal <christophe.pradal@inria.fr>
 
 .. #}
