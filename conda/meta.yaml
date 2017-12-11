@@ -1,0 +1,29 @@
+# {# pkglts, conda.package
+package:
+  name: pkglts
+  version: "2.1.0"
+# #}
+
+# {# pkglts, conda.src
+source:
+  path:
+    ../
+# #}
+
+requirements:
+  build:
+    - python
+    - setuptools
+
+  run:
+    - python
+
+build:
+  script: python setup.py install --single-version-externally-managed --record=record.txt
+
+# {# pkglts, conda.about
+about:
+  summary: "Building packages with long term support"
+  license: "CeCILL-C"
+  license_file: LICENSE
+# #}
