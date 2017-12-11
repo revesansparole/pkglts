@@ -33,3 +33,9 @@ class Dependency(object):
             install_cmd = "pip install git+{}".format(pkg_mng)
         
         return "{} # {}".format(self.name, install_cmd)
+    
+    def is_conda(self):
+        return self.package_manager is None or self.package_manager == 'conda'
+    
+    def is_pip(self):
+        return self.package_manager == 'pip'
