@@ -20,7 +20,7 @@ def requirements(cfg, requirement_name):
                 reqs[dep.name] = dep
         except KeyError:
             raise KeyError("option '%s' does not exists" % name)
-
+    
     return [reqs[name] for name in sorted(reqs)]
 
 
@@ -31,35 +31,35 @@ def pkg_url(cfg):
             return url
     except KeyError:
         pass
-
+    
     try:
         url = cfg['github']['url']
         if url is not None:
             return url
     except KeyError:
         pass
-
+    
     try:
         url = cfg['gitlab']['url']
         if url is not None:
             return url
     except KeyError:
         pass
-
+    
     try:
         url = cfg['pypi']['url']
         if url is not None:
             return url
     except KeyError:
         pass
-
+    
     try:
         url = cfg['readthedocs']['url']
         if url is not None:
             return url
     except KeyError:
         pass
-
+    
     return ""
 
 
@@ -75,9 +75,9 @@ def environment_extensions(cfg):
     req_install = requirements(cfg, 'install')
     for dep in cfg['pysetup']['require']:
         req_install.append(Dependency(**dep))
-
+    
     req_dvlpt = requirements(cfg, 'dvlpt')
-
+    
     def req(name):
         if name == 'install':
             return req_install
@@ -89,7 +89,7 @@ def environment_extensions(cfg):
     def is_pip_filter(dep):
         return dep.is_pip()
     
-    cfg.add_test('is_pip_dep',is_pip_filter)
-
+    cfg.add_test('is_pip_dep', is_pip_filter)
+    
     return {"pkg_url": pkg_url(cfg),
             "requirements": req}
