@@ -3,7 +3,7 @@ package:
   version: "{{ version.major }}.{{ version.minor }}.{{ version.post }}"
 
 source:
-  git_url: ../
+  path: ../
 
 requirements:
   build:
@@ -12,6 +12,9 @@ requirements:
 
   run:
     - python
+
+build:
+  script: python setup.py install --single-version-externally-managed --record=record.txt
 
 about:
   summary: "{{ doc.description }}"
