@@ -96,6 +96,12 @@ setup_kwds = dict(
 
 setup_kwds['entry_points']['console_scripts'] = ['pmg = pkglts.manage_script:main']
 setup_kwds['entry_points']['pkglts'] = [
+    'appveyor.root = pkglts.option.appveyor',
+    'appveyor.update_parameters = pkglts.option.appveyor.config:update_parameters',
+    'appveyor.check = pkglts.option.appveyor.config:check',
+    'appveyor.require = pkglts.option.appveyor.config:require',
+    'appveyor.environment_extensions = pkglts.option.appveyor.handlers:environment_extensions',
+
     'base.root = pkglts.option.base',
     'base.update_parameters = pkglts.option.base.config:update_parameters',
     'base.check = pkglts.option.base.config:check',
