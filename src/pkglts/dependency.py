@@ -8,7 +8,7 @@ class Dependency(object):
     info to install a dependency.
     """
     
-    def __init__(self, name, version=None, pkg_mng=None, channel=None):
+    def __init__(self, name, version="", pkg_mng=None, channel=None):
         self.name = name
         """name of dependency"""
         
@@ -58,29 +58,25 @@ class Dependency(object):
         Returns:
             (str)
         """
-        if self.package_manager is None:
-            pkg_mng = "conda"
-        else:
-            pkg_mng = self.package_manager
-        
-        if self.version is None:
-            full_name = self.name
-        else:
+        if self.is_pip(strict=False):
             version = self.version
-            if pkg_mng == 'conda':
-                if version[:2] in ('==', '>=', '<=', "~="):
-                    logger.warning("bad version specification for '{}' with conda, use '=' by default".format(self.name))
-                    version = "=" + self.version[2:]
+            if version[:2] not in ('==', '>=', '<=', "~="):
+                version = "==" + version
             full_name = "{}{}".format(self.name, version)
-        
-        if pkg_mng == "conda":
+            txt = "{}  # pip install {}".format(full_name, full_name)
+        elif self.is_conda(strict=True):
+            version = self.version
+            if version[:2] in ('==', '>=', '<=', "~="):
+                logger.warning("bad version specification for '{}' with conda, use '=' by default".format(self.name))
+                version = "=" + version[2:]
+            elif version[0] != '=':
+                version = "=" + version
+            full_name = "{}{}".format(self.name, version)
             if self.channel is None:
-                install_cmd = "conda install {}".format(full_name)
+                txt = "#{}  # conda install {}".format(full_name, full_name)
             else:
-                install_cmd = "conda install -c {} {}".format(self.channel, full_name)
-        elif pkg_mng == "pip":
-            install_cmd = "pip install {}".format(full_name)
+                txt = "#{}  # conda install -c {} {}".format(full_name, self.channel, full_name)
         else:  # assume valid git url
-            install_cmd = "pip install git+{}".format(pkg_mng)
+            txt = "#{}  # pip install git+{}".format(self.name, self.package_manager)
         
-        return "{} # {}".format(full_name, install_cmd)
+        return txt
