@@ -24,6 +24,54 @@ class Dependency(object):
     def __str__(self):
         return "dep: {}".format(self.name)
     
+    def _conda_fmt_name(self):
+        if self.version is None:
+            version = ""
+        else:
+            version = self.version
+            if version[:2] in ('==', '>=', '<=', "~="):
+                logger.warning(
+                    "bad version specification for '{}' with conda, use '=' by default".format(self.name))
+                version = "=" + version[2:]
+            elif version[0] != '=':
+                version = "=" + version
+        return "{}{}".format(self.name, version)
+    
+    def _pip_fmt_name(self):
+        if self.version is None:
+            version = ""
+        else:
+            version = self.version
+            if version[:2] not in ('==', '>=', '<=', "~="):
+                version = "==" + version
+        return "{}{}".format(self.name, version)
+    
+    def conda_full_name(self):
+        """Produce fully qualified name with version number.
+        
+        Returns:
+            (str)
+        """
+        if self.is_conda(strict=False):
+            return self._conda_fmt_name()
+        elif self.is_pip(strict=True):
+            return self._pip_fmt_name()
+        else:  # TODO git url
+            return "walou {}".format(self.name)
+    
+    def pip_full_name(self):
+        """Produce fully qualified name with version number.
+        
+        Returns:
+            (str)
+        """
+        if self.is_pip(strict=False):
+            return self._pip_fmt_name()
+        elif self.is_conda(strict=True):
+            return self._conda_fmt_name()
+        else:  # assume valid git url
+            return "walou {}".format(self.name)
+    
     def is_conda(self, strict=True):
         """Check whether this dependency can be managed by conda
         
@@ -52,35 +100,35 @@ class Dependency(object):
         else:
             return self.package_manager is None or self.package_manager == 'pip'
     
+    def conda_install(self):
+        """Produce command line needed to install this dependency.
+        
+        Returns:
+            (str)
+        """
+        full_name = self.conda_full_name()
+        
+        if self.channel is None:
+            return "conda install {}".format(full_name)
+        else:
+            return "conda install -c {} {}".format(self.channel, full_name)
+    
+    def pip_install(self):
+        """Produce command line needed to install this dependency.
+        
+        Returns:
+            (str)
+        """
+        full_name = self.pip_full_name()
+        return "pip install {}".format(full_name)
+    
     def fmt_conda_requirement(self):
         """Format dependency for conda requirements.yml files
         
         Returns:
             (str)
         """
-        if self.is_conda(strict=False):
-            if self.version is None:
-                version = ""
-            else:
-                version = self.version
-                if version[:2] in ('==', '>=', '<=', "~="):
-                    logger.warning("bad version specification for '{}' with conda, use '=' by default".format(self.name))
-                    version = "=" + version[2:]
-                elif version[0] != '=':
-                    version = "=" + version
-            full_name = "{}{}".format(self.name, version)  # TODO channel
-        elif self.is_pip(strict=True):
-            if self.version is None:
-                version = ""
-            else:
-                version = self.version
-                if version[:2] not in ('==', '>=', '<=', "~="):
-                    version = "==" + version
-            full_name = "{}{}".format(self.name, version)
-        else:  # TODO git url
-            full_name = "# walou {}".format(self.name)
-        
-        return full_name
+        return self.conda_full_name()
     
     def fmt_pip_requirement(self, extended=False):
         """Format dependency for pip requirements.txt files
@@ -89,33 +137,13 @@ class Dependency(object):
             (str)
         """
         if self.is_pip(strict=False):
-            if self.version is None:
-                version = ""
-            else:
-                version = self.version
-                if version[:2] not in ('==', '>=', '<=', "~="):
-                    version = "==" + version
-            full_name = "{}{}".format(self.name, version)
-            txt = full_name
+            txt = self._pip_fmt_name()
             if extended:
-                txt += "  # pip install {}".format(full_name)
+                txt += "  # {}".format(self.pip_install())
         elif self.is_conda(strict=True):
-            if self.version is None:
-                version = ""
-            else:
-                version = self.version
-                if version[:2] in ('==', '>=', '<=', "~="):
-                    logger.warning("bad version specification for '{}' with conda, use '=' by default".format(self.name))
-                    version = "=" + version[2:]
-                elif version[0] != '=':
-                    version = "=" + version
-            full_name = "{}{}".format(self.name, version)
-            txt = "#{}".format(full_name)
+            txt = "#{}".format(self._conda_fmt_name())
             if extended:
-                if self.channel is None:
-                    txt += "  # conda install {}".format(full_name)
-                else:
-                    txt += "  # conda install -c {} {}".format(self.channel, full_name)
+                txt += "  # {}".format(self.conda_install())
         else:  # assume valid git url
             txt = "#{}".format(self.name)
             if extended:

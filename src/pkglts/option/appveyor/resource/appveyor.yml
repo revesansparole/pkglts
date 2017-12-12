@@ -33,9 +33,9 @@ build_script:
   # install dependencies and package
 {% for dep in pysetup.requirements('install') %}
   {%- if dep.is_conda(strict=False) %}
-  - conda install {{ dep.name }}
+  - {{ dep.conda_install() }}
   {%- elif dep.is_pip(strict=True) %}
-  - pip install {{ dep.name }}
+  - {{ dep.pip_install() }}
   {%- elif dep.package_manager == 'git' %}
   - pip install git+https://github.com/{{ dep.name }}
   {%- endif %}
@@ -43,9 +43,9 @@ build_script:
 
 {%- for dep in pysetup.requirements('dvlpt') %}
   {%- if dep.is_conda(strict=False) %}
-  - conda install {{ dep.name }}
+  - {{ dep.conda_install() }}
   {%- elif dep.is_pip(strict=True) %}
-  - pip install {{ dep.name }}
+  - {{ dep.pip_install() }}
   {%- elif dep.package_manager == 'git' %}
   - pip install git+https://github.com/{{ dep.name }}
   {%- endif %}
