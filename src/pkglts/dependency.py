@@ -82,7 +82,7 @@ class Dependency(object):
         
         return full_name
     
-    def fmt_pip_requirement(self):
+    def fmt_pip_requirement(self, extended=False):
         """Format dependency for pip requirements.txt files
         
         Returns:
@@ -96,7 +96,9 @@ class Dependency(object):
                 if version[:2] not in ('==', '>=', '<=', "~="):
                     version = "==" + version
             full_name = "{}{}".format(self.name, version)
-            txt = "{}  # pip install {}".format(full_name, full_name)
+            txt = full_name
+            if extended:
+                txt += "  # pip install {}".format(full_name)
         elif self.is_conda(strict=True):
             if self.version is None:
                 version = ""
@@ -108,11 +110,15 @@ class Dependency(object):
                 elif version[0] != '=':
                     version = "=" + version
             full_name = "{}{}".format(self.name, version)
-            if self.channel is None:
-                txt = "#{}  # conda install {}".format(full_name, full_name)
-            else:
-                txt = "#{}  # conda install -c {} {}".format(full_name, self.channel, full_name)
+            txt = "#{}".format(full_name)
+            if extended:
+                if self.channel is None:
+                    txt += "  # conda install {}".format(full_name)
+                else:
+                    txt += "  # conda install -c {} {}".format(self.channel, full_name)
         else:  # assume valid git url
-            txt = "#{}  # pip install git+{}".format(self.name, self.package_manager)
+            txt = "#{}".format(self.name)
+            if extended:
+                txt += "  # pip install git+{}".format(self.package_manager)
         
         return txt
