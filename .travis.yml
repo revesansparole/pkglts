@@ -45,10 +45,10 @@ install:
   - conda install coverage
   - pip install coveralls
   - conda install flake8
-  - conda install mock
   - conda install nbconvert
   - conda install pytest
   - conda install pytest-cov
+  - conda install pytest-mock
   - conda install sphinx
   - pip install tox
   - pip install twine

@@ -14,7 +14,7 @@
     "travis": "G8RJ3Ab2mF28579gVhB+tdzqRXGAB4yi2jUj5bbE6kNNP4MU3Ii0u2y12GGaShQVcOLpeImwlO87dygbLng/Gw==",
     "travis.addons": "z4PhNX7vuL3xVChQ1m2AB9Yg5AULVxXcg/SpIdNs6c5H0NE8XYXysP+DGNKHfuwvY7kxvUdBeoGlODJ6+SfaPg==",
     "travis.after": "NK0ZmP0FuAXWFohzr7Peg6h/JISQ/QkBMmwK1DvwqCyGKNhw5rprqhyARHDyc6LRyq+oqid/4e4MiviIsNoZKA==",
-    "travis.install": "YzrE0tBNNlzHGGANuqaJvLr+fMvuWMUBvTkAnJrtSfuXn9zEWWn67sUyidEVPOfgjQzDSLUVXX2feeXY0gSifg==",
+    "travis.install": "SjX7qutWRUiHBVTIuib0smS/ZHQ7d8jXyi81wrJqbF93bR0fKj7+LBi3zeN6tnJCKreKJzSNLO9z0LLU4IYILA==",
     "travis.script": "DuMVu20DK3x0WVdVZxihdiYnEkfDqmOlMUuCHohyYvi4fv3Ew8OeAca6AdKM/ZCSZvVS9tywx+PhPrmDexl6hg=="
   },
   "AUTHORS.rst": {
@@ -58,13 +58,13 @@
   "doc/readme.rst": {},
   "doc/usage.rst": {},
   "dvlpt_requirements.txt": {
-    "pysetup": "rGbMAtRqXwJAPfCJeVDR0eUOpfIpzAPEkXSgKYehto039I/5eSDz94sy09hx1WMLskm1jck+wWawuNHho90JkQ=="
+    "pysetup": "Vuup22usqy8dN0o1gxxgSt71YwFtp/GivIMVrpTCKV0yrmJUsfNEug3N3+DrHzjFcrq1ywhybjN/n/+HPtH0Sg=="
   },
   "dvlpt_requirements.yml": {
-    "conda": "kU28cQ9w+lfTisAnDwpXy2hif3fZEd/NH391FWSnX/Qu1ABRT1wvVIq9wbS7lxHERfyR6bctsX1C0yp5sPOjpQ=="
+    "conda": "YJOBPWVpRGqqc1ATto0dSHPatjHxdI36eZA97SDpqj7w55r1OMGhre41bANOR+uus77GUDfVu/N4xbYSWKn4FQ=="
   },
   "requirements.txt": {
-    "pysetup": "42EE+7yU0kr52oOsMS6/F5Fv3MoIvMlLRiY3MigycbG0PUzXrOwHOnZ+STycEuhDFdROdHplH5upzhAfUB2wLg=="
+    "pysetup": "a3vxSz1gh9Jpi9HD2zTkYmMLp1wlSvhWQpTs/AUv7B/UWgArJGdcPPrg0SS6sPxsGZ75kNCaic4APrGKU93fcA=="
   },
   "requirements.yml": {
     "conda": "vvKR8KzrmYPOQ8QVuz1v6hrKVpRd1Sz8kehXALgjKN9dkWsxFktUPZzSiDYxrlS4bU+6ggpaosBdQHGvu8mWPQ=="
@@ -74,7 +74,7 @@
   },
   "setup.py": {
     "pysetup.call": "2wHuP94SpWKZpqOzExkQGTxnhGPgBHK3qOdPn0Ncstj5FkZ7FBGGM/inqAXaI4QLKQtTNlOUYRGSkYUWAUcf1w==",
-    "pysetup.kwds": "LAHkJFDHCK5t8zEbaKP3CSZuGroxIcK9ZBTSdGnhOCUuCeIJ/RU6wZlo1w8Lu1D/vUGLLu8Y7LZ66Qyv7WxZSQ=="
+    "pysetup.kwds": "wru5RMINXhANgk6o6uIEZcDrf2a0up9LyTwU7dF6yhqViSKEK6xRW0k9+cW/GOck071J1bE/rGlz2rtKpqdtIA=="
   },
   "src/pkglts/__init__.py": {
     "base": "gR33dW0qqYmsV9NSNB+DD8XmuxnC2t0mKjnMoU5728qh97fSER6MbX+3QKxpZDLByZToaAay4xhx8acxketJmA=="
