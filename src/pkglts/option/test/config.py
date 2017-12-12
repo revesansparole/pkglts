@@ -51,14 +51,10 @@ def require(purpose, cfg):
         return [Dependency(name) for name in options]
 
     if purpose == 'dvlpt':
-        deps = [Dependency('mock')]
-
         test_suite = cfg['test']['suite_name']
         if test_suite == 'pytest':
-            deps.append(Dependency('pytest'))
+            return [Dependency(name) for name in ['pytest', 'pytest-mock']]
         if test_suite == 'nose':
-            deps.append(Dependency('nose'))
-
-        return deps
+            return [Dependency(name) for name in ['nose', 'mock']]
 
     return []
