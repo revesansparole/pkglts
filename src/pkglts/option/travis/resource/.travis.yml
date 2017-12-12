@@ -37,9 +37,9 @@ install:
   - source activate myenv
 
 {% for dep in pysetup.requirements('install') %}
-  {%- if dep.package_manager == 'conda' or dep.package_manager is none %}
+  {%- if dep.is_conda(strict=False) %}
   - conda install {{ dep.name }}
-  {%- elif dep.package_manager == 'pip' %}
+  {%- elif dep.is_pip(strict=True) %}
   - pip install {{ dep.name }}
   {%- elif dep.package_manager == 'git' %}
   - pip install git+https://github.com/{{ dep.name }}
@@ -47,9 +47,9 @@ install:
 {%- endfor %}
 
 {%- for dep in pysetup.requirements('dvlpt') %}
-  {%- if dep.package_manager == 'conda' or dep.package_manager is none %}
+  {%- if dep.is_conda(strict=False) %}
   - conda install {{ dep.name }}
-  {%- elif dep.package_manager == 'pip' %}
+  {%- elif dep.is_pip(strict=True) %}
   - pip install {{ dep.name }}
   {%- elif dep.package_manager == 'git' %}
   - pip install git+https://github.com/{{ dep.name }}
