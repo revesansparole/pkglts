@@ -34,26 +34,38 @@ def test_dependency_respect_strict_pkg_mng():
 def test_dependency_writes_correct_pip_requirements():
     dep = Dependency("toto", pkg_mng="pip")
     txt = dep.fmt_pip_requirement()
+    assert txt == "toto"
+    txt = dep.fmt_pip_requirement(extended=True)
     assert txt == "toto  # pip install toto"
     
     dep = Dependency("toto", pkg_mng="pip", version="2.18")
     txt = dep.fmt_pip_requirement()
+    assert txt == "toto==2.18"
+    txt = dep.fmt_pip_requirement(extended=True)
     assert txt == "toto==2.18  # pip install toto==2.18"
     
     dep = Dependency("toto", pkg_mng="pip", version="==2.18")
     txt = dep.fmt_pip_requirement()
+    assert txt == "toto==2.18"
+    txt = dep.fmt_pip_requirement(extended=True)
     assert txt == "toto==2.18  # pip install toto==2.18"
     
     dep = Dependency("toto", pkg_mng="conda")
     txt = dep.fmt_pip_requirement()
+    assert txt == "#toto"
+    txt = dep.fmt_pip_requirement(extended=True)
     assert txt == "#toto  # conda install toto"
     
     dep = Dependency("toto", pkg_mng="conda", version="2.18")
     txt = dep.fmt_pip_requirement()
+    assert txt == "#toto=2.18"
+    txt = dep.fmt_pip_requirement(extended=True)
     assert txt == "#toto=2.18  # conda install toto=2.18"
     
     dep = Dependency("toto", pkg_mng="conda", version="==2.18")
     txt = dep.fmt_pip_requirement()
+    assert txt == "#toto=2.18"
+    txt = dep.fmt_pip_requirement(extended=True)
     assert txt == "#toto=2.18  # conda install toto=2.18"
 
 
