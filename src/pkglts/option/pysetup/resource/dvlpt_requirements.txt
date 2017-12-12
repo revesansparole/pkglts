@@ -1,5 +1,5 @@
 # {# pkglts, pysetup
 {% for dep in pysetup.requirements('dvlpt') -%}
-{{ dep.fmt_requirement() }}
+{{ dep.fmt_pip_requirement() }}
 {% endfor %}
 # #}

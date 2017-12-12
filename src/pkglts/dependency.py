@@ -52,7 +52,7 @@ class Dependency(object):
         else:
             return self.package_manager is None or self.package_manager == 'pip'
     
-    def fmt_requirement(self):
+    def fmt_pip_requirement(self):
         """Format dependency for requirements files
         
         Returns:
