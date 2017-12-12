@@ -18,6 +18,6 @@ def require(purpose, cfg):
         return [Dependency(name) for name in options]
 
     if purpose == 'dvlpt':
-        return [Dependency('coveralls', 'pip')]
+        return [Dependency('coveralls', pkg_mng='pip')]
 
     return []

@@ -62,6 +62,6 @@ def require(purpose, cfg):
         return [Dependency(name) for name in options]
 
     if purpose == 'dvlpt':
-        return [Dependency('twine', 'pip')]
+        return [Dependency('twine', pkg_mng='pip')]
 
     return []

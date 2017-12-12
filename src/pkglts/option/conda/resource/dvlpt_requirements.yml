@@ -6,15 +6,15 @@ channels:
 - defaults
 
 dependencies:
-{%- for dep in pysetup.requirements('dvlpt') if dep.is_conda() %}
-- {{ dep.name }}
+{%- for dep in pysetup.requirements('dvlpt') if dep.is_conda(False) %}
+- {{ dep.fmt_conda_requirement() }}
 {%- endfor %}
 
-{%- set pip_deps = pysetup.requirements('dvlpt')|select("is_pip_dep")|list -%}
+{%- set pip_deps = pysetup.requirements('dvlpt')|select("is_pip_dep", True)|list -%}
 {%- if pip_deps|length > 0 %}
 - pip:
 {%- for dep in pip_deps %}
-  - {{ dep.name }}
+  - {{ dep.fmt_conda_requirement() }}
 {%- endfor %}
 {% endif %}
 # #}
