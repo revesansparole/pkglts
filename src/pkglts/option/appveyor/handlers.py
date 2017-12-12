@@ -14,8 +14,8 @@ def environment_extensions(cfg):
     project = cfg['github']['project'].replace("_", "-")
     token = cfg['appveyor']['token']
     
-    url = "https://ci.appveyor.com/project/%s/%s/branch/master" % (owner, project)
-    img = "https://ci.appveyor.com/api/projects/status/%s/branch/master?svg=true" % token
+    url = "ci.appveyor.com/project/%s/%s/branch/master" % (owner, project)
+    img = "ci.appveyor.com/api/projects/status/%s/branch/master?svg=true" % token
     badge = fmt_badge(img, url, "Appveyor build status", cfg['doc']['fmt'])
     
     return {"badge": badge}
