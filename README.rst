@@ -15,6 +15,11 @@ pkglts
     :target: https://travis-ci.org/revesansparole/pkglts
 
 
+.. image:: https://ci.appveyor.com/api/projects/status/hrwjhn2oe0q4oaf2/branch/master?svg=true
+    :alt: Appveyor build status
+    :target: https://ci.appveyor.com/project/revesansparole/pkglts/branch/master
+
+
 .. image:: https://coveralls.io/repos/github/revesansparole/pkglts/badge.svg?branch=master
     :alt: Coverage report status
     :target: https://coveralls.io/github/revesansparole/pkglts?branch=master

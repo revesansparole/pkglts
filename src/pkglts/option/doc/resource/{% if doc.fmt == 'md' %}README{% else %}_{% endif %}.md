@@ -7,6 +7,9 @@
 {%- if 'travis' is available %}
 {{ travis.badge }}
 {% endif %}
+{%- if 'appveyor' is available %}
+{{ appveyor.badge }}
+{% endif %}
 {%- if 'coveralls' is available %}
 {{ coveralls.badge }}
 {% endif %}

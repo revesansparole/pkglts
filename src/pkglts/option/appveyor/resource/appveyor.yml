@@ -1,0 +1,57 @@
+# {# pkglts, appveyor
+# Config file for automatic testing on appveyor
+
+environment:
+  global:
+    # SDK v7.0 MSVC Express 2008's SetEnv.cmd script will fail if the
+    # /E:ON and /V:ON options are not enabled in the batch script interpreter
+    # See: http://stackoverflow.com/a/13751649/163740
+    CMD_IN_ENV: "cmd /E:ON /V:ON /C"
+
+  matrix:
+    - PYTHON: "C:\\Python36_64"
+      PYTHON_VERSION: "3.6"
+      PYTHON_ARCH: "64"
+      CONDA_PY: "36"
+      CONDA_NPY: "113"
+
+install:
+  # this installs the appropriate Miniconda (Py2/Py3, 32/64 bit),
+  - powershell .\\appveyor_scripts.ps1
+  - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
+  - conda config --set always_yes yes --set changeps1 no
+  - conda update -q conda
+  # useful for debugging any issues with conda
+  - conda info -a
+  # create environment
+  - conda create -n ci python
+  - activate ci
+
+build: false
+
+build_script:
+  # install dependencies and package
+{% for dep in pysetup.requirements('install') %}
+  {%- if dep.package_manager == 'conda' or dep.package_manager is none %}
+  - conda install {{ dep.name }}
+  {%- elif dep.package_manager == 'pip' %}
+  - pip install {{ dep.name }}
+  {%- elif dep.package_manager == 'git' %}
+  - pip install git+https://github.com/{{ dep.name }}
+  {%- endif %}
+{%- endfor %}
+
+{%- for dep in pysetup.requirements('dvlpt') %}
+  {%- if dep.package_manager == 'conda' or dep.package_manager is none %}
+  - conda install {{ dep.name }}
+  {%- elif dep.package_manager == 'pip' %}
+  - pip install {{ dep.name }}
+  {%- elif dep.package_manager == 'git' %}
+  - pip install git+https://github.com/{{ dep.name }}
+  {%- endif %}
+{%- endfor %}
+
+  - python setup.py install
+  # test
+  - pytest
+# #}

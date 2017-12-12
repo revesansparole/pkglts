@@ -30,7 +30,13 @@
     "pysetup": "psgypH2rS1U8zm/+1e5ZlOpirmjJkBjlR8wcPFifhf3NhP2MkmP7yyYp+Gloshy40cDY7l2tAeGkV8hcu5GjpQ=="
   },
   "README.rst": {
-    "doc": "ymc0VSFORY4OIdPdiVEm8kT9iExjge9QD17KVEhgezgHLwRaXhzePiVCTvG+dsNxxlQHlirfIdkVYUJagjZ8zQ=="
+    "doc": "cFO7xpAieGYycTGaKrDtOLgiJgOo6NZOG5GuovFkb789StH6Ag7exCyp8LQMLe0ViZ/d0JrCI+7/3jCZQYlk4Q=="
+  },
+  "appveyor.yml": {
+    "appveyor": "wTtXmQmAp8WIxiVH5NqgNebM6BC9Y/OF1dLPxT2ZI9HmEv+enLf9unDc+JCvBLdZyEu7ft52IrQdsPKCGg8xIw=="
+  },
+  "appveyor_scripts.ps1": {
+    "appveyor": "HdiTMjGtis8VNyHfwqGBOjaDQZajmxcqAtNYMzKycmWHGjUpEEXIwvb1/ZCqiY9tDAh39PX+sf7tG4zTJ+0MXw=="
   },
   "conda/meta.yaml": {
     "conda.about": "7jgIubwtZ5uu8wIoAJBjSpwLdOSRdmKwx0EYKW1u0AW5g9QBTWSIUvuADIkyH9j4uiSjDC0TYhWczajS11WuoQ==",
@@ -74,7 +80,7 @@
   },
   "setup.py": {
     "pysetup.call": "2wHuP94SpWKZpqOzExkQGTxnhGPgBHK3qOdPn0Ncstj5FkZ7FBGGM/inqAXaI4QLKQtTNlOUYRGSkYUWAUcf1w==",
-    "pysetup.kwds": "wru5RMINXhANgk6o6uIEZcDrf2a0up9LyTwU7dF6yhqViSKEK6xRW0k9+cW/GOck071J1bE/rGlz2rtKpqdtIA=="
+    "pysetup.kwds": "7Rr5bWjp4CLXx3YUEUA0UgxE2HhTJsVNEHU0S5c0yv3vxSAEuvqdfSShQABiZ4MVN3zRMJgDHTxthvrjT1f8YA=="
   },
   "src/pkglts/__init__.py": {
     "base": "gR33dW0qqYmsV9NSNB+DD8XmuxnC2t0mKjnMoU5728qh97fSER6MbX+3QKxpZDLByZToaAay4xhx8acxketJmA=="

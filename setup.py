@@ -32,7 +32,7 @@ data_rel_pth = lambda pth: normpath(abspath(pth))[nb:]
 data_files = []
 for root, dnames, fnames in walk("src/pkglts"):
     for name in fnames:
-        if splitext(name)[-1] in ['', '.bat', '.cfg', '.json', '.md', '.in', '.ini', '.png', '.rst', '.sh', '.tpl', '.txt', '.yaml', '.yml']:
+        if splitext(name)[-1] in ['', '.bat', '.cfg', '.json', '.md', '.in', '.ini', '.png', '.ps1', '.rst', '.sh', '.tpl', '.txt', '.yaml', '.yml']:
             data_files.append(data_rel_pth(pj(root, name)))
 
 
@@ -96,6 +96,12 @@ setup_kwds = dict(
 
 setup_kwds['entry_points']['console_scripts'] = ['pmg = pkglts.manage_script:main']
 setup_kwds['entry_points']['pkglts'] = [
+    'appveyor.root = pkglts.option.appveyor',
+    'appveyor.update_parameters = pkglts.option.appveyor.config:update_parameters',
+    'appveyor.check = pkglts.option.appveyor.config:check',
+    'appveyor.require = pkglts.option.appveyor.config:require',
+    'appveyor.environment_extensions = pkglts.option.appveyor.handlers:environment_extensions',
+
     'base.root = pkglts.option.base',
     'base.update_parameters = pkglts.option.base.config:update_parameters',
     'base.check = pkglts.option.base.config:check',
