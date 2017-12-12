@@ -1,5 +1,0 @@
-{
-    "console_scripts": [
-        "pmg = pkglts.manage_script:main"
-    ]
-}
