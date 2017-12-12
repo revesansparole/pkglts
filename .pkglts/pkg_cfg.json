@@ -5,6 +5,9 @@
     "use_prompts": false,
     "version": 11
   },
+  "appveyor": {
+    "token": ""
+  },
   "base": {
     "authors": [
       [
