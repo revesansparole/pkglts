@@ -8,10 +8,10 @@ channels:
 dependencies:
 - coverage
 - flake8
-- mock
 - nbconvert
 - pytest
 - pytest-cov
+- pytest-mock
 - sphinx
 - pip:
   - coveralls

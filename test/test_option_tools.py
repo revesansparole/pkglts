@@ -1,4 +1,3 @@
-import mock
 import pytest
 
 from pkglts.option_tools import get_user_permission
@@ -7,17 +6,17 @@ from pkglts.option_tools import get_user_permission
 loc_input = 'pkglts.option_tools.loc_input'
 
 
-def test_user_permission():
-    with mock.patch(loc_input, return_value=''):
+def test_user_permission(mocker):
+    with mocker.patch(loc_input, return_value=''):
         assert get_user_permission('action')
 
-    with mock.patch(loc_input, return_value='y'):
+    with mocker.patch(loc_input, return_value='y'):
         assert get_user_permission('action')
 
-    with mock.patch(loc_input, return_value='n'):
+    with mocker.patch(loc_input, return_value='n'):
         assert not get_user_permission('action')
 
-    with mock.patch(loc_input, return_value='N'):
+    with mocker.patch(loc_input, return_value='N'):
         assert not get_user_permission('action')
 
 
@@ -35,33 +34,33 @@ def test_user_permission():
 #     assert get_key('titi', {'toto': {'titi': 'tata'}}) is None
 #
 #
-# def test_ask_arg_do_not_prompt_user_if_value_in_extra():
-#     with mock.patch(loc_input, return_value='useless'):
+# def test_ask_arg_do_not_prompt_user_if_value_in_extra(mocker):
+#     with mocker.patch(loc_input, return_value='useless'):
 #         assert ask_arg('toto', None, None, {'toto': 1}) == 1
 #
 #
-# def test_ask_arg_find_default_in_pkg_cfg():
-#     with mock.patch(loc_input, return_value=''):
+# def test_ask_arg_find_default_in_pkg_cfg(mocker):
+#     with mocker.patch(loc_input, return_value=''):
 #         assert ask_arg('toto', {'toto': 1}) == '1'
 #         assert ask_arg('toto', {'titi': 1}) == ''
 #         assert ask_arg('toto') == ''
 #
 #
-# def test_ask_use_default_if_everything_fail_only():
-#     with mock.patch(loc_input, return_value=''):
+# def test_ask_use_default_if_everything_fail_only(mocker):
+#     with mocker.patch(loc_input, return_value=''):
 #         assert ask_arg('toto', {'toto': 1}, 2) == '1'
 #         assert ask_arg('toto', {'titi': 1}, 2) == '2'
 #
 #
-# def test_ask_arg_user_bypass_default():
-#     with mock.patch(loc_input, return_value='myvalue'):
+# def test_ask_arg_user_bypass_default(mocker):
+#     with mocker.patch(loc_input, return_value='myvalue'):
 #         assert ask_arg('toto', {'toto': 1}, 0, {}) == 'myvalue'
 #         assert ask_arg('toto', {}, 0, {}) == 'myvalue'
 #         assert ask_arg('toto') == 'myvalue'
 #
 #
-# def test_ask_arg_handle_list():
-#     with mock.patch(loc_input, return_value=''):
+# def test_ask_arg_handle_list(mocker):
+#     with mocker.patch(loc_input, return_value=''):
 #         res = ask_arg('keys', {}, ["1"], {})
 #         assert res == ["1"]
 #         res = ask_arg('keys', {}, ["1", "2"], {})

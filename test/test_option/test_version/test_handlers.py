@@ -1,5 +1,3 @@
-# import mock
-
 # from pkglts.option.version.handlers import fetch_github_version
 #
 #
@@ -9,11 +7,11 @@
 #     assert txt == ""
 
 
-# def test_handlers_not_available():
+# def test_handlers_not_available(mocker):
 #     def import_call(*args):
 #         print args
 #
-#     with mock.patch("pkglts.option.version.handlers.__builtins__",
+#     with mocker.patch("pkglts.option.version.handlers.__builtins__",
 #                     new_callable=import_call):
 #         # from pkglts.option.version.handlers import fetch_github_version
 #         assert fetch_github_version == "0"
