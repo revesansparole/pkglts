@@ -36,10 +36,10 @@ def test_option_use_default_from_config():
     assert cfg['base']['authors'][0][0] == 'moi'
 
 
-# def test_option_prompt_user_if_global_config_ask_for_it():
+# def test_option_prompt_user_if_global_config_ask_for_it(mocker):
 #     pkg_cfg = dict(_pkglts={'use_prompts': True})
 #
-#     with mock.patch('pkglts.option_tools.loc_input', return_value=''):
+#     with mocker.patch('pkglts.option_tools.loc_input', return_value=''):
 #         pkg_cfg = update_opt('base', pkg_cfg)
 #         assert 'base' in pkg_cfg
 #         cfg = pkg_cfg['base']
