@@ -15,7 +15,7 @@ pkglts
     :target: https://travis-ci.org/revesansparole/pkglts
 
 
-.. image:: https://ci.appveyor.com/api/projects/status//branch/master?svg=true
+.. image:: https://ci.appveyor.com/api/projects/status/hrwjhn2oe0q4oaf2/branch/master?svg=true
     :alt: Appveyor build status
     :target: https://ci.appveyor.com/project/revesansparole/pkglts/branch/master
 

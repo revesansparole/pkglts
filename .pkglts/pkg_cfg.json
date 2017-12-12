@@ -6,7 +6,7 @@
     "version": 11
   },
   "appveyor": {
-    "token": ""
+    "token": "hrwjhn2oe0q4oaf2"
   },
   "base": {
     "authors": [
