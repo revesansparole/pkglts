@@ -141,7 +141,7 @@ class Dependency(object):
             if extended:
                 txt += "  # {}".format(self.pip_install())
         elif self.is_conda(strict=True):
-            txt = "#{}".format(self._conda_fmt_name())
+            txt = self._conda_fmt_name()
             if extended:
                 txt += "  # {}".format(self.conda_install())
         else:  # assume valid git url
