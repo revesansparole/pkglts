@@ -1,3 +1,6 @@
+"""
+Define actions that can be called with the CLI.
+"""
 from argparse import ArgumentParser, RawTextHelpFormatter
 import logging
 

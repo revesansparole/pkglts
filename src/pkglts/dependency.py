@@ -1,3 +1,6 @@
+"""
+Dependency object to handle multi dependency managers.
+"""
 import logging
 
 logger = logging.getLogger(__name__)

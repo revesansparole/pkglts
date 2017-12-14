@@ -1,3 +1,6 @@
+"""
+Set of functions to extend jinja2.
+"""
 from os.path import exists
 import re
 

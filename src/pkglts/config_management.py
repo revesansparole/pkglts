@@ -1,3 +1,6 @@
+"""
+Main config object and functions to manipulate it.
+"""
 from datetime import date
 from jinja2 import Environment, StrictUndefined, UndefinedError
 import json

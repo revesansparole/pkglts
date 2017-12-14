@@ -1,3 +1,6 @@
+"""
+Set of function to extend jinja2 environment.
+"""
 from pkglts.dependency import Dependency
 from pkglts.option_tools import available_options
 

@@ -1,3 +1,6 @@
+"""
+Set of function to extend jinja2 environment.
+"""
 import logging
 from os.path import dirname
 from os.path import join as pj

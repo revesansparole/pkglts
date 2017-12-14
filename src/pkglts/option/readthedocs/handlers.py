@@ -1,3 +1,6 @@
+"""
+Set of function to extend jinja2 environment.
+"""
 from pkglts.option.doc import fmt_badge
 
 

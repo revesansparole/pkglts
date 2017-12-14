@@ -1,4 +1,3 @@
-# rev = 1
 """ Contains functions to manage the structure of the package.
 
 Use 'setup.py' for common tasks.

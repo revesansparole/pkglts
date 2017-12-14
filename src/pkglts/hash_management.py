@@ -1,3 +1,6 @@
+"""
+Set of function to associate hash to blobs.
+"""
 from base64 import b64encode
 from hashlib import sha512
 import json

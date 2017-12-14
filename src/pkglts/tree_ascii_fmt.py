@@ -1,4 +1,7 @@
-# coding: utf-8
+"""
+Script which can be called before generating the doc
+to generate description of files modified by each option.
+"""
 
 from os import listdir
 from os.path import isdir

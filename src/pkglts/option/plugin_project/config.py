@@ -1,3 +1,6 @@
+"""
+Set of function related to handling the configuration of this option.
+"""
 from pkglts.dependency import Dependency
 
 

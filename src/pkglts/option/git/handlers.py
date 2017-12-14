@@ -1,3 +1,6 @@
+"""
+Set of function to extend jinja2 environment.
+"""
 import logging
 import re
 import subprocess

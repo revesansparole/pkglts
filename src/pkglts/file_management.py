@@ -1,3 +1,8 @@
+"""
+TODO Useless?
+"""
+
+
 def write_file(pth, content):
     """Write the content of a file on a local path and
     register associated hash for further modification

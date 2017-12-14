@@ -1,3 +1,6 @@
+"""
+Maintain version for this package.
+"""
 # {# pkglts, version
 #  -*- coding: utf-8 -*-
 
