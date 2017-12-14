@@ -17,7 +17,7 @@ def environment_extensions(cfg):
         dict of str: any
     """
     del cfg
-    
+
     try:
         log = subprocess.check_output(['git', 'log', '--all', '--use-mailmap']).decode('utf-8')
         commiters = re.findall(r'Author: (.* <.*@.*>)\n', unidecode(log))
@@ -28,5 +28,5 @@ def environment_extensions(cfg):
         contributors = ["I failed to construct the contributor list"]
     except subprocess.CalledProcessError as e:
         contributors = ["Pb with git, %s" % str(e)]
-    
+
     return {'contributors': contributors}

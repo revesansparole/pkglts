@@ -2,7 +2,6 @@ import logging
 from os.path import dirname
 from os.path import join as pj
 
-
 logger = logging.getLogger(__name__)
 
 tpl_dir = pj(dirname(__file__), "templates")

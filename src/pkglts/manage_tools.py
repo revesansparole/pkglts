@@ -11,7 +11,6 @@ from .local import init_namespace_dir
 from .option_tools import available_options, get_user_permission
 from .templating import render
 
-
 logger = logging.getLogger(__name__)
 
 tpl_src_name = "{" + "{ base.pkgname }" + "}"

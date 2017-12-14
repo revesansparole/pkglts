@@ -12,9 +12,9 @@ def require(purpose, cfg):
         (list of Dependency)
     """
     del cfg
-    
+
     if purpose == 'option':
         options = ['github']
         return [Dependency(name) for name in options]
-    
+
     return []

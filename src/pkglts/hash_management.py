@@ -8,7 +8,6 @@ from os.path import normpath
 from .config import pkglts_dir, pkg_hash_file
 from .templating import parse_source
 
-
 logger = logging.getLogger(__name__)
 
 

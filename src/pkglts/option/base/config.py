@@ -1,7 +1,5 @@
 from os.path import abspath, basename
 
-from pkglts.dependency import Dependency
-
 
 def update_parameters(cfg):
     """Update config with parameters necessary for this option.

@@ -54,7 +54,7 @@ class Option(object):
             self._root_dir = dirname(self._root_dir.load().__file__)
 
         return self._root_dir
-    
+
     def example_dir(self):
         pth = pj(self.root_dir(), 'example')
         if exists(pth):

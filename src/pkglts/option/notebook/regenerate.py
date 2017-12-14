@@ -6,7 +6,6 @@ import shutil
 
 
 def write_rst_file_with_resources(body, resources):
-
     # Create folder if the path not exists
     if not os.path.exists(resources["metadata"]["path"]):
         os.makedirs(resources["metadata"]["path"])
@@ -30,7 +29,6 @@ def write_rst_file_with_filename(body, filename):
 
 
 def find_notebook_file(root_directory):
-
     # Get recursively all notebook filenames in the src_directory
     matches = []
     for root, dirnames, filenames in os.walk(root_directory):
@@ -83,7 +81,6 @@ Notebook
 
     rst_exporter = nbconvert.RSTExporter()
     for nb_filename in nb_filenames:
-
         # Convert each notebook to rst
         body, resources = rst_exporter.from_filename(nb_filename)
 

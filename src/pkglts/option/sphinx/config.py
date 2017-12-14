@@ -32,7 +32,7 @@ def check(cfg):
     invalids = []
     if cfg['doc']['fmt'] != 'rst':
         invalids.append('doc.fmt')
-    
+
     theme = cfg['sphinx']['theme']
     if theme != str(theme):
         invalids.append('sphinx.theme')
@@ -58,7 +58,7 @@ def require(purpose, cfg):
         deps = [Dependency('sphinx')]
         if cfg["sphinx"]["theme"] == "sphinx_rtd_theme":
             deps.append(Dependency('sphinx_rtd_theme'))
-        
+
         return deps
 
     return []
