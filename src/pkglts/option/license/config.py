@@ -43,7 +43,7 @@ def check(cfg):
     # organization = pkg_cfg['license']['organization']
     # project = pkg_cfg['license']['project']
 
-    if len(name) == 0:
+    if not name:
         invalids.append('license.name')
     elif not exists(get_tpl_path(name)):
         invalids.append('license.name')

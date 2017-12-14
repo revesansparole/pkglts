@@ -37,7 +37,7 @@ def check(cfg):
     fmt = cfg['doc']['fmt']
     # keywords = env.globals['doc'].keywords
 
-    if len(description) == 0:
+    if not description:
         invalids.append("doc.description")
 
     if fmt not in ('rst', 'md'):

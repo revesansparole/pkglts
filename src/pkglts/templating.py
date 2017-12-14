@@ -4,10 +4,10 @@ Set of functions to extend jinja2.
 from os.path import exists
 import re
 
-opening_marker = "{" + "#"
-closing_marker = "#" + "}"
+OPENING_MARKER = "{" + "#"
+CLOSING_MARKER = "#" + "}"
 
-block_re = re.compile(
+BLOCK_RE = re.compile(
     r"\{#[ ]pkglts,[ ](?P<key>[a-zA-Z0-9.]*)(?P<aft_head>.*?)\n(?P<cnt>.*?)#\}(?P<aft_foot>.*?(?=\n))",
     re.DOTALL | re.MULTILINE)
 
@@ -48,16 +48,16 @@ def parse_source(txt):
     blocks = []
     last_end = 0
 
-    for res in block_re.finditer(txt):
+    for res in BLOCK_RE.finditer(txt):
         i = res.start()
         while i > last_end and txt[i] != "\n":
             i -= 1
 
         if i >= last_end:
-            b = TplBlock()
-            b.bid = None
-            b.content = txt[last_end: (i + 1)]
-            blocks.append(b)
+            block = TplBlock()
+            block.bid = None
+            block.content = txt[last_end: (i + 1)]
+            blocks.append(block)
 
         bef = txt[(i + 1): res.start()]
 
@@ -73,20 +73,20 @@ def parse_source(txt):
         cnt = cnt[:i]
         last_end = res.end() + 1
 
-        b = TplBlock()
-        b.bid = bid
-        b.before_header = bef
-        b.after_header = aft_head
-        b.content = cnt
-        b.before_footer = aft
-        b.after_footer = aft_foot
-        blocks.append(b)
+        block = TplBlock()
+        block.bid = bid
+        block.before_header = bef
+        block.after_header = aft_head
+        block.content = cnt
+        block.before_footer = aft
+        block.after_footer = aft_foot
+        blocks.append(block)
 
     if last_end < len(txt):
-        b = TplBlock()
-        b.bid = None
-        b.content = txt[last_end: len(txt)]
-        blocks.append(b)
+        block = TplBlock()
+        block.bid = None
+        block.content = txt[last_end: len(txt)]
+        blocks.append(block)
 
     return blocks
 
@@ -105,14 +105,14 @@ def render(cfg, src_pth, tgt_pth):
         (list of [str, str]): key, cnt for preserved blocks
     """
     # parse src file to find 'preserved' blocks
-    with open(src_pth, 'r') as f:
-        src_blocks = parse_source(f.read())
+    with open(src_pth, 'r') as fhr:
+        src_blocks = parse_source(fhr.read())
 
     blocks = []
     if exists(tgt_pth):  # retrieves preserved blocks from source
         # parse tgt file to find 'preserved' blocks
-        with open(tgt_pth, 'r') as f:
-            tgt_blocks = parse_source(f.read())
+        with open(tgt_pth, 'r') as fhr:
+            tgt_blocks = parse_source(fhr.read())
 
         src_blocks = dict((b.bid, b) for b in src_blocks if b.bid is not None)
         for tgt_block in tgt_blocks:

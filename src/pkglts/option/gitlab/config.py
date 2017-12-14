@@ -36,7 +36,7 @@ def check(cfg):
     invalids = []
     project = cfg['gitlab']['project']
 
-    if len(project) == 0:
+    if not project:
         invalids.append('gitlab.project')
 
     return invalids

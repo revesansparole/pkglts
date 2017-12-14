@@ -10,7 +10,8 @@ from os.path import join as pj
 from pkglts.config_management import Config
 
 
-def nn(cfg, pth):
+def _nn(cfg, pth):
+    """Helper function"""
     print("pth:", pth)
     tgt_name = cfg.render(pth)
     if tgt_name.endswith(".tpl"):
@@ -19,7 +20,8 @@ def nn(cfg, pth):
     return tgt_name
 
 
-def tree(dname, padding, txt):
+def _tree(dname, padding, txt):
+    """Generate tree ascii representation of a dir"""
     pkg_cfg = dict(base={"namespace": None,
                          "owner": "owner",
                          "pkgname": "pkgname",
@@ -36,15 +38,15 @@ def tree(dname, padding, txt):
     for is_dir, fname in files:
         count += 1
         txt += padding + '|\n'
-        fmt_name = nn(cfg, fname)
+        fmt_name = _nn(cfg, fname)
         txt += padding + '+-' + fmt_name
         path = pj(dname, fname)
         if is_dir:
             txt += "/\n"
             if count == len(files):
-                txt = tree(path, padding + ' ' + ' ' * int(len(fmt_name) / 2), txt)
+                txt = _tree(path, padding + ' ' + ' ' * int(len(fmt_name) / 2), txt)
             else:
-                txt = tree(path, padding + '|' + ' ' * int(len(fmt_name) / 2), txt)
+                txt = _tree(path, padding + '|' + ' ' * int(len(fmt_name) / 2), txt)
         else:
             txt += '\n'
 
@@ -52,4 +54,5 @@ def tree(dname, padding, txt):
 
 
 def fmt_tree(dname):
-    return tree(dname, '', ".\n")
+    """Generate tree ascii representation of a dir"""
+    return _tree(dname, '', ".\n")

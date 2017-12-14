@@ -6,6 +6,14 @@ from pkglts.option.doc import fmt_badge
 
 
 def auto_classifiers(cfg):
+    """Generate a list of calssifiers for pypi from all sections of config.
+
+    Args:
+        cfg (Config):  current package configuration
+
+    Returns:
+        (list of str)
+    """
     items = set(cfg['pypi']['classifiers'])
 
     # add license item
@@ -13,7 +21,7 @@ def auto_classifiers(cfg):
 
     # add intended versions items
     intended_versions = cfg['pysetup']['intended_versions']
-    if len(intended_versions) > 0:
+    if intended_versions:
         items.add("Programming Language :: Python")
 
         ver_cla_tpl = "Programming Language :: Python :: %s.%s"

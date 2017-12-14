@@ -10,10 +10,9 @@ def installed_packages():
     return:
         (iter of str)
     """
-    p = Popen(["conda", "list", "--json"], stdin=PIPE, stdout=PIPE, stderr=PIPE)
-    output, err = p.communicate("")
-    rc = p.returncode
-    if rc != 0:
+    process = Popen(["conda", "list", "--json"], stdin=PIPE, stdout=PIPE, stderr=PIPE)
+    output, _ = process.communicate("")
+    if process.returncode != 0:
         raise UserWarning("unable to execute 'conda list'")
 
     for pkg in loads(output):
@@ -29,12 +28,12 @@ def install(name):
     return:
      - (bool): whether installation was successful or not
     """
-    p = Popen(["conda", "install", name], stdin=PIPE, stdout=PIPE, stderr=PIPE)
-    p.communicate("")
-    rc = p.returncode
+    process = Popen(["conda", "install", name], stdin=PIPE, stdout=PIPE, stderr=PIPE)
+    process.communicate("")
 
-    if rc == 0:
+    if process.returncode == 0:
         return True
-    else:  # try to use pip if conda install fail
-        from .pip_front_end import install as pip_install
-        return pip_install(name)
+
+    # try to use pip if conda install fail
+    from .pip_front_end import install as pip_install
+    return pip_install(name)

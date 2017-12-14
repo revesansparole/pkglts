@@ -28,6 +28,14 @@ def requirements(cfg, requirement_name):
 
 
 def pkg_url(cfg):
+    """Extract a valid url from all config sections.
+
+    Args:
+        cfg (Config):  current package configuration
+
+    Returns:
+        (str): a valid url for the package
+    """
     try:
         url = cfg['base']['url']
         if url is not None:
@@ -82,6 +90,7 @@ def environment_extensions(cfg):
     req_dvlpt = requirements(cfg, 'dvlpt')
 
     def req(name):
+        """For internal use only."""
         if name == 'install':
             return req_install
         elif name == 'dvlpt':
