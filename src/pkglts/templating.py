@@ -31,6 +31,18 @@ class TplBlock(object):
                                                          self.before_footer,
                                                          self.after_footer)
 
+    def user_defined(self, cnt):
+        """Make this block a user defined one.
+
+        Args:
+            cnt (str): content
+
+        Returns:
+            None
+        """
+        self.bid = None
+        self.content = cnt
+
 
 def parse_source(txt):
     """Parse text to find preserved blocks
@@ -55,8 +67,7 @@ def parse_source(txt):
 
         if i >= last_end:
             block = TplBlock()
-            block.bid = None
-            block.content = txt[last_end: (i + 1)]
+            block.user_defined(txt[last_end: (i + 1)])
             blocks.append(block)
 
         bef = txt[(i + 1): res.start()]
@@ -84,8 +95,7 @@ def parse_source(txt):
 
     if last_end < len(txt):
         block = TplBlock()
-        block.bid = None
-        block.content = txt[last_end: len(txt)]
+        block.user_defined(txt[last_end: len(txt)])
         blocks.append(block)
 
     return blocks
@@ -143,7 +153,7 @@ def render(cfg, src_pth, tgt_pth):
             tgt += cnt
             tgt += "\n" + block.before_footer + "#" + "}%s\n" % block.after_footer
 
-    with open(tgt_pth, 'w') as f:
-        f.write(tgt)
+    with open(tgt_pth, 'w') as fhw:
+        fhw.write(tgt)
 
     return preserved
