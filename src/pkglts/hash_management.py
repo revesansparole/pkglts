@@ -11,7 +11,7 @@ from os.path import normpath
 from .config import pkglts_dir, pkg_hash_file
 from .templating import parse_source
 
-logger = logging.getLogger(__name__)
+LOGGER = logging.getLogger(__name__)
 
 
 def pth_as_key(pth):
@@ -50,10 +50,8 @@ def get_pkg_hash(rep="."):
         (dict of str, list): hash map of preserved sections in this
                              package
     """
-    with open(pj(rep, pkglts_dir, pkg_hash_file), 'r') as f:
-        hm = json.load(f)
-
-    return hm
+    with open(pj(rep, pkglts_dir, pkg_hash_file), 'r') as fhr:
+        return json.load(fhr)
 
 
 def write_pkg_hash(pkg_hash, rep="."):
@@ -67,11 +65,11 @@ def write_pkg_hash(pkg_hash, rep="."):
     Returns:
         None
     """
-    logger.info("write package hash")
+    LOGGER.info("write package hash")
     cfg = dict(pkg_hash)
 
-    with open(pj(rep, pkglts_dir, pkg_hash_file), 'w') as f:
-        json.dump(cfg, f, sort_keys=True, indent=2)
+    with open(pj(rep, pkglts_dir, pkg_hash_file), 'w') as fhw:
+        json.dump(cfg, fhw, sort_keys=True, indent=2)
 
 
 def modified_file_hash(pth, pkg_hash):
@@ -91,15 +89,17 @@ def modified_file_hash(pth, pkg_hash):
 
     ref_blocks = pkg_hash[key]
 
-    with open(pth, 'r') as f:
-        blocks = parse_source(f.read())
+    with open(pth, 'r') as fhr:
+        blocks = parse_source(fhr.read())
 
     lts_blocks = dict((block.bid, block.content) for block in blocks
                       if block.bid is not None)
     if set(lts_blocks) != set(ref_blocks):
         return True
-    else:
-        for bid, cnt in lts_blocks.items():
-            sha = compute_hash(cnt)
-            if sha != ref_blocks[bid]:
-                return True
+
+    for bid, cnt in lts_blocks.items():
+        sha = compute_hash(cnt)
+        if sha != ref_blocks[bid]:
+            return True
+
+    return False

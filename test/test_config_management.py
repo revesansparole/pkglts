@@ -3,8 +3,8 @@ from os.path import exists
 from os.path import join as pj
 import pytest
 
-from pkglts.config_management import (Config, current_pkg_cfg_version,
-                                      default_cfg, get_pkg_config,
+from pkglts.config_management import (Config, CURRENT_PKG_CFG_VERSION,
+                                      DEFAULT_CFG, get_pkg_config,
                                       write_pkg_config)
 
 from .small_tools import ensure_created, rmdir
@@ -23,10 +23,10 @@ def tmp_dir():
 
 
 def test_create_env():
-    cfg = Config(default_cfg)
+    cfg = Config(DEFAULT_CFG)
     assert len(tuple(cfg.installed_options())) == 0
 
-    pkg_cfg = dict(default_cfg)
+    pkg_cfg = dict(DEFAULT_CFG)
     pkg_cfg['base'] = dict(a=1, b=2)
     cfg = Config(pkg_cfg)
     assert len(tuple(cfg.installed_options())) == 1
@@ -35,7 +35,7 @@ def test_create_env():
 
 
 def test_create_env_render_templates():
-    pkg_cfg = dict(default_cfg)
+    pkg_cfg = dict(DEFAULT_CFG)
     pkg_cfg['base'] = dict(a="a", b="b")
     pkg_cfg['tpl'] = dict(tpl1="{{ base.a }}",
                           tpl2="{{ base.b }} and {{ tpl.tpl1 }}")
@@ -46,7 +46,7 @@ def test_create_env_render_templates():
 
 
 def test_create_env_raise_error_if_unable_to_fully_render_templates():
-    pkg_cfg = dict(default_cfg)
+    pkg_cfg = dict(DEFAULT_CFG)
     pkg_cfg['base'] = dict(a="{{ base.b }}", b="{{ base.a }}")
 
     with pytest.raises(UserWarning):
@@ -54,7 +54,7 @@ def test_create_env_raise_error_if_unable_to_fully_render_templates():
 
 
 def test_pkg_env_raise_error_if_option_not_defined():
-    pkg_cfg = dict(default_cfg)
+    pkg_cfg = dict(DEFAULT_CFG)
     pkg_cfg['babou'] = dict(a="a", b="b")
 
     with pytest.raises(KeyError):
@@ -62,7 +62,7 @@ def test_pkg_env_raise_error_if_option_not_defined():
 
 
 def test_pkg_env_loads_specific_handlers_from_options():
-    pkg_cfg = dict(default_cfg)
+    pkg_cfg = dict(DEFAULT_CFG)
     pkg_cfg['base'] = dict(pkgname="toto", namespace="nm",
                            url=None, authors=[("moi", "moi@aussi")])
 
@@ -72,7 +72,7 @@ def test_pkg_env_loads_specific_handlers_from_options():
 
 
 def test_get_pkg_config_read_cfg(tmp_dir):
-    pkg_cfg = dict(default_cfg)
+    pkg_cfg = dict(DEFAULT_CFG)
     pkg_cfg['base'] = dict(pkgname="toto", namespace="nm",
                            url=None, authors=[("moi", "moi@aussi")])
     json.dump(pkg_cfg, open(pj(tmp_dir, ".pkglts/pkg_cfg.json"), 'w'))
@@ -82,16 +82,16 @@ def test_get_pkg_config_read_cfg(tmp_dir):
 
 
 def test_get_pkg_config_handle_versions(tmp_dir):
-    pkg_cfg = dict(default_cfg)
+    pkg_cfg = dict(DEFAULT_CFG)
     pkg_cfg["_pkglts"]["version"] = 0
     json.dump(pkg_cfg, open(pj(tmp_dir, ".pkglts/pkg_cfg.json"), 'w'))
 
     cfg = get_pkg_config(tmp_dir)
-    assert cfg["_pkglts"]['version'] == current_pkg_cfg_version
+    assert cfg["_pkglts"]['version'] == CURRENT_PKG_CFG_VERSION
 
 
 def test_pkg_cfg_read_write_maintains_templates(tmp_dir):
-    pkg_cfg = dict(default_cfg)
+    pkg_cfg = dict(DEFAULT_CFG)
     pkg_cfg['base'] = dict(pkgname="toto", namespace="nm",
                            url=None, authors=[("moi", "moi@aussi")])
     pkg_cfg['license'] = dict(name="CeCILL-C", organization="org",

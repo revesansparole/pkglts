@@ -4,9 +4,10 @@ import logging
 from os.path import dirname, exists, join as pj
 import pkg_resources
 
-logger = logging.getLogger(__name__)
+LOGGER = logging.getLogger(__name__)
 
 available_options = {}
+"""Dictionary of currently available option in pkglts. Discovered at run time"""
 
 try:
     loc_input = raw_input
@@ -26,27 +27,37 @@ class Option(object):
         self._require = None
         self._environment_extensions = None
         self._regenerate = None
-        self._files_dir = None
 
-    def from_entry_point(self, ep):
-        self._name, func_name = ep.name.split(".")
+    def from_entry_point(self, ept):
+        """Associate an entry point with its correct attribute.
+
+        Notes: does not load the entry point
+
+        Args:
+            ept (entry point): as returned by pkg_resources
+
+        Returns:
+            None
+        """
+        self._name, func_name = ept.name.split(".")
         if func_name == "root":
-            self._root_dir = ep
+            self._root_dir = ept
         elif func_name == "update_parameters":
-            self._update_parameters = ep
+            self._update_parameters = ept
         elif func_name == "check":
-            self._check = ep
+            self._check = ept
         elif func_name == "require":
-            self._require = ep
+            self._require = ept
         elif func_name == "environment_extensions":
-            self._environment_extensions = ep
+            self._environment_extensions = ept
         elif func_name == "regenerate":
-            self._regenerate = ep
+            self._regenerate = ept
         else:
             # silently ignore other type of entry points
-            logger.error("unknown entry point attribute: '{}'".format(func_name))
+            LOGGER.error("unknown entry point attribute: '%s'", func_name)
 
     def root_dir(self):
+        """Base directory containing option definition files."""
         if self._root_dir is None:
             raise UserWarning("Need to associate entry point first")
 
@@ -56,20 +67,30 @@ class Option(object):
         return self._root_dir
 
     def example_dir(self):
+        """Directory containing option example files."""
         pth = pj(self.root_dir(), 'example')
         if exists(pth):
             return pth
-        else:
-            return None
+
+        return None
 
     def resource_dir(self):
+        """Directory containing option resource files."""
         pth = pj(self.root_dir(), 'resource')
         if exists(pth):
             return pth
-        else:
-            return None
+
+        return None
 
     def update_parameters(self, cfg):
+        """Update configuration with option parameters.
+
+        Args:
+            cfg (Config):  current package configuration
+
+        Returns:
+            (Config)
+        """
         if self._update_parameters is None:
             cfg[self._name] = {}
             return
@@ -80,6 +101,11 @@ class Option(object):
         return self._update_parameters(cfg)
 
     def check(self, *args, **kwds):
+        """Check validity of parameters for this option.
+
+        Returns:
+            (list of str): list of failing params
+        """
         if self._check is None:
             return []
 
@@ -89,6 +115,11 @@ class Option(object):
         return self._check(*args, **kwds)
 
     def require(self, *args, **kwds):
+        """Check dependencies for this option.
+
+        Returns:
+            (list of Dependency): list of modules or options this option require
+        """
         if self._require is None:
             return []
 
@@ -98,6 +129,11 @@ class Option(object):
         return self._require(*args, **kwds)
 
     def environment_extensions(self, *args, **kwds):
+        """Get jinja2 environment extensions defined by this option.
+
+        Returns:
+            (list of func): extensions defined by this option
+        """
         if self._environment_extensions is None:
             return {}
 
@@ -107,6 +143,11 @@ class Option(object):
         return self._environment_extensions(*args, **kwds)
 
     def regenerate(self, *args, **kwds):
+        """Call regenerate associated with this option.
+
+        Returns:
+            (any)
+        """
         if self._regenerate is None:
             return None
 
@@ -117,20 +158,36 @@ class Option(object):
 
 
 def find_available_options():
-    for ep in pkg_resources.iter_entry_points(group='pkglts'):
-        option_name = ep.name.split(".")[0]
+    """Discover all available options.
+
+    Returns:
+        (list of Option)
+    """
+    for ept in pkg_resources.iter_entry_points(group='pkglts'):
+        option_name = ept.name.split(".")[0]
         if option_name not in available_options:
             available_options[option_name] = Option()
 
         opt = available_options[option_name]
-        opt.from_entry_point(ep)
+        opt.from_entry_point(ept)
 
 
 def get_user_permission(action_name, default_true=True):
+    """Helper function to input a yes or no question.
+
+    Args:
+        action_name (str): action to ask permission for.
+        default_true (bool): whether answer is yes or no by default.
+
+    Returns:
+        (bool)
+    """
     if default_true:
-        return loc_input("%s [y], n?" % action_name) in ("", "y")
+        ans = loc_input("%s [y], n?" % action_name) in ("", "y")
     else:
-        return loc_input("%s y, [n]?" % action_name) == "y"
+        ans = loc_input("%s y, [n]?" % action_name) == "y"
+
+    return ans
 
 #
 # def get_key(key, env):

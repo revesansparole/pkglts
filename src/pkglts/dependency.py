@@ -3,7 +3,7 @@ Dependency object to handle multi dependency managers.
 """
 import logging
 
-logger = logging.getLogger(__name__)
+LOGGER = logging.getLogger(__name__)
 
 
 class Dependency(object):
@@ -33,8 +33,7 @@ class Dependency(object):
         else:
             version = self.version
             if version[:2] in ('==', '>=', '<=', "~="):
-                logger.warning(
-                    "bad version specification for '{}' with conda, use '=' by default".format(self.name))
+                LOGGER.warning("bad version specification for '%s' with conda, use '=' by default", self.name)
                 version = "=" + version[2:]
             elif version[0] != '=':
                 version = "=" + version
@@ -57,10 +56,12 @@ class Dependency(object):
         """
         if self.is_conda(strict=False):
             return self._conda_fmt_name()
-        elif self.is_pip(strict=True):
+
+        if self.is_pip(strict=True):
             return self._pip_fmt_name()
-        else:  # TODO git url
-            return "walou {}".format(self.name)
+
+        # TODO git url
+        return "walou {}".format(self.name)
 
     def pip_full_name(self):
         """Produce fully qualified name with version number.
@@ -70,10 +71,12 @@ class Dependency(object):
         """
         if self.is_pip(strict=False):
             return self._pip_fmt_name()
-        elif self.is_conda(strict=True):
+
+        if self.is_conda(strict=True):
             return self._conda_fmt_name()
-        else:  # assume valid git url
-            return "walou {}".format(self.name)
+
+        # TODO assume valid git url
+        return "walou {}".format(self.name)
 
     def is_conda(self, strict=True):
         """Check whether this dependency can be managed by conda
@@ -86,8 +89,8 @@ class Dependency(object):
         """
         if strict:
             return self.package_manager == 'conda'
-        else:
-            return self.package_manager is None or self.package_manager == 'conda'
+
+        return self.package_manager is None or self.package_manager == 'conda'
 
     def is_pip(self, strict=True):
         """Check whether this dependency can be managed by pip
@@ -100,8 +103,8 @@ class Dependency(object):
         """
         if strict:
             return self.package_manager == 'pip'
-        else:
-            return self.package_manager is None or self.package_manager == 'pip'
+
+        return self.package_manager is None or self.package_manager == 'pip'
 
     def conda_install(self):
         """Produce command line needed to install this dependency.
@@ -113,8 +116,8 @@ class Dependency(object):
 
         if self.channel is None:
             return "conda install {}".format(full_name)
-        else:
-            return "conda install -c {} {}".format(self.channel, full_name)
+
+        return "conda install -c {} {}".format(self.channel, full_name)
 
     def pip_install(self):
         """Produce command line needed to install this dependency.

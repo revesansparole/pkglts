@@ -1,30 +1,31 @@
 """
 Main config object and functions to manipulate it.
 """
-from datetime import date
-from jinja2 import Environment, StrictUndefined, UndefinedError
 import json
 import logging
+from datetime import date
 from os.path import join as pj
 
-from .config import pkglts_dir, pkg_cfg_file
-from .option_tools import available_options, find_available_options
+from jinja2 import Environment, StrictUndefined, UndefinedError
+
+from .config import pkg_cfg_file, pkglts_dir
 from .option.git.config import update_parameters as git_update_parameters
 from .option.pypi.config import update_parameters as pypi_update_parameters
+from .option_tools import available_options, find_available_options
 
 try:
     string_type = basestring
 except NameError:
     string_type = str
 
-current_pkg_cfg_version = 11
+CURRENT_PKG_CFG_VERSION = 11
 
-logger = logging.getLogger(__name__)
+LOGGER = logging.getLogger(__name__)
 
-default_cfg = dict(_pkglts=dict(use_prompts=False,
+DEFAULT_CFG = dict(_pkglts=dict(use_prompts=False,
                                 auto_install=True,
                                 install_front_end='stdout',
-                                version=current_pkg_cfg_version))
+                                version=CURRENT_PKG_CFG_VERSION))
 
 find_available_options()
 
@@ -58,6 +59,7 @@ class Config(dict):
         self.resolve()
 
     def template(self):
+        """Associated template even after resolution."""
         return self._tpl
 
     def add_test(self, name, func):
@@ -107,7 +109,7 @@ class Config(dict):
 
         nb_iter_max = len(to_eval) ** 2
         cur_iter = 0
-        while len(to_eval) > 0 and cur_iter < nb_iter_max:
+        while to_eval and cur_iter < nb_iter_max:
             cur_iter += 1
             opt_name, key, param = to_eval.pop(0)
             try:
@@ -116,7 +118,7 @@ class Config(dict):
             except UndefinedError:
                 to_eval.append((opt_name, key, param))
 
-        if len(to_eval) > 0:
+        if to_eval:
             msg = "unable to fully render config\n"
             for item in to_eval:
                 msg += "%s:%s '%s'\n" % item
@@ -128,14 +130,14 @@ class Config(dict):
         Returns:
             None
         """
-        for name in self:
-            if not name.startswith("_"):
+        for opt_name in self:
+            if not opt_name.startswith("_"):
                 try:
-                    opt = available_options[name]
-                    for k, v in opt.environment_extensions(self).items():
-                        setattr(self._env.globals[name], k, v)
+                    opt = available_options[opt_name]
+                    for func_name, func in opt.environment_extensions(self).items():
+                        setattr(self._env.globals[opt_name], func_name, func)
                 except KeyError:
-                    raise KeyError("option '%s' does not exists" % name)
+                    raise KeyError("option '%s' does not exists" % opt_name)
 
     def installed_options(self):
         """List all installed options.
@@ -169,12 +171,12 @@ def get_pkg_config(rep="."):
     Returns:
         (Config): Config initialized with pkg_config
     """
-    with open(pj(rep, pkglts_dir, pkg_cfg_file), 'r') as f:
-        pkg_cfg = json.load(f)
+    with open(pj(rep, pkglts_dir, pkg_cfg_file), 'r') as fhr:
+        pkg_cfg = json.load(fhr)
 
     # update version of pkg_config
     file_version = pkg_cfg['_pkglts'].get('version', 0)
-    for i in range(file_version, current_pkg_cfg_version):
+    for i in range(file_version, CURRENT_PKG_CFG_VERSION):
         upgrade_pkg_cfg_version(pkg_cfg, i)
 
     # create Config object
@@ -182,7 +184,7 @@ def get_pkg_config(rep="."):
     cfg.load_extra()
 
     # write back config if version has been updated
-    if file_version < current_pkg_cfg_version:
+    if file_version < CURRENT_PKG_CFG_VERSION:
         write_pkg_config(cfg, rep)
 
     return cfg
@@ -198,11 +200,11 @@ def write_pkg_config(cfg, rep="."):
     Returns:
         None
     """
-    logger.info("write package config")
+    LOGGER.info("write package config")
     pkg_cfg = dict(cfg.template())
 
-    with open(pj(rep, pkglts_dir, pkg_cfg_file), 'w') as f:
-        json.dump(pkg_cfg, f, sort_keys=True, indent=2)
+    with open(pj(rep, pkglts_dir, pkg_cfg_file), 'w') as fhw:
+        json.dump(pkg_cfg, fhw, sort_keys=True, indent=2)
 
 
 def upgrade_pkg_cfg_version(pkg_cfg, version):
@@ -258,16 +260,26 @@ def upgrade_pkg_cfg_version(pkg_cfg, version):
     elif version == 8:
         pkg_cfg['_pkglts']['version'] = 9
         if 'github' in pkg_cfg or 'gitlab' in pkg_cfg:
-            print("#" * 20 + "\n" * 2)
-            print("please remove '.gitignore file and regenerate package")
-            print("\n" * 2 + "#" * 20)
+            LOGGER.info("\n"
+                        "################################################\n"
+                        "\n"
+                        "\n"
+                        "please remove '.gitignore file and regenerate package\n"
+                        "\n"
+                        "\n"
+                        "################################################\n")
             git_update_parameters(pkg_cfg)
     elif version == 9:
         pkg_cfg['_pkglts']['version'] = 10
         if 'pypi' in pkg_cfg:
-            print("#" * 20 + "\n" * 2)
-            print("please remove '.pypirc file and regenerate package")
-            print("\n" * 2 + "#" * 20)
+            LOGGER.info("\n"
+                        "################################################\n"
+                        "\n"
+                        "\n"
+                        "please remove '.pypirc file and regenerate package\n"
+                        "\n"
+                        "\n"
+                        "################################################\n")
             # save section
             mem = dict(pkg_cfg["pypi"])
             # get newly defined list of servers

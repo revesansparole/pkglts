@@ -19,8 +19,8 @@ def pkg_full_name(cfg):
     namespace = cfg['base']['namespace']
     if namespace is None:
         return cfg['base']['pkgname']
-    else:
-        return namespace + "." + cfg['base']['pkgname']
+
+    return namespace + "." + cfg['base']['pkgname']
 
 
 def src_dir(cfg):
