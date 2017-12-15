@@ -1,11 +1,13 @@
+"""
+Set of function to extend jinja2 environment.
+"""
 import logging
 from os.path import dirname
 from os.path import join as pj
 
+LOGGER = logging.getLogger(__name__)
 
-logger = logging.getLogger(__name__)
-
-tpl_dir = pj(dirname(__file__), "templates")
+TPL_DIR = pj(dirname(__file__), "templates")
 
 
 def get_tpl_path(name):
@@ -19,8 +21,7 @@ def get_tpl_path(name):
     Returns:
         (str)
     """
-    tpl_pth = pj(tpl_dir, "%s.txt" % name.lower())
-    return tpl_pth
+    return pj(TPL_DIR, "%s.txt" % name.lower())
 
 
 def full_text(cfg):
@@ -30,13 +31,13 @@ def full_text(cfg):
 
     # open template
     try:
-        with open(get_tpl_path(name), 'r') as f:
-            cnt = f.read()
+        with open(get_tpl_path(name), 'r') as fhr:
+            cnt = fhr.read()
 
         return cfg.render(cnt)
-    except IOError as e:
-        logger.error("unable to find template for given license")
-        raise e
+    except IOError as err:
+        LOGGER.error("unable to find template for given license")
+        raise err
 
 
 def environment_extensions(cfg):

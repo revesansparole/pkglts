@@ -1,3 +1,6 @@
+"""
+Set of function related to handling the configuration of this option.
+"""
 from pkglts.dependency import Dependency
 
 
@@ -31,13 +34,13 @@ def check(cfg):
     invalids = []
     intended_versions = cfg['pysetup']['intended_versions']
 
-    if len(intended_versions) == 0:
+    if not intended_versions:
         invalids.append("pysetup.intended_versions")
 
-    require = cfg['pysetup']['require']
+    req = cfg['pysetup']['require']
 
     valid_methods = (None, "pip", "conda", "git")
-    if any(dep.get('pkg_mng') not in valid_methods for dep in require):
+    if any(dep.get('pkg_mng') not in valid_methods for dep in req):
         invalids.append("pysetup.require")
 
     return invalids

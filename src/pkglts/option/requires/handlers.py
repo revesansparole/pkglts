@@ -1,3 +1,6 @@
+"""
+Set of function to extend jinja2 environment.
+"""
 from pkglts.option.doc import fmt_badge
 
 
@@ -12,10 +15,10 @@ def environment_extensions(cfg):
     """
     owner = cfg['github']['owner']
     project = cfg['github']['project']
-    
+
     base_url = "requires.io/github/%s/%s/" % (owner, project)
     url = base_url + "requirements/?branch=master"
     img = base_url + "requirements.svg?branch=master"
     badge = fmt_badge(img, url, "Requirements status", cfg['doc']['fmt'])
-    
+
     return {"badge": badge}

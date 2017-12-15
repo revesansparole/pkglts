@@ -1,3 +1,6 @@
+"""
+Set of function related to handling the configuration of this option.
+"""
 from pkglts.dependency import Dependency
 
 
@@ -30,7 +33,7 @@ def check(cfg):
     invalids = []
     project = cfg['readthedocs']['project']
 
-    if len(project) == 0:
+    if not project:
         invalids.append("readthedocs.project")
 
     return invalids

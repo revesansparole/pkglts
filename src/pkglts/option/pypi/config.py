@@ -1,3 +1,6 @@
+"""
+Set of function related to handling the configuration of this option.
+"""
 from pkglts.dependency import Dependency
 
 
@@ -39,7 +42,7 @@ def check(cfg):
     invalids = []
     classifiers = cfg['pypi']['classifiers']
 
-    if len(classifiers) == 0:
+    if not classifiers:
         invalids.append("pypi.classifiers")
 
     return invalids

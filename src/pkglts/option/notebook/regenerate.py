@@ -1,12 +1,17 @@
+"""
+Set of function used to regenerate html files from notebooks.
+"""
+import fnmatch
 import os
 import os.path
-import fnmatch
-import nbconvert
 import shutil
+
+import nbconvert
 
 
 def write_rst_file_with_resources(body, resources):
-
+    """Helper function.
+    """
     # Create folder if the path not exists
     if not os.path.exists(resources["metadata"]["path"]):
         os.makedirs(resources["metadata"]["path"])
@@ -30,14 +35,20 @@ def write_rst_file_with_filename(body, filename):
 
 
 def find_notebook_file(root_directory):
+    """Get recursively all notebook filenames in the src_directory.
 
-    # Get recursively all notebook filenames in the src_directory
+    Args:
+        root_directory (str): base directory to search
+
+    Returns:
+        (list of str)
+    """
     matches = []
-    for root, dirnames, filenames in os.walk(root_directory):
+    for root, _, filenames in os.walk(root_directory):
         for filename in fnmatch.filter(filenames, '*.ipynb'):
 
             # Avoid tmp notebook in hidden folder like *-checkpoint.ipynb
-            if len(os.path.basename(root)) > 0:
+            if os.path.basename(root):
                 if os.path.basename(root)[0] == '.':
                     continue
 
@@ -83,7 +94,6 @@ Notebook
 
     rst_exporter = nbconvert.RSTExporter()
     for nb_filename in nb_filenames:
-
         # Convert each notebook to rst
         body, resources = rst_exporter.from_filename(nb_filename)
 

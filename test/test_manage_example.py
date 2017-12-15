@@ -4,7 +4,7 @@ from os.path import exists
 from os.path import join as pj
 import pytest
 
-from pkglts.config_management import Config, default_cfg
+from pkglts.config_management import Config, DEFAULT_CFG
 from pkglts.manage import install_example_files
 
 from .small_tools import ensure_created, rmdir
@@ -21,14 +21,14 @@ def tmp_dir():
 
 
 def test_install_example_returns_false_if_option_not_already_installed(tmp_dir):
-    cfg = Config(default_cfg)
+    cfg = Config(DEFAULT_CFG)
     cfg.load_extra()
     ans = install_example_files('option', cfg, tmp_dir)
     assert not ans
 
 
 def test_install_example_ok_if_option_do_not_provide_examples(tmp_dir):
-    pkg_cfg = deepcopy(default_cfg)
+    pkg_cfg = deepcopy(DEFAULT_CFG)
     pkg_cfg['base'] = dict(pkgname='toto', namespace=None)
     cfg = Config(pkg_cfg)
     cfg.load_extra()
@@ -38,7 +38,7 @@ def test_install_example_ok_if_option_do_not_provide_examples(tmp_dir):
 
 
 def test_install_example_copy_files(tmp_dir):
-    pkg_cfg = deepcopy(default_cfg)
+    pkg_cfg = deepcopy(DEFAULT_CFG)
     pkg_cfg['base'] = dict(pkgname='toto', namespace=None)
     pkg_cfg['test'] = dict(suite_name='nose')
     cfg = Config(pkg_cfg)
@@ -52,7 +52,7 @@ def test_install_example_copy_files(tmp_dir):
 
 
 def test_install_example_copy_binary_files(tmp_dir):
-    pkg_cfg = deepcopy(default_cfg)
+    pkg_cfg = deepcopy(DEFAULT_CFG)
     pkg_cfg['base'] = dict(pkgname='toto', namespace=None)
     pkg_cfg['data'] = dict()
     cfg = Config(pkg_cfg)
@@ -65,7 +65,7 @@ def test_install_example_copy_binary_files(tmp_dir):
 
 
 def test_install_example_do_not_complain_if_file_already_exists(tmp_dir):
-    pkg_cfg = deepcopy(default_cfg)
+    pkg_cfg = deepcopy(DEFAULT_CFG)
     pkg_cfg['base'] = dict(pkgname='toto', namespace=None)
     pkg_cfg['test'] = dict(suite_name='nose')
     cfg = Config(pkg_cfg)
@@ -76,7 +76,7 @@ def test_install_example_do_not_complain_if_file_already_exists(tmp_dir):
 
 
 def test_install_example_handles_namespace(tmp_dir):
-    pkg_cfg = deepcopy(default_cfg)
+    pkg_cfg = deepcopy(DEFAULT_CFG)
     pkg_cfg['base'] = dict(pkgname='toto', namespace='oa', namespace_method='pkg_utils')
     pkg_cfg['test'] = dict(suite_name='nose')
     cfg = Config(pkg_cfg)

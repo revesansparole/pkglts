@@ -1,9 +1,7 @@
-# rev = 1
 """ Contains functions to manage the structure of the package.
 
 Use 'setup.py' for common tasks.
 """
-
 import logging
 from os import listdir, mkdir, remove, walk
 from os.path import exists, normpath, splitext
@@ -11,7 +9,7 @@ from os.path import join as pj
 from shutil import rmtree
 
 from .config import pkg_cfg_file, pkg_hash_file, pkglts_dir
-from .config_management import (Config, default_cfg,
+from .config_management import (Config, DEFAULT_CFG,
                                 get_pkg_config, write_pkg_config)
 from .hash_management import (get_pkg_hash, modified_file_hash,
                               pth_as_key, write_pkg_hash)
@@ -19,7 +17,7 @@ from .manage_tools import (check_option_parameters,
                            regenerate_dir, update_opt)
 from .option_tools import available_options, get_user_permission
 
-logger = logging.getLogger(__name__)
+LOGGER = logging.getLogger(__name__)
 
 
 def init_pkg(rep="."):
@@ -33,20 +31,20 @@ def init_pkg(rep="."):
     """
     if not exists(pj(rep, pkglts_dir)):
         mkdir(pj(rep, pkglts_dir))
-    
-    logger.info("init package")
-    
+
+    LOGGER.info("init package")
+
     for name in ("regenerate.no", "clean.no"):
         if not exists(pj(rep, pkglts_dir, name)):
-            with open(pj(rep, pkglts_dir, name), 'w') as f:
-                f.write("")
-    
+            with open(pj(rep, pkglts_dir, name), 'w') as fhw:
+                fhw.write("")
+
     if exists(pj(rep, pkglts_dir, pkg_cfg_file)):
         cfg = get_pkg_config(rep)
     else:
-        cfg = Config(default_cfg)
+        cfg = Config(DEFAULT_CFG)
     write_pkg_config(cfg, rep)
-    
+
     if not exists(pj(rep, pkglts_dir, pkg_hash_file)):
         write_pkg_hash({}, rep)
 
@@ -66,7 +64,7 @@ def clean(rep="."):
         pth = normpath(pj(rep, name))
         if exists(pth):
             rmtree(pth)
-    
+
     for root, dnames, fnames in walk(rep):
         # do not walk directories starting with "."
         for name in tuple(dnames):
@@ -77,7 +75,7 @@ def clean(rep="."):
             elif name == "__pycache__":
                 rmtree(pj(root, name))
                 dnames.remove(name)
-        
+
         for name in fnames:
             if not name.startswith("."):
                 if splitext(name)[1] in [".pyc", ".pyo"]:
@@ -98,7 +96,7 @@ def add_option(name, cfg):
     """
     if name in cfg.installed_options():
         raise UserWarning("option already included in this package")
-    
+
     return update_opt(name, cfg)
 
 
@@ -114,17 +112,52 @@ def install_example_files(option, cfg, target="."):
         (bool): whether operation succeeded or not
     """
     if option not in cfg.installed_options():
-        logger.warning("please install option before example files")
+        LOGGER.warning("please install option before example files")
         return False
-    
+
     opt = available_options[option]
     ex_dir = opt.example_dir()
     if ex_dir is None:
-        logger.info("option does not provide any example")
+        LOGGER.info("option does not provide any example")
         return False
-    
+
     regenerate_dir(ex_dir, target, cfg, {})
     return True
+
+
+def _manage_conflicts(target, hm_ref, overwrite):
+    """Check if files have been modified.
+
+    Args:
+        target (str): target directory to write into
+        hm_ref (dict): reference hash for blocks
+        overwrite (bool): whether or not, by default,
+                         overwrite user modified files
+
+    Returns:
+        (dict of str, bool): file path, overwrite
+    """
+    conflicted = []
+    for file_pth in hm_ref:
+        pth = pj(target, file_pth)
+        if exists(pth) and modified_file_hash(pth, hm_ref):
+            conflicted.append(pth)
+        else:
+            # file disappeared, regenerate_dir will reload it if managed by pkglts
+            pass
+
+    overwrite_file = {}
+    if conflicted:
+        if overwrite:
+            for name in conflicted:
+                LOGGER.debug("conflicted, '%s'", name)
+                overwrite_file[pth_as_key(name)] = True
+        else:
+            for name in conflicted:
+                LOGGER.info("A non editable section of %s has been modified", name)
+                overwrite_file[pth_as_key(name)] = get_user_permission("overwrite", False)
+
+    return overwrite_file
 
 
 def regenerate_package(cfg, target=".", overwrite=False):
@@ -142,51 +175,32 @@ def regenerate_package(cfg, target=".", overwrite=False):
     # check consistency of env params
     invalids = []
     for option in cfg.installed_options():
-        for n in check_option_parameters(option, cfg):
-            invalids.append((option, n))
-    
-    if len(invalids) > 0:
+        for name in check_option_parameters(option, cfg):
+            invalids.append((option, name))
+
+    if invalids:
         for option, param in invalids:
-            logger.warning("param %s is not valid for '%s'", param, option)
-        
+            LOGGER.warning("param %s is not valid for '%s'", param, option)
+
         return False
-    
+
     # check for potential conflicts
     hm_ref = get_pkg_hash(target)
-    
-    conflicted = []
-    for file_pth in hm_ref:
-        pth = pj(target, file_pth)
-        if exists(pth) and modified_file_hash(pth, hm_ref):
-            conflicted.append(pth)
-        else:
-            # file disappeared, regenerate_dir will reload it if managed by pkglts
-            pass
-    
-    overwrite_file = {}
-    if len(conflicted) > 0:
-        if overwrite:
-            for name in conflicted:
-                logger.debug("conflicted, '%s'" % name)
-                overwrite_file[pth_as_key(name)] = True
-        else:
-            for name in conflicted:
-                print("A non editable section of %s has been modified" % name)
-                overwrite_file[pth_as_key(name)] = get_user_permission("overwrite", False)
-    
+    overwrite_file = _manage_conflicts(target, hm_ref, overwrite)
+
     # render files for all options
-    hm = {}
+    hmap = {}
     for name in cfg.installed_options():
         opt = available_options[name]
         resource_dir = opt.resource_dir()
         if resource_dir is None:
-            logger.info("option %s does not provide files" % name)
+            LOGGER.info("option %s does not provide files", name)
         else:
-            logger.info("rendering option %s" % name)
+            LOGGER.info("rendering option %s", name)
             loc_hm = regenerate_dir(resource_dir, target, cfg, overwrite_file)
-            hm.update(loc_hm)
-    
-    hm_ref.update(hm)
+            hmap.update(loc_hm)
+
+    hm_ref.update(hmap)
     write_pkg_hash(hm_ref, target)
 
 

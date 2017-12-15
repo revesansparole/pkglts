@@ -1,3 +1,6 @@
+"""
+Set of function to extend jinja2 environment.
+"""
 from pkglts.local import pkg_full_name, src_dir
 
 

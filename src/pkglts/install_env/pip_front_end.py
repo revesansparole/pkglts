@@ -13,8 +13,8 @@ def installed_packages():
         (iter of str)
     """
     pip.utils.pkg_resources = imp.reload(pip.utils.pkg_resources)
-    for p in get_installed_distributions():
-        yield p.project_name
+    for pjt in get_installed_distributions():
+        yield pjt.project_name
 
 
 def install(name):

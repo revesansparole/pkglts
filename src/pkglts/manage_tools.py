@@ -11,12 +11,11 @@ from .local import init_namespace_dir
 from .option_tools import available_options, get_user_permission
 from .templating import render
 
+LOGGER = logging.getLogger(__name__)
 
-logger = logging.getLogger(__name__)
+TPL_SRC_NAME = "{" + "{ base.pkgname }" + "}"
 
-tpl_src_name = "{" + "{ base.pkgname }" + "}"
-
-non_bin_ext = ("", ".bat", ".cfg", ".in", ".ini", ".md", ".no", ".ps1", ".py", ".rst", ".sh",
+NON_BIN_EXT = ("", ".bat", ".cfg", ".in", ".ini", ".md", ".no", ".ps1", ".py", ".rst", ".sh",
                ".txt", ".yml", ".yaml")
 
 
@@ -26,7 +25,7 @@ def ensure_installed_packages(requirements, msg, cfg):
     If not, ask user permission to install them.
 
     Args:
-        requirements (list of str): list of package names to install
+        requirements (list of Dependency): list of package names to install
                                    if needed
         msg (str): error message to print
         cfg (Config):  current package configuration
@@ -39,12 +38,12 @@ def ensure_installed_packages(requirements, msg, cfg):
            if dep.package_manager is None or dep.package_manager == ife_name]
     ife = get_install_front_end(ife_name)
     to_install = set(req) - set(ife.installed_packages())
-    if len(to_install) > 0:
+    if to_install:
         print(msg)
-        logger.warning("missing packages: " + ", ".join(to_install))
+        LOGGER.warning("missing packages: " + ", ".join(to_install))
         for name in to_install:
             ife.install(name)
-            logger.info("install %s", name)
+            LOGGER.info("install %s", name)
 
     return True
 
@@ -75,7 +74,7 @@ def update_opt(name, cfg):
         name (str): name of option to add
         cfg (Config):  current package configuration
     """
-    logger.info("update option %s", name)
+    LOGGER.info("update option %s", name)
 
     # test existence of option
     try:
@@ -111,6 +110,62 @@ def update_opt(name, cfg):
     return cfg
 
 
+def _rg_dir(src_pth, tgt_name, tgt_pth, cfg, overwrite_file):
+    """Regenerate a directory.
+
+    Notes:
+        recursively regenerate all tree rooted on src_pth
+
+    Args:
+        src_pth (str): path to directory
+        tgt_name (str): name of directory to create
+        tgt_pth (str): path to created directory
+        cfg (Config):  current package configuration
+        overwrite_file (dict): which files to overwrite
+
+    Returns:
+        (dict of str, map): hash key of preserved sections
+    """
+    if tgt_name in ("", "_"):
+        return {}
+
+    if not exists(tgt_pth):
+        mkdir(tgt_pth)
+
+    return regenerate_dir(src_pth, tgt_pth, cfg, overwrite_file)
+
+
+def _rg_file(src_pth, tgt_name, tgt_pth, cfg, overwrite_file):
+    """Regenerate a single file.
+
+    Args:
+        src_pth (str): path to file
+        tgt_name (str): name of file to create
+        tgt_pth (str): path to created file
+        cfg (Config):  current package configuration
+        overwrite_file (dict): which files to overwrite
+
+    Returns:
+        (dict|None): bid, hash of block content
+    """
+    if splitext(tgt_name)[0] == "_":
+        return None
+
+    if overwrite_file.get(pth_as_key(tgt_pth), True):
+        _, ext = splitext(tgt_name)
+        if ext in NON_BIN_EXT:
+            blocks = render(cfg, src_pth, tgt_pth)
+            return dict((bid, compute_hash(cnt)) for bid, cnt in blocks)
+        else:  # binary file
+            if exists(tgt_pth):
+                print("overwrite? %s" % tgt_pth)
+            else:
+                with open(src_pth, 'rb') as fhr:
+                    content = fhr.read()
+                with open(tgt_pth, 'wb') as fhw:
+                    fhw.write(content)
+
+
 def regenerate_dir(src_dir, tgt_dir, cfg, overwrite_file):
     """Walk all files in src_dir and create/update them on tgt_dir
 
@@ -124,7 +179,7 @@ def regenerate_dir(src_dir, tgt_dir, cfg, overwrite_file):
     Returns:
         (dict of str, map): hash key of preserved sections
     """
-    hm = {}
+    hmap = {}
 
     for src_name in listdir(src_dir):
         src_pth = src_dir + "/" + src_name
@@ -134,8 +189,7 @@ def regenerate_dir(src_dir, tgt_dir, cfg, overwrite_file):
 
         tgt_pth = tgt_dir + "/" + tgt_name
         # handle namespace
-        if (isdir(src_pth) and basename(src_dir) == 'src' and
-                    src_name == tpl_src_name):
+        if isdir(src_pth) and basename(src_dir) == 'src' and src_name == TPL_SRC_NAME:
             namespace = cfg['base']['namespace']
             if namespace is not None:
                 ns_pth = tgt_dir + "/" + namespace
@@ -146,27 +200,10 @@ def regenerate_dir(src_dir, tgt_dir, cfg, overwrite_file):
                 tgt_pth = ns_pth + "/" + tgt_name
 
         if isdir(src_pth):
-            if tgt_name not in ("", "_"):
-                if not exists(tgt_pth):
-                    mkdir(tgt_pth)
-
-                sub_hm = regenerate_dir(src_pth, tgt_pth, cfg, overwrite_file)
-                hm.update(sub_hm)
+            hmap.update(_rg_dir(src_pth, tgt_name, tgt_pth, cfg, overwrite_file))
         else:
-            if splitext(tgt_name)[0] != "_":
-                kp = pth_as_key(tgt_pth)
-                if overwrite_file.get(kp, True):
-                    fname, ext = splitext(tgt_name)
-                    if ext in non_bin_ext:
-                        blocks = render(cfg, src_pth, tgt_pth)
-                        hm[kp] = dict((bid, compute_hash(cnt)) for bid, cnt in blocks)
-                    else:  # binary file
-                        if exists(tgt_pth):
-                            print("overwrite? %s" % tgt_pth)
-                        else:
-                            with open(src_pth, 'rb') as fr:
-                                content = fr.read()
-                            with open(tgt_pth, 'wb') as fw:
-                                fw.write(content)
+            bhash = _rg_file(src_pth, tgt_name, tgt_pth, cfg, overwrite_file)
+            if bhash is not None:
+                hmap[pth_as_key(tgt_pth)] = bhash
 
-    return hm
+    return hmap

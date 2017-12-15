@@ -1,6 +1,6 @@
 import pytest
 
-from pkglts.config_management import Config, default_cfg
+from pkglts.config_management import Config, DEFAULT_CFG
 from pkglts.manage_tools import update_opt
 
 
@@ -14,7 +14,7 @@ def test_non_existing_option_raises_warning():
 
 
 def test_option_fetch_parameter_list_from_config():
-    cfg = Config(default_cfg)
+    cfg = Config(DEFAULT_CFG)
     cfg = update_opt('base', cfg)
     assert 'base' in cfg
     assert 'pkgname' in cfg['base']
@@ -22,7 +22,7 @@ def test_option_fetch_parameter_list_from_config():
 
 
 def test_option_handle_no_parameter_list_in_config():
-    cfg = Config(default_cfg)
+    cfg = Config(DEFAULT_CFG)
     cfg._env.globals['base'] = None
     cfg = update_opt('data', cfg)
     assert 'data' in cfg
@@ -30,7 +30,7 @@ def test_option_handle_no_parameter_list_in_config():
 
 
 def test_option_use_default_from_config():
-    cfg = Config(default_cfg)
+    cfg = Config(DEFAULT_CFG)
     cfg = update_opt('base', cfg)
     assert 'base' in cfg
     assert cfg['base']['authors'][0][0] == 'moi'

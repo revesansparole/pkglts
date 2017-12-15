@@ -1,6 +1,7 @@
+"""
+Set of function related to handling the configuration of this option.
+"""
 from os.path import abspath, basename
-
-from pkglts.dependency import Dependency
 
 
 def update_parameters(cfg):

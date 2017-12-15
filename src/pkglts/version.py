@@ -1,14 +1,17 @@
+"""
+Maintain version for this package.
+"""
 # {# pkglts, version
 #  -*- coding: utf-8 -*-
 
-major = 2
+MAJOR = 2
 """(int) Version major component."""
 
-minor = 3
+MINOR = 3
 """(int) Version minor component."""
 
-post = 4
+POST = 4
 """(int) Version post or bugfix component."""
 
-__version__ = ".".join([str(s) for s in (major, minor, post)])
+__version__ = ".".join([str(s) for s in (MAJOR, MINOR, POST)])
 # #}
