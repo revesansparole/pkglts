@@ -9,6 +9,7 @@ dependencies:
 - jinja2
 - requests
 - unidecode
+- six
 - pip:
   - semver
 
