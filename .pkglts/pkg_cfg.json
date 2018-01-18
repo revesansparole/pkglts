@@ -103,6 +103,9 @@
       },
       {
         "name": "unidecode"
+      },
+      {
+        "name": "six"
       }
     ]
   },
@@ -123,6 +126,6 @@
   "version": {
     "major": 2,
     "minor": 4,
-    "post": 0
+    "post": 1
   }
 }
