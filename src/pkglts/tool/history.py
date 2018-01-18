@@ -4,8 +4,10 @@ This tool will try to parse all release tags to create an history of package.
 from functools import cmp_to_key
 import logging
 import os
-from urllib.parse import quote_plus
-
+try:
+    from urllib.parse import quote_plus
+except ImportError:
+    from six.moves.urllib_parse import quote_plus
 import requests
 import semver
 
