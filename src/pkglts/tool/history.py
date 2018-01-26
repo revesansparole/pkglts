@@ -148,7 +148,7 @@ def action_history(*args, **kwds):
         server = cfg['gitlab']['server']
         owner = cfg['gitlab']['owner']
         project = cfg['gitlab']['project']
-        tags = gitlab_tag_list(server, "%s/%s" % (owner, project), "URFqxvqV8Zn51qsZGSNZ")
+        tags = gitlab_tag_list(server, "%s/%s" % (owner, project), "QfqBHyPbk5eXkjkxuk5j")
     elif 'github' in cfg.installed_options():
         owner = cfg['github']['owner']
         project = cfg['github']['project']
