@@ -151,7 +151,7 @@ def _rg_file(src_pth, tgt_name, tgt_pth, cfg, overwrite_file):
     if splitext(tgt_name)[0] == "_":
         return None
 
-    LOGGER.info("render file '%s' into '%s'", src_pth, tgt_pth)
+    LOGGER.debug("render file '%s' into '%s'", src_pth, tgt_pth)
 
     if overwrite_file.get(pth_as_key(tgt_pth), True):
         _, ext = splitext(tgt_name)
