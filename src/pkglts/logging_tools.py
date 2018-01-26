@@ -26,16 +26,27 @@ def rolling_logs(logger):
     logger.addHandler(info_ch)
 
 
-def main():
-    """Set logging configuration"""
+def main(verbosity):
+    """Set logging configuration.
+
+    Args:
+        verbosity (int): verbosity level
+
+    Returns:
+        None
+    """
+    if verbosity > 2:
+        verbosity = 2
+    vlevel = [logging.WARNING, logging.INFO, logging.DEBUG][verbosity]
+
     fmt = logging.Formatter('%(asctime)s %(levelname)s (%(name)s): %(message)s')
 
     wng_ch = logging.StreamHandler()
-    wng_ch.setLevel(logging.WARNING)
+    wng_ch.setLevel(vlevel)
     wng_ch.setFormatter(fmt)
 
     logger = logging.getLogger("pkglts")
-    logger.setLevel(logging.DEBUG)
+    logger.setLevel(vlevel)
     logger.addHandler(wng_ch)
 
     try:
@@ -50,4 +61,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    main(0)

@@ -6,6 +6,7 @@ import json
 import logging
 
 from .config_management import (get_pkg_config, write_pkg_config)
+from . import logging_tools
 from .manage import (clean, init_pkg, install_example_files,
                      regenerate_package, regenerate_option, add_option)
 from .tool.history import action_history
@@ -157,11 +158,16 @@ def main():
                         help='extra arguments to pass to the action',
                         dest='extra')
 
+    parser.add_argument("-v", "--verbosity", action="count", default=0,
+                        help="increase output verbosity")
+
     args = parser.parse_args()
     if args.extra is None:
         extra = {}
     else:
         extra = dict(args.extra)
+
+    logging_tools.main(args.verbosity)
 
     # perform action
     action[args.action](*args.action_args, **extra)
