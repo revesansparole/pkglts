@@ -3,32 +3,10 @@
 ========================
 
 .. {# pkglts, doc
-{%- if 'readthedocs' is available %}
-{{ readthedocs.badge }}
-{% endif %}
-{%- if 'travis' is available %}
-{{ travis.badge }}
-{% endif %}
-{%- if 'appveyor' is available %}
-{{ appveyor.badge }}
-{% endif %}
-{%- if 'coveralls' is available %}
-{{ coveralls.badge }}
-{% endif %}
-{%- if 'landscape' is available %}
-{{ landscape.badge }}
-{% endif %}
-{%- if 'pypi' is available %}
-{{ pypi.badge }}
-{% endif -%}
-{%- if 'requires' is available %}
-{{ requires.badge }}
-{% endif -%}
-.. #}
-
-{% for badge in doc.badges %}
+{%- for badge in doc.badges %}
 {{ badge }}
-{% endfor %}
+{% endfor -%}
+.. #}
 
 {{ doc.description }}
 
