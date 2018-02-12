@@ -127,6 +127,7 @@ setup_kwds['entry_points']['pkglts'] = [
     'doc.update_parameters = pkglts.option.doc.config:update_parameters',
     'doc.check = pkglts.option.doc.config:check',
     'doc.require = pkglts.option.doc.config:require',
+    'doc.environment_extensions = pkglts.option.doc.handlers:environment_extensions',
 
     'flake8.root = pkglts.option.flake8',
     'flake8.require = pkglts.option.flake8.config:require',

@@ -15,10 +15,15 @@ def fmt_badge(badge, url, txt, fmt):
     Returns:
         (str)
     """
+    if not url.startswith("http"):
+        url = "https://%s" % url
+    if not badge.startswith("http"):
+        badge = "https://%s" % badge
+
     if fmt == 'rst':
-        lines = [".. image:: https://%s" % badge,
+        lines = [".. image:: %s" % badge,
                  "    :alt: %s" % txt,
-                 "    :target: https://%s" % url]
+                 "    :target: %s" % url]
         return "\n" + "\n".join(lines)
 
     if fmt == 'md':

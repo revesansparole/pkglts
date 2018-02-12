@@ -16,7 +16,7 @@ LOGGER = logging.getLogger(__name__)
 TPL_SRC_NAME = "{" + "{ base.pkgname }" + "}"
 
 NON_BIN_EXT = ("", ".bat", ".cfg", ".in", ".ini", ".md", ".no", ".ps1", ".py", ".rst", ".sh",
-               ".txt", ".yml", ".yaml")
+               ".svg", ".txt", ".yml", ".yaml")
 
 
 def ensure_installed_packages(requirements, msg, cfg):
@@ -160,7 +160,7 @@ def _rg_file(src_pth, tgt_name, tgt_pth, cfg, overwrite_file):
             return dict((bid, compute_hash(cnt)) for bid, cnt in blocks)
         else:  # binary file
             if exists(tgt_pth):
-                print("overwrite? %s" % tgt_pth)
+                LOGGER.info("overwrite? %s", tgt_pth)
             else:
                 with open(src_pth, 'rb') as fhr:
                     content = fhr.read()
