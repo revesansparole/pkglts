@@ -26,5 +26,9 @@
 {% endif -%}
 .. #}
 
+{% for badge in doc.badges %}
+{{ badge }}
+{% endfor %}
+
 {{ doc.description }}
 
