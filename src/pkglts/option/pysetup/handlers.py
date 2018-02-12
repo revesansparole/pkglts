@@ -57,19 +57,19 @@ def pkg_url(cfg):
     except KeyError:
         pass
 
-    try:
-        url = cfg['pypi']['url']
-        if url is not None:
-            return url
-    except KeyError:
-        pass
+    # try:
+    #     url = cfg['pypi']['url']
+    #     if url is not None:
+    #         return url
+    # except KeyError:
+    #     pass
 
-    try:
-        url = cfg['readthedocs']['url']
-        if url is not None:
-            return url
-    except KeyError:
-        pass
+    # try:
+    #     url = cfg['readthedocs']['url']
+    #     if url is not None:
+    #         return url
+    # except KeyError:
+    #     pass
 
     return ""
 

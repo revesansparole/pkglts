@@ -50,9 +50,13 @@ def environment_extensions(cfg):
     Returns:
         dict of str: any
     """
-    url = "badge.fury.io/py/%s" % pkg_full_name(cfg)
-    img = url + ".svg"
-    badge = fmt_badge(img, url, "PyPI version", cfg['doc']['fmt'])
+    servers = cfg['pypi']['servers']
+    if servers and servers[0]['name'] == 'pypi':
+        url = "badge.fury.io/py/%s" % pkg_full_name(cfg)
+        img = url + ".svg"
+        badge = fmt_badge(img, url, "PyPI version", cfg['doc']['fmt'])
+    else:
+        badge = ""
 
     return {"badge": badge,
             "auto_classifiers": auto_classifiers(cfg)}
