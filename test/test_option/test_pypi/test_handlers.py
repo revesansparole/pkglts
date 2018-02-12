@@ -7,7 +7,7 @@ def test_badge():
                       doc={'fmt': 'rst'},
                       pysetup={"intended_versions": ["27", "28"],
                                'require': []},
-                      pypi={'classifiers': []}))
+                      pypi={'classifiers': [], 'servers': [dict(name="pypi", url="https://upload.pypi.org/legacy/")]}))
     cfg.load_extra()
     assert ".. image:" in cfg._env.globals['pypi'].badge
 
@@ -18,7 +18,7 @@ def test_auto_classifiers():
                       doc={'fmt': 'rst'},
                       pysetup={"intended_versions": ["27", "28"],
                                'require': []},
-                      pypi={'classifiers': []}))
+                      pypi={'classifiers': [], 'servers': []}))
     cfg.load_extra()
     section = cfg._env.globals['pypi']
     assert "Programming Language :: Python" in section.auto_classifiers
