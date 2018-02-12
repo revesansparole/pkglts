@@ -3,7 +3,7 @@
     "auto_install": true,
     "install_front_end": "stdout",
     "use_prompts": false,
-    "version": 11
+    "version": 12
   },
   "appveyor": {
     "token": "hrwjhn2oe0q4oaf2"
@@ -75,14 +75,16 @@
       "License :: OSI Approved :: BSD License",
       "Natural Language :: English"
     ],
-    "servers": {
-      "pypi": {
+    "servers": [
+      {
+        "name": "pypi",
         "url": "https://upload.pypi.org/legacy/"
       },
-      "test": {
+      {
+        "name": "test",
         "url": "https://testpypi.python.org/pypi"
       }
-    }
+    ]
   },
   "pysetup": {
     "intended_versions": [
