@@ -30,7 +30,7 @@
     "pysetup": "psgypH2rS1U8zm/+1e5ZlOpirmjJkBjlR8wcPFifhf3NhP2MkmP7yyYp+Gloshy40cDY7l2tAeGkV8hcu5GjpQ=="
   },
   "README.rst": {
-    "doc": "cFO7xpAieGYycTGaKrDtOLgiJgOo6NZOG5GuovFkb789StH6Ag7exCyp8LQMLe0ViZ/d0JrCI+7/3jCZQYlk4Q=="
+    "doc": "o5MA/WIyttlY9ptvCAXvODKSSa3qZVhtAJigoXclKAnK0gViu3WN4c7DuCqhOJwZoqjXqbFVVj+098DvxX9F0w=="
   },
   "appveyor.yml": {
     "appveyor": "EI5AlO+3xaWF1Lr1snVBdNdkWNsU0Qgzggv9MnztwNuQk5VqntCHxlb8AVFM/c4L++fw6x3D2J9e1hpUNmx/nw=="
@@ -40,7 +40,7 @@
   },
   "conda/meta.yaml": {
     "conda.about": "7jgIubwtZ5uu8wIoAJBjSpwLdOSRdmKwx0EYKW1u0AW5g9QBTWSIUvuADIkyH9j4uiSjDC0TYhWczajS11WuoQ==",
-    "conda.package": "hGKR26tkUQd3nrItpvBrRZjKhjS7waUdPk22KKSweM0kep2AiB6o/ArEtM1zRWlm5yYkLxw7qscArKf+hRZxMw==",
+    "conda.package": "vQPwi7bnIpCR9Csi7JScJ4/b4nuu/LMZjXi+Bz2VK/8lrY7jfdiXk8s5gdV+IklmvR8skcbreyw+XsXzQCTkGw==",
     "conda.src": "HrwSleFu4NbgkAAkAfKBpsU5jaVQ83sYumDl1fUALX04VYq8s0OexqOusF2UQ/BxfHXQWGQEQ/0OBDbmkNE0Aw=="
   },
   "conda_pkglts/bld.bat": {},
@@ -89,7 +89,7 @@
     "data": "wwgLuV/OqHWjWbssvDHa4LNg+7C+tuNiKHOxkO+9UAl9opI/HfPyJAq2fPhUeTmVvb/E6MkqDJIli9m8n5/V0Q=="
   },
   "src/pkglts/version.py": {
-    "version": "57XrQavB+sn1Otzpvk3HSvu4MM1c+sB/2BNyD9cMLr2L2q/v2wgwKu1KMg1bfTwKBxDBckJN3pAxe7k3gu0KhA=="
+    "version": "GAdPKiN15fhqbBbCAK9LveDaYrCtc9BtGe6Q/gHZQ2LyaA8MbfIeVWTcfhqomTw3vYXdClVhVAkqwd83Iwv5mw=="
   },
   "src/pkglts_data/__init__.py": {},
   "test/__init__.py": {},
