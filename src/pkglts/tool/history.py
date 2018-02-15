@@ -66,10 +66,10 @@ def gitlab_tag_list(server, project, token):
     LOGGER.info("repo_id: %s", repo_id)
 
     url = base_url + repo_id + "/repository/tags" + "?private_token=%s" % token
-    print("url:  %s", url)
+    LOGGER.debug("url:  %s", url)
 
     res = requests.get(url)
-    print("status: %s", res.status_code)
+    LOGGER.debug("status: %s", res.status_code)
     tags = {}
     for tag in res.json():
         if tag['name'].startswith("v"):
