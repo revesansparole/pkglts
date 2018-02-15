@@ -62,7 +62,6 @@ setup_kwds = dict(
         "requests",
         "semver",
         "unidecode",
-        "six",
         ],
     tests_require=[
         "coverage",

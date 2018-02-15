@@ -42,7 +42,6 @@ install:
   - conda install requests
   - pip install semver
   - conda install unidecode
-  - conda install six
   - conda install coverage
   - pip install coveralls
   - conda install flake8

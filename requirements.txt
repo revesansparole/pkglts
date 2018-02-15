@@ -7,6 +7,5 @@ jinja2  # pip install jinja2
 requests  # pip install requests
 semver  # pip install semver
 unidecode  # pip install unidecode
-six  # pip install six
 
 # #}
