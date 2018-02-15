@@ -20,16 +20,9 @@ requirements:
   run:
     - python
     - jinja2
-    - coverage
-    - flake8
-    - mock
-    - nbconvert
-    - pytest
-    - pytest-cov
-    - sphinx
-    # - tox # virtualenv
-    # - twine
-    # - coveralls
+    - requests
+    - semver
+    - unidecode
 
 build:
   number: 0

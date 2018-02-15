@@ -24,8 +24,14 @@ Preferred method use virtual environments::
 
 or conda_ environments::
 
-    $ conda create -n toto python
+    $ conda create -n toto pkglts -c defaults -c revesansparole -c conda-forge
+
+If you already have an existing environment 'toto'::
+
     $ activate toto
     (toto) $ pip install pkglts
+
+    $ activate toto
+    (toto) $ conda install pkglts -c defaults -c revesansparole -c conda-forge
 
 .. _conda: https://conda.io/miniconda.html
