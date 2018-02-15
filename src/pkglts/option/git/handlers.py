@@ -26,7 +26,7 @@ def environment_extensions(cfg):
         commiters = re.findall(r'Author: (.* <.*@.*>)\n', unidecode(log))
         ccs = [(commiters.count(name), name) for name in set(commiters)]
         contributors = [name for nb, name in sorted(ccs, reverse=True)]
-    except KeyError:
+    except (KeyError, WindowsError):
         LOGGER.warning("Please add git to your $PATH")
         contributors = ["I failed to construct the contributor list"]
     except subprocess.CalledProcessError as err:
