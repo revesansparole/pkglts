@@ -10,6 +10,7 @@ source:
     ../
 # #}
 
+
 requirements:
   build:
     - python
@@ -31,7 +32,17 @@ requirements:
     # - coveralls
 
 build:
-  script: python setup.py install --single-version-externally-managed --record=record.txt
+  number: 0
+  entry_points:
+    - pmg = pkglts.manage_script:main
+  script: python setup.py install --single-version-externally-managed --record record.txt
+
+test:
+  imports:
+    - pkglts
+
+  commands:
+    - pmg --help
 
 # {# pkglts, conda.about
 about:
