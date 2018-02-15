@@ -4,7 +4,10 @@ This tool will try to parse all release tags to create an history of package.
 from functools import cmp_to_key
 import logging
 import os
-from urllib.parse import quote_plus
+try:  # python3
+    from urllib.parse import quote_plus
+except ImportError:  # python2
+    from urllib import quote_plus
 
 import requests
 import semver
