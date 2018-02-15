@@ -2,6 +2,7 @@
 """
 import logging
 from os.path import dirname, exists, join as pj
+
 import pkg_resources
 
 LOGGER = logging.getLogger(__name__)

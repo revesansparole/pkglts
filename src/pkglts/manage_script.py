@@ -1,14 +1,13 @@
 """
 Define actions that can be called with the CLI.
 """
-from argparse import ArgumentParser, RawTextHelpFormatter
 import json
 import logging
+from argparse import ArgumentParser, RawTextHelpFormatter
 
-from .config_management import (get_pkg_config, write_pkg_config)
 from . import logging_tools
-from .manage import (clean, init_pkg, install_example_files,
-                     regenerate_package, regenerate_option, add_option)
+from .config_management import get_pkg_config, write_pkg_config
+from .manage import add_option, clean, init_pkg, install_example_files, regenerate_option, regenerate_package
 from .tool.history import action_history
 
 LOGGER = logging.getLogger(__name__)

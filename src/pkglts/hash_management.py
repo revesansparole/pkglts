@@ -1,14 +1,14 @@
 """
 Set of function to associate hash to blobs.
 """
-from base64 import b64encode
-from hashlib import sha512
 import json
 import logging
+from base64 import b64encode
+from hashlib import sha512
 from os.path import join as pj
 from os.path import normpath
 
-from .config import pkglts_dir, pkg_hash_file
+from .config import pkg_hash_file, pkglts_dir
 from .templating import parse_source
 
 LOGGER = logging.getLogger(__name__)
