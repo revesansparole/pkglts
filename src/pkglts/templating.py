@@ -1,8 +1,8 @@
 """
 Set of functions to extend jinja2.
 """
-from os.path import exists
 import re
+from os.path import exists
 
 OPENING_MARKER = "{" + "#"
 CLOSING_MARKER = "#" + "}"

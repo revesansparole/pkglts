@@ -1,13 +1,15 @@
 """
 This tool will try to parse all release tags to create an history of package.
 """
-from functools import cmp_to_key
 import logging
 import os
-try:
+from functools import cmp_to_key
+
+try:  # python3
     from urllib.parse import quote_plus
-except ImportError:
-    from six.moves.urllib_parse import quote_plus
+except ImportError:  # python2
+    from urllib import quote_plus
+
 import requests
 import semver
 
@@ -64,10 +66,10 @@ def gitlab_tag_list(server, project, token):
     LOGGER.info("repo_id: %s", repo_id)
 
     url = base_url + repo_id + "/repository/tags" + "?private_token=%s" % token
-    print("url:  %s", url)
+    LOGGER.debug("url:  %s", url)
 
     res = requests.get(url)
-    print("status: %s", res.status_code)
+    LOGGER.debug("status: %s", res.status_code)
     tags = {}
     for tag in res.json():
         if tag['name'].startswith("v"):
