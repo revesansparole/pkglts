@@ -39,7 +39,7 @@ def ensure_installed_packages(requirements, msg, cfg):
     ife = get_install_front_end(ife_name)
     to_install = set(req) - set(ife.installed_packages())
     if to_install:
-        print(msg)
+        LOGGER.warning(msg)
         LOGGER.warning("missing packages: " + ", ".join(to_install))
         for name in to_install:
             ife.install(name)
@@ -86,7 +86,7 @@ def update_opt(name, cfg):
     for dep in opt.require('option', cfg):
         option_name = dep.name
         if option_name not in cfg.installed_options():
-            print("need to install option '%s' first" % option_name)
+            LOGGER.info("need to install option '%s' first", option_name)
             if (cfg["_pkglts"]['auto_install'] or
                     get_user_permission("install")):
                 cfg = update_opt(option_name, cfg)
@@ -96,7 +96,7 @@ def update_opt(name, cfg):
     # find extra package requirements for setup
     msg = "this option requires some packages to setup"
     if not ensure_installed_packages(opt.require('setup', cfg), msg, cfg):
-        print("option installation stopped")
+        LOGGER.warning("option installation stopped")
         return cfg
 
     # find parameters required by option config
