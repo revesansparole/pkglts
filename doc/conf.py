@@ -85,8 +85,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'pkglts'
-copyright = u'2015, pkglts'
+project = u"pkglts"
+copyright = u"2015, pkglts"
 
 # The version info for the project you're documenting, acts as replacement
 # for |version| and |release|, also used in various other places throughout
@@ -148,7 +148,7 @@ pygments_style = 'sphinx'
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'default'
+html_theme = "default"
 
 # Theme options are theme-specific and customize the look and feel of a
 # theme further.  For a list of options available for each theme, see the
@@ -225,7 +225,7 @@ html_static_path = ['_static']
 # html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'pkgltsdoc'
+htmlhelp_basename = "pkgltsdoc"
 
 
 # -- Options for LaTeX output ------------------------------------------
@@ -245,9 +245,9 @@ latex_elements = {
 # (source start file, target name, title, author, documentclass
 # [howto/manual]).
 latex_documents = [
-    ('index', 'pkglts.tex',
-     u'pkglts Documentation',
-     u'revesansparole', 'manual'),
+    (u"index", u"pkglts.tex",
+     u"pkglts Documentation",
+     u"revesansparole", u"manual"),
 ]
 
 # The name of an image file (relative to this directory) to place at
@@ -276,9 +276,9 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'pkglts',
-     u'pkglts Documentation',
-     [u'revesansparole'], 1)
+    (u"index", u"pkglts",
+     u"pkglts Documentation",
+     [u"revesansparole"], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -291,12 +291,12 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    ('index', 'pkglts',
-     u'pkglts Documentation',
-     u'revesansparole',
-     'pkglts',
-     'Building packages with long term support',
-     'Miscellaneous'),
+    (u"index", u"pkglts",
+     u"pkglts Documentation",
+     u"revesansparole",
+     u"pkglts",
+     u"Building packages with long term support",
+     u"Miscellaneous"),
 ]
 
 # Documents to append as an appendix to all manuals.
