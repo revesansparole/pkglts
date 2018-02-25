@@ -19,7 +19,7 @@ class OptionAppveyor(Option):
         del cfg
 
         if purpose == 'option':
-            options = ['pysetup', 'github']
+            options = ['doc', 'pysetup', 'github']
             return [Dependency(name) for name in options]
 
         return []

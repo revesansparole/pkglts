@@ -13,7 +13,7 @@ class OptionCoveralls(Option):
         del cfg
 
         if purpose == 'option':
-            options = ['coverage', 'travis']
+            options = ['doc', 'coverage', 'travis']
             return [Dependency(name) for name in options]
 
         if purpose == 'dvlpt':
