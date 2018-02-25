@@ -91,97 +91,28 @@ setup_kwds = dict(
 setup_kwds['entry_points']['console_scripts'] = ['pmg = pkglts.manage_script:main']
 setup_kwds['entry_points']['pkglts'] = [
     'base = pkglts.option.base.option:OptionBase',
-    # 'appveyor.root = pkglts.option.appveyor',
-    # 'appveyor.update_parameters = pkglts.option.appveyor.config:update_parameters',
-    # 'appveyor.check = pkglts.option.appveyor.config:check',
-    # 'appveyor.require = pkglts.option.appveyor.config:require',
-    # 'appveyor.environment_extensions = pkglts.option.appveyor.handlers:environment_extensions',
-    #
-    # 'conda.root = pkglts.option.conda',
-    # 'conda.require = pkglts.option.conda.config:require',
-    #
-    # 'coverage.root = pkglts.option.coverage',
-    # 'coverage.require = pkglts.option.coverage.config:require',
-    #
-    # 'coveralls.root = pkglts.option.coveralls',
-    # 'coveralls.require = pkglts.option.coveralls.config:require',
-    # 'coveralls.environment_extensions = pkglts.option.coveralls.handlers:environment_extensions',
-    #
-    # 'data.root = pkglts.option.data',
-    # 'data.update_parameters = pkglts.option.data.config:update_parameters',
-    # 'data.check = pkglts.option.data.config:check',
-    # 'data.require = pkglts.option.data.config:require',
-    #
+    'appveyor = pkglts.option.appveyor.option:OptionAppveyor',
+    'conda = pkglts.option.conda.option:OptionConda',
+    'coverage = pkglts.option.coverage.option:OptionCoverage',
+    'coveralls = pkglts.option.coveralls.option:OptionCoveralls',
+    'data = pkglts.option.data.option:OptionDaat',
     'doc = pkglts.option.doc.option:OptionDoc',
-    #
-    # 'flake8.root = pkglts.option.flake8',
-    # 'flake8.require = pkglts.option.flake8.config:require',
-    #
-    # 'git.root = pkglts.option.git',
-    # 'git.update_parameters = pkglts.option.git.config:update_parameters',
-    # 'git.check = pkglts.option.git.config:check',
-    # 'git.require = pkglts.option.git.config:require',
-    # 'git.environment_extensions = pkglts.option.git.handlers:environment_extensions',
-    #
-    # 'github.root = pkglts.option.github',
-    # 'github.update_parameters = pkglts.option.github.config:update_parameters',
-    # 'github.check = pkglts.option.github.config:check',
-    # 'github.require = pkglts.option.github.config:require',
-    #
-    # 'gitlab.root = pkglts.option.gitlab',
-    # 'gitlab.update_parameters = pkglts.option.gitlab.config:update_parameters',
-    # 'gitlab.check = pkglts.option.gitlab.config:check',
-    # 'gitlab.require = pkglts.option.gitlab.config:require',
-    #
-    # 'landscape.root = pkglts.option.landscape',
-    # 'landscape.require = pkglts.option.landscape.config:require',
-    # 'landscape.environment_extensions = pkglts.option.landscape.handlers:environment_extensions',
-    #
+    'flake8 = pkglts.option.flake8.option:OptionFlake8',
+    'git = pkglts.option.git.option:OptionGit',
+    'github = pkglts.option.github.option:OptionGithub',
+    'gitlab = pkglts.option.gitlab.option:OptionGitlab',
+    'landscape = pkglts.option.landscape.option:OptionLandscape',
     'license = pkglts.option.license.option:OptionLicense',
-    #
-    # 'notebook.root = pkglts.option.notebook',
-    # 'notebook.update_parameters = pkglts.option.notebook.config:update_parameters',
-    # 'notebook.check = pkglts.option.notebook.config:check',
-    # 'notebook.require = pkglts.option.notebook.config:require',
-    # 'notebook.regenerate = pkglts.option.notebook.regenerate:main',
-    #
-    # 'plugin_project.root = pkglts.option.plugin_project',
-    # 'plugin_project.update_parameters = pkglts.option.plugin_project.config:update_parameters',
-    # 'plugin_project.check = pkglts.option.plugin_project.config:check',
-    # 'plugin_project.require = pkglts.option.plugin_project.config:require',
-    #
-    # 'pypi.root = pkglts.option.pypi',
-    # 'pypi.update_parameters = pkglts.option.pypi.config:update_parameters',
-    # 'pypi.check = pkglts.option.pypi.config:check',
-    # 'pypi.require = pkglts.option.pypi.config:require',
-    # 'pypi.environment_extensions = pkglts.option.pypi.handlers:environment_extensions',
-    #
+    'notebook = pkglts.option.notebook.option:OptionNotebook',
+    'plugin_project = pkglts.option.plugin_project.option:OptionPlugin',
+    'pypi = pkglts.option.pypi.option:OptionPypi',
     'pysetup = pkglts.option.pysetup.option:OptionPysetup',
-    #
-    # 'readthedocs.root = pkglts.option.readthedocs',
-    # 'readthedocs.update_parameters = pkglts.option.readthedocs.config:update_parameters',
-    # 'readthedocs.check = pkglts.option.readthedocs.config:check',
-    # 'readthedocs.require = pkglts.option.readthedocs.config:require',
-    # 'readthedocs.environment_extensions = pkglts.option.readthedocs.handlers:environment_extensions',
-    #
-    # 'requires.root = pkglts.option.requires',
-    # 'requires.require = pkglts.option.requires.config:require',
-    # 'requires.environment_extensions = pkglts.option.requires.handlers:environment_extensions',
-    #
-    # 'sphinx.root = pkglts.option.sphinx',
-    # 'sphinx.update_parameters = pkglts.option.sphinx.config:update_parameters',
-    # 'sphinx.check = pkglts.option.sphinx.config:check',
-    # 'sphinx.require = pkglts.option.sphinx.config:require',
-    #
+    'readthedocs = pkglts.option.readthedocs.option:OptionReadthedocs',
+    'requires = pkglts.option.requires.option:OptionRequires',
+    'sphinx = pkglts.option.sphinx.option:OptionSphinx',
     'test = pkglts.option.test.option:OptionTest',
-    #
-    # 'tox.root = pkglts.option.tox',
-    # 'tox.require = pkglts.option.tox.config:require',
-    #
-    # 'travis.root = pkglts.option.travis',
-    # 'travis.require = pkglts.option.travis.config:require',
-    # 'travis.environment_extensions = pkglts.option.travis.handlers:environment_extensions',
-    #
+    'tox = pkglts.option.tox.option:OptionTox',
+    'travis = pkglts.option.travis.option:OptionTravis',
     'version = pkglts.option.version.option:OptionVersion',
 ]
 

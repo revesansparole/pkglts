@@ -1,0 +1,36 @@
+from os.path import dirname
+
+from pkglts.dependency import Dependency
+from pkglts.option_object import Option
+
+
+class OptionGitlab(Option):
+    def root_dir(self):
+        return dirname(__file__)
+
+    def update_parameters(self, cfg):
+        sec = dict(
+            owner="{{ base.authors[0][0] }}",
+            project="{{ base.pkgname }}",
+            server="framagit.org",
+            url="https://{{ gitlab.server }}/{{ gitlab.owner }}/{{ gitlab.project }}"
+        )
+        cfg['gitlab'] = sec
+
+    def check(self, cfg):
+        invalids = []
+        project = cfg['gitlab']['project']
+
+        if not project:
+            invalids.append('gitlab.project')
+
+        return invalids
+
+    def require(self, purpose, cfg):
+        del cfg
+
+        if purpose == 'option':
+            options = ['git']
+            return [Dependency(name) for name in options]
+
+        return []
