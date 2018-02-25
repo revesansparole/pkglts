@@ -15,12 +15,6 @@ short_descr = "Building packages with long term support"
 readme = open('README.rst').read()
 history = open('HISTORY.rst').read()
 
-
-# find version number in src/pkglts/version.py
-version = {}
-with open("src/pkglts/version.py") as fp:
-    exec(fp.read(), version)
-
 # find packages
 pkgs = find_packages('src')
 
@@ -40,7 +34,7 @@ pkg_data['pkglts'] = data_files
 
 setup_kwds = dict(
     name='pkglts',
-    version=version["__version__"],
+    version="2.8.0",
     description=short_descr,
     long_description=readme + '\n\n' + history,
     author="revesansparole",

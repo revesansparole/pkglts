@@ -15,12 +15,6 @@ short_descr = "{{ doc.description }}"
 readme = open('README.{{ doc.fmt }}').read()
 history = open('HISTORY.{{ doc.fmt }}').read()
 
-
-# find version number in {{ base.src_pth }}/version.py
-version = {}
-with open("{{ base.src_pth }}/version.py") as fp:
-    exec(fp.read(), version)
-
 # find packages
 pkgs = find_packages('src')
 
@@ -55,7 +49,7 @@ pkg_data['{{ base.pkgname }}_data'] = data_files
 
 setup_kwds = dict(
     name='{{ base.pkg_full_name }}',
-    version=version["__version__"],
+    version="{{ version.major }}.{{ version.minor }}.{{ version.post }}",
     description=short_descr,
     long_description=readme + '\n\n' + history,
     author="{{ base.authors[0][0] }}",
