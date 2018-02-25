@@ -84,6 +84,7 @@ target/
 {%- if 'test' is available %}
 {%- if test.suite_name == 'pytest' %}
 .cache/
+.pytest_cache/
 {% endif -%}
 {% endif -%}
 
