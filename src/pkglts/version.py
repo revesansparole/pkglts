@@ -7,7 +7,7 @@ Maintain version for this package.
 MAJOR = 2
 """(int) Version major component."""
 
-MINOR = 8
+MINOR = 9
 """(int) Version minor component."""
 
 POST = 0
