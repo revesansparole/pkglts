@@ -97,12 +97,6 @@ setup_kwds['entry_points']['pkglts'] = [
     # 'appveyor.require = pkglts.option.appveyor.config:require',
     # 'appveyor.environment_extensions = pkglts.option.appveyor.handlers:environment_extensions',
     #
-    # 'base.root = pkglts.option.base',
-    # 'base.update_parameters = pkglts.option.base.config:update_parameters',
-    # 'base.check = pkglts.option.base.config:check',
-    # 'base.require = pkglts.option.base.config:require',
-    # 'base.environment_extensions = pkglts.option.base.handlers:environment_extensions',
-    #
     # 'conda.root = pkglts.option.conda',
     # 'conda.require = pkglts.option.conda.config:require',
     #
@@ -118,11 +112,7 @@ setup_kwds['entry_points']['pkglts'] = [
     # 'data.check = pkglts.option.data.config:check',
     # 'data.require = pkglts.option.data.config:require',
     #
-    # 'doc.root = pkglts.option.doc',
-    # 'doc.update_parameters = pkglts.option.doc.config:update_parameters',
-    # 'doc.check = pkglts.option.doc.config:check',
-    # 'doc.require = pkglts.option.doc.config:require',
-    # 'doc.environment_extensions = pkglts.option.doc.handlers:environment_extensions',
+    'doc = pkglts.option.doc.option:OptionDoc',
     #
     # 'flake8.root = pkglts.option.flake8',
     # 'flake8.require = pkglts.option.flake8.config:require',
@@ -147,11 +137,7 @@ setup_kwds['entry_points']['pkglts'] = [
     # 'landscape.require = pkglts.option.landscape.config:require',
     # 'landscape.environment_extensions = pkglts.option.landscape.handlers:environment_extensions',
     #
-    # 'license.root = pkglts.option.license',
-    # 'license.update_parameters = pkglts.option.license.config:update_parameters',
-    # 'license.check = pkglts.option.license.config:check',
-    # 'license.require = pkglts.option.license.config:require',
-    # 'license.environment_extensions = pkglts.option.license.handlers:environment_extensions',
+    'license = pkglts.option.license.option:OptionLicense',
     #
     # 'notebook.root = pkglts.option.notebook',
     # 'notebook.update_parameters = pkglts.option.notebook.config:update_parameters',
@@ -170,11 +156,7 @@ setup_kwds['entry_points']['pkglts'] = [
     # 'pypi.require = pkglts.option.pypi.config:require',
     # 'pypi.environment_extensions = pkglts.option.pypi.handlers:environment_extensions',
     #
-    # 'pysetup.root = pkglts.option.pysetup',
-    # 'pysetup.update_parameters = pkglts.option.pysetup.config:update_parameters',
-    # 'pysetup.check = pkglts.option.pysetup.config:check',
-    # 'pysetup.require = pkglts.option.pysetup.config:require',
-    # 'pysetup.environment_extensions = pkglts.option.pysetup.handlers:environment_extensions',
+    'pysetup = pkglts.option.pysetup.option:OptionPysetup',
     #
     # 'readthedocs.root = pkglts.option.readthedocs',
     # 'readthedocs.update_parameters = pkglts.option.readthedocs.config:update_parameters',
@@ -191,10 +173,7 @@ setup_kwds['entry_points']['pkglts'] = [
     # 'sphinx.check = pkglts.option.sphinx.config:check',
     # 'sphinx.require = pkglts.option.sphinx.config:require',
     #
-    # 'test.root = pkglts.option.test',
-    # 'test.update_parameters = pkglts.option.test.config:update_parameters',
-    # 'test.check = pkglts.option.test.config:check',
-    # 'test.require = pkglts.option.test.config:require',
+    'test = pkglts.option.test.option:OptionTest',
     #
     # 'tox.root = pkglts.option.tox',
     # 'tox.require = pkglts.option.tox.config:require',
@@ -203,9 +182,6 @@ setup_kwds['entry_points']['pkglts'] = [
     # 'travis.require = pkglts.option.travis.config:require',
     # 'travis.environment_extensions = pkglts.option.travis.handlers:environment_extensions',
     #
-    # 'version.root = pkglts.option.version',
-    # 'version.update_parameters = pkglts.option.version.config:update_parameters',
-    # 'version.check = pkglts.option.version.config:check',
     'version = pkglts.option.version.option:OptionVersion',
 ]
 

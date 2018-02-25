@@ -6,7 +6,7 @@ import logging
 from argparse import ArgumentParser
 
 from . import logging_tools
-from .config_management import available_options, get_pkg_config, write_pkg_config
+from .config_management import get_pkg_config, write_pkg_config
 from .manage import add_option, clean, init_pkg, install_example_files, regenerate_option, regenerate_package
 from .tool.history import action_history
 
