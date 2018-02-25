@@ -41,9 +41,15 @@ def action_clean(**kwds):
 def action_init(**kwds):
     """Initialize environment for use of pkglts.
     """
+    cfg = kwds["_pkglts_cfg"]
+    if cfg is not None:
+        LOGGER.warning("Directory is already a pkglts package")
+        return
+
     init_pkg()
 
     if kwds:
+        kwds["_pkglts_cfg"] = get_pkg_config()
         action_add(**kwds)
 
 
@@ -66,7 +72,11 @@ def action_update(**kwds):
 def action_regenerate(**kwds):
     """Regenerate all files in the package.
     """
-    cfg = get_pkg_config()
+    cfg = kwds["_pkglts_cfg"]
+    if cfg is None:
+        LOGGER.warning("Directory is not a pkglts package, run pmg init first")
+        return
+
     clean()
 
     if kwds['option']:
@@ -81,8 +91,12 @@ def action_regenerate(**kwds):
 def action_add(**kwds):
     """Add new options in the package.
     """
+    cfg = kwds["_pkglts_cfg"]
+    if cfg is None:
+        LOGGER.warning("Directory is not a pkglts package, run pmg init first")
+        return
+
     LOGGER.info("add option")
-    cfg = get_pkg_config()
     for name in kwds['option']:
         cfg = add_option(name, cfg)
 
@@ -100,8 +114,12 @@ def action_remove(**kwds):
 def action_example(**kwds):
     """Install example files associated with options.
     """
+    cfg = kwds["_pkglts_cfg"]
+    if cfg is None:
+        LOGGER.warning("Directory is not a pkglts package, run pmg init first")
+        return
+
     LOGGER.info("install examples")
-    cfg = get_pkg_config()
     for name in kwds['option']:
         install_example_files(name, cfg)
 
@@ -155,7 +173,17 @@ def main():
                                 help="name of option which offer example files")
     parser_history = subparsers.add_parser('history', help=action_history.__doc__)
 
+    # try to read package config for extra commands
+    try:
+        cfg = get_pkg_config()
+    except FileNotFoundError:
+        cfg = None
+    else:
+        # add option commands
+        pass
+
     args = vars(parser.parse_args())
+    args['_pkglts_cfg'] = cfg
 
     logging_tools.main(args.pop('verbosity'))
 
