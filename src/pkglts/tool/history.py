@@ -13,8 +13,6 @@ except ImportError:  # python2
 import requests
 import semver
 
-from ..config_management import get_pkg_config
-
 LOGGER = logging.getLogger(__name__)
 
 
@@ -135,13 +133,15 @@ def write_changelog(tags, fmt):
         LOGGER.warning("Doc format '%s' unsupported", fmt)
 
 
-def action_history(*args, **kwds):
+def action_history(**kwds):
     """Regenerate history file from tag list.
     """
-    del args, kwds  # unused
+    cfg = kwds["_pkglts_cfg"]
+    if cfg is None:
+        LOGGER.warning("Directory is not a pkglts package, run pmg init first")
+        return
 
     LOGGER.info("Reconstruct history")
-    cfg = get_pkg_config()
 
     # extract release tags from versioning system
     if 'git' not in cfg.installed_options():
@@ -152,7 +152,7 @@ def action_history(*args, **kwds):
         server = cfg['gitlab']['server']
         owner = cfg['gitlab']['owner']
         project = cfg['gitlab']['project']
-        tags = gitlab_tag_list(server, "%s/%s" % (owner, project), "QfqBHyPbk5eXkjkxuk5j")
+        tags = gitlab_tag_list(server, "%s/%s" % (owner, project), "MuoY8dFhUVQp4d6gQmTE")
     elif 'github' in cfg.installed_options():
         owner = cfg['github']['owner']
         project = cfg['github']['project']
