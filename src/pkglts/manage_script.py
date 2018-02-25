@@ -3,7 +3,7 @@ Define actions that can be called with the CLI.
 """
 import json
 import logging
-from argparse import ArgumentParser, RawTextHelpFormatter
+from argparse import ArgumentParser
 
 from . import logging_tools
 from .config_management import get_pkg_config, write_pkg_config
@@ -13,10 +13,9 @@ from .tool.history import action_history
 LOGGER = logging.getLogger(__name__)
 
 
-def action_info(*args, **kwds):
+def action_info(**kwds):
     """Display info on package for debug purpose.
     """
-    del args  # unused
     del kwds  # unused
     LOGGER.info("package info")
     from pkglts.option_tools import available_options
@@ -31,95 +30,79 @@ def action_info(*args, **kwds):
             print(json.dumps(opt_params, sort_keys=True, indent=2))
 
 
-def action_clean(*args, **kwds):
+def action_clean(**kwds):
     """Clean package of all un necessary files.
     """
-    del args  # unused
     del kwds  # unused
     LOGGER.info("clean package")
     clean()
 
 
-def action_init(*args, **kwds):
+def action_init(**kwds):
     """Initialize environment for use of pkglts.
     """
     init_pkg()
 
-    if args:
-        action_add(*args, **kwds)
+    if kwds:
+        action_add(**kwds)
 
 
-def action_clear(*args, **kwds):
+def action_clear(**kwds):
     """Attempt to free the package from pkglts interactions.
     """
-    del args  # unused
     del kwds  # unused
     LOGGER.info("clear")
     print("TODO")
 
 
-def action_update(*args, **kwds):
+def action_update(**kwds):
     """Check if a new version of pkglts is available.
     """
-    del args  # unused
     del kwds  # unused
     LOGGER.info("update")
     print("TODO")
 
 
-def action_regenerate(*args, **kwds):
+def action_regenerate(**kwds):
     """Regenerate all files in the package.
     """
-    overwrite = 'overwrite' in kwds
-
     cfg = get_pkg_config()
     clean()
 
-    if args:
-        for name in args:
+    if kwds['option']:
+        for name in kwds['option']:
             LOGGER.info("regenerate '%s'", name)
-            regenerate_option(cfg, name, overwrite=overwrite)
+            regenerate_option(cfg, name, overwrite=kwds['overwrite'])
     else:
         LOGGER.info("regenerate package")
-        regenerate_package(cfg, overwrite=overwrite)
+        regenerate_package(cfg, overwrite=kwds['overwrite'])
 
 
-def action_add(*args, **kwds):
+def action_add(**kwds):
     """Add new options in the package.
     """
-    del kwds  # unused
-    if not args:
-        raise UserWarning("need to specify at least one option name")
-
     LOGGER.info("add option")
     cfg = get_pkg_config()
-    for name in args:
+    for name in kwds['option']:
         cfg = add_option(name, cfg)
 
     write_pkg_config(cfg)
 
 
-def action_remove(*args, **kwds):
+def action_remove(**kwds):
     """Remove options from the package.
     """
-    del kwds  # unused
-    if not args:
-        raise UserWarning("need to specify at least one option name")
-
     LOGGER.info("remove option")
     print("TODO")
+    del kwds
 
 
-def action_example(*args, **kwds):
+def action_example(**kwds):
     """Install example files associated with options.
     """
-    del kwds  # unused
-    if not args:
-        raise UserWarning("need to specify at least one option name")
-
     LOGGER.info("install examples")
     cfg = get_pkg_config()
-    for name in args:
+    for name in kwds['option']:
         install_example_files(name, cfg)
 
 
@@ -139,37 +122,46 @@ def main():
         history=action_history
     )
     # parse argument line
-    parser = ArgumentParser(description='Package structure manager',
-                            formatter_class=RawTextHelpFormatter)
-
-    act_help = "type of action performed by pmg, one of:\n"
-    for name, func in action.items():
-        act_help += "\n  - %s: %s" % (name, func.__doc__)
-
-    parser.add_argument('action', metavar='action',
-                        choices=tuple(action.keys()),
-                        help=act_help)
-
-    parser.add_argument('action_args', nargs='*',
-                        help="action to perform on the package")
-
-    parser.add_argument('-e', metavar='extra', nargs=2, action='append',
-                        help='extra arguments to pass to the action',
-                        dest='extra')
-
+    parser = ArgumentParser(description='Package structure manager')
     parser.add_argument("-v", "--verbosity", action="count", default=0,
                         help="increase output verbosity")
 
-    args = parser.parse_args()
-    if args.extra is None:
-        extra = {}
-    else:
-        extra = dict(args.extra)
+    subparsers = parser.add_subparsers(dest='subcmd', help='sub-command help')
 
-    logging_tools.main(args.verbosity)
+    parser_info = subparsers.add_parser('info', help=action_info.__doc__)
+
+    parser_clean = subparsers.add_parser('clean', help=action_clean.__doc__)
+
+    parser_init = subparsers.add_parser('init', help=action_init.__doc__)
+    parser_init.add_argument('option', nargs='*',
+                             help="name of option to add during init")
+    parser_clear = subparsers.add_parser('clear', help=action_clear.__doc__)
+    parser_update = subparsers.add_parser('update', help=action_update.__doc__)
+    parser_rg = subparsers.add_parser('rg', help=action_regenerate.__doc__)
+    parser_rg.add_argument('option', nargs='*',
+                           help="name of option to add")
+    parser_rg.add_argument('--overwrite', type=bool, default=False,
+                           help="Globally overwrite user modified files")
+
+    parser_add = subparsers.add_parser('add', help=action_add.__doc__)
+    parser_add.add_argument('option', nargs='+',
+                            help="name of option to add")
+
+    parser_remove = subparsers.add_parser('remove', help=action_remove.__doc__)
+    parser_remove.add_argument('option', nargs='+',
+                               help="name of option to remove")
+    parser_example = subparsers.add_parser('example', help=action_example.__doc__)
+    parser_example.add_argument('option', nargs='+',
+                                help="name of option which offer example files")
+    parser_history = subparsers.add_parser('history', help=action_history.__doc__)
+
+    args = vars(parser.parse_args())
+
+    logging_tools.main(args.pop('verbosity'))
 
     # perform action
-    action[args.action](*args.action_args, **extra)
+    subcmd = args.pop('subcmd')
+    action[subcmd](**args)
 
 
 if __name__ == '__main__':
