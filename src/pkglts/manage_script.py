@@ -8,7 +8,7 @@ from argparse import ArgumentParser
 from . import logging_tools
 from .config_management import get_pkg_config, write_pkg_config
 from .manage import add_option, clean, init_pkg, install_example_files, regenerate_option, regenerate_package
-from .tool.history import action_history
+from .tool.history import parser_history
 
 LOGGER = logging.getLogger(__name__)
 
@@ -136,8 +136,7 @@ def main():
         rg=action_regenerate,
         add=action_add,
         remove=action_remove,
-        example=action_example,
-        history=action_history
+        example=action_example
     )
     # parse argument line
     parser = ArgumentParser(description='Package structure manager')
@@ -171,7 +170,9 @@ def main():
     parser_example = subparsers.add_parser('example', help=action_example.__doc__)
     parser_example.add_argument('option', nargs='+',
                                 help="name of option which offer example files")
-    parser_history = subparsers.add_parser('history', help=action_history.__doc__)
+
+    name, action_history = parser_history(subparsers)
+    action[name] = action_history
 
     # try to read package config for extra commands
     try:

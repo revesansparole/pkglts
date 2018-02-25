@@ -164,3 +164,20 @@ def action_history(**kwds):
     # format tags into history file
     if tags:
         write_changelog(tags, cfg['doc']['fmt'])
+
+
+def parser_history(subparsers):
+    """Associate a CLI to this tool.
+
+    Notes: The CLI will be a subcommand of pmg.
+
+    Args:
+        subparsers (ArgumentParser): entity to create a subparsers
+
+    Returns:
+        (string): a unique id for this parser
+        (callable): the action to perform
+    """
+    parser = subparsers.add_parser('history', help=action_history.__doc__)
+
+    return 'history', action_history
