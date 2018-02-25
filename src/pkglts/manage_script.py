@@ -158,7 +158,7 @@ def main():
     parser_rg = subparsers.add_parser('rg', help=action_regenerate.__doc__)
     parser_rg.add_argument('option', nargs='*',
                            help="name of option to add")
-    parser_rg.add_argument('--overwrite', type=bool, default=False,
+    parser_rg.add_argument("--overwrite", action='store_true',
                            help="Globally overwrite user modified files")
 
     parser_add = subparsers.add_parser('add', help=action_add.__doc__)

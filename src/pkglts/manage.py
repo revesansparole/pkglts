@@ -154,7 +154,7 @@ def _manage_conflicts(target, hm_ref, overwrite):
                 overwrite_file[pth_as_key(name)] = True
         else:
             for name in conflicted:
-                LOGGER.info("A non editable section of %s has been modified", name)
+                LOGGER.warning("A non editable section of %s has been modified", name)
                 overwrite_file[pth_as_key(name)] = get_user_permission("overwrite", False)
 
     return overwrite_file
