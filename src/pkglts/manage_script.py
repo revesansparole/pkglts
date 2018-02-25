@@ -8,6 +8,7 @@ from argparse import ArgumentParser
 from . import logging_tools
 from .config_management import get_pkg_config, write_pkg_config
 from .manage import add_option, clean, init_pkg, install_example_files, regenerate_option, regenerate_package
+from .tool.bump_version import parser_bump
 from .tool.history import parser_history
 
 LOGGER = logging.getLogger(__name__)
@@ -171,8 +172,9 @@ def main():
     parser_example.add_argument('option', nargs='+',
                                 help="name of option which offer example files")
 
-    name, action_history = parser_history(subparsers)
-    action[name] = action_history
+    for parser_tool in (parser_bump, parser_history):
+        name, action_tool = parser_tool(subparsers)
+        action[name] = action_tool
 
     # try to read package config for extra commands
     try:
