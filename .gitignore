@@ -81,6 +81,7 @@ target/
 # svn
 .svn
 .cache/
+.pytest_cache/
 
 # coverage
 .coverage
