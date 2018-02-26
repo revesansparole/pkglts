@@ -178,12 +178,10 @@ def main():
         cfg = None
     else:
         # add option commands
-        pass
-
-    for opt_name in cfg.installed_options():
-        for parser_tool in available_options[opt_name].tools(cfg):
-            name, action_tool = parser_tool(subparsers)
-            action[name] = action_tool
+        for opt_name in cfg.installed_options():
+            for parser_tool in available_options[opt_name].tools(cfg):
+                name, action_tool = parser_tool(subparsers)
+                action[name] = action_tool
 
     args = vars(parser.parse_args())
     args['_pkglts_cfg'] = cfg
