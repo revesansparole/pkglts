@@ -11,7 +11,7 @@ from jinja2 import Environment, StrictUndefined, UndefinedError
 from .config import pkg_cfg_file, pkglts_dir
 from .option.git.option import OptionGit
 from .option.pypi.option import OptionPypi
-from .option_tools import available_options, find_available_options
+from .option_tools import available_options
 
 try:
     string_type = basestring
@@ -26,8 +26,6 @@ DEFAULT_CFG = dict(_pkglts=dict(use_prompts=False,
                                 auto_install=True,
                                 install_front_end='stdout',
                                 version=CURRENT_PKG_CFG_VERSION))
-
-find_available_options()
 
 
 class ConfigSection(object):
