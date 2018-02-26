@@ -4,6 +4,8 @@ from pkglts.dependency import Dependency
 from pkglts.option_object import Option
 from pkglts.option_tools import available_options
 
+from . import history
+
 
 class OptionDoc(Option):
     def root_dir(self):
@@ -54,3 +56,7 @@ class OptionDoc(Option):
                     badges.extend(ext['badges'])
 
         return {"badges": badges}
+
+    def tools(self, cfg):
+        del cfg
+        yield history.parser_history
