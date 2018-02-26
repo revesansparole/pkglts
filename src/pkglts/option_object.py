@@ -97,3 +97,14 @@ class Option(object):
             (any)
         """
         return None
+
+    def tools(self, cfg):
+        """Iterate on tools defined by this option.
+
+        Args:
+            cfg (Config):  current package configuration
+
+        Returns:
+            (iter of (str, func)): command name, command callback
+        """
+        return []
