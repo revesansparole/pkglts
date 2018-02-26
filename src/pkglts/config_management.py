@@ -9,8 +9,8 @@ from os.path import join as pj
 from jinja2 import Environment, StrictUndefined, UndefinedError
 
 from .config import pkg_cfg_file, pkglts_dir
-from .option.git.config import update_parameters as git_update_parameters
-from .option.pypi.config import update_parameters as pypi_update_parameters
+from .option.git.option import OptionGit
+from .option.pypi.option import OptionPypi
 from .option_tools import available_options, find_available_options
 
 try:
@@ -268,7 +268,7 @@ def upgrade_pkg_cfg_version(pkg_cfg, version):
                         "\n"
                         "\n"
                         "################################################\n")
-            git_update_parameters(pkg_cfg)
+            OptionGit('git').update_parameters(pkg_cfg)
     elif version == 9:
         pkg_cfg['_pkglts']['version'] = 10
         if 'pypi' in pkg_cfg:
@@ -283,7 +283,7 @@ def upgrade_pkg_cfg_version(pkg_cfg, version):
             # save section
             mem = dict(pkg_cfg["pypi"])
             # get newly defined list of servers
-            pypi_update_parameters(pkg_cfg)
+            OptionPypi('pypi').update_parameters(pkg_cfg)
             servers = dict(pkg_cfg["pypi"]["servers"])
             # update option
             pkg_cfg["pypi"] = mem

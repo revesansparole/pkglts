@@ -1,41 +1,52 @@
+import pytest
 from pkglts.config_management import Config
-from pkglts.option.base.config import check, require, update_parameters
+from pkglts.option.base.option import OptionBase
 
 
-def test_update_parameters():
+@pytest.fixture()
+def opt():
+    return OptionBase('base')
+
+
+def test_root_dir_is_defined(opt):
+    assert opt.root_dir() is not None
+
+
+def test_update_parameters(opt):
     cfg = {}
-    update_parameters(cfg)
+    opt.update_parameters(cfg)
     assert len(cfg['base']) == 5
 
 
-def test_config_check_pkg_names():
+def test_config_check_pkg_names(opt):
     for pkg in ('1mypkg', ' mypkg', '1', '1.mypkg',
                 ' .mypkg', '.mypkg', 'None.mypkg', 'oa.o.mypkg'):
         cfg = Config(dict(base={'pkgname': pkg,
-                                    'namespace': None,
-                                    'namespace_method': "pkg_util",
-                                    'owner': 'moi',
-                                    'url': None}))
-        assert 'base.pkgname' in check(cfg)
-        cfg = Config(dict(base={'pkgname': 'toto',
-                                    'namespace': pkg,
-                                    'namespace_method': "pkg_util",
-                                    'owner': 'moi',
-                                    'url': None}))
-        assert 'base.namespace' in check(cfg)
-
-    cfg = Config(dict(base={'pkgname': 'toto',
                                 'namespace': None,
-                                'namespace_method': "toto",
+                                'namespace_method': "pkg_util",
                                 'owner': 'moi',
                                 'url': None}))
-    assert 'base.namespace_method' in check(cfg)
+        assert 'base.pkgname' in opt.check(cfg)
+        cfg = Config(dict(base={'pkgname': 'toto',
+                                'namespace': pkg,
+                                'namespace_method': "pkg_util",
+                                'owner': 'moi',
+                                'url': None}))
+        assert 'base.namespace' in opt.check(cfg)
+
+    cfg = Config(dict(base={'pkgname': 'toto',
+                            'namespace': None,
+                            'namespace_method': "toto",
+                            'owner': 'moi',
+                            'url': None}))
+    assert 'base.namespace_method' in opt.check(cfg)
 
 
-def test_require():
-    cfg = Config(dict(base={}))
+def test_require(opt):
+    cfg = Config()
+    opt.update_parameters(cfg)
 
-    assert len(require('option', cfg)) == 0
-    assert len(require('setup', cfg)) == 0
-    assert len(require('install', cfg)) == 0
-    assert len(require('dvlpt', cfg)) == 0
+    assert len(opt.require('option', cfg)) == 0
+    assert len(opt.require('setup', cfg)) == 0
+    assert len(opt.require('install', cfg)) == 0
+    assert len(opt.require('dvlpt', cfg)) == 0

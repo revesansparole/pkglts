@@ -8,8 +8,7 @@ from argparse import ArgumentParser
 from . import logging_tools
 from .config_management import get_pkg_config, write_pkg_config
 from .manage import add_option, clean, init_pkg, install_example_files, regenerate_option, regenerate_package
-from .tool.bump_version import parser_bump
-from .tool.history import parser_history
+from .option_tools import available_options
 
 LOGGER = logging.getLogger(__name__)
 
@@ -172,10 +171,6 @@ def main():
     parser_example.add_argument('option', nargs='+',
                                 help="name of option which offer example files")
 
-    for parser_tool in (parser_bump, parser_history):
-        name, action_tool = parser_tool(subparsers)
-        action[name] = action_tool
-
     # try to read package config for extra commands
     try:
         cfg = get_pkg_config()
@@ -184,6 +179,12 @@ def main():
     else:
         # add option commands
         pass
+
+    for opt_name, opt_params in cfg.items():
+        if not opt_name.startswith("_"):
+            for parser_tool in available_options[opt_name].tools(cfg):
+                name, action_tool = parser_tool(subparsers)
+                action[name] = action_tool
 
     args = vars(parser.parse_args())
     args['_pkglts_cfg'] = cfg
