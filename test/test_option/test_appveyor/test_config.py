@@ -27,6 +27,10 @@ def test_require(opt):
     cfg = Config()
     opt.update_parameters(cfg)
 
+
+def test_require(opt):
+    cfg = Config(dict(base={}, travis={}))
+
     assert len(opt.require('option', cfg)) == 3
     assert len(opt.require('setup', cfg)) == 0
     assert len(opt.require('install', cfg)) == 0
