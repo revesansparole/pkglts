@@ -130,14 +130,13 @@ class Config(dict):
         Returns:
             None
         """
-        for opt_name in self:
-            if not opt_name.startswith("_"):
-                try:
-                    opt = available_options[opt_name]
-                    for func_name, func in opt.environment_extensions(self).items():
-                        setattr(self._env.globals[opt_name], func_name, func)
-                except KeyError:
-                    raise KeyError("option '%s' does not exists" % opt_name)
+        for opt_name in self.installed_options():
+            try:
+                opt = available_options[opt_name]
+                for func_name, func in opt.environment_extensions(self).items():
+                    setattr(self._env.globals[opt_name], func_name, func)
+            except KeyError:
+                raise KeyError("option '%s' does not exists" % opt_name)
 
     def installed_options(self):
         """List all installed options.

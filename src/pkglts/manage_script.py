@@ -24,10 +24,9 @@ def action_info(**kwds):
         print("  ", opt_name)
     cfg = get_pkg_config()
     print("current config (after resolution)")
-    for opt_name, opt_params in cfg.items():
-        if not opt_name.startswith("_"):
-            print(opt_name)
-            print(json.dumps(opt_params, sort_keys=True, indent=2))
+    for opt_name in cfg.installed_options():
+        print(opt_name)
+        print(json.dumps(cfg[opt_name], sort_keys=True, indent=2))
 
 
 def action_clean(**kwds):
@@ -180,11 +179,10 @@ def main():
         # add option commands
         pass
 
-    for opt_name, opt_params in cfg.items():
-        if not opt_name.startswith("_"):
-            for parser_tool in available_options[opt_name].tools(cfg):
-                name, action_tool = parser_tool(subparsers)
-                action[name] = action_tool
+    for opt_name in cfg.installed_options():
+        for parser_tool in available_options[opt_name].tools(cfg):
+            name, action_tool = parser_tool(subparsers)
+            action[name] = action_tool
 
     args = vars(parser.parse_args())
     args['_pkglts_cfg'] = cfg
