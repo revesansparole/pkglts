@@ -3,7 +3,7 @@ This tool will try to bump the version number of the package.
 """
 import logging
 
-from ..config_management import write_pkg_config
+from pkglts.config_management import write_pkg_config
 
 LOGGER = logging.getLogger(__name__)
 

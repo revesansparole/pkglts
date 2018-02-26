@@ -105,6 +105,6 @@ class Option(object):
             cfg (Config):  current package configuration
 
         Returns:
-            (iter of (str, func)): command name, command callback
+            (iter of func): cli parser
         """
         return []

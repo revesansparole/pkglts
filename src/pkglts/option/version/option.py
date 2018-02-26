@@ -3,6 +3,8 @@ from os.path import dirname
 from pkglts.dependency import Dependency
 from pkglts.option_object import Option
 
+from . import bump_version
+
 
 class OptionVersion(Option):
     def root_dir(self):
@@ -39,3 +41,7 @@ class OptionVersion(Option):
             return [Dependency(name) for name in options]
 
         return []
+
+    def tools(self, cfg):
+        del cfg
+        yield bump_version.parser_bump
