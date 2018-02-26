@@ -24,7 +24,8 @@ def test_config_check_project_exists(opt):
 
 
 def test_require(opt):
-    cfg = Config(dict(base={}, data={}))
+    cfg = Config()
+    opt.update_parameters(cfg)
 
     assert len(opt.require('option', cfg)) == 1
     assert len(opt.require('setup', cfg)) == 0

@@ -13,12 +13,14 @@ def test_root_dir_is_defined(opt):
 
 
 def test_require(opt):
-    cfg = Config(dict(coverage={}, test={'suite_name': 'pytest'}))
+    cfg = Config(dict(test={'suite_name': 'pytest'}))
+    opt.update_parameters(cfg)
 
     assert len(opt.require('option', cfg)) == 1
     assert len(opt.require('setup', cfg)) == 0
     assert len(opt.require('install', cfg)) == 0
     assert len(opt.require('dvlpt', cfg)) == 2
 
-    cfg = Config(dict(coverage={}, test={'suite_name': 'nose'}))
+    cfg = Config(dict(test={'suite_name': 'nose'}))
+    opt.update_parameters(cfg)
     assert len(opt.require('dvlpt', cfg)) == 1

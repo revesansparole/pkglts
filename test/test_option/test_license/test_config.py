@@ -29,7 +29,8 @@ def test_config_check_license_name_exists(opt):
 
 
 def test_require(opt):
-    cfg = Config(dict(license={}))
+    cfg = Config()
+    opt.update_parameters(cfg)
 
     assert len(opt.require('option', cfg)) == 1
     assert len(opt.require('setup', cfg)) == 0

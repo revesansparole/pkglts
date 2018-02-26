@@ -13,7 +13,8 @@ def test_root_dir_is_defined(opt):
 
 
 def test_require(opt):
-    cfg = Config(dict(landscape={}))
+    cfg = Config()
+    opt.update_parameters(cfg)
 
     assert len(opt.require('option', cfg)) == 4
     assert len(opt.require('setup', cfg)) == 0

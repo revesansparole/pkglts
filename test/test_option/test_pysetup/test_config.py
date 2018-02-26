@@ -29,9 +29,8 @@ def test_config_check_intended_version_exists(opt):
 
 
 def test_require(opt):
-    cfg = Config(dict(test={},
-                      pysetup={'intended_versions': ["27"],
-                               'require': []}))
+    cfg = Config()
+    opt.update_parameters(cfg)
 
     assert len(opt.require('option', cfg)) == 5
     assert len(opt.require('setup', cfg)) == 0

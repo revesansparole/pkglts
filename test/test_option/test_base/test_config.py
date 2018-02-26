@@ -43,7 +43,8 @@ def test_config_check_pkg_names(opt):
 
 
 def test_require(opt):
-    cfg = Config(dict(base={}))
+    cfg = Config()
+    opt.update_parameters(cfg)
 
     assert len(opt.require('option', cfg)) == 0
     assert len(opt.require('setup', cfg)) == 0

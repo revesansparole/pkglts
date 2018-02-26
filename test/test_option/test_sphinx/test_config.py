@@ -30,7 +30,8 @@ def test_config_check_sphinx_theme(opt):
 
 
 def test_require(opt):
-    cfg = Config(dict(sphinx={'theme': "default"}))
+    cfg = Config()
+    opt.update_parameters(cfg)
 
     assert len(opt.require('option', cfg)) == 3
     assert len(opt.require('setup', cfg)) == 0
