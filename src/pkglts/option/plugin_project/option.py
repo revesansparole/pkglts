@@ -15,7 +15,7 @@ def is_valid_identifier(name):
         return False
 
 
-class OptionTest(Option):
+class OptionPluginProject(Option):
     def root_dir(self):
         return dirname(__file__)
 
@@ -29,9 +29,9 @@ class OptionTest(Option):
         plugin_name = cfg['plugin_project']['plugin_name']
 
         if "." in plugin_name:
-            invalids.append('plugin.plugin_name')
+            invalids.append('plugin_project.plugin_name')
         elif not is_valid_identifier(plugin_name):
-            invalids.append('plugin.plugin_name')
+            invalids.append('plugin_project.plugin_name')
 
         return invalids
 

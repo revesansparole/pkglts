@@ -1,9 +1,14 @@
 from os import mkdir, rmdir
 from os.path import exists
-import pytest
 
+import pytest
 from pkglts.config_management import Config
-from pkglts.option.notebook.config import check, require, update_parameters
+from pkglts.option.notebook.option import OptionNotebook
+
+
+@pytest.fixture()
+def opt():
+    return OptionNotebook('notebook')
 
 
 @pytest.fixture()
@@ -17,24 +22,28 @@ def tmp_dir():
         rmdir(pth)
 
 
-def test_update_parameters():
+def test_root_dir_is_defined(opt):
+    assert opt.root_dir() is not None
+
+
+def test_update_parameters(opt):
     cfg = {}
-    update_parameters(cfg)
+    opt.update_parameters(cfg)
     assert len(cfg['notebook']) == 1
 
 
-def test_config_check_src_directory(tmp_dir):
+def test_config_check_src_directory(opt, tmp_dir):
     cfg = Config(dict(notebook={'src_directory': "failed_nb"}))
-    assert 'notebook.src_directory' in check(cfg)
+    assert 'notebook.src_directory' in opt.check(cfg)
 
     cfg = Config(dict(notebook={'src_directory': tmp_dir}))
-    assert 'notebook.src_directory' not in check(cfg)
+    assert 'notebook.src_directory' not in opt.check(cfg)
 
 
-def test_require():
+def test_require(opt):
     cfg = Config(dict(notebook={}))
 
-    assert len(require('option', cfg)) == 1
-    assert len(require('setup', cfg)) == 0
-    assert len(require('install', cfg)) == 0
-    assert len(require('dvlpt', cfg)) == 1
+    assert len(opt.require('option', cfg)) == 1
+    assert len(opt.require('setup', cfg)) == 0
+    assert len(opt.require('install', cfg)) == 0
+    assert len(opt.require('dvlpt', cfg)) == 1
