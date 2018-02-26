@@ -136,16 +136,30 @@ class Config(dict):
             except KeyError:
                 raise KeyError("option '%s' does not exists" % opt_name)
 
-    def installed_options(self):
+    def installed_options(self, return_sorted=False):
         """List all installed options.
 
         Returns:
             (iter of str)
         """
-        for key in self:
-            if not key.startswith("_"):
-                yield key
+        if return_sorted:
+            opt_names = list(self.installed_options())
+            installed = []
+            while opt_names:
+                name = opt_names.pop(0)
+                opt = available_options[name]
+                if any(dep.name not in installed for dep in opt.require("option", self)):
+                    opt_names.append(name)
+                else:
+                    installed.append(name)
 
+            for name in installed:
+                yield name
+        else:
+            for key in self:
+                if not key.startswith("_"):
+                    yield key
+            
     def render(self, txt):
         """Use items in config to render text
 
