@@ -1,22 +1,32 @@
+import pytest
 from pkglts.config_management import Config
-from pkglts.option.appveyor.config import check, require, update_parameters
+from pkglts.option.appveyor.option import OptionAppveyor
 
 
-def test_update_parameters():
+@pytest.fixture()
+def opt():
+    return OptionAppveyor('appveyor')
+
+
+def test_root_dir_is_defined(opt):
+    assert opt.root_dir() is not None
+
+
+def test_update_parameters(opt):
     cfg = {}
-    update_parameters(cfg)
+    opt.update_parameters(cfg)
     assert len(cfg['appveyor']) == 1
 
 
-def test_config_does_nothing():
+def test_config_does_nothing(opt):
     cfg = Config(dict(appveyor={'token': 'toto'}))
-    assert len(check(cfg)) == 0
+    assert len(opt.check(cfg)) == 0
 
 
-def test_require():
+def test_require(opt):
     cfg = Config(dict(base={}, travis={}))
-    
-    assert len(require('option', cfg)) == 2
-    assert len(require('setup', cfg)) == 0
-    assert len(require('install', cfg)) == 0
-    assert len(require('dvlpt', cfg)) == 0
+
+    assert len(opt.require('option', cfg)) == 3
+    assert len(opt.require('setup', cfg)) == 0
+    assert len(opt.require('install', cfg)) == 0
+    assert len(opt.require('dvlpt', cfg)) == 0

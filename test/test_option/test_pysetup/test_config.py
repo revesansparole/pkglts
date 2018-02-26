@@ -1,29 +1,39 @@
+import pytest
 from pkglts.config_management import Config
-from pkglts.option.pysetup.config import check, require, update_parameters
+from pkglts.option.pysetup.option import OptionPysetup
 
 
-def test_update_parameters():
+@pytest.fixture()
+def opt():
+    return OptionPysetup('pysetup')
+
+
+def test_root_dir_is_defined(opt):
+    assert opt.root_dir() is not None
+
+
+def test_update_parameters(opt):
     cfg = {}
-    update_parameters(cfg)
+    opt.update_parameters(cfg)
     assert len(cfg['pysetup']) == 2
 
 
-def test_config_check_intended_version_exists():
+def test_config_check_intended_version_exists(opt):
     cfg = Config(dict(pysetup={'intended_versions': [], 'require': []}))
-    assert 'pysetup.intended_versions' in check(cfg)
-    assert 'pysetup.require' not in check(cfg)
+    assert 'pysetup.intended_versions' in opt.check(cfg)
+    assert 'pysetup.require' not in opt.check(cfg)
 
     cfg = Config(dict(pysetup={'intended_versions': ["27"],
                                'require': [{'pkg_mng': 'walou', 'name': 'numpy'}]}))
-    assert 'pysetup.require' in check(cfg)
+    assert 'pysetup.require' in opt.check(cfg)
 
 
-def test_require():
+def test_require(opt):
     cfg = Config(dict(test={},
                       pysetup={'intended_versions': ["27"],
                                'require': []}))
 
-    assert len(require('option', cfg)) == 5
-    assert len(require('setup', cfg)) == 0
-    assert len(require('install', cfg)) == 0
-    assert len(require('dvlpt', cfg)) == 0
+    assert len(opt.require('option', cfg)) == 5
+    assert len(opt.require('setup', cfg)) == 0
+    assert len(opt.require('install', cfg)) == 0
+    assert len(opt.require('dvlpt', cfg)) == 0
