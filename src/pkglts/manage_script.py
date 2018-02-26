@@ -8,7 +8,7 @@ from argparse import ArgumentParser
 from . import logging_tools
 from .config_management import get_pkg_config, write_pkg_config
 from .manage import add_option, clean, init_pkg, install_example_files, regenerate_option, regenerate_package
-from .option_tools import available_options, find_available_options
+from .option_tools import available_options
 
 LOGGER = logging.getLogger(__name__)
 
@@ -171,7 +171,6 @@ def main():
                                 help="name of option which offer example files")
 
     # try to read package config for extra commands
-    find_available_options()
     try:
         cfg = get_pkg_config()
     except FileNotFoundError:
