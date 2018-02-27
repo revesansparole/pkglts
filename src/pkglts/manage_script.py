@@ -16,17 +16,18 @@ LOGGER = logging.getLogger(__name__)
 def action_info(cfg, **kwds):
     """Display info on package for debug purpose.
     """
-    del cfg, kwds  # unused
     LOGGER.info("package info")
-    from pkglts.option_tools import available_options
-    print("available_options:")
-    for opt_name in available_options:
-        print("  ", opt_name)
-    cfg = get_pkg_config()
     print("current config (after resolution)")
-    for opt_name in cfg.installed_options():
+    opt_names = kwds['option']
+    if not opt_names:
+        opt_names = cfg.installed_options()
+    for opt_name in opt_names:
         print(opt_name)
         print(json.dumps(cfg[opt_name], sort_keys=True, indent=2))
+
+    print("other available options:")
+    for opt_name in sorted(set(available_options) - set(cfg.installed_options())):
+        print("  ", opt_name)
 
 
 def action_clean(cfg, **kwds):
@@ -126,6 +127,8 @@ def main():
     subparsers = parser.add_subparsers(dest='subcmd', help='sub-command help')
 
     parser_info = subparsers.add_parser('info', help=action_info.__doc__)
+    parser_info.add_argument('option', nargs='*',
+                             help="name of option to fetch info")
 
     parser_clean = subparsers.add_parser('clean', help=action_clean.__doc__)
 
