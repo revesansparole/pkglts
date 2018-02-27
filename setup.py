@@ -66,6 +66,7 @@ setup_kwds = dict(
         "pytest-cov",
         "pytest-mock",
         "sphinx",
+        "sphinx_rtd_theme",
         "tox",
         "twine",
         ],
