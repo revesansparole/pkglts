@@ -55,18 +55,9 @@ def find_notebook_file(root_directory):
     return matches
 
 
-def main(cfg, target=".", overwrite=False):
-    """Main function called to walk the package
-
-    Args:
-        cfg (Config):  current package configuration
-        target (str): place to write plugin def into
-        overwrite (bool): whether or not to overwrite previous definition
-                          files. Default to False.
+def action_nbcompile(cfg, **kwds):
+    """Compile notebooks into html.
     """
-    del target
-    del overwrite
-
     src_directory = cfg["notebook"]['src_directory']
     len_src_directory = len(src_directory)
 
@@ -114,3 +105,20 @@ Notebook
     # Write rst_index body in the root src directory
     rst_index_filename = os.path.join(dst_rst_directory, "index.rst")
     write_rst_file_with_filename(index_body, rst_index_filename)
+
+
+def parser_nbcompile(subparsers):
+    """Associate a CLI to this tool.
+
+    Notes: The CLI will be a subcommand of pmg.
+
+    Args:
+        subparsers (ArgumentParser): entity to create a subparsers
+
+    Returns:
+        (string): a unique id for this parser
+        (callable): the action to perform
+    """
+    parser = subparsers.add_parser('nbcompile', help=action_nbcompile.__doc__)
+
+    return 'history', action_nbcompile
