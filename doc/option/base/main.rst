@@ -77,4 +77,4 @@ in which you started to code).
 
 Then::
 
-    (dvlpt)$ pmg regenerate
+    (dvlpt)$ pmg rg

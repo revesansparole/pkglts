@@ -20,7 +20,7 @@ Quick setup::
 
 Then::
 
-    (dvlpt)$ pmg regenerate
+    (dvlpt)$ pmg rg
 
 
 Modifications

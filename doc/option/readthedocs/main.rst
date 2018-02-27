@@ -11,7 +11,7 @@ need to perform the registration by hand. Look at :doc:`readthedocs_tutorial` fo
 a step by step guide::
 
     (dvlpt)$ pmg add readthedocs
-    (dvlpt)$ pmg regenerate
+    (dvlpt)$ pmg rg
 
     $ git add --all
     $ git commit -m"added readthedocs support"

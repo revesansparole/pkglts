@@ -36,7 +36,7 @@ Quick tutorial
 Follow these steps to install this option and the associated files::
 
      (dvlpt)$ pmg add doc
-     (dvlpt)$ pmg regenerate
+     (dvlpt)$ pmg rg
 
 Meaning of pieces of information
 --------------------------------

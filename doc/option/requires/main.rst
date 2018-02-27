@@ -10,7 +10,7 @@ project by hand. Have a look at the `Requires.io Documentation`_ or
 :doc:`requires_tutorial` tutorial for more information::
 
     (dvlpt)$ pmg add requires
-    (dvlpt)$ pmg regenerate
+    (dvlpt)$ pmg rg
 
     $ git add --all
     $ git commit -m"added requires support"

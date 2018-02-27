@@ -18,7 +18,7 @@ to your package if you have not done it already. It will take care of creating t
 needed 'travis.yml' file::
 
     (dvlpt)$ pmg add travis
-    (dvlpt)$ pmg regenerate
+    (dvlpt)$ pmg rg
 
 A simple git push will trigger the first automatic rebuild::
 
