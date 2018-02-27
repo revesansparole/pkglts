@@ -14,7 +14,7 @@
     "travis": "G8RJ3Ab2mF28579gVhB+tdzqRXGAB4yi2jUj5bbE6kNNP4MU3Ii0u2y12GGaShQVcOLpeImwlO87dygbLng/Gw==",
     "travis.addons": "z4PhNX7vuL3xVChQ1m2AB9Yg5AULVxXcg/SpIdNs6c5H0NE8XYXysP+DGNKHfuwvY7kxvUdBeoGlODJ6+SfaPg==",
     "travis.after": "NK0ZmP0FuAXWFohzr7Peg6h/JISQ/QkBMmwK1DvwqCyGKNhw5rprqhyARHDyc6LRyq+oqid/4e4MiviIsNoZKA==",
-    "travis.install": "SjX7qutWRUiHBVTIuib0smS/ZHQ7d8jXyi81wrJqbF93bR0fKj7+LBi3zeN6tnJCKreKJzSNLO9z0LLU4IYILA==",
+    "travis.install": "XGk5D+6U/oGacWyVi7dqbab/tHgs+gG1fycP0ZYG3OeSjnubb3O79GjiCTm7ATSSWFaAVr/DaUBpKkCRddT5mA==",
     "travis.script": "DuMVu20DK3x0WVdVZxihdiYnEkfDqmOlMUuCHohyYvi4fv3Ew8OeAca6AdKM/ZCSZvVS9tywx+PhPrmDexl6hg=="
   },
   "AUTHORS.rst": {
@@ -33,7 +33,7 @@
     "doc": "o5MA/WIyttlY9ptvCAXvODKSSa3qZVhtAJigoXclKAnK0gViu3WN4c7DuCqhOJwZoqjXqbFVVj+098DvxX9F0w=="
   },
   "appveyor.yml": {
-    "appveyor": "EI5AlO+3xaWF1Lr1snVBdNdkWNsU0Qgzggv9MnztwNuQk5VqntCHxlb8AVFM/c4L++fw6x3D2J9e1hpUNmx/nw=="
+    "appveyor": "BCVk3jrMYqzaxNYTaiwwpQfo7OiDbRPwbSwAtCIXDRZfXSng+584cPVBekQnIAgzm9PP618JpN8Vjatd7wsSfQ=="
   },
   "appveyor_scripts.ps1": {
     "appveyor": "HdiTMjGtis8VNyHfwqGBOjaDQZajmxcqAtNYMzKycmWHGjUpEEXIwvb1/ZCqiY9tDAh39PX+sf7tG4zTJ+0MXw=="
@@ -52,7 +52,7 @@
   "doc/_static/nonempty.txt": {},
   "doc/authors.rst": {},
   "doc/conf.py": {
-    "sphinx": "a9/V9W+2ujYl+Yo4upxBGoaDUTJhphdE/qMSZr1UE5I2Z5uQbg9UdsQ7fk+s6uvvSBbSkqqUlsdDHiULwJ+T0g=="
+    "sphinx": "qtU9N3iqjGZkLixRMEgvRxtrJgqSJg+ZuObgaHJ+hW0lHSYCh7hVFMS2mYgUBaa4JAEQ9BY+jyjnwgfTrNPoMw=="
   },
   "doc/contributing.rst": {},
   "doc/history.rst": {},
@@ -64,10 +64,10 @@
   "doc/readme.rst": {},
   "doc/usage.rst": {},
   "dvlpt_requirements.txt": {
-    "pysetup": "Vuup22usqy8dN0o1gxxgSt71YwFtp/GivIMVrpTCKV0yrmJUsfNEug3N3+DrHzjFcrq1ywhybjN/n/+HPtH0Sg=="
+    "pysetup": "qPjRyO4/HYH8oF72Vaqrvf1oCliNW/FXuFGOMQmxnut/BMvRTu8TvWbM1yIONBTJBDFfr8sWRtcKBuqaliAi1Q=="
   },
   "dvlpt_requirements.yml": {
-    "conda": "YJOBPWVpRGqqc1ATto0dSHPatjHxdI36eZA97SDpqj7w55r1OMGhre41bANOR+uus77GUDfVu/N4xbYSWKn4FQ=="
+    "conda": "hYUeHrjxcUK0QeqRShxeP2X+gsNiWTJtqkMPQzjPvZGe7wbImbVZ39ibM10cnkrd0pNChw+Ou1jqu3m45Hm1Iw=="
   },
   "requirements.txt": {
     "pysetup": "a3vxSz1gh9Jpi9HD2zTkYmMLp1wlSvhWQpTs/AUv7B/UWgArJGdcPPrg0SS6sPxsGZ75kNCaic4APrGKU93fcA=="
@@ -80,7 +80,7 @@
   },
   "setup.py": {
     "pysetup.call": "2wHuP94SpWKZpqOzExkQGTxnhGPgBHK3qOdPn0Ncstj5FkZ7FBGGM/inqAXaI4QLKQtTNlOUYRGSkYUWAUcf1w==",
-    "pysetup.kwds": "amHi7u/BCN3hCdn3AFdCXxLsNK9zLTZyN/jPdzwmrzZJ7nu0LSGE9WsDGMUe97rGUbAW8lvIChEMOolSTTXjlA=="
+    "pysetup.kwds": "ghoEf4WC88a+IsEs1+DUvE8QfMIAAsJ9rOAGyK6gXJt6+cq/TofqhecAjV6sv0Dp0yCnSMfOpx2JKPel5t/cdg=="
   },
   "src/pkglts/__init__.py": {
     "base": "gR33dW0qqYmsV9NSNB+DD8XmuxnC2t0mKjnMoU5728qh97fSER6MbX+3QKxpZDLByZToaAay4xhx8acxketJmA=="

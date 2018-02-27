@@ -11,7 +11,7 @@ Quick setup::
     (dvlpt)$ pmg add pysetup
     > intended versions [27]:
     ...
-    (dvlpt)$ pmg regenerate
+    (dvlpt)$ pmg rg
 
 Modifications
 -------------

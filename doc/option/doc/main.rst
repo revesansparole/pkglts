@@ -36,7 +36,7 @@ Quick tutorial
 Follow these steps to install this option and the associated files::
 
      (dvlpt)$ pmg add doc
-     (dvlpt)$ pmg regenerate
+     (dvlpt)$ pmg rg
 
 Meaning of pieces of information
 --------------------------------
@@ -73,4 +73,5 @@ History
 *******
 
 History of your package is generated automatically from the github or gitlab
-commit tags and messages if possible.
+commit tags and messages if possible. See :doc:`history` for a tool
+that will perform this operation.

@@ -50,6 +50,7 @@ install:
   - conda install pytest-cov
   - conda install pytest-mock
   - conda install sphinx
+  - conda install sphinx_rtd_theme
   - pip install tox
   - pip install twine
 

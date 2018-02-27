@@ -12,7 +12,7 @@ to register by hand. Have a look at the `Landscape Documentation`_ or
 :doc:`landscape_tutorial` tutorial for more information::
 
     (dvlpt)$ pmg add landscape
-    (dvlpt)$ pmg regenerate
+    (dvlpt)$ pmg rg
 
     $ git add --all
     $ git commit -m"added landscape.io support"

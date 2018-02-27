@@ -115,7 +115,7 @@
   "sphinx": {
     "autodoc_dvlpt": true,
     "build_dir": "build/sphinx",
-    "theme": "default"
+    "theme": "sphinx_rtd_theme"
   },
   "test": {
     "suite_name": "pytest"

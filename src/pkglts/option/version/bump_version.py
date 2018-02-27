@@ -8,14 +8,9 @@ from pkglts.config_management import write_pkg_config
 LOGGER = logging.getLogger(__name__)
 
 
-def action_bump(**kwds):
+def action_bump(cfg, **kwds):
     """Bump version number.
     """
-    cfg = kwds["_pkglts_cfg"]
-    if cfg is None:
-        LOGGER.warning("Directory is not a pkglts package, run pmg init first")
-        return
-
     LOGGER.info("Bump version")
     pos = kwds['pos']
     # update both the actual config and its associated template

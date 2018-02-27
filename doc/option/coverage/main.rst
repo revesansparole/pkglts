@@ -26,7 +26,7 @@ Follow these steps to quickly install the option. I assume you already followed
 :doc:`../test/main` quick tutorial::
 
     (dvlpt)$ pmg add coverage
-    (dvlpt)$ pmg regenerate
+    (dvlpt)$ pmg rg
 
 Nosetests
 ---------

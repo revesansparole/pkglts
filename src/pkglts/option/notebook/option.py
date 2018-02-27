@@ -3,6 +3,8 @@ from os.path import dirname, exists
 from pkglts.dependency import Dependency
 from pkglts.option_object import Option
 
+from . import nbcompile
+
 
 class OptionNotebook(Option):
     def root_dir(self):
@@ -34,3 +36,7 @@ class OptionNotebook(Option):
             return [Dependency('nbconvert')]
 
         return []
+
+    def tools(self, cfg):
+        del cfg
+        yield nbcompile.parser_nbcompile

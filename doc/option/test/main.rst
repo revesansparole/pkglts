@@ -32,7 +32,7 @@ Follow these steps for a quick setup (do :doc:`../base/main` quick tutorial firs
 if you haven't done it yet)::
 
     (dvlpt)$ pmg add test
-    (dvlpt)$ pmg regenerate
+    (dvlpt)$ pmg rg
     (dvlpt)$ pmg example test
 
     (dvlpt)$ pytest

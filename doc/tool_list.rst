@@ -5,7 +5,8 @@ List of currently available tools
 .. toctree::
    :maxdepth: 1
 
-   tool/history/main
+   option/doc/history
+   option/version/bump
 
 .. _GitHub: https://github.com/
 .. _PyPi: https://pypi.python.org/pypi

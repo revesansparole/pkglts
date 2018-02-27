@@ -8,7 +8,7 @@ you registered with the :doc:`../pysetup/main` option the python environments th
 actually exists on your machine and create a tox.ini file with the relevant options::
 
     (dvlpt)$ pmg add tox
-    (dvlpt)$ pmg regenerate
+    (dvlpt)$ pmg rg
 
 To invoke tox, just use the command line tool::
 

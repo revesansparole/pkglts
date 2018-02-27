@@ -4,7 +4,7 @@ flake8
 Test the compliance of your code with PEP8_ definitions::
 
     (dvlpt)$ pmg add flake8
-    (dvlpt)$ pmg regenerate
+    (dvlpt)$ pmg rg
 
 Basic usage::
 

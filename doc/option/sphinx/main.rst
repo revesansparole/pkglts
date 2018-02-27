@@ -20,7 +20,7 @@ Follow these steps to build your first comprehensive documentation. I assume
 you also install the attached example files::
 
     (dvlpt)$ pmg add sphinx
-    (dvlpt)$ pmg regenerate
+    (dvlpt)$ pmg rg
     (dvlpt)$ pmg example sphinx
 
 If you already installed the :doc:`../pysetup/main` option::

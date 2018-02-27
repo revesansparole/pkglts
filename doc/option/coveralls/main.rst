@@ -13,7 +13,7 @@ look at the `Coveralls Documentation`_ or :doc:`coveralls_tutorial` tutorial for
 more information::
 
     (dvlpt)$ pmg add coveralls
-    (dvlpt)$ pmg regenerate
+    (dvlpt)$ pmg rg
 
     $ git add --all
     $ git commit -m"added coveralls support"

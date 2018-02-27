@@ -116,27 +116,12 @@ can reinstall them at any time (you'll be prompted for action if conflicts occur
 Extra tools
 ===========
 
-Pkglts comes with a set of tools to make the life of package manager easier.
+Some options of pkglts provide tools to make the life of package manager easier.
 
-- :doc:`tool/history/main`: Regenerate the history of your package from associated tags
+- :doc:`option/doc/history`: Regenerate the history of your package from associated tags
+- :doc:`option/version/bump`: Increase your package version number
 
 .. warning:: Work In Progress
-
-Package Builder also provides a few useful services to check that the python
-modules follow code best practices:
-
- - 'add_object': will create a new python module with the proper headers and
-   a skeleton of a python class.
- - 'add_plugin': will wrap a given python class into a usable plugin_.
- - 'add_script': will wrap a given python functionality into a command line
-   script.
- - 'reset_file_header': will loop through all python modules and try to rewrite
-   file header to match current best practices.
- - fmt_doc: check code documentation and format it according to given standard
-   if possible. Requires some already good documentation, just a quick fix to
-   pass from one style to another (e.g. google to numpy).
-
-.. _plugin: openalea.plugin
 
 Contributing
 ============
