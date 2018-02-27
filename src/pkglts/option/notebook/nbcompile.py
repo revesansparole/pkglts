@@ -10,12 +10,16 @@ import shutil
 def write_rst_file_with_resources(body, resources):
     """Helper function.
     """
+    import nbconvert
+
     # Create folder if the path not exists
     if not os.path.exists(resources["metadata"]["path"]):
         os.makedirs(resources["metadata"]["path"])
 
     # Keep resources metadata like image in the rst
     writer = nbconvert.writers.FilesWriter()
+    # TODO hack to solve problems with pygment not recognizing ipython2
+    body = body.replace(".. code:: ipython2", ".. code:: python")
     writer.write(body, resources, notebook_name=resources["metadata"]["name"])
 
 
@@ -58,6 +62,8 @@ def find_notebook_file(root_directory):
 def action_nbcompile(cfg, **kwds):
     """Compile notebooks into html.
     """
+    import nbconvert
+
     src_directory = cfg["notebook"]['src_directory']
     len_src_directory = len(src_directory)
 
@@ -80,7 +86,6 @@ Notebook
     :caption: Notebook
 
 """
-    import nbconvert
 
     rst_exporter = nbconvert.RSTExporter()
     for nb_filename in nb_filenames:
@@ -121,4 +126,4 @@ def parser_nbcompile(subparsers):
     """
     parser = subparsers.add_parser('nbcompile', help=action_nbcompile.__doc__)
 
-    return 'history', action_nbcompile
+    return 'nbcompile', action_nbcompile
