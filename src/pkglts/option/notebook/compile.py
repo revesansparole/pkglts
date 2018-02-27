@@ -6,8 +6,6 @@ import os
 import os.path
 import shutil
 
-import nbconvert
-
 
 def write_rst_file_with_resources(body, resources):
     """Helper function.
@@ -91,6 +89,7 @@ Notebook
     :caption: Notebook
 
 """
+    import nbconvert
 
     rst_exporter = nbconvert.RSTExporter()
     for nb_filename in nb_filenames:
@@ -98,16 +97,13 @@ Notebook
         body, resources = rst_exporter.from_filename(nb_filename)
 
         # Remove basename src_directory in the path
-        resources["metadata"]["path"] = \
-            resources["metadata"]["path"][len_src_directory + 1:]
+        resources["metadata"]["path"] = resources["metadata"]["path"][len_src_directory + 1:]
 
         # Get the local file_path of the notebook write
-        local_file_path = os.path.join(resources["metadata"]["path"],
-                                       resources["metadata"]["name"])
+        local_file_path = os.path.join(resources["metadata"]["path"], resources["metadata"]["name"])
 
         # Add dst_rst_directory in the path
-        resources["metadata"]["path"] = os.path.join(
-            dst_rst_directory, resources["metadata"]["path"])
+        resources["metadata"]["path"] = os.path.join(dst_rst_directory, resources["metadata"]["path"])
 
         # Write rst with this resources
         write_rst_file_with_resources(body, resources)

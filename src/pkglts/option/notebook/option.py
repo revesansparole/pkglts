@@ -34,3 +34,7 @@ class OptionNotebook(Option):
             return [Dependency('nbconvert')]
 
         return []
+
+    def tools(self, cfg):
+        del cfg
+        yield history.parser_history
