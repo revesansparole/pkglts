@@ -113,7 +113,6 @@ def main():
         init=action_init,
         clear=action_clear,
         update=action_update,
-        regenerate=action_regenerate,
         rg=action_regenerate,
         add=action_add,
         remove=action_remove,
