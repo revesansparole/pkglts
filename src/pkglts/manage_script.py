@@ -13,10 +13,10 @@ from .option_tools import available_options
 LOGGER = logging.getLogger(__name__)
 
 
-def action_info(**kwds):
+def action_info(cfg, **kwds):
     """Display info on package for debug purpose.
     """
-    del kwds  # unused
+    del cfg, kwds  # unused
     LOGGER.info("package info")
     from pkglts.option_tools import available_options
     print("available_options:")
@@ -29,18 +29,17 @@ def action_info(**kwds):
         print(json.dumps(cfg[opt_name], sort_keys=True, indent=2))
 
 
-def action_clean(**kwds):
+def action_clean(cfg, **kwds):
     """Clean package of all un necessary files.
     """
-    del kwds  # unused
+    del cfg, kwds  # unused
     LOGGER.info("clean package")
     clean()
 
 
-def action_init(**kwds):
+def action_init(cfg, **kwds):
     """Initialize environment for use of pkglts.
     """
-    cfg = kwds["_pkglts_cfg"]
     if cfg is not None:
         LOGGER.warning("Directory is already a pkglts package")
         return
@@ -48,34 +47,28 @@ def action_init(**kwds):
     init_pkg()
 
     if kwds:
-        kwds["_pkglts_cfg"] = get_pkg_config()
-        action_add(**kwds)
+        action_add(get_pkg_config(), **kwds)
 
 
-def action_clear(**kwds):
+def action_clear(cfg, **kwds):
     """Attempt to free the package from pkglts interactions.
     """
-    del kwds  # unused
+    del cfg, kwds  # unused
     LOGGER.info("clear")
     print("TODO")
 
 
-def action_update(**kwds):
+def action_update(cfg, **kwds):
     """Check if a new version of pkglts is available.
     """
-    del kwds  # unused
+    del cfg, kwds  # unused
     LOGGER.info("update")
     print("TODO")
 
 
-def action_regenerate(**kwds):
+def action_regenerate(cfg, **kwds):
     """Regenerate all files in the package.
     """
-    cfg = kwds["_pkglts_cfg"]
-    if cfg is None:
-        LOGGER.warning("Directory is not a pkglts package, run pmg init first")
-        return
-
     clean()
 
     if kwds['option']:
@@ -87,14 +80,9 @@ def action_regenerate(**kwds):
         regenerate_package(cfg, overwrite=kwds['overwrite'])
 
 
-def action_add(**kwds):
+def action_add(cfg, **kwds):
     """Add new options in the package.
     """
-    cfg = kwds["_pkglts_cfg"]
-    if cfg is None:
-        LOGGER.warning("Directory is not a pkglts package, run pmg init first")
-        return
-
     LOGGER.info("add option")
     for name in kwds['option']:
         cfg = add_option(name, cfg)
@@ -102,23 +90,17 @@ def action_add(**kwds):
     write_pkg_config(cfg)
 
 
-def action_remove(**kwds):
+def action_remove(cfg, **kwds):
     """Remove options from the package.
     """
     LOGGER.info("remove option")
     print("TODO")
-    del kwds
+    del cfg, kwds
 
 
-def action_example(**kwds):
+def action_example(cfg, **kwds):
     """Install example files associated with options.
     """
-    cfg = kwds["_pkglts_cfg"]
-    if cfg is None:
-        LOGGER.warning("Directory is not a pkglts package, run pmg init first")
-        return
-
-    LOGGER.info("install examples")
     for name in kwds['option']:
         install_example_files(name, cfg)
 
@@ -182,14 +164,16 @@ def main():
                 name, action_tool = parser_tool(subparsers)
                 action[name] = action_tool
 
-    args = vars(parser.parse_args())
-    args['_pkglts_cfg'] = cfg
-
-    logging_tools.main(args.pop('verbosity'))
+    kwds = vars(parser.parse_args())
+    logging_tools.main(kwds.pop('verbosity'))
 
     # perform action
-    subcmd = args.pop('subcmd')
-    action[subcmd](**args)
+    subcmd = kwds.pop('subcmd')
+    if cfg is None and subcmd != "init":
+        LOGGER.error("Directory is not a pkglts package, run pmg init first")
+        return
+
+    action[subcmd](cfg, **kwds)
 
 
 if __name__ == '__main__':

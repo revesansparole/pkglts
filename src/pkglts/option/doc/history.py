@@ -133,14 +133,9 @@ def write_changelog(tags, fmt):
         LOGGER.warning("Doc format '%s' unsupported", fmt)
 
 
-def action_history(**kwds):
+def action_history(cfg, **kwds):
     """Regenerate history file from tag list.
     """
-    cfg = kwds["_pkglts_cfg"]
-    if cfg is None:
-        LOGGER.warning("Directory is not a pkglts package, run pmg init first")
-        return
-
     LOGGER.info("Reconstruct history")
 
     # extract release tags from versioning system
