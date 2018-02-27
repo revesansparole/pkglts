@@ -73,4 +73,5 @@ History
 *******
 
 History of your package is generated automatically from the github or gitlab
-commit tags and messages if possible.
+commit tags and messages if possible. See :doc:`history` for a tool
+that will perform this operation.
