@@ -41,6 +41,10 @@ pkglts
 
 .. #}
 
+.. image:: https://anaconda.org/revesansparole/pkglts/badges/version.svg
+    :alt: Anaconda version
+    :target: https://anaconda.org/revesansparole/pkglts
+
 Building packages with long term support
 
 
