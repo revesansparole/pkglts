@@ -29,6 +29,7 @@ requirements:
 
 build:
   number: 0
+  noarch: python
   entry_points:
     - pmg = pkglts.manage_script:main
   script: python setup.py install --single-version-externally-managed --record record.txt
