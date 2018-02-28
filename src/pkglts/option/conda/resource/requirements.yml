@@ -4,6 +4,9 @@
 # section pysetup
 channels:
 - defaults
+{%- for channel in conda.channels %}
+- {{ channel }}
+{%- endfor %}
 
 dependencies:
 {%- for dep in pysetup.requirements('install') if dep.is_conda(False) %}

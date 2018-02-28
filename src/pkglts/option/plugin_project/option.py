@@ -43,6 +43,6 @@ class OptionPluginProject(Option):
             return [Dependency(name) for name in options]
 
         if purpose == 'install':
-            return [Dependency('pkglts')]
+            return [Dependency('pkglts', channel='revesansparole')]
 
         return []

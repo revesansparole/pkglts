@@ -42,9 +42,6 @@ class OptionPysetup(Option):
 
     def environment_extensions(self, cfg):
         req_install = requirements(cfg, 'install')
-        for dep in cfg['pysetup']['require']:
-            req_install.append(Dependency(**dep))
-
         req_dvlpt = requirements(cfg, 'dvlpt')
 
         def req(name):
@@ -80,6 +77,11 @@ def requirements(cfg, requirement_name):
                 reqs[dep.name] = dep
         except KeyError:
             raise KeyError("option '%s' does not exists" % name)
+
+    if requirement_name == 'install':
+        for dep_def in cfg['pysetup']['require']:
+            dep = Dependency(**dep_def)
+            reqs[dep.name] = dep
 
     return [reqs[name] for name in sorted(reqs)]
 
