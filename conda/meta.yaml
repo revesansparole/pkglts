@@ -15,8 +15,8 @@ requirements:
   build:
     - python
     - setuptools
-# #}
     - pytest-runner
+# #}
 
 # {# pkglts, conda.req_run
   run:

@@ -15,6 +15,11 @@ requirements:
   build:
     - python
     - setuptools
+{%- if 'test' is available -%}
+{%- if test.suite_name == 'pytest' %}
+    - pytest-runner
+{%- endif -%}
+{%- endif -%}
 # #}
 
 # {# pkglts, conda.req_run
