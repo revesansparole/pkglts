@@ -57,14 +57,7 @@ class Dependency(object):
         Returns:
             (str)
         """
-        if self.is_conda(strict=False):
-            return self._conda_fmt_name()
-
-        if self.is_pip(strict=True):
-            return self._pip_fmt_name()
-
-        # TODO git url
-        return "walou {}".format(self.name)
+        return self._conda_fmt_name()
 
     def pip_full_name(self):
         """Produce fully qualified name with version number.
@@ -145,17 +138,13 @@ class Dependency(object):
         Returns:
             (str)
         """
-        if self.is_pip(strict=False):
-            txt = self._pip_fmt_name()
-            if extended:
+        txt = self._pip_fmt_name()
+        if extended:
+            if self.is_pip(strict=False):
                 txt += "  # {}".format(self.pip_install())
-        elif self.is_conda(strict=True):
-            txt = self._conda_fmt_name()
-            if extended:
+            elif self.is_conda(strict=True):
                 txt += "  # {}".format(self.conda_install())
-        else:  # assume valid git url
-            txt = "#{}".format(self.name)
-            if extended:
+            else:  # assume valid git url
                 txt += "  # pip install git+{}".format(self.package_manager)
 
         return txt
