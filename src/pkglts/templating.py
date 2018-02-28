@@ -8,7 +8,7 @@ OPENING_MARKER = "{" + "#"
 CLOSING_MARKER = "#" + "}"
 
 BLOCK_RE = re.compile(
-    r"\{#[ ]pkglts,[ ](?P<key>[a-zA-Z0-9.]*)(?P<aft_head>.*?)\n(?P<cnt>.*?)#\}(?P<aft_foot>.*?(?=\n))",
+    r"\{#[ ]pkglts,[ ](?P<key>[a-zA-Z0-9._]*)(?P<aft_head>.*?)\n(?P<cnt>.*?)#\}(?P<aft_foot>.*?(?=\n))",
     re.DOTALL | re.MULTILINE)
 
 

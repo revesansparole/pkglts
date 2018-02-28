@@ -8,8 +8,6 @@ channels:
 dependencies:
 - jinja2
 - requests
+- semver
 - unidecode
-- pip:
-  - semver
-
 # #}

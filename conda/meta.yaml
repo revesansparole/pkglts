@@ -1,7 +1,7 @@
 # {# pkglts, conda.package
 package:
   name: pkglts
-  version: "3.1.0"
+  version: "3.2.0"
 # #}
 
 # {# pkglts, conda.src
@@ -10,19 +10,22 @@ source:
     ../
 # #}
 
-
+# {# pkglts, conda.req_build
 requirements:
   build:
     - python
     - setuptools
     - pytest-runner
+# #}
 
+# {# pkglts, conda.req_run
   run:
     - python
     - jinja2
     - requests
     - semver
     - unidecode
+# #}
 
 build:
   number: 0

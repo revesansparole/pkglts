@@ -10,13 +10,27 @@ source:
     ../
 # #}
 
+# {# pkglts, conda.req_build
 requirements:
   build:
     - python
     - setuptools
+{%- if 'test' is available -%}
+{%- if test.suite_name == 'pytest' %}
+    - pytest-runner
+{%- endif -%}
+{%- endif -%}
+# #}
 
+# {# pkglts, conda.req_run
   run:
     - python
+{%- for dep in pysetup.requirements('install') -%}
+  {%- if dep.is_conda(strict=False) %}
+    - {{ dep.fmt_conda_requirement() }}
+  {%- endif %}
+{%- endfor %}
+# #}
 
 build:
   script: python setup.py install --single-version-externally-managed --record=record.txt
