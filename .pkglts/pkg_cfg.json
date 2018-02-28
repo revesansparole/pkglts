@@ -100,8 +100,8 @@
         "name": "requests"
       },
       {
-        "name": "semver",
-        "channel": "conda-forge"
+        "channel": "conda-forge",
+        "name": "semver"
       },
       {
         "name": "unidecode"
@@ -125,6 +125,6 @@
   "version": {
     "major": 3,
     "minor": 2,
-    "post": 0
+    "post": 1
   }
 }

@@ -4,6 +4,7 @@
 # section pysetup
 channels:
 - defaults
+- conda-forge
 
 dependencies:
 - coverage
