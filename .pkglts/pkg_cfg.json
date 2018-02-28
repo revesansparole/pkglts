@@ -100,8 +100,7 @@
         "name": "requests"
       },
       {
-        "name": "semver",
-        "pkg_mng": "pip"
+        "name": "semver"
       },
       {
         "name": "unidecode"
