@@ -43,6 +43,6 @@ class OptionPluginProject(Option):
             return [Dependency(name) for name in options]
 
         if purpose == 'install':
-            return [Dependency('pkglts', pkg_mng='pip')]
+            return [Dependency('pkglts')]
 
         return []
