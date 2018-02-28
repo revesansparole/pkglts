@@ -100,7 +100,8 @@
         "name": "requests"
       },
       {
-        "name": "semver"
+        "name": "semver",
+        "channel": "conda-forge"
       },
       {
         "name": "unidecode"

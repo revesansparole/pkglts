@@ -14,7 +14,7 @@
     "travis": "G8RJ3Ab2mF28579gVhB+tdzqRXGAB4yi2jUj5bbE6kNNP4MU3Ii0u2y12GGaShQVcOLpeImwlO87dygbLng/Gw==",
     "travis.addons": "z4PhNX7vuL3xVChQ1m2AB9Yg5AULVxXcg/SpIdNs6c5H0NE8XYXysP+DGNKHfuwvY7kxvUdBeoGlODJ6+SfaPg==",
     "travis.after": "NK0ZmP0FuAXWFohzr7Peg6h/JISQ/QkBMmwK1DvwqCyGKNhw5rprqhyARHDyc6LRyq+oqid/4e4MiviIsNoZKA==",
-    "travis.install": "f+94Tw+OHkF1szso3DAzqyNQm2MEqLawGnoEZaz0PvQQwk1bCmaKcXhCHH/VYw9lUNDE0/MtJO5HkI074MT5NA==",
+    "travis.install": "OeJNLkq3uJKjoHjwBnFJ3becc5SWlk1N+PKiQfawOFZ3M/i8mEGi6aHPwSDZQjKt/hFvR+QULxjn+4127esJUA==",
     "travis.script": "DuMVu20DK3x0WVdVZxihdiYnEkfDqmOlMUuCHohyYvi4fv3Ew8OeAca6AdKM/ZCSZvVS9tywx+PhPrmDexl6hg=="
   },
   "AUTHORS.rst": {
@@ -33,7 +33,7 @@
     "doc": "o5MA/WIyttlY9ptvCAXvODKSSa3qZVhtAJigoXclKAnK0gViu3WN4c7DuCqhOJwZoqjXqbFVVj+098DvxX9F0w=="
   },
   "appveyor.yml": {
-    "appveyor": "783uHBKvgLcKPxwz/mi+zb4RokwGSAckbc1O0Zk33K3CtcJVzYNPrKzkwr+DwD2dufEfm2nbqnrQZzcxriS/vw=="
+    "appveyor": "jRh5NE3Z8ZMzJC+CNd996r8epGyDYjQHA+34E0Pmqj3+P7yq+GX7wjK0D3VQd7S4MCyJNc8rrwWvhSjQH6hxdg=="
   },
   "appveyor_scripts.ps1": {
     "appveyor": "HdiTMjGtis8VNyHfwqGBOjaDQZajmxcqAtNYMzKycmWHGjUpEEXIwvb1/ZCqiY9tDAh39PX+sf7tG4zTJ+0MXw=="
@@ -66,13 +66,13 @@
   "doc/readme.rst": {},
   "doc/usage.rst": {},
   "dvlpt_requirements.txt": {
-    "pysetup": "qPjRyO4/HYH8oF72Vaqrvf1oCliNW/FXuFGOMQmxnut/BMvRTu8TvWbM1yIONBTJBDFfr8sWRtcKBuqaliAi1Q=="
+    "pysetup": "kq6LnTDd2ce5q/uFj8jDbfJYL3rbbs6+Z+bxhcPFOWiRK7VSVYcJkNu0/7fNkQUZovrMKU8wrtWpoHzPbjLIdQ=="
   },
   "dvlpt_requirements.yml": {
     "conda": "hYUeHrjxcUK0QeqRShxeP2X+gsNiWTJtqkMPQzjPvZGe7wbImbVZ39ibM10cnkrd0pNChw+Ou1jqu3m45Hm1Iw=="
   },
   "requirements.txt": {
-    "pysetup": "a3vxSz1gh9Jpi9HD2zTkYmMLp1wlSvhWQpTs/AUv7B/UWgArJGdcPPrg0SS6sPxsGZ75kNCaic4APrGKU93fcA=="
+    "pysetup": "MnVSGuxuiN6H5UYP/Wto41hESc+RKWgPHqsW56jhjG5jzume9oMm8uJG58iInexwBKiRquOb4yuwhO2S5b4X/Q=="
   },
   "requirements.yml": {
     "conda": "zhbCaxN+ucQWw5EXOo1X3y6zDkyepAovMpdLWH8hTt8X23rmpEfi7f/OwybCvUWOYkKIdQr6NA2jizcryf06YA=="

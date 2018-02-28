@@ -3,9 +3,9 @@
 # edit .pkglts/pkg_cfg instead
 # section pysetup
 
-jinja2  # pip install jinja2
-requests  # pip install requests
-semver  # pip install semver
-unidecode  # pip install unidecode
+jinja2
+requests
+semver
+unidecode
 
 # #}

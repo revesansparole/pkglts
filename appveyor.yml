@@ -36,7 +36,7 @@ build_script:
 
   - conda install jinja2
   - conda install requests
-  - conda install semver
+  - conda install -c conda-forge semver
   - conda install unidecode
   - conda install coverage
   - pip install coveralls

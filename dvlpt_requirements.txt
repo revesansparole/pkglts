@@ -1,14 +1,14 @@
 # {# pkglts, pysetup
-coverage  # pip install coverage
-coveralls  # pip install coveralls
-flake8  # pip install flake8
-nbconvert  # pip install nbconvert
-pytest  # pip install pytest
-pytest-cov  # pip install pytest-cov
-pytest-mock  # pip install pytest-mock
-sphinx  # pip install sphinx
-sphinx_rtd_theme  # pip install sphinx_rtd_theme
-tox  # pip install tox
-twine  # pip install twine
+coverage
+coveralls
+flake8
+nbconvert
+pytest
+pytest-cov
+pytest-mock
+sphinx
+sphinx_rtd_theme
+tox
+twine
 
 # #}
