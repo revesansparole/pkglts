@@ -45,7 +45,10 @@ class Dependency(object):
         else:
             version = self.version
             if version[:2] not in ('==', '>=', '<=', "~="):
-                version = "==" + version
+                if len(version.split(".")) < 3:
+                    version = ">=" + version
+                else:
+                    version = "==" + version
         return "{}{}".format(self.name, version)
 
     def conda_full_name(self):
