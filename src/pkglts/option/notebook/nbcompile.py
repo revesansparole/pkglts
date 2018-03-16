@@ -20,6 +20,7 @@ def write_rst_file_with_resources(body, resources):
     writer = nbconvert.writers.FilesWriter()
     # TODO hack to solve problems with pygment not recognizing ipython2
     body = body.replace(".. code:: ipython2", ".. code:: python")
+    body = body.replace(".. code:: ipython3", ".. code:: python")
     writer.write(body, resources, notebook_name=resources["metadata"]["name"])
 
 
