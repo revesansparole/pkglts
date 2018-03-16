@@ -101,8 +101,17 @@ Notebook
         # Add dst_rst_directory in the path
         resources["metadata"]["path"] = os.path.join(dst_rst_directory, resources["metadata"]["path"])
 
-        # Write rst with this resources
+        # Write beginning block to download file
+        disclaimer = "This file has been generated from the following notebook: :download:`%s`.\n\n" % os.path.basename(nb_filename)
+        disclaimer += "Download it if you want to replay it using `jupyter notebook <http://jupyter.org/>`_.\n\n"
+
+        body = disclaimer + body
+
+        # Write rst with his resources
         write_rst_file_with_resources(body, resources)
+
+        # Write notebook file for further download
+        shutil.copy(nb_filename, os.path.join(dst_rst_directory, os.path.basename(nb_filename)))
 
         # Save the notebook rst position in the index body
         index_body += "    " + local_file_path.replace("\\", "/") + "\n"
