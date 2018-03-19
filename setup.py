@@ -61,7 +61,6 @@ setup_kwds = dict(
         "coverage",
         "coveralls",
         "flake8",
-        "nbconvert",
         "pytest",
         "pytest-cov",
         "pytest-mock",
