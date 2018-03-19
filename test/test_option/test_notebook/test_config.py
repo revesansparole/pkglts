@@ -47,4 +47,4 @@ def test_require(opt):
     assert len(opt.require('option', cfg)) == 1
     assert len(opt.require('setup', cfg)) == 0
     assert len(opt.require('install', cfg)) == 0
-    assert len(opt.require('dvlpt', cfg)) == 1
+    assert len(opt.require('dvlpt', cfg)) == 0

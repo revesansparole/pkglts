@@ -32,8 +32,8 @@ class OptionNotebook(Option):
             options = ['sphinx']
             return [Dependency(name) for name in options]
 
-        if purpose == 'dvlpt':
-            return [Dependency('nbconvert')]
+        # if purpose == 'dvlpt':
+        #     return [Dependency('nbconvert')]
 
         return []
 
