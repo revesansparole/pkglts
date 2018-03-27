@@ -315,7 +315,10 @@ texinfo_documents = [
 # use apidoc to generate developer doc
 import os
 from os import path
-from sphinx.ext.apidoc import main
+try:
+    from sphinx.ext.apidoc import main
+except ImportError:
+    from sphinx.apidoc import main
 
 
 rootpath = path.abspath(path.join(project_root, "src"))
