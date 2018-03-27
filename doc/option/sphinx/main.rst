@@ -2,7 +2,8 @@ sphinx
 ======
 
 Extend basic documentation to use the sphinx_ set of tools. This option will use
-the 'default' theme by default instead of 'classic' to ensure that the right theme
+the theme set in the `.pkglts/pkg_cfg.json` file to compile the doc. The theme by
+default is 'default' instead of 'classic' to ensure that the right theme
 will be selected on readthedocs_. If the 'autodoc_dvlpt' parameter is set to True,
 then docstrings will also be compiled.
 
