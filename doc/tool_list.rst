@@ -7,6 +7,7 @@ List of currently available tools
 
    option/doc/history
    option/version/bump
+   option/notebook/nbcompile
 
 .. _GitHub: https://github.com/
 .. _PyPi: https://pypi.python.org/pypi
