@@ -1,5 +1,5 @@
-Bump version number
-===================
+bump
+====
 
 Increase your package version number in the configuration file.
 

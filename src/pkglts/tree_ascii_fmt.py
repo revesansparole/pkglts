@@ -5,7 +5,7 @@ to generate description of files modified by each option.
 
 from os import listdir
 from os.path import isdir
-from os.path import join as pj
+from os.path import splitext, join as pj
 
 from pkglts.config_management import Config
 
@@ -26,6 +26,7 @@ def _tree(dname, padding, txt):
                          "owner": "owner",
                          "pkgname": "pkgname",
                          "url": None},
+                   data={"use_ext_dir": False},
                    doc={"fmt": "rst"},
                    plugin_project={"plugin_name": "plugin"})
 
@@ -36,19 +37,20 @@ def _tree(dname, padding, txt):
 
     count = 0
     for is_dir, fname in files:
-        count += 1
-        txt += padding + '|\n'
         fmt_name = _nn(cfg, fname)
-        txt += padding + '+-' + fmt_name
-        path = pj(dname, fname)
-        if is_dir:
-            txt += "/\n"
-            if count == len(files):
-                txt = _tree(path, padding + ' ' + ' ' * int(len(fmt_name) / 2), txt)
+        if splitext(fmt_name)[0] != '_':
+            count += 1
+            txt += padding + '|\n'
+            txt += padding + '+-' + fmt_name
+            path = pj(dname, fname)
+            if is_dir:
+                txt += "/\n"
+                if count == len(files):
+                    txt = _tree(path, padding + ' ' + ' ' * int(len(fmt_name) / 2), txt)
+                else:
+                    txt = _tree(path, padding + '|' + ' ' * int(len(fmt_name) / 2), txt)
             else:
-                txt = _tree(path, padding + '|' + ' ' * int(len(fmt_name) / 2), txt)
-        else:
-            txt += '\n'
+                txt += '\n'
 
     return txt
 

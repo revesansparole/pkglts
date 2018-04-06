@@ -12,9 +12,12 @@ to list all the notebooks.
 Command line
 ------------
 
+Use the :doc:`nbcompile` tool provided with this option to recompile the notebooks
+into restructured text files as explained above.
+
 .. code::
 
-    (dvlpt)$ pmg rg notebook
+    (dvlpt)$ pmg nbcompile
 
 User Warnings
 -------------

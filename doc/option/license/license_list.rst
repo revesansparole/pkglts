@@ -208,6 +208,16 @@ header::
    1.1. "Contributor"
    means each individual or legal entity that creates, contributes to the
 
+private
+-------
+
+header::
+
+   {{ license.project }} - Terms and conditions
+   1) Preamble: This Agreement, signed on {{ license.year }} (hereinafter: Effective Date)
+   governs the relationship between any Business Entity, (hereinafter: Licensee) and
+   {{ license.organization }}, a duly registered company (hereinafter: Licensor).
+
 unlicense
 ---------
 
