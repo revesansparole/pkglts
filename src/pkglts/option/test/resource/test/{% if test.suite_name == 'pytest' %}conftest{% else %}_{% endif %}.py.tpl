@@ -6,10 +6,10 @@ import pytest
 
 # {# pkglts, test.pytest_cmdline_preparse
 def pytest_cmdline_preparse(args):
-    {% if 'coverage' is available -%}
+    {%- if 'coverage' is available %}
     if 'PYCHARM_HOSTED' not in os.environ:
         args.append("--cov={{ base.pkg_full_name }}")
-    {% else %}
+    {%- else %}
     pass
     {%- endif %}
 # #}
@@ -29,5 +29,4 @@ def pytest_collection_modifyitems(config, items):
         for item in items:
             if "slow" in item.keywords:
                 item.add_marker(skip_slow)
-
 # #}

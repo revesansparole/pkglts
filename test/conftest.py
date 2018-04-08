@@ -8,7 +8,6 @@ import pytest
 def pytest_cmdline_preparse(args):
     if 'PYCHARM_HOSTED' not in os.environ:
         args.append("--cov=pkglts")
-    
 # #}
 
 
@@ -26,5 +25,4 @@ def pytest_collection_modifyitems(config, items):
         for item in items:
             if "slow" in item.keywords:
                 item.add_marker(skip_slow)
-
 # #}
