@@ -4,6 +4,7 @@ This tool will try to parse all release tags to create an history of package.
 import logging
 import os
 from functools import cmp_to_key
+from getpass import getpass
 
 try:  # python3
     from urllib.parse import quote_plus
@@ -147,7 +148,8 @@ def action_history(cfg, **kwds):
         server = cfg['gitlab']['server']
         owner = cfg['gitlab']['owner']
         project = cfg['gitlab']['project']
-        tags = gitlab_tag_list(server, "%s/%s" % (owner, project), "MuoY8dFhUVQp4d6gQmTE")
+        token = getpass("gitlab API access token:")
+        tags = gitlab_tag_list(server, "%s/%s" % (owner, project), token)
     elif 'github' in cfg.installed_options():
         owner = cfg['github']['owner']
         project = cfg['github']['project']

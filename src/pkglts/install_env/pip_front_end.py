@@ -2,8 +2,17 @@
 """
 import imp
 import pip
-from pip import get_installed_distributions
-from pip import main as pip_install
+## Dealing with pip 10.* api changes
+## The solution is from:
+## https://github.com/naiquevin/pipdeptree/blob/master/pipdeptree.py
+try:
+    from pip._internal import get_installed_distributions
+except ImportError:
+    from pip import get_installed_distributions
+try:
+    from pip._internal import main as pip_install
+except:
+    from pip import main as pip_install
 
 
 def installed_packages():
