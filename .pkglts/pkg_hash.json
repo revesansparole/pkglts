@@ -40,7 +40,7 @@
   },
   "conda/meta.yaml": {
     "conda.about": "7jgIubwtZ5uu8wIoAJBjSpwLdOSRdmKwx0EYKW1u0AW5g9QBTWSIUvuADIkyH9j4uiSjDC0TYhWczajS11WuoQ==",
-    "conda.package": "CWDtvm4WxdSrgEk/FXk/fzstSDWQvU5bhXzvbZpMO29iB+Y1S6Ni8c9evLU8X9uTuh/G7wPJ+wE/iN+dEzgOaQ==",
+    "conda.package": "RY/hgbFuM06xZpZmucgWNgCHq3xfLFfnAVtBmFVb2xxTF8wqvarPoV8maw2z3BIFqdqLGoEERteIj3BjkO5Hwg==",
     "conda.req_build": "sTGn3R/3JQrBzHUPc05zAOCoaG/3bk/2XxDXuB2yLzi5ZYJQyHbI7BpllnugDeu9Q4PgvKakGXlZU05Pv7mggQ==",
     "conda.req_run": "wfQxh4h17xfUYLjddGfAUGaFHpJYO0q2BvR1VlOGOvWA3cWupGDbJu67jP/uth9U6E4LgB0zwW7LsIclj93wHg==",
     "conda.src": "HrwSleFu4NbgkAAkAfKBpsU5jaVQ83sYumDl1fUALX04VYq8s0OexqOusF2UQ/BxfHXQWGQEQ/0OBDbmkNE0Aw=="
@@ -82,7 +82,7 @@
   },
   "setup.py": {
     "pysetup.call": "2wHuP94SpWKZpqOzExkQGTxnhGPgBHK3qOdPn0Ncstj5FkZ7FBGGM/inqAXaI4QLKQtTNlOUYRGSkYUWAUcf1w==",
-    "pysetup.kwds": "fq33mB44lWeNwTzfDFlRq+wwKCvCXUhgl2My6gfuz6Q5MuhwuLQLMAxYznwAfSQ52miQhizYxsqRENM54S0ZNw=="
+    "pysetup.kwds": "NH04jxER7AyAAEw6h4Ge/GIV9+1YabUNIHQtTIag/Z7jYED45gCqwNDYIfW9b2VOcy6RQs3W+zvO9iTjpVHLSQ=="
   },
   "src/pkglts/__init__.py": {
     "base": "gR33dW0qqYmsV9NSNB+DD8XmuxnC2t0mKjnMoU5728qh97fSER6MbX+3QKxpZDLByZToaAay4xhx8acxketJmA=="
@@ -91,7 +91,7 @@
     "data": "wwgLuV/OqHWjWbssvDHa4LNg+7C+tuNiKHOxkO+9UAl9opI/HfPyJAq2fPhUeTmVvb/E6MkqDJIli9m8n5/V0Q=="
   },
   "src/pkglts/version.py": {
-    "version": "z/+H9d6+SKoyGvMLEvHOsmY2lT7x27sNvfM4y4Tl9F88Zq6KzvXjI1roYlzux1Au0h5175xQhmf3z4sCvlTf4Q=="
+    "version": "HfpjmKWbQNNRymWFcWRiylZrjw/JaxlK/sKYFqQOdh2kZ398agTKCzdZZg5J5v0rV8jNBIUC3XuJ7Ei542oc7g=="
   },
   "src/pkglts_data/__init__.py": {},
   "test/__init__.py": {},
