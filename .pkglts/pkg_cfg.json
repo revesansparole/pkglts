@@ -21,7 +21,13 @@
     "url": null
   },
   "conda": {},
-  "coverage": {},
+  "coverage": {
+    "exclude_lines": [
+      "raise AssertionError",
+      "raise NotImplemented",
+      "raise NotImplementedError"
+      ]
+  },
   "coveralls": {},
   "data": {
     "filetype": [
@@ -124,7 +130,7 @@
   "travis": {},
   "version": {
     "major": 3,
-    "minor": 3,
+    "minor": 4,
     "post": 1
   }
 }
