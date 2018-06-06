@@ -7,11 +7,11 @@ directory = build/htmlcov
 source = pkglts
 
 [report]
+show_missing = True
 exclude_lines =
     # Don't complain if tests don't hit defensive assertion code:
     raise AssertionError
     raise NotImplemented
     raise NotImplementedError
-show_missing = True
-
+    __main__
 # #}
