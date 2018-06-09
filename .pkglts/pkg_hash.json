@@ -1,107 +1,107 @@
 {
   ".coveragerc": {
-    "coverage": "YD2zCEbej9jQU5Z0CuFu3XtCP2dBvVQZTnMkNvwPzTQA4Qx2QvsvmALudjeIqLzwcT4KCC5DLP1u1YvgOg5pUw=="
+    "coverage": "/dlOVITbFfEjDPCtfbLYNBPmPKTzYwEr/xQglkl97AbM+0ormOvq2mfxThEsWlfMjDm7IOL94BO2Fl7jgkkg1w=="
   },
   ".gitignore": {
-    "git": "IH+HWmLKbCFVYyY3JkeTzVDb9r9EVePvugRuqv7jnYwAVGxXp1Es8tdSB5TydkrU0WwUhslLVrBqQjiwusG1wQ=="
+    "git": "rNvcuZtAkglAHMCa9/tk/6SYFfNVTluSC3jgZ00ajgJm5uwwb6HPnQV7MziE1/WxjM8JAFsM/J7q3727LRfz0A=="
   },
   ".landscape.yml": {},
   ".pypirc": {
     "pypi.serverdescr": "Xwmy6dIeZ8dRPhYNKBwoBU+vXof53eeATlBeDYhO3dbdM2nu5f+i7KADpDKewMsy4vaw07SlvZcvrkNxIQGdOw==",
-    "pypi.serverlist": "BGltL3W0iQd15DvEGmiS0N1SxLtu7rF4EZH1YZjfi7ct3IwdAvMuRVdebtxnsCAas/tgs29gbmyZA06lW7hzQg=="
+    "pypi.serverlist": "PC9SiM3/1x2vn66stkaGs8IZmA3C9zq9z6sBMLr74e3tdF5l0eBAZsagfMbQjPF+AW6evtXBtpEDMsF3dkjVHQ=="
   },
   ".travis.yml": {
-    "travis": "G8RJ3Ab2mF28579gVhB+tdzqRXGAB4yi2jUj5bbE6kNNP4MU3Ii0u2y12GGaShQVcOLpeImwlO87dygbLng/Gw==",
-    "travis.addons": "z4PhNX7vuL3xVChQ1m2AB9Yg5AULVxXcg/SpIdNs6c5H0NE8XYXysP+DGNKHfuwvY7kxvUdBeoGlODJ6+SfaPg==",
-    "travis.after": "NK0ZmP0FuAXWFohzr7Peg6h/JISQ/QkBMmwK1DvwqCyGKNhw5rprqhyARHDyc6LRyq+oqid/4e4MiviIsNoZKA==",
-    "travis.install": "DvbfE9NE22YaluMlopSOUIyfK01pOdl25HYY5qr0nbNZZ5zrdq/93IR9xAmAL9dsKMOLWR7VVUBJEm7DdSseCw==",
-    "travis.script": "DuMVu20DK3x0WVdVZxihdiYnEkfDqmOlMUuCHohyYvi4fv3Ew8OeAca6AdKM/ZCSZvVS9tywx+PhPrmDexl6hg=="
+    "travis": "iilBkpqEYZtYirWnp7FyrZrMeRdxY0uVNv8szSCQUpy6o4fx9xKxn8NTk5BAGP7QeBiLtxScW+/q7V0jx1o3Dw==",
+    "travis.addons": "qA98wmBu9uVHTpax5SDBfs9DLw2ppWa9FXBEEwz7VI8Q2Sn/tXgwCN94ttB9B9EJv/utGZjLgwnszsfk0/yBOg==",
+    "travis.after": "72uS//er4znuzRcHy4w7fgQi/P8G6vjUIPx3h8vWY+GiXBbZEgRoray41OEdBBbx2Krg83Lup6Mj/ZFF8eQO4Q==",
+    "travis.install": "wpGewp7LVfOTjCS2LIWty48tl4JRtNicn75ic9gQkom6WkyBqfpwyPUsTXkC9eNhJZPYnHhcvUdyhqmnMHL2hA==",
+    "travis.script": "9damuXTnvvXkgIJ1fEA1WDeXd8fpdKeNdJBj0x8vZrzl/jPdimjOjNE+473IW3fAkn3UiKxu+vItDkVGATl5ew=="
   },
   "AUTHORS.rst": {
-    "doc.authors": "w6jfJjf36UAGY5xtLYQpKySd2EqWvvRiIPKeQFXiSTyCT3hLg/amjRE062vPZXvZTVKefknIXchZTe6xS0SCfQ==",
-    "doc.contributors": "q9YYeo16ZDYoD4x3S8RF9cMpCVbjQPDDP5byMTCxNBnRMa2QPZMQrPO7x6tjHilLT2TEoPf8ZH+FkSXkFaYmxg=="
+    "doc.authors": "/4DdVJ8b3rG94lfO9Lc7StWASvDQpuf73AL4vpQmxvi4N9ShPsMeP3Shwf6i2d3e4dvIUgDW1Mc0vUxg5LkbUw==",
+    "doc.contributors": "rvb87NzVCXfRXi4Ck12W32B/gu6DkioRFRi/jb3AbCx/0SeEBn63WSmtirSr4hecyT+T1LaAAgjwr4D2qmk5Xw=="
   },
   "CONTRIBUTING.rst": {},
   "HISTORY.rst": {},
   "LICENSE": {
-    "license": "21ExMhSzB2uXQuU1VoH7++nrb4u6TbesqGtJDpM39OLPWft9SJ2tJ956R6foYmkI9VuJay7SUrhFLPxxMEHLxg=="
+    "license": "RbGRVVjgGPhWaPWhqwtq7HHev/U1DkppBYjGN39HbDZ2BDejFc2exfwAH1MiY2HHn+3TgxlvBkg/s/x9hs3aOA=="
   },
   "MANIFEST.in": {
-    "pysetup": "psgypH2rS1U8zm/+1e5ZlOpirmjJkBjlR8wcPFifhf3NhP2MkmP7yyYp+Gloshy40cDY7l2tAeGkV8hcu5GjpQ=="
+    "pysetup": "Bf8VVtOtAXVFYwZdlSPnC/rvOHQl4SDG0bKB5w0FlNkMAMuEKge6RTm/8W6dPJtUjSCZlavzwST1gKpE055Y/w=="
   },
   "README.rst": {
     "doc": "o5MA/WIyttlY9ptvCAXvODKSSa3qZVhtAJigoXclKAnK0gViu3WN4c7DuCqhOJwZoqjXqbFVVj+098DvxX9F0w=="
   },
   "appveyor.yml": {
-    "appveyor": "woJORbnBmbgMNIZQQ5TeXULPNkgc4K+ys97JmO8pobSlCaR74iG8ihURc/7k/DIKoc4dXvG4OCHpzSmQnEPGVw=="
+    "appveyor": "lwkbVrpR18Q9k1xtcN7KWXNsNrIP+BLD44RTvjRkPC9nwGwuwmR8ml0Htba9Xh/BROt0hqxNG3c8XdqfFn+aPQ=="
   },
   "appveyor_scripts.ps1": {
     "appveyor": "HdiTMjGtis8VNyHfwqGBOjaDQZajmxcqAtNYMzKycmWHGjUpEEXIwvb1/ZCqiY9tDAh39PX+sf7tG4zTJ+0MXw=="
   },
   "conda/meta.yaml": {
-    "conda.about": "7jgIubwtZ5uu8wIoAJBjSpwLdOSRdmKwx0EYKW1u0AW5g9QBTWSIUvuADIkyH9j4uiSjDC0TYhWczajS11WuoQ==",
-    "conda.package": "tQU6OFfzUfp1IACdgfFDt98L9ljaTo0Gb8L8lcbxbLVqX3DlY7F04kbBUGv6XhYAfbvXqaccnlYlJS9G9g1FnQ==",
-    "conda.req_build": "sTGn3R/3JQrBzHUPc05zAOCoaG/3bk/2XxDXuB2yLzi5ZYJQyHbI7BpllnugDeu9Q4PgvKakGXlZU05Pv7mggQ==",
-    "conda.req_run": "wfQxh4h17xfUYLjddGfAUGaFHpJYO0q2BvR1VlOGOvWA3cWupGDbJu67jP/uth9U6E4LgB0zwW7LsIclj93wHg==",
-    "conda.src": "HrwSleFu4NbgkAAkAfKBpsU5jaVQ83sYumDl1fUALX04VYq8s0OexqOusF2UQ/BxfHXQWGQEQ/0OBDbmkNE0Aw=="
+    "conda.about": "6/RoaDh45Wwcc0uAhKGnUH46mczqPBQq/PV0cSCbe+fhiDQPOooOK8u24GzswyAcXIEHoASc/XIe+WS/2zBl5A==",
+    "conda.package": "7LSr8IZOStV/kIwj7r8lt6qqPowQrWRFbHhJgMgvoUBI/VQ/NPjrhWZAWapEW2hqkODU0mYEjbDB9B+OoN2+MQ==",
+    "conda.req_build": "GhXkH8/JbyLDpbnbH4PKkatycDXY3pwfyKp1Sqk8NMMycTXqi5KGfolUnNVfiVAhgP90gokseGbhS1Oa8ZlpMg==",
+    "conda.req_run": "IFJIX6NLBagkPhLDSOvcHHj/XiggVhFfvIRKy/vGjLnBm8TsaqXFdb8wX1l/l4GJaGjfNUA3+MOT+tGumt8uPw==",
+    "conda.src": "Lzbp176AVU0YantZQxB4LsR2jbxpZ/OlkvY2V4aWAEuzKEarh872uc1eRvsIYf/FsbxvcmUI84AezWlA72nI6A=="
   },
   "conda_pkglts/bld.bat": {},
   "conda_pkglts/build.sh": {},
   "conda_pkglts/meta.yaml": {},
   "doc/Makefile": {
-    "sphinx": "C58jxdu8XJNOoaWOw7VWy4LwFmS8lTQt/JeZLt5JozMSJ503plOZchucx+vAEzELbx/Czs/h9pshe9s+9HeOeQ=="
+    "sphinx": "EsaaEppe6Kw79WHpUyBigedrIraP6YlQDBg9Fu6jue32Rt6mCQkk2zH7gfOVqjT5bNpnXN90UfLkrzHVJCo6UQ=="
   },
   "doc/_static/nonempty.txt": {},
   "doc/authors.rst": {},
   "doc/conf.py": {
-    "sphinx": "QHEiUoLFy45Pc5Zi2OyzoBMGEETGFOQVxk8vPZKM0IwX0EKk70wWJ8zYRXVA8lcihN9DCVWpX2rvHj9bs89law=="
+    "sphinx": "J1gwuPs3tsw/mhwybtVDuK5TI8NIuZ+0L55LZ5dohBA52vZilz22jkLYAs642o1SHt1SQqS4ZI+5WNxyDzOEWA=="
   },
   "doc/contributing.rst": {},
   "doc/history.rst": {},
   "doc/index.rst": {},
   "doc/installation.rst": {},
   "doc/make.bat": {
-    "sphinx": "oA67PK7JSR3w9u1V0gOXFZAb8qgfgUJ0wQ46cVXu7M3iJyAbLf76WkEqw6Y1r5Q6EvHAogcjmImdGsOpiYZ22g=="
+    "sphinx": "E9sFsnXAm9uPYBn7f0Qb6edct0UKizsXRIJyjZISRCjHbT2HldXK4GIj1yO69R/OVSfnmdAX5lzXQ4wONQNFgA=="
   },
   "doc/readme.rst": {},
   "doc/usage.rst": {},
   "dvlpt_requirements.txt": {
-    "pysetup": "F5LsRgozBc0LBXocLa2O0J9wf7DDKcB7R2nMaDuQQY/Quvamuq8ISJIwb/m7EhDW3yumQBhSAhNGrR+bORUC4Q=="
+    "pysetup": "yYHHsSMHCOhc2gK0lPHsV9gTH5FRCDWJo4SNb8ia5GtPq7IPhiXmWDZ0CZt6ACHPb+4AwYH3i3FZAtyULCjqvQ=="
   },
   "dvlpt_requirements.yml": {
-    "conda": "jx9vQWK2lh+/q2CEY9H2nTu2xJVmXtGQx02SgQzwUCmYmuXgjdF6inJeYptawIANxPfWzLfyqW+xmrTtJaNDGg=="
+    "conda": "9LFLPxi0fMfsVQCULGbuCPMAujTUjyJtpzboCqNm3fXAhCGT9YFTYKjyIiaEZB09qKWjnrXk4bFwcpVtzIyY6g=="
   },
   "requirements.txt": {
-    "pysetup": "MnVSGuxuiN6H5UYP/Wto41hESc+RKWgPHqsW56jhjG5jzume9oMm8uJG58iInexwBKiRquOb4yuwhO2S5b4X/Q=="
+    "pysetup": "TIUhM0FxiwdbYDbR+IKNWKpRSLaXaLUcUYPdyChhHdzigDv1obxUCTEKVvpaIh/mrPOyEqEBKolnupm3By+Ffw=="
   },
   "requirements.yml": {
-    "conda": "BFGrPn5ogVFz0rBXQyQ+uzZCMUWVMjULnjE4H7shul8WDuE546G9xFC+BkB3ijr6P6HDnkBhuDZGmBiwxyk9Gw=="
+    "conda": "EObyPICVVOBSFDCFLcXQgQXSZlxfcBZY9QOQwpXen2WPHiIoJT0mLtQzgEzzxvMlVbbky5lcTASD++y3lB+8Rw=="
   },
   "setup.cfg": {
-    "pysetup": "mOK0wV85MXPScO8PuGtpcZgMFbOJiHb17Fi9Um5ZHFSEJPfCDJvRwzo7C3gr1sQf+o5EXTo4/RadPzieCi+Dog=="
+    "pysetup": "wk6mbRZJFwYyq2D/gRBwBH/1tTQog3B033fOZvR9DQxjxS0mMJ/uqOM5f2X4cUdKrCEJbs6WvFlByUFr6WvYDA=="
   },
   "setup.py": {
-    "pysetup.call": "2wHuP94SpWKZpqOzExkQGTxnhGPgBHK3qOdPn0Ncstj5FkZ7FBGGM/inqAXaI4QLKQtTNlOUYRGSkYUWAUcf1w==",
-    "pysetup.kwds": "XPyyI1T3jEETnDNqHzPU8IS8u7XlXVIpr2F25nQHUGwyCDJCEPNDrIqp9IwMyay6VhnBiBoD5+ZmTFjYmwrJ2Q=="
+    "pysetup.call": "t30iIuCMd/sWxStR2XNYb8bCBgwanhKt8YYn2VKACyAqL5cKFRUWpVRIpAR+uxXUZ9PYYy2csMmECcONnRZE8w==",
+    "pysetup.kwds": "Vyul+r9moKb0oKg2zMxTqiJBkfoGd14WNPfGPY7GQu0sH/A1mvXqjFhsNIxUyC8pBBb08vEc4SYFf2ivQtWJHg=="
   },
   "src/pkglts/__init__.py": {
-    "base": "gR33dW0qqYmsV9NSNB+DD8XmuxnC2t0mKjnMoU5728qh97fSER6MbX+3QKxpZDLByZToaAay4xhx8acxketJmA=="
+    "base": "+GVGxVjJGifAp8dAR9V2W3aVPe7/D53bN7r0O5VxO9OUqG4vnGTZvnORu1objjjIwm86DgemQd7ax/IJpRa8Wg=="
   },
   "src/pkglts/data_access.py": {
     "data": "wwgLuV/OqHWjWbssvDHa4LNg+7C+tuNiKHOxkO+9UAl9opI/HfPyJAq2fPhUeTmVvb/E6MkqDJIli9m8n5/V0Q=="
   },
   "src/pkglts/version.py": {
-    "version": "u3/9kcxHzpaqWTeFqIeysCaGBvQAKym+tTSv/ovOPnysytZAa3/Ki01RJys12XXnn6sGs26WeOkszcj+aOe+Fg=="
+    "version": "F9qQ0tPKIGvsMesKodEZUl4ZHXkyf+ahQut+mPq0PHvY69hE+l/vUY7se5QhtwolpPoG6E6lL1t3igh1jvEwnw=="
   },
   "src/pkglts_data/__init__.py": {},
   "test/__init__.py": {},
   "test/conftest.py": {
-    "test.pytest_addoption": "jFnEU9LSZXsRR+AglTjJfDfAhcvMgDvdiMTSWlrGm0Ync5j6GCcRGcFGLj/sQJntjGL/iQ8r+1y7XLcL8ruq8A==",
-    "test.pytest_cmdline_preparse": "ew1iWb2zyAH6kGMK3OgkpV35ofPdl8jhZv+763LdaA8fDon0q1X0L/tGcB1aNVoNuIEi031+CGLLro9X3nxMMQ==",
-    "test.pytest_collection": "ZpPnGKd9ZzD5XqsqsA4nUaSQmWsqdmgsXQ0wDwLsM36eK2hpapCssiOGnxyxtYcEKXvBToBVQy0fqbOpirdYdw==",
-    "test.pytest_import": "sZYHNG/fIwr/W9awbiTY4haUtI4gCVhKUsaSWX4encF77Y9oHGEjxt1wUSL+4P6Y0erqudlbJrX0hLFngWfBfQ=="
+    "test.pytest_addoption": "I/hswVryIEYvZRBcFqkfRBxLP6eZCwZSbQuPclkOkjHw4MApBst5h7H0ejnMMe4bmwHXMXR5DCSxOMj/FcCnjQ==",
+    "test.pytest_cmdline_preparse": "PReC04aIsiEUts+uEAiU4rCIEtXIoB6cJ1EmKApbIKD5wNYWokZ0r1WjV/1+WobsK/wgmcC4Yvf5NwwYZb9yjg==",
+    "test.pytest_collection": "a/3h30sLUHJ7xWsOrmfCInOOVXvm660dS+RxHwcDUcae2jHqDLRGhq/v8zgC+FSzN3pXaEaJ1QBJ9MNLOUBuCA==",
+    "test.pytest_import": "2ox6A0szNpUYZR5cJJRSW3OwEWR558BOiUMjC/OVkTPT++CF/OCgGSELCPL+7YHWaJGQKMw2rtCXmOMeSK5ZJA=="
   },
   "tox.ini": {
-    "tox": "lNsVQhM6iz1Zn4tKANbJtJmri+WsCrWxvjnYhZrIu1l7ZHNMpktlmcCa6ZkDs7PqrbR/9yi2Spb3qxvEGxlyOw=="
+    "tox": "Y99+LmUUU/6WhbiWM8tcKaouEzSUNzf1jtSlGMEtceYtYfPh6iImlManrQSmjUcvhwpPQQZXMlBE3gfn6q72MA=="
   }
 }
