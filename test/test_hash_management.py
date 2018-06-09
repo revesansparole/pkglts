@@ -62,13 +62,13 @@ def test_modified_file_detect_modifications_in_preserved_sections(tmp_pth):
     with open(tmp_pth, 'w') as f:
         f.write("{# pkglts, toto\n")
         f.write(txt)
-        f.write("\n#}\n")
+        f.write("#}\n")
 
     assert not modified_file_hash(tmp_pth, {tmp_pth: dict(toto=hv)})
 
     with open(tmp_pth, 'w') as f:
         f.write("{# pkglts, toto\n")
         f.write(txt * 2)
-        f.write("\n#}\n")
+        f.write("#}\n")
 
     assert modified_file_hash(tmp_pth, {tmp_pth: dict(toto=hv)})
