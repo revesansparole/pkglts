@@ -38,7 +38,6 @@ pkglts
 .. image:: https://travis-ci.org/revesansparole/pkglts.svg?branch=master
     :alt: Travis build status
     :target: https://travis-ci.org/revesansparole/pkglts
-
 .. #}
 
 .. image:: https://anaconda.org/revesansparole/pkglts/badges/version.svg

@@ -71,16 +71,16 @@ def parse_source(txt):
                     - line start before end for preserved content
     """
     blocks = []
-    last_end = 0
+    last_end = -1
 
     for res in BLOCK_RE.finditer(txt):
         i = res.start()
         while i > last_end and txt[i] != "\n":
             i -= 1
 
-        if i >= last_end:
+        if i > last_end:
             block = TplBlock()
-            block.user_defined(txt[last_end: (i + 1)])
+            block.user_defined(txt[(last_end + 1): (i + 1)])
             blocks.append(block)
 
         bef = txt[(i + 1): res.start()]
@@ -94,8 +94,8 @@ def parse_source(txt):
         while i > 0 and cnt[i] != "\n":
             i -= 1
         aft = cnt[(i + 1): len(cnt)]
-        cnt = cnt[:i]
-        last_end = res.end() + 1
+        cnt = cnt[:(i + 1)]
+        last_end = res.end()
 
         block = TplBlock()
         block.pkglts_defined(bid, cnt)
@@ -105,9 +105,9 @@ def parse_source(txt):
         block.after_footer = aft_foot
         blocks.append(block)
 
-    if last_end < len(txt):
+    if last_end < (len(txt) - 1):
         block = TplBlock()
-        block.user_defined(txt[last_end: len(txt)])
+        block.user_defined(txt[(last_end + 1): len(txt)])
         blocks.append(block)
 
     return blocks
@@ -159,11 +159,13 @@ def render(cfg, src_pth, tgt_pth):
         else:
             # format cnt
             cnt = cfg.render(block.content)
+            if len(cnt) == 0 or cnt[-1] != "\n":  # case where templating has eaten the remaining spaces and '\n'
+                cnt += "\n"
             preserved.append((block.bid, cnt))
             # rewrite preserved tag if necessary
             tgt += block.before_header + "{" + "# pkglts, %s" % block.bid + "%s\n" % block.after_header
             tgt += cnt
-            tgt += "\n" + block.before_footer + "#" + "}%s\n" % block.after_footer
+            tgt += block.before_footer + "#" + "}%s\n" % block.after_footer
 
     with open(tgt_pth, 'w') as fhw:
         fhw.write(tgt)
