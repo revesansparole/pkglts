@@ -159,6 +159,8 @@ def render(cfg, src_pth, tgt_pth):
         else:
             # format cnt
             cnt = cfg.render(block.content)
+            if len(cnt) == 0 or cnt[-1] != "\n":  # case where templating has eaten the remaining spaces and '\n'
+                cnt += "\n"
             preserved.append((block.bid, cnt))
             # rewrite preserved tag if necessary
             tgt += block.before_header + "{" + "# pkglts, %s" % block.bid + "%s\n" % block.after_header
