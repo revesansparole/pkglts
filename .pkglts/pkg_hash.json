@@ -40,7 +40,7 @@
   },
   "conda/meta.yaml": {
     "conda.about": "6/RoaDh45Wwcc0uAhKGnUH46mczqPBQq/PV0cSCbe+fhiDQPOooOK8u24GzswyAcXIEHoASc/XIe+WS/2zBl5A==",
-    "conda.package": "DU5c17WZGHOq6qDRgjzOlO67wlzDCXG8fTZPtFMZMN4vm4AXfnh6RZp6CskSnAdZc+fU9dIgRuerPgOVDKZ54Q==",
+    "conda.package": "UZSDLcBTzzfpNRm2TNbVvgRK01+MAsChy5XQhYdF1muAFqROPWADmOLy8AuYfhzqhaJmry0tGl6qjMVqqdYROw==",
     "conda.req_build": "GhXkH8/JbyLDpbnbH4PKkatycDXY3pwfyKp1Sqk8NMMycTXqi5KGfolUnNVfiVAhgP90gokseGbhS1Oa8ZlpMg==",
     "conda.req_run": "IFJIX6NLBagkPhLDSOvcHHj/XiggVhFfvIRKy/vGjLnBm8TsaqXFdb8wX1l/l4GJaGjfNUA3+MOT+tGumt8uPw==",
     "conda.src": "Lzbp176AVU0YantZQxB4LsR2jbxpZ/OlkvY2V4aWAEuzKEarh872uc1eRvsIYf/FsbxvcmUI84AezWlA72nI6A=="
@@ -54,7 +54,7 @@
   "doc/_static/nonempty.txt": {},
   "doc/authors.rst": {},
   "doc/conf.py": {
-    "sphinx": "pJ0o3miCyIYagzC4jSw2aKTX20haKz6fpBkvsZrUgoRpqDUBefLWz3Om0DJVXhiJ+mo5QUFcm6lfz/405kLGig=="
+    "sphinx": "VAduuKJKKeSo8G0Uj5tPVzab1l+PPyMeAGQqDGQUgrplQTICXDtpIxtAeTzxm3fnzcAwZudw8dhTeNEhvMc/7g=="
   },
   "doc/contributing.rst": {},
   "doc/history.rst": {},
@@ -82,7 +82,7 @@
   },
   "setup.py": {
     "pysetup.call": "t30iIuCMd/sWxStR2XNYb8bCBgwanhKt8YYn2VKACyAqL5cKFRUWpVRIpAR+uxXUZ9PYYy2csMmECcONnRZE8w==",
-    "pysetup.kwds": "iKNcIi5j/ooms6+zK7VwRk9IaAe1NkCYFRw8My7TezjWkO5NNEr3KahrkTakql1rt90Z13VexaBMi74KduMlSA=="
+    "pysetup.kwds": "wA04r/zxyFsyZwtEwmSnLeTHTg0KrsPK8xwgQamR2k6SLB4ij7T6ZV02zf9/EIbhcG1sExT9RR65FHJoZfMj6w=="
   },
   "src/pkglts/__init__.py": {
     "base": "+GVGxVjJGifAp8dAR9V2W3aVPe7/D53bN7r0O5VxO9OUqG4vnGTZvnORu1objjjIwm86DgemQd7ax/IJpRa8Wg=="
@@ -91,7 +91,7 @@
     "data": "wwgLuV/OqHWjWbssvDHa4LNg+7C+tuNiKHOxkO+9UAl9opI/HfPyJAq2fPhUeTmVvb/E6MkqDJIli9m8n5/V0Q=="
   },
   "src/pkglts/version.py": {
-    "version": "n9FgAA7pXyUtmDOdCm4wQU0ziePnyvIEkStN8jYJ3pVb74htSrxgc6Nx4DYYBbBLV2BJJSyS0VOO5iuKKzxzGA=="
+    "version": "fu1HULegjzU9RxOV23Ht/69Zm2bfgxHZsi3QhQdpefiKl5Vg8MsPAfYh3UKm73I2DVzf1SaTwpLhHNkAoUQWcg=="
   },
   "src/pkglts_data/__init__.py": {},
   "test/__init__.py": {},
