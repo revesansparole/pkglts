@@ -9,7 +9,7 @@ from . import logging_tools
 from .config_management import get_pkg_config, write_pkg_config
 from .manage import add_option, clean, init_pkg, install_example_files, regenerate_option, regenerate_package
 from .option_tools import available_options
-from .version_management import write_pkg_version
+from .version_management import write_pkg_version, outdated_options
 
 LOGGER = logging.getLogger(__name__)
 
@@ -23,9 +23,14 @@ def action_info(cfg, **kwds):
     if not opt_names:
         opt_names = cfg.installed_options()
 
-    for opt_name in opt_names:
-        print("%s: cur %s, latest rg %s" % (opt_name, available_options[opt_name].version(), "0.0.0"))
-        print(json.dumps(cfg[opt_name], sort_keys=True, indent=2))
+    outdated = outdated_options(cfg)
+
+    for name in opt_names:
+        if name in outdated:
+            print("%s: OUTDATED" % name)
+        else:
+            print(name)
+        print(json.dumps(cfg[name], sort_keys=True, indent=2))
 
     print("other available options:")
     for opt_name in sorted(set(available_options) - set(cfg.installed_options())):
@@ -72,6 +77,14 @@ def action_update(cfg, **kwds):
 def action_regenerate(cfg, **kwds):
     """Regenerate all files in the package.
     """
+    outdated = outdated_options(cfg)
+    if len(outdated) > 0:
+        out_fmt = "\n".join(outdated)
+        LOGGER.warning("Some options are outdated,"
+                       " please upgrade pkglts and/or all the following options:\n"
+                       "%s" % out_fmt)
+        return
+
     clean()
 
     if kwds['option']:
