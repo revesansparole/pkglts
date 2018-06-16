@@ -27,7 +27,7 @@ class OptionGit(Option):
         del cfg
 
         try:
-            log = subprocess.check_output(['git', 'log', '--all', '--use-mailmap']).decode('utf-8')
+            log = subprocess.check_output(['git', 'log', '--all', '--use-mailmap'], stderr=subprocess.STDOUT).decode('utf-8')
             commiters = re.findall(r'Author: (.* <.*@.*>)\n', unidecode(log))
             ccs = [(commiters.count(name), name) for name in set(commiters)]
             contributors = [name for nb, name in sorted(ccs, reverse=True)]
