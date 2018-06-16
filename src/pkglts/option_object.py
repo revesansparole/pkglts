@@ -11,6 +11,14 @@ class Option(object):
     def __init__(self, name):
         self._name = name
 
+    def version(self):
+        """Current version of this option.
+
+        Returns:
+            (str): X.X.X
+        """
+        return "0.0.0"
+
     def root_dir(self):
         """Base directory containing option definition files.
 

@@ -2,6 +2,7 @@ from os.path import abspath, basename, dirname
 
 from pkglts.local import pkg_full_name, src_dir
 from pkglts.option_object import Option
+from pkglts.version import __version__
 
 
 def is_valid_identifier(name):
@@ -16,6 +17,9 @@ def is_valid_identifier(name):
 
 
 class OptionBase(Option):
+    def version(self):
+        return __version__
+
     def root_dir(self):
         return dirname(__file__)
 
