@@ -9,6 +9,7 @@ from . import logging_tools
 from .config_management import get_pkg_config, write_pkg_config
 from .manage import add_option, clean, init_pkg, install_example_files, regenerate_option, regenerate_package
 from .option_tools import available_options
+from .version_management import write_pkg_version
 
 LOGGER = logging.getLogger(__name__)
 
@@ -21,8 +22,9 @@ def action_info(cfg, **kwds):
     opt_names = kwds['option']
     if not opt_names:
         opt_names = cfg.installed_options()
+
     for opt_name in opt_names:
-        print(opt_name)
+        print("%s: cur %s, latest rg %s" % (opt_name, available_options[opt_name].version(), "0.0.0"))
         print(json.dumps(cfg[opt_name], sort_keys=True, indent=2))
 
     print("other available options:")
@@ -79,6 +81,8 @@ def action_regenerate(cfg, **kwds):
     else:
         LOGGER.info("regenerate package")
         regenerate_package(cfg, overwrite=kwds['overwrite'])
+
+    write_pkg_version(cfg)
 
 
 def action_add(cfg, **kwds):

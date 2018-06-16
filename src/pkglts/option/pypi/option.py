@@ -4,9 +4,13 @@ from pkglts.dependency import Dependency
 from pkglts.local import pkg_full_name
 from pkglts.option.doc import fmt_badge
 from pkglts.option_object import Option
+from pkglts.version import __version__
 
 
 class OptionPypi(Option):
+    def version(self):
+        return __version__
+
     def root_dir(self):
         return dirname(__file__)
 

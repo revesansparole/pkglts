@@ -5,6 +5,7 @@ from os.path import join as pj
 
 from pkglts.dependency import Dependency
 from pkglts.option_object import Option
+from pkglts.version import __version__
 
 LOGGER = logging.getLogger(__name__)
 
@@ -12,6 +13,9 @@ TPL_DIR = pj(dirname(__file__), "templates")
 
 
 class OptionLicense(Option):
+    def version(self):
+        return __version__
+
     def root_dir(self):
         return dirname(__file__)
 
