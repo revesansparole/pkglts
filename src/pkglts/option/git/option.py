@@ -1,7 +1,7 @@
 import logging
 import re
 from os.path import dirname
-from subprocess import CalledProcessError, STDOUT, check_output
+import subprocess
 
 from pkglts.dependency import Dependency
 from pkglts.option_object import Option
@@ -31,14 +31,15 @@ class OptionGit(Option):
         del cfg
 
         try:
-            log = check_output(['git', 'log', '--all', '--use-mailmap'], stderr=STDOUT).decode('utf-8')
+            log = subprocess.check_output(['git', 'log', '--all', '--use-mailmap'],
+                                          stderr=subprocess.STDOUT).decode('utf-8')
             commiters = re.findall(r'Author: (.* <.*@.*>)\n', unidecode(log))
             ccs = [(commiters.count(name), name) for name in set(commiters)]
             contributors = [name for nb, name in sorted(ccs, reverse=True)]
         except (KeyError, OSError):
             LOGGER.warning("Please add git to your $PATH")
             contributors = ["I failed to construct the contributor list"]
-        except CalledProcessError as err:
+        except subprocess.CalledProcessError as err:
             contributors = ["Pb with git, %s" % str(err)]
 
         return {'contributors': contributors}
