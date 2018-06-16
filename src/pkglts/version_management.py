@@ -11,6 +11,13 @@ import semver
 from .config import pkg_version_file, pkglts_dir
 from .option_tools import available_options
 
+# python2 compatibility
+try:
+    FileNotFoundError
+except NameError:
+    FileNotFoundError = IOError
+
+
 LOGGER = logging.getLogger(__name__)
 
 
