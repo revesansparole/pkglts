@@ -42,16 +42,8 @@ install:
   - conda install requests
   - conda install -c conda-forge semver
   - conda install unidecode
-  - conda install coverage
-  - pip install coveralls
   - conda install flake8
-  - conda install pytest
-  - conda install pytest-cov
-  - conda install pytest-mock
-  - conda install sphinx
-  - conda install sphinx_rtd_theme
-  - pip install tox
-  - pip install twine
+  - conda install twine
 
   - python setup.py install
 # #}

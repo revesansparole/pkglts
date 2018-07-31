@@ -34,7 +34,7 @@ pkg_data['pkglts'] = data_files
 
 setup_kwds = dict(
     name='pkglts',
-    version="4.0.0",
+    version="4.1.0",
     description=short_descr,
     long_description=readme + '\n\n' + history,
     author="revesansparole",
@@ -58,15 +58,7 @@ setup_kwds = dict(
         "unidecode",
         ],
     tests_require=[
-        "coverage",
-        "coveralls",
         "flake8",
-        "pytest",
-        "pytest-cov",
-        "pytest-mock",
-        "sphinx",
-        "sphinx_rtd_theme",
-        "tox",
         "twine",
         ],
     entry_points={},

@@ -3,9 +3,33 @@
 # edit .pkglts/pkg_cfg instead
 # section pysetup
 
+# install
 jinja2
 requests
 semver
 unidecode
+
+
+# run examples
+
+
+# test
+coverage
+coveralls
+pytest
+pytest-cov
+pytest-mock
+tox
+
+
+# compile doc
+sphinx
+sphinx_rtd_theme
+
+
+# other dvlpt tools
+flake8
+twine
+
 
 # #}
