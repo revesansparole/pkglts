@@ -1,8 +1,6 @@
 from os.path import dirname
-
-from pkglts.dependency import Dependency
-from pkglts.option_object import Option
 from pkglts.option.pysetup.option import requirements
+from pkglts.option_object import Option
 from pkglts.version import __version__
 
 
@@ -17,7 +15,7 @@ class OptionConda(Option):
         return ['pysetup']
 
     def environment_extensions(self, cfg):
-        channels = set(dep.channel for dep in requirements(cfg, 'install'))
+        channels = set(dep.channel for dep in requirements(cfg))
         try:
             channels.remove(None)
         except KeyError:
