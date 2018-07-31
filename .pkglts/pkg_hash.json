@@ -38,12 +38,18 @@
   "appveyor_scripts.ps1": {
     "appveyor": "HdiTMjGtis8VNyHfwqGBOjaDQZajmxcqAtNYMzKycmWHGjUpEEXIwvb1/ZCqiY9tDAh39PX+sf7tG4zTJ+0MXw=="
   },
+  "conda/dvlpt_requirements.yml": {
+    "conda": "9LFLPxi0fMfsVQCULGbuCPMAujTUjyJtpzboCqNm3fXAhCGT9YFTYKjyIiaEZB09qKWjnrXk4bFwcpVtzIyY6g=="
+  },
   "conda/meta.yaml": {
     "conda.about": "6/RoaDh45Wwcc0uAhKGnUH46mczqPBQq/PV0cSCbe+fhiDQPOooOK8u24GzswyAcXIEHoASc/XIe+WS/2zBl5A==",
     "conda.package": "UZSDLcBTzzfpNRm2TNbVvgRK01+MAsChy5XQhYdF1muAFqROPWADmOLy8AuYfhzqhaJmry0tGl6qjMVqqdYROw==",
     "conda.req_build": "GhXkH8/JbyLDpbnbH4PKkatycDXY3pwfyKp1Sqk8NMMycTXqi5KGfolUnNVfiVAhgP90gokseGbhS1Oa8ZlpMg==",
     "conda.req_run": "IFJIX6NLBagkPhLDSOvcHHj/XiggVhFfvIRKy/vGjLnBm8TsaqXFdb8wX1l/l4GJaGjfNUA3+MOT+tGumt8uPw==",
     "conda.src": "Lzbp176AVU0YantZQxB4LsR2jbxpZ/OlkvY2V4aWAEuzKEarh872uc1eRvsIYf/FsbxvcmUI84AezWlA72nI6A=="
+  },
+  "conda/requirements.yml": {
+    "conda": "EObyPICVVOBSFDCFLcXQgQXSZlxfcBZY9QOQwpXen2WPHiIoJT0mLtQzgEzzxvMlVbbky5lcTASD++y3lB+8Rw=="
   },
   "conda_pkglts/bld.bat": {},
   "conda_pkglts/build.sh": {},
