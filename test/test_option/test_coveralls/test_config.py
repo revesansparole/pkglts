@@ -13,7 +13,7 @@ def test_root_dir_is_defined(opt):
 
 
 def test_require_option(opt):
-    assert len(tuple(opt.require_option())) == 3
+    assert len(tuple(opt.require_option())) == 2
 
 
 def test_require(opt):

@@ -24,7 +24,7 @@ def test_config_check_project_exists(opt):
 
 
 def test_require_option(opt):
-    assert len(tuple(opt.require_option())) == 4
+    assert len(tuple(opt.require_option())) == 3
 
 
 def test_require(opt):
