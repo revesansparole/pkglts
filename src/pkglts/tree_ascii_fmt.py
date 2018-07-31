@@ -28,7 +28,8 @@ def _tree(dname, padding, txt):
                          "url": None},
                    data={"use_ext_dir": False},
                    doc={"fmt": "rst"},
-                   plugin_project={"plugin_name": "plugin"})
+                   plugin_project={"plugin_name": "plugin"},
+                   test={'suite_name': "pytest"})
 
     cfg = Config(pkg_cfg)
 
