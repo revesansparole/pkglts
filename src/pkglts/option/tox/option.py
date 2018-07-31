@@ -17,4 +17,4 @@ class OptionTox(Option):
 
     def require(self, cfg):
         del cfg
-        yield Dependency('tox', intent='test')
+        yield Dependency('tox', intent='test', channel='conda-forge')

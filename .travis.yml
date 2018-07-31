@@ -48,7 +48,7 @@ install:
   - conda install pytest
   - conda install pytest-cov
   - conda install pytest-mock
-  - conda install tox
+  - conda install -c conda-forge tox
   # doc
   - conda install sphinx
   - conda install sphinx_rtd_theme
