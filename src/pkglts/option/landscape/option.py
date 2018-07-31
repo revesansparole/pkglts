@@ -13,7 +13,7 @@ class OptionLandscape(Option):
         return dirname(__file__)
 
     def require_option(self):
-        return ['doc', 'gtihub', 'flake8', 'travis']
+        return ['flake8', 'travis']
 
     def environment_extensions(self, cfg):
         owner = cfg['github']['owner']

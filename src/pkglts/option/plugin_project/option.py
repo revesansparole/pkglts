@@ -40,7 +40,7 @@ class OptionPluginProject(Option):
         return invalids
 
     def require_option(self):
-        return ['pysetup', 'data', 'github']
+        return ['pysetup', 'data', 'git']
 
     def require(self, cfg):
         del cfg

@@ -28,7 +28,7 @@ class OptionReadthedocs(Option):
         return invalids
 
     def require_option(self):
-        return ['doc', 'pysetup', 'github', 'sphinx']
+        return ['pysetup', 'github', 'sphinx']
 
     def environment_extensions(self, cfg):
         project = cfg['readthedocs']['project']

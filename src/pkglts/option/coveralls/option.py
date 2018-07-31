@@ -14,7 +14,7 @@ class OptionCoveralls(Option):
         return dirname(__file__)
 
     def require_option(self):
-        return ['doc', 'coverage', 'travis']
+        return ['coverage', 'travis']
 
     def require(self, cfg):
         del cfg
