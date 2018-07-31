@@ -37,11 +37,22 @@ install:
   - conda create -q -n myenv python=$TRAVIS_PYTHON_VERSION
   - source activate myenv
 
-
+  # install
   - conda install jinja2
   - conda install requests
   - conda install -c conda-forge semver
   - conda install unidecode
+  # test
+  - conda install coverage
+  - conda install coveralls
+  - conda install pytest
+  - conda install pytest-cov
+  - conda install pytest-mock
+  - conda install tox
+  # doc
+  - conda install sphinx
+  - conda install sphinx_rtd_theme
+  # dvlpt
   - conda install flake8
   - conda install twine
 
