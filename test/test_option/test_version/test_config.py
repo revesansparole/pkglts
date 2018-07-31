@@ -35,11 +35,12 @@ def test_config_check_version_numbers_are_valid(opt):
     assert 'version.post' in opt.check(cfg)
 
 
+def test_require_option(opt):
+    assert len(tuple(opt.require_option())) == 1
+
+
 def test_require(opt):
     cfg = Config()
     opt.update_parameters(cfg)
 
-    assert len(opt.require('option', cfg)) == 1
-    assert len(opt.require('setup', cfg)) == 0
-    assert len(opt.require('install', cfg)) == 0
-    assert len(opt.require('dvlpt', cfg)) == 0
+    assert len(tuple(opt.require(cfg))) == 0

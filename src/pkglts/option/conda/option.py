@@ -13,14 +13,8 @@ class OptionConda(Option):
     def root_dir(self):
         return dirname(__file__)
 
-    def require(self, purpose, cfg):
-        del cfg
-
-        if purpose == 'option':
-            options = ['pysetup']
-            return [Dependency(name) for name in options]
-
-        return []
+    def require_option(self):
+        return ['pysetup']
 
     def environment_extensions(self, cfg):
         channels = set(dep.channel for dep in requirements(cfg, 'install'))

@@ -42,11 +42,12 @@ def test_config_check_pkg_names(opt):
     assert 'base.namespace_method' in opt.check(cfg)
 
 
+def test_require_option(opt):
+    assert len(tuple(opt.require_option())) == 0
+
+
 def test_require(opt):
     cfg = Config()
     opt.update_parameters(cfg)
 
-    assert len(opt.require('option', cfg)) == 0
-    assert len(opt.require('setup', cfg)) == 0
-    assert len(opt.require('install', cfg)) == 0
-    assert len(opt.require('dvlpt', cfg)) == 0
+    assert len(tuple(opt.require(cfg))) == 0

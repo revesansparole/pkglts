@@ -39,14 +39,9 @@ class OptionPluginProject(Option):
 
         return invalids
 
-    def require(self, purpose, cfg):
+    def require_option(self):
+        return ['bpysetup', 'data', 'github']
+
+    def require(self, cfg):
         del cfg
-
-        if purpose == 'option':
-            options = ['pysetup', 'data', 'github']
-            return [Dependency(name) for name in options]
-
-        if purpose == 'install':
-            return [Dependency('pkglts', channel='revesansparole')]
-
-        return []
+        yield Dependency('pkglts', intent='install', channel='revesansparole')

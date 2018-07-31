@@ -13,17 +13,12 @@ class OptionCoveralls(Option):
     def root_dir(self):
         return dirname(__file__)
 
-    def require(self, purpose, cfg):
+    def require_option(self):
+        return ['doc', 'coverage', 'travis']
+
+    def require(self, cfg):
         del cfg
-
-        if purpose == 'option':
-            options = ['doc', 'coverage', 'travis']
-            return [Dependency(name) for name in options]
-
-        if purpose == 'dvlpt':
-            return [Dependency('coveralls', pkg_mng='pip')]
-
-        return []
+        yield Dependency('coveralls', intent='test')
 
     def environment_extensions(self, cfg):
         owner = cfg['github']['owner']

@@ -27,16 +27,14 @@ class OptionTest(Option):
 
         return invalids
 
-    def require(self, purpose, cfg):
-        if purpose == 'option':
-            options = ['base']
-            return [Dependency(name) for name in options]
+    def require_option(self):
+        return ['base']
 
-        if purpose == 'dvlpt':
-            test_suite = cfg['test']['suite_name']
-            if test_suite == 'pytest':
-                return [Dependency(name) for name in ['pytest', 'pytest-mock']]
-            if test_suite == 'nose':
-                return [Dependency(name) for name in ['nose', 'mock']]
-
-        return []
+    def require(self, cfg):
+        test_suite = cfg['test']['suite_name']
+        if test_suite == 'pytest':
+            yield Dependency('pytest', intent='test')
+            yield Dependency('pytest-mock', intent='test')
+        elif test_suite == 'nose':
+            yield Dependency('nose', intent='test')
+            yield Dependency('mock', intent='test')

@@ -1,9 +1,8 @@
 import logging
 from datetime import datetime
+
 from os.path import dirname, exists
 from os.path import join as pj
-
-from pkglts.dependency import Dependency
 from pkglts.option_object import Option
 from pkglts.version import __version__
 
@@ -40,14 +39,8 @@ class OptionLicense(Option):
 
         return invalids
 
-    def require(self, purpose, cfg):
-        del cfg
-
-        if purpose == 'option':
-            options = ['base']
-            return [Dependency(name) for name in options]
-
-        return []
+    def require_option(self):
+        return ['base']
 
     def environment_extensions(self, cfg):
         return {"full_text": full_text(cfg)}

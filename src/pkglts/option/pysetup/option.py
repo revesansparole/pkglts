@@ -35,27 +35,15 @@ class OptionPysetup(Option):
 
         return invalids
 
-    def require(self, purpose, cfg):
-        del cfg
-
-        if purpose == 'option':
-            options = ['base', 'test', 'doc', 'license', 'version']
-            return [Dependency(name) for name in options]
-
-        return []
+    def require_option(self):
+        return ['base', 'test', 'doc', 'license', 'version']
 
     def environment_extensions(self, cfg):
-        req_install = requirements(cfg, 'install')
-        req_dvlpt = requirements(cfg, 'dvlpt')
+        reqs = requirements(cfg)
 
-        def req(name):
+        def req(intent):
             """For internal use only."""
-            if name == 'install':
-                return req_install
-            elif name == 'dvlpt':
-                return req_dvlpt
-            else:
-                raise UserWarning("WTF")
+            return [r for r in reqs if r.intent == intent]
 
         cfg.add_test('is_pip_dep', Dependency.is_pip)
 
@@ -63,29 +51,27 @@ class OptionPysetup(Option):
                 "requirements": req}
 
 
-def requirements(cfg, requirement_name):
+def requirements(cfg):
     """Check all requirements for installed options.
 
     Args:
         cfg (Config):  current package configuration
-        requirement_name (str): type of requirement 'install', 'dvlpt'
 
     Returns:
-        (list of str): list of required packages names
+        (list): list of required packages
     """
     reqs = {}
     for name in cfg.installed_options():
         try:
             opt = available_options[name]
-            for dep in opt.require(requirement_name, cfg):
+            for dep in opt.require(cfg):
                 reqs[dep.name] = dep
         except KeyError:
             raise KeyError("option '%s' does not exists" % name)
 
-    if requirement_name == 'install':
-        for dep_def in cfg['pysetup']['require']:
-            dep = Dependency(**dep_def)
-            reqs[dep.name] = dep
+    for dep_def in cfg['pysetup']['require']:
+        dep = Dependency(**dep_def)
+        reqs[dep.name] = dep
 
     return [reqs[name] for name in sorted(reqs)]
 

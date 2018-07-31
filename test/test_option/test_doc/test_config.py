@@ -40,13 +40,14 @@ def test_config_check_fmt_valid(opt):
     assert 'doc.fmt' in opt.check(cfg)
 
 
+def test_require_option(opt):
+    assert len(tuple(opt.require_option())) == 1
+
+
 def test_require(opt):
     cfg = Config(dict(base={}, doc={'fmt': 'rst'}))
 
-    assert len(opt.require('option', cfg)) == 1
-    assert len(opt.require('setup', cfg)) == 0
-    assert len(opt.require('install', cfg)) == 0
-    assert len(opt.require('dvlpt', cfg)) == 0
+    assert len(tuple(opt.require(cfg))) == 0
 
     cfg = Config(dict(base={}, doc={'fmt': 'md'}))
-    assert len(opt.require('dvlpt', cfg)) == 1
+    assert len(tuple(opt.require(cfg))) == 1

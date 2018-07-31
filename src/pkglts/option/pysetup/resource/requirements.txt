@@ -3,7 +3,29 @@
 # edit .pkglts/pkg_cfg instead
 # section pysetup
 
+# install
 {% for dep in pysetup.requirements('install') -%}
 {{ dep.fmt_pip_requirement(extended=False) }}
 {% endfor %}
+
+# run examples
+{% for dep in pysetup.requirements('example') -%}
+{{ dep.fmt_pip_requirement(extended=False) }}
+{% endfor %}
+
+# test
+{% for dep in pysetup.requirements('test') -%}
+{{ dep.fmt_pip_requirement(extended=False) }}
+{% endfor %}
+
+# compile doc
+{% for dep in pysetup.requirements('doc') -%}
+{{ dep.fmt_pip_requirement(extended=False) }}
+{% endfor %}
+
+# other dvlpt tools
+{% for dep in pysetup.requirements('dvlpt') -%}
+{{ dep.fmt_pip_requirement(extended=False) }}
+{% endfor %}
+
 # #}
