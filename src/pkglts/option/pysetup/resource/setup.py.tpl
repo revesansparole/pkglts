@@ -83,7 +83,7 @@ setup_kwds = dict(
         {% endif -%}
         {%- endfor %}],
     tests_require=[
-        {% for dep in pysetup.requirements('dvlpt') -%}
+        {% for dep in pysetup.requirements('test') -%}
         {% if dep.is_pip(strict=False) -%}
         "{{ dep.fmt_pip_requirement() }}",
         {% endif -%}
