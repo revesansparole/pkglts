@@ -83,8 +83,7 @@ def update_opt(name, cfg):
         raise KeyError("option '%s' does not exists" % name)
 
     # find other option requirements in repository
-    for dep in opt.require('option', cfg):
-        option_name = dep.name
+    for option_name in opt.require_option():
         if option_name not in cfg.installed_options():
             LOGGER.info("need to install option '%s' first", option_name)
             if (cfg["_pkglts"]['auto_install'] or
@@ -94,18 +93,18 @@ def update_opt(name, cfg):
                 return cfg
 
     # find extra package requirements for setup
-    msg = "this option requires some packages to setup"
-    if not ensure_installed_packages(opt.require('setup', cfg), msg, cfg):
-        LOGGER.warning("option installation stopped")
-        return cfg
+    # msg = "this option requires some packages to setup"
+    # if not ensure_installed_packages(opt.require('setup', cfg), msg, cfg):
+    #     LOGGER.warning("option installation stopped")
+    #     return cfg
 
     # find parameters required by option config
     opt.update_parameters(cfg.template())
     cfg.resolve()
 
     # find extra package requirements for dvlpt
-    msg = "this option requires additional packages for developers"
-    ensure_installed_packages(opt.require('dvlpt', cfg), msg, cfg)
+    # msg = "this option requires additional packages for developers"
+    # ensure_installed_packages(opt.require('dvlpt', cfg), msg, cfg)
 
     return cfg
 

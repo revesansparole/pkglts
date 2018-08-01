@@ -11,7 +11,7 @@ class Dependency(object):
     info to install a dependency.
     """
 
-    def __init__(self, name, version=None, pkg_mng=None, channel=None):
+    def __init__(self, name, version=None, pkg_mng=None, channel=None, intent='install'):
         self.name = name
         """name of dependency"""
 
@@ -23,6 +23,15 @@ class Dependency(object):
 
         self.channel = channel
         """place to find the dependency depends on package_manager"""
+
+        self.intent = intent
+        """When does the package require this option:
+         - 'install': only for installation (prod purpose)
+         - 'test': for testing purpose only
+         - 'doc': to compile the associated documentation
+         - 'example': to replay the examples
+         - 'pkglts': used internally to create dependencies between pkglts options
+        """
 
     def __str__(self):
         return "dep: {}".format(self.name)

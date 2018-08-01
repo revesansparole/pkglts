@@ -24,13 +24,9 @@ class Option{{ plugin_project.plugin_name|capitalize }}(Option):
 
         return invalids
 
-    def require(self, purpose, cfg):
+    def require_option(self):
+        return ['base']
+
+    def require(self, cfg):
         del cfg
-
-        if purpose == 'option':
-            return [Dependency('base')]
-
-        if purpose == 'install':
-            return [Dependency('pkglts')]
-
-        return []
+        yield Dependency('pkglts', intent='install')

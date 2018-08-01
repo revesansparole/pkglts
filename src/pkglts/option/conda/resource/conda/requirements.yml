@@ -9,7 +9,24 @@ channels:
 {%- endfor %}
 
 dependencies:
+# install
 {%- for dep in pysetup.requirements('install') if dep.is_conda(False) %}
+- {{ dep.fmt_conda_requirement() }}
+{%- endfor %}
+# run examples
+{%- for dep in pysetup.requirements('example') if dep.is_conda(False) %}
+- {{ dep.fmt_conda_requirement() }}
+{%- endfor %}
+# test
+{%- for dep in pysetup.requirements('test') if dep.is_conda(False) %}
+- {{ dep.fmt_conda_requirement() }}
+{%- endfor %}
+# compile doc
+{%- for dep in pysetup.requirements('doc') if dep.is_conda(False) %}
+- {{ dep.fmt_conda_requirement() }}
+{%- endfor %}
+# other dvlpt tools
+{%- for dep in pysetup.requirements('dvlpt') if dep.is_conda(False) %}
 - {{ dep.fmt_conda_requirement() }}
 {%- endfor %}
 

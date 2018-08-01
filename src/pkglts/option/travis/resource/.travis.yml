@@ -36,36 +36,24 @@ install:
   - conda create -q -n myenv python=$TRAVIS_PYTHON_VERSION
   - source activate myenv
 
-{% for dep in pysetup.requirements('install') %}
-  {%- if dep.is_conda(strict=False) %}
-  - {{ dep.conda_install() }}
-  {%- elif dep.is_pip(strict=True) %}
-  - {{ dep.pip_install() }}
-  {%- elif dep.package_manager == 'git' %}
-  - pip install git+https://github.com/{{ dep.name }}
+  # install dependencies
+  {% if pysetup.conda_reqs(['install', 'test', 'doc', 'dvlpt']) != "" -%}
+  - {{ pysetup.conda_reqs(['install', 'test', 'doc', 'dvlpt']) }}
   {%- endif %}
-{%- endfor %}
-
-{%- for dep in pysetup.requirements('dvlpt') %}
-  {%- if dep.is_conda(strict=False) %}
-  - {{ dep.conda_install() }}
-  {%- elif dep.is_pip(strict=True) %}
-  - {{ dep.pip_install() }}
-  {%- elif dep.package_manager == 'git' %}
-  - pip install git+https://github.com/{{ dep.name }}
+  {% if pysetup.pip_reqs(['install', 'test', 'doc', 'dvlpt']) != "" -%}
+  - {{ pysetup.pip_reqs(['install', 'test', 'doc', 'dvlpt']) }}
   {%- endif %}
-{%- endfor %}
 
+  # install package
   - python setup.py install
 # #}
 
 script:
 # {# pkglts, travis.script
-  {%- if 'test' is available -%}
-  {%- if test.suite_name == 'nose' %}
+  {% if 'test' is available -%}
+  {%- if test.suite_name == 'nose' -%}
   - nosetests
-  {%- endif -%}
-  {%- if test.suite_name == 'pytest' %}
+  {%- elif test.suite_name == 'pytest' -%}
   - pytest
   {%- endif -%}
   {%- endif %}
@@ -73,7 +61,7 @@ script:
 
 after_success:
 # {# pkglts, travis.after
-{%- if 'coveralls' is available -%}
+  {% if 'coveralls' is available -%}
   - coveralls
-{%- endif %}
+  {%- endif %}
 # #}

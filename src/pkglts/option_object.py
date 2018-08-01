@@ -75,15 +75,22 @@ class Option(object):
         """
         return []
 
-    def require(self, purpose, cfg):
+    def require_option(self):
+        """Names of other options required by this option.
+
+        Returns:
+            (list of str)
+        """
+        return []
+
+    def require(self, cfg):
         """Check dependencies for this option.
 
         Args:
-            purpose (str): either 'option', 'setup', 'install' or 'dvlpt'
             cfg (Config):  current package configuration
 
         Returns:
-            (list of Dependency): list of modules or options this option require
+            (list of Dependency): list of packages this option require
         """
         return []
 

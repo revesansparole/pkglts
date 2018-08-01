@@ -7,16 +7,8 @@ channels:
 - conda-forge
 
 dependencies:
-- coverage
-- flake8
-- pytest
-- pytest-cov
-- pytest-mock
-- sphinx
-- sphinx_rtd_theme
-- pip:
-  - coveralls
-  - tox
-  - twine
-
+- jinja2
+- requests
+- semver
+- unidecode
 # #}

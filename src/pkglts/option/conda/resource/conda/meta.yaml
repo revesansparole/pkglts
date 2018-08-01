@@ -18,6 +18,11 @@ requirements:
 {%- if 'test' is available -%}
 {%- if test.suite_name == 'pytest' %}
     - pytest-runner
+{%- for dep in pysetup.requirements('test') -%}
+  {%- if dep.is_conda(strict=False) %}
+    - {{ dep.fmt_conda_requirement() }}
+  {%- endif %}
+{%- endfor %}
 {%- endif -%}
 {%- endif -%}
 # #}

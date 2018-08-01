@@ -1,5 +1,4 @@
 from os.path import dirname
-
 from pkglts.dependency import Dependency
 from pkglts.option_object import Option
 from pkglts.option_tools import available_options
@@ -37,16 +36,12 @@ class OptionDoc(Option):
 
         return invalids
 
-    def require(self, purpose, cfg):
-        if purpose == 'option':
-            options = ['base']
-            return [Dependency(name) for name in options]
+    def require_option(self):
+        return ['base']
 
-        if purpose == 'dvlpt':
-            if cfg['doc']['fmt'] == 'md':
-                return [Dependency('mkdocs', pkg_mng='pip')]
-
-        return []
+    def require(self, cfg):
+        if cfg['doc']['fmt'] == 'md':
+            yield Dependency('mkdocs', intent='doc')
 
     def environment_extensions(self, cfg):
         badges = []

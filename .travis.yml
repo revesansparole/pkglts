@@ -37,34 +37,22 @@ install:
   - conda create -q -n myenv python=$TRAVIS_PYTHON_VERSION
   - source activate myenv
 
+  # install dependencies
+  - conda install -c conda-forge coverage coveralls flake8 jinja2 pytest pytest-cov pytest-mock requests semver sphinx sphinx_rtd_theme tox twine unidecode
+  
 
-  - conda install jinja2
-  - conda install requests
-  - conda install -c conda-forge semver
-  - conda install unidecode
-  - conda install coverage
-  - pip install coveralls
-  - conda install flake8
-  - conda install pytest
-  - conda install pytest-cov
-  - conda install pytest-mock
-  - conda install sphinx
-  - conda install sphinx_rtd_theme
-  - pip install tox
-  - pip install twine
-
+  # install package
   - python setup.py install
 # #}
 
 script:
 # {# pkglts, travis.script
-
   - pytest
 # #}
 
 after_success:
 # {# pkglts, travis.after
-- coveralls
+  - coveralls
 # #}
 # blacklist
 branches:

@@ -1,9 +1,8 @@
 import logging
 import re
-from os.path import dirname
 import subprocess
 
-from pkglts.dependency import Dependency
+from os.path import dirname
 from pkglts.option_object import Option
 from pkglts.version import __version__
 from unidecode import unidecode
@@ -18,14 +17,8 @@ class OptionGit(Option):
     def root_dir(self):
         return dirname(__file__)
 
-    def require(self, purpose, cfg):
-        del cfg
-
-        if purpose == 'option':
-            options = ['base']
-            return [Dependency(name) for name in options]
-
-        return []
+    def require_option(self):
+        return ['base']
 
     def environment_extensions(self, cfg):
         del cfg

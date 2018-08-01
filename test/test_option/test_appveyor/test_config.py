@@ -23,15 +23,12 @@ def test_config_does_nothing(opt):
     assert len(opt.check(cfg)) == 0
 
 
-def test_require(opt):
-    cfg = Config()
-    opt.update_parameters(cfg)
+def test_require_option(opt):
+    assert len(tuple(opt.require_option())) == 3
 
 
 def test_require(opt):
     cfg = Config(dict(base={}, travis={}))
+    opt.update_parameters(cfg)
 
-    assert len(opt.require('option', cfg)) == 3
-    assert len(opt.require('setup', cfg)) == 0
-    assert len(opt.require('install', cfg)) == 0
-    assert len(opt.require('dvlpt', cfg)) == 0
+    assert len(tuple(opt.require(cfg))) == 0

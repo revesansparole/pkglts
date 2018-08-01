@@ -1,6 +1,4 @@
 from os.path import dirname, exists
-
-from pkglts.dependency import Dependency
 from pkglts.option_object import Option
 from pkglts.version import __version__
 
@@ -29,17 +27,8 @@ class OptionNotebook(Option):
 
         return invalids
 
-    def require(self, purpose, cfg):
-        del cfg
-
-        if purpose == 'option':
-            options = ['sphinx']
-            return [Dependency(name) for name in options]
-
-        # if purpose == 'dvlpt':
-        #     return [Dependency('nbconvert')]
-
-        return []
+    def require_option(self):
+        return ['sphinx']
 
     def tools(self, cfg):
         del cfg

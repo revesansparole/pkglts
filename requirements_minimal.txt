@@ -1,0 +1,7 @@
+# {# pkglts, pysetup
+jinja2
+requests
+semver
+unidecode
+
+# #}

@@ -19,14 +19,8 @@ class OptionAppveyor(Option):
         )
         cfg['appveyor'] = sec
 
-    def require(self, purpose, cfg):
-        del cfg
-
-        if purpose == 'option':
-            options = ['doc', 'pysetup', 'github']
-            return [Dependency(name) for name in options]
-
-        return []
+    def require_option(self):
+        return ['doc', 'pysetup', 'github']
 
     def environment_extensions(self, cfg):
         owner = cfg['github']['owner']

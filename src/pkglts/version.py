@@ -7,10 +7,10 @@ Maintain version for this package.
 MAJOR = 4
 """(int) Version major component."""
 
-MINOR = 0
+MINOR = 1
 """(int) Version minor component."""
 
-POST = 0
+POST = 1
 """(int) Version post or bugfix component."""
 
 __version__ = ".".join([str(s) for s in (MAJOR, MINOR, POST)])

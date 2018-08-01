@@ -24,11 +24,13 @@ def test_config_check_suite_names(opt):
         assert 'test.suite_name' in opt.check(cfg)
 
 
+def test_require_option(opt):
+    assert len(tuple(opt.require_option())) == 1
+
+
 def test_require(opt):
     for suite_name in ('pytest', 'nose'):
         cfg = Config(dict(base={}, test={'suite_name': suite_name}))
+        opt.update_parameters(cfg)
 
-        assert len(opt.require('option', cfg)) == 1
-        assert len(opt.require('setup', cfg)) == 0
-        assert len(opt.require('install', cfg)) == 0
-        assert len(opt.require('dvlpt', cfg)) == 2
+        assert len(tuple(opt.require(cfg))) == 2

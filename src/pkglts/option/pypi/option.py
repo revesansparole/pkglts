@@ -38,17 +38,12 @@ class OptionPypi(Option):
 
         return invalids
 
-    def require(self, purpose, cfg):
+    def require_option(self):
+        return ['doc', 'pysetup']
+
+    def require(self, cfg):
         del cfg
-
-        if purpose == 'option':
-            options = ['doc', 'pysetup']
-            return [Dependency(name) for name in options]
-
-        if purpose == 'dvlpt':
-            return [Dependency('twine', pkg_mng='pip')]
-
-        return []
+        yield Dependency('twine', intent='dvlpt')
 
     def environment_extensions(self, cfg):
         servers = cfg['pypi']['servers']

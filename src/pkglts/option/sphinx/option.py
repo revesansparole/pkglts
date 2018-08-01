@@ -31,16 +31,10 @@ class OptionSphinx(Option):
 
         return invalids
 
-    def require(self, purpose, cfg):
-        if purpose == 'option':
-            options = ['test', 'doc', 'license']
-            return [Dependency(name) for name in options]
+    def require_option(self):
+        return ['test', 'doc', 'license']
 
-        if purpose == 'dvlpt':
-            deps = [Dependency('sphinx')]
-            if cfg["sphinx"]["theme"] == "sphinx_rtd_theme":
-                deps.append(Dependency('sphinx_rtd_theme'))
-
-            return deps
-
-        return []
+    def require(self, cfg):
+        yield Dependency('sphinx', intent='doc')
+        if cfg["sphinx"]["theme"] == "sphinx_rtd_theme":
+            yield Dependency('sphinx_rtd_theme', intent='doc')

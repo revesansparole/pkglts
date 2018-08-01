@@ -33,9 +33,7 @@ def test_require_correctly_defined():
             # check 'require' function exists for each option
             try:
                 opt = available_options[option_name]
-                assert len(opt.require('option', cfg)) >= 0
-                assert len(opt.require('setup', cfg)) >= 0
-                assert len(opt.require('install', cfg)) >= 0
-                assert len(opt.require('dvlpt', cfg)) >= 0
+                assert len(tuple(opt.require_option())) >=0
+                assert len(tuple(opt.require(cfg))) >= 0
             except ImportError:
                 assert False

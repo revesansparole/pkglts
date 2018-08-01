@@ -28,11 +28,12 @@ def test_config_check_plugin_names(opt):
         assert 'plugin_project.plugin_name' in opt.check(cfg)
 
 
+def test_require_option(opt):
+    assert len(tuple(opt.require_option())) == 3
+
+
 def test_require(opt):
     cfg = Config()
     opt.update_parameters(cfg)
 
-    assert len(opt.require('option', cfg)) == 3
-    assert len(opt.require('setup', cfg)) == 0
-    assert len(opt.require('install', cfg)) == 1
-    assert len(opt.require('dvlpt', cfg)) == 0
+    assert len(tuple(opt.require(cfg))) == 1

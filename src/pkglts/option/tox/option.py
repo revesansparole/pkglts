@@ -12,14 +12,9 @@ class OptionTox(Option):
     def root_dir(self):
         return dirname(__file__)
 
-    def require(self, purpose, cfg):
+    def require_option(self):
+        return ['pysetup']
+
+    def require(self, cfg):
         del cfg
-
-        if purpose == 'option':
-            options = ['pysetup']
-            return [Dependency(name) for name in options]
-
-        if purpose == 'dvlpt':
-            return [Dependency('tox', pkg_mng='pip')]
-
-        return []
+        yield Dependency('tox', intent='test', channel='conda-forge')

@@ -34,4 +34,4 @@ def test_requirements():
                                'require': []}))
     cfg.load_extra()
     assert len(cfg._env.globals['pysetup'].requirements('install')) == 0
-    assert len(cfg._env.globals['pysetup'].requirements('dvlpt')) == 2
+    assert len(cfg._env.globals['pysetup'].requirements('test')) == 2

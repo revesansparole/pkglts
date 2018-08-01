@@ -19,11 +19,5 @@ class OptionData(Option):
         )
         cfg['data'] = sec
 
-    def require(self, purpose, cfg):
-        del cfg
-
-        if purpose == 'option':
-            options = ['base']
-            return [Dependency(name) for name in options]
-
-        return []
+    def require_option(self):
+        return ['base']
