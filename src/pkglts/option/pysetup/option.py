@@ -45,10 +45,18 @@ class OptionPysetup(Option):
             """For internal use only."""
             return [r for r in reqs if r.intent == intent]
 
+        def conda_reqs(intents):
+            return fmt_conda_reqs(reqs, intents)
+
+        def pip_reqs(intents):
+            return fmt_pip_reqs(reqs, intents)
+
         cfg.add_test('is_pip_dep', Dependency.is_pip)
 
         return {"pkg_url": pkg_url(cfg),
-                "requirements": req}
+                "requirements": req,
+                "conda_reqs": conda_reqs,
+                "pip_reqs": pip_reqs}
 
 
 def requirements(cfg):
@@ -121,3 +129,49 @@ def pkg_url(cfg):
     #     pass
 
     return ""
+
+
+def fmt_conda_reqs(reqs, intents):
+    """Produce conda cmd line to install list of requirements.
+
+    Args:
+        reqs (list of Dependency): list of requirements objects
+        intents (list of str): list of intents for deps
+
+    Returns:
+        (str)
+    """
+    reqs = [r for r in reqs if r.is_conda(strict=False) and r.intent in intents]
+    if len(reqs) == 0:
+        return ""
+
+    cmd = "conda install"
+    for channel in set(r.channel for r in reqs) - {None}:
+        cmd += " -c %s" % channel
+
+    for name in sorted(r.name for r in reqs):
+        cmd += " %s" % name
+
+    return cmd
+
+
+def fmt_pip_reqs(reqs, intents):
+    """Produce pip cmd line to install list of requirements.
+
+    Args:
+        reqs (list of Dependency): list of requirements objects
+        intents (list of str): list of intents for deps
+
+    Returns:
+        (str)
+    """
+    reqs = [r for r in reqs if r.is_pip(strict=True) and r.intent in intents]
+    if len(reqs) == 0:
+        return ""
+
+    cmd = "pip install"
+
+    for name in sorted(r.name for r in reqs):
+        cmd += " %s" % name
+
+    return cmd

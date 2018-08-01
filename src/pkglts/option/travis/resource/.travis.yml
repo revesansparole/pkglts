@@ -36,47 +36,15 @@ install:
   - conda create -q -n myenv python=$TRAVIS_PYTHON_VERSION
   - source activate myenv
 
-  # install
-{%- for dep in pysetup.requirements('install') %}
-  - {% if dep.is_conda(strict=False) -%}
-  {{ dep.conda_install() }}
-  {%- elif dep.is_pip(strict=True) -%}
-  {{ dep.pip_install() }}
-  {%- elif dep.package_manager == 'git' -%}
-  pip install git+https://github.com/{{ dep.name }}
+  # install dependencies
+  {% if pysetup.conda_reqs(['install', 'test', 'doc', 'dvlpt']) != "" -%}
+  - {{ pysetup.conda_reqs(['install', 'test', 'doc', 'dvlpt']) }}
   {%- endif %}
-{%- endfor %}
-  # test
-{%- for dep in pysetup.requirements('test') %}
-  - {% if dep.is_conda(strict=False) -%}
-  {{ dep.conda_install() }}
-  {%- elif dep.is_pip(strict=True) -%}
-  {{ dep.pip_install() }}
-  {%- elif dep.package_manager == 'git' -%}
-  pip install git+https://github.com/{{ dep.name }}
+  {% if pysetup.pip_reqs(['install', 'test', 'doc', 'dvlpt']) != "" -%}
+  - {{ pysetup.pip_reqs(['install', 'test', 'doc', 'dvlpt']) }}
   {%- endif %}
-{%- endfor %}
-  # doc
-{%- for dep in pysetup.requirements('doc') %}
-  - {% if dep.is_conda(strict=False) -%}
-  {{ dep.conda_install() }}
-  {%- elif dep.is_pip(strict=True) -%}
-  {{ dep.pip_install() }}
-  {%- elif dep.package_manager == 'git' -%}
-  pip install git+https://github.com/{{ dep.name }}
-  {%- endif %}
-{%- endfor %}
-  # dvlpt
-{%- for dep in pysetup.requirements('dvlpt') %}
-  - {% if dep.is_conda(strict=False) -%}
-  {{ dep.conda_install() }}
-  {%- elif dep.is_pip(strict=True) -%}
-  {{ dep.pip_install() }}
-  {%- elif dep.package_manager == 'git' -%}
-  pip install git+https://github.com/{{ dep.name }}
-  {%- endif %}
-{%- endfor %}
 
+  # install package
   - python setup.py install
 # #}
 

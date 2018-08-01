@@ -32,26 +32,11 @@ install:
 build: false
 
 build_script:
-  # install dependencies and package
-  # install
-  - conda install jinja2
-  - conda install requests
-  - conda install -c conda-forge semver
-  - conda install unidecode
-  # test
-  - conda install coverage
-  - conda install coveralls
-  - conda install pytest
-  - conda install pytest-cov
-  - conda install pytest-mock
-  - conda install -c conda-forge tox
-  # doc
-  - conda install sphinx
-  - conda install sphinx_rtd_theme
-  # dvlpt
-  - conda install flake8
-  - conda install twine
+  # install dependencies
+  - conda install -c conda-forge coverage coveralls flake8 jinja2 pytest pytest-cov pytest-mock requests semver sphinx sphinx_rtd_theme tox twine unidecode
+  
 
+  # install package
   - python setup.py install
   # test
   - pytest
