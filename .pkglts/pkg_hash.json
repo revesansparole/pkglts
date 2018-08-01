@@ -43,8 +43,8 @@
   },
   "conda/meta.yaml": {
     "conda.about": "6/RoaDh45Wwcc0uAhKGnUH46mczqPBQq/PV0cSCbe+fhiDQPOooOK8u24GzswyAcXIEHoASc/XIe+WS/2zBl5A==",
-    "conda.package": "cPq733MXs4Qmg8j1vGoDjk95uQUBobkxphsLsvwxau22KKLGbAcMk41V9zpYVAwczPHUhjWHal0FXOT20iTt8w==",
-    "conda.req_build": "GhXkH8/JbyLDpbnbH4PKkatycDXY3pwfyKp1Sqk8NMMycTXqi5KGfolUnNVfiVAhgP90gokseGbhS1Oa8ZlpMg==",
+    "conda.package": "X2hdTFGrfwa8mlAQEQn/G0n3/mRs/x7UX4G+i9yaQbqXO7L5eZ2jy8cnpwjz892DJ/+KGX387L8eYInSyHQHuw==",
+    "conda.req_build": "STnNeGQNdKNtp0ZDkfZ9RqPnmFYfv1p31EavfN1V6ogusq9KBD+sFzDaFK8r9xu+pqXupiyeBc1T/MIqJWYXJg==",
     "conda.req_run": "IFJIX6NLBagkPhLDSOvcHHj/XiggVhFfvIRKy/vGjLnBm8TsaqXFdb8wX1l/l4GJaGjfNUA3+MOT+tGumt8uPw==",
     "conda.src": "Lzbp176AVU0YantZQxB4LsR2jbxpZ/OlkvY2V4aWAEuzKEarh872uc1eRvsIYf/FsbxvcmUI84AezWlA72nI6A=="
   },
@@ -63,7 +63,7 @@
   "doc/_static/nonempty.txt": {},
   "doc/authors.rst": {},
   "doc/conf.py": {
-    "sphinx": "lg5AaPSDBxvmGJw60s2YUj3MM0LNodVqm8DoJxhPVnuZKLDND5Kgq4T0CcnTPdlrNwGGfHLjgImEUv7txBS9pw=="
+    "sphinx": "rWiNiSYrb1/IsA6EoOrAxFA8zqalRbVENitQv5FPSOMKvaMcwXO2YfjM72ZzO8lFWj0/jBcl9Faq8w5Xi1H0zg=="
   },
   "doc/contributing.rst": {},
   "doc/history.rst": {},
@@ -94,7 +94,7 @@
   },
   "setup.py": {
     "pysetup.call": "t30iIuCMd/sWxStR2XNYb8bCBgwanhKt8YYn2VKACyAqL5cKFRUWpVRIpAR+uxXUZ9PYYy2csMmECcONnRZE8w==",
-    "pysetup.kwds": "XB6jLZ9Yuj+ueTPOgHhAm2KQXcW0hIarLbQPSDn1ytkB3E/J5FOFQ0plZ9QhCPRH7rWSnPnT6fn5ISLDQB+Fjw=="
+    "pysetup.kwds": "imT1HTRrxtdeFIs0FKktKMfkbeizJ3uoCzkYMwvc8nowiKOV5W6qw32QPWdgQ1V6PEDruwwPB6DJqV1UCnz/Lg=="
   },
   "src/pkglts/__init__.py": {
     "base": "+GVGxVjJGifAp8dAR9V2W3aVPe7/D53bN7r0O5VxO9OUqG4vnGTZvnORu1objjjIwm86DgemQd7ax/IJpRa8Wg=="
@@ -103,7 +103,7 @@
     "data": "wwgLuV/OqHWjWbssvDHa4LNg+7C+tuNiKHOxkO+9UAl9opI/HfPyJAq2fPhUeTmVvb/E6MkqDJIli9m8n5/V0Q=="
   },
   "src/pkglts/version.py": {
-    "version": "1lzwfHmw7dePpKuVD+O9G4EVtEJGYlU7ePDhZi8l2okZbkWePNuKhvcBovSFEB67/pYi/ENAmlD7gGAEUTo6Ww=="
+    "version": "oHIsPkq2Yy/Q+ncSAurlQg0o510Y8EcBNGVr1lhwRSeHIgoichmRYR8wWBS7CrTMQe9NSY9GqI3CmWYrit8d8g=="
   },
   "src/pkglts_data/__init__.py": {},
   "test/__init__.py": {},

@@ -1,7 +1,7 @@
 # {# pkglts, conda.package
 package:
   name: pkglts
-  version: "4.1.0"
+  version: "4.1.1"
 # #}
 
 # {# pkglts, conda.src
@@ -16,6 +16,12 @@ requirements:
     - python
     - setuptools
     - pytest-runner
+    - coverage
+    - coveralls
+    - pytest
+    - pytest-cov
+    - pytest-mock
+    - tox
 # #}
 
 # {# pkglts, conda.req_run
