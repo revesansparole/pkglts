@@ -50,11 +50,10 @@ install:
 
 script:
 # {# pkglts, travis.script
-  {%- if 'test' is available -%}
-  {%- if test.suite_name == 'nose' %}
+  {% if 'test' is available -%}
+  {%- if test.suite_name == 'nose' -%}
   - nosetests
-  {%- endif -%}
-  {%- if test.suite_name == 'pytest' %}
+  {%- elif test.suite_name == 'pytest' -%}
   - pytest
   {%- endif -%}
   {%- endif %}
@@ -62,7 +61,7 @@ script:
 
 after_success:
 # {# pkglts, travis.after
-{%- if 'coveralls' is available -%}
+  {% if 'coveralls' is available -%}
   - coveralls
-{%- endif %}
+  {%- endif %}
 # #}

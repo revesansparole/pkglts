@@ -47,13 +47,12 @@ install:
 
 script:
 # {# pkglts, travis.script
-
   - pytest
 # #}
 
 after_success:
 # {# pkglts, travis.after
-- coveralls
+  - coveralls
 # #}
 # blacklist
 branches:
