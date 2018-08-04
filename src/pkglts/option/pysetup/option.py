@@ -1,9 +1,10 @@
 from os.path import dirname
-
 from pkglts.dependency import Dependency
 from pkglts.option_object import Option
 from pkglts.option_tools import available_options
 from pkglts.version import __version__
+
+from . import find_requirements
 
 
 class OptionPysetup(Option):
@@ -37,6 +38,10 @@ class OptionPysetup(Option):
 
     def require_option(self):
         return ['base', 'test', 'doc', 'license', 'version']
+
+    def tools(self, cfg):
+        del cfg
+        yield find_requirements.parser_find_reqs
 
     def environment_extensions(self, cfg):
         reqs = requirements(cfg)
