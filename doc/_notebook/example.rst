@@ -1,3 +1,7 @@
+This file has been generated from the following notebook: :download:`example.ipynb`.
+
+Download it if you want to replay it using `jupyter notebook <http://jupyter.org/>`_.
+
 
 Notebook Example, Main Title
 ============================
@@ -44,5 +48,4 @@ Display
 
 
 .. image:: output_6_1.png
-
 
