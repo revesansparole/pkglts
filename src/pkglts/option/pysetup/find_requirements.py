@@ -42,8 +42,8 @@ def action_find_reqs(cfg, **kwds):
                 if not path.basename(pth).startswith("_"):
                     src = open(pth, 'rb').read()
                     pt = ast.parse(src, pth)
-                    reqs.update(
-                        pkgname.split(".")[0] for pkgname in iter_ext_imports(pt.body))  # TODO pb with namespaces
+                    # TODO pb with namespaces
+                    reqs.update(pkgname.split(".")[0] for pkgname in iter_ext_imports(pt.body))
             reqs -= {this_pkgname}
             print("standard", sorted(reqs & stdpkgs))
             print("external", sorted(reqs - stdpkgs))
