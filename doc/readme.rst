@@ -119,6 +119,7 @@ Extra tools
 Some options of pkglts provide tools to make the life of package manager easier.
 
 - :doc:`option/doc/history`: Regenerate the history of your package from associated tags
+- :doc:`option/pysetup/reqs`: Find all your dependencies
 - :doc:`option/version/bump`: Increase your package version number
 
 .. warning:: Work In Progress
