@@ -6,8 +6,9 @@ List of currently available tools
    :maxdepth: 1
 
    option/doc/history
-   option/version/bump
    option/notebook/nbcompile
+   option/pysetup/reqs
+   option/version/bump
 
 .. _GitHub: https://github.com/
 .. _PyPi: https://pypi.python.org/pypi

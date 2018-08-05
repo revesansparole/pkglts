@@ -6,10 +6,8 @@ Increase your package version number in the configuration file.
 Modifications
 -------------
 
-
 This tool will overwrite your package config file. You'll still have to call
 'rg' to regenerate your files with the new version.
-
 
 Quick tutorial
 --------------
