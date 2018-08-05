@@ -47,6 +47,7 @@ def action_find_reqs(cfg, **kwds):
             reqs -= {this_pkgname}
             print("standard", sorted(reqs & stdpkgs))
             print("external", sorted(reqs - stdpkgs))
+            print("")
 
 
 def parser_find_reqs(subparsers):
