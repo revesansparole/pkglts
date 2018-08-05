@@ -1,16 +1,52 @@
 """
 This tool will display all dependencies used by this package.
 """
+import ast
 import logging
+from glob import glob
+from os import path
+
+from pkglts.local import src_dir
 
 LOGGER = logging.getLogger(__name__)
+
+stdpkgs = set(line.strip() for line in open(path.join(path.dirname(__file__), "stdpkgs.txt")).readlines()
+              if len(line.strip()) > 0 and not line.startswith("#"))
+
+
+def iter_ext_imports(body):
+    for node in body:
+        if isinstance(node, ast.Import):
+            for alias in node.names:
+                yield alias.name
+        elif isinstance(node, ast.ImportFrom):
+            if node.level == 0:  # only external imports
+                yield node.module
+
+        # elif isinstance(node, ast.FunctionDef):
+        #     for name, level in iter_imports(node.body):
+        #         yield name, level
 
 
 def action_find_reqs(cfg, **kwds):
     """Find dependencies used by this package.
     """
     LOGGER.info("Find requirements")
-    print("TODO")
+    this_pkgname = cfg['base']['pkgname']
+
+    for dirpth in (src_dir(cfg), 'doc', 'example', 'test'):
+        if path.exists(dirpth):
+            print("############\n# %s\n############" % dirpth)
+            reqs = set()
+            for pth in glob("%s/*.py" % dirpth) + glob("%s/**/*.py" % dirpth):
+                if not path.basename(pth).startswith("_"):
+                    src = open(pth, 'rb').read()
+                    pt = ast.parse(src, pth)
+                    reqs.update(
+                        pkgname.split(".")[0] for pkgname in iter_ext_imports(pt.body))  # TODO pb with namespaces
+            reqs -= {this_pkgname}
+            print("standard", sorted(reqs & stdpkgs))
+            print("external", sorted(reqs - stdpkgs))
 
 
 def parser_find_reqs(subparsers):
