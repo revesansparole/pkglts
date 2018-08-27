@@ -154,7 +154,7 @@ def fmt_conda_reqs(reqs, intents):
     for channel in set(r.channel for r in reqs) - {None}:
         cmd += " -c %s" % channel
 
-    for name in sorted(r.name for r in reqs):
+    for name in sorted(r.conda_full_name() for r in reqs):
         cmd += " %s" % name
 
     return cmd
@@ -176,7 +176,7 @@ def fmt_pip_reqs(reqs, intents):
 
     cmd = "pip install"
 
-    for name in sorted(r.name for r in reqs):
+    for name in sorted(r.pip_full_name() for r in reqs):
         cmd += " %s" % name
 
     return cmd
