@@ -9,7 +9,7 @@ from . import logging_tools
 from .config_management import get_pkg_config, write_pkg_config
 from .manage import add_option, clean, init_pkg, install_example_files, regenerate_option, regenerate_package
 from .option_tools import available_options
-from .version_management import write_pkg_version, outdated_options
+from .version_management import outdated_options, write_pkg_version
 
 LOGGER = logging.getLogger(__name__)
 
@@ -20,8 +20,10 @@ def action_info(cfg, **kwds):
     LOGGER.info("package info")
     print("current config (after resolution)")
     opt_names = kwds['option']
+    all_opts = False
     if not opt_names:
         opt_names = cfg.installed_options()
+        all_opts = True
 
     outdated = outdated_options(cfg)
 
@@ -32,9 +34,10 @@ def action_info(cfg, **kwds):
             print(name)
         print(json.dumps(cfg[name], sort_keys=True, indent=2))
 
-    print("other available options:")
-    for opt_name in sorted(set(available_options) - set(cfg.installed_options())):
-        print("  ", opt_name)
+    if all_opts:
+        print("other available options:")
+        for opt_name in sorted(set(available_options) - set(cfg.installed_options())):
+            print("  ", opt_name)
 
 
 def action_clean(cfg, **kwds):
