@@ -49,9 +49,9 @@ def test_dependency_writes_correct_pip_requirements():
     # version partially specified without comparison indicator
     dep = Dependency("toto", pkg_mng="pip", version="2.18")
     txt = dep.fmt_pip_requirement()
-    assert txt == "toto>=2.18"
+    assert txt == "toto>=2.18, <2.19"
     txt = dep.fmt_pip_requirement(extended=True)
-    assert txt == "toto>=2.18  # pip install toto>=2.18"
+    assert txt == "toto>=2.18, <2.19  # pip install toto>=2.18, <2.19"
 
     # version specified with comparison indicator
     dep = Dependency("toto", pkg_mng="pip", version="==2.18")
@@ -77,9 +77,9 @@ def test_dependency_writes_correct_pip_requirements():
     # version partially specified without comparison indicator conda manager
     dep = Dependency("toto", pkg_mng="conda", version="2.18")
     txt = dep.fmt_pip_requirement()
-    assert txt == "toto>=2.18"
+    assert txt == "toto>=2.18, <2.19"
     txt = dep.fmt_pip_requirement(extended=True)
-    assert txt == "toto>=2.18  # conda install toto=2.18"
+    assert txt == "toto>=2.18, <2.19  # conda install toto=2.18"
 
 
 def test_dependency_writes_correct_conda_requirements():
