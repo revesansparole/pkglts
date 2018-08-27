@@ -53,9 +53,22 @@ class Dependency(object):
             version = ""
         else:
             version = self.version
-            if version[:2] not in ('==', '>=', '<=', "~="):
-                if len(version.split(".")) < 3:
-                    version = ">=" + version
+            if version[:2] in ('==', '>=', '<=', "~="):
+                # full formatter already do nothing
+                pass
+            elif version[0] == '=':
+                # transform into '=='
+                version = "=" + version
+            else:
+                # no formatter at all use heuristic to include one
+                if len(version.split(".")) == 1:
+                    major = int(version)
+                    next_version = "{:d}".format(major + 1)
+                    version = ">=" + version + ", <" + next_version
+                elif len(version.split(".")) == 2:
+                    major, minor = (int(v) for v in version.split("."))
+                    next_version = "{:d}.{:d}".format(major, minor + 1)
+                    version = ">=" + version + ", <" + next_version
                 else:
                     version = "==" + version
         return "{}{}".format(self.name, version)
