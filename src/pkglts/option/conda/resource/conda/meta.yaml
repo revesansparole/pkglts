@@ -38,6 +38,7 @@ requirements:
 # #}
 
 build:
+  noarch: python
   script: python setup.py install --single-version-externally-managed --record=record.txt
 
 # {# pkglts, conda.about
