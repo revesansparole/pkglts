@@ -13,7 +13,7 @@ from .option_tools import available_options
 
 # python2 compatibility
 try:
-    FileNotFoundError
+    FileNotFoundError = FileNotFoundError
 except NameError:
     FileNotFoundError = IOError
 
