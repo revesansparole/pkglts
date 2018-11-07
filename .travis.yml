@@ -51,7 +51,7 @@ script:
 
 after_success:
 # {# pkglts, travis.after
-  - coveralls
+  - coveralls debug
 # #}
 # blacklist
 branches:
