@@ -6,7 +6,6 @@ from os import listdir, mkdir
 from os.path import basename, exists, isdir, splitext
 
 from .hash_management import compute_hash, pth_as_key
-from .install_env.load_front_end import get_install_front_end
 from .local import init_namespace_dir
 from .option_tools import available_options, get_user_permission
 from .templating import render
@@ -17,35 +16,6 @@ TPL_SRC_NAME = "{" + "{ base.pkgname }" + "}"
 
 NON_BIN_EXT = ("", ".bat", ".cfg", ".in", ".ini", ".md", ".no", ".ps1", ".py", ".rst", ".sh",
                ".svg", ".txt", ".yml", ".yaml")
-
-
-def ensure_installed_packages(requirements, msg, cfg):
-    """Ensure all packages in requirements are installed.
-
-    If not, ask user permission to install them.
-
-    Args:
-        requirements (list of Dependency): list of package names to install
-                                   if needed
-        msg (str): error message to print
-        cfg (Config):  current package configuration
-
-    Returns:
-        (bool): whether all required packages are installed or not
-    """
-    ife_name = cfg["_pkglts"]['install_front_end']
-    req = [dep.name for dep in requirements
-           if dep.package_manager is None or dep.package_manager == ife_name]
-    ife = get_install_front_end(ife_name)
-    to_install = set(req) - set(ife.installed_packages())
-    if to_install:
-        LOGGER.warning(msg)
-        LOGGER.warning("missing packages: " + ", ".join(to_install))
-        for name in to_install:
-            ife.install(name)
-            LOGGER.info("install %s", name)
-
-    return True
 
 
 def check_option_parameters(name, cfg):
@@ -92,19 +62,9 @@ def update_opt(name, cfg):
             else:
                 return cfg
 
-    # find extra package requirements for setup
-    # msg = "this option requires some packages to setup"
-    # if not ensure_installed_packages(opt.require('setup', cfg), msg, cfg):
-    #     LOGGER.warning("option installation stopped")
-    #     return cfg
-
     # find parameters required by option config
     opt.update_parameters(cfg.template())
     cfg.resolve()
-
-    # find extra package requirements for dvlpt
-    # msg = "this option requires additional packages for developers"
-    # ensure_installed_packages(opt.require('dvlpt', cfg), msg, cfg)
 
     return cfg
 

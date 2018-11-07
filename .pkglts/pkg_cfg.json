@@ -89,7 +89,6 @@
   "pysetup": {
     "intended_versions": [
       "27",
-      "35",
       "36"
     ],
     "require": [
@@ -125,6 +124,6 @@
   "version": {
     "major": 4,
     "minor": 4,
-    "post": 0
+    "post": 1
   }
 }

@@ -34,7 +34,7 @@ pkg_data['pkglts'] = data_files
 
 setup_kwds = dict(
     name='pkglts',
-    version="4.4.0",
+    version="4.4.1",
     description=short_descr,
     long_description=readme + '\n\n' + history,
     author="revesansparole",
@@ -77,7 +77,6 @@ setup_kwds = dict(
         "Programming Language :: Python :: 2",
         "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
     ],
     )
