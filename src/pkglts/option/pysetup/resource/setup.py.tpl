@@ -60,7 +60,9 @@ setup_kwds = dict(
 
     packages=pkgs,
     {%- if base.namespace is not none %}
+    {% if base.namespace_method == 'setuptools' -%}
     namespace_packages=['{{ base.namespace }}'],
+    {%- endif %}
     {%- endif %}
     package_dir={'': 'src'},
     {% if 'data' is available %}
