@@ -89,8 +89,7 @@
   "pysetup": {
     "intended_versions": [
       "27",
-      "36",
-      "37"
+      "36"
     ],
     "require": [
       {
