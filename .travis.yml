@@ -47,10 +47,12 @@ install:
 script:
 # {# pkglts, travis.script
   - pytest
+  - ls -a
 # #}
 
 after_success:
 # {# pkglts, travis.after
+  - ls -a
   - coveralls debug
 # #}
 # blacklist
