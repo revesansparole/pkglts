@@ -1,13 +1,12 @@
-from os.path import join as pj
-from os.path import exists
-import pytest
 from random import random
 
+import pytest
+from os.path import exists
+from os.path import join as pj
 from pkglts.config_management import Config, DEFAULT_CFG
 from pkglts.hash_management import pth_as_key
 from pkglts.manage_tools import regenerate_dir
-
-from .small_tools import ensure_created, ensure_path, rmdir
+from pkglts.small_tools import ensure_created, ensure_path, rmdir
 
 
 @pytest.fixture()
