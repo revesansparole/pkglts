@@ -46,7 +46,7 @@ install:
 
 script:
 # {# pkglts, travis.script
-  - touch .coverage
+  - ls -a
   - pytest
   - ls -a
 # #}
