@@ -53,6 +53,7 @@ script:
 after_success:
 # {# pkglts, travis.after
   - ls -a
+  - ls -a test
   - coveralls debug
 # #}
 # blacklist
