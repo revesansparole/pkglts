@@ -46,7 +46,7 @@ install:
 
 script:
 # {# pkglts, travis.script
-  - pytest
+  - pytest --cov=pkglts
 # #}
 
 after_success:
