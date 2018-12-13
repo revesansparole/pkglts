@@ -46,16 +46,12 @@ install:
 
 script:
 # {# pkglts, travis.script
-  - ls -a
-  - pytest --cov=pkglts
-  - ls -a
+  - pytest
 # #}
 
 after_success:
 # {# pkglts, travis.after
-  - ls -a
-  - ls -a test
-  - coveralls debug
+  - coveralls
 # #}
 # blacklist
 branches:
