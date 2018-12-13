@@ -1,15 +1,14 @@
 import json
-from os.path import exists
-from os.path import join as pj
 
 import pytest
 import semver
+from os.path import exists
+from os.path import join as pj
 from pkglts.config import pkg_version_file, pkglts_dir
 from pkglts.config_management import Config, DEFAULT_CFG
+from pkglts.small_tools import ensure_created, rmdir
 from pkglts.version import __version__
 from pkglts.version_management import load_pkg_version, option_current_version, outdated_options, write_pkg_version
-
-from .small_tools import ensure_created, rmdir
 
 
 @pytest.fixture()

@@ -1,11 +1,10 @@
 from os import listdir
-from os.path import join as pj
-import pytest
 
+import pytest
+from os.path import join as pj
 from pkglts.manage import (get_pkg_config, get_pkg_hash,
                            init_pkg)
-
-from .small_tools import ensure_created, rmdir
+from pkglts.small_tools import ensure_created, rmdir
 
 
 @pytest.fixture()

@@ -1,14 +1,13 @@
 import json
 from os import remove
+
+import pytest
 from os.path import exists
 from os.path import join as pj
-import pytest
-
-from pkglts.config import pkglts_dir, pkg_cfg_file
+from pkglts.config import pkg_cfg_file, pkglts_dir
 from pkglts.config_management import Config, get_pkg_config, write_pkg_config
 from pkglts.manage import (init_pkg, regenerate_package)
-
-from .small_tools import ensure_created, rmdir
+from pkglts.small_tools import ensure_created, rmdir
 
 
 def addendum(init_file):
