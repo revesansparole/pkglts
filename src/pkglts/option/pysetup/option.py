@@ -46,6 +46,9 @@ class OptionPysetup(Option):
     def environment_extensions(self, cfg):
         reqs = requirements(cfg)
 
+        def intents():
+            return sorted(set(r.intent for r in reqs) | {'install', 'doc', 'dvlpt', 'test'})
+
         def req(intent):
             """For internal use only."""
             return [r for r in reqs if r.intent == intent]
@@ -59,6 +62,7 @@ class OptionPysetup(Option):
         cfg.add_test('is_pip_dep', Dependency.is_pip)
 
         return {"pkg_url": pkg_url(cfg),
+                "intents": intents,
                 "requirements": req,
                 "conda_reqs": conda_reqs,
                 "pip_reqs": pip_reqs}
