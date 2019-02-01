@@ -25,7 +25,7 @@ Every time you make changes to the structure of your package by adding a new
 option for example, a call to 'pmg regenerate' is mandatory to rebuilt the
 package structural files::
 
-    (dvlpt)toto$ pmg regenerate
+    (dvlpt)toto$ pmg rg
 
 This phase will never overwrite any files you modified or created. You'll be prompted
 in case of conflicts but it is your responsibility to solve them and relaunch the
@@ -95,7 +95,7 @@ The script will perform different tasks sequentially:
 Multiple call to add options can be serialized but you explicitly needs to call
 regenerate to see the action of the new options on your package::
 
-    (dvlpt)toto$ pmg regenerate
+    (dvlpt)toto$ pmg rg
 
 
 Before calling 'regenerate' however, take the time to browse through 'pkg_cfg.json'
