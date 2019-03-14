@@ -29,7 +29,10 @@ def check_option_parameters(name, cfg):
     """
     try:
         opt = available_options[name]
-        return opt.check(cfg)
+        try:
+            return opt.check(cfg)
+        except KeyError as e:
+            raise UserWarning("problem with check of %s" % name)
     except KeyError:
         return []
 
