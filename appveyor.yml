@@ -37,7 +37,7 @@ build_script:
   
 
   # install package
-  - python setup.py install
+  - pip install .
   # test
   - pytest
 # #}
