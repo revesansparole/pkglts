@@ -9,7 +9,7 @@ environment:
     CMD_IN_ENV: "cmd /E:ON /V:ON /C"
 
   matrix:
-    - PYTHON: "C:\\Python36_64"
+    - PYTHON: "C:\\Python36-x64"
       PYTHON_VERSION: "3.6"
       PYTHON_ARCH: "64"
       CONDA_PY: "36"
@@ -26,7 +26,7 @@ install:
   # useful for debugging any issues with conda
   - conda info -a
   # create environment
-  - conda create -n ci python=3.6
+  - conda create -n ci python
   - activate ci
 
 build: false
