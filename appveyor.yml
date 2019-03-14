@@ -9,35 +9,25 @@ environment:
     CMD_IN_ENV: "cmd /E:ON /V:ON /C"
 
   matrix:
-    - PYTHON: "C:\\Python36_64"
-      PYTHON_VERSION: "3.6"
-      PYTHON_ARCH: "64"
-      CONDA_PY: "36"
-      CONDA_NPY: "113"
+    - CONDA: "C:\\Miniconda3-x64\\Scripts"
 
 install:
-  # this installs Miniconda
-  - curl https://repo.continuum.io/miniconda/Miniconda3-latest-Windows-x86_64.exe -o miniconda.exe
-  - miniconda.exe /AddToPath=1 /InstallationType=JustMe /RegisterPython=0 /S /D=%HOMEDRIVE%\Miniconda
-  - del miniconda.exe
-  - "set PATH=%HOMEDRIVE%\\Miniconda;%HOMEDRIVE%\\Miniconda\\Scripts;%PATH%"
-  - conda config --set always_yes yes --set changeps1 no
-  - conda update -q conda
+  - "%CONDA%\\conda config --set always_yes yes --set changeps1 no"
   # useful for debugging any issues with conda
-  - conda info -a
+  - "%CONDA%\\conda info -a"
   # create environment
-  - conda create -n ci python
-  - activate ci
+  - "%CONDA%\\conda create -n ci python"
+  - "%CONDA%\\activate ci"
 
 build: false
 
 build_script:
   # install dependencies
-  - conda install -c conda-forge coverage coveralls flake8 jinja2 pytest pytest-cov pytest-mock requests semver sphinx sphinx_rtd_theme tox twine unidecode
+  - "%CONDA%\\conda install -c conda-forge coverage coveralls flake8 jinja2 pytest pytest-cov pytest-mock requests semver sphinx sphinx_rtd_theme tox twine unidecode"
   
 
   # install package
-  - python setup.py install
+  - pip install .
   # test
-  - pytest
+  - pytest --cov=pkglts
 # #}
