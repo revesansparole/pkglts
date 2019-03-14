@@ -26,7 +26,7 @@ install:
   - "%CONDA%\\conda info -a"
   # create environment
   - "%CONDA%\\conda create -n ci python"
-  - "%CONDA% activate ci"
+  - "%CONDA%\\activate ci"
 
 build: false
 
