@@ -26,8 +26,8 @@ install:
   # useful for debugging any issues with conda
   - conda info -a
   # create environment
-  - conda create -n ci python
-  - conda activate ci
+  - conda create -n ci python=3.6
+  - activate ci
 
 build: false
 
