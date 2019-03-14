@@ -20,7 +20,7 @@ install:
 #  - miniconda.exe /AddToPath=1 /InstallationType=JustMe /RegisterPython=0 /S /D=%HOMEDRIVE%\Miniconda
 #  - del miniconda.exe
 #  - "set PATH=%HOMEDRIVE%\\Miniconda;%HOMEDRIVE%\\Miniconda\\Scripts;%PATH%"
-  - %CONDA%\conda config --set always_yes yes --set changeps1 no
+  - "%CONDA%\conda config --set always_yes yes --set changeps1 no"
   - conda update -q conda
   # useful for debugging any issues with conda
   - conda info -a
