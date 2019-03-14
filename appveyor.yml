@@ -27,7 +27,7 @@ install:
   - conda info -a
   # create environment
   - conda create -n ci python
-  - activate ci
+  - conda activate ci
 
 build: false
 
