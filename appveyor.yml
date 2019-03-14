@@ -9,7 +9,7 @@ environment:
     CMD_IN_ENV: "cmd /E:ON /V:ON /C"
 
   matrix:
-    - CONDA: "C:\\Miniconda3-x64\\Scripts\\conda"
+    - CONDA: "C:\\Miniconda3-x64\\Scripts"
 
 install:
   - dir C:\Miniconda3-x64
@@ -20,19 +20,19 @@ install:
 #  - miniconda.exe /AddToPath=1 /InstallationType=JustMe /RegisterPython=0 /S /D=%HOMEDRIVE%\Miniconda
 #  - del miniconda.exe
 #  - "set PATH=%HOMEDRIVE%\\Miniconda;%HOMEDRIVE%\\Miniconda\\Scripts;%PATH%"
-  - "%CONDA% config --set always_yes yes --set changeps1 no"
+  - "%CONDA%\\conda config --set always_yes yes --set changeps1 no"
 #  - conda update -q conda
   # useful for debugging any issues with conda
-  - "%CONDA% info -a"
+  - "%CONDA%\\conda info -a"
   # create environment
-  - "%CONDA% create -n ci python"
+  - "%CONDA%\\conda create -n ci python"
   - "%CONDA% activate ci"
 
 build: false
 
 build_script:
   # install dependencies
-  - "%CONDA% install -c conda-forge coverage coveralls flake8 jinja2 pytest pytest-cov pytest-mock requests semver sphinx sphinx_rtd_theme tox twine unidecode"
+  - "%CONDA%\\conda install -c conda-forge coverage coveralls flake8 jinja2 pytest pytest-cov pytest-mock requests semver sphinx sphinx_rtd_theme tox twine unidecode"
   
 
   # install package
