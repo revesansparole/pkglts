@@ -16,6 +16,8 @@ environment:
       CONDA_NPY: "113"
 
 install:
+  - dir C:\Miniconda3-x64
+  - dir C:\Miniconda3-x64\condabin
   # this installs Miniconda
   - curl https://repo.continuum.io/miniconda/Miniconda3-latest-Windows-x86_64.exe -o miniconda.exe
   - miniconda.exe /AddToPath=1 /InstallationType=JustMe /RegisterPython=0 /S /D=%HOMEDRIVE%\Miniconda
