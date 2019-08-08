@@ -23,7 +23,7 @@ def action_info(cfg, **kwds):
     opt_names = kwds['option']
     all_opts = False
     if not opt_names:
-        opt_names = cfg.installed_options()
+        opt_names = cfg.installed_options(return_sorted=True)
         all_opts = True
 
     outdated = outdated_options(cfg)
