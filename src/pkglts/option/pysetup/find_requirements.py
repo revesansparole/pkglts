@@ -34,7 +34,7 @@ def action_find_reqs(cfg, **kwds):
     LOGGER.info("Find requirements")
     this_pkgname = cfg['base']['pkgname']
 
-    for dirpth in (src_dir(cfg), 'doc', 'example', 'test'):
+    for dirpth in (src_dir(cfg), 'doc', 'example', 'script', 'test'):
         if path.exists(dirpth):
             print("############\n# %s\n############" % dirpth)
             reqs = set()
