@@ -15,10 +15,6 @@ class OptionConda(Option):
         return ['pysetup']
 
     def environment_extensions(self, cfg):
-        channels = set(dep.channel for dep in requirements(cfg))
-        try:
-            channels.remove(None)
-        except KeyError:
-            pass
+        channels = set(dep.channel for dep in requirements(cfg)) - {None}
 
         return {"channels": channels}
