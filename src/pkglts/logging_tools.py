@@ -49,15 +49,15 @@ def main(verbosity):
     logger.setLevel(vlevel)
     logger.addHandler(wng_ch)
 
-    try:
-        # rolling_logs(logger)
-        info_ch = logging.StreamHandler()
-        info_ch.setLevel(logging.INFO)
-        info_ch.setFormatter(fmt)
-
-        logger.addHandler(info_ch)
-    except IOError:
-        print("no info handler")
+    # try:
+    #     # rolling_logs(logger)
+    #     info_ch = logging.StreamHandler()
+    #     info_ch.setLevel(logging.INFO)
+    #     info_ch.setFormatter(fmt)
+    #
+    #     logger.addHandler(info_ch)
+    # except IOError:
+    #     print("no info handler")
 
 
 if __name__ == '__main__':
