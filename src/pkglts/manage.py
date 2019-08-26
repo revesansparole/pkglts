@@ -223,3 +223,17 @@ def regenerate_option(cfg, name, target=".", overwrite=False):
         opt.regenerate(cfg, target, overwrite)
     except KeyError:
         raise KeyError("option '%s' does not exists" % name)
+
+
+def rg2(cfg, target=".", overwrite=False):
+    """Rebuild all automatically generated files.
+
+    Args:
+        cfg (Config):  current package configuration
+        target (str): target directory to write into
+        overwrite (bool): default False, whether or not
+                         to overwrite user modified files
+
+    Returns:
+        None
+    """
