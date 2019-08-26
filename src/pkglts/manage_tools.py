@@ -115,19 +115,22 @@ def _rg_file(src_pth, tgt_name, tgt_pth, cfg, overwrite_file):
 
     LOGGER.debug("render file '%s' into '%s'", src_pth, tgt_pth)
 
-    if overwrite_file.get(pth_as_key(tgt_pth), True):
-        _, ext = splitext(tgt_name)
-        if ext in NON_BIN_EXT:
-            blocks = render(cfg, src_pth, tgt_pth)
-            return dict((bid, compute_hash(cnt)) for bid, cnt in blocks)
-        else:  # binary file
-            if exists(tgt_pth):
-                LOGGER.warning("overwrite? %s", tgt_pth)
-            else:
-                with open(src_pth, 'rb') as fhr:
-                    content = fhr.read()
-                with open(tgt_pth, 'wb') as fhw:
-                    fhw.write(content)
+    if not overwrite_file.get(pth_as_key(tgt_pth), True):
+        LOGGER.debug("no overwrite")
+        return None
+
+    _, ext = splitext(tgt_name)
+    if ext in NON_BIN_EXT:
+        blocks = render(cfg, src_pth, tgt_pth)
+        return dict((bid, compute_hash(cnt)) for bid, cnt in blocks)
+    else:  # binary file
+        if exists(tgt_pth):
+            LOGGER.warning("overwrite? %s", tgt_pth)
+        else:
+            with open(src_pth, 'rb') as fhr:
+                content = fhr.read()
+            with open(tgt_pth, 'wb') as fhw:
+                fhw.write(content)
 
 
 def regenerate_dir(src_dir, tgt_dir, cfg, overwrite_file):
@@ -143,6 +146,7 @@ def regenerate_dir(src_dir, tgt_dir, cfg, overwrite_file):
     Returns:
         (dict of str, map): hash key of preserved sections
     """
+    LOGGER.debug("regenerate_dir: '%s' -> '%s'", src_dir, tgt_dir)
     hmap = {}
 
     for src_name in listdir(src_dir):
