@@ -2,8 +2,7 @@
 Set of functions to extend jinja2.
 """
 import re
-from os import mkdir
-from os.path import dirname, exists, splitext
+from os.path import exists, splitext
 
 from .small_tools import ensure_path
 
@@ -199,7 +198,7 @@ class Template(object):
             with open(tgt_pth, 'wb') as fhw:
                 fhw.write(self.bin_cnt)
         else:
-            self._render_non_bin(cfg, tgt_pth)
+            return self._render_non_bin(cfg, tgt_pth)
 
     def _render_non_bin(self, cfg, tgt_pth):
         blocks = []
@@ -208,7 +207,9 @@ class Template(object):
             with open(tgt_pth, 'r') as fhr:
                 tgt_blocks = parse_source(fhr.read())
 
-            if set(b.bid for b in self.blocks) != set(b.bid for b in tgt_blocks):
+            tpl_bids = set(b.bid for b in self.blocks if b.bid is not None)
+            tgt_bids = set(b.bid for b in tgt_blocks if b.bid is not None)
+            if tpl_bids != tgt_bids:
                 raise UserWarning("File '%s' not compatible with current template" % tgt_pth)
 
             src_blocks = dict((b.bid, b) for b in self.blocks if b.bid is not None)

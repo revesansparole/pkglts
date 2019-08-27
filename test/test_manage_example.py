@@ -1,9 +1,9 @@
 from copy import deepcopy
 from os import listdir
-
-import pytest
 from os.path import exists
 from os.path import join as pj
+
+import pytest
 from pkglts.config_management import Config, DEFAULT_CFG
 from pkglts.manage import install_example_files
 from pkglts.small_tools import ensure_created, rmdir

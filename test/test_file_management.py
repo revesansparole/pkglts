@@ -1,7 +1,7 @@
 from os import remove
 from os.path import exists
-import pytest
 
+import pytest
 from pkglts.file_management import write_file
 
 

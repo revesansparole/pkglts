@@ -129,11 +129,10 @@ def install_example_files(option, cfg, target="."):
     return True
 
 
-def _manage_conflicts(target, hm_ref, overwrite):
+def _manage_conflicts(hm_ref, overwrite):
     """Check if files have been modified.
 
     Args:
-        target (str): target directory to write into
         hm_ref (dict): reference hash for blocks
         overwrite (bool): whether or not, by default,
                          overwrite user modified files
@@ -142,10 +141,9 @@ def _manage_conflicts(target, hm_ref, overwrite):
         (dict of str, bool): file path, overwrite
     """
     conflicted = []
-    for file_pth in hm_ref:
-        pth = pj(target, file_pth)
-        if exists(pth) and modified_file_hash(pth, hm_ref):
-            conflicted.append(pth)
+    for tgt_pth in hm_ref:
+        if exists(tgt_pth) and modified_file_hash(tgt_pth, hm_ref):
+            conflicted.append(tgt_pth)
         else:
             # file disappeared, regenerate_dir will reload it if managed by pkglts
             pass
@@ -190,7 +188,7 @@ def regenerate_package(cfg, target=".", overwrite=False):
 
     # check for potential conflicts
     hm_ref = get_pkg_hash(target)
-    overwrite_file = _manage_conflicts(target, hm_ref, overwrite)
+    overwrite_file = _manage_conflicts(hm_ref, overwrite)
 
     # find template files associated with installed options
     rg_tree = {}

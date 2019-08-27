@@ -1,8 +1,7 @@
+from os.path import join as pj
 from random import random
 
 import pytest
-from os.path import exists
-from os.path import join as pj
 from pkglts.config_management import Config, DEFAULT_CFG
 from pkglts.hash_management import pth_as_key
 from pkglts.manage_tools import find_templates, render_template
@@ -163,4 +162,3 @@ def test_render_template_does_not_overwrite_outside_protected_blocks(tmp_dir):
         cnt = f.read()
 
     assert cnt == "Toto start\n{# pkglts, b0\nLOREM IPSUM\n#}\nToto end\n"
-

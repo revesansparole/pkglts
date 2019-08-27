@@ -15,7 +15,7 @@ def test_dependency_respect_strict_pkg_mng():
     dep = Dependency("toto", pkg_mng="git+https://")
     assert not dep.is_conda(strict=True)
     assert not dep.is_conda(strict=False)
-    
+
     # pip
     dep = Dependency("toto", pkg_mng="pip")
     assert dep.is_pip(strict=True)
@@ -73,7 +73,7 @@ def test_dependency_writes_correct_pip_requirements():
     assert txt == "toto==2.18.1"
     txt = dep.fmt_pip_requirement(extended=True)
     assert txt == "toto==2.18.1  # conda install toto=2.18.1"
-    
+
     # version partially specified without comparison indicator conda manager
     dep = Dependency("toto", pkg_mng="conda", version="2.18")
     txt = dep.fmt_pip_requirement()

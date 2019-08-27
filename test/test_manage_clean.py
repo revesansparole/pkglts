@@ -1,7 +1,7 @@
 from os import listdir, mkdir
+from os.path import exists
 
 import pytest
-from os.path import exists
 from pkglts.manage import clean
 from pkglts.small_tools import ensure_created, rmdir
 

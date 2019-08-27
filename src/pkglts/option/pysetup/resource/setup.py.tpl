@@ -107,11 +107,7 @@ setup_kwds = dict(
 )
 # #}
 # change setup_kwds below before the next pkglts tag
-{% if 'plugin_project' is available %}
-setup_kwds['entry_points']['pkglts'] = [
-    '{{ plugin_project.plugin_name }} = {{ base.pkg_full_name }}.option:Option{{ plugin_project.plugin_name|capitalize }}',
-]
-{% endif %}
+
 # do not change things below
 # {# pkglts, pysetup.call
 setup(**setup_kwds)
