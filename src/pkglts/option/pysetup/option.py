@@ -1,4 +1,5 @@
 from os.path import dirname
+
 from pkglts.dependency import Dependency
 from pkglts.option_object import Option
 from pkglts.option_tools import available_options
@@ -37,7 +38,7 @@ class OptionPysetup(Option):
         return invalids
 
     def require_option(self):
-        return ['base', 'test', 'doc', 'license', 'version']
+        return ['src', 'doc', 'license', 'version']
 
     def tools(self, cfg):
         del cfg
@@ -61,11 +62,13 @@ class OptionPysetup(Option):
 
         cfg.add_test('is_pip_dep', Dependency.is_pip)
 
-        return {"pkg_url": pkg_url(cfg),
-                "intents": intents,
-                "requirements": req,
-                "conda_reqs": conda_reqs,
-                "pip_reqs": pip_reqs}
+        return {
+            "pkg_url": pkg_url(cfg),
+            "intents": intents,
+            "requirements": req,
+            "conda_reqs": conda_reqs,
+            "pip_reqs": pip_reqs,
+        }
 
 
 def requirements(cfg):

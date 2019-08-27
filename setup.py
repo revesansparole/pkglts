@@ -105,6 +105,7 @@ setup_kwds['entry_points']['pkglts'] = [
     'readthedocs = pkglts.option.readthedocs.option:OptionReadthedocs',
     'requires = pkglts.option.requires.option:OptionRequires',
     'sphinx = pkglts.option.sphinx.option:OptionSphinx',
+    'src = pkglts.option.src.option:OptionSrc',
     'test = pkglts.option.test.option:OptionTest',
     'tox = pkglts.option.tox.option:OptionTox',
     'travis = pkglts.option.travis.option:OptionTravis',

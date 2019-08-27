@@ -5,6 +5,7 @@ from os import path
 
 from .hash_management import pth_as_key
 
+
 def pkg_full_name(cfg):
     """Compute name of src dir according to pkgname
     and namespace in environment

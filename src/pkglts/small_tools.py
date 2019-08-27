@@ -9,6 +9,17 @@ def ensure_created(dname):
         mkdir(dname)
 
 
+def is_valid_identifier(name):
+    """ Check that name is a valid python identifier
+    sort of back port of "".isidentifier()
+    """
+    try:
+        compile("%s=1" % name, "test", 'single')
+        return True
+    except SyntaxError:
+        return False
+
+
 def rmdir(dname):
     for i in range(5):
         if exists(dname):

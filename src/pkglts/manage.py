@@ -95,7 +95,7 @@ def add_option(name, cfg):
         (Config): updated package configuration
     """
     if name in cfg.installed_options():
-        raise UserWarning("option already included in this package")
+        raise UserWarning("option '%s' already included in this package" % name)
 
     return update_opt(name, cfg)
 

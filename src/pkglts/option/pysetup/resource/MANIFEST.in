@@ -1,17 +1,19 @@
 # {# pkglts, pysetup
-
 include AUTHORS.{{ doc.fmt }}
 include CONTRIBUTING.{{ doc.fmt }}
 include HISTORY.{{ doc.fmt }}
 include README.{{ doc.fmt }}
-
+{% if 'license' is available %}
 include LICENSE
+{% endif %}
 include requirements.txt
 include requirements_minimal.txt
 
+{% if 'test' is available %}
 recursive-include test *
+{% endif %}
 {% if 'data' is available %}
-recursive-include {{ base.src_pth }} *
+recursive-include {{ src.src_pth }} *
 {% if data.use_ext_dir %}
 recursive-include src/{{ base.pkgname }}_data *
 {% endif %}
@@ -20,8 +22,8 @@ recursive-include src/{{ base.pkgname }}_data *
 recursive-exclude * __pycache__
 recursive-exclude * *.py[co]
 
-recursive-include doc *.{{ doc.fmt }}
 {% if 'sphinx' is available %}
+recursive-include doc *.{{ doc.fmt }}
 include doc/conf.py
 include doc/Makefile
 include doc/make.bat

@@ -18,7 +18,7 @@ try:
 except NameError:
     string_type = str
 
-CURRENT_PKG_CFG_VERSION = 12
+CURRENT_PKG_CFG_VERSION = 13
 
 LOGGER = logging.getLogger(__name__)
 
@@ -314,5 +314,13 @@ def upgrade_pkg_cfg_version(pkg_cfg, version):
             # transform dict into list
             servers_list = [dict(name=name, url=descr['url']) for name, descr in servers.items()]
             pkg_cfg["pypi"]["servers"] = servers_list
+    elif version == 12:
+        pkg_cfg['_pkglts']['version'] = 13
+        namespace_method = "pkg_util"
+        if 'base' in pkg_cfg:
+            namespace_method = pkg_cfg['base'].pop('namespace_method')
+
+        if 'src' in pkg_cfg:
+            pkg_cfg['src']['namespace_method'] = namespace_method
 
     return pkg_cfg

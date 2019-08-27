@@ -1,19 +1,9 @@
 from os.path import abspath, basename, dirname
 
-from pkglts.local import pkg_full_name, src_dir
+from pkglts.local import pkg_full_name
 from pkglts.option_object import Option
+from pkglts.small_tools import is_valid_identifier
 from pkglts.version import __version__
-
-
-def is_valid_identifier(name):
-    """ Check that name is a valid python identifier
-    sort of back port of "".isidentifier()
-    """
-    try:
-        compile("%s=1" % name, "test", 'single')
-        return True
-    except SyntaxError:
-        return False
 
 
 class OptionBase(Option):
@@ -27,7 +17,6 @@ class OptionBase(Option):
         sec = dict(
             pkgname=basename(abspath(".")),
             namespace=None,
-            namespace_method="pkg_util",
             url=None,
             authors=[("moi", "moi@email.com")]
         )
@@ -49,11 +38,7 @@ class OptionBase(Option):
             elif not is_valid_identifier(namespace):
                 invalids.append('base.namespace')
 
-        if cfg['base']['namespace_method'] not in ("pkg_util", "setuptools", "P3.3>"):
-            invalids.append("base.namespace_method")
-
         return invalids
 
     def environment_extensions(self, cfg):
-        return {"pkg_full_name": pkg_full_name(cfg),
-                "src_pth": src_dir(cfg)}
+        return {"pkg_full_name": pkg_full_name(cfg)}
