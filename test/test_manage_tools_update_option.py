@@ -3,7 +3,6 @@ import pytest
 from pkglts.config_management import Config, DEFAULT_CFG
 from pkglts.manage_tools import update_opt
 
-
 print(__file__)
 
 
@@ -34,7 +33,6 @@ def test_option_use_default_from_config():
     cfg = update_opt('base', cfg)
     assert 'base' in cfg
     assert cfg['base']['authors'][0][0] == 'moi'
-
 
 # def test_option_prompt_user_if_global_config_ask_for_it(mocker):
 #     pkg_cfg = dict(_pkglts={'use_prompts': True})

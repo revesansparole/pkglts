@@ -1,7 +1,7 @@
 from os import remove
 from os.path import exists
-import pytest
 
+import pytest
 from pkglts.hash_management import compute_hash, modified_file_hash, pth_as_key
 
 

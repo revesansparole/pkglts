@@ -13,8 +13,8 @@ from .config_management import (Config, DEFAULT_CFG,
                                 get_pkg_config, write_pkg_config)
 from .hash_management import (get_pkg_hash, modified_file_hash,
                               pth_as_key, write_pkg_hash)
-from .manage_tools import (check_option_parameters,
-                           regenerate_dir, update_opt)
+from .manage_tools import (check_option_parameters, find_templates,
+                           render_template, update_opt)
 from .option_tools import available_options, get_user_permission
 
 LOGGER = logging.getLogger(__name__)
@@ -121,15 +121,18 @@ def install_example_files(option, cfg, target="."):
         LOGGER.info("option does not provide any example")
         return False
 
-    regenerate_dir(ex_dir, target, cfg, {})
+    rg_tree = {}
+    find_templates(ex_dir, target, cfg, rg_tree)
+    for tgt_pth, src_pths in rg_tree.items():
+        render_template(src_pths, tgt_pth, cfg, {})
+
     return True
 
 
-def _manage_conflicts(target, hm_ref, overwrite):
+def _manage_conflicts(hm_ref, overwrite):
     """Check if files have been modified.
 
     Args:
-        target (str): target directory to write into
         hm_ref (dict): reference hash for blocks
         overwrite (bool): whether or not, by default,
                          overwrite user modified files
@@ -138,10 +141,9 @@ def _manage_conflicts(target, hm_ref, overwrite):
         (dict of str, bool): file path, overwrite
     """
     conflicted = []
-    for file_pth in hm_ref:
-        pth = pj(target, file_pth)
-        if exists(pth) and modified_file_hash(pth, hm_ref):
-            conflicted.append(pth)
+    for tgt_pth in hm_ref:
+        if exists(tgt_pth) and modified_file_hash(tgt_pth, hm_ref):
+            conflicted.append(tgt_pth)
         else:
             # file disappeared, regenerate_dir will reload it if managed by pkglts
             pass
@@ -186,19 +188,25 @@ def regenerate_package(cfg, target=".", overwrite=False):
 
     # check for potential conflicts
     hm_ref = get_pkg_hash(target)
-    overwrite_file = _manage_conflicts(target, hm_ref, overwrite)
+    overwrite_file = _manage_conflicts(hm_ref, overwrite)
 
-    # render files for all options
-    hmap = {}
+    # find template files associated with installed options
+    rg_tree = {}
     for name in cfg.installed_options():
         opt = available_options[name]
         resource_dir = opt.resource_dir()
         if resource_dir is None:
             LOGGER.info("option %s does not provide files", name)
         else:
-            LOGGER.info("rendering option %s", name)
-            loc_hm = regenerate_dir(resource_dir, target, cfg, overwrite_file)
-            hmap.update(loc_hm)
+            LOGGER.info("find template for option %s", name)
+            find_templates(resource_dir, target, cfg, rg_tree)
+
+    # render all templates
+    hmap = {}
+    for tgt_pth, src_pths in rg_tree.items():
+        loc_map = render_template(src_pths, tgt_pth, cfg, overwrite_file)
+        if loc_map is not None:  # non binary file
+            hmap[pth_as_key(tgt_pth)] = loc_map
 
     hm_ref.update(hmap)
     write_pkg_hash(hm_ref, target)

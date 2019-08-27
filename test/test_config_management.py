@@ -1,8 +1,8 @@
 import json
-
-import pytest
 from os.path import exists
 from os.path import join as pj
+
+import pytest
 from pkglts.config_management import (CURRENT_PKG_CFG_VERSION, Config, DEFAULT_CFG, get_pkg_config, write_pkg_config)
 from pkglts.small_tools import ensure_created, rmdir
 

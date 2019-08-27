@@ -1,9 +1,9 @@
 from copy import deepcopy
 from os import listdir
-
-import pytest
 from os.path import exists
 from os.path import join as pj
+
+import pytest
 from pkglts.config_management import Config, DEFAULT_CFG
 from pkglts.manage import install_example_files
 from pkglts.small_tools import ensure_created, rmdir
@@ -53,7 +53,7 @@ def test_install_example_copy_files(tmp_dir):
 def test_install_example_copy_binary_files(tmp_dir):
     pkg_cfg = deepcopy(DEFAULT_CFG)
     pkg_cfg['base'] = dict(pkgname='toto', namespace=None)
-    pkg_cfg['data'] = dict()
+    pkg_cfg['data'] = dict(filetype=[".png", ".ui"], use_ext_dir=False)
     cfg = Config(pkg_cfg)
     cfg.load_extra()
 

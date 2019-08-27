@@ -1,7 +1,7 @@
 from os import listdir
+from os.path import join as pj
 
 import pytest
-from os.path import join as pj
 from pkglts.manage import (get_pkg_config, get_pkg_hash,
                            init_pkg)
 from pkglts.small_tools import ensure_created, rmdir
@@ -34,7 +34,6 @@ def test_manage_init_create_pkg_hash(tmp_dir):
 def test_manage_init_protect_pkglts_dir_from_modif(tmp_dir):
     assert "regenerate.no" in listdir(pj(tmp_dir, ".pkglts"))
     assert "clean.no" in listdir(pj(tmp_dir, ".pkglts"))
-
 
 # @with_setup(setup, teardown)
 # def test_manage_pkg_config():

@@ -144,8 +144,10 @@ class Config(dict):
         Returns:
             (iter of str)
         """
+        installed = [key for key in self if not key.startswith("_")]
+
         if return_sorted:
-            opt_names = list(self.installed_options())
+            opt_names = installed
             installed = []
             while opt_names:
                 name = opt_names.pop(0)
@@ -155,12 +157,8 @@ class Config(dict):
                 else:
                     installed.append(name)
 
-            for name in installed:
-                yield name
-        else:
-            for key in self:
-                if not key.startswith("_"):
-                    yield key
+        for name in installed:
+            yield name
 
     def render(self, txt):
         """Use items in config to render text

@@ -1,7 +1,4 @@
-import pytest
-
 from pkglts.option_tools import get_user_permission
-
 
 loc_input = 'pkglts.option_tools.loc_input'
 
@@ -18,7 +15,6 @@ def test_user_permission(mocker):
 
     with mocker.patch(loc_input, return_value='N'):
         assert not get_user_permission('action')
-
 
 # def test_get_key():
 #     assert get_key('toto', {'toto': 'titi'}) == 'titi'

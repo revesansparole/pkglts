@@ -2,20 +2,17 @@
 """
 
 import logging
-from os import listdir, mkdir
-from os.path import basename, exists, isdir, splitext
+from os import listdir
+from os.path import basename, isdir, splitext
 
 from .hash_management import compute_hash, pth_as_key
 from .local import init_namespace_dir
 from .option_tools import available_options, get_user_permission
-from .templating import render
+from .templating import Template
 
 LOGGER = logging.getLogger(__name__)
 
 TPL_SRC_NAME = "{" + "{ base.pkgname }" + "}"
-
-NON_BIN_EXT = ("", ".bat", ".cfg", ".in", ".ini", ".md", ".no", ".ps1", ".py", ".rst", ".sh",
-               ".svg", ".txt", ".yml", ".yaml")
 
 
 def check_option_parameters(name, cfg):
@@ -72,78 +69,21 @@ def update_opt(name, cfg):
     return cfg
 
 
-def _rg_dir(src_pth, tgt_name, tgt_pth, cfg, overwrite_file):
-    """Regenerate a directory.
+def find_templates(src_dir, tgt_dir, cfg, rg_tree):
+    """Find all template files associated to an option
 
-    Notes:
-        recursively regenerate all tree rooted on src_pth
-
-    Args:
-        src_pth (str): path to directory
-        tgt_name (str): name of directory to create
-        tgt_pth (str): path to created directory
-        cfg (Config):  current package configuration
-        overwrite_file (dict): which files to overwrite
-
-    Returns:
-        (dict of str, map): hash key of preserved sections
-    """
-    if tgt_name in ("", "_"):
-        return {}
-
-    if not exists(tgt_pth):
-        mkdir(tgt_pth)
-
-    return regenerate_dir(src_pth, tgt_pth, cfg, overwrite_file)
-
-
-def _rg_file(src_pth, tgt_name, tgt_pth, cfg, overwrite_file):
-    """Regenerate a single file.
-
-    Args:
-        src_pth (str): path to file
-        tgt_name (str): name of file to create
-        tgt_pth (str): path to created file
-        cfg (Config):  current package configuration
-        overwrite_file (dict): which files to overwrite
-
-    Returns:
-        (dict|None): bid, hash of block content
-    """
-    if splitext(tgt_name)[0] == "_":
-        return None
-
-    LOGGER.debug("render file '%s' into '%s'", src_pth, tgt_pth)
-
-    if overwrite_file.get(pth_as_key(tgt_pth), True):
-        _, ext = splitext(tgt_name)
-        if ext in NON_BIN_EXT:
-            blocks = render(cfg, src_pth, tgt_pth)
-            return dict((bid, compute_hash(cnt)) for bid, cnt in blocks)
-        else:  # binary file
-            if exists(tgt_pth):
-                LOGGER.warning("overwrite? %s", tgt_pth)
-            else:
-                with open(src_pth, 'rb') as fhr:
-                    content = fhr.read()
-                with open(tgt_pth, 'wb') as fhw:
-                    fhw.write(content)
-
-
-def regenerate_dir(src_dir, tgt_dir, cfg, overwrite_file):
-    """Walk all files in src_dir and create/update them on tgt_dir
+    Warnings: modify rg_tree in place
 
     Args:
         src_dir (str): path to reference files
         tgt_dir (str): path to target where files will be written
         cfg (Config):  current package configuration
-        overwrite_file (dict of str, bool): whether or not to overwrite some
-                             files
+        rg_tree (dict): Structure to store path to templates found
 
     Returns:
-        (dict of str, map): hash key of preserved sections
+        None
     """
-    hmap = {}
+    LOGGER.debug("find_templates in %s", src_dir)
 
     for src_name in listdir(src_dir):
         src_pth = src_dir + "/" + src_name
@@ -157,17 +97,48 @@ def regenerate_dir(src_dir, tgt_dir, cfg, overwrite_file):
             namespace = cfg['base']['namespace']
             if namespace is not None:
                 ns_pth = tgt_dir + "/" + namespace
-                if not exists(ns_pth):
-                    mkdir(ns_pth)
-
-                init_namespace_dir(ns_pth, cfg)
+                init_namespace_dir(ns_pth, rg_tree)
                 tgt_pth = ns_pth + "/" + tgt_name
 
         if isdir(src_pth):
-            hmap.update(_rg_dir(src_pth, tgt_name, tgt_pth, cfg, overwrite_file))
+            if tgt_name in ("", "_"):
+                # do nothing
+                pass
+            else:
+                find_templates(src_pth, tgt_pth, cfg, rg_tree)
         else:
-            bhash = _rg_file(src_pth, tgt_name, tgt_pth, cfg, overwrite_file)
-            if bhash is not None:
-                hmap[pth_as_key(tgt_pth)] = bhash
+            if splitext(tgt_name)[0] == "_":
+                pass
+            else:
+                try:
+                    rg_tree[pth_as_key(tgt_pth)].append(src_pth)
+                except KeyError:
+                    rg_tree[pth_as_key(tgt_pth)] = [src_pth]
 
-    return hmap
+
+def render_template(src_pths, tgt_pth, cfg, overwrite_file):
+    """Render template and write it in tgt_pth
+
+    Args:
+        src_pths (list): list of reference templates
+        tgt_pth (str): path to created file
+        cfg (Config):  current package configuration
+        overwrite_file (dict): which files to overwrite
+
+    Returns:
+        (dict|None): bid, hash of block content
+    """
+    LOGGER.debug("render file '%s'", tgt_pth)
+    if not overwrite_file.get(pth_as_key(tgt_pth), True):
+        LOGGER.debug("no overwrite")
+        return None
+
+    tpl = Template()
+    for src_pth in src_pths:
+        tpl.parse(src_pth)
+
+    blocks = tpl.render(cfg, tgt_pth)
+    if blocks is None:
+        return None
+    else:  # non binary file
+        return dict((bid, compute_hash(cnt)) for bid, cnt in blocks)

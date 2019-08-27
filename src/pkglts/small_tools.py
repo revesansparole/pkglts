@@ -25,6 +25,6 @@ def rmdir(dname):
 
 def ensure_path(pth):
     dname = dirname(pth)
-    if not exists(dname):
+    if dname and not exists(dname):
         ensure_path(dname)
         mkdir(dname)
