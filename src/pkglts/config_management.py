@@ -11,6 +11,7 @@ from jinja2 import Environment, StrictUndefined, UndefinedError
 from .config import pkg_cfg_file, pkglts_dir
 from .option.git.option import OptionGit
 from .option.pypi.option import OptionPypi
+from .option.src.option import OptionSrc
 from .option_tools import available_options, find_available_options
 
 try:
@@ -320,7 +321,9 @@ def upgrade_pkg_cfg_version(pkg_cfg, version):
         if 'base' in pkg_cfg:
             namespace_method = pkg_cfg['base'].pop('namespace_method')
 
-        if 'src' in pkg_cfg:
-            pkg_cfg['src']['namespace_method'] = namespace_method
+        if 'src' not in pkg_cfg:
+            OptionSrc('src').update_parameters(pkg_cfg)
+
+        pkg_cfg['src']['namespace_method'] = namespace_method
 
     return pkg_cfg
