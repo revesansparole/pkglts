@@ -79,13 +79,13 @@ setup_kwds = dict(
         {% endif -%}
     ],
     install_requires=[
-        {% for dep in pysetup.requirements('install') -%}
+        {% for dep in reqs.requirements('install') -%}
         {% if dep.is_pip(strict=False) -%}
         "{{ dep.fmt_pip_requirement() }}",
         {% endif -%}
         {%- endfor %}],
     tests_require=[
-        {% for dep in pysetup.requirements('test') -%}
+        {% for dep in reqs.requirements('test') -%}
         {% if dep.is_pip(strict=False) -%}
         "{{ dep.fmt_pip_requirement() }}",
         {% endif -%}
