@@ -7,7 +7,7 @@ from argparse import ArgumentParser
 
 from . import logging_tools
 from .config_management import get_pkg_config, write_pkg_config
-from .manage import add_option, clean, init_pkg, install_example_files, regenerate_option, regenerate_package, rg2
+from .manage import add_option, clean, init_pkg, install_example_files, regenerate_option, regenerate_package
 from .option_tools import available_options
 from .version_management import FileNotFoundError, outdated_options, write_pkg_version
 
@@ -101,23 +101,6 @@ def action_regenerate(cfg, **kwds):
     write_pkg_version(cfg)
 
 
-def action_rg2(cfg, **kwds):
-    """Regenerate all files in the package.
-    """
-    outdated = outdated_options(cfg)
-    if len(outdated) > 0:
-        out_fmt = "\n".join(outdated)
-        LOGGER.warning("Some options are outdated,"
-                       " please upgrade pkglts and/or all the following options:\n"
-                       "%s" % out_fmt)
-        return
-
-    LOGGER.info("regenerate package")
-    rg2(cfg, overwrite=kwds['overwrite'])
-
-    # write_pkg_version(cfg)
-
-
 def action_add(cfg, **kwds):
     """Add new options in the package.
     """
@@ -152,7 +135,6 @@ def main():
         clear=action_clear,
         update=action_update,
         rg=action_regenerate,
-        rg2=action_rg2,
         add=action_add,
         remove=action_remove,
         example=action_example
@@ -179,12 +161,6 @@ def main():
     parser_rg.add_argument('option', nargs='*',
                            help="name of option to add")
     parser_rg.add_argument("--overwrite", action='store_true',
-                           help="Globally overwrite user modified files")
-
-    parser_rg2 = subparsers.add_parser('rg2', help=action_regenerate.__doc__)
-    parser_rg2.add_argument('option', nargs='*',
-                           help="name of option to add")
-    parser_rg2.add_argument("--overwrite", action='store_true',
                            help="Globally overwrite user modified files")
 
     parser_add = subparsers.add_parser('add', help=action_add.__doc__)

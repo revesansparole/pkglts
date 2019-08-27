@@ -2,7 +2,10 @@
 Set of functions to extend jinja2.
 """
 import re
-from os.path import exists
+from os import mkdir
+from os.path import dirname, exists, splitext
+
+from .small_tools import ensure_path
 
 OPENING_MARKER = "{" + "#"
 CLOSING_MARKER = "#" + "}"
@@ -11,13 +14,17 @@ BLOCK_RE = re.compile(
     r"\{#[ ]pkglts,[ ](?P<key>[a-zA-Z0-9._]*)(?P<aft_head>.*?)\n(?P<cnt>.*?)#\}(?P<aft_foot>.*?(?=\n))",
     re.DOTALL | re.MULTILINE)
 
+NON_BIN_EXT = ("", ".bat", ".cfg", ".in", ".ini", ".md", ".no", ".ps1", ".py", ".rst", ".sh",
+               ".svg", ".tpl", ".txt", ".yml", ".yaml")
+
 
 class TplBlock(object):
-    """Simple container for templated blocks."""
+    """Simple container for template blocks."""
 
     def __init__(self):
         self.before_header = ""
         self.bid = None
+        self.loc = None
         self.after_header = ""
         self.content = ""
         self.before_footer = ""
@@ -103,6 +110,14 @@ def parse_source(txt):
         block.after_header = aft_head
         block.before_footer = aft
         block.after_footer = aft_foot
+
+        if aft_head.startswith(", after"):
+            block.loc = ('after', aft_head[7:].split(" ")[1])
+        elif aft_head.startswith(", before"):
+            block.loc = ('before', aft_head[8:].split(" ")[1])
+        elif aft_head.startswith(", replace"):
+            block.loc = ('replace', aft_head[8:].split(" ")[1])
+
         blocks.append(block)
 
     if last_end < (len(txt) - 1):
@@ -113,61 +128,119 @@ def parse_source(txt):
     return blocks
 
 
-def render(cfg, src_pth, tgt_pth):
-    """Render src_pth templated file into tgt_pth
+class Template(object):
+    """Simple container that holds a list of blocks
 
-    Notes: keeps 'preserved' block structure
-
-    Args:
-        cfg (Config):  current package configuration
-        src_pth (str): path to reference file
-        tgt_pth (str): path to potentially non existent yet target file
-
-    Returns:
-        (list of [str, str]): key, cnt for preserved blocks
+    The may objective is to represent a full templated file
     """
-    # parse src file to find 'preserved' blocks
-    with open(src_pth, 'r') as fhr:
-        src_blocks = parse_source(fhr.read())
 
-    blocks = []
-    if exists(tgt_pth):  # retrieves preserved blocks from source
-        # parse tgt file to find 'preserved' blocks
-        with open(tgt_pth, 'r') as fhr:
-            tgt_blocks = parse_source(fhr.read())
+    def __init__(self):
+        self.blocks = []
+        self.bin_cnt = None  # binary content for binary files
 
-        src_blocks = dict((b.bid, b) for b in src_blocks if b.bid is not None)
-        for tgt_block in tgt_blocks:
-            # check stored content hash
-            if tgt_block.bid is not None:
-                tgt_block.content = src_blocks[tgt_block.bid].content
+    def add(self, block):
+        """Insert a new block in the overall template
 
-            blocks.append(tgt_block)
-    else:  # format non preserved blocks for the first and only time
-        for block in src_blocks:
-            if block.bid is None:
-                block.content = cfg.render(block.content)
+        Notes: will use block loc to position it.
 
-            blocks.append(block)
+        Args:
+            block (TplBlock): block with all fields filled
 
-    # regenerate preserved block content
-    preserved = []
-    tgt = ""
-    for block in blocks:
-        if block.bid is None:
-            tgt += block.content
+        Returns:
+            None
+        """
+        if block.loc is None:
+            self.blocks.append(block)
         else:
-            # format cnt
-            cnt = cfg.render(block.content)
-            if len(cnt) == 0 or cnt[-1] != "\n":  # case where templating has eaten the remaining spaces and '\n'
-                cnt += "\n"
-            preserved.append((block.bid, cnt))
-            # rewrite preserved tag if necessary
-            tgt += block.before_header + "{" + "# pkglts, %s" % block.bid + "%s\n" % block.after_header
-            tgt += cnt
-            tgt += block.before_footer + "#" + "}%s\n" % block.after_footer
+            ind = [b.bid for b in self.blocks].index(block.loc[1])
+            if block.loc[0] == 'after':
+                self.blocks.insert(ind + 1, block)
+            elif block.loc[0] == 'before':
+                self.blocks.insert(ind, block)
+            elif block.loc[0] == 'replace':
+                self.blocks[ind] = block
+            else:
+                raise NotImplementedError
 
-    with open(tgt_pth, 'w') as fhw:
-        fhw.write(tgt)
+    def parse(self, pth):
+        """Parse file and append all blocks into this template
 
-    return preserved
+        Args:
+            pth (str): path to file to read
+
+        Returns:
+            None
+        """
+        _, ext = splitext(pth)
+        if ext in NON_BIN_EXT:
+            with open(pth, 'r') as fhr:
+                blocks = parse_source(fhr.read())
+
+            for block in blocks:
+                self.add(block)
+        else:
+            with open(pth, 'rb') as fhr:
+                self.bin_cnt = fhr.read()
+
+    def render(self, cfg, tgt_pth):
+        """Render template into tgt_pth
+
+        Notes: keeps 'preserved' block structure
+
+        Args:
+            cfg (Config):  current package configuration
+            tgt_pth (str): path to potentially non existent yet target file
+
+        Returns:
+            (list of [str, str]): key, cnt for preserved blocks
+        """
+        if self.bin_cnt is not None:
+            ensure_path(tgt_pth)
+            with open(tgt_pth, 'wb') as fhw:
+                fhw.write(self.bin_cnt)
+        else:
+            self._render_non_bin(cfg, tgt_pth)
+
+    def _render_non_bin(self, cfg, tgt_pth):
+        blocks = []
+        if exists(tgt_pth):  # retrieves preserved blocks from source
+            # parse tgt file to find 'preserved' blocks
+            with open(tgt_pth, 'r') as fhr:
+                tgt_blocks = parse_source(fhr.read())
+
+            src_blocks = dict((b.bid, b) for b in self.blocks if b.bid is not None)
+            for tgt_block in tgt_blocks:
+                # reset content of preserved blocks only
+                if tgt_block.bid is not None:
+                    tgt_block.content = src_blocks[tgt_block.bid].content
+
+                blocks.append(tgt_block)
+        else:  # format non preserved blocks for the first and only time
+            for block in self.blocks:
+                if block.bid is None:
+                    block.content = cfg.render(block.content)
+
+                blocks.append(block)
+
+        # regenerate preserved block content
+        preserved = []
+        tgt = ""
+        for block in blocks:
+            if block.bid is None:
+                tgt += block.content
+            else:
+                # format cnt
+                cnt = cfg.render(block.content)
+                if len(cnt) == 0 or cnt[-1] != "\n":  # case where templating has eaten the remaining spaces and '\n'
+                    cnt += "\n"
+                preserved.append((block.bid, cnt))
+                # rewrite preserved tag
+                tgt += block.before_header + "{" + "# pkglts, %s" % block.bid + "%s\n" % block.after_header
+                tgt += cnt
+                tgt += block.before_footer + "#" + "}%s\n" % block.after_footer
+
+        ensure_path(tgt_pth)
+        with open(tgt_pth, 'w') as fhw:
+            fhw.write(tgt)
+
+        return preserved
