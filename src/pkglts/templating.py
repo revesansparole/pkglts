@@ -208,6 +208,9 @@ class Template(object):
             with open(tgt_pth, 'r') as fhr:
                 tgt_blocks = parse_source(fhr.read())
 
+            if set(b.bid for b in self.blocks) != set(b.bid for b in tgt_blocks):
+                raise UserWarning("File '%s' not compatible with current template" % tgt_pth)
+
             src_blocks = dict((b.bid, b) for b in self.blocks if b.bid is not None)
             for tgt_block in tgt_blocks:
                 # reset content of preserved blocks only
