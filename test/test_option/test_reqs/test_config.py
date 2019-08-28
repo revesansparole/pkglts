@@ -1,11 +1,16 @@
 import pytest
 from pkglts.config_management import Config
-from pkglts.option.reqs.option import OptionReqs
+from pkglts.dependency import Dependency
+from pkglts.option.reqs.option import OptionReqs, fmt_conda_reqs, fmt_pip_reqs
 
 
 @pytest.fixture()
 def opt():
     return OptionReqs('reqs')
+
+
+def test_version_is_defined(opt):
+    assert opt.version() != "0.0.0"
 
 
 def test_root_dir_is_defined(opt):
@@ -35,3 +40,33 @@ def test_require(opt):
     opt.update_parameters(cfg)
 
     assert len(tuple(opt.require(cfg))) == 0
+
+
+def test_fmt_conda_reqs_works_correctly():
+    assert fmt_conda_reqs([], ['install']) == ""
+
+    d1 = Dependency('d1')
+    dex = Dependency('dex', intent='example')
+    dconda = Dependency('dconda')
+    dpip = Dependency('dpip')
+
+    cmd = fmt_conda_reqs([d1, dex, dconda, dpip], ['install'])
+
+    assert cmd.strip() == "conda install d1 dconda dpip"
+
+    d = Dependency('d', channel='extra')
+
+    assert fmt_conda_reqs([d], ['install']) == "conda install -c extra d"
+
+
+def test_fmt_pip_reqs_works_correctly():
+    assert fmt_pip_reqs([], ['install']) == ""
+
+    d1 = Dependency('d1')
+    dex = Dependency('dex', intent='example', pkg_mng='pip')
+    dconda = Dependency('dconda')
+    dpip = Dependency('dpip', pkg_mng='pip')
+
+    cmd = fmt_pip_reqs([d1, dex, dconda, dpip], ['install'])
+
+    assert cmd.strip() == "pip install dpip"
