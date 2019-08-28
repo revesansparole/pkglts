@@ -15,7 +15,7 @@ def test_root_dir_is_defined(opt):
 def test_update_parameters(opt):
     cfg = {}
     opt.update_parameters(cfg)
-    assert len(cfg['base']) == 5
+    assert len(cfg['base']) == 4
 
 
 def test_config_check_pkg_names(opt):
@@ -33,13 +33,6 @@ def test_config_check_pkg_names(opt):
                                 'owner': 'moi',
                                 'url': None}))
         assert 'base.namespace' in opt.check(cfg)
-
-    cfg = Config(dict(base={'pkgname': 'toto',
-                            'namespace': None,
-                            'namespace_method': "toto",
-                            'owner': 'moi',
-                            'url': None}))
-    assert 'base.namespace_method' in opt.check(cfg)
 
 
 def test_require_option(opt):

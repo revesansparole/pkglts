@@ -6,7 +6,7 @@ from os.path import join as pj
 import pytest
 from pkglts.config import pkg_cfg_file, pkglts_dir
 from pkglts.config_management import Config, get_pkg_config, write_pkg_config
-from pkglts.manage import (init_pkg, regenerate_package)
+from pkglts.manage import init_pkg, regenerate_package
 from pkglts.small_tools import ensure_created, rmdir
 
 
@@ -31,10 +31,12 @@ def tmp_pths():
     with open(pj(pth, pkglts_dir, pkg_cfg_file), 'r') as f:
         pkg_cfg = json.load(f)
 
-    pkg_cfg['base'] = dict(pkgname='toto', namespace=None,
+    pkg_cfg['base'] = dict(pkgname='toto',
+                           namespace=None,
                            authors=[('moi', 'moi@email.com')],
-                           namespace_method="pkg_util",
                            url=None)
+    pkg_cfg['src'] = dict(namespace_method="pkg_util")
+
     cfg = Config(pkg_cfg)
     write_pkg_config(cfg, pth)
     regenerate_package(cfg, pth)
@@ -51,10 +53,6 @@ def test_regenerate_pass(tmp_pths):
     with open(pj(tmp_dir, pkglts_dir, pkg_cfg_file), 'r') as f:
         pkg_cfg = json.load(f)
 
-    pkg_cfg['base'] = dict(pkgname='toto', namespace=None,
-                           authors=[('moi', 'moi@email.com')],
-                           namespace_method="pkg_util",
-                           url=None)
     cfg = Config(pkg_cfg)
     regenerate_package(cfg, tmp_dir)
     assert exists(init_file)
@@ -65,10 +63,8 @@ def test_regenerate_check_pkg_cfg_validity(tmp_pths):
     with open(pj(tmp_dir, pkglts_dir, pkg_cfg_file), 'r') as f:
         pkg_cfg = json.load(f)
 
-    pkg_cfg['base'] = dict(pkgname='1toto', namespace=None,
-                           authors=[('moi', 'moi@email.com')],
-                           namespace_method="pkg_util",
-                           url=None)
+    pkg_cfg['base']['pkgname'] = '1toto'
+
     cfg = Config(pkg_cfg)
     assert not regenerate_package(cfg, tmp_dir)
 

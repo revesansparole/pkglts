@@ -30,7 +30,7 @@ def test_config_check_sphinx_theme(opt):
 
 
 def test_require_option(opt):
-    assert len(tuple(opt.require_option())) == 3
+    assert len(tuple(opt.require_option())) == 1
 
 
 def test_require(opt):

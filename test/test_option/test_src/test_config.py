@@ -1,11 +1,11 @@
 import pytest
 from pkglts.config_management import Config
-from pkglts.option.pysetup.option import OptionPysetup
+from pkglts.option.src.option import OptionSrc
 
 
 @pytest.fixture()
 def opt():
-    return OptionPysetup('pysetup')
+    return OptionSrc('src')
 
 
 def test_root_dir_is_defined(opt):
@@ -15,16 +15,16 @@ def test_root_dir_is_defined(opt):
 def test_update_parameters(opt):
     cfg = {}
     opt.update_parameters(cfg)
-    assert len(cfg['pysetup']) == 1
+    assert len(cfg['src']) == 1
 
 
-def test_config_check_intended_version_exists(opt):
-    cfg = Config(dict(pysetup={'intended_versions': []}))
-    assert 'pysetup.intended_versions' in opt.check(cfg)
+def test_config_check_pkg_names(opt):
+    cfg = Config(dict(src={'namespace_method': "toto"}))
+    assert 'src.namespace_method' in opt.check(cfg)
 
 
 def test_require_option(opt):
-    assert len(tuple(opt.require_option())) == 5
+    assert len(tuple(opt.require_option())) == 1
 
 
 def test_require(opt):
