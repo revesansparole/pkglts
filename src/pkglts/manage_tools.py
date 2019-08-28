@@ -18,20 +18,12 @@ TPL_SRC_NAME = "{" + "{ base.pkgname }" + "}"
 def check_option_parameters(name, cfg):
     """Check that the parameters associated to an option are valid.
 
-    Try to import Check function in option dir.
-
     Args:
         name (str): option name
         cfg (Config):  current package configuration
     """
-    try:
-        opt = available_options[name]
-        try:
-            return opt.check(cfg)
-        except KeyError as e:
-            raise UserWarning("problem with check of %s" % name)
-    except KeyError:
-        return []
+    opt = available_options[name]
+    return opt.check(cfg)
 
 
 def update_opt(name, cfg):

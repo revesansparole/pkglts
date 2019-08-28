@@ -36,7 +36,7 @@ class OptionVersion(Option):
         return invalids
 
     def require_option(self):
-        return ['base']
+        return ['src']
 
     def tools(self, cfg):
         del cfg

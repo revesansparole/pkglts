@@ -1,0 +1,5 @@
+# {# pkglts, reqs
+{% for dep in reqs.requirements('install') -%}
+{{ dep.fmt_pip_requirement(extended=False) }}
+{% endfor %}
+# #}

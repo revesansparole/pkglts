@@ -9,11 +9,11 @@ channels:
 {%- endfor %}
 
 dependencies:
-{%- for dep in pysetup.requirements('install') if dep.is_conda(strict=False) %}
+{%- for dep in reqs.requirements('install') if dep.is_conda(strict=False) %}
 - {{ dep.fmt_conda_requirement() }}
 {%- endfor %}
 
-{%- set pip_deps = pysetup.requirements('install')|select("is_pip_dep", True)|list -%}
+{%- set pip_deps = reqs.requirements('install')|select("is_pip_dep", True)|list -%}
 {%- if pip_deps|length > 0 %}
 - pip:
 {%- for dep in pip_deps %}

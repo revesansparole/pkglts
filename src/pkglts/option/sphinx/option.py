@@ -32,7 +32,7 @@ class OptionSphinx(Option):
         return invalids
 
     def require_option(self):
-        return ['test', 'doc', 'license']
+        return ['pysetup']
 
     def require(self, cfg):
         yield Dependency('sphinx', intent='doc')

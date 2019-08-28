@@ -28,7 +28,7 @@ class OptionTest(Option):
         return invalids
 
     def require_option(self):
-        return ['base']
+        return ['pysetup']
 
     def require(self, cfg):
         test_suite = cfg['test']['suite_name']

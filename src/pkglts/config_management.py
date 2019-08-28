@@ -11,6 +11,8 @@ from jinja2 import Environment, StrictUndefined, UndefinedError
 from .config import pkg_cfg_file, pkglts_dir
 from .option.git.option import OptionGit
 from .option.pypi.option import OptionPypi
+from .option.reqs.option import OptionReqs
+from .option.src.option import OptionSrc
 from .option_tools import available_options, find_available_options
 
 try:
@@ -18,7 +20,7 @@ try:
 except NameError:
     string_type = str
 
-CURRENT_PKG_CFG_VERSION = 12
+CURRENT_PKG_CFG_VERSION = 13
 
 LOGGER = logging.getLogger(__name__)
 
@@ -314,5 +316,22 @@ def upgrade_pkg_cfg_version(pkg_cfg, version):
             # transform dict into list
             servers_list = [dict(name=name, url=descr['url']) for name, descr in servers.items()]
             pkg_cfg["pypi"]["servers"] = servers_list
+    elif version == 12:
+        pkg_cfg['_pkglts']['version'] = 13
+        if 'base' in pkg_cfg:
+            namespace_method = pkg_cfg['base'].pop('namespace_method')
+
+            if 'src' not in pkg_cfg:
+                OptionSrc('src').update_parameters(pkg_cfg)
+
+            pkg_cfg['src']['namespace_method'] = namespace_method
+
+        if 'pysetup' in pkg_cfg:
+            require = pkg_cfg['pysetup'].pop('require')
+
+            if 'reqs' not in pkg_cfg:
+                OptionReqs('reqs').update_parameters(pkg_cfg)
+
+            pkg_cfg['reqs']['require'] = require
 
     return pkg_cfg

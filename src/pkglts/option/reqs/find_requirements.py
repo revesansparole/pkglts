@@ -28,6 +28,23 @@ def iter_ext_imports(body):
         #         yield name, level
 
 
+def find_reqs(pth):
+    """Find all requirements (imports) used by a script.
+
+    Args:
+        pth (str): path to file to parse
+
+    Returns:
+        (list): list of package names
+    """
+    src = open(pth, 'rb').read()
+    pt = ast.parse(src, pth)
+    # TODO pb with namespaces
+    pkgs = set(pkgname.split(".")[0] for pkgname in iter_ext_imports(pt.body))
+
+    return pkgs
+
+
 def action_find_reqs(cfg, **kwds):
     """Find dependencies used by this package.
     """
@@ -40,10 +57,7 @@ def action_find_reqs(cfg, **kwds):
             reqs = set()
             for pth in glob("%s/*.py" % dirpth) + glob("%s/**/*.py" % dirpth):
                 if not path.basename(pth).startswith("_"):
-                    src = open(pth, 'rb').read()
-                    pt = ast.parse(src, pth)
-                    # TODO pb with namespaces
-                    reqs.update(pkgname.split(".")[0] for pkgname in iter_ext_imports(pt.body))
+                    reqs.update(find_reqs(pth))
             reqs -= {this_pkgname}
             print("standard", sorted(reqs & stdpkgs))
             print("external", sorted(reqs - stdpkgs))

@@ -20,4 +20,4 @@ class OptionData(Option):
         cfg['data'] = sec
 
     def require_option(self):
-        return ['base']
+        return ['src']

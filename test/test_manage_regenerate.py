@@ -6,7 +6,7 @@ from os.path import join as pj
 import pytest
 from pkglts.config import pkg_cfg_file, pkglts_dir
 from pkglts.config_management import Config, get_pkg_config, write_pkg_config
-from pkglts.manage import (init_pkg, regenerate_package)
+from pkglts.manage import init_pkg, regenerate_package, regenerate_option
 from pkglts.small_tools import ensure_created, rmdir
 
 
@@ -31,10 +31,12 @@ def tmp_pths():
     with open(pj(pth, pkglts_dir, pkg_cfg_file), 'r') as f:
         pkg_cfg = json.load(f)
 
-    pkg_cfg['base'] = dict(pkgname='toto', namespace=None,
+    pkg_cfg['base'] = dict(pkgname='toto',
+                           namespace=None,
                            authors=[('moi', 'moi@email.com')],
-                           namespace_method="pkg_util",
                            url=None)
+    pkg_cfg['src'] = dict(namespace_method="pkg_util")
+
     cfg = Config(pkg_cfg)
     write_pkg_config(cfg, pth)
     regenerate_package(cfg, pth)
@@ -51,10 +53,6 @@ def test_regenerate_pass(tmp_pths):
     with open(pj(tmp_dir, pkglts_dir, pkg_cfg_file), 'r') as f:
         pkg_cfg = json.load(f)
 
-    pkg_cfg['base'] = dict(pkgname='toto', namespace=None,
-                           authors=[('moi', 'moi@email.com')],
-                           namespace_method="pkg_util",
-                           url=None)
     cfg = Config(pkg_cfg)
     regenerate_package(cfg, tmp_dir)
     assert exists(init_file)
@@ -65,10 +63,8 @@ def test_regenerate_check_pkg_cfg_validity(tmp_pths):
     with open(pj(tmp_dir, pkglts_dir, pkg_cfg_file), 'r') as f:
         pkg_cfg = json.load(f)
 
-    pkg_cfg['base'] = dict(pkgname='1toto', namespace=None,
-                           authors=[('moi', 'moi@email.com')],
-                           namespace_method="pkg_util",
-                           url=None)
+    pkg_cfg['base']['pkgname'] = '1toto'
+
     cfg = Config(pkg_cfg)
     assert not regenerate_package(cfg, tmp_dir)
 
@@ -148,6 +144,18 @@ def test_regenerate_remove_user_files_do_not_generate_conflicts(tmp_pths):
     assert not exists(new_pth)
 
 
+def test_regenerate_remove_tpl_files_do_not_generate_conflicts(tmp_pths):
+    tmp_dir, init_file = tmp_pths
+    cfg = get_pkg_config(tmp_dir)
+
+    regenerate_package(cfg, tmp_dir)
+
+    remove(init_file)
+
+    regenerate_package(cfg, tmp_dir)
+    assert exists(init_file)
+
+
 def test_regenerate_fail_if_permanent_section_ids_have_been_modified(tmp_pths):
     tmp_dir, init_file = tmp_pths
     cfg = get_pkg_config(tmp_dir)
@@ -157,3 +165,13 @@ def test_regenerate_fail_if_permanent_section_ids_have_been_modified(tmp_pths):
 
     with pytest.raises(UserWarning):
         regenerate_package(cfg, tmp_dir, overwrite=True)
+
+
+def test_regenerate_option_fails_if_option_not_available(tmp_pths):
+    tmp_dir, init_file = tmp_pths
+    cfg = get_pkg_config(tmp_dir)
+
+    regenerate_option(cfg, 'base', tmp_dir)
+
+    with pytest.raises(KeyError):
+        regenerate_option(cfg, "toto", tmp_dir)

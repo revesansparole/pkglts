@@ -1,5 +1,5 @@
 from os.path import dirname
-from pkglts.option.pysetup.option import requirements
+from pkglts.option.reqs.option import requirements
 from pkglts.option_object import Option
 from pkglts.version import __version__
 

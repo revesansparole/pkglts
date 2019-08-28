@@ -18,7 +18,7 @@ requirements:
 {%- if 'test' is available -%}
 {%- if test.suite_name == 'pytest' %}
     - pytest-runner
-{%- for dep in pysetup.requirements('test') -%}
+{%- for dep in reqs.requirements('test') -%}
   {%- if dep.is_conda(strict=False) %}
     - {{ dep.fmt_conda_requirement() }}
   {%- endif %}
@@ -30,7 +30,7 @@ requirements:
 # {# pkglts, conda.req_run
   run:
     - python
-{%- for dep in pysetup.requirements('install') -%}
+{%- for dep in reqs.requirements('install') -%}
   {%- if dep.is_conda(strict=False) %}
     - {{ dep.fmt_conda_requirement() }}
   {%- endif %}

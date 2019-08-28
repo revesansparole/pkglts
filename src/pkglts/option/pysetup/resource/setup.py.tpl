@@ -21,11 +21,11 @@ pkgs = find_packages('src')
 {% if 'data' is available -%}
 pkg_data = {}
 
-nb = len(normpath(abspath("{{ base.src_pth }}"))) + 1
+nb = len(normpath(abspath("{{ src.src_pth }}"))) + 1
 data_rel_pth = lambda pth: normpath(abspath(pth))[nb:]
 
 data_files = []
-for root, dnames, fnames in walk("{{ base.src_pth }}"):
+for root, dnames, fnames in walk("{{ src.src_pth }}"):
     for name in fnames:
         if splitext(name)[-1] in {{ data.filetype }}:
             data_files.append(data_rel_pth(pj(root, name)))
@@ -59,8 +59,8 @@ setup_kwds = dict(
     zip_safe=False,
 
     packages=pkgs,
-    {%- if base.namespace is not none %}
-    {% if base.namespace_method == 'setuptools' -%}
+    {%- if src.namespace is not none %}
+    {% if src.namespace_method == 'setuptools' -%}
     namespace_packages=['{{ base.namespace }}'],
     {%- endif %}
     {%- endif %}
@@ -79,13 +79,13 @@ setup_kwds = dict(
         {% endif -%}
     ],
     install_requires=[
-        {% for dep in pysetup.requirements('install') -%}
+        {% for dep in reqs.requirements('install') -%}
         {% if dep.is_pip(strict=False) -%}
         "{{ dep.fmt_pip_requirement() }}",
         {% endif -%}
         {%- endfor %}],
     tests_require=[
-        {% for dep in pysetup.requirements('test') -%}
+        {% for dep in reqs.requirements('test') -%}
         {% if dep.is_pip(strict=False) -%}
         "{{ dep.fmt_pip_requirement() }}",
         {% endif -%}

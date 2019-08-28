@@ -1,7 +1,5 @@
-# {# pkglts, version, after base
-{% if 'version' is available %}
+# {# pkglts, version, after src
 from . import version
 
 __version__ = version.__version__
-{% endif %}
 # #}

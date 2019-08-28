@@ -1,5 +1,0 @@
-# {# pkglts, pysetup
-{% for dep in pysetup.requirements('install') -%}
-{{ dep.fmt_pip_requirement(extended=False) }}
-{% endfor %}
-# #}

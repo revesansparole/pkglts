@@ -3,6 +3,6 @@
 {{ doc.description }}
 """
 {% endif -%}
-# {# pkglts, base
+# {# pkglts, src
 # FYEO
 # #}
