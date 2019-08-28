@@ -1,4 +1,4 @@
-from os.path import dirname
+from os.path import dirname, exists
 
 from pkglts.dependency import Dependency
 from pkglts.option_object import Option
@@ -16,7 +16,8 @@ class OptionSphinx(Option):
         sec = dict(
             theme="default",
             autodoc_dvlpt=True,
-            build_dir="build/sphinx"
+            build_dir="build/sphinx",
+            gallery="",
         )
         cfg['sphinx'] = sec
 
@@ -29,6 +30,10 @@ class OptionSphinx(Option):
         if theme != str(theme):
             invalids.append('sphinx.theme')
 
+        gallery = cfg['sphinx']['gallery']
+        if gallery != "" and not exists(gallery):
+            invalids.append('sphinx.gallery')
+
         return invalids
 
     def require_option(self):
@@ -38,3 +43,6 @@ class OptionSphinx(Option):
         yield Dependency('sphinx', intent='doc')
         if cfg["sphinx"]["theme"] == "sphinx_rtd_theme":
             yield Dependency('sphinx_rtd_theme', intent='doc')
+
+        if cfg['sphinx']['gallery'] != "":
+            yield Dependency('sphinx-gallery', intent='doc')
