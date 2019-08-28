@@ -47,7 +47,7 @@ class OptionReqs(Option):
             for r in reqs:
                 intents.update(r.intents)
 
-            return intents
+            return sorted(intents)
 
         def req(intent):
             """For internal use only."""
