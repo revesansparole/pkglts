@@ -42,12 +42,16 @@ class OptionReqs(Option):
     def environment_extensions(self, cfg):
         reqs = requirements(cfg)
 
-        def intents():
-            return sorted(set(r.intent for r in reqs) | {'install', 'doc', 'dvlpt', 'test'})
+        def all_intents():
+            intents = {'install', 'doc', 'dvlpt', 'test'}
+            for r in reqs:
+                intents.update(r.intents)
+
+            return intents
 
         def req(intent):
             """For internal use only."""
-            return [r for r in reqs if r.intent == intent]
+            return [r for r in reqs if intent in r.intents]
 
         def conda_reqs(intents):
             return fmt_conda_reqs(reqs, intents)
@@ -58,7 +62,7 @@ class OptionReqs(Option):
         cfg.add_test('is_pip_dep', Dependency.is_pip)
 
         return {
-            "intents": intents,
+            "intents": all_intents,
             "requirements": req,
             "conda_reqs": conda_reqs,
             "pip_reqs": pip_reqs,
@@ -100,7 +104,8 @@ def fmt_conda_reqs(reqs, intents):
     Returns:
         (str)
     """
-    reqs = [r for r in reqs if r.is_conda(strict=False) and r.intent in intents]
+    intents = set(intents)
+    reqs = [r for r in reqs if r.is_conda(strict=False) and len(r.intents & intents) > 0]
     if len(reqs) == 0:
         return ""
 
@@ -124,7 +129,8 @@ def fmt_pip_reqs(reqs, intents):
     Returns:
         (str)
     """
-    reqs = [r for r in reqs if r.is_pip(strict=True) and r.intent in intents]
+    intents = set(intents)
+    reqs = [r for r in reqs if r.is_pip(strict=True) and len(r.intents & intents) > 0]
     if len(reqs) == 0:
         return ""
 

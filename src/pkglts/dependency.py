@@ -24,7 +24,10 @@ class Dependency(object):
         self.channel = channel
         """place to find the dependency depends on package_manager"""
 
-        self.intent = intent
+        if isinstance(intent, str):
+            intent = {intent}
+
+        self.intents = set(intent)
         """When does the package require this option:
          - 'install': only for installation (prod purpose)
          - 'test': for testing purpose only
