@@ -144,9 +144,7 @@ def _manage_conflicts(hm_ref, overwrite):
     for tgt_pth in hm_ref:
         if exists(tgt_pth) and modified_file_hash(tgt_pth, hm_ref):
             conflicted.append(tgt_pth)
-        else:
-            # file disappeared, regenerate_dir will reload it if managed by pkglts
-            pass
+        # else file disappeared, regenerate_dir will reload it if managed by pkglts
 
     overwrite_file = {}
     if conflicted:

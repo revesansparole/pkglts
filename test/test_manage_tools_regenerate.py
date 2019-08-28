@@ -56,6 +56,26 @@ def test_find_templates_renders_path_names(tmp_dir):
         assert pth_as_key(pj(tmp_dir, 'tgt', fname)) in rg_tree
 
 
+def test_find_templates_ignores_specific_names(tmp_dir):
+    ensure_created(pj(tmp_dir, "src", "{{ custom_name }}"))
+    fnames = ('{{ custom_name }}.txt', 'titi.txt',
+              '{{ custom_name }}/{{ custom_name }}.txt')
+    for fname in fnames:
+        pth = pj(tmp_dir, "src", fname)
+        with open(pth, 'w') as f:
+            f.write("lorem ipsum")
+
+    cfg = Config(DEFAULT_CFG)
+    cfg._env.globals['custom_name'] = '_'
+    rg_tree = {}
+    find_templates(pj(tmp_dir, 'src'), pj(tmp_dir, 'tgt'), cfg, rg_tree)
+
+    assert pth_as_key(pj(tmp_dir, 'tgt', 'titi.txt')) in rg_tree
+    fnames = ('_.txt', '_/_.txt')
+    for fname in fnames:
+        assert pth_as_key(pj(tmp_dir, 'tgt', fname)) not in rg_tree
+
+
 def test_find_templates_handles_src_directory_no_namespace(tmp_dir):
     pth = pj(tmp_dir, "src", "src", "{{ base.pkgname }}", "test.txt")
     ensure_path(pth)
