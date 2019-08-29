@@ -43,7 +43,7 @@ def test_config_check_sphinx_gallery(opt):
 
     assert 'sphinx.gallery' not in opt.check(cfg)
 
-    for pth in ("-", "toto/titi/"):
+    for pth in ("a" * 256, "toto/:titi/"):
         cfg['sphinx']['gallery'] = pth
         assert 'sphinx.gallery' in opt.check(cfg)
 
