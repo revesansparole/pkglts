@@ -138,7 +138,7 @@ class Config(dict):
                 for func_name, func in opt.environment_extensions(self).items():
                     setattr(self._env.globals[opt_name], func_name, func)
             except KeyError:
-                raise KeyError("option '%s' does not exists" % opt_name)
+                raise KeyError("option '%s' exists in config but does not appear to be installed" % opt_name)
 
     def installed_options(self, return_sorted=False):
         """List all installed options.
