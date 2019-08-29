@@ -1,7 +1,8 @@
-from os.path import dirname, exists
+from os.path import dirname
 
 from pkglts.dependency import Dependency
 from pkglts.option_object import Option
+from pkglts.small_tools import is_pathname_valid
 from pkglts.version import __version__
 
 
@@ -31,7 +32,7 @@ class OptionSphinx(Option):
             invalids.append('sphinx.theme')
 
         gallery = cfg['sphinx']['gallery']
-        if gallery != "" and not exists(gallery):
+        if gallery != "" and not is_pathname_valid(gallery):
             invalids.append('sphinx.gallery')
 
         return invalids
