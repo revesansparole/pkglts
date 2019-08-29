@@ -19,18 +19,33 @@ def test_root_dir_is_defined(opt):
 def test_update_parameters(opt):
     cfg = {}
     opt.update_parameters(cfg)
-    assert len(cfg['sphinx']) == 3
+    assert len(cfg['sphinx']) == 4
 
 
 def test_config_checks_doc_fmt(opt):
-    cfg = Config(dict(doc={'fmt': 'md'}, sphinx={'theme': "default"}))
+    cfg = Config(dict(doc={'fmt': 'md'}))
+    opt.update_parameters(cfg)
     assert 'doc.fmt' in opt.check(cfg)
 
 
 def test_config_check_sphinx_theme(opt):
+    cfg = Config(dict(doc={'fmt': 'rst'}))
+    opt.update_parameters(cfg)
+
     for theme in (1, None,):
-        cfg = Config(dict(doc={'fmt': 'rst'}, sphinx={'theme': theme}))
+        cfg['sphinx']['theme'] = theme
         assert 'sphinx.theme' in opt.check(cfg)
+
+
+def test_config_check_sphinx_gallery(opt):
+    cfg = Config(dict(doc={'fmt': 'rst'}))
+    opt.update_parameters(cfg)
+
+    assert 'sphinx.gallery' not in opt.check(cfg)
+
+    for pth in ("a" * 256,):
+        cfg['sphinx']['gallery'] = pth
+        assert 'sphinx.gallery' in opt.check(cfg)
 
 
 def test_require_option(opt):

@@ -4,6 +4,9 @@ from os import path
 import pkglts
 from pkglts.config_management import Config
 from pkglts.option_tools import available_options
+from pkglts.option.doc.option import OptionDoc
+from pkglts.option.sphinx.option import OptionSphinx
+from pkglts.option.test.option import OptionTest
 
 
 def test_options_expose_parameters():
@@ -23,7 +26,10 @@ def test_options_expose_parameters():
 
 
 def test_require_correctly_defined():
-    cfg = Config(dict(base={}, doc={'fmt': 'rst'}, sphinx={'theme': 'default'}, test={'suite_name': 'pytest'}))
+    cfg = Config(dict(base={}))
+    OptionDoc('doc').update_parameters(cfg)
+    OptionTest('test').update_parameters(cfg)
+    OptionSphinx('sphinx').update_parameters(cfg)
 
     # walk through all possible options
     option_basedir = path.join(path.dirname(pkglts.__file__), 'option')

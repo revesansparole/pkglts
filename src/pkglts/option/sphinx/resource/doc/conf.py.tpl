@@ -53,7 +53,10 @@ extensions = [
     'sphinx.ext.mathjax',
     'sphinx.ext.napoleon',
     'sphinx.ext.todo',
-    'sphinx.ext.viewcode'
+    'sphinx.ext.viewcode',
+{%- if sphinx.gallery != "" %}
+    'sphinx_gallery.gen_gallery',
+{%- endif %}
 ]
 
 # try to add more extensions which are not default
@@ -65,6 +68,14 @@ try:
     extensions.append('matplotlib.sphinxext.plot_directive')
 except ImportError:
     pass
+
+{% if sphinx.gallery != "" -%}
+sphinx_gallery_conf = {
+    'examples_dirs': '../{{ sphinx.gallery }}',   # path to your example scripts
+    'gallery_dirs': '_gallery',  # path where to save gallery generated examples
+    'filename_pattern': 'plot_*',
+}
+{%- endif %}
 
 # default settings that can be redefined outside of the pkglts block
 todo_include_todos = True
