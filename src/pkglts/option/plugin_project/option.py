@@ -2,18 +2,8 @@ from os.path import dirname
 
 from pkglts.dependency import Dependency
 from pkglts.option_object import Option
+from pkglts.small_tools import is_valid_identifier
 from pkglts.version import __version__
-
-
-def is_valid_identifier(name):
-    """ Check that name is a valid python identifier
-    sort of back port of "".isidentifier()
-    """
-    try:
-        compile("%s=1" % name, "test", 'single')
-        return True
-    except SyntaxError:
-        return False
 
 
 class OptionPluginProject(Option):

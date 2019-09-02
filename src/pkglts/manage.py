@@ -190,7 +190,7 @@ def regenerate_package(cfg, target=".", overwrite=False):
 
     # find template files associated with installed options
     rg_tree = {}
-    for name in cfg.installed_options():
+    for name in cfg.installed_options(return_sorted=True):
         opt = available_options[name]
         resource_dir = opt.resource_dir()
         if resource_dir is None:
