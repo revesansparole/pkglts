@@ -253,8 +253,8 @@ latex_elements = {
 # [howto/manual]).
 latex_documents = [
     (u"index", u"{{ base.pkgname }}.tex",
-     u"{{ base.pkgname }} Documentation",
-     u"{{ base.authors[0][0] }}", u"manual"),
+     u"{{ base.pkgname|replace('_', '\_') }} Documentation",
+     u"{{ base.authors[0][0]|replace('_', '\_') }}", u"manual"),
 ]
 
 # The name of an image file (relative to this directory) to place at
