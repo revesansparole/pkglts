@@ -16,11 +16,11 @@ class OptionReadthedocs(Option):
         sec = dict(
             project="{{ github.project }}"
         )
-        cfg['readthedocs'] = sec
+        cfg[self._name] = sec
 
     def check(self, cfg):
         invalids = []
-        project = cfg['readthedocs']['project']
+        project = cfg[self._name]['project']
 
         if not project:
             invalids.append("readthedocs.project")

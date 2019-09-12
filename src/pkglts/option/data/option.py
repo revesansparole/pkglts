@@ -17,7 +17,7 @@ class OptionData(Option):
             filetype=[".json", ".ini"],
             use_ext_dir=False
         )
-        cfg['data'] = sec
+        cfg[self._name] = sec
 
     def require_option(self):
         return ['src']

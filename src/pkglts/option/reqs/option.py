@@ -19,12 +19,12 @@ class OptionReqs(Option):
         sec = dict(
             require=[]
         )
-        cfg['reqs'] = sec
+        cfg[self._name] = sec
 
     def check(self, cfg):
         invalids = []
 
-        req = cfg['reqs']['require']
+        req = cfg[self._name]['require']
 
         valid_methods = (None, "pip", "conda", "git")
         if any(dep.get('pkg_mng') not in valid_methods for dep in req):

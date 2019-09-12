@@ -14,13 +14,13 @@ class OptionPluginProject(Option):
         return dirname(__file__)
 
     def update_parameters(self, cfg):
-        cfg['plugin_project'] = {
+        cfg[self._name] = {
             "plugin_name": "{{ base.pkgname }}"
         }
 
     def check(self, cfg):
         invalids = []
-        plugin_name = cfg['plugin_project']['plugin_name']
+        plugin_name = cfg[self._name]['plugin_name']
 
         if "." in plugin_name:
             invalids.append('plugin_project.plugin_name')

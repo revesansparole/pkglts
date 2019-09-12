@@ -27,11 +27,11 @@ class OptionPypi(Option):
                 dict(name="test", url="https://testpypi.python.org/pypi")
             ]
         )
-        cfg['pypi'] = sec
+        cfg[self._name] = sec
 
     def check(self, cfg):
         invalids = []
-        classifiers = cfg['pypi']['classifiers']
+        classifiers = cfg[self._name]['classifiers']
 
         if not classifiers:
             invalids.append("pypi.classifiers")

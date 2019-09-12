@@ -17,11 +17,11 @@ class OptionGithub(Option):
             project="{{ base.pkgname }}",
             url="https://github.com/{{ github.owner }}/{{ github.project }}"
         )
-        cfg['github'] = sec
+        cfg[self._name] = sec
 
     def check(self, cfg):
         invalids = []
-        project = cfg['github']['project']
+        project = cfg[self._name]['project']
 
         if not project:
             invalids.append('github.project')

@@ -16,11 +16,11 @@ class OptionTest(Option):
         sec = dict(
             suite_name="pytest",
         )
-        cfg['test'] = sec
+        cfg[self._name] = sec
 
     def check(self, cfg):
         invalids = []
-        name = cfg['test']['suite_name']
+        name = cfg[self._name]['suite_name']
 
         if name not in ("pytest", "nose"):
             invalids.append('test.suite_name')

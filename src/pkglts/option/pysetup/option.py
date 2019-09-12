@@ -15,11 +15,11 @@ class OptionPysetup(Option):
         sec = dict(
             intended_versions=["36"],
         )
-        cfg['pysetup'] = sec
+        cfg[self._name] = sec
 
     def check(self, cfg):
         invalids = []
-        intended_versions = cfg['pysetup']['intended_versions']
+        intended_versions = cfg[self._name]['intended_versions']
 
         if not intended_versions:
             invalids.append("pysetup.intended_versions")

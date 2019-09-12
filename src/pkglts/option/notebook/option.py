@@ -16,11 +16,11 @@ class OptionNotebook(Option):
         sec = dict(
             src_directory="example"
         )
-        cfg['notebook'] = sec
+        cfg[self._name] = sec
 
     def check(self, cfg):
         invalids = []
-        src_directory = cfg['notebook']['src_directory']
+        src_directory = cfg[self._name]['src_directory']
 
         if not exists(src_directory):
             invalids.append("notebook.src_directory")
