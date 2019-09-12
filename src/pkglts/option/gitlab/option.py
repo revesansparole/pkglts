@@ -18,11 +18,11 @@ class OptionGitlab(Option):
             server="framagit.org",
             url="https://{{ gitlab.server }}/{{ gitlab.owner }}/{{ gitlab.project }}"
         )
-        cfg['gitlab'] = sec
+        cfg[self._name] = sec
 
     def check(self, cfg):
         invalids = []
-        project = cfg['gitlab']['project']
+        project = cfg[self._name]['project']
 
         if not project:
             invalids.append('gitlab.project')

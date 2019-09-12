@@ -20,12 +20,12 @@ class OptionDoc(Option):
             fmt="rst",
             keywords=[]
         )
-        cfg['doc'] = sec
+        cfg[self._name] = sec
 
     def check(self, cfg):
         invalids = []
-        description = cfg['doc']['description']
-        fmt = cfg['doc']['fmt']
+        description = cfg[self._name]['description']
+        fmt = cfg[self._name]['fmt']
         # keywords = env.globals['doc'].keywords
 
         if not description:
@@ -40,19 +40,18 @@ class OptionDoc(Option):
         return ['base']
 
     def require(self, cfg):
-        if cfg['doc']['fmt'] == 'md':
+        if cfg[self._name]['fmt'] == 'md':
             yield Dependency('mkdocs', intent='doc')
 
     def environment_extensions(self, cfg):
         badges = []
-        for name in cfg.installed_options():
-            if name != 'doc':
-                opt = available_options[name]
-                ext = opt.environment_extensions(cfg)
-                if 'badge' in ext:
-                    badges.append(ext['badge'])
-                if 'badges' in ext:
-                    badges.extend(ext['badges'])
+        for name in set(cfg.installed_options()) - {self._name}:
+            opt = available_options[name]
+            ext = opt.environment_extensions(cfg)
+            if 'badge' in ext:
+                badges.append(ext['badge'])
+            if 'badges' in ext:
+                badges.extend(ext['badges'])
 
         return {"badges": badges}
 

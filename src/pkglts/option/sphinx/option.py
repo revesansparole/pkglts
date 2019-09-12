@@ -20,18 +20,18 @@ class OptionSphinx(Option):
             build_dir="build/sphinx",
             gallery="",
         )
-        cfg['sphinx'] = sec
+        cfg[self._name] = sec
 
     def check(self, cfg):
         invalids = []
         if cfg['doc']['fmt'] != 'rst':
             invalids.append('doc.fmt')
 
-        theme = cfg['sphinx']['theme']
+        theme = cfg[self._name]['theme']
         if theme != str(theme):
             invalids.append('sphinx.theme')
 
-        gallery = cfg['sphinx']['gallery']
+        gallery = cfg[self._name]['gallery']
         if gallery != "" and not is_pathname_valid(gallery):
             invalids.append('sphinx.gallery')
 

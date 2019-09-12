@@ -25,11 +25,11 @@ class OptionLicense(Option):
             organization="organization",
             project="{{ base.pkgname }}"
         )
-        cfg['license'] = sec
+        cfg[self._name] = sec
 
     def check(self, cfg):
         invalids = []
-        name = cfg['license']['name']
+        name = cfg[self._name]['name']
         # year = pkg_cfg['license']['year']
         # organization = pkg_cfg['license']['organization']
         # project = pkg_cfg['license']['project']

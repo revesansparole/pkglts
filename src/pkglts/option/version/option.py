@@ -18,13 +18,13 @@ class OptionVersion(Option):
             minor=0,
             post=1,
         )
-        cfg['version'] = sec
+        cfg[self._name] = sec
 
     def check(self, cfg):
         invalids = []
-        major = cfg['version']['major']
-        minor = cfg['version']['minor']
-        post = cfg['version']['post']
+        major = cfg[self._name]['major']
+        minor = cfg[self._name]['minor']
+        post = cfg[self._name]['post']
 
         if not isinstance(major, int):
             invalids.append("version.major")

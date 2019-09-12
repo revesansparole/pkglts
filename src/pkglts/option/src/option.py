@@ -16,12 +16,12 @@ class OptionSrc(Option):
         sec = dict(
             namespace_method="pkg_util",
         )
-        cfg['src'] = sec
+        cfg[self._name] = sec
 
     def check(self, cfg):
         invalids = []
 
-        if cfg['src']['namespace_method'] not in ("pkg_util", "setuptools", "P3.3>"):
+        if cfg[self._name]['namespace_method'] not in ("pkg_util", "setuptools", "P3.3>"):
             invalids.append("src.namespace_method")
 
         return invalids

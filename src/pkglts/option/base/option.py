@@ -20,12 +20,12 @@ class OptionBase(Option):
             url=None,
             authors=[("moi", "moi@email.com")]
         )
-        cfg['base'] = sec
+        cfg[self._name] = sec
 
     def check(self, cfg):
         invalids = []
-        pkgname = cfg['base']['pkgname']
-        namespace = cfg['base']['namespace']
+        pkgname = cfg[self._name]['pkgname']
+        namespace = cfg[self._name]['namespace']
 
         if "." in pkgname:
             invalids.append('base.pkgname')
