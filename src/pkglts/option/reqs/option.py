@@ -114,6 +114,8 @@ def fmt_conda_reqs(reqs, intents):
         cmd += " -c %s" % channel
 
     for name in sorted(r.conda_full_name() for r in reqs):
+        if " " in name:
+            name = '"{}"'.format(name)
         cmd += " %s" % name
 
     return cmd
@@ -137,6 +139,8 @@ def fmt_pip_reqs(reqs, intents):
     cmd = "pip install"
 
     for name in sorted(r.pip_full_name() for r in reqs):
+        if " " in name:
+            name = '"{}"'.format(name)
         cmd += " %s" % name
 
     return cmd
