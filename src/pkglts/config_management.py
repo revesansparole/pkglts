@@ -334,4 +334,7 @@ def upgrade_pkg_cfg_version(pkg_cfg, version):
 
             pkg_cfg['reqs']['require'] = require
 
+        if 'sphinx' in pkg_cfg:
+            pkg_cfg['sphinx']['gallery'] = pkg_cfg['sphinx'].get('gallery', "")
+
     return pkg_cfg
