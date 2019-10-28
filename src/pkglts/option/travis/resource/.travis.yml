@@ -37,11 +37,11 @@ install:
   - source activate myenv
 
   # install dependencies
-  {% if pysetup.conda_reqs(['install', 'test', 'doc', 'dvlpt']) != "" -%}
-  - {{ pysetup.conda_reqs(['install', 'test', 'doc', 'dvlpt']) }}
+  {% if reqs.conda_reqs(['install', 'test', 'doc', 'dvlpt']) != "" -%}
+  - {{ reqs.conda_reqs(['install', 'test', 'doc', 'dvlpt']) }}
   {%- endif %}
-  {% if pysetup.pip_reqs(['install', 'test', 'doc', 'dvlpt']) != "" -%}
-  - {{ pysetup.pip_reqs(['install', 'test', 'doc', 'dvlpt']) }}
+  {% if reqs.pip_reqs(['install', 'test', 'doc', 'dvlpt']) != "" -%}
+  - {{ reqs.pip_reqs(['install', 'test', 'doc', 'dvlpt']) }}
   {%- endif %}
 
   # install package

@@ -1,15 +1,17 @@
 # {# pkglts, pysetup
-
 include AUTHORS.rst
 include CONTRIBUTING.rst
 include HISTORY.rst
 include README.rst
 
 include LICENSE
+
 include requirements.txt
 include requirements_minimal.txt
 
+
 recursive-include test *
+
 
 recursive-include src/pkglts *
 
@@ -18,8 +20,8 @@ recursive-include src/pkglts *
 recursive-exclude * __pycache__
 recursive-exclude * *.py[co]
 
-recursive-include doc *.rst
 
+recursive-include doc *.rst
 include doc/conf.py
 include doc/Makefile
 include doc/make.bat

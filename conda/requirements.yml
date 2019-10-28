@@ -7,12 +7,17 @@ channels:
 - conda-forge
 
 dependencies:
+# doc
+- sphinx
+- sphinx_rtd_theme
+# dvlpt
+- flake8
+- twine
 # install
 - jinja2
 - requests
 - semver
 - unidecode
-# run examples
 # test
 - coverage
 - coveralls
@@ -20,10 +25,4 @@ dependencies:
 - pytest-cov
 - pytest-mock
 - tox
-# compile doc
-- sphinx
-- sphinx_rtd_theme
-# other dvlpt tools
-- flake8
-- twine
 # #}

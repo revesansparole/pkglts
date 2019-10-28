@@ -53,7 +53,7 @@ extensions = [
     'sphinx.ext.mathjax',
     'sphinx.ext.napoleon',
     'sphinx.ext.todo',
-    'sphinx.ext.viewcode'
+    'sphinx.ext.viewcode',
 ]
 
 # try to add more extensions which are not default
@@ -65,6 +65,8 @@ try:
     extensions.append('matplotlib.sphinxext.plot_directive')
 except ImportError:
     pass
+
+
 
 # default settings that can be redefined outside of the pkglts block
 todo_include_todos = True
