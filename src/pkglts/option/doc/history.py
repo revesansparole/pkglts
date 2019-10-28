@@ -5,11 +5,7 @@ import logging
 import os
 from functools import cmp_to_key
 from getpass import getpass
-
-try:  # python3
-    from urllib.parse import quote_plus
-except ImportError:  # python2
-    from urllib import quote_plus
+from urllib.parse import quote_plus
 
 import requests
 import semver

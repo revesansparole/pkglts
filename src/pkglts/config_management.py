@@ -15,11 +15,6 @@ from .option.reqs.option import OptionReqs
 from .option.src.option import OptionSrc
 from .option_tools import available_options, find_available_options
 
-try:
-    string_type = basestring
-except NameError:
-    string_type = str
-
 CURRENT_PKG_CFG_VERSION = 13
 
 LOGGER = logging.getLogger(__name__)
@@ -110,7 +105,7 @@ class Config(dict):
             self[opt_name] = {}
             self._env.globals[opt_name] = ConfigSection()
             for key, param in cfg.items():
-                if isinstance(param, string_type):
+                if isinstance(param, str):
                     to_eval.append((opt_name, key, param))
                 else:
                     self._add_param(opt_name, key, param)

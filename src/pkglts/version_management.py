@@ -11,13 +11,6 @@ import semver
 from .config import pkg_version_file, pkglts_dir
 from .option_tools import available_options
 
-# python2 compatibility
-try:
-    FileNotFoundError = FileNotFoundError
-except NameError:
-    FileNotFoundError = IOError
-
-
 LOGGER = logging.getLogger(__name__)
 
 
@@ -79,7 +72,7 @@ def outdated_options(cfg, rep="."):
     """
     try:
         ver = load_pkg_version(rep)
-    except FileNotFoundError:
+    except IOError:
         return []
 
     outdated = []
