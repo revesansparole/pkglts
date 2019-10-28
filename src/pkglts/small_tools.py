@@ -1,7 +1,6 @@
 import errno
 import os
 import sys
-from os import mkdir
 from os.path import dirname, exists
 from shutil import rmtree
 from time import sleep
@@ -9,7 +8,7 @@ from time import sleep
 
 def ensure_created(dname):
     if not exists(dname):
-        mkdir(dname)
+        os.mkdir(dname)
 
 
 def is_valid_identifier(name):
@@ -41,7 +40,7 @@ def ensure_path(pth):
     dname = dirname(pth)
     if dname and not exists(dname):
         ensure_path(dname)
-        mkdir(dname)
+        os.mkdir(dname)
 
 
 # code taken from

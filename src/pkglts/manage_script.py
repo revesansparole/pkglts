@@ -114,9 +114,9 @@ def action_add(cfg, **kwds):
 def action_remove(cfg, **kwds):
     """Remove options from the package.
     """
+    del cfg, kwds
     LOGGER.info("remove option")
     print("TODO")
-    del cfg, kwds
 
 
 def action_example(cfg, **kwds):

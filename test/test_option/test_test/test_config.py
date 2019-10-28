@@ -8,14 +8,6 @@ def opt():
     return OptionTest('test')
 
 
-def test_version_is_defined(opt):
-    assert opt.version() != "0.0.0"
-
-
-def test_root_dir_is_defined(opt):
-    assert opt.root_dir() is not None
-
-
 def test_update_parameters(opt):
     cfg = {}
     opt.update_parameters(cfg)
@@ -34,7 +26,8 @@ def test_require_option(opt):
 
 def test_require(opt):
     for suite_name in ('pytest', 'nose'):
-        cfg = Config(dict(base={}, test={'suite_name': suite_name}))
+        cfg = Config(dict(base={}))
         opt.update_parameters(cfg)
+        cfg['test']['suite_name'] = suite_name
 
         assert len(tuple(opt.require(cfg))) == 2

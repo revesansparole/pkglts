@@ -8,14 +8,6 @@ def opt():
     return OptionRequires('requires')
 
 
-def test_version_is_defined(opt):
-    assert opt.version() != "0.0.0"
-
-
-def test_root_dir_is_defined(opt):
-    assert opt.root_dir() is not None
-
-
 def test_require_option(opt):
     assert len(tuple(opt.require_option())) == 2
 

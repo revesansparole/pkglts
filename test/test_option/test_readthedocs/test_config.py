@@ -8,14 +8,6 @@ def opt():
     return OptionReadthedocs('readthedocs')
 
 
-def test_version_is_defined(opt):
-    assert opt.version() != "0.0.0"
-
-
-def test_root_dir_is_defined(opt):
-    assert opt.root_dir() is not None
-
-
 def test_update_parameters(opt):
     cfg = {}
     opt.update_parameters(cfg)
