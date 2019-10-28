@@ -134,6 +134,6 @@ def parser_nbcompile(subparsers):
         (string): a unique id for this parser
         (callable): the action to perform
     """
-    parser = subparsers.add_parser('nbcompile', help=action_nbcompile.__doc__)
+    subparsers.add_parser('nbcompile', help=action_nbcompile.__doc__)
 
     return 'nbcompile', action_nbcompile

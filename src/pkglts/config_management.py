@@ -60,6 +60,9 @@ class Config(dict):
         # resolve
         self.resolve()
 
+    def __eq__(self, other):
+        return dict.__eq__(self, other)
+
     def template(self):
         """Associated template even after resolution."""
         return self._tpl

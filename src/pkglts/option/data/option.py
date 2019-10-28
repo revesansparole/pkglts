@@ -1,6 +1,5 @@
 from os.path import dirname
 
-from pkglts.dependency import Dependency
 from pkglts.option_object import Option
 from pkglts.version import __version__
 

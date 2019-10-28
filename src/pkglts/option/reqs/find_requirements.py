@@ -76,6 +76,6 @@ def parser_find_reqs(subparsers):
         (string): a unique id for this parser
         (callable): the action to perform
     """
-    parser = subparsers.add_parser('reqs', help=action_find_reqs.__doc__)
+    subparsers.add_parser('reqs', help=action_find_reqs.__doc__)
 
     return 'reqs', action_find_reqs
