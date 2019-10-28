@@ -175,6 +175,6 @@ def parser_history(subparsers):
         (string): a unique id for this parser
         (callable): the action to perform
     """
-    parser = subparsers.add_parser('history', help=action_history.__doc__)
+    subparsers.add_parser('history', help=action_history.__doc__)
 
     return 'history', action_history
