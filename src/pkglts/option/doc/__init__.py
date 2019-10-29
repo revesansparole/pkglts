@@ -16,17 +16,17 @@ def fmt_badge(badge, url, txt, fmt):
         (str)
     """
     if not url.startswith("http"):
-        url = "https://%s" % url
+        url = f"https://{url}"
     if not badge.startswith("http"):
-        badge = "https://%s" % badge
+        badge = f"https://{badge}"
 
     if fmt == 'rst':
-        lines = [".. image:: %s" % badge,
-                 "    :alt: %s" % txt,
-                 "    :target: %s" % url]
+        lines = [f".. image:: {badge}",
+                 f"    :alt: {txt}",
+                 f"    :target: {url}"]
         return "\n" + "\n".join(lines)
 
     if fmt == 'md':
-        return "[![%s](%s)](%s)" % (txt, badge, url)
+        return f"[![{txt}]({badge})]({url})"
 
-    raise UserWarning("Unknown format '{}'".format(fmt))
+    raise UserWarning(f"Unknown format '{fmt}'")

@@ -24,9 +24,8 @@ class OptionCoveralls(Option):
         owner = cfg['github']['owner']
         project = cfg['github']['project']
 
-        url = "coveralls.io/github/%s/%s?branch=master" % (owner, project)
-        img = ("coveralls.io/repos/github/%s/%s/" % (owner, project) +
-               "badge.svg?branch=master")
+        url = f"coveralls.io/github/{owner}/{project}?branch=master"
+        img = f"coveralls.io/repos/github/{owner}/{project}/badge.svg?branch=master"
         badge = fmt_badge(img, url, "Coverage report status", cfg['doc']['fmt'])
 
         return {"badge": badge}

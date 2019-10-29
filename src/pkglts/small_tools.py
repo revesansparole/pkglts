@@ -20,7 +20,7 @@ def rmdir(dname):
         else:
             return
 
-    raise OSError("unable to remove directory: %s" % dname)
+    raise OSError(f"unable to remove directory: '{dname}'")
 
 
 def ensure_path(pth):

@@ -41,7 +41,7 @@ def update_opt(name, cfg):
     try:
         opt = available_options[name]
     except KeyError:
-        raise KeyError("option '%s' does not exists" % name)
+        raise KeyError(f"option '{name}' does not exists")
 
     # find other option requirements in repository
     for option_name in opt.require_option():

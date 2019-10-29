@@ -52,8 +52,8 @@ def get_user_permission(action_name, default_true=True):
         (bool)
     """
     if default_true:
-        ans = input("%s [y], n?" % action_name) in ("", "y")
+        ans = input(f"{action_name} [y], n?") in ("", "y")
     else:
-        ans = input("%s y, [n]?" % action_name) == "y"
+        ans = input(f"{action_name} y, [n]?") == "y"
 
     return ans

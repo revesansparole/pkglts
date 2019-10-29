@@ -228,9 +228,9 @@ class Template(object):
                     cnt += "\n"
                 preserved.append((block.bid, cnt))
                 # rewrite preserved tag
-                tgt += block.before_header + "{" + "# pkglts, %s" % block.bid + "%s\n" % block.after_header
+                tgt += block.before_header + "{" + f"# pkglts, {block.bid}{block.after_header}\n"
                 tgt += cnt
-                tgt += block.before_footer + "#" + "}%s\n" % block.after_footer
+                tgt += block.before_footer + "#" + "}" + f"{block.after_footer}\n"
 
         ensure_path(tgt_pth)
         tgt_pth.write_text(tgt)

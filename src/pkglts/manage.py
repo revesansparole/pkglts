@@ -90,7 +90,7 @@ def add_option(name, cfg):
         (Config): updated package configuration
     """
     if name in cfg.installed_options():
-        raise UserWarning("option '%s' already included in this package" % name)
+        raise UserWarning(f"option '{name}' already included in this package")
 
     return update_opt(name, cfg)
 
@@ -224,4 +224,4 @@ def regenerate_option(cfg, name, target=".", overwrite=False):
         opt = available_options[name]
         opt.regenerate(cfg, target, overwrite)
     except KeyError:
-        raise KeyError("option '%s' does not exists" % name)
+        raise KeyError(f"option '{name}' does not exists")

@@ -26,8 +26,8 @@ class OptionAppveyor(Option):
         project = cfg['github']['project'].replace("_", "-")
         token = cfg[self._name]['token']
 
-        url = "ci.appveyor.com/project/%s/%s/branch/master" % (owner, project)
-        img = "ci.appveyor.com/api/projects/status/%s/branch/master?svg=true" % token
+        url = f"ci.appveyor.com/project/{owner}/{project}/branch/master"
+        img = f"ci.appveyor.com/api/projects/status/{token}/branch/master?svg=true"
         badge = fmt_badge(img, url, "Appveyor build status", cfg['doc']['fmt'])
 
         return {"badge": badge}

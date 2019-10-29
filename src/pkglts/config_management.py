@@ -123,7 +123,7 @@ class Config(dict):
         if to_eval:
             msg = "unable to fully render config\n"
             for item in to_eval:
-                msg += "%s:%s '%s'\n" % item
+                msg += "{}:{} '{}'\n".format(*item)
             raise UserWarning(msg)
 
     def load_extra(self):
@@ -138,7 +138,7 @@ class Config(dict):
                 for func_name, func in opt.environment_extensions(self).items():
                     setattr(self._env.globals[opt_name], func_name, func)
             except KeyError:
-                raise KeyError("option '%s' exists in config but does not appear to be installed" % opt_name)
+                raise KeyError(f"option '{opt_name}' exists in config but does not appear to be installed")
 
     def installed_options(self, return_sorted=False):
         """List all installed options.
