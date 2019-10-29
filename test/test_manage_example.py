@@ -51,7 +51,7 @@ def test_install_example_copy_files(tmp_dir):
 def test_install_example_copy_binary_files(tmp_dir):
     pkg_cfg = deepcopy(DEFAULT_CFG)
     pkg_cfg['base'] = dict(pkgname='toto', namespace=None)
-    pkg_cfg['data'] = dict(filetype=[".png", ".ui"], use_ext_dir=False)
+    pkg_cfg['data'] = dict(filetype=[".png", ".ui"], use_ext_dir=True)
     cfg = Config(pkg_cfg)
     cfg.load_extra()
 
