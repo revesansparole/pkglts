@@ -1,4 +1,4 @@
-from os.path import dirname
+from pathlib import Path
 
 from pkglts.option.doc import fmt_badge
 from pkglts.option_object import Option
@@ -10,7 +10,7 @@ class OptionRequires(Option):
         return __version__
 
     def root_dir(self):
-        return dirname(__file__)
+        return Path(__file__).parent
 
     def require_option(self):
         return ['doc', 'github']
@@ -19,9 +19,9 @@ class OptionRequires(Option):
         owner = cfg['github']['owner']
         project = cfg['github']['project']
 
-        base_url = "requires.io/github/%s/%s/" % (owner, project)
-        url = base_url + "requirements/?branch=master"
-        img = base_url + "requirements.svg?branch=master"
+        base_url = f"requires.io/github/{owner}/{project}/"
+        url = f"{base_url}requirements/?branch=master"
+        img = f"{base_url}requirements.svg?branch=master"
         badge = fmt_badge(img, url, "Requirements status", cfg['doc']['fmt'])
 
         return {"badge": badge}

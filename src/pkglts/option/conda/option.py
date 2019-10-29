@@ -1,4 +1,5 @@
-from os.path import dirname
+from pathlib import Path
+
 from pkglts.option.reqs.option import requirements
 from pkglts.option_object import Option
 from pkglts.version import __version__
@@ -9,7 +10,7 @@ class OptionConda(Option):
         return __version__
 
     def root_dir(self):
-        return dirname(__file__)
+        return Path(__file__).parent
 
     def require_option(self):
         return ['pysetup']

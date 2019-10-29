@@ -78,6 +78,11 @@ target/
 # jupyter notebooks
 .ipynb_checkpoints/
 
+# Microsoft office temporary files
+~$*.docx
+~$*.pptx
+~$*.xlsx
+
 # svn
 .svn
 .cache/

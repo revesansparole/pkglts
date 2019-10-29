@@ -1,13 +1,11 @@
 """
 Building packages with long term support
 """
-# {# pkglts, base
+# {# pkglts, src
 # FYEO
 # #}
-# {# pkglts, version, after base
-
+# {# pkglts, version, after src
 from . import version
 
 __version__ = version.__version__
-
 # #}

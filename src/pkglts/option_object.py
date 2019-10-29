@@ -1,7 +1,7 @@
 """
 Base class for options.
 """
-from os.path import dirname, exists, join as pj
+from pathlib import Path
 
 
 class Option(object):
@@ -23,18 +23,18 @@ class Option(object):
         """Base directory containing option definition files.
 
         Returns:
-            (str|Path)
+            (Path)
         """
-        return dirname(__file__)
+        return Path(__file__).parent
 
     def example_dir(self):
         """Directory containing option example files.
 
         Returns:
-            (str|Path)
+            (Path)
         """
-        pth = pj(self.root_dir(), 'example')
-        if exists(pth):
+        pth = self.root_dir() / 'example'
+        if pth.exists():
             return pth
 
         return None
@@ -43,10 +43,10 @@ class Option(object):
         """Directory containing option resource files.
 
         Returns:
-            (str|Path)
+            (Path)
         """
-        pth = pj(self.root_dir(), 'resource')
-        if exists(pth):
+        pth = self.root_dir() / 'resource'
+        if pth.exists():
             return pth
 
         return None

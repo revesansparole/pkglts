@@ -9,7 +9,7 @@ from . import logging_tools
 from .config_management import get_pkg_config, write_pkg_config
 from .manage import add_option, clean, init_pkg, install_example_files, regenerate_option, regenerate_package
 from .option_tools import available_options
-from .version_management import FileNotFoundError, outdated_options, write_pkg_version
+from .version_management import outdated_options, write_pkg_version
 
 LOGGER = logging.getLogger(__name__)
 
@@ -29,7 +29,7 @@ def action_info(cfg, **kwds):
 
     for name in opt_names:
         if name in outdated:
-            print("%s: OUTDATED" % name)
+            print(f"{name}: OUTDATED")
         else:
             print(name)
         print(json.dumps(cfg[name], sort_keys=True, indent=2))
@@ -85,7 +85,7 @@ def action_regenerate(cfg, **kwds):
         out_fmt = "\n".join(outdated)
         LOGGER.warning("Some options are outdated,"
                        " please upgrade pkglts and/or all the following options:\n"
-                       "%s" % out_fmt)
+                       "%s", out_fmt)
         return
 
     clean()

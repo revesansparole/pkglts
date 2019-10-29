@@ -3,7 +3,7 @@
     "auto_install": true,
     "install_front_end": "stdout",
     "use_prompts": false,
-    "version": 12
+    "version": 13
   },
   "appveyor": {
     "token": "hrwjhn2oe0q4oaf2"
@@ -16,7 +16,6 @@
       ]
     ],
     "namespace": null,
-    "namespace_method": "pkg_util",
     "pkgname": "pkglts",
     "url": null
   },
@@ -88,9 +87,14 @@
   },
   "pysetup": {
     "intended_versions": [
-      "27",
-      "36"
-    ],
+      "36",
+      "37"
+    ]
+  },
+  "readthedocs": {
+    "project": "{{ github.project }}"
+  },
+  "reqs": {
     "require": [
       {
         "name": "jinja2"
@@ -107,14 +111,15 @@
       }
     ]
   },
-  "readthedocs": {
-    "project": "{{ github.project }}"
-  },
   "requires": {},
   "sphinx": {
     "autodoc_dvlpt": true,
     "build_dir": "build/sphinx",
+    "gallery": "",
     "theme": "sphinx_rtd_theme"
+  },
+  "src": {
+    "namespace_method": "pkg_util"
   },
   "test": {
     "suite_name": "pytest"
@@ -123,7 +128,7 @@
   "travis": {},
   "version": {
     "major": 5,
-    "minor": 0,
+    "minor": 1,
     "post": 0
   }
 }

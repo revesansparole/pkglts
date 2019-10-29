@@ -4,7 +4,6 @@ Main config object and functions to manipulate it.
 import json
 import logging
 from datetime import date
-from os.path import join as pj
 
 from jinja2 import Environment, StrictUndefined, UndefinedError
 
@@ -14,11 +13,6 @@ from .option.pypi.option import OptionPypi
 from .option.reqs.option import OptionReqs
 from .option.src.option import OptionSrc
 from .option_tools import available_options, find_available_options
-
-try:
-    string_type = basestring
-except NameError:
-    string_type = str
 
 CURRENT_PKG_CFG_VERSION = 13
 
@@ -110,7 +104,7 @@ class Config(dict):
             self[opt_name] = {}
             self._env.globals[opt_name] = ConfigSection()
             for key, param in cfg.items():
-                if isinstance(param, string_type):
+                if isinstance(param, str):
                     to_eval.append((opt_name, key, param))
                 else:
                     self._add_param(opt_name, key, param)
@@ -129,7 +123,7 @@ class Config(dict):
         if to_eval:
             msg = "unable to fully render config\n"
             for item in to_eval:
-                msg += "%s:%s '%s'\n" % item
+                msg += "{}:{} '{}'\n".format(*item)
             raise UserWarning(msg)
 
     def load_extra(self):
@@ -144,7 +138,7 @@ class Config(dict):
                 for func_name, func in opt.environment_extensions(self).items():
                     setattr(self._env.globals[opt_name], func_name, func)
             except KeyError:
-                raise KeyError("option '%s' exists in config but does not appear to be installed" % opt_name)
+                raise KeyError(f"option '{opt_name}' exists in config but does not appear to be installed")
 
     def installed_options(self, return_sorted=False):
         """List all installed options.
@@ -185,12 +179,12 @@ def get_pkg_config(rep="."):
     """Read pkg_cfg file associated to this package.
 
     Args:
-        rep (str): directory to search for info
+        rep (Path): directory to search for info
 
     Returns:
         (Config): Config initialized with pkg_config
     """
-    with open(pj(rep, pkglts_dir, pkg_cfg_file), 'r') as fhr:
+    with open(rep / pkglts_dir / pkg_cfg_file, 'r') as fhr:
         pkg_cfg = json.load(fhr)
 
     # update version of pkg_config
@@ -214,7 +208,7 @@ def write_pkg_config(cfg, rep="."):
 
     Args:
         cfg (Config): current working config
-        rep (str): directory to search for info
+        rep (Path): directory to search for info
 
     Returns:
         None
@@ -222,7 +216,7 @@ def write_pkg_config(cfg, rep="."):
     LOGGER.info("write package config")
     pkg_cfg = dict(cfg.template())
 
-    with open(pj(rep, pkglts_dir, pkg_cfg_file), 'w') as fhw:
+    with open(rep / pkglts_dir / pkg_cfg_file, 'w') as fhw:
         json.dump(pkg_cfg, fhw, sort_keys=True, indent=2)
 
 

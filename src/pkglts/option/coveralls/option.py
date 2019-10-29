@@ -1,4 +1,4 @@
-from os.path import dirname
+from pathlib import Path
 
 from pkglts.dependency import Dependency
 from pkglts.option.doc import fmt_badge
@@ -11,7 +11,7 @@ class OptionCoveralls(Option):
         return __version__
 
     def root_dir(self):
-        return dirname(__file__)
+        return Path(__file__).parent
 
     def require_option(self):
         return ['coverage', 'travis']
@@ -24,9 +24,8 @@ class OptionCoveralls(Option):
         owner = cfg['github']['owner']
         project = cfg['github']['project']
 
-        url = "coveralls.io/github/%s/%s?branch=master" % (owner, project)
-        img = ("coveralls.io/repos/github/%s/%s/" % (owner, project) +
-               "badge.svg?branch=master")
+        url = f"coveralls.io/github/{owner}/{project}?branch=master"
+        img = f"coveralls.io/repos/github/{owner}/{project}/badge.svg?branch=master"
         badge = fmt_badge(img, url, "Coverage report status", cfg['doc']['fmt'])
 
         return {"badge": badge}

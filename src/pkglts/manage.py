@@ -3,12 +3,10 @@
 Use 'setup.py' for common tasks.
 """
 import logging
-from os import listdir, mkdir, remove, walk
-from os.path import exists, normpath, splitext
-from os.path import join as pj
+from pathlib import Path
 from shutil import rmtree
 
-from .config import pkg_cfg_file, pkg_hash_file, pkglts_dir
+from .config import pkg_hash_file, pkglts_dir
 from .config_management import (Config, DEFAULT_CFG,
                                 get_pkg_config, write_pkg_config)
 from .hash_management import (get_pkg_hash, modified_file_hash,
@@ -16,6 +14,7 @@ from .hash_management import (get_pkg_hash, modified_file_hash,
 from .manage_tools import (check_option_parameters, find_templates,
                            render_template, update_opt)
 from .option_tools import available_options, get_user_permission
+from .small_tools import ensure_created
 
 LOGGER = logging.getLogger(__name__)
 
@@ -24,28 +23,26 @@ def init_pkg(rep="."):
     """Initialise a package in given directory.
 
     Args:
-        rep (str): directory to create pkg into, default current
+        rep (Path): directory to create pkg into, default current
 
     Returns:
         None
     """
-    if not exists(pj(rep, pkglts_dir)):
-        mkdir(pj(rep, pkglts_dir))
+    loc_pkglts_dir = rep / pkglts_dir
+    ensure_created(loc_pkglts_dir)
 
     LOGGER.info("init package")
 
     for name in ("regenerate.no", "clean.no"):
-        if not exists(pj(rep, pkglts_dir, name)):
-            with open(pj(rep, pkglts_dir, name), 'w') as fhw:
-                fhw.write("")
+        (loc_pkglts_dir / name).touch()
 
-    if exists(pj(rep, pkglts_dir, pkg_cfg_file)):
+    try:
         cfg = get_pkg_config(rep)
-    else:
+    except FileNotFoundError:
         cfg = Config(DEFAULT_CFG)
     write_pkg_config(cfg, rep)
 
-    if not exists(pj(rep, pkglts_dir, pkg_hash_file)):
+    if not (loc_pkglts_dir / pkg_hash_file).exists():
         write_pkg_hash({}, rep)
 
 
@@ -55,31 +52,29 @@ def clean(rep="."):
     Todo: exception list instead of hardcoded one
 
     Args:
-        rep (str): default ".", top directory to clean
+        rep (Path): default ".", top directory to clean
 
     Returns:
         None
     """
+    root_dir = Path(rep)
     for name in ("build", "dist", "doc/_dvlpt", "doc/build"):
-        pth = normpath(pj(rep, name))
-        if exists(pth):
+        pth = root_dir / name
+        if pth.exists():
             rmtree(pth)
 
-    for root, dnames, fnames in walk(rep):
-        # do not walk directories starting with "."
-        for name in tuple(dnames):
-            if "clean.no" in listdir(pj(root, name)):
-                dnames.remove(name)
-            elif name.startswith("."):
-                dnames.remove(name)
-            elif name == "__pycache__":
-                rmtree(pj(root, name))
-                dnames.remove(name)
-
-        for name in fnames:
-            if not name.startswith("."):
-                if splitext(name)[1] in [".pyc", ".pyo"]:
-                    remove(pj(root, name))
+    for dir_pth in tuple(root_dir.glob("**/")):
+        if dir_pth.exists():  # could have been removed with a previous rmtree
+            if not dir_pth.name.startswith('.') and len(tuple(dir_pth.glob("clean.no"))) == 0:
+                if dir_pth.name == '__pycache__':
+                    rmtree(dir_pth)
+                else:
+                    for pth in dir_pth.glob("*.pyc"):
+                        if not pth.name.startswith('.'):
+                            pth.unlink()
+                    for pth in dir_pth.glob("*.pyo"):
+                        if not pth.name.startswith('.'):
+                            pth.unlink()
 
 
 def add_option(name, cfg):
@@ -95,18 +90,18 @@ def add_option(name, cfg):
         (Config): updated package configuration
     """
     if name in cfg.installed_options():
-        raise UserWarning("option '%s' already included in this package" % name)
+        raise UserWarning(f"option '{name}' already included in this package")
 
     return update_opt(name, cfg)
 
 
-def install_example_files(option, cfg, target="."):
+def install_example_files(option, cfg, target=Path(".")):
     """Install example files associated to an option.
 
     Args:
         option (str): name of option
         cfg (Config):  current package configuration
-        target (str): target directory to write into
+        target (Path): target directory to write into
 
     Returns:
         (bool): whether operation succeeded or not
@@ -123,8 +118,8 @@ def install_example_files(option, cfg, target="."):
 
     rg_tree = {}
     find_templates(ex_dir, target, cfg, rg_tree)
-    for tgt_pth, src_pths in rg_tree.items():
-        render_template(src_pths, tgt_pth, cfg, {})
+    for tgt_key, src_pths in rg_tree.items():
+        render_template(src_pths, Path(tgt_key), cfg, {})
 
     return True
 
@@ -141,31 +136,32 @@ def _manage_conflicts(hm_ref, overwrite):
         (dict of str, bool): file path, overwrite
     """
     conflicted = []
-    for tgt_pth in hm_ref:
-        if exists(tgt_pth) and modified_file_hash(tgt_pth, hm_ref):
+    for tgt_key in hm_ref:
+        tgt_pth = Path(tgt_key)
+        if tgt_pth.exists() and modified_file_hash(tgt_pth, hm_ref):
             conflicted.append(tgt_pth)
         # else file disappeared, regenerate_dir will reload it if managed by pkglts
 
     overwrite_file = {}
     if conflicted:
         if overwrite:
-            for name in conflicted:
-                LOGGER.debug("conflicted, '%s'", name)
-                overwrite_file[pth_as_key(name)] = True
+            for pth in conflicted:
+                LOGGER.debug("conflicted, '%s'", pth)
+                overwrite_file[pth_as_key(pth)] = True
         else:
-            for name in conflicted:
-                LOGGER.warning("A non editable section of %s has been modified", name)
-                overwrite_file[pth_as_key(name)] = get_user_permission("overwrite", False)
+            for pth in conflicted:
+                LOGGER.warning("A non editable section of %s has been modified", pth)
+                overwrite_file[pth_as_key(pth)] = get_user_permission("overwrite", False)
 
     return overwrite_file
 
 
-def regenerate_package(cfg, target=".", overwrite=False):
+def regenerate_package(cfg, target=Path("."), overwrite=False):
     """Rebuild all automatically generated files.
 
     Args:
         cfg (Config):  current package configuration
-        target (str): target directory to write into
+        target (Path): target directory to write into
         overwrite (bool): default False, whether or not
                          to overwrite user modified files
 
@@ -201,10 +197,10 @@ def regenerate_package(cfg, target=".", overwrite=False):
 
     # render all templates
     hmap = {}
-    for tgt_pth, src_pths in rg_tree.items():
-        loc_map = render_template(src_pths, tgt_pth, cfg, overwrite_file)
+    for tgt_key, src_pths in rg_tree.items():
+        loc_map = render_template(src_pths, Path(tgt_key), cfg, overwrite_file)
         if loc_map is not None:  # non binary file
-            hmap[pth_as_key(tgt_pth)] = loc_map
+            hmap[tgt_key] = loc_map
 
     hm_ref.update(hmap)
     write_pkg_hash(hm_ref, target)
@@ -216,7 +212,7 @@ def regenerate_option(cfg, name, target=".", overwrite=False):
     Args:
         cfg (Config):  current package configuration
         name: (str) name of option
-        target: (str) target directory to write into
+        target: (Path) target directory to write into
         overwrite (bool): default False, whether or not
                          to overwrite user modified files
 
@@ -228,4 +224,4 @@ def regenerate_option(cfg, name, target=".", overwrite=False):
         opt = available_options[name]
         opt.regenerate(cfg, target, overwrite)
     except KeyError:
-        raise KeyError("option '%s' does not exists" % name)
+        raise KeyError(f"option '{name}' does not exists")

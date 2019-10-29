@@ -1,6 +1,6 @@
 from pkglts.option_tools import get_user_permission
 
-loc_input = 'pkglts.option_tools.loc_input'
+loc_input = 'builtins.input'
 
 
 def test_user_permission(mocker):

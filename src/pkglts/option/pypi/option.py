@@ -1,4 +1,4 @@
-from os.path import dirname
+from pathlib import Path
 
 from pkglts.dependency import Dependency
 from pkglts.local import pkg_full_name
@@ -12,7 +12,7 @@ class OptionPypi(Option):
         return __version__
 
     def root_dir(self):
-        return dirname(__file__)
+        return Path(__file__).parent
 
     def update_parameters(self, cfg):
         sec = dict(
@@ -48,8 +48,8 @@ class OptionPypi(Option):
     def environment_extensions(self, cfg):
         servers = cfg['pypi']['servers']
         if servers and servers[0]['name'] == 'pypi':
-            url = "badge.fury.io/py/%s" % pkg_full_name(cfg)
-            img = url + ".svg"
+            url = f"badge.fury.io/py/{pkg_full_name(cfg)}"
+            img = f"{url}.svg"
             badge = fmt_badge(img, url, "PyPI version", cfg['doc']['fmt'])
         else:
             badge = ""
@@ -59,7 +59,7 @@ class OptionPypi(Option):
 
 
 def auto_classifiers(cfg):
-    """Generate a list of calssifiers for pypi from all sections of config.
+    """Generate a list of classifiers for pypi from all sections of config.
 
     Args:
         cfg (Config):  current package configuration
@@ -77,18 +77,18 @@ def auto_classifiers(cfg):
     if intended_versions:
         items.add("Programming Language :: Python")
 
-        ver_cla_tpl = "Programming Language :: Python :: %s.%s"
+        ver_cla_tpl = "Programming Language :: Python :: {}.{}"
         major_versions = set()
         for ver in intended_versions:
-            items.add(ver_cla_tpl % (ver[0], ver[1]))
+            items.add(ver_cla_tpl.format(ver[0], ver[1]))
             major_versions.add(ver[0])
 
-        ver_cla_tpl = "Programming Language :: Python :: %s"
+        ver_cla_tpl = "Programming Language :: Python :: {}"
         for ver in major_versions:
-            items.add(ver_cla_tpl % ver)
+            items.add(ver_cla_tpl.format(ver))
 
         if len(major_versions) == 1:
             ver, = major_versions
-            items.add("Programming Language :: Python :: %s :: Only" % ver)
+            items.add(f"Programming Language :: Python :: {ver} :: Only")
 
     return sorted(items)

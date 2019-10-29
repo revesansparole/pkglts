@@ -3,8 +3,6 @@ import pytest
 from pkglts.config_management import Config
 from pkglts.local import (pkg_full_name, src_dir)
 
-print(__file__)
-
 
 def test_pkg_full_name():
     cfg = {}

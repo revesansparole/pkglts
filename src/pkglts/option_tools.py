@@ -6,11 +6,6 @@ import pkg_resources
 
 LOGGER = logging.getLogger(__name__)
 
-try:
-    loc_input = raw_input
-except NameError:
-    loc_input = input
-
 
 class EpDict(dict):
     """A simple dictionary to load EntryPoint at access time only"""
@@ -57,8 +52,8 @@ def get_user_permission(action_name, default_true=True):
         (bool)
     """
     if default_true:
-        ans = loc_input("%s [y], n?" % action_name) in ("", "y")
+        ans = input(f"{action_name} [y], n?") in ("", "y")
     else:
-        ans = loc_input("%s y, [n]?" % action_name) == "y"
+        ans = input(f"{action_name} y, [n]?") == "y"
 
     return ans

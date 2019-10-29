@@ -1,4 +1,4 @@
-from os.path import dirname
+from pathlib import Path
 
 from pkglts.option.doc import fmt_badge
 from pkglts.option_object import Option
@@ -10,7 +10,7 @@ class OptionLandscape(Option):
         return __version__
 
     def root_dir(self):
-        return dirname(__file__)
+        return Path(__file__).parent
 
     def require_option(self):
         return ['flake8', 'travis']
@@ -19,8 +19,8 @@ class OptionLandscape(Option):
         owner = cfg['github']['owner']
         project = cfg['github']['project']
 
-        url = "landscape.io/github/%s/%s/master" % (owner, project)
-        img = url + "/landscape.svg?style=flat"
+        url = f"landscape.io/github/{owner}/{project}/master"
+        img = f"{url}/landscape.svg?style=flat"
         badge = fmt_badge(img, url, "Code health status", cfg['doc']['fmt'])
 
         return {"badge": badge}

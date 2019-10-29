@@ -1,5 +1,4 @@
-from os import remove
-from os.path import exists
+from pathlib import Path
 
 import pytest
 from pkglts.hash_management import compute_hash, modified_file_hash, pth_as_key
@@ -7,18 +6,18 @@ from pkglts.hash_management import compute_hash, modified_file_hash, pth_as_key
 
 @pytest.fixture()
 def tmp_pth():
-    pth = 'toto.txt'
+    pth = Path('toto.txt')
 
     yield pth
 
-    if exists(pth):
-        remove(pth)
+    if pth.exists():
+        pth.unlink()
 
 
 def test_pth_as_key_produce_unique_path():
-    pth1 = pth_as_key("./toto/titi/")
-    pth2 = pth_as_key("toto/titi")
-    pth3 = pth_as_key("./toto/../toto/titi")
+    pth1 = pth_as_key(Path("./toto/titi/"))
+    pth2 = pth_as_key(Path("toto/titi"))
+    pth3 = pth_as_key(Path("./toto/../toto/titi"))
 
     assert pth1 == pth2
     assert pth1 == pth3
@@ -41,7 +40,7 @@ def test_modified_file_detect_modifications_only_in_preserved_sections(tmp_pth):
     with open(tmp_pth, 'w') as f:
         f.write("lorem ipsum\n" * 10)
 
-    assert not modified_file_hash(tmp_pth, {tmp_pth: []})
+    assert not modified_file_hash(tmp_pth, {pth_as_key(tmp_pth): []})
 
 
 def test_modified_file_if_not_same_preserved_sections(tmp_pth):
@@ -52,7 +51,7 @@ def test_modified_file_if_not_same_preserved_sections(tmp_pth):
         f.write(txt)
         f.write("#}\n")
 
-    assert modified_file_hash(tmp_pth, {tmp_pth: dict(titi="azerty")})
+    assert modified_file_hash(tmp_pth, {pth_as_key(tmp_pth): dict(titi="azerty")})
 
 
 def test_modified_file_detect_modifications_in_preserved_sections(tmp_pth):
@@ -64,11 +63,11 @@ def test_modified_file_detect_modifications_in_preserved_sections(tmp_pth):
         f.write(txt)
         f.write("#}\n")
 
-    assert not modified_file_hash(tmp_pth, {tmp_pth: dict(toto=hv)})
+    assert not modified_file_hash(tmp_pth, {pth_as_key(tmp_pth): dict(toto=hv)})
 
     with open(tmp_pth, 'w') as f:
         f.write("{# pkglts, toto\n")
         f.write(txt * 2)
         f.write("#}\n")
 
-    assert modified_file_hash(tmp_pth, {tmp_pth: dict(toto=hv)})
+    assert modified_file_hash(tmp_pth, {pth_as_key(tmp_pth): dict(toto=hv)})

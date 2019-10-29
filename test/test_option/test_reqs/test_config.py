@@ -1,7 +1,7 @@
 import pytest
 from pkglts.config_management import Config
 from pkglts.dependency import Dependency
-from pkglts.option.reqs.option import OptionReqs, fmt_conda_reqs, fmt_pip_reqs
+from pkglts.option.reqs.option import OptionReqs, fmt_conda_reqs, fmt_pip_reqs, requirements
 
 
 @pytest.fixture()
@@ -34,6 +34,14 @@ def test_require(opt):
     assert len(tuple(opt.require(cfg))) == 0
 
 
+def test_require_puts_list_of_reqs_in_requirements(opt):
+    cfg = Config()
+    opt.update_parameters(cfg)
+    cfg['reqs']['require'].append({'pkg_mng': 'walou', 'name': 'numpy'})
+
+    assert 'numpy' in (dep.name for dep in requirements(cfg))
+
+
 def test_fmt_conda_reqs_works_correctly():
     assert fmt_conda_reqs([], ['install']) == ""
 
@@ -50,6 +58,10 @@ def test_fmt_conda_reqs_works_correctly():
 
     assert fmt_conda_reqs([d], ['install']) == "conda install -c extra d"
 
+    d = Dependency('d', version='= 5')
+
+    assert fmt_conda_reqs([d], ['install']) == 'conda install "d= 5"'
+
 
 def test_fmt_pip_reqs_works_correctly():
     assert fmt_pip_reqs([], ['install']) == ""
@@ -62,3 +74,7 @@ def test_fmt_pip_reqs_works_correctly():
     cmd = fmt_pip_reqs([d1, dex, dconda, dpip], ['install'])
 
     assert cmd.strip() == "pip install dpip"
+
+    d = Dependency('d', pkg_mng='pip', version='= 5')
+
+    assert fmt_pip_reqs([d], ['install']) == 'pip install "d== 5"'

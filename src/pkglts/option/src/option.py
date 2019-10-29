@@ -1,4 +1,4 @@
-from os.path import dirname
+from pathlib import Path
 
 from pkglts.local import src_dir
 from pkglts.option_object import Option
@@ -10,7 +10,7 @@ class OptionSrc(Option):
         return __version__
 
     def root_dir(self):
-        return dirname(__file__)
+        return Path(__file__).parent
 
     def update_parameters(self, cfg):
         sec = dict(
@@ -31,5 +31,5 @@ class OptionSrc(Option):
 
     def environment_extensions(self, cfg):
         return {
-            "src_pth": src_dir(cfg)
+            "src_pth": src_dir(cfg).as_posix()
         }

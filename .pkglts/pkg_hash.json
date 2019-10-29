@@ -3,7 +3,7 @@
     "coverage": "/dlOVITbFfEjDPCtfbLYNBPmPKTzYwEr/xQglkl97AbM+0ormOvq2mfxThEsWlfMjDm7IOL94BO2Fl7jgkkg1w=="
   },
   ".gitignore": {
-    "git": "rNvcuZtAkglAHMCa9/tk/6SYFfNVTluSC3jgZ00ajgJm5uwwb6HPnQV7MziE1/WxjM8JAFsM/J7q3727LRfz0A=="
+    "git": "YpklUH97Nm/lh8DXs3uF0qVjOfdclZdFdyrGR2+x7lb9lP8C0sMJoUjqW+81d86wJeIuXb3Jpxd6EX2VkFM3yQ=="
   },
   ".landscape.yml": {},
   ".pypirc": {
@@ -11,7 +11,7 @@
     "pypi.serverlist": "PC9SiM3/1x2vn66stkaGs8IZmA3C9zq9z6sBMLr74e3tdF5l0eBAZsagfMbQjPF+AW6evtXBtpEDMsF3dkjVHQ=="
   },
   ".travis.yml": {
-    "travis": "7eaNfa58qYVExzeKCoOiq18ZH3F3YF6T7frXBqHpbpCJa13cB2qKSN0FllniSRz26o5ePY/dPEXDDLVZzrRY4g==",
+    "travis": "KAPbJhcvhwooyTBB94qbddjFF2nJrcLU/AZbVktCepomu4oaEu6lhl3lTQa0GBdxZzFaJ3RWGY1ZAvq32af0Qg==",
     "travis.addons": "qA98wmBu9uVHTpax5SDBfs9DLw2ppWa9FXBEEwz7VI8Q2Sn/tXgwCN94ttB9B9EJv/utGZjLgwnszsfk0/yBOg==",
     "travis.after": "veQncG9PjU1UhCfzzNEtfVgUZ+iPmx9TVKRZWbLepccpcpNo8LvgMyTkYgGYNyLPbijRTXQdVQaDQRs6MCDYwA==",
     "travis.install": "46GBb0A8cqVSF4dTer9R9z5cqsnNvrZhCP9d0C5FOuNllCl6YYyR+1LF01WaJl7LSBzj7/C/aQNi7RukHOgcuw==",
@@ -27,10 +27,10 @@
     "license": "RbGRVVjgGPhWaPWhqwtq7HHev/U1DkppBYjGN39HbDZ2BDejFc2exfwAH1MiY2HHn+3TgxlvBkg/s/x9hs3aOA=="
   },
   "MANIFEST.in": {
-    "pysetup": "lySTyIXNQv2o6wty0ybc8vZlaQDemS27JruB2eVUiIRVWQVIzXIeyUK17HErQhtNsZxApWwo54VegOb6Y8jWSg=="
+    "pysetup": "T0+K8kQXfN7mECB6vXJvk6QJEs6Xo7faTVLCxp8Srjmfd+nUmZAxt35tSIVO3OzPV7vopLZFe6HXGxhYVOONpQ=="
   },
   "README.rst": {
-    "doc": "o5MA/WIyttlY9ptvCAXvODKSSa3qZVhtAJigoXclKAnK0gViu3WN4c7DuCqhOJwZoqjXqbFVVj+098DvxX9F0w=="
+    "doc": "Ak1uIyA5WjSRQ4P/fCMcbT/LlnX3NOjBoSrrPtGy5+QmYya5ceek5eagtpK2YrMJaP5saT8OyLqPBoRJJWnPyQ=="
   },
   "appveyor.yml": {
     "appveyor": "5/T0A4182n2Zha7QLgdW4PRGtORCAuPwTw7Fb/sm/DgSRrWuco2aqUpuCV9j9wlmGZ5CM/dnT1zw+Lxn1Iv7Lg=="
@@ -43,13 +43,13 @@
   },
   "conda/meta.yaml": {
     "conda.about": "6/RoaDh45Wwcc0uAhKGnUH46mczqPBQq/PV0cSCbe+fhiDQPOooOK8u24GzswyAcXIEHoASc/XIe+WS/2zBl5A==",
-    "conda.package": "dWIdHhWP8ZIuAd97cWqQCudrGQR3oZ11fdREVT2215ZQ4jlAL2bXVwHXKAgmRaCXfx6bYc7AH59O8zysp/j56w==",
+    "conda.package": "qr9DyGLqDgkBGD/ecxLLtscwFWINMlcO7D6DIBfZci375Z++VcosIjJWFca8NCZm0FWZJSJ+EOgS9VDD9OdoOQ==",
     "conda.req_build": "STnNeGQNdKNtp0ZDkfZ9RqPnmFYfv1p31EavfN1V6ogusq9KBD+sFzDaFK8r9xu+pqXupiyeBc1T/MIqJWYXJg==",
     "conda.req_run": "IFJIX6NLBagkPhLDSOvcHHj/XiggVhFfvIRKy/vGjLnBm8TsaqXFdb8wX1l/l4GJaGjfNUA3+MOT+tGumt8uPw==",
     "conda.src": "Lzbp176AVU0YantZQxB4LsR2jbxpZ/OlkvY2V4aWAEuzKEarh872uc1eRvsIYf/FsbxvcmUI84AezWlA72nI6A=="
   },
   "conda/requirements.yml": {
-    "conda": "SyPGWCJECwMvPqstaWDS0VqQ6B6u4FpAAPyZOVZd62N58pEiiPy1Cof28XOqswqEkWmwLVvu9NzNlvmbBF8MjQ=="
+    "conda": "RX536+Us/L0Z0cFyw0dQdMzrikSvCviysbX3QWkXLhIrUlRRRv3sTxJgSzkTqnfBsQrcw3Cuc+jpJatMXvHwPg=="
   },
   "conda/requirements_minimal.yml": {
     "conda": "EObyPICVVOBSFDCFLcXQgQXSZlxfcBZY9QOQwpXen2WPHiIoJT0mLtQzgEzzxvMlVbbky5lcTASD++y3lB+8Rw=="
@@ -63,7 +63,7 @@
   "doc/_static/nonempty.txt": {},
   "doc/authors.rst": {},
   "doc/conf.py": {
-    "sphinx": "4s7BPv3qxABpBsAUCY7Z4NqTPMgzp7MmU8WPOELBhzLKIhXVrv9O1ksPCOtGytaJj97LxY5kkC2/5oJ5Odtpag=="
+    "sphinx": "riGnBF9Jd+Bxqr2/O13UMxM+HGKQkeMfnc7YwuNzU4ocS916oGUvEegiIfkLGq9eX3CiAGO6hxKZv87pPBHSBA=="
   },
   "doc/contributing.rst": {},
   "doc/history.rst": {},
@@ -81,34 +81,34 @@
     "conda": "9LFLPxi0fMfsVQCULGbuCPMAujTUjyJtpzboCqNm3fXAhCGT9YFTYKjyIiaEZB09qKWjnrXk4bFwcpVtzIyY6g=="
   },
   "requirements.txt": {
-    "pysetup": "vgB4L5i6G25dTgc9wAeOSv2B0M1K5zGWK3qVH+JoYQaSaZaq+2Bkm+JL7TPTEGW3c9lYgIY4Y8rxBRDwWKKjKA=="
+    "reqs": "QByn1+g+YQGpO2SjFdjtjPSrOmQOn2BF3ZmlsgoL6aHNKrbvBOUSvsbAGyPihpysMoA+4rA9KxRqISP/eOWFlg=="
   },
   "requirements.yml": {
     "conda": "EObyPICVVOBSFDCFLcXQgQXSZlxfcBZY9QOQwpXen2WPHiIoJT0mLtQzgEzzxvMlVbbky5lcTASD++y3lB+8Rw=="
   },
   "requirements_minimal.txt": {
-    "pysetup": "/ODLman8W/ctq+oJnKmdv6gbJGbnI1GWXgiOjqnlQtCuNHfE/Ew+xdkn7OXQ57AIJO0mqhiBNY92aFV7Hq0sug=="
+    "reqs": "/ODLman8W/ctq+oJnKmdv6gbJGbnI1GWXgiOjqnlQtCuNHfE/Ew+xdkn7OXQ57AIJO0mqhiBNY92aFV7Hq0sug=="
   },
   "setup.cfg": {
     "pysetup.flake8": "vhKQd+PKOI3JRd+DFX5XAX/LSu1zj/XLulLKKW/FVe7nIDZQS3p6cM9+HKZlyqOkyqOtXcONb2OiJKtlXcIj8g==",
     "sphinx": "mYLeHXWNqXwTk9eWxY4wTrltnDTrAHQvl0l+kosuIfAgrbAuhWMgySq4WR2Y855Q5HDAtGZY7Pnt+BAU6niXIg==",
     "test.nose": "vmiIOMqGhuXJBom/KrWFzvETfJmbSMcLkvZ6XDTcFWl7XRHJgu1tcb4eHn97TgcziEqpfD96M5qO0DV3z3S+CQ==",
     "test.pytest": "R5P5XMaQxSXsNQJ3hXYY45iLvnl8Mbec6XuIaFTum52gym+wTM2TfEbW/N2doHNaCkpdAWg07oblbYi15AwQkA==",
-    "wheel": "LgxSyd3sncQciXfy8nS0rfnddQKT8V//d32w1hTs0wKjdU/bsGMtBkvNIdujnhoM34k9C14TSfJlMFU09s8jpg=="
+    "wheel": "pZhz4563YE3KL0KwhzTKkYAC8VXT0uaEvVjwMWPNS0Sqo4THPmHeQkqlKsT2iVqTRN7LLW2f/hN836ZtQE4/+A=="
   },
   "setup.py": {
     "pysetup.call": "t30iIuCMd/sWxStR2XNYb8bCBgwanhKt8YYn2VKACyAqL5cKFRUWpVRIpAR+uxXUZ9PYYy2csMmECcONnRZE8w==",
-    "pysetup.kwds": "M8ioEgeym4Z4S6MCgYcmseDfot+YGtfioCR15psEQCqlgViQIxqssYvd/C5WcE7SaqkTBEUe7qUT6nfPvpmhlQ=="
+    "pysetup.kwds": "ScknR03nRq2YrhdWxLd9xqWeeikbMByTdSNlGcFskUInvXP+QP6FbR9mYKpVskH8AyKwq64VqUDL/8EwzKhzow=="
   },
   "src/pkglts/__init__.py": {
-    "base": "L2dZgUBRC5qv3o09+1CbMcgYfQtR1ZNSvP8KlP8REQazZiAQAktALjpCC2ijdxvKPv/tN9KsZrzNW+lZMszSfg==",
-    "version": "+GVGxVjJGifAp8dAR9V2W3aVPe7/D53bN7r0O5VxO9OUqG4vnGTZvnORu1objjjIwm86DgemQd7ax/IJpRa8Wg=="
+    "src": "L2dZgUBRC5qv3o09+1CbMcgYfQtR1ZNSvP8KlP8REQazZiAQAktALjpCC2ijdxvKPv/tN9KsZrzNW+lZMszSfg==",
+    "version": "skSCnavrYKIlfN9Mpi+cANbU8gXulaKdlHryvkjkoSSpsag1I66dM+6JHm1aOdmKYU0rZNNgcIamCMbIL7IeMg=="
   },
   "src/pkglts/data_access.py": {
     "data": "wwgLuV/OqHWjWbssvDHa4LNg+7C+tuNiKHOxkO+9UAl9opI/HfPyJAq2fPhUeTmVvb/E6MkqDJIli9m8n5/V0Q=="
   },
   "src/pkglts/version.py": {
-    "version": "6UTXIxX0fg9AHojCuZM9iwzP5xARA1Xs4u51VKHdu/2R4HCq0uhiB7TGj9tZr/SzwJJLJtpnGPt2S1ibsunWXQ=="
+    "version": "+nYa6wG8xE2/Hz4/bBizxuKt7N+RYgyj3UiAHBrOoNvl8D/LD+Bzr2k6N/YyEfFfVDM9nqTaZxC0tTjn71Uk0w=="
   },
   "src/pkglts_data/__init__.py": {},
   "test/__init__.py": {},
@@ -119,6 +119,6 @@
     "test.pytest_import": "2ox6A0szNpUYZR5cJJRSW3OwEWR558BOiUMjC/OVkTPT++CF/OCgGSELCPL+7YHWaJGQKMw2rtCXmOMeSK5ZJA=="
   },
   "tox.ini": {
-    "tox": "35gPs4/mZyjH1pTfNDCUNHLK4esLtj49+7QJWvfmhBmm69pIxJNGV5AKpneR+62x6pRpVupHTSozMwy1k2oR7Q=="
+    "tox": "Ev0Hl9GfSkG9ACDTQ8J4Jq9bJejyaBVMHfs9ldqGH41QgzuIq6n0zhuiUpUfrOelHH3OCI1OffL76e0V8nD76Q=="
   }
 }

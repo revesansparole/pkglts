@@ -1,15 +1,14 @@
-from os import listdir
-from os.path import join as pj
+from pathlib import Path
 
 import pytest
-from pkglts.manage import (get_pkg_config, get_pkg_hash,
-                           init_pkg)
+from pkglts.config import pkglts_dir
+from pkglts.manage import get_pkg_config, get_pkg_hash, init_pkg
 from pkglts.small_tools import ensure_created, rmdir
 
 
 @pytest.fixture()
 def tmp_dir():
-    pth = 'toto_manage_cfg'
+    pth = Path('toto_manage_cfg')
     ensure_created(pth)
     init_pkg(pth)
 
@@ -19,30 +18,30 @@ def tmp_dir():
 
 
 def test_manage_init_create_pkg_config(tmp_dir):
-    # init_pkg(tmp_dir)
     cfg = get_pkg_config(tmp_dir)
     assert cfg is not None
     assert "_pkglts" in cfg
 
 
 def test_manage_init_create_pkg_hash(tmp_dir):
-    init_pkg(tmp_dir)
     hm = get_pkg_hash(tmp_dir)
     assert hm is not None
 
 
 def test_manage_init_protect_pkglts_dir_from_modif(tmp_dir):
-    assert "regenerate.no" in listdir(pj(tmp_dir, ".pkglts"))
-    assert "clean.no" in listdir(pj(tmp_dir, ".pkglts"))
+    assert "regenerate.no" in [pth.name for pth in (tmp_dir / pkglts_dir).iterdir()]
+    assert "clean.no" in [pth.name for pth in (tmp_dir / pkglts_dir).iterdir()]
 
-# @with_setup(setup, teardown)
-# def test_manage_pkg_config():
-#     cfg = dict(default_cfg)
-#     cfg['toto'] = dict(toto=1)
+# def test_manage_pkg_config(tmp_dir):
+#     cfg = get_pkg_config(tmp_dir)
+#     cfg.template()['toto'] = dict(toto=1)
 #     write_pkg_config(cfg, tmp_dir)
-#     new_cfg = get_pkg_config(tmp_dir)
-#     assert new_cfg == cfg
 #
+#     new_cfg = get_pkg_config(tmp_dir)
+#     import json
+#     print(json.dumps(cfg, indent=2))
+#     print(json.dumps(new_cfg, indent=2))
+#     assert new_cfg == cfg
 #
 # @with_setup(setup, teardown)
 # def test_manage_pkg_config_fmt_templates():

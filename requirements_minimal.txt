@@ -1,4 +1,4 @@
-# {# pkglts, pysetup
+# {# pkglts, reqs
 jinja2
 requests
 semver

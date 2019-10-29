@@ -3,14 +3,13 @@ This tool will display all dependencies used by this package.
 """
 import ast
 import logging
-from glob import glob
-from os import path
+from pathlib import Path
 
 from pkglts.local import src_dir
 
 LOGGER = logging.getLogger(__name__)
 
-stdpkgs = set(line.strip() for line in open(path.join(path.dirname(__file__), "stdpkgs.txt")).readlines()
+stdpkgs = set(line.strip() for line in open(Path(__file__).parent / "stdpkgs.txt").readlines()
               if len(line.strip()) > 0 and not line.startswith("#"))
 
 
@@ -32,13 +31,12 @@ def find_reqs(pth):
     """Find all requirements (imports) used by a script.
 
     Args:
-        pth (str): path to file to parse
+        pth (Path): path to file to parse
 
     Returns:
         (list): list of package names
     """
-    src = open(pth, 'rb').read()
-    pt = ast.parse(src, pth)
+    pt = ast.parse(pth.read_bytes(), pth)
     # TODO pb with namespaces
     pkgs = set(pkgname.split(".")[0] for pkgname in iter_ext_imports(pt.body))
 
@@ -51,13 +49,15 @@ def action_find_reqs(cfg, **kwds):
     LOGGER.info("Find requirements")
     this_pkgname = cfg['base']['pkgname']
 
-    for dirpth in (src_dir(cfg), 'doc', 'example', 'script', 'test'):
-        if path.exists(dirpth):
-            print("############\n# %s\n############" % dirpth)
+    for dname in (src_dir(cfg), 'doc', 'example', 'script', 'test'):
+        dirpth = Path(dname)
+        if dirpth.exists():
+            print(f"############\n# {dirpth}\n############")
             reqs = set()
-            for pth in glob("%s/*.py" % dirpth) + glob("%s/**/*.py" % dirpth):
-                if not path.basename(pth).startswith("_"):
+            for pth in dirpth.glob("**/*.py"):
+                if not pth.name.startswith("_"):
                     reqs.update(find_reqs(pth))
+
             reqs -= {this_pkgname}
             print("standard", sorted(reqs & stdpkgs))
             print("external", sorted(reqs - stdpkgs))

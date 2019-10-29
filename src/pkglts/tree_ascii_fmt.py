@@ -2,11 +2,6 @@
 Script which can be called before generating the doc
 to generate description of files modified by each option.
 """
-
-from os import listdir
-from os.path import isdir
-from os.path import splitext, join as pj
-
 from pkglts.config_management import Config
 
 
@@ -33,23 +28,21 @@ def _tree(dname, padding, txt):
 
     cfg = Config(pkg_cfg)
 
-    files = [(isdir(pj(dname, fname)), fname) for fname in listdir(dname)]
-    files.sort()
+    files = sorted(dname.iterdir())
 
     count = 0
-    for is_dir, fname in files:
-        fmt_name = _nn(cfg, fname)
-        if splitext(fmt_name)[0] != '_':
+    for pth in files:
+        fmt_name = _nn(cfg, pth.name)
+        if fmt_name.split(".")[0] != '_':
             count += 1
             txt += padding + '|\n'
             txt += padding + '+-' + fmt_name
-            path = pj(dname, fname)
-            if is_dir:
+            if pth.is_dir():
                 txt += "/\n"
                 if count == len(files):
-                    txt = _tree(path, padding + ' ' + ' ' * int(len(fmt_name) / 2), txt)
+                    txt = _tree(pth, padding + ' ' + ' ' * int(len(fmt_name) / 2), txt)
                 else:
-                    txt = _tree(path, padding + '|' + ' ' * int(len(fmt_name) / 2), txt)
+                    txt = _tree(pth, padding + '|' + ' ' * int(len(fmt_name) / 2), txt)
             else:
                 txt += '\n'
 
@@ -57,5 +50,12 @@ def _tree(dname, padding, txt):
 
 
 def fmt_tree(dname):
-    """Generate tree ascii representation of a dir"""
+    """Generate tree ascii representation of a dir
+
+    Args:
+        dname (Path): path to directory
+
+    Returns:
+        (str)
+    """
     return _tree(dname, '', ".\n")

@@ -3,13 +3,10 @@ This tool will try to parse all release tags to create an history of package.
 """
 import logging
 import os
+from pathlib import Path
 from functools import cmp_to_key
 from getpass import getpass
-
-try:  # python3
-    from urllib.parse import quote_plus
-except ImportError:  # python2
-    from urllib import quote_plus
+from urllib.parse import quote_plus
 
 import requests
 import semver
@@ -31,7 +28,7 @@ def github_tag_list(project):
         (dict of (str|dict)): tag name, tag info
     """
     base_url = "https://api.github.com"
-    url = base_url + "/repos/%s/releases" % project
+    url = f"{base_url}/repos{project}/releases"
     res = requests.get(url)
     LOGGER.info("status: %s", res.status_code)
     tags = {}
@@ -60,11 +57,11 @@ def gitlab_tag_list(server, project, token):
     Returns:
         (dict of (str|dict)): tag name, tag info
     """
-    base_url = "https://%s/api/v4/projects/" % server
+    base_url = f"https://{server}/api/v4/projects"
     repo_id = quote_plus(project)
     LOGGER.info("repo_id: %s", repo_id)
 
-    url = base_url + repo_id + "/repository/tags" + "?private_token=%s" % token
+    url = f"{base_url}/{repo_id}/repository/tags?private_token={token}"
     LOGGER.debug("url:  %s", url)
 
     res = requests.get(url)
@@ -101,37 +98,34 @@ def write_changelog(tags, fmt):
     ver_list.sort(key=cmp_to_key(semver.compare), reverse=True)
 
     # format changelog
-    if fmt == "md":
-        txt = "# History\n\n"
-        for ver in ver_list:
-            tag = tags[ver]
-            txt += "## %s - <small>*(%s)*</small> - %s\n\n" % (tag['name'], tag['date'], tag['title'])
-            txt += tag['body']
-            txt += "\n\n"
-
-        for name in ("CHANGELOG.md", "HISTORY.md"):
-            if os.path.exists(name):
-                LOGGER.info("write changelog in %s", name)
-                with open(name, 'w') as fhw:
-                    fhw.write(txt)
-
-    elif fmt == "rst":
-        txt = "=======\nHistory\n=======\n\n"
-        for ver in ver_list:
-            tag = tags[ver]
-            tag_title = "%s - *(%s)* - %s" % (tag['name'], tag['date'], tag['title'])
-            txt += tag_title + "\n"
-            txt += "=" * len(tag_title) + "\n\n"
-            txt += tag['body']
-            txt += "\n\n"
-
-        for name in ("CHANGELOG.rst", "HISTORY.rst"):
-            if os.path.exists(name):
-                LOGGER.info("write changelog in %s", name)
-                with open(name, 'w') as fhw:
-                    fhw.write(txt)
-    else:
+    if fmt not in ('md', 'rst'):
         LOGGER.warning("Doc format '%s' unsupported", fmt)
+    else:
+        if fmt == "md":
+            txt = "# History\n\n"
+            for ver in ver_list:
+                tag = tags[ver]
+                txt += f"## {tag['name']} - <small>*({tag['date']})*</small> - {tag['title']}\n\n"
+                txt += tag['body']
+                txt += "\n\n"
+
+        else:  # fmt == "rst":
+            txt = "=======\nHistory\n=======\n\n"
+            for ver in ver_list:
+                tag = tags[ver]
+                tag_title = f"{tag['name']} - *({tag['date']})* - {tag['title']}"
+                txt += tag_title + "\n"
+                txt += "=" * len(tag_title) + "\n\n"
+                txt += tag['body']
+                txt += "\n\n"
+
+        root_dir = Path('.')
+        for name in (f"CHANGELOG.{fmt}", f"HISTORY.{fmt}"):
+            pth = root_dir / name
+            if pth.exists():
+                LOGGER.info("write changelog in %s", name)
+                pth.write_text(txt)
+                break
 
 
 def action_history(cfg, **kwds):
@@ -149,11 +143,11 @@ def action_history(cfg, **kwds):
         owner = cfg['gitlab']['owner']
         project = cfg['gitlab']['project']
         token = getpass("gitlab API access token:")
-        tags = gitlab_tag_list(server, "%s/%s" % (owner, project), token)
+        tags = gitlab_tag_list(server, f"{owner}/{project}", token)
     elif 'github' in cfg.installed_options():
         owner = cfg['github']['owner']
         project = cfg['github']['project']
-        tags = github_tag_list("%s/%s" % (owner, project))
+        tags = github_tag_list(f"{owner}/{project}")
     else:
         LOGGER.info("git only option not supported yet")
         tags = {}
