@@ -21,7 +21,7 @@ for pth in src_dir.glob("**/*.*"):
     if pth.suffix in {{ data.filetype }}:
         data_files.append(str(pth.relative_to(src_dir)))
 
-pkg_data= {'{{ base.pkg_full_name }}': data_files}
+pkg_data = {'{{ base.pkg_full_name }}': data_files}
 
 {%- if data.use_ext_dir %}
 data_dir = Path("src/{{ base.pkgname }}_data")

@@ -11,7 +11,7 @@
     "pypi.serverlist": "PC9SiM3/1x2vn66stkaGs8IZmA3C9zq9z6sBMLr74e3tdF5l0eBAZsagfMbQjPF+AW6evtXBtpEDMsF3dkjVHQ=="
   },
   ".travis.yml": {
-    "travis": "8EYmUGVuqpXP0Rx+e6aOAF0xYje1JfZvpgTHxW0Vt/CinkJbNs2ESrpnd++m4U1u+99Jf2JE5KMtXDw1pDw2fA==",
+    "travis": "KAPbJhcvhwooyTBB94qbddjFF2nJrcLU/AZbVktCepomu4oaEu6lhl3lTQa0GBdxZzFaJ3RWGY1ZAvq32af0Qg==",
     "travis.addons": "qA98wmBu9uVHTpax5SDBfs9DLw2ppWa9FXBEEwz7VI8Q2Sn/tXgwCN94ttB9B9EJv/utGZjLgwnszsfk0/yBOg==",
     "travis.after": "veQncG9PjU1UhCfzzNEtfVgUZ+iPmx9TVKRZWbLepccpcpNo8LvgMyTkYgGYNyLPbijRTXQdVQaDQRs6MCDYwA==",
     "travis.install": "46GBb0A8cqVSF4dTer9R9z5cqsnNvrZhCP9d0C5FOuNllCl6YYyR+1LF01WaJl7LSBzj7/C/aQNi7RukHOgcuw==",
@@ -30,7 +30,7 @@
     "pysetup": "T0+K8kQXfN7mECB6vXJvk6QJEs6Xo7faTVLCxp8Srjmfd+nUmZAxt35tSIVO3OzPV7vopLZFe6HXGxhYVOONpQ=="
   },
   "README.rst": {
-    "doc": "jKttOEgws4m8swEZ0XwkbQwbYJsLt7Op0uK41qTUTRgTod238pc6H9HP3hGjK7BPkrHU+PIm0v1l+560wwjxog=="
+    "doc": "/tQNMWM3j7CaLaKR4PqR3ZdyvUUIDASWZQ18jcDIa2sG8X0R9Ml3ZphMHQqsPUFxQMvU7IVuQDTmDSHMvqzkUw=="
   },
   "appveyor.yml": {
     "appveyor": "5/T0A4182n2Zha7QLgdW4PRGtORCAuPwTw7Fb/sm/DgSRrWuco2aqUpuCV9j9wlmGZ5CM/dnT1zw+Lxn1Iv7Lg=="
@@ -98,7 +98,7 @@
   },
   "setup.py": {
     "pysetup.call": "t30iIuCMd/sWxStR2XNYb8bCBgwanhKt8YYn2VKACyAqL5cKFRUWpVRIpAR+uxXUZ9PYYy2csMmECcONnRZE8w==",
-    "pysetup.kwds": "i6yHc5sTaIAU2DN89u+iXRTm/3RWCWxZcAkW2IrmJFNs0sXYOFuFLF/s6COQSCn2tUxUr/j3PIi5CvdIf0zHmg=="
+    "pysetup.kwds": "ddNin0258X+7AGm7xacGD8aBXrR/2FuJ7j8bUya4FkAGRTMxS35Q5vyO4gENi22S/s1m3FThi0OqD4D3f85KAw=="
   },
   "src/pkglts/__init__.py": {
     "src": "L2dZgUBRC5qv3o09+1CbMcgYfQtR1ZNSvP8KlP8REQazZiAQAktALjpCC2ijdxvKPv/tN9KsZrzNW+lZMszSfg==",
@@ -108,7 +108,7 @@
     "data": "wwgLuV/OqHWjWbssvDHa4LNg+7C+tuNiKHOxkO+9UAl9opI/HfPyJAq2fPhUeTmVvb/E6MkqDJIli9m8n5/V0Q=="
   },
   "src/pkglts/version.py": {
-    "version": "6UTXIxX0fg9AHojCuZM9iwzP5xARA1Xs4u51VKHdu/2R4HCq0uhiB7TGj9tZr/SzwJJLJtpnGPt2S1ibsunWXQ=="
+    "version": "9LbVrhKYmzzdCMYLVgovHKKzUYD96VJX3XE2WFw5KNiQBEbVUCYdk0nKaJ28fYwEo9QEgUG09FfmVIu5V9PyMQ=="
   },
   "src/pkglts_data/__init__.py": {},
   "test/__init__.py": {},
@@ -119,6 +119,6 @@
     "test.pytest_import": "2ox6A0szNpUYZR5cJJRSW3OwEWR558BOiUMjC/OVkTPT++CF/OCgGSELCPL+7YHWaJGQKMw2rtCXmOMeSK5ZJA=="
   },
   "tox.ini": {
-    "tox": "T5QOciglIRtffPGA1ht0LrmvUBcJbUwrN0OQNbUrgVswmnIaXfFbdt0yLy9mGz2pOIMTAZH/17mIqSZVzBCV6A=="
+    "tox": "Ev0Hl9GfSkG9ACDTQ8J4Jq9bJejyaBVMHfs9ldqGH41QgzuIq6n0zhuiUpUfrOelHH3OCI1OffL76e0V8nD76Q=="
   }
 }

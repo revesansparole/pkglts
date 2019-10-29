@@ -1,12 +1,7 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 # {# pkglts, pysetup.kwds
 # format setup arguments
 
-from os import walk
-from os.path import abspath, normpath, splitext
-from os.path import join as pj
+from pathlib import Path
 
 from setuptools import setup, find_packages
 
@@ -18,19 +13,14 @@ history = open('HISTORY.rst').read()
 # find packages
 pkgs = find_packages('src')
 
-pkg_data = {}
-
-nb = len(normpath(abspath("src/pkglts"))) + 1
-data_rel_pth = lambda pth: normpath(abspath(pth))[nb:]
+src_dir = Path("src/pkglts")
 
 data_files = []
-for root, dnames, fnames in walk("src/pkglts"):
-    for name in fnames:
-        if splitext(name)[-1] in ['', '.bat', '.cfg', '.json', '.md', '.in', '.ini', '.png', '.ps1', '.rst', '.sh', '.tpl', '.txt', '.yaml', '.yml']:
-            data_files.append(data_rel_pth(pj(root, name)))
+for pth in src_dir.glob("**/*.*"):
+    if pth.suffix in ['', '.bat', '.cfg', '.json', '.md', '.in', '.ini', '.png', '.ps1', '.rst', '.sh', '.tpl', '.txt', '.yaml', '.yml']:
+        data_files.append(str(pth.relative_to(src_dir)))
 
-
-pkg_data['pkglts'] = data_files
+pkg_data = {'pkglts': data_files}
 
 setup_kwds = dict(
     name='pkglts',
@@ -78,6 +68,7 @@ setup_kwds = dict(
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3 :: Only",
         "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
     ],
     )
 # #}
