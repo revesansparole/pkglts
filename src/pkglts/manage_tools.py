@@ -2,7 +2,6 @@
 """
 
 import logging
-from pathlib import Path
 
 from .hash_management import compute_hash, pth_as_key
 from .local import init_namespace_dir
