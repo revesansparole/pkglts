@@ -2,12 +2,6 @@
 Script which can be called before generating the doc
 to generate description of files modified by each option.
 """
-
-from os import listdir
-from os.path import isdir
-from os.path import splitext, join as pj
-from pathlib import Path
-
 from pkglts.config_management import Config
 
 
