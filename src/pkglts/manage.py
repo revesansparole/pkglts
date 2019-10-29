@@ -95,7 +95,7 @@ def add_option(name, cfg):
     return update_opt(name, cfg)
 
 
-def install_example_files(option, cfg, target="."):
+def install_example_files(option, cfg, target=Path(".")):
     """Install example files associated to an option.
 
     Args:
@@ -156,7 +156,7 @@ def _manage_conflicts(hm_ref, overwrite):
     return overwrite_file
 
 
-def regenerate_package(cfg, target=".", overwrite=False):
+def regenerate_package(cfg, target=Path("."), overwrite=False):
     """Rebuild all automatically generated files.
 
     Args:
