@@ -1,14 +1,13 @@
 import logging
 from datetime import datetime
+from pathlib import Path
 
-from os.path import dirname, exists
-from os.path import join as pj
 from pkglts.option_object import Option
 from pkglts.version import __version__
 
 LOGGER = logging.getLogger(__name__)
 
-TPL_DIR = pj(dirname(__file__), "templates")
+TPL_DIR = Path(__file__).parent / "templates"
 
 
 class OptionLicense(Option):
@@ -16,7 +15,7 @@ class OptionLicense(Option):
         return __version__
 
     def root_dir(self):
-        return dirname(__file__)
+        return Path(__file__).parent
 
     def update_parameters(self, cfg):
         sec = dict(
@@ -34,7 +33,7 @@ class OptionLicense(Option):
         # organization = pkg_cfg['license']['organization']
         # project = pkg_cfg['license']['project']
 
-        if not name or not exists(get_tpl_path(name)):
+        if not name or not get_tpl_path(name).exists():
             invalids.append('license.name')
 
         return invalids
@@ -57,7 +56,7 @@ def get_tpl_path(name):
     Returns:
         (str)
     """
-    return pj(TPL_DIR, "%s.txt" % name.lower())
+    return TPL_DIR / f"{name.lower()}.txt"
 
 
 def full_text(cfg):
@@ -71,6 +70,6 @@ def full_text(cfg):
             cnt = fhr.read()
 
         return cfg.render(cnt)
-    except IOError as err:
+    except FileNotFoundError as err:
         LOGGER.error("unable to find template for given license")
         raise err

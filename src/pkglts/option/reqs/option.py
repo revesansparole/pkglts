@@ -1,4 +1,4 @@
-from os.path import dirname
+from pathlib import Path
 
 from pkglts.dependency import Dependency
 from pkglts.option_object import Option
@@ -13,7 +13,7 @@ class OptionReqs(Option):
         return __version__
 
     def root_dir(self):
-        return dirname(__file__)
+        return Path(__file__).parent
 
     def update_parameters(self, cfg):
         sec = dict(
@@ -85,7 +85,7 @@ def requirements(cfg):
             for dep in opt.require(cfg):
                 reqs[dep.name] = dep
         except KeyError:
-            raise KeyError("option '%s' does not exists" % name)
+            raise KeyError(f"option '{name}' does not exists")
 
     for dep_def in cfg['reqs']['require']:
         dep = Dependency(**dep_def)
@@ -111,12 +111,12 @@ def fmt_conda_reqs(reqs, intents):
 
     cmd = "conda install"
     for channel in set(r.channel for r in reqs) - {None}:
-        cmd += " -c %s" % channel
+        cmd += f" -c {channel}"
 
     for name in sorted(r.conda_full_name() for r in reqs):
         if " " in name:
-            name = '"{}"'.format(name)
-        cmd += " %s" % name
+            name = f'"{name}"'
+        cmd += f" {name}"
 
     return cmd
 
@@ -140,7 +140,7 @@ def fmt_pip_reqs(reqs, intents):
 
     for name in sorted(r.pip_full_name() for r in reqs):
         if " " in name:
-            name = '"{}"'.format(name)
-        cmd += " %s" % name
+            name = f'"{name}"'
+        cmd += f" {name}"
 
     return cmd

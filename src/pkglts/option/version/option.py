@@ -1,4 +1,5 @@
-from os.path import dirname
+from pathlib import Path
+
 from pkglts.option_object import Option
 from pkglts.version import __version__
 
@@ -10,7 +11,7 @@ class OptionVersion(Option):
         return __version__
 
     def root_dir(self):
-        return dirname(__file__)
+        return Path(__file__).parent
 
     def update_parameters(self, cfg):
         sec = dict(

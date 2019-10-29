@@ -1,4 +1,4 @@
-from os.path import join as pj
+from pathlib import Path
 
 import pytest
 from pkglts.option.reqs.find_requirements import find_reqs
@@ -7,7 +7,7 @@ from pkglts.small_tools import ensure_created, rmdir
 
 @pytest.fixture()
 def tmp_dir():
-    pth = "tagadareqs"
+    pth = Path("tagadareqs")
 
     ensure_created(pth)
 
@@ -17,7 +17,7 @@ def tmp_dir():
 
 
 def test_find_reqs_parses_files(tmp_dir):
-    pth = pj(tmp_dir, "toto.py")
+    pth = tmp_dir / "toto.py"
     with open(pth, 'w') as fhw:
         fhw.write("import os\n"
                   "from sys import argv\n"

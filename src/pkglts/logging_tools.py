@@ -4,25 +4,28 @@ This module is executed when importing pkglts.
 """
 import logging
 import logging.handlers
-from os import remove, rename
-from os.path import exists
+
+from .config import pkglts_dir
 
 
 def rolling_logs(logger):
     """Associate log files using a rolling mechanism"""
     nb_logs = 5
-    tpl = ".pkglts/info.log.%d"
-    if exists(tpl % nb_logs):
-        remove(tpl % nb_logs)
+    tpl = pkglts_dir / "info.log.%d"
+    pth = pkglts_dir / f"info.{nb_logs:d}.log"
+    if pth.exists():
+        pth.unlink()
 
     for i in range(nb_logs, 0, -1):
-        if exists(tpl % (i - 1)):
-            rename(tpl % (i - 1), tpl % i)
+        pth = pkglts_dir / f"info.{i - 1:d}.log"
+        if pth.exists():
+            pth.rename(pkglts_dir / f"info.{i:d}.log")
 
-    if exists(".pkglts/info.log"):
-        rename(".pkglts/info.log", tpl % 0)
+    pth = pkglts_dir / "info.log"
+    if pth.exists():
+        pth.rename(tpl % 0)
 
-    info_ch = logging.FileHandler(".pkglts/info.log", 'w')
+    info_ch = logging.FileHandler(str(pth), 'w')
     logger.addHandler(info_ch)
 
 

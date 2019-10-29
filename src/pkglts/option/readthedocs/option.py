@@ -1,4 +1,4 @@
-from os.path import dirname
+from pathlib import Path
 
 from pkglts.option.doc import fmt_badge
 from pkglts.option_object import Option
@@ -10,7 +10,7 @@ class OptionReadthedocs(Option):
         return __version__
 
     def root_dir(self):
-        return dirname(__file__)
+        return Path(__file__).parent
 
     def update_parameters(self, cfg):
         sec = dict(
@@ -33,8 +33,8 @@ class OptionReadthedocs(Option):
     def environment_extensions(self, cfg):
         project = cfg['readthedocs']['project']
         project = project.replace(".", "")
-        url = "%s.readthedocs.io/en/latest/?badge=latest" % project
-        img = "readthedocs.org/projects/%s/badge/?version=latest" % project
+        url = f"{project}.readthedocs.io/en/latest/?badge=latest"
+        img = f"readthedocs.org/projects/{project}/badge/?version=latest"
         badge = fmt_badge(img, url, "Documentation status", cfg['doc']['fmt'])
 
         return {"badge": badge}

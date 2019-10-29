@@ -1,4 +1,4 @@
-from os.path import dirname
+from pathlib import Path
 
 from pkglts.dependency import Dependency
 from pkglts.option.doc import fmt_badge
@@ -11,7 +11,7 @@ class OptionCoveralls(Option):
         return __version__
 
     def root_dir(self):
-        return dirname(__file__)
+        return Path(__file__).parent
 
     def require_option(self):
         return ['coverage', 'travis']

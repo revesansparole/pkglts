@@ -1,8 +1,8 @@
 import logging
 import re
 import subprocess
+from pathlib import Path
 
-from os.path import dirname
 from pkglts.option_object import Option
 from pkglts.version import __version__
 from unidecode import unidecode
@@ -15,7 +15,7 @@ class OptionGit(Option):
         return __version__
 
     def root_dir(self):
-        return dirname(__file__)
+        return Path(__file__).parent
 
     def require_option(self):
         return ['base']
@@ -33,6 +33,6 @@ class OptionGit(Option):
             LOGGER.warning("Please add git to your $PATH")
             contributors = ["I failed to construct the contributor list"]
         except subprocess.CalledProcessError as err:
-            contributors = ["Pb with git, %s" % str(err)]
+            contributors = [f"Pb with git, {err:s}"]
 
         return {'contributors': contributors}

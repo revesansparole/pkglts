@@ -14,5 +14,5 @@ MINOR = {{ version.minor }}
 POST = {{ version.post }}
 """(int) Version post or bugfix component."""
 
-__version__ = ".".join([str(s) for s in (MAJOR, MINOR, POST)])
+__version__ = f"{MAJOR:d}.{MINOR:d}.{POST:d}"
 # #}

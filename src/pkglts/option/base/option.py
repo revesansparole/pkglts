@@ -1,8 +1,7 @@
-from os.path import abspath, basename, dirname
+from pathlib import Path
 
 from pkglts.local import pkg_full_name
 from pkglts.option_object import Option
-from pkglts.small_tools import is_valid_identifier
 from pkglts.version import __version__
 
 
@@ -11,11 +10,11 @@ class OptionBase(Option):
         return __version__
 
     def root_dir(self):
-        return dirname(__file__)
+        return Path(__file__).parent
 
     def update_parameters(self, cfg):
         sec = dict(
-            pkgname=basename(abspath(".")),
+            pkgname=Path.cwd().name,
             namespace=None,
             url=None,
             authors=[("moi", "moi@email.com")]
@@ -29,13 +28,13 @@ class OptionBase(Option):
 
         if "." in pkgname:
             invalids.append('base.pkgname')
-        elif not is_valid_identifier(pkgname):
+        elif not pkgname.isidentifier():
             invalids.append('base.pkgname')
 
         if namespace is not None:
             if "." in namespace:
                 invalids.append('base.namespace')
-            elif not is_valid_identifier(namespace):
+            elif not namespace.isidentifier():
                 invalids.append('base.namespace')
 
         return invalids

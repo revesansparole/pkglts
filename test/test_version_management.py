@@ -1,6 +1,7 @@
 import json
 from os.path import exists
 from os.path import join as pj
+from pathlib import Path
 
 import pytest
 import semver
@@ -13,14 +14,13 @@ from pkglts.version_management import load_pkg_version, option_current_version, 
 
 @pytest.fixture()
 def tmp_dir():
-    pth = "toto_mg_ver"
+    pth = Path("toto_mg_ver")
     ensure_created(pth)
-    ensure_created(pj(pth, ".pkglts"))
+    ensure_created(pth / pkglts_dir)
 
     yield pth
 
-    if exists(pth):
-        rmdir(pth)
+    rmdir(pth)
 
 
 @pytest.fixture()
@@ -53,7 +53,7 @@ def test_old_regenerated_package_have_outdated_options(tmp_cfg, tmp_dir):
     write_pkg_version(tmp_cfg, tmp_dir)
     ver = load_pkg_version(tmp_dir)
     ver['base'] = semver.bump_major(ver['base'])
-    json.dump(ver, open(pj(tmp_dir, pkglts_dir, pkg_version_file), 'w'))
+    json.dump(ver, open(tmp_dir / pkglts_dir / pkg_version_file, 'w'))
 
     assert 'base' in outdated_options(tmp_cfg, tmp_dir)
 
@@ -62,6 +62,6 @@ def test_old_regenerated_handles_unknown_options(tmp_cfg, tmp_dir):
     write_pkg_version(tmp_cfg, tmp_dir)
     ver = load_pkg_version(tmp_dir)
     del ver['base']
-    json.dump(ver, open(pj(tmp_dir, pkglts_dir, pkg_version_file), 'w'))
+    json.dump(ver, open(tmp_dir / pkglts_dir / pkg_version_file, 'w'))
 
     assert 'base' not in outdated_options(tmp_cfg, tmp_dir)

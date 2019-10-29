@@ -52,7 +52,7 @@ def action_find_reqs(cfg, **kwds):
     this_pkgname = cfg['base']['pkgname']
 
     for dirpth in (src_dir(cfg), 'doc', 'example', 'script', 'test'):
-        if path.exists(dirpth):
+        if dirpth.exists():
             print("############\n# %s\n############" % dirpth)
             reqs = set()
             for pth in glob("%s/*.py" % dirpth) + glob("%s/**/*.py" % dirpth):

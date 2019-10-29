@@ -2,8 +2,7 @@
 """
 
 import logging
-from os import listdir
-from os.path import basename, isdir, splitext
+from pathlib import Path
 
 from .hash_management import compute_hash, pth_as_key
 from .local import init_namespace_dir
@@ -67,8 +66,8 @@ def find_templates(src_dir, tgt_dir, cfg, rg_tree):
     Warnings: modify rg_tree in place
 
     Args:
-        src_dir (str): path to reference files
-        tgt_dir (str): path to target where files will be written
+        src_dir (Path): path to reference files
+        tgt_dir (Path): path to target where files will be written
         cfg (Config):  current package configuration
         rg_tree (dict): Structure to store path to templates found
 
@@ -77,29 +76,28 @@ def find_templates(src_dir, tgt_dir, cfg, rg_tree):
     """
     LOGGER.debug("find_templates in %s", src_dir)
 
-    for src_name in listdir(src_dir):
-        src_pth = src_dir + "/" + src_name
-        tgt_name = cfg.render(src_name)
+    for src_pth in src_dir.glob("*"):
+        tgt_name = cfg.render(src_pth.name)
         if tgt_name.endswith(".tpl"):
             tgt_name = tgt_name[:-4]
 
-        tgt_pth = tgt_dir + "/" + tgt_name
+        tgt_pth = tgt_dir / tgt_name
         # handle namespace
-        if isdir(src_pth) and basename(src_dir) == 'src' and src_name == TPL_SRC_NAME:
+        if src_pth.is_dir() and src_dir.name == 'src' and src_pth.name == TPL_SRC_NAME:
             namespace = cfg['base']['namespace']
             if namespace is not None:
-                ns_pth = tgt_dir + "/" + namespace
+                ns_pth = tgt_dir / namespace
                 init_namespace_dir(ns_pth, rg_tree)
-                tgt_pth = ns_pth + "/" + tgt_name
+                tgt_pth = ns_pth / tgt_name
 
-        if isdir(src_pth):
+        if src_pth.is_dir():
             if tgt_name in ("", "_"):
                 # do nothing
                 pass
             else:
                 find_templates(src_pth, tgt_pth, cfg, rg_tree)
         else:
-            if splitext(tgt_name)[0] == "_":
+            if tgt_name.split('.')[0] == "_":
                 pass
             else:
                 try:
@@ -113,7 +111,7 @@ def render_template(src_pths, tgt_pth, cfg, overwrite_file):
 
     Args:
         src_pths (list): list of reference templates
-        tgt_pth (str): path to created file
+        tgt_pth (Path): path to created file
         cfg (Config):  current package configuration
         overwrite_file (dict): which files to overwrite
 

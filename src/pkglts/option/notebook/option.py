@@ -1,4 +1,5 @@
-from os.path import dirname, exists
+from pathlib import Path
+
 from pkglts.option_object import Option
 from pkglts.version import __version__
 
@@ -10,7 +11,7 @@ class OptionNotebook(Option):
         return __version__
 
     def root_dir(self):
-        return dirname(__file__)
+        return Path(__file__).parent
 
     def update_parameters(self, cfg):
         sec = dict(
@@ -20,9 +21,9 @@ class OptionNotebook(Option):
 
     def check(self, cfg):
         invalids = []
-        src_directory = cfg[self._name]['src_directory']
+        src_directory = Path(cfg[self._name]['src_directory'])
 
-        if not exists(src_directory):
+        if not src_directory.exists():
             invalids.append("notebook.src_directory")
 
         return invalids

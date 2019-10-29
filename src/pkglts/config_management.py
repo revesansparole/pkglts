@@ -4,7 +4,6 @@ Main config object and functions to manipulate it.
 import json
 import logging
 from datetime import date
-from os.path import join as pj
 
 from jinja2 import Environment, StrictUndefined, UndefinedError
 
@@ -180,12 +179,12 @@ def get_pkg_config(rep="."):
     """Read pkg_cfg file associated to this package.
 
     Args:
-        rep (str): directory to search for info
+        rep (Path): directory to search for info
 
     Returns:
         (Config): Config initialized with pkg_config
     """
-    with open(pj(rep, pkglts_dir, pkg_cfg_file), 'r') as fhr:
+    with open(rep / pkglts_dir / pkg_cfg_file, 'r') as fhr:
         pkg_cfg = json.load(fhr)
 
     # update version of pkg_config
@@ -209,7 +208,7 @@ def write_pkg_config(cfg, rep="."):
 
     Args:
         cfg (Config): current working config
-        rep (str): directory to search for info
+        rep (Path): directory to search for info
 
     Returns:
         None
@@ -217,7 +216,7 @@ def write_pkg_config(cfg, rep="."):
     LOGGER.info("write package config")
     pkg_cfg = dict(cfg.template())
 
-    with open(pj(rep, pkglts_dir, pkg_cfg_file), 'w') as fhw:
+    with open(rep / pkglts_dir / pkg_cfg_file, 'w') as fhw:
         json.dump(pkg_cfg, fhw, sort_keys=True, indent=2)
 
 

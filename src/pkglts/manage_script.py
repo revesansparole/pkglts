@@ -177,7 +177,7 @@ def main():
     # try to read package config for extra commands
     try:
         cfg = get_pkg_config()
-    except IOError:
+    except FileNotFoundError:
         cfg = None
     else:
         # add option commands

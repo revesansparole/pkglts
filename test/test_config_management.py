@@ -1,21 +1,21 @@
 import json
-from os.path import exists
-from os.path import join as pj
+from pathlib import Path
 
 import pytest
+from pkglts.config import pkg_cfg_file, pkglts_dir
 from pkglts.config_management import (CURRENT_PKG_CFG_VERSION, Config, DEFAULT_CFG, get_pkg_config, write_pkg_config)
 from pkglts.small_tools import ensure_created, rmdir
 
 
 @pytest.fixture()
 def tmp_dir():
-    pth = "toto_mg_cfg"
+    pth = Path("toto_mg_cfg")
     ensure_created(pth)
-    ensure_created(pj(pth, ".pkglts"))
+    ensure_created(pth / pkglts_dir)
 
     yield pth
 
-    if exists(pth):
+    if pth.exists():
         rmdir(pth)
 
 
@@ -72,7 +72,7 @@ def test_get_pkg_config_read_cfg(tmp_dir):
     pkg_cfg = dict(DEFAULT_CFG)
     pkg_cfg['base'] = dict(pkgname="toto", namespace="nm",
                            url=None, authors=[("moi", "moi@aussi")])
-    json.dump(pkg_cfg, open(pj(tmp_dir, ".pkglts/pkg_cfg.json"), 'w'))
+    json.dump(pkg_cfg, open(tmp_dir / pkglts_dir / pkg_cfg_file, 'w'))
 
     cfg = get_pkg_config(tmp_dir)
     assert 'base' in cfg
@@ -81,7 +81,7 @@ def test_get_pkg_config_read_cfg(tmp_dir):
 def test_get_pkg_config_handle_versions(tmp_dir):
     pkg_cfg = dict(DEFAULT_CFG)
     pkg_cfg["_pkglts"]["version"] = 0
-    json.dump(pkg_cfg, open(pj(tmp_dir, ".pkglts/pkg_cfg.json"), 'w'))
+    json.dump(pkg_cfg, open(tmp_dir / pkglts_dir / pkg_cfg_file, 'w'))
 
     cfg = get_pkg_config(tmp_dir)
     assert cfg["_pkglts"]['version'] == CURRENT_PKG_CFG_VERSION
@@ -94,16 +94,16 @@ def test_pkg_cfg_read_write_maintains_templates(tmp_dir):
     pkg_cfg['license'] = dict(name="CeCILL-C", organization="org",
                               project="{{ base.pkgname }}", year="2015")
 
-    json.dump(pkg_cfg, open(pj(tmp_dir, ".pkglts/pkg_cfg.json"), 'w'))
+    json.dump(pkg_cfg, open(tmp_dir / pkglts_dir / pkg_cfg_file, 'w'))
 
     cfg = get_pkg_config(tmp_dir)
     assert cfg['license']['project'] == "toto"
 
     write_pkg_config(cfg, tmp_dir)
-    pkg_cfg = json.load(open(pj(tmp_dir, ".pkglts/pkg_cfg.json")))
+    pkg_cfg = json.load(open(tmp_dir / pkglts_dir / pkg_cfg_file))
     pkg_cfg["base"]["pkgname"] = "tutu"
 
-    json.dump(pkg_cfg, open(pj(tmp_dir, ".pkglts/pkg_cfg.json"), 'w'))
+    json.dump(pkg_cfg, open(tmp_dir / pkglts_dir / pkg_cfg_file, 'w'))
 
     cfg = get_pkg_config(tmp_dir)
     assert cfg['license']['project'] == "tutu"

@@ -1,9 +1,9 @@
-from os import mkdir, rmdir
-from os.path import exists
+from pathlib import Path
 
 import pytest
 from pkglts.config_management import Config
 from pkglts.option.notebook.option import OptionNotebook
+from pkglts.small_tools import ensure_created, rmdir
 
 
 @pytest.fixture()
@@ -13,13 +13,12 @@ def opt():
 
 @pytest.fixture()
 def tmp_dir():
-    pth = "nb_test_config"
-    mkdir(pth)
+    pth = Path("nb_test_config")
+    ensure_created(pth)
 
     yield pth
 
-    if exists(pth):
-        rmdir(pth)
+    rmdir(pth)
 
 
 def test_update_parameters(opt):
