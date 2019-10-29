@@ -1,12 +1,7 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 # {# pkglts, pysetup.kwds
 # format setup arguments
 {% if 'data' is available %}
-from os import walk
-from os.path import abspath, normpath, splitext
-from os.path import join as pj
+from pathlib import Path
 {% endif %}
 from setuptools import setup, find_packages
 
@@ -19,28 +14,21 @@ history = open('HISTORY.{{ doc.fmt }}').read()
 pkgs = find_packages('src')
 
 {% if 'data' is available -%}
-pkg_data = {}
-
-nb = len(normpath(abspath("{{ src.src_pth }}"))) + 1
-data_rel_pth = lambda pth: normpath(abspath(pth))[nb:]
+src_dir = Path("{{ src.src_pth }}")
 
 data_files = []
-for root, dnames, fnames in walk("{{ src.src_pth }}"):
-    for name in fnames:
-        if splitext(name)[-1] in {{ data.filetype }}:
-            data_files.append(data_rel_pth(pj(root, name)))
+for pth in src_dir.glob("**/*.*"):
+    if pth.suffix in {{ data.filetype }}:
+        data_files.append(str(pth.relative_to(src_dir)))
 
-
-pkg_data['{{ base.pkg_full_name }}'] = data_files
+pkg_data= {'{{ base.pkg_full_name }}': data_files}
 
 {%- if data.use_ext_dir %}
-nb = len(normpath(abspath("src/{{ base.pkgname }}_data"))) + 1
-data_rel_pth = lambda pth: normpath(abspath(pth))[nb:]
+data_dir = Path("src/{{ base.pkgname }}_data")
 
 data_files = []
-for root, dnames, fnames in walk("src/{{ base.pkgname }}_data"):
-    for name in fnames:
-        data_files.append(data_rel_pth(pj(root, name)))
+for pth in src_dir.glob("**/*.*"):
+    data_files.append(str(pth.relative_to(src_dir)))
 
 
 pkg_data['{{ base.pkgname }}_data'] = data_files
