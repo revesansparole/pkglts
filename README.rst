@@ -5,14 +5,19 @@ pkglts
 .. {# pkglts, doc
 
 
-.. image:: https://travis-ci.org/revesansparole/pkglts.svg?branch=master
-    :alt: Travis build status
-    :target: https://travis-ci.org/revesansparole/pkglts
-
-
 .. image:: https://coveralls.io/repos/github/revesansparole/pkglts/badge.svg?branch=master
     :alt: Coverage report status
     :target: https://coveralls.io/github/revesansparole/pkglts?branch=master
+
+
+.. image:: https://readthedocs.org/projects/pkglts/badge/?version=latest
+    :alt: Documentation status
+    :target: https://pkglts.readthedocs.io/en/latest/?badge=latest
+
+
+.. image:: https://travis-ci.org/revesansparole/pkglts.svg?branch=master
+    :alt: Travis build status
+    :target: https://travis-ci.org/revesansparole/pkglts
 
 
 .. image:: https://landscape.io/github/revesansparole/pkglts/master/landscape.svg?style=flat
@@ -23,11 +28,6 @@ pkglts
 .. image:: https://requires.io/github/revesansparole/pkglts/requirements.svg?branch=master
     :alt: Requirements status
     :target: https://requires.io/github/revesansparole/pkglts/requirements/?branch=master
-
-
-.. image:: https://readthedocs.org/projects/pkglts/badge/?version=latest
-    :alt: Documentation status
-    :target: https://pkglts.readthedocs.io/en/latest/?badge=latest
 
 
 .. image:: https://badge.fury.io/py/pkglts.svg
