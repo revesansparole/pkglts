@@ -58,6 +58,7 @@
     "url": "https://github.com/{{ github.owner }}/{{ github.project }}"
   },
   "landscape": {},
+  "lgtm": {},
   "license": {
     "name": "CeCILL-C",
     "organization": "OpenAlea",
