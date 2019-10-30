@@ -88,6 +88,7 @@ setup_kwds['entry_points']['pkglts'] = [
     'github = pkglts.option.github.option:OptionGithub',
     'gitlab = pkglts.option.gitlab.option:OptionGitlab',
     'landscape = pkglts.option.landscape.option:OptionLandscape',
+    'lgtm = pkglts.option.lgtm.option:OptionLgtm',
     'license = pkglts.option.license.option:OptionLicense',
     'notebook = pkglts.option.notebook.option:OptionNotebook',
     'plugin_project = pkglts.option.plugin_project.option:OptionPluginProject',
