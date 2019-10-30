@@ -30,8 +30,11 @@ class OptionPysetup(Option):
         return ['src', 'doc', 'license', 'version', 'reqs']
 
     def environment_extensions(self, cfg):
+        py_min_ver = sorted(cfg[self._name]['intended_versions'])[0]
+
         return {
             "pkg_url": pkg_url(cfg),
+            "py_min_ver": ".".join(tuple(py_min_ver))
         }
 
 

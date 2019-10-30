@@ -13,7 +13,7 @@ source:
 # {# pkglts, conda.req_build
 requirements:
   build:
-    - python
+    - python >={{ pysetup.py_min_ver }}
     - setuptools
 {%- if 'test' is available -%}
 {%- if test.suite_name == 'pytest' %}
@@ -29,7 +29,7 @@ requirements:
 
 # {# pkglts, conda.req_run
   run:
-    - python
+    - python >={{ pysetup.py_min_ver }}
 {%- for dep in reqs.requirements('install') -%}
   {%- if dep.is_conda(strict=False) %}
     - {{ dep.fmt_conda_requirement() }}

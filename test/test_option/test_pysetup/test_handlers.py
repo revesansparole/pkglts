@@ -24,3 +24,17 @@ def test_pkg_url_look_multiple_places():
         cfg = Config(loc_cfg)
         cfg.load_extra()
         assert cfg._env.globals['pysetup'].pkg_url == name
+
+
+def test_py_min_ver_uses_min_intended_version():
+    cfg = Config(dict(pysetup={"intended_versions": ["27"]}))
+    cfg.load_extra()
+    assert cfg._env.globals['pysetup'].py_min_ver == "2.7"
+
+    cfg = Config(dict(pysetup={"intended_versions": ["27", "36"]}))
+    cfg.load_extra()
+    assert cfg._env.globals['pysetup'].py_min_ver == "2.7"
+
+    cfg = Config(dict(pysetup={"intended_versions": ["36", "37"]}))
+    cfg.load_extra()
+    assert cfg._env.globals['pysetup'].py_min_ver == "3.6"
