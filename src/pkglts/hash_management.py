@@ -23,7 +23,7 @@ def pth_as_key(pth):
         (str)
     """
     pth = pth.resolve()
-    if pth.drive != '':
+    if pth.is_absolute():  # make path relative to project root
         pth = pth.relative_to(Path.cwd())
     return pth.as_posix()
 
