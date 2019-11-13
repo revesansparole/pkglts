@@ -5,24 +5,19 @@ pkglts
 .. {# pkglts, doc
 
 
-.. image:: https://readthedocs.org/projects/pkglts/badge/?version=latest
-    :alt: Documentation status
-    :target: https://pkglts.readthedocs.io/en/latest/?badge=latest
-
-
-.. image:: https://landscape.io/github/revesansparole/pkglts/master/landscape.svg?style=flat
-    :alt: Code health status
-    :target: https://landscape.io/github/revesansparole/pkglts/master
-
-
 .. image:: https://img.shields.io/lgtm/grade/python/g/revesansparole/pkglts.svg?logo=lgtm&logoWidth=18
     :alt: Language grade: Python
     :target: https://lgtm.com/projects/g/revesansparole/pkglts/context:python
 
 
-.. image:: https://ci.appveyor.com/api/projects/status/hrwjhn2oe0q4oaf2/branch/master?svg=true
-    :alt: Appveyor build status
-    :target: https://ci.appveyor.com/project/revesansparole/pkglts/branch/master
+.. image:: https://readthedocs.org/projects/pkglts/badge/?version=latest
+    :alt: Documentation status
+    :target: https://pkglts.readthedocs.io/en/latest/?badge=latest
+
+
+.. image:: https://requires.io/github/revesansparole/pkglts/requirements.svg?branch=master
+    :alt: Requirements status
+    :target: https://requires.io/github/revesansparole/pkglts/requirements/?branch=master
 
 
 .. image:: https://badge.fury.io/py/pkglts.svg
@@ -30,9 +25,14 @@ pkglts
     :target: https://badge.fury.io/py/pkglts
 
 
-.. image:: https://requires.io/github/revesansparole/pkglts/requirements.svg?branch=master
-    :alt: Requirements status
-    :target: https://requires.io/github/revesansparole/pkglts/requirements/?branch=master
+.. image:: https://landscape.io/github/revesansparole/pkglts/master/landscape.svg?style=flat
+    :alt: Code health status
+    :target: https://landscape.io/github/revesansparole/pkglts/master
+
+
+.. image:: https://ci.appveyor.com/api/projects/status/hrwjhn2oe0q4oaf2/branch/master?svg=true
+    :alt: Appveyor build status
+    :target: https://ci.appveyor.com/project/revesansparole/pkglts/branch/master
 
 
 .. image:: https://coveralls.io/repos/github/revesansparole/pkglts/badge.svg?branch=master
