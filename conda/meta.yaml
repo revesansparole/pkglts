@@ -1,7 +1,7 @@
 # {# pkglts, conda.package
 package:
   name: pkglts
-  version: "5.1.0"
+  version: "5.1.1"
 # #}
 
 # {# pkglts, conda.src
