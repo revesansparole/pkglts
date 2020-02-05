@@ -30,7 +30,7 @@
     "pysetup": "T0+K8kQXfN7mECB6vXJvk6QJEs6Xo7faTVLCxp8Srjmfd+nUmZAxt35tSIVO3OzPV7vopLZFe6HXGxhYVOONpQ=="
   },
   "README.rst": {
-    "doc": "TVuW0vyb63W2mHFNGgq8MCXgFqiETAm7c3iXuB249hbKM8NvHjRQIaXZsLmR4JyoBbnE+G5P94afW1JwrEQrDQ=="
+    "doc": "K5Zn5g7vTVYNrDqBi72PJZ62S8XmQ5xauyp7nAiD0hE8G1PS8bzQjBpfPn2VHqnXPUTGHHdZNeFYB6NIzmESlA=="
   },
   "appveyor.yml": {
     "appveyor": "5/T0A4182n2Zha7QLgdW4PRGtORCAuPwTw7Fb/sm/DgSRrWuco2aqUpuCV9j9wlmGZ5CM/dnT1zw+Lxn1Iv7Lg=="
@@ -43,7 +43,7 @@
   },
   "conda/meta.yaml": {
     "conda.about": "6/RoaDh45Wwcc0uAhKGnUH46mczqPBQq/PV0cSCbe+fhiDQPOooOK8u24GzswyAcXIEHoASc/XIe+WS/2zBl5A==",
-    "conda.package": "J4tjWMzVcpqdubyoLB8pPcR3H53BGnZ3mAu9NgtYWzjkAr1zKq3lkNmA0I2Gvh+pVnNvpi8PHAaLQ/7i0ewc2A==",
+    "conda.package": "IrVvVF3Rb8SiXnoNmdON6EnFkmJqUQqAzR2bD5EogBvOaxVOOyjvjLHzIMYtEIEPwfrEl3L3/SH3CTbi/fZl5w==",
     "conda.req_build": "PHQ4LRj963FIG00GtdBBsC4RGzQPqOz8nxsL3g3mCpe6xaYzXaEMD/Eifbbfi+X+Z578AJlr/Qsw4fgVokh+vQ==",
     "conda.req_run": "tAHRVsBmpT3G6fyAPJkEHz1WG4680wzFomYI2F+7oMSggoS73xMjEXINojQRwtSEgNIbUvcWxht0663/LYY8Yw==",
     "conda.src": "Lzbp176AVU0YantZQxB4LsR2jbxpZ/OlkvY2V4aWAEuzKEarh872uc1eRvsIYf/FsbxvcmUI84AezWlA72nI6A=="
@@ -63,7 +63,7 @@
   "doc/_static/nonempty.txt": {},
   "doc/authors.rst": {},
   "doc/conf.py": {
-    "sphinx": "TUimNy7fdDAxC2YX1P4jPqbMD25qj402HYDd0Xy7dRiRMsK/eXqz0Dc87at3BplQjoQSvBQDjJ09qhT8+TForQ=="
+    "sphinx": "wxid7n6z/iEapvADxI5uC+V+AT5voqdsPP8ZUJQnZQuqIUCLaTEDg+dDWjKmi0rvs4WTLVhAaN7MW8w7aBRwDA=="
   },
   "doc/contributing.rst": {},
   "doc/history.rst": {},
@@ -98,7 +98,7 @@
   },
   "setup.py": {
     "pysetup.call": "t30iIuCMd/sWxStR2XNYb8bCBgwanhKt8YYn2VKACyAqL5cKFRUWpVRIpAR+uxXUZ9PYYy2csMmECcONnRZE8w==",
-    "pysetup.kwds": "WrFejOlnEEIai+0sfJPLdCIWdoBAxHsXeNaEqyu2kOqMGzYpczsukIYnft8odBddG+u9wTGzqaUoTj3op60S4g=="
+    "pysetup.kwds": "QgoNpksIZ19uwjWSnx2Kpe3Qiqj/tClKwSCkkZ/csXygzkaV05Oy4sP9ycyM+RkFjPhOKC3AUSwb6GEwmkNuKA=="
   },
   "src/pkglts/__init__.py": {
     "src": "L2dZgUBRC5qv3o09+1CbMcgYfQtR1ZNSvP8KlP8REQazZiAQAktALjpCC2ijdxvKPv/tN9KsZrzNW+lZMszSfg==",
@@ -108,7 +108,7 @@
     "data": "wwgLuV/OqHWjWbssvDHa4LNg+7C+tuNiKHOxkO+9UAl9opI/HfPyJAq2fPhUeTmVvb/E6MkqDJIli9m8n5/V0Q=="
   },
   "src/pkglts/version.py": {
-    "version": "J7PegCgWk9NAQevDwZ1dPz6McE2t4/g4bc0bsgcU+1o3QVthuT+KeaZL/i4NNV66B9kOATPZ2jyilhKD+NZ0Eg=="
+    "version": "MwUmKlEaNplofnUafx8m2d62xxyN3flLhNJap38CzrtAC2KybFaw2KT+ZcnrGR1fq+Ksk6NSWFEvbeMSQ2E2lg=="
   },
   "src/pkglts_data/__init__.py": {},
   "test/__init__.py": {},
