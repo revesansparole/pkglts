@@ -73,9 +73,8 @@ def test_regenerate_handle_conflicts_keep(tmp_pths, mocker):
 
     init_file.write_text("modified")
 
-    with mocker.patch('pkglts.manage.get_user_permission',
-                      return_value=False):
-        regenerate_package(cfg, tmp_dir)
+    mocker.patch('pkglts.manage.get_user_permission', return_value=False)
+    regenerate_package(cfg, tmp_dir)
 
     assert init_file.read_text() == "modified"
 
@@ -86,9 +85,8 @@ def test_regenerate_handle_conflicts_overwrite(tmp_pths, mocker):
 
     addendum(init_file)
 
-    with mocker.patch('pkglts.manage.get_user_permission',
-                      return_value=True):
-        regenerate_package(cfg, tmp_dir)
+    mocker.patch('pkglts.manage.get_user_permission', return_value=True)
+    regenerate_package(cfg, tmp_dir)
 
     assert "modified" not in init_file.read_text()
 
