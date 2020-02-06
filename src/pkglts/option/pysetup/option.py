@@ -32,9 +32,12 @@ class OptionPysetup(Option):
     def environment_extensions(self, cfg):
         py_min_ver = sorted(cfg[self._name]['intended_versions'])[0]
 
+        universal = len(set(ver[0] for ver in cfg[self._name]['intended_versions'])) > 1
+
         return {
             "pkg_url": pkg_url(cfg),
-            "py_min_ver": ".".join(tuple(py_min_ver))
+            "py_min_ver": ".".join(tuple(py_min_ver)),
+            "universal": universal
         }
 
 
