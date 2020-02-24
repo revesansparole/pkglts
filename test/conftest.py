@@ -4,6 +4,7 @@ import os
 import pytest
 # #}
 
+
 # {# pkglts, test.pytest_cmdline_preparse
 def pytest_cmdline_preparse(args):
     if 'PYCHARM_HOSTED' not in os.environ:
@@ -15,6 +16,14 @@ def pytest_cmdline_preparse(args):
 def pytest_addoption(parser):
     parser.addoption("--runslow", action="store_true",
                      default=False, help="run slow tests")
+# #}
+
+
+# {# pkglts, test.pytest_configure
+def pytest_configure(config):
+    config.addinivalue_line(
+        "markers", "slow: marks tests as slow (deselect with '--runslow')"
+    )
 # #}
 
 

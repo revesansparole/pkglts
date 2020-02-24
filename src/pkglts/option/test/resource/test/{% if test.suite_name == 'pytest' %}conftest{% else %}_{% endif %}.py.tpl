@@ -23,7 +23,7 @@ def pytest_addoption(parser):
 # #}
 
 
-# {# pkglts, test.pytest_addoption
+# {# pkglts, test.pytest_configure
 def pytest_configure(config):
     config.addinivalue_line(
         "markers", "slow: marks tests as slow (deselect with '--runslow')"

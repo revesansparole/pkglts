@@ -30,7 +30,7 @@
     "pysetup": "T0+K8kQXfN7mECB6vXJvk6QJEs6Xo7faTVLCxp8Srjmfd+nUmZAxt35tSIVO3OzPV7vopLZFe6HXGxhYVOONpQ=="
   },
   "README.rst": {
-    "doc": "K5Zn5g7vTVYNrDqBi72PJZ62S8XmQ5xauyp7nAiD0hE8G1PS8bzQjBpfPn2VHqnXPUTGHHdZNeFYB6NIzmESlA=="
+    "doc": "PZW+gZcXPTm9+VQQ3IgkxeiqqV9cdb3ico/ngemh4CkXK04LBRvcLEkjQ++4hZ6Slb4xXbQLEYeXHLgOnSyErQ=="
   },
   "appveyor.yml": {
     "appveyor": "5/T0A4182n2Zha7QLgdW4PRGtORCAuPwTw7Fb/sm/DgSRrWuco2aqUpuCV9j9wlmGZ5CM/dnT1zw+Lxn1Iv7Lg=="
@@ -116,6 +116,7 @@
     "test.pytest_addoption": "I/hswVryIEYvZRBcFqkfRBxLP6eZCwZSbQuPclkOkjHw4MApBst5h7H0ejnMMe4bmwHXMXR5DCSxOMj/FcCnjQ==",
     "test.pytest_cmdline_preparse": "PReC04aIsiEUts+uEAiU4rCIEtXIoB6cJ1EmKApbIKD5wNYWokZ0r1WjV/1+WobsK/wgmcC4Yvf5NwwYZb9yjg==",
     "test.pytest_collection": "a/3h30sLUHJ7xWsOrmfCInOOVXvm660dS+RxHwcDUcae2jHqDLRGhq/v8zgC+FSzN3pXaEaJ1QBJ9MNLOUBuCA==",
+    "test.pytest_configure": "SjyTXdrRadJNWhVFYkAvXekjOqNtovwqKNizWD35oZ9XVmsdB/B+lQDzXNPZQ0D5flFpSEURUiGqIvifgEKZ9Q==",
     "test.pytest_import": "2ox6A0szNpUYZR5cJJRSW3OwEWR558BOiUMjC/OVkTPT++CF/OCgGSELCPL+7YHWaJGQKMw2rtCXmOMeSK5ZJA=="
   },
   "tox.ini": {
