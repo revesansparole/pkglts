@@ -10,24 +10,24 @@ pkglts
     :target: https://pkglts.readthedocs.io/en/latest/?badge=latest
 
 
-.. image:: https://landscape.io/github/revesansparole/pkglts/master/landscape.svg?style=flat
-    :alt: Code health status
-    :target: https://landscape.io/github/revesansparole/pkglts/master
-
-
-.. image:: https://coveralls.io/repos/github/revesansparole/pkglts/badge.svg?branch=master
-    :alt: Coverage report status
-    :target: https://coveralls.io/github/revesansparole/pkglts?branch=master
-
-
 .. image:: https://badge.fury.io/py/pkglts.svg
     :alt: PyPI version
     :target: https://badge.fury.io/py/pkglts
 
 
+.. image:: https://landscape.io/github/revesansparole/pkglts/master/landscape.svg?style=flat
+    :alt: Code health status
+    :target: https://landscape.io/github/revesansparole/pkglts/master
+
+
 .. image:: https://requires.io/github/revesansparole/pkglts/requirements.svg?branch=master
     :alt: Requirements status
     :target: https://requires.io/github/revesansparole/pkglts/requirements/?branch=master
+
+
+.. image:: https://coveralls.io/repos/github/revesansparole/pkglts/badge.svg?branch=master
+    :alt: Coverage report status
+    :target: https://coveralls.io/github/revesansparole/pkglts?branch=master
 
 
 .. image:: https://img.shields.io/lgtm/grade/python/g/revesansparole/pkglts.svg?logo=lgtm&logoWidth=18
