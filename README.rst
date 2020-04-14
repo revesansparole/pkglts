@@ -10,9 +10,9 @@ pkglts
     :target: https://pkglts.readthedocs.io/en/latest/?badge=latest
 
 
-.. image:: https://ci.appveyor.com/api/projects/status/hrwjhn2oe0q4oaf2/branch/master?svg=true
-    :alt: Appveyor build status
-    :target: https://ci.appveyor.com/project/revesansparole/pkglts/branch/master
+.. image:: https://badge.fury.io/py/pkglts.svg
+    :alt: PyPI version
+    :target: https://badge.fury.io/py/pkglts
 
 
 .. image:: https://landscape.io/github/revesansparole/pkglts/master/landscape.svg?style=flat
@@ -20,19 +20,14 @@ pkglts
     :target: https://landscape.io/github/revesansparole/pkglts/master
 
 
+.. image:: https://requires.io/github/revesansparole/pkglts/requirements.svg?branch=master
+    :alt: Requirements status
+    :target: https://requires.io/github/revesansparole/pkglts/requirements/?branch=master
+
+
 .. image:: https://coveralls.io/repos/github/revesansparole/pkglts/badge.svg?branch=master
     :alt: Coverage report status
     :target: https://coveralls.io/github/revesansparole/pkglts?branch=master
-
-
-.. image:: https://travis-ci.org/revesansparole/pkglts.svg?branch=master
-    :alt: Travis build status
-    :target: https://travis-ci.org/revesansparole/pkglts
-
-
-.. image:: https://badge.fury.io/py/pkglts.svg
-    :alt: PyPI version
-    :target: https://badge.fury.io/py/pkglts
 
 
 .. image:: https://img.shields.io/lgtm/grade/python/g/revesansparole/pkglts.svg?logo=lgtm&logoWidth=18
@@ -40,9 +35,14 @@ pkglts
     :target: https://lgtm.com/projects/g/revesansparole/pkglts/context:python
 
 
-.. image:: https://requires.io/github/revesansparole/pkglts/requirements.svg?branch=master
-    :alt: Requirements status
-    :target: https://requires.io/github/revesansparole/pkglts/requirements/?branch=master
+.. image:: https://travis-ci.org/revesansparole/pkglts.svg?branch=master
+    :alt: Travis build status
+    :target: https://travis-ci.org/revesansparole/pkglts
+
+
+.. image:: https://ci.appveyor.com/api/projects/status/hrwjhn2oe0q4oaf2/branch/master?svg=true
+    :alt: Appveyor build status
+    :target: https://ci.appveyor.com/project/revesansparole/pkglts/branch/master
 .. #}
 
 .. image:: https://anaconda.org/revesansparole/pkglts/badges/version.svg
