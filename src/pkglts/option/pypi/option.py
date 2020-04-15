@@ -46,16 +46,15 @@ class OptionPypi(Option):
         yield Dependency('twine', intent='dvlpt')
 
     def environment_extensions(self, cfg):
+        ext = {"auto_classifiers": auto_classifiers(cfg)}
+
         servers = cfg['pypi']['servers']
         if servers and servers[0]['name'] == 'pypi':
             url = f"badge.fury.io/py/{pkg_full_name(cfg)}"
             img = f"{url}.svg"
-            badge = fmt_badge(img, url, "PyPI version", cfg['doc']['fmt'])
-        else:
-            badge = ""
+            ext['badge'] = fmt_badge(img, url, "PyPI version", cfg['doc']['fmt'])
 
-        return {"badge": badge,
-                "auto_classifiers": auto_classifiers(cfg)}
+        return ext
 
 
 def auto_classifiers(cfg):
