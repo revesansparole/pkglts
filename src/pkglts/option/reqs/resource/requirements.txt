@@ -8,7 +8,6 @@
 {% for dep in reqs.requirements(intent) -%}
 {{ dep.fmt_pip_requirement(extended=False) }}
 {% endfor %}
-
 {% endfor -%}
 
 # #}

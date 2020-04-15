@@ -46,7 +46,7 @@ class OptionDoc(Option):
 
     def environment_extensions(self, cfg):
         badges = []
-        for name in set(cfg.installed_options()) - {self._name}:
+        for name in sorted(set(cfg.installed_options()) - {self._name}):
             opt = available_options[name]
             ext = opt.environment_extensions(cfg)
             if 'badge' in ext:

@@ -3,9 +3,9 @@
 ========================
 
 .. {# pkglts, doc
-{%- for badge in doc.badges %}
+{% for badge in doc.badges -%}
 {{ badge }}
-{% endfor -%}
+{% endfor %}
 .. #}
 
 {{ doc.description }}
