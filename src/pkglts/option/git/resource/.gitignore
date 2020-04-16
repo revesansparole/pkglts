@@ -111,6 +111,9 @@ target/
 {%- if 'sphinx' is available %}
 # sphinx autogen file
 doc/_dvlpt/
+{% if sphinx.gallery != "" -%}
+doc/_gallery/
+{% endif -%}
 {% endif %}
 
 # #}

@@ -16,6 +16,9 @@
 
 import sys
 import os
+{% if sphinx.gallery != "" -%}
+import warnings
+{%- endif %}
 
 # If extensions (or modules to document with autodoc) are in another
 # directory, add these directories to sys.path here. If the directory is
@@ -333,4 +336,12 @@ if not os.path.isdir(destdir):
 
 main(['-e', '-o', destdir, '-d', '4', '-s', source_suffix[1:], '--force', src_dir])
 {% endif %}
+
+{% if sphinx.gallery != "" -%}
+# Remove matplotlib agg warnings from generated doc when using plt.show
+warnings.filterwarnings("ignore", category=UserWarning,
+                        message='Matplotlib is currently using agg, which is a'
+                                ' non-GUI backend, so cannot show the figure.')
+{%- endif %}
+
 # #}
