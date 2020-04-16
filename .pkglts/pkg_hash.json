@@ -7,7 +7,7 @@
   },
   ".landscape.yml": {},
   ".pypirc": {
-    "pypi.serverdescr": "Xwmy6dIeZ8dRPhYNKBwoBU+vXof53eeATlBeDYhO3dbdM2nu5f+i7KADpDKewMsy4vaw07SlvZcvrkNxIQGdOw==",
+    "pypi.serverdescr": "d6B+Qvp4m8jn/exks3Rn+36F5CYJtuu7hnbIDZauGJVydBD8d2afBO1Pq0KNvhuDgx5x4tslaFISorNRxUqAXA==",
     "pypi.serverlist": "PC9SiM3/1x2vn66stkaGs8IZmA3C9zq9z6sBMLr74e3tdF5l0eBAZsagfMbQjPF+AW6evtXBtpEDMsF3dkjVHQ=="
   },
   ".travis.yml": {
@@ -30,7 +30,7 @@
     "pysetup": "T0+K8kQXfN7mECB6vXJvk6QJEs6Xo7faTVLCxp8Srjmfd+nUmZAxt35tSIVO3OzPV7vopLZFe6HXGxhYVOONpQ=="
   },
   "README.rst": {
-    "doc": "uSVZJktu1TdxWIxxWNeaUaEmv+FbGy4XYJdu1jTyzf3xfRGAWZ2x2HXAtCyXmAB+1QJsZVVA2Lssrr28mYVwLw=="
+    "doc": "Csb+4ZwF3T3rgSupi20BnAN347/oeWD+MMbydE7ha/5PgNhz1pTnh0TIecc+rmfopldEZHb2JZByNZn3UBSQ6w=="
   },
   "appveyor.yml": {
     "appveyor": "5/T0A4182n2Zha7QLgdW4PRGtORCAuPwTw7Fb/sm/DgSRrWuco2aqUpuCV9j9wlmGZ5CM/dnT1zw+Lxn1Iv7Lg=="
@@ -81,13 +81,13 @@
     "conda": "9LFLPxi0fMfsVQCULGbuCPMAujTUjyJtpzboCqNm3fXAhCGT9YFTYKjyIiaEZB09qKWjnrXk4bFwcpVtzIyY6g=="
   },
   "requirements.txt": {
-    "reqs": "QByn1+g+YQGpO2SjFdjtjPSrOmQOn2BF3ZmlsgoL6aHNKrbvBOUSvsbAGyPihpysMoA+4rA9KxRqISP/eOWFlg=="
+    "reqs": "G/z+Ryn/YKfAHkqDHs3CLv+NNjMgVaq4L44S0AD3uukO3pj1sVThuPcEYdOC8eu8+q25IDp//wkrrlfp+P62Ag=="
   },
   "requirements.yml": {
     "conda": "EObyPICVVOBSFDCFLcXQgQXSZlxfcBZY9QOQwpXen2WPHiIoJT0mLtQzgEzzxvMlVbbky5lcTASD++y3lB+8Rw=="
   },
   "requirements_minimal.txt": {
-    "reqs": "/ODLman8W/ctq+oJnKmdv6gbJGbnI1GWXgiOjqnlQtCuNHfE/Ew+xdkn7OXQ57AIJO0mqhiBNY92aFV7Hq0sug=="
+    "reqs": "VgrymzAkHHQ5cX2LBMGqNkCAcOD7sb2jUFNwVysB9t3gzHgMH3ZhMacfxXNL85A4+5WVR6jInOjf9e9Wv8RTkg=="
   },
   "setup.cfg": {
     "pysetup.flake8": "vhKQd+PKOI3JRd+DFX5XAX/LSu1zj/XLulLKKW/FVe7nIDZQS3p6cM9+HKZlyqOkyqOtXcONb2OiJKtlXcIj8g==",

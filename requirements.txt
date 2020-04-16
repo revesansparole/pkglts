@@ -7,18 +7,15 @@
 sphinx
 sphinx_rtd_theme
 
-
 # dvlpt
 flake8
 twine
-
 
 # install
 jinja2
 requests
 semver
 unidecode
-
 
 # test
 coverage
@@ -27,6 +24,5 @@ pytest
 pytest-cov
 pytest-mock
 tox
-
 
 # #}
