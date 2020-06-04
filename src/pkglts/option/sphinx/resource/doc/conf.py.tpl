@@ -14,8 +14,9 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
-import sys
 import os
+import re
+import sys
 {%- if sphinx.gallery != "" %}
 import warnings
 {%- endif %}
@@ -74,9 +75,11 @@ except ImportError:
 
 {% if sphinx.gallery != "" -%}
 sphinx_gallery_conf = {
-    'examples_dirs': '../{{ sphinx.gallery }}',   # path to your example scripts
-    'gallery_dirs': '_gallery',  # path where to save gallery generated examples
-    'filename_pattern': 'plot_*',
+    'examples_dirs': "../{{ sphinx.gallery }}",   # path to your example scripts
+    'gallery_dirs': "_gallery",  # path where to save gallery generated examples
+    'filename_pattern': f"{re.escape(os.sep)}plot_",
+    'ignore_pattern': f"^((?!{re.escape(os.sep)}plot_).)*$",
+    'download_all_examples': False,
 }
 {%- endif %}
 
