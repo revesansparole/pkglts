@@ -78,7 +78,8 @@ sphinx_gallery_conf = {
     'examples_dirs': "../{{ sphinx.gallery }}",   # path to your example scripts
     'gallery_dirs': "_gallery",  # path where to save gallery generated examples
     'filename_pattern': f"{re.escape(os.sep)}plot_",
-    'ignore_pattern': f"^((?!{re.escape(os.sep)}plot_).)*$"
+    'ignore_pattern': f"^((?!{re.escape(os.sep)}plot_).)*$",
+    'download_all_examples': False,
 }
 {%- endif %}
 
