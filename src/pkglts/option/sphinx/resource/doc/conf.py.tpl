@@ -19,6 +19,7 @@ import re
 import sys
 {%- if sphinx.gallery != "" %}
 import warnings
+from sphinx_gallery.sorting import ExampleTitleSortKey
 {%- endif %}
 
 # If extensions (or modules to document with autodoc) are in another
@@ -80,6 +81,7 @@ sphinx_gallery_conf = {
     'filename_pattern': f"{re.escape(os.sep)}plot_",
     'ignore_pattern': f"^((?!{re.escape(os.sep)}plot_).)*$",
     'download_all_examples': False,
+    'within_subsection_order': ExampleTitleSortKey,
 }
 {%- endif %}
 
