@@ -72,7 +72,7 @@ except ImportError:
 # default settings that can be redefined outside of the pkglts block
 todo_include_todos = True
 autosummary_generate = True
-intersphinx_mapping = {'python': ('https://docs.python.org/3.4', None)}
+intersphinx_mapping = {'python': ('https://docs.python.org/3', None)}
 inheritance_node_attrs = dict(shape='ellipse', fontsize=12,
                               color='orange', style='filled')
 
