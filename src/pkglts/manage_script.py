@@ -7,7 +7,8 @@ from argparse import ArgumentParser
 
 from . import logging_tools
 from .config_management import get_pkg_config, write_pkg_config
-from .manage import add_option, clean, init_pkg, install_example_files, regenerate_option, regenerate_package
+from .manage import (add_option, clean, init_pkg, install_example_files,
+                     regenerate_option, regenerate_package, reset_package)
 from .option_tools import available_options
 from .version_management import outdated_options, write_pkg_version
 
@@ -101,6 +102,31 @@ def action_regenerate(cfg, **kwds):
     write_pkg_version(cfg)
 
 
+def action_reset(cfg, **kwds):
+    """Remove all templated files from the package (do it only if pkg is versioned to avoid troubles).
+    """
+    if not kwds['yes']:
+        ans = input("You're about to remove all templated files y,[n]? ")
+        if ans != "y":
+            LOGGER.info("reset aborted, back to safety ;)")
+            return
+
+    outdated = outdated_options(cfg)
+    if len(outdated) > 0:
+        out_fmt = "\n".join(outdated)
+        LOGGER.warning("Some options are outdated,"
+                       " please upgrade pkglts and/or all the following options:\n"
+                       "%s", out_fmt)
+        return
+
+    clean()
+
+    LOGGER.info("rm all templated files from packages")
+    reset_package(cfg)
+
+    write_pkg_version(cfg)
+
+
 def action_add(cfg, **kwds):
     """Add new options in the package.
     """
@@ -137,6 +163,7 @@ def main():
         rg=action_regenerate,
         add=action_add,
         remove=action_remove,
+        reset=action_reset,
         example=action_example
     )
     # parse argument line
@@ -170,6 +197,9 @@ def main():
     parser_remove = subparsers.add_parser('remove', help=action_remove.__doc__)
     parser_remove.add_argument('option', nargs='+',
                                help="name of option to remove")
+    parser_reset = subparsers.add_parser('reset', help=action_reset.__doc__)
+    parser_reset.add_argument("--yes", action='store_true',
+                              help="Force reset without confirmation")
     parser_example = subparsers.add_parser('example', help=action_example.__doc__)
     parser_example.add_argument('option', nargs='+',
                                 help="name of option which offer example files")
