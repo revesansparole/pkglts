@@ -225,3 +225,47 @@ def regenerate_option(cfg, name, target=".", overwrite=False):
         opt.regenerate(cfg, target, overwrite)
     except KeyError:
         raise KeyError(f"option '{name}' does not exists")
+
+
+def reset_package(cfg, target=Path(".")):
+    """Remove all templated files from packages.
+
+    Args:
+        cfg (Config):  current package configuration
+        target: (Path) target directory to write into
+
+    Returns:
+        None
+    """
+    # check consistency of env params
+    invalids = []
+    for option in cfg.installed_options():
+        for name in check_option_parameters(option, cfg):
+            invalids.append((option, name))
+
+    if invalids:
+        for option, param in invalids:
+            LOGGER.warning("param %s is not valid for '%s'", param, option)
+
+        return False
+
+    hm_ref = get_pkg_hash(target)
+
+    # find template files associated with installed options
+    rg_tree = {}
+    for name in cfg.installed_options(return_sorted=True):
+        opt = available_options[name]
+        resource_dir = opt.resource_dir()
+        if resource_dir is None:
+            LOGGER.info("option %s does not provide files", name)
+        else:
+            LOGGER.info("find template for option %s", name)
+            find_templates(resource_dir, target, cfg, rg_tree)
+
+    # remove all templates
+    for tgt_key, src_pths in rg_tree.items():
+        LOGGER.debug("remove file '%s'", tgt_key)
+        Path(tgt_key).unlink()
+        del hm_ref[tgt_key]
+
+    write_pkg_hash(hm_ref, target)
