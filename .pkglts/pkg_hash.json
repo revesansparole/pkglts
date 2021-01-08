@@ -43,7 +43,7 @@
   },
   "conda/meta.yaml": {
     "conda.about": "6/RoaDh45Wwcc0uAhKGnUH46mczqPBQq/PV0cSCbe+fhiDQPOooOK8u24GzswyAcXIEHoASc/XIe+WS/2zBl5A==",
-    "conda.package": "l6sQ9VdHaOTs75jlZZOFyexqB+xODF7ovePGhWSbCUnV0L3unQFUQvrF8FmJ5tJEPbuCHFE7FUhTiB2gdpezRg==",
+    "conda.package": "OLW2VG9J1pVL0uQ5lOuWgzbJgkgIkFDWyO+co3LWW/TwBO0p6Q3p80uwqk20Nxc1UYHsxgMWhOsDUmeVJTMA3Q==",
     "conda.req_build": "PHQ4LRj963FIG00GtdBBsC4RGzQPqOz8nxsL3g3mCpe6xaYzXaEMD/Eifbbfi+X+Z578AJlr/Qsw4fgVokh+vQ==",
     "conda.req_run": "tAHRVsBmpT3G6fyAPJkEHz1WG4680wzFomYI2F+7oMSggoS73xMjEXINojQRwtSEgNIbUvcWxht0663/LYY8Yw==",
     "conda.src": "Lzbp176AVU0YantZQxB4LsR2jbxpZ/OlkvY2V4aWAEuzKEarh872uc1eRvsIYf/FsbxvcmUI84AezWlA72nI6A=="
@@ -63,7 +63,7 @@
   "doc/_static/nonempty.txt": {},
   "doc/authors.rst": {},
   "doc/conf.py": {
-    "sphinx": "sKwy8LOw46yeUSlgLQ9zV5g0JHABh6ypgNHmVDIU0Bi78t/p5DM5xCmLAdbfO68UDGcoz7Z/eTdcELfeftV+RA=="
+    "sphinx": "hkFHHc1KFFNK6etIqF18CV0afAQvNxDAxQEP7snGfoXy1YzJfyTqfJTkh87cE4o8g7Zk/SPNCXdqsnX7CZuVEg=="
   },
   "doc/contributing.rst": {},
   "doc/history.rst": {},
@@ -98,7 +98,7 @@
   },
   "setup.py": {
     "pysetup.call": "t30iIuCMd/sWxStR2XNYb8bCBgwanhKt8YYn2VKACyAqL5cKFRUWpVRIpAR+uxXUZ9PYYy2csMmECcONnRZE8w==",
-    "pysetup.kwds": "VpCIFr4BCzlm1oMuqRmWxkrb4O7p57tVQkdw1fj3EBImYowFqOQsdfOQSZFtL/nLyH04yZdVBTVKahnFFPqkVg=="
+    "pysetup.kwds": "oWGgqiYiVBzr8yb17RrIFvYvuycHn9PZrurIhgXzoiNpTfOBif/zQRYKTMs+Bt+NuwTqI+/xpBspHqohW0LoMQ=="
   },
   "src/pkglts/__init__.py": {
     "src": "L2dZgUBRC5qv3o09+1CbMcgYfQtR1ZNSvP8KlP8REQazZiAQAktALjpCC2ijdxvKPv/tN9KsZrzNW+lZMszSfg==",
@@ -108,7 +108,7 @@
     "data": "wwgLuV/OqHWjWbssvDHa4LNg+7C+tuNiKHOxkO+9UAl9opI/HfPyJAq2fPhUeTmVvb/E6MkqDJIli9m8n5/V0Q=="
   },
   "src/pkglts/version.py": {
-    "version": "fvH9n/9V4oWT0bx8ZYFKw8xRTPCkWQnpFv5++uVKEVFEZ6amc8mUKUlk1Dm42VF5o2RRfYzxh2DAK+ICrgNMUw=="
+    "version": "jYnfkVyXLy+m7ZUZI9pZjw8zJhYFSwZiIMrZLybbk5+O+W+izXmFENI+RTPFwlw/JZjXNLEjt5GfjLxyyS0eAw=="
   },
   "src/pkglts_data/__init__.py": {},
   "test/__init__.py": {},

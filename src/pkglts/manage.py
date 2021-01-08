@@ -265,7 +265,11 @@ def reset_package(cfg, target=Path(".")):
     # remove all templates
     for tgt_key, src_pths in rg_tree.items():
         LOGGER.debug("remove file '%s'", tgt_key)
-        Path(tgt_key).unlink()
+        try:
+            Path(tgt_key).unlink()
+        except FileNotFoundError:
+            LOGGER.debug("File '%s' does not exist", tgt_key)
+
         del hm_ref[tgt_key]
 
     write_pkg_hash(hm_ref, target)
