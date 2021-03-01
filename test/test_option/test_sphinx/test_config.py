@@ -11,7 +11,7 @@ def opt():
 def test_update_parameters(opt):
     cfg = {}
     opt.update_parameters(cfg)
-    assert len(cfg['sphinx']) == 4
+    assert len(cfg['sphinx']) == 5
 
 
 def test_config_checks_doc_fmt(opt):
@@ -41,7 +41,7 @@ def test_config_check_sphinx_gallery(opt):
 
 
 def test_require_option(opt):
-    assert len(tuple(opt.require_option())) == 1
+    assert len(tuple(opt.require_option())) == 2
 
 
 def test_require(opt):

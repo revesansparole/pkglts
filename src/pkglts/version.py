@@ -7,10 +7,10 @@ Maintain version for this package.
 MAJOR = 5
 """(int) Version major component."""
 
-MINOR = 2
+MINOR = 3
 """(int) Version minor component."""
 
-POST = 1
+POST = 0
 """(int) Version post or bugfix component."""
 
 __version__ = f"{MAJOR:d}.{MINOR:d}.{POST:d}"

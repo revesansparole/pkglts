@@ -14,7 +14,7 @@ from .option.reqs.option import OptionReqs
 from .option.src.option import OptionSrc
 from .option_tools import available_options, find_available_options
 
-CURRENT_PKG_CFG_VERSION = 13
+CURRENT_PKG_CFG_VERSION = 14
 
 LOGGER = logging.getLogger(__name__)
 
@@ -336,5 +336,10 @@ def upgrade_pkg_cfg_version(pkg_cfg, version):
 
         if 'sphinx' in pkg_cfg:
             pkg_cfg['sphinx']['gallery'] = pkg_cfg['sphinx'].get('gallery', "")
+    elif version == 13:
+        pkg_cfg['_pkglts']['version'] = 14
+
+        if 'sphinx' in pkg_cfg:
+            pkg_cfg['sphinx']['doc_dir'] = pkg_cfg['sphinx'].get('doc_dir', "doc")
 
     return pkg_cfg
