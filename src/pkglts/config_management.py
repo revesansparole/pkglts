@@ -14,7 +14,7 @@ from .option.reqs.option import OptionReqs
 from .option.src.option import OptionSrc
 from .option_tools import available_options, find_available_options
 
-CURRENT_PKG_CFG_VERSION = 13
+CURRENT_PKG_CFG_VERSION = 14
 
 LOGGER = logging.getLogger(__name__)
 
