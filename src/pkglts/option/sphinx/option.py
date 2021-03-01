@@ -18,6 +18,7 @@ class OptionSphinx(Option):
             theme="default",
             autodoc_dvlpt=True,
             build_dir="build/sphinx",
+            doc_dir="doc",
             gallery="",
         )
         cfg[self._name] = sec
@@ -38,7 +39,7 @@ class OptionSphinx(Option):
         return invalids
 
     def require_option(self):
-        return ['pysetup']
+        return ['doc', 'license']
 
     def require(self, cfg):
         yield Dependency('sphinx', intent='doc')
