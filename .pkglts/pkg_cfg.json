@@ -3,7 +3,7 @@
     "auto_install": true,
     "install_front_end": "stdout",
     "use_prompts": false,
-    "version": 13
+    "version": 14
   },
   "appveyor": {
     "token": "hrwjhn2oe0q4oaf2"
@@ -116,6 +116,7 @@
   "sphinx": {
     "autodoc_dvlpt": true,
     "build_dir": "build/sphinx",
+    "doc_dir": "doc",
     "gallery": "",
     "theme": "sphinx_rtd_theme"
   },
@@ -129,7 +130,7 @@
   "travis": {},
   "version": {
     "major": 5,
-    "minor": 2,
-    "post": 1
+    "minor": 3,
+    "post": 0
   }
 }
