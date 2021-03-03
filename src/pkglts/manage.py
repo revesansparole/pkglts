@@ -58,7 +58,20 @@ def clean(rep="."):
         None
     """
     root_dir = Path(rep)
-    for name in ("build", "dist", "doc/_dvlpt", "doc/build"):
+    try:
+        cfg = get_pkg_config(rep)
+
+        try:
+            doc_dir = root_dir / cfg['sphinx']['doc_dir']
+            for pth in (doc_dir / "build", doc_dir / "_dvlpt"):
+                if pth.exists():
+                    rmtree(pth)
+        except KeyError:
+            pass
+    except FileNotFoundError:
+        pass
+
+    for name in ("build", "dist"):
         pth = root_dir / name
         if pth.exists():
             rmtree(pth)
