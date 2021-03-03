@@ -110,7 +110,8 @@ target/
 
 {%- if 'sphinx' is available %}
 # sphinx autogen file
-doc/_dvlpt/
+{{ sphinx.doc_dir }}/build/
+{{ sphinx.doc_dir }}/_dvlpt/
 {% if sphinx.gallery != "" -%}
 doc/_gallery/
 {% endif -%}

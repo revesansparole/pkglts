@@ -98,6 +98,7 @@ target/
 .pypirc
 
 # sphinx autogen file
+doc/build/
 doc/_dvlpt/
 
 
