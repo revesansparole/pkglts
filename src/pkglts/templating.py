@@ -12,7 +12,7 @@ BLOCK_RE = re.compile(
     r"\{#[ ]pkglts,[ ](?P<key>[a-zA-Z0-9._]*)(?P<aft_head>.*?)\n(?P<cnt>.*?)#\}(?P<aft_foot>.*?(?=\n))",
     re.DOTALL | re.MULTILINE)
 
-NON_BIN_EXT = ("", ".bat", ".cfg", ".in", ".ini", ".md", ".no", ".ps1", ".py", ".rst", ".sh",
+NON_BIN_EXT = ("", ".bat", ".cfg", ".json", ".in", ".ini", ".md", ".no", ".ps1", ".py", ".rst", ".sh",
                ".svg", ".tpl", ".txt", ".yml", ".yaml")
 
 
