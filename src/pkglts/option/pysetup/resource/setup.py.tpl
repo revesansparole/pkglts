@@ -1,10 +1,9 @@
 # {# pkglts, pysetup.kwds
 # format setup arguments
-{% if 'data' is available %}
+{%- if 'data' is available %}
 from pathlib import Path
-{% endif %}
+{%- endif %}
 from setuptools import setup, find_packages
-
 
 short_descr = "{{ doc.description }}"
 readme = open('README.{{ doc.fmt }}').read()
@@ -17,9 +16,10 @@ pkgs = find_packages('src')
 src_dir = Path("{{ src.src_pth }}")
 
 data_files = []
-for pth in src_dir.glob("**/*.*"):
-    if pth.suffix in {{ data.filetype }}:
-        data_files.append(str(pth.relative_to(src_dir)))
+for pth in src_dir.rglob("*"):
+    if not pth.is_dir() and "__pycache__" not in pth.parts:
+        if pth.suffix in {{ data.filetype }}:
+            data_files.append(str(pth.relative_to(src_dir)))
 
 pkg_data = {'{{ base.pkg_full_name }}': data_files}
 
@@ -27,9 +27,9 @@ pkg_data = {'{{ base.pkg_full_name }}': data_files}
 data_dir = Path("src/{{ base.pkgname }}_data")
 
 data_files = []
-for pth in src_dir.glob("**/*.*"):
-    data_files.append(str(pth.relative_to(src_dir)))
-
+for pth in src_dir.rglob("*"):
+    if not pth.is_dir() and "__pycache__" not in pth.parts:
+        data_files.append(str(pth.relative_to(src_dir)))
 
 pkg_data['{{ base.pkgname }}_data'] = data_files
 {%- endif -%}
