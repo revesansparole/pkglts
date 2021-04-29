@@ -1,10 +1,7 @@
 # {# pkglts, pysetup.kwds
 # format setup arguments
-
 from pathlib import Path
-
 from setuptools import setup, find_packages
-
 
 short_descr = "Building packages with long term support"
 readme = open('README.rst').read()
@@ -16,15 +13,16 @@ pkgs = find_packages('src')
 src_dir = Path("src/pkglts")
 
 data_files = []
-for pth in src_dir.glob("**/*.*"):
-    if pth.suffix in ['', '.bat', '.cfg', '.json', '.md', '.in', '.ini', '.png', '.ps1', '.rst', '.sh', '.tpl', '.txt', '.yaml', '.yml']:
-        data_files.append(str(pth.relative_to(src_dir)))
+for pth in src_dir.rglob("*"):
+    if not pth.is_dir() and "__pycache__" not in pth.parts:
+        if pth.suffix in ['', '.bat', '.cfg', '.json', '.md', '.in', '.ini', '.png', '.ps1', '.rst', '.sh', '.tpl', '.txt', '.yaml', '.yml']:
+            data_files.append(str(pth.relative_to(src_dir)))
 
 pkg_data = {'pkglts': data_files}
 
 setup_kwds = dict(
     name='pkglts',
-    version="5.4.0",
+    version="5.4.1",
     description=short_descr,
     long_description=readme + '\n\n' + history,
     author="revesansparole",
