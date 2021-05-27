@@ -15,4 +15,4 @@ Modifications
     :file: modifications.html
 
 
-.. _Travis-CI: http://travis-ci.org/
+.. _Travis-CI: http://travis-ci.com/
