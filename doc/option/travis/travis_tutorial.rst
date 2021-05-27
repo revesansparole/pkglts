@@ -7,7 +7,7 @@ credential to sign up so no need to create a new account.
 Find your project
 -----------------
 
-On your home page ('https://travis-ci.org/profile/github_login_name') you will find
+On your home page ('https://travis-ci.com/profile/github_login_name') you will find
 all the projects you contribute. If yours is not showing try to hit the 'Sync' button.
 
 .. image:: travis_home_page.png
@@ -61,4 +61,4 @@ if you see nothing).
 Downside is that if you now make poor code, you get the infamous red build-fail
 badge showing :)
 
-.. _Travis-CI: https://travis-ci.org/
+.. _Travis-CI: https://travis-ci.com/
