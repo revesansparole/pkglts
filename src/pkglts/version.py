@@ -10,7 +10,7 @@ MAJOR = 5
 MINOR = 4
 """(int) Version minor component."""
 
-POST = 1
+POST = 2
 """(int) Version post or bugfix component."""
 
 __version__ = f"{MAJOR:d}.{MINOR:d}.{POST:d}"
