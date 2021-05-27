@@ -44,7 +44,7 @@ class OptionSphinx(Option):
     def require(self, cfg):
         yield Dependency('sphinx', intent='doc')
         if cfg["sphinx"]["theme"] == "sphinx_rtd_theme":
-            yield Dependency('sphinx_rtd_theme', intent='doc')
+            yield Dependency('sphinx_rtd_theme', intent='doc', pkg_mng='pip')
 
         if cfg['sphinx']['gallery'] != "":
             yield Dependency('sphinx-gallery', intent='doc')
