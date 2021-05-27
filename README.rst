@@ -32,9 +32,9 @@ pkglts
     :alt: Requirements status
     :target: https://requires.io/github/revesansparole/pkglts/requirements/?branch=master
 
-.. image:: https://travis-ci.org/revesansparole/pkglts.svg?branch=master
+.. image:: https://api.travis-ci.com/revesansparole/pkglts.svg?branch=master
     :alt: Travis build status
-    :target: https://travis-ci.org/revesansparole/pkglts
+    :target: https://api.travis-ci.com/revesansparole/pkglts
 
 .. #}
 
