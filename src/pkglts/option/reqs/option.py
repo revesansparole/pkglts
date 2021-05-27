@@ -49,8 +49,11 @@ class OptionReqs(Option):
 
             return sorted(intents)
 
-        def req(intent):
+        def req(intent=None):
             """For internal use only."""
+            if intent is None:
+                return reqs
+
             return [r for r in reqs if intent in r.intents]
 
         def conda_reqs(intents):
