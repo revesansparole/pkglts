@@ -19,8 +19,8 @@ class OptionTravis(Option):
         owner = cfg['github']['owner']
         project = cfg['github']['project']
 
-        url = f"api.travis-ci.com/{owner}/{project}"
-        img = f"{url}.svg?branch=master"
+        url = f"travis-ci.com/github/{owner}/{project}"
+        img = f"api.travis-ci.com/{owner}/{project}.svg?branch=master"
         badge = fmt_badge(img, url, "Travis build status", cfg['doc']['fmt'])
 
         return {"badge": badge}

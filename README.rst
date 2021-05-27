@@ -34,7 +34,7 @@ pkglts
 
 .. image:: https://api.travis-ci.com/revesansparole/pkglts.svg?branch=master
     :alt: Travis build status
-    :target: https://api.travis-ci.com/revesansparole/pkglts
+    :target: https://travis-ci.com/github/revesansparole/pkglts
 
 .. #}
 
