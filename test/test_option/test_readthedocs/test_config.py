@@ -10,7 +10,7 @@ def opt():
 
 @pytest.fixture()
 def cfg():
-    return Config()
+    return Config(dict(github={}))
 
 
 def test_update_parameters(opt, cfg):

@@ -13,8 +13,15 @@ class OptionReadthedocs(Option):
         return Path(__file__).parent
 
     def update_parameters(self, cfg):
+        if 'gitlab' in cfg:
+            prj_name = "{{ gitlab.project }}"
+        elif 'github' in cfg:
+            prj_name = "{{ github.project }}"
+        else:
+            raise NotImplementedError("not supposed to happen")
+
         sec = dict(
-            project="{{ github.project }}"
+            project=prj_name
         )
         cfg[self._name] = sec
 
@@ -28,7 +35,15 @@ class OptionReadthedocs(Option):
         return invalids
 
     def require_option(self, cfg):
-        return ['pysetup', 'github', 'sphinx']
+        reqs = ['pysetup', 'sphinx']
+        if 'gitlab' in cfg:
+            reqs.append('gitlab')
+        elif 'github' in cfg:
+            reqs.append('github')
+        else:
+            raise UserWarning("need either github or gitlab and don't want to decide for you")
+
+        return reqs
 
     def environment_extensions(self, cfg):
         project = cfg['readthedocs']['project']

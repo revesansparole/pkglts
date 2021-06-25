@@ -34,8 +34,11 @@ def test_root_dir_is_defined():
 def test_options_expose_parameters():
     for opt in pkglts_opts():
         cfg = {}
-        opt.update_parameters(cfg)
-        assert len(cfg) == 1
+        try:
+            opt.update_parameters(cfg)
+            assert len(cfg) == 1
+        except NotImplementedError:  # for options that depends on cfg
+            pass
 
 
 def test_require_correctly_defined():
@@ -43,6 +46,7 @@ def test_require_correctly_defined():
     OptionDoc('doc').update_parameters(cfg)
     OptionTest('test').update_parameters(cfg)
     OptionSphinx('sphinx').update_parameters(cfg)
+    OptionSphinx('github').update_parameters(cfg)
 
     for opt in pkglts_opts():
         assert len(tuple(opt.require_option(cfg))) >= 0
