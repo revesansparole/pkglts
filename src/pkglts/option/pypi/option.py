@@ -38,7 +38,7 @@ class OptionPypi(Option):
 
         return invalids
 
-    def require_option(self):
+    def require_option(self, cfg):
         return ['doc', 'pysetup']
 
     def require(self, cfg):

@@ -9,33 +9,35 @@ def opt():
     return OptionReqs('reqs')
 
 
-def test_update_parameters(opt):
-    cfg = {}
+@pytest.fixture()
+def cfg():
+    return Config()
+
+
+def test_update_parameters(opt, cfg):
     opt.update_parameters(cfg)
     assert len(cfg['reqs']) == 1
 
 
-def test_config_check_pkg_names(opt):
-    cfg = Config(dict(reqs={'require': []}))
+def test_config_check_pkg_names(opt, cfg):
+    cfg['reqs'] = {'require': []}
     assert 'reqs.require' not in opt.check(cfg)
 
-    cfg = Config(dict(reqs={'require': [{'pkg_mng': 'walou', 'name': 'numpy'}]}))
+    cfg['reqs'] = {'require': [{'pkg_mng': 'walou', 'name': 'numpy'}]}
     assert 'reqs.require' in opt.check(cfg)
 
 
-def test_require_option(opt):
-    assert len(tuple(opt.require_option())) == 1
+def test_require_option(opt, cfg):
+    assert len(tuple(opt.require_option(cfg))) == 1
 
 
-def test_require(opt):
-    cfg = Config()
+def test_require(opt, cfg):
     opt.update_parameters(cfg)
 
     assert len(tuple(opt.require(cfg))) == 0
 
 
-def test_require_puts_list_of_reqs_in_requirements(opt):
-    cfg = Config()
+def test_require_puts_list_of_reqs_in_requirements(opt, cfg):
     opt.update_parameters(cfg)
     cfg['reqs']['require'].append({'pkg_mng': 'walou', 'name': 'numpy'})
 

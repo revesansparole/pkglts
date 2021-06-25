@@ -27,7 +27,7 @@ class OptionReadthedocs(Option):
 
         return invalids
 
-    def require_option(self):
+    def require_option(self, cfg):
         return ['pysetup', 'github', 'sphinx']
 
     def environment_extensions(self, cfg):

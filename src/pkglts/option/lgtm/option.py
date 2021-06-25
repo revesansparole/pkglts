@@ -12,7 +12,7 @@ class OptionLgtm(Option):
     def root_dir(self):
         return Path(__file__).parent
 
-    def require_option(self):
+    def require_option(self, cfg):
         return ['github', 'pysetup']
 
     def environment_extensions(self, cfg):

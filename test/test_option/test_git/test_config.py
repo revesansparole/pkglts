@@ -8,23 +8,26 @@ def opt():
     return OptionGit('git')
 
 
-def test_update_parameters(opt):
-    cfg = {}
+@pytest.fixture()
+def cfg():
+    return Config()
+
+
+def test_update_parameters(opt, cfg):
     opt.update_parameters(cfg)
     assert len(cfg['git']) == 0
 
 
-def test_config_check_nothing(opt):
-    cfg = Config(dict(git={}))
+def test_config_check_nothing(opt, cfg):
+    cfg['git'] = {}
     assert len(opt.check(cfg)) == 0
 
 
-def test_require_option(opt):
-    assert len(tuple(opt.require_option())) == 1
+def test_require_option(opt, cfg):
+    assert len(tuple(opt.require_option(cfg))) == 1
 
 
-def test_require(opt):
-    cfg = Config()
+def test_require(opt, cfg):
     opt.update_parameters(cfg)
 
     assert len(tuple(opt.require(cfg))) == 0

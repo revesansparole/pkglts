@@ -18,7 +18,7 @@ class OptionAppveyor(Option):
         )
         cfg[self._name] = sec
 
-    def require_option(self):
+    def require_option(self, cfg):
         return ['doc', 'pysetup', 'github']
 
     def environment_extensions(self, cfg):

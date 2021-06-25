@@ -26,7 +26,7 @@ class OptionPysetup(Option):
 
         return invalids
 
-    def require_option(self):
+    def require_option(self, cfg):
         return ['src', 'doc', 'license', 'version', 'reqs']
 
     def environment_extensions(self, cfg):

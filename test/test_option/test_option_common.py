@@ -45,7 +45,7 @@ def test_require_correctly_defined():
     OptionSphinx('sphinx').update_parameters(cfg)
 
     for opt in pkglts_opts():
-        assert len(tuple(opt.require_option())) >= 0
+        assert len(tuple(opt.require_option(cfg))) >= 0
         assert len(tuple(opt.require(cfg))) >= 0
 
 

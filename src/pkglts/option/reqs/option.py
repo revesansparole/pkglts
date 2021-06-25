@@ -32,7 +32,7 @@ class OptionReqs(Option):
 
         return invalids
 
-    def require_option(self):
+    def require_option(self, cfg):
         return ['base']
 
     def tools(self, cfg):

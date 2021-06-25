@@ -12,7 +12,7 @@ class OptionFlake8(Option):
     def root_dir(self):
         return Path(__file__).parent
 
-    def require_option(self):
+    def require_option(self, cfg):
         return ['base']
 
     def require(self, cfg):

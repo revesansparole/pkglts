@@ -28,7 +28,7 @@ class OptionNotebook(Option):
 
         return invalids
 
-    def require_option(self):
+    def require_option(self, cfg):
         return ['sphinx']
 
     def tools(self, cfg):
