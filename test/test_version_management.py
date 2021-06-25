@@ -52,7 +52,7 @@ def test_outdated_options_handles_no_version_file(tmp_cfg, tmp_dir):
 def test_old_regenerated_package_have_outdated_options(tmp_cfg, tmp_dir):
     write_pkg_version(tmp_cfg, tmp_dir)
     ver = load_pkg_version(tmp_dir)
-    ver['base'] = semver.bump_major(ver['base'])
+    ver['base'] = str(semver.VersionInfo.parse(ver['base']).bump_major())
     json.dump(ver, open(tmp_dir / pkglts_dir / pkg_version_file, 'w'))
 
     assert 'base' in outdated_options(tmp_cfg, tmp_dir)

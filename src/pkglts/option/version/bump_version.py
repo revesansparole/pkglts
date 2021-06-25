@@ -25,12 +25,12 @@ def action_bump(cfg, **kwds):
             sec['post'] = 0
         elif pos == 'post':
             sec['post'] += 1
-        else:
+        else:  # version has been given as 'X.X.X', force it
             try:
-                version = semver.parse(pos)
-                sec['major'] = version['major']
-                sec['minor'] = version['minor']
-                sec['post'] = version['patch']
+                version = semver.VersionInfo.parse(pos)
+                sec['major'] = version.major
+                sec['minor'] = version.minor
+                sec['post'] = version.patch
             except ValueError:
                 LOGGER.error("Bump version: invalid argument '%s'", pos)
 
