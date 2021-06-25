@@ -51,7 +51,7 @@ Ready to contribute? Here's how to set up `{{ base.pkgname }}` for local
 development.
 
 1. Fork the `{{ base.pkgname }}` repo on {% if 'github' is available %}GitHub{% elif 'gitlab' is available %}
-Gitlab{% endif %}.
+   Gitlab{% endif %}.
 2. Clone your fork locally::
 ```
 {% if 'github' is available %}$ git clone git@github.com:your_name_here/{{ base.pkgname }}.git
@@ -59,7 +59,7 @@ Gitlab{% endif %}.
 {% endif %}
 ```
 3. Install your local copy into a virtualenv. Assuming you have [virtualenv]
-installed, this is how you set up your fork for local development::
+   installed, this is how you set up your fork for local development::
 ```
 $ virtualenv dvlpt
 $ dvlpt/script/activate
@@ -72,7 +72,7 @@ $ dvlpt/script/activate
    Now you can make your changes locally.
 
 5. When you're done making changes, check that your changes pass flake8 and the
-tests, including testing other Python versions with tox::
+   tests, including testing other Python versions with tox::
 ```
 (dvlpt)$ cd {{ base.pkgname }}
 (dvlpt) {{ base.pkgname }}$ flake8
@@ -84,13 +84,14 @@ tests, including testing other Python versions with tox::
    To get flake8 and tox, just pip install them into your virtualenv.
 
 6. Commit your changes and push your branch to {% if 'github' is available %}GitHub
-{% elif 'gitlab' is available %}Gitlab{% endif %}::
+   {% elif 'gitlab' is available %}Gitlab{% endif %}::
 ```
 $ git add .
 $ git commit -m "Your detailed description of your changes."
 $ git push origin wip_name-of-your-bugfix-or-feature
 ```
-7. Submit a pull request through the {% if 'github' is available %}GitHub{% elif 'gitlab' is available %}Gitlab{% endif %} website.
+7. Submit {% if 'github' is available %}a pull request through the GitHub
+   {% elif 'gitlab' is available %}a merge request through the Gitlab{% endif %} website.
 
 ## Pull Request Guidelines
 
