@@ -8,12 +8,16 @@ def opt():
     return OptionTox('tox')
 
 
-def test_require_option(opt):
-    assert len(tuple(opt.require_option())) == 1
+@pytest.fixture()
+def cfg():
+    return Config()
 
 
-def test_require(opt):
-    cfg = Config()
+def test_require_option(opt, cfg):
+    assert len(tuple(opt.require_option(cfg))) == 1
+
+
+def test_require(opt, cfg):
     opt.update_parameters(cfg)
 
     assert len(tuple(opt.require(cfg))) == 1

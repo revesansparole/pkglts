@@ -154,7 +154,7 @@ class Config(dict):
             while opt_names:
                 name = opt_names.pop(0)
                 opt = available_options[name]
-                if any(dep not in installed for dep in opt.require_option()):
+                if any(dep not in installed for dep in opt.require_option(self)):
                     opt_names.append(name)
                 else:
                     installed.append(name)

@@ -8,20 +8,23 @@ def opt():
     return OptionSphinx('sphinx')
 
 
-def test_update_parameters(opt):
-    cfg = {}
+@pytest.fixture()
+def cfg():
+    return Config(dict(doc={'fmt': 'rst'}))
+
+
+def test_update_parameters(opt, cfg):
     opt.update_parameters(cfg)
     assert len(cfg['sphinx']) == 5
 
 
-def test_config_checks_doc_fmt(opt):
-    cfg = Config(dict(doc={'fmt': 'md'}))
+def test_config_checks_doc_fmt(opt, cfg):
+    cfg['doc'] = {'fmt': 'md'}
     opt.update_parameters(cfg)
     assert 'doc.fmt' in opt.check(cfg)
 
 
-def test_config_check_sphinx_theme(opt):
-    cfg = Config(dict(doc={'fmt': 'rst'}))
+def test_config_check_sphinx_theme(opt, cfg):
     opt.update_parameters(cfg)
 
     for theme in (1, None,):
@@ -29,8 +32,7 @@ def test_config_check_sphinx_theme(opt):
         assert 'sphinx.theme' in opt.check(cfg)
 
 
-def test_config_check_sphinx_gallery(opt):
-    cfg = Config(dict(doc={'fmt': 'rst'}))
+def test_config_check_sphinx_gallery(opt, cfg):
     opt.update_parameters(cfg)
 
     assert 'sphinx.gallery' not in opt.check(cfg)
@@ -40,12 +42,11 @@ def test_config_check_sphinx_gallery(opt):
         assert 'sphinx.gallery' in opt.check(cfg)
 
 
-def test_require_option(opt):
-    assert len(tuple(opt.require_option())) == 2
+def test_require_option(opt, cfg):
+    assert len(tuple(opt.require_option(cfg))) == 2
 
 
-def test_require(opt):
-    cfg = Config()
+def test_require(opt, cfg):
     opt.update_parameters(cfg)
 
     assert len(tuple(opt.require(cfg))) == 1

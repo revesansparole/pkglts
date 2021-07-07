@@ -75,8 +75,11 @@ class Option(object):
         """
         return []
 
-    def require_option(self):
+    def require_option(self, cfg):
         """Names of other options required by this option.
+
+        Args:
+            cfg (Config):  current package configuration
 
         Returns:
             (list of str)

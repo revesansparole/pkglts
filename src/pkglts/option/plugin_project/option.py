@@ -28,7 +28,7 @@ class OptionPluginProject(Option):
 
         return invalids
 
-    def require_option(self):
+    def require_option(self, cfg):
         return ['pysetup', 'data', 'git']
 
     def require(self, cfg):

@@ -27,7 +27,7 @@ class OptionTest(Option):
 
         return invalids
 
-    def require_option(self):
+    def require_option(self, cfg):
         return ['pysetup']
 
     def require(self, cfg):

@@ -12,7 +12,7 @@ class OptionLandscape(Option):
     def root_dir(self):
         return Path(__file__).parent
 
-    def require_option(self):
+    def require_option(self, cfg):
         return ['flake8', 'travis']
 
     def environment_extensions(self, cfg):

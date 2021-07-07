@@ -43,7 +43,7 @@ def update_opt(name, cfg):
         raise KeyError(f"option '{name}' does not exists")
 
     # find other option requirements in repository
-    for option_name in opt.require_option():
+    for option_name in opt.require_option(cfg):
         if option_name not in cfg.installed_options():
             LOGGER.info("need to install option '%s' first", option_name)
             if (cfg["_pkglts"]['auto_install'] or

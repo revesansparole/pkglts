@@ -26,7 +26,7 @@ class OptionSrc(Option):
 
         return invalids
 
-    def require_option(self):
+    def require_option(self, cfg):
         return ['base']
 
     def environment_extensions(self, cfg):

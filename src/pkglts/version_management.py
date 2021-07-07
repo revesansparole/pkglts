@@ -76,9 +76,9 @@ def outdated_options(cfg, rep="."):
 
     outdated = []
     for name in cfg.installed_options():
-        ver_cur = option_current_version(name)
+        ver_cur = semver.VersionInfo.parse(option_current_version(name))
         ver_last_rg = ver.get(name, "0.0.0")
-        if semver.compare(ver_cur, ver_last_rg) < 0:
+        if ver_cur.compare(ver_last_rg) < 0:
             outdated.append(name)
 
     return outdated

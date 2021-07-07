@@ -37,7 +37,7 @@ class OptionDoc(Option):
 
         return invalids
 
-    def require_option(self):
+    def require_option(self, cfg):
         return ['base']
 
     def require(self, cfg):
