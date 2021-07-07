@@ -4,10 +4,10 @@ Maintain version for this package.
 # {# pkglts, version
 #  -*- coding: utf-8 -*-
 
-MAJOR = 5
+MAJOR = 6
 """(int) Version major component."""
 
-MINOR = 5
+MINOR = 0
 """(int) Version minor component."""
 
 POST = 0
