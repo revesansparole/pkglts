@@ -142,8 +142,6 @@ def fmt_pip_reqs(reqs, intents):
     cmd = "pip install"
 
     for name in sorted(r.pip_full_name() for r in reqs):
-        if " " in name:
-            name = f'"{name}"'
-        cmd += f" {name}"
+        cmd += f' "{name}"'
 
     return cmd
