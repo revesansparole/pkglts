@@ -22,7 +22,7 @@ pkg_data = {'pkglts': data_files}
 
 setup_kwds = dict(
     name='pkglts',
-    version="6.0.0",
+    version="6.1.0",
     description=short_descr,
     long_description=readme + '\n\n' + history,
     author="revesansparole",
@@ -67,6 +67,8 @@ setup_kwds = dict(
         "Programming Language :: Python :: 3 :: Only",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
     ],
     )
 # #}
