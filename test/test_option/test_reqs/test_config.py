@@ -75,7 +75,7 @@ def test_fmt_pip_reqs_works_correctly():
 
     cmd = fmt_pip_reqs([d1, dex, dconda, dpip], ['install'])
 
-    assert cmd.strip() == "pip install dpip"
+    assert cmd.strip() == 'pip install "dpip"'
 
     d = Dependency('d', pkg_mng='pip', version='= 5')
 
