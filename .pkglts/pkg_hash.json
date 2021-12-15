@@ -14,7 +14,7 @@
     "travis": "ak+GZZ02tia6hseOhRNX9WV5Jxp1jKWzCN9eCwRG3EsDlgkKiuYK1MJr4M+hJpgJ9YMH2T6JI1opqSpRSPCWgA==",
     "travis.addons": "qA98wmBu9uVHTpax5SDBfs9DLw2ppWa9FXBEEwz7VI8Q2Sn/tXgwCN94ttB9B9EJv/utGZjLgwnszsfk0/yBOg==",
     "travis.after": "veQncG9PjU1UhCfzzNEtfVgUZ+iPmx9TVKRZWbLepccpcpNo8LvgMyTkYgGYNyLPbijRTXQdVQaDQRs6MCDYwA==",
-    "travis.install": "2UBojJPrL/VcsZG/k8YwrRXTE49WQTzup4l3dcgjRZfPEAhV2PerBbOkkulvWuOyXoA0PJ/iFCRjNuV963ETFQ==",
+    "travis.install": "E+Djg5S+LOlif569hZtYqji2q9KO5cw1W9dO698DBEWf7jupFjFPwG5kE7snxuIbwN537C9yWKfCOxdx+l7qwA==",
     "travis.script": "DWnNG1V41yUvAAIhLi16BVuchmYxRpP5lGwJU+d9t365G9fE1x5055/MYxR4QbABSHdJR7PpKWbZqy/OVAWNiw=="
   },
   "AUTHORS.rst": {
@@ -33,7 +33,7 @@
     "doc": "1X4cCBCIGMpNHvcDZexkQrOsJjC/n2kUOVBN50av6kAghmVxkcPzH8HIV1hmwcdmxdMSLQc39LVKKxFKvTZjEg=="
   },
   "appveyor.yml": {
-    "appveyor": "DKBD6SdxL4xJoQAUJUdVi3A5CQJ/KLlV0gM6eLDJ2moc9E/87QrqrZ+oanZ1FkPGSdRcHSVWSJoDQmBVXvtUUw=="
+    "appveyor": "h29SsHi5+iP2tErF8t0oobYCHCnT6ZNJ0nCHxD0xWJx/GOxV5wfXS7CK3dZbONSKi9Es39L9wOopR/DyeGuirw=="
   },
   "appveyor_scripts.ps1": {
     "appveyor": "HdiTMjGtis8VNyHfwqGBOjaDQZajmxcqAtNYMzKycmWHGjUpEEXIwvb1/ZCqiY9tDAh39PX+sf7tG4zTJ+0MXw=="
