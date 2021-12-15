@@ -44,6 +44,6 @@ build:
 # {# pkglts, conda.about
 about:
   summary: "{{ doc.description }}"
-  license: "{{ license.name }}"
+  license: "{{ license.name | replace('private', 'PROPRIETARY') }}"
   license_file: LICENSE
 # #}
