@@ -39,11 +39,11 @@ requirements:
 
 build:
   noarch: python
-  script: python setup.py install --single-version-externally-managed --record=record.txt
+  script: pip install .
 
 # {# pkglts, conda.about
 about:
   summary: "{{ doc.description }}"
-  license: "{{ license.name }}"
+  license: "{{ license.name | replace('private', 'PROPRIETARY') }}"
   license_file: LICENSE
 # #}
