@@ -17,6 +17,12 @@ class OptionGit(Option):
     def root_dir(self):
         return Path(__file__).parent
 
+    def update_parameters(self, cfg):
+        sec = dict(
+            permanent_branches=[],
+        )
+        cfg[self._name] = sec
+
     def require_option(self, cfg):
         return ['base']
 
