@@ -3,7 +3,7 @@
     "auto_install": true,
     "install_front_end": "stdout",
     "use_prompts": false,
-    "version": 14
+    "version": 15
   },
   "appveyor": {
     "token": "hrwjhn2oe0q4oaf2"
@@ -51,7 +51,11 @@
     ]
   },
   "flake8": {},
-  "git": {},
+  "git": {
+    "permanent_branches": [
+      "main"
+    ]
+  },
   "github": {
     "owner": "{{ base.authors[0][0] }}",
     "project": "{{ base.pkgname }}",
@@ -132,7 +136,7 @@
   "travis": {},
   "version": {
     "major": 6,
-    "minor": 2,
+    "minor": 3,
     "post": 0
   }
 }

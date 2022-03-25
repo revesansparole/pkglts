@@ -14,7 +14,7 @@ from .option.reqs.option import OptionReqs
 from .option.src.option import OptionSrc
 from .option_tools import available_options, find_available_options
 
-CURRENT_PKG_CFG_VERSION = 14
+CURRENT_PKG_CFG_VERSION = 15
 
 LOGGER = logging.getLogger(__name__)
 
@@ -341,5 +341,18 @@ def upgrade_pkg_cfg_version(pkg_cfg, version):
 
         if 'sphinx' in pkg_cfg:
             pkg_cfg['sphinx']['doc_dir'] = pkg_cfg['sphinx'].get('doc_dir', "doc")
+    elif version == 14:
+        pkg_cfg['_pkglts']['version'] = 15
+
+        if 'git' in pkg_cfg:
+            try:
+                perm_branches = pkg_cfg['git']['permanent_branches']
+            except KeyError:
+                if 'gitlab' in pkg_cfg or 'github' in pkg_cfg:
+                    perm_branches = ["main"]
+                else:
+                    perm_branches = []
+
+            pkg_cfg['git']['permanent_branches'] = perm_branches
 
     return pkg_cfg

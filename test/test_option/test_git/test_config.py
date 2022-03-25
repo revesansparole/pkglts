@@ -15,7 +15,7 @@ def cfg():
 
 def test_update_parameters(opt, cfg):
     opt.update_parameters(cfg)
-    assert len(cfg['git']) == 0
+    assert len(cfg['git']) == 1
 
 
 def test_config_check_nothing(opt, cfg):
