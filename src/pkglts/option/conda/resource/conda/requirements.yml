@@ -8,6 +8,7 @@ channels:
 {%- endfor %}
 
 dependencies:
+- python={{ pysetup.intended_versions[-1][0]}}.{{ pysetup.intended_versions[-1][1]}}
 {%- for intent in reqs.intents() %}
 # {{ intent }}
 {%- for dep in reqs.requirements(intent) if dep.is_conda(False) %}
@@ -17,6 +18,7 @@ dependencies:
 
 {%- set pip_deps = reqs.requirements()|select("is_pip_dep", True)|list -%}
 {%- if pip_deps|length > 0 %}
+- pip
 - pip:
 {%- for intent in reqs.intents() %}
 # {{ intent }}
