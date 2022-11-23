@@ -4,10 +4,10 @@
 name: {{ base.pkgname }}
 
 channels:
-- defaults
 {%- for channel in conda.channels %}
 - {{ channel }}
 {%- endfor %}
+- defaults
 
 dependencies:
 - python={{ pysetup.intended_versions[-1][0]}}.{{ pysetup.intended_versions[-1][1]}}
