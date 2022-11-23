@@ -20,6 +20,7 @@ Contributors
 * ThT12 <ThT12@ThT12.fr>
 * pradal <christophe.pradal@inria.fr>
 * Simon Artzet <simon.artzet@gmail.com>
+* lquibel <lucie.quibel@itk.fr>
 * Christophe Pradal <christophe.pradal@inria.fr>
 
 .. #}

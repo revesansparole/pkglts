@@ -19,7 +19,7 @@
   },
   "AUTHORS.rst": {
     "doc.authors": "/4DdVJ8b3rG94lfO9Lc7StWASvDQpuf73AL4vpQmxvi4N9ShPsMeP3Shwf6i2d3e4dvIUgDW1Mc0vUxg5LkbUw==",
-    "doc.contributors": "DshEJvzKN550YD47HpxKLvJwoB9H18fO1lpuBc4/SqLr2O3n9iMt2Jm2Xde6TU7SNgjyV9K7IlNqFoOnWXYr4g=="
+    "doc.contributors": "MnLX1iCllPTBNf3Ps7r2GTshvB6+s6pymGebr4L2TXgLg/Ye5KGIZZlgP0KDF/dRlxmetf8XAQ847IpQJUrcmg=="
   },
   "CONTRIBUTING.rst": {},
   "HISTORY.rst": {},
@@ -49,10 +49,10 @@
     "conda.src": "Lzbp176AVU0YantZQxB4LsR2jbxpZ/OlkvY2V4aWAEuzKEarh872uc1eRvsIYf/FsbxvcmUI84AezWlA72nI6A=="
   },
   "conda/requirements.yml": {
-    "conda": "Awy8tAzl7y3C11RgJc6JAH7vWWmkmkP1XIOnHzM59CnAbYT3pHbqOZYT/Utd4YU+OiyMJKY263ouOwLP1zT5Fg=="
+    "conda": "vLYv8TCqQIke6/8rdu5Q3JeFgnuEaQpy3E1QgocqRoaBEXJ3UPIYuEUhNLT0sXnaHvRVgOyIOi9aw28Bb79ikw=="
   },
   "conda/requirements_minimal.yml": {
-    "conda": "AuKw/KCEhDj7D2hro3hMT5OzujfJgRg8200FQaZ0jByouKOacp7OhEfxZtV/YLAqKMFhHb1ZGHkVWfIBx9zoiw=="
+    "conda": "QKPgKgSDBP1AmPTKqWiTfyqRC2AW/fbxWQUcMhwE9fPxEpv2vFiU49gBKT+Gl3vkIh2V5Ng2axlkvgH4n1pyZQ=="
   },
   "conda_pkglts/bld.bat": {},
   "conda_pkglts/build.sh": {},
