@@ -3,7 +3,7 @@
     "auto_install": true,
     "install_front_end": "stdout",
     "use_prompts": false,
-    "version": 15
+    "version": 16
   },
   "appveyor": {
     "token": "hrwjhn2oe0q4oaf2"
@@ -19,7 +19,9 @@
     "pkgname": "pkglts",
     "url": null
   },
-  "conda": {},
+  "conda": {
+    "env_name": "{{ base.pkgname }}"
+  },
   "coverage": {},
   "coveralls": {},
   "data": {
@@ -136,7 +138,7 @@
   "travis": {},
   "version": {
     "major": 6,
-    "minor": 3,
+    "minor": 4,
     "post": 0
   }
 }

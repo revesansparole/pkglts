@@ -14,7 +14,7 @@ from .option.reqs.option import OptionReqs
 from .option.src.option import OptionSrc
 from .option_tools import available_options, find_available_options
 
-CURRENT_PKG_CFG_VERSION = 15
+CURRENT_PKG_CFG_VERSION = 16
 
 LOGGER = logging.getLogger(__name__)
 
@@ -354,5 +354,15 @@ def upgrade_pkg_cfg_version(pkg_cfg, version):
                     perm_branches = []
 
             pkg_cfg['git']['permanent_branches'] = perm_branches
+    elif version == 15:
+        pkg_cfg['_pkglts']['version'] = 16
+
+        if 'conda' in pkg_cfg:
+            try:
+                env_name = pkg_cfg['conda']['env_name']
+            except KeyError:
+                env_name = "{{ base.pkgname }}"
+
+            pkg_cfg['conda']['env_name'] = env_name
 
     return pkg_cfg
