@@ -5,7 +5,7 @@ language: python
 
 python:
 {%- for pyver in pysetup.intended_versions %}
-  - "{{ pyver[0] }}.{{ pyver[1] }}"
+  - "{{ pyver }}"
 {%- endfor %}
 
 # #}

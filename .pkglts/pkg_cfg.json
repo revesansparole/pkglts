@@ -3,7 +3,7 @@
     "auto_install": true,
     "install_front_end": "stdout",
     "use_prompts": false,
-    "version": 16
+    "version": 17
   },
   "appveyor": {
     "token": "hrwjhn2oe0q4oaf2"
@@ -94,10 +94,10 @@
   },
   "pysetup": {
     "intended_versions": [
-      "36",
-      "37",
-      "38",
-      "39"
+      "3.6",
+      "3.7",
+      "3.8",
+      "3.9"
     ]
   },
   "readthedocs": {
@@ -138,7 +138,7 @@
   "travis": {},
   "version": {
     "major": 6,
-    "minor": 4,
+    "minor": 5,
     "post": 0
   }
 }

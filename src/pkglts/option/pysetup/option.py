@@ -13,7 +13,7 @@ class OptionPysetup(Option):
 
     def update_parameters(self, cfg):
         sec = dict(
-            intended_versions=["36"],
+            intended_versions=["3.10"],
         )
         cfg[self._name] = sec
 
@@ -30,13 +30,13 @@ class OptionPysetup(Option):
         return ['src', 'doc', 'license', 'version', 'reqs']
 
     def environment_extensions(self, cfg):
-        py_min_ver = sorted(cfg[self._name]['intended_versions'])[0]
+        py_min_ver = sorted([int(v) for v in ver.split(".")] for ver in cfg[self._name]['intended_versions'])[0]
 
-        universal = len(set(ver[0] for ver in cfg[self._name]['intended_versions'])) > 1
+        universal = len(set(ver.split(".")[0] for ver in cfg[self._name]['intended_versions'])) > 1
 
         return {
             "pkg_url": pkg_url(cfg),
-            "py_min_ver": ".".join(tuple(py_min_ver)),
+            "py_min_ver": ".".join(str(v) for v in py_min_ver),
             "universal": universal
         }
 

@@ -5,7 +5,7 @@ def test_badge():
     cfg = Config(dict(base={'pkgname': "pkg", 'namespace': None,
                             "url": "http://toto"},
                       doc={'fmt': 'rst'},
-                      pysetup={"intended_versions": ["27", "28"],
+                      pysetup={"intended_versions": ["2.7", "2.8"],
                                'require': []},
                       pypi={'classifiers': [], 'servers': [dict(name="pypi", url="https://upload.pypi.org/legacy/")]}))
     cfg.load_extra()
@@ -16,7 +16,7 @@ def test_auto_classifiers():
     cfg = Config(dict(base={'pkgname': "pkg", 'namespace': None,
                             "url": "http://toto"},
                       doc={'fmt': 'rst'},
-                      pysetup={"intended_versions": ["27", "28"],
+                      pysetup={"intended_versions": ["2.7", "2.8"],
                                'require': []},
                       pypi={'classifiers': [], 'servers': []}))
     cfg.load_extra()

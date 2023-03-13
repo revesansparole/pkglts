@@ -76,13 +76,12 @@ def auto_classifiers(cfg):
     if intended_versions:
         items.add("Programming Language :: Python")
 
-        ver_cla_tpl = "Programming Language :: Python :: {}.{}"
+        ver_cla_tpl = "Programming Language :: Python :: {}"
         major_versions = set()
         for ver in intended_versions:
-            items.add(ver_cla_tpl.format(ver[0], ver[1]))
-            major_versions.add(ver[0])
+            items.add(ver_cla_tpl.format(ver))
+            major_versions.add(ver.split(".")[0])
 
-        ver_cla_tpl = "Programming Language :: Python :: {}"
         for ver in major_versions:
             items.add(ver_cla_tpl.format(ver))
 

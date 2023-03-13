@@ -111,7 +111,7 @@ Before you submit a pull request, check that it meets these guidelines:
      your new functionality into a function with a docstring, and add the
      feature to the list in README.rst.
 {%- if 'pysetup' is available %}
-  3. The pull request should work for Python {{ pysetup.intended_versions|join(", ") }}.
+  3. The pull request should work for Python {{ pysetup.intended_versions|join(', ') }}.
      {% if 'github' is available -%}
      Check `Travis <https://travis-ci.org/{{ github.owner }}/{{ github.project }}/pull_requests>`_
      and make sure that the tests pass for all supported Python versions.
