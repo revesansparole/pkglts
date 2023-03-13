@@ -22,7 +22,7 @@ pkg_data = {'pkglts': data_files}
 
 setup_kwds = dict(
     name='pkglts',
-    version="6.4.0",
+    version="6.5.0",
     description=short_descr,
     long_description=readme + '\n\n' + history,
     author="revesansparole",
