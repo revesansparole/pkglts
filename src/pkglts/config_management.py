@@ -14,7 +14,7 @@ from .option.reqs.option import OptionReqs
 from .option.src.option import OptionSrc
 from .option_tools import available_options, find_available_options
 
-CURRENT_PKG_CFG_VERSION = 16
+CURRENT_PKG_CFG_VERSION = 17
 
 LOGGER = logging.getLogger(__name__)
 
@@ -364,5 +364,17 @@ def upgrade_pkg_cfg_version(pkg_cfg, version):
                 env_name = "{{ base.pkgname }}"
 
             pkg_cfg['conda']['env_name'] = env_name
+    elif version == 16:
+        pkg_cfg['_pkglts']['version'] = 17
+
+        if 'pysetup' in pkg_cfg:
+            intended_versions = []
+            for ver in pkg_cfg['pysetup']['intended_versions']:
+                if "." in ver:
+                    intended_versions.append(ver)
+                else:
+                    intended_versions.append(".".join((ver[0], ver[1:])))
+
+            pkg_cfg['pysetup']['intended_versions'] = intended_versions
 
     return pkg_cfg
