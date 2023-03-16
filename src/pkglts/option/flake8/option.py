@@ -1,8 +1,11 @@
+import logging
 from pathlib import Path
 
 from pkglts.dependency import Dependency
 from pkglts.option_object import Option
 from pkglts.version import __version__
+
+LOGGER = logging.getLogger(__name__)
 
 
 class OptionFlake8(Option):

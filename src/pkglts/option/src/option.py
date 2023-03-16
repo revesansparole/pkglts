@@ -1,8 +1,11 @@
+import logging
 from pathlib import Path
 
 from pkglts.local import src_dir
 from pkglts.option_object import Option
 from pkglts.version import __version__
+
+LOGGER = logging.getLogger(__name__)
 
 
 class OptionSrc(Option):
@@ -13,6 +16,7 @@ class OptionSrc(Option):
         return Path(__file__).parent
 
     def update_parameters(self, cfg):
+        LOGGER.info("update parameters %s", self._name)
         sec = dict(
             namespace_method="pkg_util",
         )

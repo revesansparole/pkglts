@@ -3,9 +3,10 @@ import re
 import subprocess
 from pathlib import Path
 
+from unidecode import unidecode
+
 from pkglts.option_object import Option
 from pkglts.version import __version__
-from unidecode import unidecode
 
 LOGGER = logging.getLogger(__name__)
 
@@ -18,6 +19,7 @@ class OptionGit(Option):
         return Path(__file__).parent
 
     def update_parameters(self, cfg):
+        LOGGER.info("update parameters %s", self._name)
         sec = dict(
             permanent_branches=[],
         )

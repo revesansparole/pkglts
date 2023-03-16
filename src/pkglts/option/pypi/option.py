@@ -1,3 +1,4 @@
+import logging
 from pathlib import Path
 
 from pkglts.dependency import Dependency
@@ -5,6 +6,8 @@ from pkglts.local import pkg_full_name
 from pkglts.option.doc import fmt_badge
 from pkglts.option_object import Option
 from pkglts.version import __version__
+
+LOGGER = logging.getLogger(__name__)
 
 
 class OptionPypi(Option):
@@ -15,6 +18,7 @@ class OptionPypi(Option):
         return Path(__file__).parent
 
     def update_parameters(self, cfg):
+        LOGGER.info("update parameters %s", self._name)
         sec = dict(
             classifiers=[
                 "Development Status :: 2 - Pre-Alpha",

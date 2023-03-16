@@ -1,7 +1,10 @@
+import logging
 from pathlib import Path
 
 from pkglts.option_object import Option
 from pkglts.version import __version__
+
+LOGGER = logging.getLogger(__name__)
 
 
 class OptionPysetup(Option):
@@ -12,6 +15,7 @@ class OptionPysetup(Option):
         return Path(__file__).parent
 
     def update_parameters(self, cfg):
+        LOGGER.info("update parameters %s", self._name)
         sec = dict(
             intended_versions=["3.10"],
         )

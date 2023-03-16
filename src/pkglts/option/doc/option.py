@@ -1,11 +1,13 @@
+import logging
 from pathlib import Path
 
 from pkglts.dependency import Dependency
 from pkglts.option_object import Option
 from pkglts.option_tools import available_options
 from pkglts.version import __version__
-
 from . import history
+
+LOGGER = logging.getLogger(__name__)
 
 
 class OptionDoc(Option):
@@ -16,6 +18,7 @@ class OptionDoc(Option):
         return Path(__file__).parent
 
     def update_parameters(self, cfg):
+        LOGGER.info("update parameters %s", self._name)
         sec = dict(
             description="belle petite description",
             fmt="rst",

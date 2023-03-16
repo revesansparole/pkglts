@@ -1,9 +1,11 @@
+import logging
 from pathlib import Path
 
 from pkglts.option_object import Option
 from pkglts.version import __version__
-
 from . import nbcompile
+
+LOGGER = logging.getLogger(__name__)
 
 
 class OptionNotebook(Option):
@@ -14,6 +16,7 @@ class OptionNotebook(Option):
         return Path(__file__).parent
 
     def update_parameters(self, cfg):
+        LOGGER.info("update parameters %s", self._name)
         sec = dict(
             src_directory="example"
         )

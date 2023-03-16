@@ -18,6 +18,7 @@ class OptionLicense(Option):
         return Path(__file__).parent
 
     def update_parameters(self, cfg):
+        LOGGER.info("update parameters %s", self._name)
         sec = dict(
             name="cecill-c",
             year=datetime.now().year,

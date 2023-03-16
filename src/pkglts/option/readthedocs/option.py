@@ -1,8 +1,11 @@
+import logging
 from pathlib import Path
 
 from pkglts.option.doc import fmt_badge
 from pkglts.option_object import Option
 from pkglts.version import __version__
+
+LOGGER = logging.getLogger(__name__)
 
 
 class OptionReadthedocs(Option):
@@ -13,6 +16,7 @@ class OptionReadthedocs(Option):
         return Path(__file__).parent
 
     def update_parameters(self, cfg):
+        LOGGER.info("update parameters %s", self._name)
         if 'gitlab' in cfg:
             prj_name = "{{ gitlab.project }}"
         elif 'github' in cfg:

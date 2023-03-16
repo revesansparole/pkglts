@@ -1,9 +1,12 @@
+import logging
 from pathlib import Path
 
 from pkglts.dependency import Dependency
 from pkglts.option_object import Option
 from pkglts.small_tools import is_pathname_valid
 from pkglts.version import __version__
+
+LOGGER = logging.getLogger(__name__)
 
 
 class OptionSphinx(Option):
@@ -14,6 +17,7 @@ class OptionSphinx(Option):
         return Path(__file__).parent
 
     def update_parameters(self, cfg):
+        LOGGER.info("update parameters %s", self._name)
         sec = dict(
             theme="default",
             autodoc_dvlpt=True,
