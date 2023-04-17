@@ -34,13 +34,14 @@ class OptionPysetup(Option):
         return ['src', 'doc', 'license', 'version', 'reqs']
 
     def environment_extensions(self, cfg):
-        py_min_ver = sorted([int(v) for v in ver.split(".")] for ver in cfg[self._name]['intended_versions'])[0]
+        py_vers = sorted([int(v) for v in ver.split(".")] for ver in cfg[self._name]['intended_versions'])
 
         universal = len(set(ver.split(".")[0] for ver in cfg[self._name]['intended_versions'])) > 1
 
         return {
             "pkg_url": pkg_url(cfg),
-            "py_min_ver": ".".join(str(v) for v in py_min_ver),
+            "py_max_ver": ".".join(str(v) for v in py_vers[-1]),
+            "py_min_ver": ".".join(str(v) for v in py_vers[0]),
             "universal": universal
         }
 
