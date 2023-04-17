@@ -17,7 +17,7 @@ install:
   # useful for debugging any issues with conda
   - "%CONDA%\\conda info -a"
   # create environment
-  - "%CONDA%\\conda create -n ci python"
+  - "%CONDA%\\conda create -n ci python=3.9"
   - "%CONDA%\\activate ci"
 
 build: false
