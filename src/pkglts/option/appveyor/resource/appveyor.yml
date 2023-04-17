@@ -16,7 +16,7 @@ install:
   # useful for debugging any issues with conda
   - "%CONDA%\\conda info -a"
   # create environment
-  - "%CONDA%\\conda create -n ci python"
+  - "%CONDA%\\conda create -n ci python={{ pysetup.py_min_ver }}"
   - "%CONDA%\\activate ci"
 
 build: false
