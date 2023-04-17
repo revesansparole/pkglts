@@ -16,7 +16,7 @@ install:
   # useful for debugging any issues with conda
   - "%CONDA%\\conda info -a"
   # create environment
-  - "%CONDA%\\conda create -n ci python"
+  - "%CONDA%\\conda create -n ci python={{ pysetup.py_max_ver }}"
   - "%CONDA%\\activate ci"
 
 build: false
@@ -33,5 +33,5 @@ build_script:
   # install package
   - pip install .
   # test
-  - pytest --cov={{ base.pkg_full_name }}
+  - pytest
 # #}

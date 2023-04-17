@@ -15,7 +15,7 @@
     "travis.addons": "qA98wmBu9uVHTpax5SDBfs9DLw2ppWa9FXBEEwz7VI8Q2Sn/tXgwCN94ttB9B9EJv/utGZjLgwnszsfk0/yBOg==",
     "travis.after": "veQncG9PjU1UhCfzzNEtfVgUZ+iPmx9TVKRZWbLepccpcpNo8LvgMyTkYgGYNyLPbijRTXQdVQaDQRs6MCDYwA==",
     "travis.install": "E+Djg5S+LOlif569hZtYqji2q9KO5cw1W9dO698DBEWf7jupFjFPwG5kE7snxuIbwN537C9yWKfCOxdx+l7qwA==",
-    "travis.script": "DWnNG1V41yUvAAIhLi16BVuchmYxRpP5lGwJU+d9t365G9fE1x5055/MYxR4QbABSHdJR7PpKWbZqy/OVAWNiw=="
+    "travis.script": "qj1gr+V/f64/2mkg9Jy8K5+J2Y4JQEwF4rJLtZJWEBPLPQfbAaqMWutlVGONPL/RuG9PS+X5Z2T4xB7B9W7IHA=="
   },
   "AUTHORS.rst": {
     "doc.authors": "/4DdVJ8b3rG94lfO9Lc7StWASvDQpuf73AL4vpQmxvi4N9ShPsMeP3Shwf6i2d3e4dvIUgDW1Mc0vUxg5LkbUw==",
@@ -33,7 +33,7 @@
     "doc": "1X4cCBCIGMpNHvcDZexkQrOsJjC/n2kUOVBN50av6kAghmVxkcPzH8HIV1hmwcdmxdMSLQc39LVKKxFKvTZjEg=="
   },
   "appveyor.yml": {
-    "appveyor": "h29SsHi5+iP2tErF8t0oobYCHCnT6ZNJ0nCHxD0xWJx/GOxV5wfXS7CK3dZbONSKi9Es39L9wOopR/DyeGuirw=="
+    "appveyor": "WSoU0h45CKJbztRE/g4sYatiCiKsOEdlbBA0GT+Tu1Z/4Frnj1W1RsIiCzf5JD3I7N9WlhiKwwjoZf0UHWbJcw=="
   },
   "appveyor_scripts.ps1": {
     "appveyor": "HdiTMjGtis8VNyHfwqGBOjaDQZajmxcqAtNYMzKycmWHGjUpEEXIwvb1/ZCqiY9tDAh39PX+sf7tG4zTJ+0MXw=="
@@ -43,7 +43,7 @@
   },
   "conda/meta.yaml": {
     "conda.about": "6/RoaDh45Wwcc0uAhKGnUH46mczqPBQq/PV0cSCbe+fhiDQPOooOK8u24GzswyAcXIEHoASc/XIe+WS/2zBl5A==",
-    "conda.package": "c7IHihC+Mbc2wJOcwYyA2YvjWCWV7QZdqAZiLtcIw5t+fHPuXmgAxZ3qan7MD10f6MuXMguPJTHT4bXlHkWOOQ==",
+    "conda.package": "mprCbKWFYOo9510kz/YNmEkRvxj45s5djR+HqLGgFia9Su3OXZSOyx7hu2uoiH38cHY4mzd3zIcf3v/LNmXojg==",
     "conda.req_build": "PHQ4LRj963FIG00GtdBBsC4RGzQPqOz8nxsL3g3mCpe6xaYzXaEMD/Eifbbfi+X+Z578AJlr/Qsw4fgVokh+vQ==",
     "conda.req_run": "tAHRVsBmpT3G6fyAPJkEHz1WG4680wzFomYI2F+7oMSggoS73xMjEXINojQRwtSEgNIbUvcWxht0663/LYY8Yw==",
     "conda.src": "Lzbp176AVU0YantZQxB4LsR2jbxpZ/OlkvY2V4aWAEuzKEarh872uc1eRvsIYf/FsbxvcmUI84AezWlA72nI6A=="
@@ -63,7 +63,7 @@
   "doc/_static/nonempty.txt": {},
   "doc/authors.rst": {},
   "doc/conf.py": {
-    "sphinx": "VP9w+Lor3w6h1NlP26oJMLmTyvLq0tdxWJjocUunwfs5K37AR69OvvWD41Hyr2lTEVFrST/OFnpNeC5BT/x6rQ=="
+    "sphinx": "tCKbgJwauYXxiWlUwOO6Gfj6S9xB2WfDYVNCYLQR/7wf79sqN2ELR+d38n+OWXT6qiZsRVRTnefPi1CGF3GG3A=="
   },
   "doc/contributing.rst": {},
   "doc/history.rst": {},
@@ -93,12 +93,12 @@
     "pysetup.flake8": "vhKQd+PKOI3JRd+DFX5XAX/LSu1zj/XLulLKKW/FVe7nIDZQS3p6cM9+HKZlyqOkyqOtXcONb2OiJKtlXcIj8g==",
     "sphinx": "mYLeHXWNqXwTk9eWxY4wTrltnDTrAHQvl0l+kosuIfAgrbAuhWMgySq4WR2Y855Q5HDAtGZY7Pnt+BAU6niXIg==",
     "test.nose": "vmiIOMqGhuXJBom/KrWFzvETfJmbSMcLkvZ6XDTcFWl7XRHJgu1tcb4eHn97TgcziEqpfD96M5qO0DV3z3S+CQ==",
-    "test.pytest": "R5P5XMaQxSXsNQJ3hXYY45iLvnl8Mbec6XuIaFTum52gym+wTM2TfEbW/N2doHNaCkpdAWg07oblbYi15AwQkA==",
+    "test.pytest": "VID55F93dEGVSdCVD7IJMcXZy3YcffRvdAbDj+VJKYYFCqtQZFznSuzzKBwJqYi/cw6Q58LebIOMTYqXkVPtuA==",
     "wheel": "vUJZkCvbK4LQuEURneKnX/SNIwhJ9/9EaT5T6Uw1K1fauKFFiHnq1DTDES7cgBD0OANelyvwCCZO/rV4Iok+ag=="
   },
   "setup.py": {
     "pysetup.call": "t30iIuCMd/sWxStR2XNYb8bCBgwanhKt8YYn2VKACyAqL5cKFRUWpVRIpAR+uxXUZ9PYYy2csMmECcONnRZE8w==",
-    "pysetup.kwds": "X3FjERb0NLuyhPVdY/KRsapuALYTXF+792ZIqhescyQ7A9hybvmdHStABjVQRyMY1voeGoUNzo/Em2o06W1XuA=="
+    "pysetup.kwds": "M+4WRwYiEtLV/Rnw2zyy5sL5h5tKi7NHeTvE+k2qFWm7cAGaIjl8ZicWKfx9lZiH4pNjJqDnVMbnFtOAWL0iDw=="
   },
   "src/pkglts/__init__.py": {
     "src": "L2dZgUBRC5qv3o09+1CbMcgYfQtR1ZNSvP8KlP8REQazZiAQAktALjpCC2ijdxvKPv/tN9KsZrzNW+lZMszSfg==",
@@ -108,13 +108,13 @@
     "data": "wwgLuV/OqHWjWbssvDHa4LNg+7C+tuNiKHOxkO+9UAl9opI/HfPyJAq2fPhUeTmVvb/E6MkqDJIli9m8n5/V0Q=="
   },
   "src/pkglts/version.py": {
-    "version": "jGhsu2z/EWHO4pWuuCF0jwTgsiFQD7A19kiPQGC+9pVFHCbgBjSIIONWStTPbhR0YGRO5uDDXmSHd1ikFOVoTg=="
+    "version": "kLVTcTtQeDIcnpVTmtwYdAE/kVOX2fTWHTiS+MThSwY7YbOyOvyYUTlSCO/Rx1uciHxDPuXrwi1PB8iWxOWB4Q=="
   },
   "src/pkglts_data/__init__.py": {},
   "test/__init__.py": {},
   "test/conftest.py": {
     "test.pytest_addoption": "I/hswVryIEYvZRBcFqkfRBxLP6eZCwZSbQuPclkOkjHw4MApBst5h7H0ejnMMe4bmwHXMXR5DCSxOMj/FcCnjQ==",
-    "test.pytest_cmdline_preparse": "PReC04aIsiEUts+uEAiU4rCIEtXIoB6cJ1EmKApbIKD5wNYWokZ0r1WjV/1+WobsK/wgmcC4Yvf5NwwYZb9yjg==",
+    "test.pytest_cmdline_preparse": "cF5v0ZsoKer98bA8HU3EvNNCnSNr8qwFNAysa3IGObzJ5yGHbP/w9HGO+QocaLd18zabAr7ZJTCv4lmKhOQSJA==",
     "test.pytest_collection": "a/3h30sLUHJ7xWsOrmfCInOOVXvm660dS+RxHwcDUcae2jHqDLRGhq/v8zgC+FSzN3pXaEaJ1QBJ9MNLOUBuCA==",
     "test.pytest_configure": "SjyTXdrRadJNWhVFYkAvXekjOqNtovwqKNizWD35oZ9XVmsdB/B+lQDzXNPZQ0D5flFpSEURUiGqIvifgEKZ9Q==",
     "test.pytest_import": "2ox6A0szNpUYZR5cJJRSW3OwEWR558BOiUMjC/OVkTPT++CF/OCgGSELCPL+7YHWaJGQKMw2rtCXmOMeSK5ZJA=="
