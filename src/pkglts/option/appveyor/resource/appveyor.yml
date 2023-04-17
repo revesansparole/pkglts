@@ -33,5 +33,5 @@ build_script:
   # install package
   - pip install .
   # test
-  - pytest --cov={{ base.pkg_full_name }}
+  - pytest
 # #}

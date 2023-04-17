@@ -29,5 +29,5 @@ build_script:
   # install package
   - pip install .
   # test
-  - pytest --cov=pkglts
+  - pytest
 # #}
