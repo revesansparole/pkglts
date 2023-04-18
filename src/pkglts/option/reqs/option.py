@@ -116,7 +116,7 @@ def fmt_conda_reqs(reqs, intents):
         return ""
 
     cmd = "conda install"
-    for channel in set(r.channel for r in reqs) - {None}:
+    for channel in sorted(set(r.channel for r in reqs) - {None}):
         cmd += f" -c {channel}"
 
     for name in sorted(r.conda_full_name() for r in reqs):
