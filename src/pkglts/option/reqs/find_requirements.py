@@ -36,11 +36,23 @@ def find_reqs(pth):
     Returns:
         (list): list of package names
     """
-    pt = ast.parse(pth.read_bytes(), pth)
+    pt = ast.parse(pth.read_bytes(), str(pth))
     # TODO pb with namespaces
     pkgs = set(pkgname.split(".")[0] for pkgname in iter_ext_imports(pt.body))
 
     return pkgs
+
+
+def _iter_find_reqs(fld):
+    for pth in fld.glob("*.py"):
+        if not pth.name.startswith("_"):
+            for req in find_reqs(pth):
+                yield req
+
+    for subfld in fld.glob("*/"):
+        if subfld.name[0] not in ["_", "."]:
+            for req in _iter_find_reqs(subfld):
+                yield req
 
 
 def action_find_reqs(cfg, **kwds):
@@ -53,11 +65,7 @@ def action_find_reqs(cfg, **kwds):
         dirpth = Path(dname)
         if dirpth.exists():
             print(f"############\n# {dirpth}\n############")
-            reqs = set()
-            for pth in dirpth.glob("**/*.py"):
-                if not pth.name.startswith("_"):
-                    reqs.update(find_reqs(pth))
-
+            reqs = set(_iter_find_reqs(dirpth))
             reqs -= {this_pkgname}
             print("standard", sorted(reqs & stdpkgs))
             print("external", sorted(reqs - stdpkgs))
