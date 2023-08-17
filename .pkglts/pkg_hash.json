@@ -14,7 +14,7 @@
     "travis": "ak+GZZ02tia6hseOhRNX9WV5Jxp1jKWzCN9eCwRG3EsDlgkKiuYK1MJr4M+hJpgJ9YMH2T6JI1opqSpRSPCWgA==",
     "travis.addons": "qA98wmBu9uVHTpax5SDBfs9DLw2ppWa9FXBEEwz7VI8Q2Sn/tXgwCN94ttB9B9EJv/utGZjLgwnszsfk0/yBOg==",
     "travis.after": "veQncG9PjU1UhCfzzNEtfVgUZ+iPmx9TVKRZWbLepccpcpNo8LvgMyTkYgGYNyLPbijRTXQdVQaDQRs6MCDYwA==",
-    "travis.install": "E+Djg5S+LOlif569hZtYqji2q9KO5cw1W9dO698DBEWf7jupFjFPwG5kE7snxuIbwN537C9yWKfCOxdx+l7qwA==",
+    "travis.install": "46GBb0A8cqVSF4dTer9R9z5cqsnNvrZhCP9d0C5FOuNllCl6YYyR+1LF01WaJl7LSBzj7/C/aQNi7RukHOgcuw==",
     "travis.script": "qj1gr+V/f64/2mkg9Jy8K5+J2Y4JQEwF4rJLtZJWEBPLPQfbAaqMWutlVGONPL/RuG9PS+X5Z2T4xB7B9W7IHA=="
   },
   "AUTHORS.rst": {
@@ -33,7 +33,7 @@
     "doc": "1X4cCBCIGMpNHvcDZexkQrOsJjC/n2kUOVBN50av6kAghmVxkcPzH8HIV1hmwcdmxdMSLQc39LVKKxFKvTZjEg=="
   },
   "appveyor.yml": {
-    "appveyor": "WSoU0h45CKJbztRE/g4sYatiCiKsOEdlbBA0GT+Tu1Z/4Frnj1W1RsIiCzf5JD3I7N9WlhiKwwjoZf0UHWbJcw=="
+    "appveyor": "ATrDU0/msmUVgpsvI68nZPsO8CLyUaKK2ea7yZKn+r4CGpaZahguERd9d5RYt4cbPxXIcbYLAVbpUBuvJnO7vQ=="
   },
   "appveyor_scripts.ps1": {
     "appveyor": "HdiTMjGtis8VNyHfwqGBOjaDQZajmxcqAtNYMzKycmWHGjUpEEXIwvb1/ZCqiY9tDAh39PX+sf7tG4zTJ+0MXw=="
@@ -49,7 +49,7 @@
     "conda.src": "Lzbp176AVU0YantZQxB4LsR2jbxpZ/OlkvY2V4aWAEuzKEarh872uc1eRvsIYf/FsbxvcmUI84AezWlA72nI6A=="
   },
   "conda/requirements.yml": {
-    "conda": "vLYv8TCqQIke6/8rdu5Q3JeFgnuEaQpy3E1QgocqRoaBEXJ3UPIYuEUhNLT0sXnaHvRVgOyIOi9aw28Bb79ikw=="
+    "conda": "qLgOfaD291BNwDlggmawWQBk7C5LLdFsbcAjjUD/gMQA9APQ/78QS/IUIZmVQK6k5vcZJV+qH67/FQ3Vp0+LvQ=="
   },
   "conda/requirements_minimal.yml": {
     "conda": "QKPgKgSDBP1AmPTKqWiTfyqRC2AW/fbxWQUcMhwE9fPxEpv2vFiU49gBKT+Gl3vkIh2V5Ng2axlkvgH4n1pyZQ=="

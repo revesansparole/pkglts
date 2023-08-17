@@ -23,8 +23,8 @@ build: false
 
 build_script:
   # install dependencies
-  - "%CONDA%\\conda install -c conda-forge coverage coveralls flake8 jinja2 pytest pytest-cov pytest-mock requests semver sphinx tox twine unidecode"
-  - pip install "sphinx_rtd_theme"
+  - "%CONDA%\\conda install -c conda-forge coverage coveralls flake8 jinja2 pytest pytest-cov pytest-mock requests semver sphinx sphinx_rtd_theme tox twine unidecode"
+  
 
   # install package
   - pip install .

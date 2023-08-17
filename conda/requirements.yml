@@ -11,6 +11,7 @@ dependencies:
 - python=3.9
 # doc
 - sphinx
+- sphinx_rtd_theme
 # dvlpt
 - flake8
 - twine
@@ -26,12 +27,4 @@ dependencies:
 - pytest-cov
 - pytest-mock
 - tox
-- pip
-- pip:
-# doc
-  - sphinx_rtd_theme
-# dvlpt
-# install
-# test
-
 # #}
