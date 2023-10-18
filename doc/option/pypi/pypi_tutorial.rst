@@ -39,7 +39,7 @@ So first we need to create a 'PKG-INFO' file. This file is generated along your
 package whenever you run some packaging command so let's just create both a source
 distribution and a wheel of our package::
 
-    (dvlpt)$ python setup.py sdist bdist_wheel
+    (dvlpt)$ python -m build
 
 Then on the web page we can click on the 'browse' or 'Parcourir' button on the
 'PKG-INFO file:' line. In the explorer that pop up, we navigate to the directory
