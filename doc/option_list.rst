@@ -88,6 +88,7 @@ already developed online tools:
    option/travis/main
    option/readthedocs/main
    option/landscape/main
+   option/lgtm/main
    option/coveralls/main
    option/requires/main
 

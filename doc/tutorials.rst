@@ -26,7 +26,6 @@ These tutorials are specific to a single option.
    option/github/github_tutorial
    option/gitlab/gitlab_tutorial
    option/landscape/landscape_tutorial
-   option/plugin/plugin_tutorial
    option/pypi/pypi_tutorial
    option/readthedocs/readthedocs_tutorial
    option/requires/requires_tutorial
