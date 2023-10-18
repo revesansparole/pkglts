@@ -7,11 +7,7 @@ By default pytest_ is selected but this can be customized in the option of the
 
 For the moment only two frameworks are supported: pytest_ and nose_.
 
-Two different ways to run the tests, either through the setuptools call to setup.py::
-
-    (dvlpt)$ python setup.py test
-
-or through the use of the 'pytest' or 'nosetests' command line argument::
+To run the tests, use of the 'pytest' or 'nosetests' command line argument::
 
     (dvlpt)$ pytest
     (dvlpt)$ nosetests

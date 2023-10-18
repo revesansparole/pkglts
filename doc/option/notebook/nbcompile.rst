@@ -24,5 +24,6 @@ Include a reference to the generated 'index.rst' file somewhere in your document
 presumably in a table of content block, if not done already. Then recompile your
 documentation::
 
-    (dvlpt)$ python setup.py build_sphinx
+    (dvlpt)$ cd doc
+    (dvlpt) doc $ make html
 

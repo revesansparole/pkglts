@@ -28,7 +28,8 @@ Then you need to rebuild the documentation to integrate the notebooks:
 
 .. code::
 
-    (dvlpt)$ python setup.py build_sphinx
+    (dvlpt)$ cd doc
+    (dvlpt) doc $ make html
 
 Example
 -------

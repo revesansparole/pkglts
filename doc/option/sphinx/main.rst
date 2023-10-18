@@ -24,23 +24,15 @@ you also install the attached example files::
     (dvlpt)$ pmg rg
     (dvlpt)$ pmg example sphinx
 
-If you already installed the :doc:`../pysetup/main` option::
-
-    (dvlpt)$ python setup.py build_sphinx
-
-will produce a set of html pages in 'build/sphinx'. Open the 'index.html' file in
-the 'html' sub directory to access the main index. Alternatively you'll find
-another 'index.html' file in the 'docexample' directory that provide examples
-of sphinx extensions usage.
-
-If you don't want to install the :doc:`../pysetup/main` option, you simply need to
-run the make command from the doc directory::
+Then, you simply need to run the make command from the doc directory::
 
     (dvlpt)$ cd doc
     (dvplt) doc$ make
 
-This will produce a build directory with the same architecture as explained
-above.
+This will produce a build directory with a set of html pages in 'build/sphinx'.
+Open the 'index.html' file in the 'html' sub directory to access the main index.
+Alternatively you'll find another 'index.html' file in the 'docexample' directory
+that provide examples of sphinx extensions usage.
 
 .. _readthedocs: http://docs.readthedocs.org/en/latest/index.html
 .. _sphinx: http://sphinx-doc.org/
