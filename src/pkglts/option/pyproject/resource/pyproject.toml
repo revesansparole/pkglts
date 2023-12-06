@@ -1,9 +1,11 @@
-# {# pkglts, pyproject
+# {# pkglts, pyproject.build
 [build-system]
 # Minimum requirements for the build system to execute.
 requires = ["setuptools", "wheel"]  # , "setuptools-scm"]  # PEP 508 specifications.
 build-backend = "setuptools.build_meta"  # we don't know if we need it
+# #}
 
+# {# pkglts, pyproject.project
 [project]  # from https://peps.python.org/pep-0621/#specification
 name="{{ base.pkg_full_name }}"
 version="{{ version.major }}.{{ version.minor }}.{{ version.post }}"
@@ -45,9 +47,11 @@ dependencies=[
 {% endif -%}
 {%- endfor %}
 
+{% if pyproject.pkg_url %}
 [project.urls]
 documentation = "www.google.fr"
 repository = "{{ pyproject.pkg_url }}"
+{% endif %}
 
 [tool.setuptools]
 {% if 'data' is available -%}
@@ -66,9 +70,15 @@ where=["src"]
 {% endif -%}
 # #}
 
+# {# pkglts, pyproject.scripts
 [project.scripts]
+# #}
 
+# {# pkglts, pyproject.gui_scripts
 [project.gui-scripts]
+# #}
 
+# {# pkglts, pyproject.entry_points
 [project.entry-points]
+# #}
 

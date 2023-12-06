@@ -16,7 +16,7 @@ class OptionTravis(Option):
         return Path(__file__).parent
 
     def require_option(self, cfg):
-        return ['doc', 'pysetup', 'github']
+        return ['doc', 'pyproject', 'github']
 
     def environment_extensions(self, cfg):
         owner = cfg['github']['owner']

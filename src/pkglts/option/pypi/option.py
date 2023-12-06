@@ -43,7 +43,7 @@ class OptionPypi(Option):
         return invalids
 
     def require_option(self, cfg):
-        return ['doc', 'pysetup']
+        return ['doc', 'pyproject']
 
     def require(self, cfg):
         del cfg
@@ -76,7 +76,7 @@ def auto_classifiers(cfg):
     # TODO
 
     # add intended versions items
-    intended_versions = cfg['pysetup']['intended_versions']
+    intended_versions = cfg['pyproject']['intended_versions']
     if intended_versions:
         items.add("Programming Language :: Python")
 

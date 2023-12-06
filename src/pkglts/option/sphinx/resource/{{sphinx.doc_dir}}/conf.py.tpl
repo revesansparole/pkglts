@@ -6,7 +6,7 @@ see: https://www.sphinx-doc.org/en/master/usage/configuration.html
 
 """
 
-{%- if 'pysetup' is available %}
+{%- if 'pyproject' is available %}
 import os
 import re
 {%- endif %}
@@ -16,7 +16,7 @@ import warnings
 from sphinx_gallery.sorting import ExampleTitleSortKey
 {%- endif %}
 
-{% if 'pysetup' is available %}
+{% if 'pyproject' is available %}
 
 # Get the project root dir, which is the parent dir of this
 cwd = os.getcwd()
@@ -134,7 +134,7 @@ latex_documents = [
     (u"index", u"{{ base.pkgname }}.tex",
      u"{{ base.pkgname|replace('_', '\_') }} Documentation",
      u"{{ base.authors[0][0]|replace('_', '\_') }}",
-     {% if 'pysetup' is available %}u"manual"{% else %}u"article"{% endif %}),
+     {% if 'pyproject' is available %}u"manual"{% else %}u"article"{% endif %}),
 ]
 
 # -- Options for manual page output ------------------------------------
@@ -161,7 +161,7 @@ texinfo_documents = [
      u"Miscellaneous"),
 ]
 
-{% if 'pysetup' is available and sphinx.autodoc_dvlpt %}
+{% if 'pyproject' is available and sphinx.autodoc_dvlpt %}
 # use apidoc to generate developer doc
 try:
     from sphinx.ext.apidoc import main

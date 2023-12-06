@@ -10,7 +10,7 @@ channels:
 - defaults
 
 dependencies:
-- python={{ pysetup.intended_versions[-1] }}
+- python={{ pyproject.intended_versions[-1] }}
 {%- for intent in reqs.intents() %}
 # {{ intent }}
 {%- for dep in reqs.requirements(intent) if dep.is_conda(False) %}

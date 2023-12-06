@@ -35,7 +35,7 @@ class OptionConda(Option):
         return invalids
 
     def require_option(self, cfg):
-        return ['pysetup']
+        return ['pyproject']
 
     def environment_extensions(self, cfg):
         channels = set(dep.channel for dep in requirements(cfg)) - {None}

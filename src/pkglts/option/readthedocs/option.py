@@ -39,7 +39,7 @@ class OptionReadthedocs(Option):
         return invalids
 
     def require_option(self, cfg):
-        reqs = ['pysetup', 'sphinx']
+        reqs = ['pyproject', 'sphinx']
         if 'gitlab' in cfg:
             reqs.append('gitlab')
         elif 'github' in cfg:

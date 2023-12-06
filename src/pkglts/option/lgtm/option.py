@@ -16,7 +16,7 @@ class OptionLgtm(Option):
         return Path(__file__).parent
 
     def require_option(self, cfg):
-        return ['github', 'pysetup']
+        return ['github', 'pyproject']
 
     def environment_extensions(self, cfg):
         owner = cfg['github']['owner']
