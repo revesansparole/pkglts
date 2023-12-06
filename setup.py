@@ -94,7 +94,6 @@ setup_kwds['entry_points']['pkglts'] = [
     'plugin_project = pkglts.option.plugin_project.option:OptionPluginProject',
     'pypi = pkglts.option.pypi.option:OptionPypi',
     'pyproject = pkglts.option.pyproject.option:OptionPyproject',
-    'pysetup = pkglts.option.pysetup.option:OptionPysetup',
     'readthedocs = pkglts.option.readthedocs.option:OptionReadthedocs',
     'reqs = pkglts.option.reqs.option:OptionReqs',
     'requires = pkglts.option.requires.option:OptionRequires',
