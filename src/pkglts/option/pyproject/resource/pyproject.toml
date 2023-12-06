@@ -47,7 +47,7 @@ dependencies=[
 
 [project.urls]
 documentation = "www.google.fr"
-repository = "{{ pysetup.pkg_url }}"
+repository = "{{ pyproject.pkg_url }}"
 
 [tool.setuptools]
 {% if 'data' is available -%}
