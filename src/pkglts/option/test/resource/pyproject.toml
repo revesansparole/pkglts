@@ -1,6 +1,6 @@
 # {# pkglts, test, after pyproject.project
 {% if test.suite_name == 'pytest' -%}
 [tool.pytest.ini_options]
-addopts = --maxfail=2 -rf {% if 'coverage' is available %}--cov={{ base.pkg_full_name }}{% endif %}
+addopts = "--maxfail=2 -rf {% if 'coverage' is available %}--cov={{ base.pkg_full_name }}{% endif %}"
 {% endif -%}
 # #}
