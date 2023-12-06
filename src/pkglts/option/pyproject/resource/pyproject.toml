@@ -1,24 +1,21 @@
-
-# Completed from:
-# - https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html
-# - https://packaging.python.org/en/latest/specifications/declaring-project-metadata/
-# - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
-
 # {# pkglts, pyproject
 [build-system]
 # Minimum requirements for the build system to execute.
 requires = ["setuptools", "wheel"]  # , "setuptools-scm"]  # PEP 508 specifications.
 build-backend = "setuptools.build_meta"  # we don't know if we need it
 
-[project]
-# Mandatory keys
+[project]  # from https://peps.python.org/pep-0621/#specification
 name="{{ base.pkg_full_name }}"
 version="{{ version.major }}.{{ version.minor }}.{{ version.post }}"
-
-# Optional keys
+description="{{ doc.description }}"
+readme="README.{{ doc.fmt }}"
+requires-python=">=3.6"  # ??
+license={text = "{{ license.name }}"}
 authors=[
     {name = "{{ base.authors[0][0] }}", email = "{{ base.authors[0][1] }}"},
 ]
+maintainers=[]  # see doc / AUTHORS.rst
+keywords=['{{ doc.keywords|join(", ") }}']
 {% if 'pypi' is available %}
 classifiers=[
     {%- for kwd in pypi.auto_classifiers %}
@@ -26,6 +23,7 @@ classifiers=[
     {%- endfor %}
 ]
 {% endif -%}
+
 dependencies=[
     {% for dep in reqs.requirements('install') -%}
     {% if dep.is_pip(strict=False) -%}
@@ -33,34 +31,44 @@ dependencies=[
     {% endif -%}
     {%- endfor %}
 ]
-description="{{ doc.description }}"
-dynamic=["readme"]  # to specify which keys are not mentioned in static and are defined dynamically
-keywords=['{{ doc.keywords|join(", ") }}']
-license={text = "{{ license.name }}"}
-maintainers=[]  # Could be filled from AUTHORS.rst
-requires-python=">=3.6"  # ??
+
+[project.optional-dependencies]
+{% for intent in reqs.intents() -%}
+{% if intent != 'install' -%}
+{{ intent }} = [
+    {% for dep in reqs.requirements(intent) -%}
+    {% if dep.is_pip(strict=False) -%}
+    "{{ dep.fmt_pip_requirement() }}",
+    {% endif -%}
+    {%- endfor %}
+]
+{% endif -%}
+{%- endfor %}
 
 [project.urls]
 documentation = "www.google.fr"
 repository = "{{ pysetup.pkg_url }}"
 
-[tool.setuptools.dynamic]
-readme={file = ["README.rst", "HISTORY.rst"]}
-
 [tool.setuptools]
-include-package-data=true  # not mandatory as it is the default value
-#packages=""  # we may have to use the [tool.setuptools.packages.find] above mentioned, and if so...
-#package_dir={'': 'src'}  # ... we won't need to define package_dir :)
-#package_data=""  # THE biggest problem to solve ^^
+{% if 'data' is available -%}
+include-package-data=true
+{% else -%}
+include-package-data=false
+{%- endif %}
 
-
-# All the following is in Beta
 [tool.setuptools.packages.find]
-where=["src"]  # list of folders that contain the packages (["."] by default)
-# include=["my_package*"]  # package names should match these glob patterns (["*"] by default)
-# exclude=["my_package.tests*"]  # exclude packages matching these glob patterns (empty by default)
-# namespaces=false  # to disable scanning PEP 420 namespaces (true by default)
+where=["src"]
 
+{% if 'data' is available -%}
 [tool.setuptools.package-data]
-"*" = ['*.json', '*.ini', '*.csv', '*.rst', '*.svg', '*.xlsx', '*.xls']  # at least I try ^^
+"*" = [{% for file_ext in data.filetype %}'*{{ file_ext }}', {% endfor %}]
+
+{% endif -%}
 # #}
+
+[project.scripts]
+
+[project.gui-scripts]
+
+[project.entry-points]
+
