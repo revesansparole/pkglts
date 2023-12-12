@@ -14,7 +14,7 @@ from .option.reqs.option import OptionReqs
 from .option.src.option import OptionSrc
 from .option_tools import available_options, find_available_options
 
-CURRENT_PKG_CFG_VERSION = 17
+CURRENT_PKG_CFG_VERSION = 18
 
 LOGGER = logging.getLogger(__name__)
 
@@ -376,5 +376,10 @@ def upgrade_pkg_cfg_version(pkg_cfg, version):
                     intended_versions.append(".".join((ver[0], ver[1:])))
 
             pkg_cfg['pysetup']['intended_versions'] = intended_versions
+    elif version == 17:
+        pkg_cfg['_pkglts']['version'] = 18
+
+        if 'pysetup' in pkg_cfg:
+            pkg_cfg['pyproject'] = pkg_cfg.pop('pysetup')
 
     return pkg_cfg
