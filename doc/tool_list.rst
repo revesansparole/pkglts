@@ -7,7 +7,7 @@ List of currently available tools
 
    option/doc/history
    option/notebook/nbcompile
-   option/pysetup/reqs
+   option/reqs/reqs_tool
    option/version/bump
 
 .. _GitHub: https://github.com/

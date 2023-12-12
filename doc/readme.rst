@@ -51,7 +51,7 @@ already existing package:
  - :doc:`option/doc/main`: Add some documentation to your package
  - :doc:`option/test/main`: basic unitests using Nose_
  - :doc:`option/coverage/main`: add code coverage_ to the basic test configuration
- - :doc:`option/pysetup/main`: make your package distributable with setuptools (i.e. setup.py)
+ - :doc:`option/pyproject/main`: make your package distributable with setuptools (i.e. setup.py)
  - :doc:`option/data/main`: will guide through all the steps to add non python files to a package
  - :doc:`option/github/main`: will guide through all the step to safely store the package on Github_
  - :doc:`option/gitlab/main`: will guide through all the step to safely store the package on a Gitlab_ repo
@@ -119,7 +119,7 @@ Extra tools
 Some options of pkglts provide tools to make the life of package manager easier.
 
 - :doc:`option/doc/history`: Regenerate the history of your package from associated tags
-- :doc:`option/pysetup/reqs`: Find all your dependencies
+- :doc:`option/reqs/reqs_tool`: Find all your dependencies
 - :doc:`option/version/bump`: Increase your package version number
 
 .. warning:: Work In Progress

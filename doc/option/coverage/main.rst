@@ -8,7 +8,7 @@ There is two ways to use it, either using the 'coverage' command line tool or
 through the coverage option of your test suite. Both are already configured
 by the system.
 
-.. warning:: Both approaches requires the :doc:`../pysetup/main` option for nosetests
+.. warning:: Both approaches requires the :doc:`../pyproject/main` option for nosetests
              or pytest to take the config into account. Use the `Nosetests command line`_
              approach if you don't want to add a setup.py to your package.
 

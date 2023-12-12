@@ -17,6 +17,7 @@ functionality in your package.
    option/license/main
    option/version/main
    option/git/main
+   option/reqs/main
 
 Extended
 ========
@@ -39,7 +40,7 @@ The base of distributing your code comes with:
 .. toctree::
    :maxdepth: 1
 
-   option/pysetup/main
+   option/pyproject/main
 
 
 In order to make your package easily accessible for others, these options help

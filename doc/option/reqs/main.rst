@@ -1,14 +1,11 @@
-pysetup
-=======
+reqs
+====
 
-Add a 'setup.py' to your package to make it compliant with setuptools_. This
-will allow an easy distribution of your package. Since this option requires most
-basic options, it's a good proxy to add to a newly created package to avoid
-multiple 'manage add opt' commands.
+Add package requirements to your project.
 
 Quick setup::
 
-    (dvlpt)$ pmg add pysetup
+    (dvlpt)$ pmg add reqs
     (dvlpt)$ pmg rg
 
 Modifications
@@ -29,7 +26,7 @@ two requirements files:
       use your package. Think of it as the minimal requirements that will be used
       on a production server for example.
 
-To help you keep track of your dependencies, you can use the :doc:`reqs` tool
+To help you keep track of your dependencies, you can use the :doc:`reqs_tool` tool
 provided with this option.
 
 .. _setuptools: https://pypi.python.org/pypi/setuptools

@@ -1,5 +1,5 @@
-reqs
-====
+reqs tool
+=========
 
 Find all packages imported by your modules.
 
