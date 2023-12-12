@@ -7,26 +7,26 @@ build-backend = "setuptools.build_meta"  # we don't know if we need it
 
 # {# pkglts, pyproject.project
 [project]  # from https://peps.python.org/pep-0621/#specification
-name="{{ base.pkg_full_name }}"
-version="{{ version.major }}.{{ version.minor }}.{{ version.post }}"
-description="{{ doc.description }}"
-readme="README.{{ doc.fmt }}"
-requires-python=">=3.6"  # ??
-license={text = "{{ license.name }}"}
-authors=[
+name = "{{ base.pkg_full_name }}"
+version = "{{ version.major }}.{{ version.minor }}.{{ version.post }}"
+description = "{{ doc.description }}"
+readme = "README.{{ doc.fmt }}"
+requires-python = ">=3.6"  # ??
+license = {text = "{{ license.name }}"}
+authors = [
     {name = "{{ base.authors[0][0] }}", email = "{{ base.authors[0][1] }}"},
 ]
-maintainers=[]  # see doc / AUTHORS.rst
-keywords=['{{ doc.keywords|join(", ") }}']
+maintainers = []  # see doc / AUTHORS.rst
+keywords = ['{{ doc.keywords|join(", ") }}']
 {% if 'pypi' is available %}
-classifiers=[
+classifiers = [
     {%- for kwd in pypi.auto_classifiers %}
     "{{ kwd }}",
     {%- endfor %}
 ]
 {% endif -%}
 
-dependencies=[
+dependencies = [
     {% for dep in reqs.requirements('install') -%}
     {% if dep.is_pip(strict=False) -%}
     "{{ dep.fmt_pip_requirement() }}",
@@ -56,13 +56,13 @@ repository = "{{ pyproject.pkg_url }}"
 
 [tool.setuptools]
 {% if 'data' is available -%}
-include-package-data=true
+include-package-data = true
 {% else -%}
-include-package-data=false
+include-package-data = false
 {%- endif %}
 
 [tool.setuptools.packages.find]
-where=["src"]
+where = ["src"]
 
 {% if 'data' is available -%}
 [tool.setuptools.package-data]
