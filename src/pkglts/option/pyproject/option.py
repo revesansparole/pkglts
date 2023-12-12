@@ -7,7 +7,7 @@ from pkglts.version import __version__
 LOGGER = logging.getLogger(__name__)
 
 
-class OptionPysetup(Option):
+class OptionPyproject(Option):
     def version(self):
         return __version__
 
@@ -26,7 +26,7 @@ class OptionPysetup(Option):
         intended_versions = cfg[self._name]['intended_versions']
 
         if not intended_versions:
-            invalids.append("pysetup.intended_versions")
+            invalids.append("pyproject.intended_versions")
 
         return invalids
 

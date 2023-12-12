@@ -13,7 +13,7 @@ BLOCK_RE = re.compile(
     re.DOTALL | re.MULTILINE)
 
 NON_BIN_EXT = ("", ".bat", ".cfg", ".json", ".in", ".ini", ".md", ".no", ".ps1", ".py", ".rst", ".sh",
-               ".svg", ".tpl", ".txt", ".yml", ".yaml")
+               ".svg",  ".toml", ".tpl", ".txt", ".yml", ".yaml")
 
 
 class TplBlock:

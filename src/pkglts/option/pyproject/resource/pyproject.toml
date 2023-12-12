@@ -1,0 +1,85 @@
+# {# pkglts, pyproject.build
+[build-system]
+# Minimum requirements for the build system to execute.
+requires = ["setuptools", "wheel"]  # , "setuptools-scm"]  # PEP 508 specifications.
+build-backend = "setuptools.build_meta"  # we don't know if we need it
+# #}
+
+# {# pkglts, pyproject.project
+[project]  # from https://peps.python.org/pep-0621/#specification
+name="{{ base.pkg_full_name }}"
+version="{{ version.major }}.{{ version.minor }}.{{ version.post }}"
+description="{{ doc.description }}"
+readme="README.{{ doc.fmt }}"
+requires-python=">=3.6"  # ??
+license={text = "{{ license.name }}"}
+authors=[
+    {name = "{{ base.authors[0][0] }}", email = "{{ base.authors[0][1] }}"},
+]
+maintainers=[]  # see doc / AUTHORS.rst
+keywords=['{{ doc.keywords|join(", ") }}']
+{% if 'pypi' is available %}
+classifiers=[
+    {%- for kwd in pypi.auto_classifiers %}
+    "{{ kwd }}",
+    {%- endfor %}
+]
+{% endif -%}
+
+dependencies=[
+    {% for dep in reqs.requirements('install') -%}
+    {% if dep.is_pip(strict=False) -%}
+    "{{ dep.fmt_pip_requirement() }}",
+    {% endif -%}
+    {%- endfor %}
+]
+
+[project.optional-dependencies]
+{% for intent in reqs.intents() -%}
+{% if intent != 'install' -%}
+{{ intent }} = [
+    {% for dep in reqs.requirements(intent) -%}
+    {% if dep.is_pip(strict=False) -%}
+    "{{ dep.fmt_pip_requirement() }}",
+    {% endif -%}
+    {%- endfor %}
+]
+{% endif -%}
+{%- endfor %}
+
+{% if pyproject.pkg_url %}
+[project.urls]
+documentation = "www.google.fr"
+homepage = "www.google.fr"  # poetry
+repository = "{{ pyproject.pkg_url }}"
+{% endif %}
+
+[tool.setuptools]
+{% if 'data' is available -%}
+include-package-data=true
+{% else -%}
+include-package-data=false
+{%- endif %}
+
+[tool.setuptools.packages.find]
+where=["src"]
+
+{% if 'data' is available -%}
+[tool.setuptools.package-data]
+"*" = [{% for file_ext in data.filetype %}'*{{ file_ext }}', {% endfor %}]
+
+{% endif -%}
+# #}
+
+# {# pkglts, pyproject.scripts
+[project.scripts]
+# #}
+
+# {# pkglts, pyproject.gui_scripts
+[project.gui-scripts]
+# #}
+
+# {# pkglts, pyproject.entry_points
+[project.entry-points]
+# #}
+

@@ -16,7 +16,7 @@ class OptionTox(Option):
         return Path(__file__).parent
 
     def require_option(self, cfg):
-        return ['pysetup']
+        return ['pyproject']
 
     def require(self, cfg):
         del cfg

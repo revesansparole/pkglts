@@ -1,0 +1,4 @@
+# {# pkglts, plugin, after pyproject.entry_points
+[project.entry-points.pkglts]
+{{ plugin_project.plugin_name }} = "{{ base.pkg_full_name }}.option:Option{{ plugin_project.plugin_name|capitalize }}"
+# #}

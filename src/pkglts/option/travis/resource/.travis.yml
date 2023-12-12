@@ -4,7 +4,7 @@
 language: python
 
 python:
-{%- for pyver in pysetup.intended_versions %}
+{%- for pyver in pyproject.intended_versions %}
   - "{{ pyver }}"
 {%- endfor %}
 
