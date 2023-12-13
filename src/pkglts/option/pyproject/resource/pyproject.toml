@@ -14,7 +14,7 @@ readme = "README.{{ doc.fmt }}"
 requires-python = ">=3.6"  # ??
 license = {text = "{{ license.name }}"}
 authors = [
-    {name = "{{ base.authors[0][0] }}", email = "{{ base.authors[0][1] }}"},
+    {% for author in base.authors %}{name = "{{ author[0] }}", email = "{{ author[1] }}"}, {% endfor %}
 ]
 maintainers = []  # see doc / AUTHORS.rst
 keywords = ['{{ doc.keywords|join(", ") }}']
