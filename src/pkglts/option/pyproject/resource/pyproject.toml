@@ -16,7 +16,13 @@ license = {text = "{{ license.name }}"}
 authors = [
     {% for author in base.authors %}{name = "{{ author[0] }}", email = "{{ author[1] }}"}, {% endfor %}
 ]
-maintainers = []  # see doc / AUTHORS.rst
+{% if 'git' is available %}
+maintainers = [
+    {% for contrib in git.contributors -%}{name = "{{ contrib[0] }}", email = "{{ contrib[1] }}"}, {% endfor %}
+]
+{%- else %}
+maintainers = []
+{% endif %}
 keywords = ['{{ doc.keywords|join(", ") }}']
 {% if 'pypi' is available %}
 classifiers = [
