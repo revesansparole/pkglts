@@ -11,36 +11,28 @@ name = "{{ base.pkg_full_name }}"
 version = "{{ version.major }}.{{ version.minor }}.{{ version.post }}"
 description = "{{ doc.description }}"
 readme = "README.{{ doc.fmt }}"
-{% if pyproject.py_min_ver == pyproject.py_max_ver %}
-requires-python = "== {{ pyproject.py_min_ver }}"
-{%- else %}
-requires-python = ">= {{ pyproject.py_min_ver }}"
+{% if pyproject.py_min_ver == pyproject.py_max_ver %}requires-python = "== {{ pyproject.py_min_ver }}"
+{%- else %}requires-python = ">= {{ pyproject.py_min_ver }}"
 {% endif %}
 license = {text = "{{ license.name }}"}
 authors = [
     {% for author in base.authors %}{name = "{{ author[0] }}", email = "{{ author[1] }}"}, {% endfor %}
 ]
-{% if 'git' is available %}
-maintainers = [
+{% if 'git' is available %}maintainers = [
     {% for contrib in git.contributors -%}{name = "{{ contrib[0] }}", email = "{{ contrib[1] }}"}, {% endfor %}
 ]
-{%- else %}
-maintainers = []
+{%- else %}maintainers = []
 {% endif %}
 keywords = ['{{ doc.keywords|join(", ") }}']
-{% if 'pypi' is available %}
-classifiers = [
+{% if 'pypi' is available %}classifiers = [
     {%- for kwd in pypi.auto_classifiers %}
     "{{ kwd }}",
     {%- endfor %}
 ]
 {% endif -%}
-
 dependencies = [
     {% for dep in reqs.requirements('install') -%}
-    {% if dep.is_pip(strict=False) -%}
-    "{{ dep.fmt_pip_requirement() }}",
-    {% endif -%}
+    {% if dep.is_pip(strict=False) -%}"{{ dep.fmt_pip_requirement() }}", {% endif -%}
     {%- endfor %}
 ]
 
@@ -56,21 +48,15 @@ dependencies = [
 ]
 {% endif -%}
 {%- endfor %}
-
-{% if pyproject.pkg_url %}
-[project.urls]
+{% if pyproject.pkg_url %}[project.urls]
 documentation = "www.google.fr"
 homepage = "www.google.fr"  # poetry
 repository = "{{ pyproject.pkg_url }}"
 {% endif %}
-
 [tool.setuptools]
-{% if 'data' is available -%}
-include-package-data = true
-{% else -%}
-include-package-data = false
+{% if 'data' is available -%}include-package-data = true
+{% else -%}include-package-data = false
 {%- endif %}
-
 [tool.setuptools.packages.find]
 where = ["src"]
 
