@@ -59,9 +59,17 @@ dependencies = [
 ]
 {% endif -%}
 {%- endfor %}
-{% if pyproject.pkg_url %}[project.urls]
-documentation = "www.google.fr"
-homepage = "www.google.fr"  # poetry
+
+{% if pyproject.pkg_url or doc.documentation_url or doc.homepage_url %}
+[project.urls]
+{% endif %}
+{% if doc.documentation_url %}
+documentation = "{{ doc.documentation_url }}"
+{% endif %}
+{% if doc.homepage_url %}
+homepage = "{{ doc.homepage_url }}"
+{% endif %}
+{% if pyproject.pkg_url %}
 repository = "{{ pyproject.pkg_url }}"
 {% endif %}
 [tool.setuptools]
