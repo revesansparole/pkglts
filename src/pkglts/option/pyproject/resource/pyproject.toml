@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"  # we don't know if we need it
 # #}
 
 # {# pkglts, pyproject.project
-[project]  # https://packaging.python.org/en/latest/specifications/pyproject-toml/#declaring-project-metadata-the-project-table
+[project]  # https://packaging.python.org/en/latest/specifications/pyproject-toml/
 name = "{{ base.pkg_full_name }}"
 version = "{{ version.major }}.{{ version.minor }}.{{ version.post }}"
 description = "{{ doc.description }}"
@@ -28,9 +28,9 @@ maintainers = [
     {name = "{{ contrib[0] }}", email = "{{ contrib[1] }}"},
     {%- endfor %}
 ]
-{%- else %}
+{%- else -%}
 maintainers = []
-{% endif %}
+{%- endif %}
 keywords = [
     {%- for keyword in doc.keywords %}
     {{ keyword }},
