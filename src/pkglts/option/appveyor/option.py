@@ -1,7 +1,7 @@
 import logging
 from pathlib import Path
 
-from pkglts.option.doc import fmt_badge
+from pkglts.option.doc.badge import Badge
 from pkglts.option_object import Option
 from pkglts.version import __version__
 
@@ -32,6 +32,11 @@ class OptionAppveyor(Option):
 
         url = f"ci.appveyor.com/project/{owner}/{project}/branch/master"
         img = f"ci.appveyor.com/api/projects/status/{token}/branch/master?svg=true"
-        badge = fmt_badge(img, url, "Appveyor build status", cfg['doc']['fmt'])
+        badge = Badge(
+            name="appveyor",
+            url=url,
+            url_img=img,
+            text="Appveyor build status"
+        )
 
         return {"badge": badge}

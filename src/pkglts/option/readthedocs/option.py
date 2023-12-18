@@ -1,7 +1,7 @@
 import logging
 from pathlib import Path
 
-from pkglts.option.doc import fmt_badge
+from pkglts.option.doc.badge import Badge
 from pkglts.option_object import Option
 from pkglts.version import __version__
 
@@ -54,6 +54,11 @@ class OptionReadthedocs(Option):
         project = project.replace(".", "")
         url = f"{project}.readthedocs.io/en/latest/?badge=latest"
         img = f"readthedocs.org/projects/{project}/badge/?version=latest"
-        badge = fmt_badge(img, url, "Documentation status", cfg['doc']['fmt'])
+        badge = Badge(
+            name="readthedocs",
+            url=url,
+            url_img=img,
+            text="Documentation status"
+        )
 
         return {"badge": badge}

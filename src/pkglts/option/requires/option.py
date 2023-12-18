@@ -1,7 +1,7 @@
 import logging
 from pathlib import Path
 
-from pkglts.option.doc import fmt_badge
+from pkglts.option.doc.badge import Badge
 from pkglts.option_object import Option
 from pkglts.version import __version__
 
@@ -25,6 +25,11 @@ class OptionRequires(Option):
         base_url = f"requires.io/github/{owner}/{project}/"
         url = f"{base_url}requirements/?branch=master"
         img = f"{base_url}requirements.svg?branch=master"
-        badge = fmt_badge(img, url, "Requirements status", cfg['doc']['fmt'])
+        badge = Badge(
+            name="requires",
+            url=url,
+            url_img=img,
+            text="Requirements status"
+        )
 
         return {"badge": badge}

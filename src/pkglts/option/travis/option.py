@@ -1,7 +1,7 @@
 import logging
 from pathlib import Path
 
-from pkglts.option.doc import fmt_badge
+from pkglts.option.doc.badge import Badge
 from pkglts.option_object import Option
 from pkglts.version import __version__
 
@@ -24,6 +24,11 @@ class OptionTravis(Option):
 
         url = f"travis-ci.com/github/{owner}/{project}"
         img = f"api.travis-ci.com/{owner}/{project}.svg?branch=master"
-        badge = fmt_badge(img, url, "Travis build status", cfg['doc']['fmt'])
+        badge = Badge(
+            name="travis",
+            url=url,
+            url_img=img,
+            text="Travis build status"
+        )
 
         return {"badge": badge}

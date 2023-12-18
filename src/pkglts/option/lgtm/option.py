@@ -1,7 +1,7 @@
 import logging
 from pathlib import Path
 
-from pkglts.option.doc import fmt_badge
+from pkglts.option.doc.badge import Badge
 from pkglts.option_object import Option
 from pkglts.version import __version__
 
@@ -24,6 +24,11 @@ class OptionLgtm(Option):
 
         url = f"https://lgtm.com/projects/g/{owner}/{project}/context:python"
         img = f"https://img.shields.io/lgtm/grade/python/g/{owner}/{project}.svg?logo=lgtm&logoWidth=18"
-        badge = fmt_badge(img, url, "Language grade: Python", cfg['doc']['fmt'])
+        badge = Badge(
+            name="lgmt",
+            url=url,
+            url_img=img,
+            text="Language grade: Python"
+        )
 
         return {"badge": badge}

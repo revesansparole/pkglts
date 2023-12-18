@@ -2,7 +2,7 @@ import logging
 from pathlib import Path
 
 from pkglts.dependency import Dependency
-from pkglts.option.doc import fmt_badge
+from pkglts.option.doc.badge import Badge
 from pkglts.option_object import Option
 from pkglts.version import __version__
 
@@ -29,6 +29,11 @@ class OptionCoveralls(Option):
 
         url = f"coveralls.io/github/{owner}/{project}?branch=master"
         img = f"coveralls.io/repos/github/{owner}/{project}/badge.svg?branch=master"
-        badge = fmt_badge(img, url, "Coverage report status", cfg['doc']['fmt'])
+        badge = Badge(
+            name="coveralls",
+            url=url,
+            url_img=img,
+            text="Coverage report status"
+        )
 
         return {"badge": badge}
