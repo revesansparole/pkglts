@@ -3,7 +3,7 @@
 [//]: # ({# pkglts, doc)
 {% for badge in doc.badges -%}
 {{ badge.format(doc.fmt) }}
-{% endfor %}
+{% endfor -%}
 
 [//]: # (#})
 

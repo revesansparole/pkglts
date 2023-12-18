@@ -1,5 +1,7 @@
 from dataclasses import dataclass
 
+from url_normalize import url_normalize
+
 
 @dataclass
 class Badge:
@@ -18,15 +20,8 @@ class Badge:
             (str)
         """
 
-        if self.url.startswith("http"):
-            url = self.url
-        else:
-            url = f"https://{self.url}"
-
-        if self.url_img.startswith("http"):
-            url_img = self.url_img
-        else:
-            url_img = f"https://{self.url_img}"
+        url = url_normalize(self.url)
+        url_img = url_normalize(self.url_img)
 
         if self.text == "":
             txt = self.name
@@ -34,10 +29,11 @@ class Badge:
             txt = self.text
 
         if doc_fmt == 'rst':
-            lines = [f".. image:: {url_img}",
-                     f"    :alt: {txt}",
-                     f"    :target: {url}"]
-            return "\n" + "\n".join(lines)
+            return ("\n"
+                    f".. image:: {url_img}\n"
+                    f"    :alt: {txt}\n"
+                    f"    :target: {url}\n"
+                    )
 
         if doc_fmt == 'md':
             return f"[![{txt}]({url_img})]({url})"

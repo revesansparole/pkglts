@@ -60,18 +60,13 @@ dependencies = [
 {% endif -%}
 {%- endfor %}
 
-{% if pyproject.pkg_url or doc.documentation_url or doc.homepage_url %}
+{% if pyproject.urls -%}
 [project.urls]
+{%- for name, url in pyproject.urls.items() %}
+{{ name }} = {{ url }}
+{%- endfor %}
 {% endif %}
-{% if doc.documentation_url %}
-documentation = "{{ doc.documentation_url }}"
-{% endif %}
-{% if doc.homepage_url %}
-homepage = "{{ doc.homepage_url }}"
-{% endif %}
-{% if pyproject.pkg_url %}
-repository = "{{ pyproject.pkg_url }}"
-{% endif %}
+
 [tool.setuptools]
 {% if 'data' is available -%}
 include-package-data = true
