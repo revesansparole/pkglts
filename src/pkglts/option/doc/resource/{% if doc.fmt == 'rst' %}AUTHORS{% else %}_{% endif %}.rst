@@ -17,8 +17,8 @@ Contributors
 
 .. {# pkglts, doc.contributors
 {% if 'git' is available %}
-{% for contributor in git.contributors -%}
-* {{ contributor }}
+{% for name, email in git.contributors -%}
+* {{ name }} <{{ email }}>
 {% endfor %}
 {%- else %}
 None yet. Why not be the first?
