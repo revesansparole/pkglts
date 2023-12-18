@@ -6,32 +6,45 @@ build-backend = "setuptools.build_meta"  # we don't know if we need it
 # #}
 
 # {# pkglts, pyproject.project
-[project]  # from https://peps.python.org/pep-0621/#specification
+[project]  # https://packaging.python.org/en/latest/specifications/pyproject-toml/#declaring-project-metadata-the-project-table
 name = "{{ base.pkg_full_name }}"
 version = "{{ version.major }}.{{ version.minor }}.{{ version.post }}"
 description = "{{ doc.description }}"
 readme = "README.{{ doc.fmt }}"
-{% if pyproject.py_min_ver == pyproject.py_max_ver %}requires-python = "== {{ pyproject.py_min_ver }}"
-{%- else %}requires-python = ">= {{ pyproject.py_min_ver }}"
-{% endif %}
+{% if pyproject.py_min_ver == pyproject.py_max_ver -%}
+requires-python = "== {{ pyproject.py_min_ver }}"
+{% else -%}
+requires-python = ">= {{ pyproject.py_min_ver }}"
+{% endif -%}
 license = {text = "{{ license.name }}"}
 authors = [
-    {% for author in base.authors %}{name = "{{ author[0] }}", email = "{{ author[1] }}"}, {% endfor %}
+    {%- for author in base.authors %}
+    {name = "{{ author[0] }}", email = "{{ author[1] }}"},
+    {%- endfor %}
 ]
-{% if 'git' is available %}maintainers = [
-    {% for contrib in git.contributors -%}{name = "{{ contrib[0] }}", email = "{{ contrib[1] }}"}, {% endfor %}
+{% if 'git' is available -%}
+maintainers = [
+    {%- for contrib in git.contributors %}
+    {name = "{{ contrib[0] }}", email = "{{ contrib[1] }}"},
+    {%- endfor %}
 ]
-{%- else %}maintainers = []
+{%- else %}
+maintainers = []
 {% endif %}
-keywords = ['{{ doc.keywords|join(", ") }}']
-{% if 'pypi' is available %}classifiers = [
+keywords = [
+    {%- for keyword in doc.keywords %}
+    {{ keyword }},
+    {%- endfor %}
+]
+{% if 'pypi' is available -%}
+classifiers = [
     {%- for kwd in pypi.auto_classifiers %}
     "{{ kwd }}",
     {%- endfor %}
 ]
 {% endif -%}
 dependencies = [
-    {% for dep in reqs.requirements('install') -%}
+    {%- for dep in reqs.requirements('install') %}
     {% if dep.is_pip(strict=False) -%}"{{ dep.fmt_pip_requirement() }}", {% endif -%}
     {%- endfor %}
 ]
@@ -40,10 +53,8 @@ dependencies = [
 {% for intent in reqs.intents() -%}
 {% if intent != 'install' -%}
 {{ intent }} = [
-    {% for dep in reqs.requirements(intent) -%}
-    {% if dep.is_pip(strict=False) -%}
-    "{{ dep.fmt_pip_requirement() }}",
-    {% endif -%}
+    {%- for dep in reqs.requirements(intent) %}
+    {% if dep.is_pip(strict=False) -%}"{{ dep.fmt_pip_requirement() }}",{% endif -%}
     {%- endfor %}
 ]
 {% endif -%}
@@ -54,17 +65,18 @@ homepage = "www.google.fr"  # poetry
 repository = "{{ pyproject.pkg_url }}"
 {% endif %}
 [tool.setuptools]
-{% if 'data' is available -%}include-package-data = true
-{% else -%}include-package-data = false
-{%- endif %}
+{% if 'data' is available -%}
+include-package-data = true
+{% else -%}
+include-package-data = false
+{% endif %}
 [tool.setuptools.packages.find]
 where = ["src"]
 
 {% if 'data' is available -%}
 [tool.setuptools.package-data]
 "*" = [{% for file_ext in data.filetype %}'*{{ file_ext }}', {% endfor %}]
-
-{% endif -%}
+{% endif %}
 # #}
 
 # {# pkglts, pyproject.scripts
