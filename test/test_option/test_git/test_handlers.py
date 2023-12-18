@@ -5,7 +5,7 @@ def test_contributors_with_failed_request(mocker):
     mocker.patch('subprocess.check_output', side_effect=KeyError)
     cfg = Config(dict(git={}))
     cfg.load_extra()
-    assert "failed" in cfg._env.globals['git'].contributors[0]
+    assert "failed" in cfg._env.globals['git'].contributors[0][0]
 
 
 def test_contributors_without_failed_request(mocker):
