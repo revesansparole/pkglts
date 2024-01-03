@@ -4,7 +4,7 @@
 name: {{ conda.env_name }}
 
 channels:
-{%- for channel in conda.channels %}
+{%- for channel in conda.channels_minimal %}
 - {{ channel }}
 {%- endfor %}
 - defaults

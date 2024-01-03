@@ -39,5 +39,6 @@ class OptionConda(Option):
 
     def environment_extensions(self, cfg):
         channels = set(dep.channel for dep in requirements(cfg)) - {None}
+        channels_minimal = set(dep.channel for dep in requirements(cfg) if 'install' in dep.intents) - {None}
 
-        return {"channels": channels}
+        return {"channels": channels, "channels_minimal": channels_minimal}
