@@ -1,6 +1,8 @@
 import logging
 from pathlib import Path
 
+from url_normalize import url_normalize
+
 from pkglts.option_object import Option
 from pkglts.version import __version__
 
@@ -39,55 +41,33 @@ class OptionPyproject(Option):
         universal = len(set(ver.split(".")[0] for ver in cfg[self._name]['intended_versions'])) > 1
 
         return {
-            "pkg_url": pkg_url(cfg),
+            "urls": find_urls(cfg),
             "py_max_ver": ".".join(str(v) for v in py_vers[-1]),
             "py_min_ver": ".".join(str(v) for v in py_vers[0]),
             "universal": universal
         }
 
 
-def pkg_url(cfg):
-    """Extract a valid url from all config sections.
+def find_urls(cfg):
+    """Extract all valid urls from all config sections.
 
     Args:
         cfg (Config):  current package configuration
 
     Returns:
-        (str): a valid url for the package
+        dict(str, str): key, url
     """
-    try:
-        url = cfg['base']['url']
-        if url is not None:
-            return url
-    except KeyError:
-        pass
+    urls = {}
+    for name, section, key in [
+        ("homepage", "base", "url"),
+        ("repository", "github", "url"),
+        ("repository", "gitlab", "url"),
+    ]:
+        try:
+            url = cfg[section][key]
+            if url is not None:
+                urls[name] = url_normalize(url)
+        except KeyError:
+            pass
 
-    try:
-        url = cfg['github']['url']
-        if url is not None:
-            return url
-    except KeyError:
-        pass
-
-    try:
-        url = cfg['gitlab']['url']
-        if url is not None:
-            return url
-    except KeyError:
-        pass
-
-    # try:
-    #     url = cfg['pypi']['url']
-    #     if url is not None:
-    #         return url
-    # except KeyError:
-    #     pass
-
-    # try:
-    #     url = cfg['readthedocs']['url']
-    #     if url is not None:
-    #         return url
-    # except KeyError:
-    #     pass
-
-    return ""
+    return urls

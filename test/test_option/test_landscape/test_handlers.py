@@ -6,4 +6,4 @@ def test_badge():
                       doc={'fmt': 'rst'},
                       github={'owner': "moi", 'project': "project"}))
     cfg.load_extra()
-    assert ".. image:" in cfg._env.globals['landscape'].badge
+    assert "landscape" in cfg._env.globals['landscape'].badge.name

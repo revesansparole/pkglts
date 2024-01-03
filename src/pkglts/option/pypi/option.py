@@ -3,7 +3,7 @@ from pathlib import Path
 
 from pkglts.dependency import Dependency
 from pkglts.local import pkg_full_name
-from pkglts.option.doc import fmt_badge
+from pkglts.option.doc.badge import Badge
 from pkglts.option_object import Option
 from pkglts.version import __version__
 
@@ -55,8 +55,10 @@ class OptionPypi(Option):
         servers = cfg['pypi']['servers']
         if servers and servers[0]['name'] == 'pypi':
             url = f"badge.fury.io/py/{pkg_full_name(cfg)}"
-            img = f"{url}.svg"
-            ext['badge'] = fmt_badge(img, url, "PyPI version", cfg['doc']['fmt'])
+            ext['badge'] = Badge(name="pypi",
+                                 url=url,
+                                 url_img=f"{url}.svg",
+                                 text="PyPI version")
 
         return ext
 

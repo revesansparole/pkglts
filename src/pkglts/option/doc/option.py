@@ -22,7 +22,7 @@ class OptionDoc(Option):
         sec = dict(
             description="belle petite description",
             fmt="rst",
-            keywords=[]
+            keywords=[],
         )
         cfg[self._name] = sec
 

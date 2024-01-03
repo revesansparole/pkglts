@@ -1,7 +1,7 @@
 import logging
 from pathlib import Path
 
-from pkglts.option.doc import fmt_badge
+from pkglts.option.doc.badge import Badge
 from pkglts.option_object import Option
 from pkglts.version import __version__
 
@@ -24,6 +24,11 @@ class OptionLandscape(Option):
 
         url = f"landscape.io/github/{owner}/{project}/master"
         img = f"{url}/landscape.svg?style=flat"
-        badge = fmt_badge(img, url, "Code health status", cfg['doc']['fmt'])
+        badge = Badge(
+            name="landscape",
+            url=url,
+            url_img=img,
+            text="Code health status"
+        )
 
         return {"badge": badge}

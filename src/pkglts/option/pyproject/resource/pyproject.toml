@@ -59,11 +59,15 @@ dependencies = [
 ]
 {% endif -%}
 {%- endfor %}
-{% if pyproject.pkg_url %}[project.urls]
-documentation = "www.google.fr"
-homepage = "www.google.fr"  # poetry
-repository = "{{ pyproject.pkg_url }}"
-{% endif %}
+
+[project.urls]
+{%- for name, url in pyproject.urls.items() %}
+{{ name }} = {{ url }}
+{%- endfor %}
+{% for badge in doc.badges -%}
+{{ badge.name }} = {{ badge.url }}
+{% endfor %}
+
 [tool.setuptools]
 {% if 'data' is available -%}
 include-package-data = true

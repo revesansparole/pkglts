@@ -6,7 +6,7 @@ from pkglts.config_management import Config
 def test_pkg_url_empty_default():
     cfg = Config(dict(pyproject={"intended_versions": ["2.7"]}))
     cfg.load_extra()
-    assert cfg._env.globals['pyproject'].pkg_url == ""
+    assert len(cfg._env.globals['pyproject'].urls) == 0
 
 
 def test_pkg_url_look_multiple_places():
@@ -23,7 +23,7 @@ def test_pkg_url_look_multiple_places():
         loc_cfg[name]['url'] = name
         cfg = Config(loc_cfg)
         cfg.load_extra()
-        assert cfg._env.globals['pyproject'].pkg_url == name
+        assert any(name in url for url in cfg._env.globals['pyproject'].urls.values())
 
 
 def test_py_max_ver_uses_max_intended_version():
