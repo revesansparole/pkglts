@@ -1,8 +1,7 @@
 """ Some helpers for options
 """
 import logging
-
-import pkg_resources
+from importlib.metadata import EntryPoint, entry_points
 
 LOGGER = logging.getLogger(__name__)
 
@@ -12,7 +11,7 @@ class EpDict(dict):
 
     def __getitem__(self, name):
         val = dict.__getitem__(self, name)
-        if isinstance(val, pkg_resources.EntryPoint):
+        if isinstance(val, EntryPoint):
             val = val.load()(name)
             self[name] = val
 
@@ -35,7 +34,7 @@ def find_available_options():
     Returns:
         (dict of str: Option)
     """
-    for ept in pkg_resources.iter_entry_points(group='pkglts'):
+    for ept in entry_points(group='pkglts'):
         option_name = ept.name
         if option_name not in available_options:
             available_options[option_name] = ept
