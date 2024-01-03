@@ -25,7 +25,7 @@ class OptionLgtm(Option):
         url = f"https://lgtm.com/projects/g/{owner}/{project}/context:python"
         img = f"https://img.shields.io/lgtm/grade/python/g/{owner}/{project}.svg?logo=lgtm&logoWidth=18"
         badge = Badge(
-            name="lgmt",
+            name="lgtm",
             url=url,
             url_img=img,
             text="Language grade: Python"

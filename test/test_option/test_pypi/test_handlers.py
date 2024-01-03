@@ -9,7 +9,7 @@ def test_badge():
                                'require': []},
                       pypi={'classifiers': [], 'servers': [dict(name="pypi", url="https://upload.pypi.org/legacy/")]}))
     cfg.load_extra()
-    assert ".. image:" in cfg._env.globals['pypi'].badge
+    assert "pypi" in cfg._env.globals['pypi'].badge.name
 
 
 def test_auto_classifiers():

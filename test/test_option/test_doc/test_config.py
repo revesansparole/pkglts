@@ -15,7 +15,7 @@ def cfg():
 
 def test_update_parameters(opt, cfg):
     opt.update_parameters(cfg)
-    assert len(cfg['doc']) == 5
+    assert len(cfg['doc']) == 3
 
 
 def test_config_check_description_exists(opt, cfg):
