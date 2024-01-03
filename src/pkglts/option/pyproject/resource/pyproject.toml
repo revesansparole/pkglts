@@ -33,7 +33,7 @@ maintainers = []
 {%- endif %}
 keywords = [
     {%- for keyword in doc.keywords %}
-    {{ keyword }},
+    "{{ keyword }}",
     {%- endfor %}
 ]
 {% if 'pypi' is available -%}
@@ -62,10 +62,10 @@ dependencies = [
 
 [project.urls]
 {%- for name, url in pyproject.urls.items() %}
-{{ name }} = {{ url }}
+{{ name }} = "{{ url }}"
 {%- endfor %}
 {% for badge in doc.badges -%}
-{{ badge.name }} = {{ badge.url }}
+{{ badge.name }} = "{{ badge.url }}"
 {% endfor %}
 
 [tool.setuptools]
@@ -90,8 +90,3 @@ where = ["src"]
 # {# pkglts, pyproject.gui_scripts
 [project.gui-scripts]
 # #}
-
-# {# pkglts, pyproject.entry_points
-[project.entry-points]
-# #}
-

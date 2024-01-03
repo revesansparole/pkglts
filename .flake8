@@ -1,0 +1,4 @@
+# {# pkglts, flake8
+[flake8]
+exclude = example, wip
+# #}
