@@ -41,6 +41,6 @@ class OptionGit(Option):
             LOGGER.warning("Please add git to your $PATH")
             contributors = [("I failed to construct the contributor list", "")]
         except subprocess.CalledProcessError as err:
-            contributors = [(f"Pb with git, {err}", "")]
+            contributors = [(f"Pb with git, {err}", "err@err.err")]
 
         return {'contributors': contributors}
