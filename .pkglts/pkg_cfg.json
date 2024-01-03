@@ -119,6 +119,9 @@
       },
       {
         "name": "unidecode"
+      },
+      {
+        "name": "url-normalize"
       }
     ]
   },

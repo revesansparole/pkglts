@@ -13,4 +13,5 @@ dependencies:
 - requests
 - semver
 - unidecode
+- url-normalize
 # #}

@@ -17,7 +17,7 @@
     "travis": "x0VpUxrMwqZjAEcpGRTRhxBK/L8glrgMhIpjaRwOkI4Ur2BQRN0VFihAfeSdr8UCal4XT8kXzC/r1PibD+OmpQ==",
     "travis.addons": "qA98wmBu9uVHTpax5SDBfs9DLw2ppWa9FXBEEwz7VI8Q2Sn/tXgwCN94ttB9B9EJv/utGZjLgwnszsfk0/yBOg==",
     "travis.after": "veQncG9PjU1UhCfzzNEtfVgUZ+iPmx9TVKRZWbLepccpcpNo8LvgMyTkYgGYNyLPbijRTXQdVQaDQRs6MCDYwA==",
-    "travis.install": "46GBb0A8cqVSF4dTer9R9z5cqsnNvrZhCP9d0C5FOuNllCl6YYyR+1LF01WaJl7LSBzj7/C/aQNi7RukHOgcuw==",
+    "travis.install": "h6rfaYCR2zb6/RUd1Uxlh+L6FHNPIc68M4eHOe1oK3BUE38ih1xlnaApblglUVzwn0IlSZEfaEiWaRiRKe2mZg==",
     "travis.script": "qj1gr+V/f64/2mkg9Jy8K5+J2Y4JQEwF4rJLtZJWEBPLPQfbAaqMWutlVGONPL/RuG9PS+X5Z2T4xB7B9W7IHA=="
   },
   "AUTHORS.rst": {
@@ -33,20 +33,20 @@
     "doc": "1X4cCBCIGMpNHvcDZexkQrOsJjC/n2kUOVBN50av6kAghmVxkcPzH8HIV1hmwcdmxdMSLQc39LVKKxFKvTZjEg=="
   },
   "appveyor.yml": {
-    "appveyor": "BWF8QAI96yuWzJiCpeu+kfOF4jDARH5xnBvVnq604H5wso5sTmwXhKk8ZferoGzoJBSNLYM9pUn5lGaLrfbNPA=="
+    "appveyor": "bq8kzQ4nApzK5eJvrroVrC6NtFbUZAX5Kym2G0SFkiSXZgwhXWHpbjxZN2HAM9fu6s4+Kaw1eqc4gQY6sWFHmQ=="
   },
   "conda/meta.yaml": {
     "conda.about": "6/RoaDh45Wwcc0uAhKGnUH46mczqPBQq/PV0cSCbe+fhiDQPOooOK8u24GzswyAcXIEHoASc/XIe+WS/2zBl5A==",
     "conda.package": "b6nhMCxBQlKHkmU7ij20FYLsmzdGTeXSljXefmAPKWYWYGJIzBUBnynzpmeHGRY0s1HZacL++RICSaUx8lJh6w==",
     "conda.req_build": "PHQ4LRj963FIG00GtdBBsC4RGzQPqOz8nxsL3g3mCpe6xaYzXaEMD/Eifbbfi+X+Z578AJlr/Qsw4fgVokh+vQ==",
-    "conda.req_run": "tAHRVsBmpT3G6fyAPJkEHz1WG4680wzFomYI2F+7oMSggoS73xMjEXINojQRwtSEgNIbUvcWxht0663/LYY8Yw==",
+    "conda.req_run": "lfDHi4bDZyKItXtOtTH0veX4N30cbZWG78Y65Wi3T0LeyB0rJ/YFwEUR/OmWKoLL6kCnA/+SKqR+vO5fvre1Qw==",
     "conda.src": "Lzbp176AVU0YantZQxB4LsR2jbxpZ/OlkvY2V4aWAEuzKEarh872uc1eRvsIYf/FsbxvcmUI84AezWlA72nI6A=="
   },
   "conda/requirements.yml": {
-    "conda": "H4q7i0AURZ2acq6ug0sIQte0oS8LRNwa/BcBWnpWJkLB1UUTrrPUELJQbcJJ2feQfHZSJYF10oRwIT0KpaOPuw=="
+    "conda": "MYvHSVKloBFg8rRy7WeASK5ZNld6nXFL8d4KjwHMea9/MbWlz0MwTELokGiNutZ/3aMaZEr/oTVjQAKDQpALLQ=="
   },
   "conda/requirements_minimal.yml": {
-    "conda": "2VGCUSYzZzpfQsjRjR6eqoKuq3CowyFaPBs0CFNYk9p/guirsg6anw8X/6Bc/jLYnd+YYdOnXffgKdVOA0EKbg=="
+    "conda": "OSCXJdRjGu1eirHE1gWdXMfbvyCwYCWM2Ch+oRI4aX5St8uiF1klVGU3WBpMALaFeHn+QgmzHPU/sLH5OPbqjg=="
   },
   "doc/Makefile": {
     "sphinx": "EsaaEppe6Kw79WHpUyBigedrIraP6YlQDBg9Fu6jue32Rt6mCQkk2zH7gfOVqjT5bNpnXN90UfLkrzHVJCo6UQ=="
@@ -61,15 +61,15 @@
   "pyproject.toml": {
     "pyproject.build": "I2LGHHOpCXWlR8y2Sb2cY5UG39iTOOrVRVdA911ZyiSQt5YGkno3LbeRNL4DxPeE9zgYef1R8FDKDPB3U6f79g==",
     "pyproject.gui_scripts": "VNRlO4ElRuynet0DT31hGYve1t2FV1CooE7f9Bi+PIRMF5YmdymGAS4Q6k4woJdDJ3JILO7ozz/yv4RpujFdQQ==",
-    "pyproject.project": "3LNgePP5gUHEV2Aj93DdHiMlW1fUjYS/G1Wu0WGYlLekjpK4zC83IqXHZ6+QZ/LFM6nIoA6T8mYynu2mEHm9Zg==",
+    "pyproject.project": "0U2Gp/JuDnAxCEJvjjpjxijZijnfBbINGl15Ud+GDwsNjGCUa0XsnOA53H4dHxRuGRJlSuisHQfF+CW21214jQ==",
     "pyproject.scripts": "nxzQt1CUNkpQiiU7Ajxf8abPXHZurGnQFv5j+v5nxAM9VwHmddCFUclVMs+nAk+DSBoFCOFU4k2hboyksj2e3Q==",
     "test": "51JkfgVeFNaglq12GZAwGmdw31KCnH7aTHCG3kzFaDBJ9gTzNSYh7eZrdUVSt4P/lk0PZKQdmVQma9cTTK+1Iw=="
   },
   "requirements.txt": {
-    "reqs": "G/z+Ryn/YKfAHkqDHs3CLv+NNjMgVaq4L44S0AD3uukO3pj1sVThuPcEYdOC8eu8+q25IDp//wkrrlfp+P62Ag=="
+    "reqs": "gps2veTNDXQkAUmzkXeP4nVMwKOp2He+UlIAWMV52BQWfvqrIP7B3ySXXMiMBa+ncLmJWKLYAZRifUS4kALPhA=="
   },
   "requirements_minimal.txt": {
-    "reqs": "VgrymzAkHHQ5cX2LBMGqNkCAcOD7sb2jUFNwVysB9t3gzHgMH3ZhMacfxXNL85A4+5WVR6jInOjf9e9Wv8RTkg=="
+    "reqs": "vQLww+quR9LoVDm0vI2b3GS2S3GIxXJEwCrO4TP6e09vLbh/Hm8IjMWwLaqSfFHoZDGIl7UYsH5gT0hK2k9LBQ=="
   },
   "src/pkglts/__init__.py": {
     "src": "L2dZgUBRC5qv3o09+1CbMcgYfQtR1ZNSvP8KlP8REQazZiAQAktALjpCC2ijdxvKPv/tN9KsZrzNW+lZMszSfg==",
