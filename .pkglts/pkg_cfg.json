@@ -137,8 +137,8 @@
   "tox": {},
   "travis": {},
   "version": {
-    "major": 6,
-    "minor": 6,
-    "post": 1
+    "major": 7,
+    "minor": 0,
+    "post": 0
   }
 }
