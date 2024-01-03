@@ -23,8 +23,6 @@ class OptionDoc(Option):
             description="belle petite description",
             fmt="rst",
             keywords=[],
-            documentation_url=None,
-            homepage_url=None
         )
         cfg[self._name] = sec
 

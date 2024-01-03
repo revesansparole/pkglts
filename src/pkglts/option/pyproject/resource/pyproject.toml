@@ -60,12 +60,13 @@ dependencies = [
 {% endif -%}
 {%- endfor %}
 
-{% if pyproject.urls -%}
 [project.urls]
 {%- for name, url in pyproject.urls.items() %}
 {{ name }} = {{ url }}
 {%- endfor %}
-{% endif %}
+{% for badge in doc.badges -%}
+{{ badge.name }} = {{ badge.url }}
+{% endfor %}
 
 [tool.setuptools]
 {% if 'data' is available -%}

@@ -60,10 +60,8 @@ def find_urls(cfg):
     urls = {}
     for name, section, key in [
         ("homepage", "base", "url"),
-        ("homepage", "doc", "homepage_url"),
         ("repository", "github", "url"),
         ("repository", "gitlab", "url"),
-        ("documentation", "doc", "documentation_url"),
     ]:
         try:
             url = cfg[section][key]
