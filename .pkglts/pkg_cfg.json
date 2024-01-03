@@ -3,7 +3,7 @@
     "auto_install": true,
     "install_front_end": "stdout",
     "use_prompts": false,
-    "version": 17
+    "version": 18
   },
   "appveyor": {
     "token": "hrwjhn2oe0q4oaf2"
@@ -92,12 +92,14 @@
       }
     ]
   },
-  "pysetup": {
+  "pyproject": {
     "intended_versions": [
       "3.6",
       "3.7",
       "3.8",
-      "3.9"
+      "3.9",
+      "3.10",
+      "3.11"
     ]
   },
   "readthedocs": {
@@ -117,6 +119,9 @@
       },
       {
         "name": "unidecode"
+      },
+      {
+        "name": "url-normalize"
       }
     ]
   },
@@ -137,8 +142,8 @@
   "tox": {},
   "travis": {},
   "version": {
-    "major": 6,
-    "minor": 6,
-    "post": 1
+    "major": 7,
+    "minor": 0,
+    "post": 0
   }
 }

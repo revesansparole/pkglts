@@ -8,9 +8,10 @@ channels:
 - defaults
 
 dependencies:
-- python=3.9
+- python=3.11
 - jinja2
 - requests
 - semver
 - unidecode
+- url-normalize
 # #}

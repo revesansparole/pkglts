@@ -19,7 +19,7 @@ class OptionPyproject(Option):
     def update_parameters(self, cfg):
         LOGGER.info("update parameters %s", self._name)
         sec = dict(
-            intended_versions=["3.10"],
+            intended_versions=["3.11"],
         )
         cfg[self._name] = sec
 

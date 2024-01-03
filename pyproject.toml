@@ -1,0 +1,138 @@
+# {# pkglts, pyproject.build
+[build-system]
+# Minimum requirements for the build system to execute.
+requires = ["setuptools", "wheel"]  # , "setuptools-scm"]  # PEP 508 specifications.
+build-backend = "setuptools.build_meta"  # we don't know if we need it
+# #}
+
+# {# pkglts, pyproject.project
+[project]  # https://packaging.python.org/en/latest/specifications/pyproject-toml/
+name = "pkglts"
+version = "7.0.0"
+description = "Building packages with long term support"
+readme = "README.rst"
+requires-python = ">= 3.6"
+license = {text = "CeCILL-C"}
+authors = [
+    {name = "revesansparole", email = "revesansparole@gmail.com"},
+]
+maintainers = [
+    {name = "revesansparole", email = "revesansparole@gmail.com"},
+    {name = "ThT12", email = "ThT12@ThT12.fr"},
+    {name = "pradal", email = "christophe.pradal@inria.fr"},
+    {name = "egarciaitk", email = "emilien.garcia@itk.fr"},
+    {name = "Simon Artzet", email = "simon.artzet@gmail.com"},
+    {name = "lquibel", email = "lucie.quibel@itk.fr"},
+    {name = "Christophe Pradal", email = "christophe.pradal@inria.fr"},
+    {name = "Samuel Andres", email = "samuel.andres@itk.fr"},
+]
+keywords = [
+    "packaging",
+    "package builder",
+]
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: BSD License",
+    "Natural Language :: English",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+]
+dependencies = [
+    "jinja2", 
+    "requests", 
+    "semver", 
+    "unidecode", 
+    "url-normalize", 
+]
+
+[project.optional-dependencies]
+doc = [
+    "sphinx",
+    "sphinx_rtd_theme",
+]
+dvlpt = [
+    "flake8",
+    "twine",
+]
+test = [
+    "coverage",
+    "coveralls",
+    "pytest",
+    "pytest-cov",
+    "pytest-mock",
+    "tox",
+]
+
+
+[project.urls]
+repository = "https://github.com/revesansparole/pkglts"
+appveyor = "https://ci.appveyor.com/project/revesansparole/pkglts/branch/master"
+coveralls = "https://coveralls.io/github/revesansparole/pkglts?branch=master"
+landscape = "https://landscape.io/github/revesansparole/pkglts/master"
+lgtm = "https://lgtm.com/projects/g/revesansparole/pkglts/context:python"
+pypi = "https://badge.fury.io/py/pkglts"
+readthedocs = "https://pkglts.readthedocs.io/en/latest/?badge=latest"
+requires = "https://requires.io/github/revesansparole/pkglts/requirements/?branch=master"
+travis = "https://travis-ci.com/github/revesansparole/pkglts"
+
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"*" = ['*', '*.bat', '*.cfg', '*.json', '*.md', '*.in', '*.ini', '*.png', '*.ps1', '*.rst', '*.sh', '*.tpl', '*.txt', '*.yaml', '*.yml', ]
+
+# #}
+# {# pkglts, test, after pyproject.project
+[tool.pytest.ini_options]
+addopts = "--maxfail=2 -rf --cov=pkglts"
+# #}
+
+# {# pkglts, pyproject.scripts
+[project.scripts]
+# #}
+pmg = "pkglts.manage_script:main"
+
+# {# pkglts, pyproject.gui_scripts
+[project.gui-scripts]
+# #}
+
+[project.entry-points."pkglts"]
+base = "pkglts.option.base.option:OptionBase"
+appveyor = "pkglts.option.appveyor.option:OptionAppveyor"
+conda = "pkglts.option.conda.option:OptionConda"
+coverage = "pkglts.option.coverage.option:OptionCoverage"
+coveralls = "pkglts.option.coveralls.option:OptionCoveralls"
+data = "pkglts.option.data.option:OptionData"
+doc = "pkglts.option.doc.option:OptionDoc"
+flake8 = "pkglts.option.flake8.option:OptionFlake8"
+git = "pkglts.option.git.option:OptionGit"
+github = "pkglts.option.github.option:OptionGithub"
+gitlab = "pkglts.option.gitlab.option:OptionGitlab"
+landscape = "pkglts.option.landscape.option:OptionLandscape"
+lgtm = "pkglts.option.lgtm.option:OptionLgtm"
+license = "pkglts.option.license.option:OptionLicense"
+notebook = "pkglts.option.notebook.option:OptionNotebook"
+plugin_project = "pkglts.option.plugin_project.option:OptionPluginProject"
+pypi = "pkglts.option.pypi.option:OptionPypi"
+pyproject = "pkglts.option.pyproject.option:OptionPyproject"
+readthedocs = "pkglts.option.readthedocs.option:OptionReadthedocs"
+reqs = "pkglts.option.reqs.option:OptionReqs"
+requires = "pkglts.option.requires.option:OptionRequires"
+sphinx = "pkglts.option.sphinx.option:OptionSphinx"
+src = "pkglts.option.src.option:OptionSrc"
+test = "pkglts.option.test.option:OptionTest"
+tox = "pkglts.option.tox.option:OptionTox"
+travis = "pkglts.option.travis.option:OptionTravis"
+version = "pkglts.option.version.option:OptionVersion"

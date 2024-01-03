@@ -16,6 +16,7 @@ jinja2
 requests
 semver
 unidecode
+url-normalize
 
 # test
 coverage

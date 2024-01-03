@@ -16,14 +16,14 @@ install:
   # useful for debugging any issues with conda
   - "%CONDA%\\conda info -a"
   # create environment
-  - "%CONDA%\\conda create -n ci python=3.9"
+  - "%CONDA%\\conda create -n ci python=3.11"
   - "%CONDA%\\activate ci"
 
 build: false
 
 build_script:
   # install dependencies
-  - "%CONDA%\\conda install -c conda-forge coverage coveralls flake8 jinja2 pytest pytest-cov pytest-mock requests semver sphinx sphinx_rtd_theme tox twine unidecode"
+  - "%CONDA%\\conda install -c conda-forge coverage coveralls flake8 jinja2 pytest pytest-cov pytest-mock requests semver sphinx sphinx_rtd_theme tox twine unidecode url-normalize"
   
 
   # install package
