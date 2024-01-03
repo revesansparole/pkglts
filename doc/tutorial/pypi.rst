@@ -25,7 +25,7 @@ add options base, test, doc, version, license
 Make a distribution of your package
 ===================================
 
-Use of pysetup option
+Use of pyproject option
 
 Check your code thoroughly
 ==========================

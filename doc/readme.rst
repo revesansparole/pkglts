@@ -51,7 +51,7 @@ already existing package:
  - :doc:`option/doc/main`: Add some documentation to your package
  - :doc:`option/test/main`: basic unitests using Nose_
  - :doc:`option/coverage/main`: add code coverage_ to the basic test configuration
- - :doc:`option/pyproject/main`: make your package distributable with setuptools (i.e. setup.py)
+ - :doc:`option/pyproject/main`: make your package distributable with pip (i.e. pyproject.toml)
  - :doc:`option/data/main`: will guide through all the steps to add non python files to a package
  - :doc:`option/github/main`: will guide through all the step to safely store the package on Github_
  - :doc:`option/gitlab/main`: will guide through all the step to safely store the package on a Gitlab_ repo
@@ -84,7 +84,7 @@ To install a new option call the 'add' action::
 The script will perform different tasks sequentially:
 
  - Check if this option requires other options in order to be installed:
-   e.g. the 'pysetup' option requires all 'base, 'doc', 'test', 'license' and 'version'
+   e.g. the 'pyproject' option requires all 'base, 'doc', 'test', 'license' and 'version'
    in order to run properly.
  - Check if this option requires some extra packages in order to setup:
    e.g. the 'test' option depends on the Nose_ package to function properly.
