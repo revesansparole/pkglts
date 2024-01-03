@@ -10,6 +10,10 @@ class Badge:
     url_img: str
     text: str = ""
 
+    def __post_init__(self):
+        self.url = url_normalize(self.url)
+        self.url_img = url_normalize(self.url_img)
+
     def format(self, doc_fmt):
         """Produce valid img hyperlink.
 
@@ -19,10 +23,6 @@ class Badge:
         Returns:
             (str)
         """
-
-        url = url_normalize(self.url)
-        url_img = url_normalize(self.url_img)
-
         if self.text == "":
             txt = self.name
         else:
@@ -30,12 +30,12 @@ class Badge:
 
         if doc_fmt == 'rst':
             return ("\n"
-                    f".. image:: {url_img}\n"
+                    f".. image:: {self.url_img}\n"
                     f"    :alt: {txt}\n"
-                    f"    :target: {url}\n"
+                    f"    :target: {self.url}\n"
                     )
 
         if doc_fmt == 'md':
-            return f"[![{txt}]({url_img})]({url})"
+            return f"[![{txt}]({self.url_img})]({self.url})"
 
         raise UserWarning(f"Unknown format '{doc_fmt}'")

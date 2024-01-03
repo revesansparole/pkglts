@@ -74,14 +74,14 @@ test = [
 
 [project.urls]
 repository = "https://github.com/revesansparole/pkglts"
-appveyor = "ci.appveyor.com/project/revesansparole/pkglts/branch/master"
-coveralls = "coveralls.io/github/revesansparole/pkglts?branch=master"
-landscape = "landscape.io/github/revesansparole/pkglts/master"
+appveyor = "https://ci.appveyor.com/project/revesansparole/pkglts/branch/master"
+coveralls = "https://coveralls.io/github/revesansparole/pkglts?branch=master"
+landscape = "https://landscape.io/github/revesansparole/pkglts/master"
 lgtm = "https://lgtm.com/projects/g/revesansparole/pkglts/context:python"
-pypi = "badge.fury.io/py/pkglts"
-readthedocs = "pkglts.readthedocs.io/en/latest/?badge=latest"
-requires = "requires.io/github/revesansparole/pkglts/requirements/?branch=master"
-travis = "travis-ci.com/github/revesansparole/pkglts"
+pypi = "https://badge.fury.io/py/pkglts"
+readthedocs = "https://pkglts.readthedocs.io/en/latest/?badge=latest"
+requires = "https://requires.io/github/revesansparole/pkglts/requirements/?branch=master"
+travis = "https://travis-ci.com/github/revesansparole/pkglts"
 
 
 [tool.setuptools]
