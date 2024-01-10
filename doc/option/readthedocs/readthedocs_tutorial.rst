@@ -33,28 +33,19 @@ of your project on github.
 
 .. image:: readthedocs_github_repo_url.png
 
-Leave the repository type on 'git' and don't forget to check the 'edit advanced'
-before you click on 'next' if you want to add more information.
+Leaving default branch blank and language to english, clicking **next** will lead
+you to a page explaining how to setup your project.
+Since this part is managed by pkglts you can safely ignore it and click on **finish**.
+
+.. image:: readthedocs_finish_import.png
 
 Making the generation of your doc successful
 --------------------------------------------
 
-The previous step must have led you to your project home page with a sentence
-reading that the build is in progress.
+For your documentation to be build everytime you push on your original repo, you
+need to follow the doc and register a webhook.
 
-.. image:: readthedocs_project_page.png
-
-Unfortunately there is a good chance that this build will fail depending on the
-actual external package requirements of your project. To ensure subsequent build
-to be successful, you need to activate the virtualenv option. Check the corresponding
-box in the admin/advanced settings panel.
-
-.. image:: readthedocs_admin.png
-
-and enter 'requirements.txt' in the 'requirement file' field of the form. Don't
-forget to click on the 'submit' button at the bottom of the page. You'll be
-redirected to the project home page and a new build must be taking place. A successful
-one this time hopefully :)
+https://docs.readthedocs.io/en/stable/guides/setup/git-repo-manual.html
 
 Final remark
 ------------
