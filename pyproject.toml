@@ -8,7 +8,7 @@ build-backend = "setuptools.build_meta"  # we don't know if we need it
 # {# pkglts, pyproject.project
 [project]  # https://packaging.python.org/en/latest/specifications/pyproject-toml/
 name = "pkglts"
-version = "7.1.0"
+version = "7.2.0"
 description = "Building packages with long term support"
 readme = "README.rst"
 requires-python = ">= 3.6"
