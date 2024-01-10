@@ -13,6 +13,9 @@
     "pypi.serverdescr": "d6B+Qvp4m8jn/exks3Rn+36F5CYJtuu7hnbIDZauGJVydBD8d2afBO1Pq0KNvhuDgx5x4tslaFISorNRxUqAXA==",
     "pypi.serverlist": "PC9SiM3/1x2vn66stkaGs8IZmA3C9zq9z6sBMLr74e3tdF5l0eBAZsagfMbQjPF+AW6evtXBtpEDMsF3dkjVHQ=="
   },
+  ".readthedocs.yaml": {
+    "readthedocs": "e4HbismVoED+hJgwwj+saV1QHZgWAEw4KebagIeCasZ29Q517FZg4noW+erGczqimGB5DdBvNqCBsvaAxDzn7A=="
+  },
   ".travis.yml": {
     "travis": "x0VpUxrMwqZjAEcpGRTRhxBK/L8glrgMhIpjaRwOkI4Ur2BQRN0VFihAfeSdr8UCal4XT8kXzC/r1PibD+OmpQ==",
     "travis.addons": "qA98wmBu9uVHTpax5SDBfs9DLw2ppWa9FXBEEwz7VI8Q2Sn/tXgwCN94ttB9B9EJv/utGZjLgwnszsfk0/yBOg==",

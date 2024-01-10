@@ -9,15 +9,25 @@ version: 2
 build:
   os: ubuntu-22.04
   tools:
+{%- if 'conda' is available %}
     python: "miniconda3-4.7"
+{%- else %}
+    python: "3.11"
+{%- endif %}
 
 # Build documentation in the docs/ directory with Sphinx
 sphinx:
-  configuration: doc/conf.py
+  configuration: {{ sphinx.doc_dir }}/conf.py
 
 # We recommend specifying your dependencies to enable reproducible builds:
 # https://docs.readthedocs.io/en/stable/guides/reproducible-builds.html
+{%- if 'conda' is available %}
 conda:
   environment: conda/requirements.yml
+{%- else %}
+python:
+  install:
+   - requirements: requirements.txt
+{%- endif %}
 
 # #}
