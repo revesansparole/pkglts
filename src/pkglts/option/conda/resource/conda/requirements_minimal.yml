@@ -10,7 +10,7 @@ channels:
 - defaults
 
 dependencies:
-- python={{ pyproject.intended_versions[-1] }}
+- python={{ pyproject.py_max_ver }}
 {%- for dep in reqs.requirements('install') if dep.is_conda(strict=False) %}
 - {{ dep.fmt_conda_requirement() }}
 {%- endfor %}
