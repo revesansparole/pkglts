@@ -51,4 +51,4 @@ class OptionSphinx(Option):
             yield Dependency('sphinx_rtd_theme', intent='doc')
 
         if cfg['sphinx']['gallery'] != "":
-            yield Dependency('sphinx-gallery', intent='doc')
+            yield Dependency('sphinx-gallery', intent='doc', channel='conda-forge')
