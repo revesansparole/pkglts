@@ -114,6 +114,8 @@ target/
 {{ sphinx.doc_dir }}/_dvlpt/
 {% if sphinx.gallery != "" -%}
 doc/_gallery/
+doc/sg_*.rst
+
 {% endif -%}
 {% endif %}
 
