@@ -34,6 +34,8 @@ def action_bump(cfg, **kwds):
             except ValueError:
                 LOGGER.error("Bump version: invalid argument '%s'", pos)
 
+    LOGGER.info("new version %d.%d.%d", cfg['version']['major'], cfg['version']['minor'], cfg['version']['post'])
+
     write_pkg_config(cfg)
 
 
