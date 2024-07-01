@@ -5,7 +5,7 @@
 
 # doc
 sphinx
-sphinx_rtd_theme
+sphinx-rtd-theme
 
 # dvlpt
 flake8

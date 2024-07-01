@@ -11,7 +11,7 @@ dependencies:
 - python=3.11
 # doc
 - sphinx
-- sphinx_rtd_theme
+- sphinx-rtd-theme
 # dvlpt
 - flake8
 - twine

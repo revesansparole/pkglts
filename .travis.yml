@@ -41,7 +41,7 @@ install:
   - source activate myenv
 
   # install dependencies
-  - conda install -c conda-forge coverage coveralls flake8 jinja2 pytest pytest-cov pytest-mock requests semver sphinx sphinx_rtd_theme tox twine unidecode url-normalize
+  - conda install -c conda-forge coverage coveralls flake8 jinja2 pytest pytest-cov pytest-mock requests semver sphinx sphinx-rtd-theme tox twine unidecode url-normalize
   
 
   # install package
