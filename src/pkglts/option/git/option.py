@@ -36,7 +36,8 @@ class OptionGit(Option):
                                           stderr=subprocess.STDOUT).decode('utf-8')
             commiters = re.findall(r'Author: (.*) <(.*@.*)>\n', unidecode(log))
             ccs = [(commiters.count(commiter), commiter) for commiter in set(commiters)]
-            contributors = [commiter for nb, commiter in sorted(ccs, reverse=True)]
+            contributors = [(cmt_name.replace("\\", "/"), cmt_email)
+                            for nb, (cmt_name, cmt_email) in sorted(ccs, reverse=True)]
         except (KeyError, OSError):
             LOGGER.warning("Please add git to your $PATH")
             contributors = [("I failed to construct the contributor list", "")]
