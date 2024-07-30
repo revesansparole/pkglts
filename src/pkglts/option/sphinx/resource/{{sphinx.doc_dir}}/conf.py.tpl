@@ -8,12 +8,10 @@ see: https://www.sphinx-doc.org/en/master/usage/configuration.html
 
 {%- if 'pyproject' is available %}
 import os
-import re
 {%- endif %}
 import sys
 {%- if sphinx.gallery != "" %}
 import warnings
-from sphinx_gallery.sorting import ExampleTitleSortKey
 {%- endif %}
 
 {% if 'pyproject' is available %}
@@ -62,10 +60,10 @@ except ImportError:
 sphinx_gallery_conf = {
     'examples_dirs': "../{{ sphinx.gallery }}",   # path to your example scripts
     'gallery_dirs': "_gallery",  # path where to save gallery generated examples
-    'filename_pattern': f"{re.escape(os.sep)}plot_",
-    'ignore_pattern': f"^((?!{re.escape(os.sep)}plot_).)*$",
+    'filename_pattern': "plot_",
+    'ignore_pattern': "^(?!plot_)",
     'download_all_examples': False,
-    'within_subsection_order': ExampleTitleSortKey,
+    'within_subsection_order': "ExampleTitleSortKey",
 }
 {%- endif %}
 
