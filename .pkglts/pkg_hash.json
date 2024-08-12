@@ -40,7 +40,7 @@
   },
   "conda/meta.yaml": {
     "conda.about": "6/RoaDh45Wwcc0uAhKGnUH46mczqPBQq/PV0cSCbe+fhiDQPOooOK8u24GzswyAcXIEHoASc/XIe+WS/2zBl5A==",
-    "conda.package": "nYU1r4L2n1RqhEKQU73ahhQXX/3JTWWsvfIC0r4wEfBMW5lkbw3TcXRm4+PkHoql6oMuUaDLjmX2J+LsaYTkqw==",
+    "conda.package": "HFTRIKb9oTps7dR3ZUKtMC+5PKpcrtlNPREdnv/NYW68ILHRZn6vQx6S7dxPqbbLIFCuxekKV1GWNLDY7nSdeA==",
     "conda.req_build": "PHQ4LRj963FIG00GtdBBsC4RGzQPqOz8nxsL3g3mCpe6xaYzXaEMD/Eifbbfi+X+Z578AJlr/Qsw4fgVokh+vQ==",
     "conda.req_run": "lfDHi4bDZyKItXtOtTH0veX4N30cbZWG78Y65Wi3T0LeyB0rJ/YFwEUR/OmWKoLL6kCnA/+SKqR+vO5fvre1Qw==",
     "conda.src": "Lzbp176AVU0YantZQxB4LsR2jbxpZ/OlkvY2V4aWAEuzKEarh872uc1eRvsIYf/FsbxvcmUI84AezWlA72nI6A=="
@@ -56,7 +56,7 @@
   },
   "doc/_static/nonempty.txt": {},
   "doc/conf.py": {
-    "sphinx": "sR1mK6hzRkd2PRFw8/YiutV8n6ORwXkS3o14aNFWhgkxhOyZgkXWHoNwV5yD0hf/wFQeuZ01zReSJvVTSlKyKQ=="
+    "sphinx": "RcSW8jzAUCLBGvUWHo6y+V7s0znrx1qhUU6GMcu/zlqU0xzgCXwmq1jsvUxDAgzVobiVQNGCD8xGIkD59L9MzA=="
   },
   "doc/make.bat": {
     "sphinx": "E9sFsnXAm9uPYBn7f0Qb6edct0UKizsXRIJyjZISRCjHbT2HldXK4GIj1yO69R/OVSfnmdAX5lzXQ4wONQNFgA=="
@@ -64,7 +64,7 @@
   "pyproject.toml": {
     "pyproject.build": "I2LGHHOpCXWlR8y2Sb2cY5UG39iTOOrVRVdA911ZyiSQt5YGkno3LbeRNL4DxPeE9zgYef1R8FDKDPB3U6f79g==",
     "pyproject.gui_scripts": "VNRlO4ElRuynet0DT31hGYve1t2FV1CooE7f9Bi+PIRMF5YmdymGAS4Q6k4woJdDJ3JILO7ozz/yv4RpujFdQQ==",
-    "pyproject.project": "H3bYJKGcG8oE8SnAyCcrOermMoWJhTxV0GPkvd+a+/Nq5zmeOMdBhsK/adQxjjQ2JCBB5t3tVlMCpPukjaN3nw==",
+    "pyproject.project": "a1htgU8fGWfZRUEpIjCkC68RHcvrme9nxZ+AoLifgfzu2MAMS19Cph1oJBVFz8l9U80Q8dbXBdVNgVFkDW5ZUg==",
     "pyproject.scripts": "nxzQt1CUNkpQiiU7Ajxf8abPXHZurGnQFv5j+v5nxAM9VwHmddCFUclVMs+nAk+DSBoFCOFU4k2hboyksj2e3Q==",
     "test": "51JkfgVeFNaglq12GZAwGmdw31KCnH7aTHCG3kzFaDBJ9gTzNSYh7eZrdUVSt4P/lk0PZKQdmVQma9cTTK+1Iw=="
   },
@@ -79,7 +79,7 @@
     "version": "skSCnavrYKIlfN9Mpi+cANbU8gXulaKdlHryvkjkoSSpsag1I66dM+6JHm1aOdmKYU0rZNNgcIamCMbIL7IeMg=="
   },
   "src/pkglts/version.py": {
-    "version": "/3Z60Dx+jJ80kkags/uBQ2bSgP5DXvcp1L06zT5Mk9++hhK7QJ1/Thf04p40ZFuQI0QJ2sinh1llEO2lRsLvfQ=="
+    "version": "6i2MIy2Otf7pPOuBXSwpZ9vBIWE6IGf3Gc8s2XK1/on4s6pTjcIoHKzY6xbrxdbjdeO9fiLaL0ES6fXsVnc/Qg=="
   },
   "test/conftest.py": {
     "test.pytest_addoption": "I/hswVryIEYvZRBcFqkfRBxLP6eZCwZSbQuPclkOkjHw4MApBst5h7H0ejnMMe4bmwHXMXR5DCSxOMj/FcCnjQ==",
