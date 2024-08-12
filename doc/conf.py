@@ -60,7 +60,9 @@ inheritance_node_attrs = dict(shape='ellipse', fontsize=12,
 templates_path = ['_templates']
 
 # The suffix of source filenames.
-source_suffix = '.rst'
+source_suffix = {
+    '.rst': 'restructuredtext',
+}
 
 # The encoding of source files.
 # source_encoding = 'utf-8-sig'
@@ -154,6 +156,6 @@ destdir = os.path.abspath(os.path.join(project_root, "doc", "_dvlpt"))
 if not os.path.isdir(destdir):
     os.makedirs(destdir)
 
-main(['-e', '-o', destdir, '-d', '4', '-s', source_suffix[1:], '--force', src_dir])
+main(['-e', '-o', destdir, '-d', '4', '--force', src_dir])
 
 # #}
