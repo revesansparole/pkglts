@@ -38,8 +38,11 @@ class OptionConda(Option):
         return ['pyproject']
 
     def environment_extensions(self, cfg):
-        channels = [dep.channel for dep in requirements(cfg) if dep.channel is not None]
-        channels_minimal = [dep.channel for dep in requirements(cfg)
-                            if 'install' in dep.intents and dep.channel is not None]
+
+        # remove None elements
+        # remove duplicated elements using dict.fromkeys
+        channels = list(dict.fromkeys([dep.channel for dep in requirements(cfg) if dep.channel is not None]))
+        channels_minimal = list(dict.fromkeys([dep.channel for dep in requirements(cfg)
+                                               if 'install' in dep.intents and dep.channel is not None]))
 
         return {"channels": channels, "channels_minimal": channels_minimal}
