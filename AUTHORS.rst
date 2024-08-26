@@ -22,6 +22,7 @@ Contributors
 * egarciaitk <emilien.garcia@itk.fr>
 * Simon Artzet <simon.artzet@gmail.com>
 * lquibel <lucie.quibel@itk.fr>
+* Samuel Andres <samuelandres@yandex.com>
 * Christophe Pradal <christophe.pradal@inria.fr>
 * Samuel Andres <samuel.andres@itk.fr>
 

@@ -38,7 +38,11 @@ class OptionConda(Option):
         return ['pyproject']
 
     def environment_extensions(self, cfg):
-        channels = set(dep.channel for dep in requirements(cfg)) - {None}
-        channels_minimal = set(dep.channel for dep in requirements(cfg) if 'install' in dep.intents) - {None}
+        # use list(dict.fromkeys()) instead of set to preserve order
+        # between two regenerate
+        # requirements are already sorted by name
+        channels = list(dict.fromkeys([dep.channel for dep in requirements(cfg) if dep.channel is not None]))
+        channels_minimal = list(dict.fromkeys([dep.channel for dep in requirements(cfg)
+                                               if 'install' in dep.intents and dep.channel is not None]))
 
         return {"channels": channels, "channels_minimal": channels_minimal}
