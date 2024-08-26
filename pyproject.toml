@@ -8,7 +8,7 @@ build-backend = "setuptools.build_meta"  # we don't know if we need it
 # {# pkglts, pyproject.project
 [project]  # https://packaging.python.org/en/latest/specifications/pyproject-toml/
 name = "pkglts"
-version = "7.7.0"
+version = "7.8.0"
 description = "Building packages with long term support"
 readme = "README.rst"
 requires-python = ">= 3.6"
@@ -23,6 +23,7 @@ maintainers = [
     {name = "egarciaitk", email = "emilien.garcia@itk.fr"},
     {name = "Simon Artzet", email = "simon.artzet@gmail.com"},
     {name = "lquibel", email = "lucie.quibel@itk.fr"},
+    {name = "Samuel Andres", email = "samuelandres@yandex.com"},
     {name = "Christophe Pradal", email = "christophe.pradal@inria.fr"},
     {name = "Samuel Andres", email = "samuel.andres@itk.fr"},
 ]
