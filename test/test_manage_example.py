@@ -5,6 +5,7 @@ import pytest
 from pkglts.config_management import Config, DEFAULT_CFG
 from pkglts.manage import install_example_files
 from pkglts.small_tools import ensure_created, rmdir
+from pkglts import logging_tools
 
 
 @pytest.fixture()
@@ -42,6 +43,7 @@ def test_install_example_copy_files(tmp_dir):
     cfg.load_extra()
 
     assert len(tuple(tmp_dir.iterdir())) == 0
+    logging_tools.main(2)
     install_example_files('test', cfg, tmp_dir)
     assert len(tuple(tmp_dir.iterdir())) > 0
     print("iter", tuple(tmp_dir.iterdir()))
