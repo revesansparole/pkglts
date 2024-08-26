@@ -44,6 +44,7 @@ def test_install_example_copy_files(tmp_dir):
     assert len(tuple(tmp_dir.iterdir())) == 0
     install_example_files('test', cfg, tmp_dir)
     assert len(tuple(tmp_dir.iterdir())) > 0
+    print("iter", tuple(tmp_dir.iterdir()))
     assert (tmp_dir / "src/toto/example.py").exists()
     assert (tmp_dir / "test/test_example.py").exists()
 
