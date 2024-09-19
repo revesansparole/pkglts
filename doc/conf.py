@@ -80,9 +80,9 @@ copyright = u"2015, pkglts"
 #
 
 # The short X.Y version.
-version = "7.8.0"
+version = "7.8.1"
 # The full version, including alpha/beta/rc tags.
-release = "7.8.0"
+release = "7.8.1"
 
 
 exclude_patterns = ['build', 'dist']
