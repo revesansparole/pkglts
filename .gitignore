@@ -105,6 +105,8 @@ doc/_dvlpt/
 # #}
 
 # user custom filters
+doc/_notebook
+
 example/pkg_tata
 example/venv_toto
 example/wheels
