@@ -240,5 +240,7 @@ if "%1" == "pseudoxml" (
 	goto end
 )
 
+echo No rule to make target "%1". Stop.
+
 :end
 REM #}
