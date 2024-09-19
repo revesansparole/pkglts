@@ -2,10 +2,10 @@ from copy import deepcopy
 from pathlib import Path
 
 import pytest
+from pkglts import logging_tools
 from pkglts.config_management import Config, DEFAULT_CFG
 from pkglts.manage import install_example_files
 from pkglts.small_tools import ensure_created, rmdir
-from pkglts import logging_tools
 
 
 @pytest.fixture()
@@ -46,6 +46,7 @@ def test_install_example_copy_files(tmp_dir):
     logging_tools.main(2)
     install_example_files('test', cfg, tmp_dir)
     assert len(tuple(tmp_dir.iterdir())) > 0
+    print(list(tmp_dir.glob("**/*")))
     assert (tmp_dir / "src/toto/example.py").exists()
     assert (tmp_dir / "test/test_example.py").exists()
 
@@ -60,6 +61,7 @@ def test_install_example_copy_binary_files(tmp_dir):
     assert len(tuple(tmp_dir.iterdir())) == 0
     install_example_files('data', cfg, tmp_dir)
     assert len(tuple(tmp_dir.iterdir())) > 0
+    print(list(tmp_dir.glob("**/*")))
     assert (tmp_dir / "src/toto_data/ext_data.png").exists()
 
 
