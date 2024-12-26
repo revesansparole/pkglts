@@ -1,0 +1,21 @@
+# {# pkglts, conda_alias
+package:
+  name: {{ conda_alias.norm_name }}
+  version: "{{ version.major }}.{{ version.minor }}.{{ version.post }}"
+
+source:
+  path:
+    ../
+
+requirements:
+  run:
+    - {{ base.pkg_full_name }} == {{ version.major }}.{{ version.minor }}.{{ version.post }}
+
+build:
+  noarch: python
+
+about:
+  summary: "{{ doc.description }}"
+  license: "{{ license.name | replace('private', 'PROPRIETARY') }}"
+  license_file: LICENSE
+# #}
