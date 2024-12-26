@@ -16,11 +16,6 @@ class OptionCondaAlias(Option):
     def root_dir(self):
         return Path(__file__).parent
 
-    def check(self, cfg):
-        invalids = []
-
-        return invalids
-
     def require_option(self, cfg):
         return ['conda']
 
