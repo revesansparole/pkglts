@@ -89,8 +89,8 @@ source_suffix = {
 master_doc = 'index'
 
 # General information about the project.
-project = u"{{ base.pkg_full_name }}"
-copyright = u"{{ license.year }}, {{ base.pkg_full_name }}"
+project = "{{ base.pkg_full_name }}"
+copyright = "{{ license.year }}, {{ base.pkg_full_name }}"
 
 # The version info for the project you're documenting, acts as replacement
 # for |version| and |release|, also used in various other places throughout
@@ -131,10 +131,10 @@ latex_elements = {
 # (source start file, target name, title, author, documentclass
 # [howto/manual]).
 latex_documents = [
-    (u"index", u"{{ base.pkgname }}.tex",
-     u"{{ base.pkgname|replace('_', '\_') }} Documentation",
-     u"{{ base.authors[0][0]|replace('_', '\_') }}",
-     {% if 'pyproject' is available %}u"manual"{% else %}u"article"{% endif %}),
+    ("index", "{{ base.pkgname }}.tex",
+     "{{ base.pkgname|replace('_', '\\\\_') }} Documentation",
+     "{{ base.authors[0][0]|replace('_', '\\\\_') }}",
+     {% if 'pyproject' is available %}"manual"{% else %}"article"{% endif %}),
 ]
 
 # -- Options for manual page output ------------------------------------
@@ -142,9 +142,9 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (u"index", u"{{ base.pkgname }}",
-     u"{{ base.pkgname }} Documentation",
-     [u"{{ base.authors[0][0] }}"], 1)
+    ("index", "{{ base.pkgname }}",
+     "{{ base.pkgname }} Documentation",
+     ["{{ base.authors[0][0] }}"], 1)
 ]
 
 # -- Options for Texinfo output ----------------------------------------
@@ -153,12 +153,12 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (u"index", u"{{ base.pkgname }}",
-     u"{{ base.pkgname }} Documentation",
-     u"{{ base.authors[0][0] }}",
-     u"{{ base.pkgname }}",
-     u"{{ doc.description }}",
-     u"Miscellaneous"),
+    ("index", "{{ base.pkgname }}",
+     "{{ base.pkgname }} Documentation",
+     "{{ base.authors[0][0] }}",
+     "{{ base.pkgname }}",
+     "{{ doc.description }}",
+     "Miscellaneous"),
 ]
 
 {% if 'pyproject' is available and sphinx.autodoc_dvlpt %}
