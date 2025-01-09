@@ -71,8 +71,8 @@ source_suffix = {
 master_doc = 'index'
 
 # General information about the project.
-project = u"pkglts"
-copyright = u"2015, pkglts"
+project = "pkglts"
+copyright = "2015, pkglts"
 
 # The version info for the project you're documenting, acts as replacement
 # for |version| and |release|, also used in various other places throughout
@@ -80,9 +80,9 @@ copyright = u"2015, pkglts"
 #
 
 # The short X.Y version.
-version = "7.9.0"
+version = "7.9.1"
 # The full version, including alpha/beta/rc tags.
-release = "7.9.0"
+release = "7.9.1"
 
 
 exclude_patterns = ['build', 'dist']
@@ -113,10 +113,10 @@ latex_elements = {
 # (source start file, target name, title, author, documentclass
 # [howto/manual]).
 latex_documents = [
-    (u"index", u"pkglts.tex",
-     u"pkglts Documentation",
-     u"revesansparole",
-     u"manual"),
+    ("index", "pkglts.tex",
+     "pkglts Documentation",
+     "revesansparole",
+     "manual"),
 ]
 
 # -- Options for manual page output ------------------------------------
@@ -124,9 +124,9 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (u"index", u"pkglts",
-     u"pkglts Documentation",
-     [u"revesansparole"], 1)
+    ("index", "pkglts",
+     "pkglts Documentation",
+     ["revesansparole"], 1)
 ]
 
 # -- Options for Texinfo output ----------------------------------------
@@ -135,12 +135,12 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (u"index", u"pkglts",
-     u"pkglts Documentation",
-     u"revesansparole",
-     u"pkglts",
-     u"Building packages with long term support",
-     u"Miscellaneous"),
+    ("index", "pkglts",
+     "pkglts Documentation",
+     "revesansparole",
+     "pkglts",
+     "Building packages with long term support",
+     "Miscellaneous"),
 ]
 
 
