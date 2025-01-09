@@ -132,8 +132,8 @@ latex_elements = {
 # [howto/manual]).
 latex_documents = [
     ("index", "{{ base.pkgname }}.tex",
-     "{{ base.pkgname|replace('_', '\_') }} Documentation",
-     "{{ base.authors[0][0]|replace('_', '\_') }}",
+     "{{ base.pkgname|replace('_', '\\\\_') }} Documentation",
+     "{{ base.authors[0][0]|replace('_', '\\\\_') }}",
      {% if 'pyproject' is available %}"manual"{% else %}"article"{% endif %}),
 ]
 
