@@ -112,6 +112,7 @@ pmg = "pkglts.manage_script:main"
 [project.entry-points."pkglts"]
 base = "pkglts.option.base.option:OptionBase"
 appveyor = "pkglts.option.appveyor.option:OptionAppveyor"
+black = "pkglts.option.black.option:OptionBlack"
 conda = "pkglts.option.conda.option:OptionConda"
 conda_alias = "pkglts.option.conda_alias.option:OptionCondaAlias"
 coverage = "pkglts.option.coverage.option:OptionCoverage"

@@ -1,0 +1,4 @@
+# {# pkglts, black, after pyproject.project
+[tool.black]
+line-length = 120
+# #}
