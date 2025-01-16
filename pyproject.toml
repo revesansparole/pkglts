@@ -64,6 +64,7 @@ dvlpt = [
     "twine",
 ]
 test = [
+    "black",
     "coverage",
     "coveralls",
     "pytest",
@@ -94,6 +95,10 @@ where = ["src"]
 [tool.setuptools.package-data]
 "*" = ['*', '*.bat', '*.cfg', '*.json', '*.md', '*.in', '*.ini', '*.png', '*.ps1', '*.rst', '*.sh', '*.tpl', '*.txt', '*.yaml', '*.yml', ]
 
+# #}
+# {# pkglts, black, after pyproject.project
+[tool.black]
+line-length = 120
 # #}
 # {# pkglts, test, after pyproject.project
 [tool.pytest.ini_options]

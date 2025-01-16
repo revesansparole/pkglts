@@ -16,6 +16,7 @@ requirements:
     - python >=3.6
     - setuptools
     - pytest-runner
+    - black
     - coverage
     - coveralls
     - pytest
