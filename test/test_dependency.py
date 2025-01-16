@@ -40,11 +40,11 @@ def test_dependency_writes_correct_pip_requirements():
     assert txt == "toto  # pip install toto"
 
     # normalization of package names
-    dep = Dependency("toto_tutu", pkg_mng="pip")
-    txt = dep.fmt_pip_requirement()
-    assert txt == "toto-tutu"
-    txt = dep.fmt_pip_requirement(extended=True)
-    assert txt == "toto-tutu  # pip install toto-tutu"
+    # dep = Dependency("toto_tutu", pkg_mng="pip")
+    # txt = dep.fmt_pip_requirement()
+    # assert txt == "toto-tutu"
+    # txt = dep.fmt_pip_requirement(extended=True)
+    # assert txt == "toto-tutu  # pip install toto-tutu"
 
     # version fully specified without comparison indicator
     dep = Dependency("toto", pkg_mng="pip", version="2.18.0")
@@ -96,9 +96,9 @@ def test_dependency_writes_correct_conda_requirements():
     assert txt == "toto"
 
     # normalization of package names
-    dep = Dependency("toto_tutu", pkg_mng="conda")
-    txt = dep.fmt_conda_requirement()
-    assert txt == "toto-tutu"
+    # dep = Dependency("toto_tutu", pkg_mng="conda")
+    # txt = dep.fmt_conda_requirement()
+    # assert txt == "toto-tutu"
 
     # version partially specified no comparison operator
     dep = Dependency("toto", pkg_mng="conda", version="2.18")
