@@ -28,34 +28,34 @@ class OptionDoc(Option):
 
     def check(self, cfg):
         invalids = []
-        description = cfg[self._name]['description']
-        fmt = cfg[self._name]['fmt']
+        description = cfg[self._name]["description"]
+        fmt = cfg[self._name]["fmt"]
         # keywords = env.globals['doc'].keywords
 
         if not description:
             invalids.append("doc.description")
 
-        if fmt not in ('rst', 'md'):
+        if fmt not in ("rst", "md"):
             invalids.append("doc.fmt")
 
         return invalids
 
     def require_option(self, cfg):
-        return ['base']
+        return ["base"]
 
     def require(self, cfg):
-        if cfg[self._name]['fmt'] == 'md':
-            yield Dependency('mkdocs', intent='doc')
+        if cfg[self._name]["fmt"] == "md":
+            yield Dependency("mkdocs", intent="doc")
 
     def environment_extensions(self, cfg):
         badges = []
         for name in sorted(set(cfg.installed_options()) - {self._name}):
             opt = available_options[name]
             ext = opt.environment_extensions(cfg)
-            if 'badge' in ext:
-                badges.append(ext['badge'])
-            if 'badges' in ext:
-                badges.extend(ext['badges'])
+            if "badge" in ext:
+                badges.append(ext["badge"])
+            if "badges" in ext:
+                badges.extend(ext["badges"])
 
         return {"badges": badges}
 

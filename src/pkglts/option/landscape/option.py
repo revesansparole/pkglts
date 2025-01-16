@@ -16,19 +16,14 @@ class OptionLandscape(Option):
         return Path(__file__).parent
 
     def require_option(self, cfg):
-        return ['flake8', 'travis']
+        return ["flake8", "travis"]
 
     def environment_extensions(self, cfg):
-        owner = cfg['github']['owner']
-        project = cfg['github']['project']
+        owner = cfg["github"]["owner"]
+        project = cfg["github"]["project"]
 
         url = f"landscape.io/github/{owner}/{project}/master"
         img = f"{url}/landscape.svg?style=flat"
-        badge = Badge(
-            name="landscape",
-            url=url,
-            url_img=img,
-            text="Code health status"
-        )
+        badge = Badge(name="landscape", url=url, url_img=img, text="Code health status")
 
         return {"badge": badge}

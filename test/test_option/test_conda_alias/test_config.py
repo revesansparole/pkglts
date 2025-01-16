@@ -5,7 +5,7 @@ from pkglts.option.conda_alias.option import OptionCondaAlias
 
 @pytest.fixture()
 def opt():
-    return OptionCondaAlias('conda_alias')
+    return OptionCondaAlias("conda_alias")
 
 
 @pytest.fixture()
@@ -15,7 +15,7 @@ def cfg():
 
 def test_update_parameters(opt, cfg):
     opt.update_parameters(cfg)
-    assert len(cfg['conda_alias']) == 0
+    assert len(cfg["conda_alias"]) == 0
 
 
 def test_require_option(opt, cfg):

@@ -8,7 +8,7 @@ from pkglts.small_tools import ensure_created, rmdir
 
 @pytest.fixture()
 def opt():
-    return OptionNotebook('notebook')
+    return OptionNotebook("notebook")
 
 
 @pytest.fixture()
@@ -28,15 +28,15 @@ def tmp_dir():
 
 def test_update_parameters(opt, cfg):
     opt.update_parameters(cfg)
-    assert len(cfg['notebook']) == 1
+    assert len(cfg["notebook"]) == 1
 
 
 def test_config_check_src_directory(opt, cfg, tmp_dir):
-    cfg['notebook'] = {'src_directory': "failed_nb"}
-    assert 'notebook.src_directory' in opt.check(cfg)
+    cfg["notebook"] = {"src_directory": "failed_nb"}
+    assert "notebook.src_directory" in opt.check(cfg)
 
-    cfg['notebook'] = {'src_directory': tmp_dir}
-    assert 'notebook.src_directory' not in opt.check(cfg)
+    cfg["notebook"] = {"src_directory": tmp_dir}
+    assert "notebook.src_directory" not in opt.check(cfg)
 
 
 def test_require_option(opt, cfg):

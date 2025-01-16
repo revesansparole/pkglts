@@ -16,8 +16,8 @@ class OptionBlack(Option):
         return Path(__file__).parent
 
     def require_option(self, cfg):
-        return ['pyproject']
+        return ["pyproject"]
 
     def require(self, cfg):
         del cfg
-        yield Dependency('black', intent='test')
+        yield Dependency("black", intent="test")

@@ -15,5 +15,5 @@ def write_file(pth, content):
     Returns:
         None
     """
-    with open(pth, 'wb') as f:
+    with open(pth, "wb") as f:
         f.write(content.encode("utf-8"))

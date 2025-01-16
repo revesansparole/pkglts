@@ -1,6 +1,7 @@
 """
 This tool will display all dependencies used by this package.
 """
+
 import ast
 import logging
 from pathlib import Path
@@ -9,8 +10,11 @@ from pkglts.local import src_dir
 
 LOGGER = logging.getLogger(__name__)
 
-stdpkgs = set(line.strip() for line in open(Path(__file__).parent / "stdpkgs.txt").readlines()
-              if len(line.strip()) > 0 and not line.startswith("#"))
+stdpkgs = set(
+    line.strip()
+    for line in open(Path(__file__).parent / "stdpkgs.txt").readlines()
+    if len(line.strip()) > 0 and not line.startswith("#")
+)
 
 
 def iter_ext_imports(body):
@@ -56,12 +60,11 @@ def _iter_find_reqs(fld):
 
 
 def action_find_reqs(cfg, **kwds):
-    """Find dependencies used by this package.
-    """
+    """Find dependencies used by this package."""
     LOGGER.info("Find requirements")
-    this_pkgname = cfg['base']['pkgname']
+    this_pkgname = cfg["base"]["pkgname"]
 
-    for dname in (src_dir(cfg), 'doc', 'example', 'script', 'test'):
+    for dname in (src_dir(cfg), "doc", "example", "script", "test"):
         dirpth = Path(dname)
         if dirpth.exists():
             print(f"############\n# {dirpth}\n############")
@@ -84,6 +87,6 @@ def parser_find_reqs(subparsers):
         (string): a unique id for this parser
         (callable): the action to perform
     """
-    subparsers.add_parser('reqs', help=action_find_reqs.__doc__)
+    subparsers.add_parser("reqs", help=action_find_reqs.__doc__)
 
-    return 'reqs', action_find_reqs
+    return "reqs", action_find_reqs

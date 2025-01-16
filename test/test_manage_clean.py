@@ -7,7 +7,7 @@ from pkglts.small_tools import ensure_created, rmdir
 
 @pytest.fixture()
 def tmp_dir():
-    pth = Path('toto_manage_clean')
+    pth = Path("toto_manage_clean")
     ensure_created(pth)
 
     yield pth

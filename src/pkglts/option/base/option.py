@@ -17,29 +17,24 @@ class OptionBase(Option):
 
     def update_parameters(self, cfg):
         LOGGER.info("update parameters %s", self._name)
-        sec = dict(
-            pkgname=Path.cwd().name,
-            namespace=None,
-            url=None,
-            authors=[("moi", "moi@email.com")]
-        )
+        sec = dict(pkgname=Path.cwd().name, namespace=None, url=None, authors=[("moi", "moi@email.com")])
         cfg[self._name] = sec
 
     def check(self, cfg):
         invalids = []
-        pkgname = cfg[self._name]['pkgname']
-        namespace = cfg[self._name]['namespace']
+        pkgname = cfg[self._name]["pkgname"]
+        namespace = cfg[self._name]["namespace"]
 
         if "." in pkgname:
-            invalids.append('base.pkgname')
+            invalids.append("base.pkgname")
         elif not pkgname.isidentifier():
-            invalids.append('base.pkgname')
+            invalids.append("base.pkgname")
 
         if namespace is not None:
             if "." in namespace:
-                invalids.append('base.namespace')
+                invalids.append("base.namespace")
             elif not namespace.isidentifier():
-                invalids.append('base.namespace')
+                invalids.append("base.namespace")
 
         return invalids
 

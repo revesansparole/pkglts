@@ -5,7 +5,7 @@ from pkglts.option.coverage.option import OptionCoverage
 
 @pytest.fixture()
 def opt():
-    return OptionCoverage('coverage')
+    return OptionCoverage("coverage")
 
 
 @pytest.fixture()
@@ -18,11 +18,11 @@ def test_require_option(opt, cfg):
 
 
 def test_require(opt, cfg):
-    cfg['test'] = {'suite_name': 'pytest'}
+    cfg["test"] = {"suite_name": "pytest"}
     opt.update_parameters(cfg)
 
     assert len(tuple(opt.require(cfg))) == 2
 
-    cfg['test'] = {'suite_name': 'nose'}
+    cfg["test"] = {"suite_name": "nose"}
     opt.update_parameters(cfg)
     assert len(tuple(opt.require(cfg))) == 1

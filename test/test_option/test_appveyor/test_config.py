@@ -5,7 +5,7 @@ from pkglts.option.appveyor.option import OptionAppveyor
 
 @pytest.fixture()
 def opt():
-    return OptionAppveyor('appveyor')
+    return OptionAppveyor("appveyor")
 
 
 @pytest.fixture()
@@ -15,11 +15,11 @@ def cfg():
 
 def test_update_parameters(opt, cfg):
     opt.update_parameters(cfg)
-    assert len(cfg['appveyor']) == 1
+    assert len(cfg["appveyor"]) == 1
 
 
 def test_config_does_nothing(opt, cfg):
-    cfg['appveyor'] = {'token': 'toto'}
+    cfg["appveyor"] = {"token": "toto"}
     assert len(opt.check(cfg)) == 0
 
 

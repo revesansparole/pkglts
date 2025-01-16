@@ -5,7 +5,7 @@ from pkglts.option.tox.option import OptionTox
 
 @pytest.fixture()
 def opt():
-    return OptionTox('tox')
+    return OptionTox("tox")
 
 
 @pytest.fixture()

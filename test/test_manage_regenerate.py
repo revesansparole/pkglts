@@ -9,31 +9,27 @@ from pkglts.small_tools import ensure_created, rmdir
 
 
 def addendum(init_file):
-    """ modify init_file in first pkglts div
-    """
-    with open(init_file, 'r') as fhr:
+    """modify init_file in first pkglts div"""
+    with open(init_file, "r") as fhr:
         lines = fhr.read().splitlines()
 
     lines.insert(1, "addendum")
 
-    with open(init_file, 'w') as fhw:
+    with open(init_file, "w") as fhw:
         fhw.write("\n".join(lines))
         fhw.write("\n")
 
 
 @pytest.fixture()
 def tmp_pths():
-    pth = Path('toto_mg_rg')
+    pth = Path("toto_mg_rg")
     ensure_created(pth)
     init_pkg(pth)
-    with open((pth / pkglts_dir / pkg_cfg_file), 'r') as fhr:
+    with open((pth / pkglts_dir / pkg_cfg_file), "r") as fhr:
         pkg_cfg = json.load(fhr)
 
-    pkg_cfg['base'] = dict(pkgname='toto',
-                           namespace=None,
-                           authors=[('moi', 'moi@email.com')],
-                           url=None)
-    pkg_cfg['src'] = dict(namespace_method="pkg_util")
+    pkg_cfg["base"] = dict(pkgname="toto", namespace=None, authors=[("moi", "moi@email.com")], url=None)
+    pkg_cfg["src"] = dict(namespace_method="pkg_util")
 
     cfg = Config(pkg_cfg)
     write_pkg_config(cfg, pth)
@@ -48,7 +44,7 @@ def tmp_pths():
 
 def test_regenerate_pass(tmp_pths):
     tmp_dir, init_file = tmp_pths
-    with open(tmp_dir / pkglts_dir / pkg_cfg_file, 'r') as fhr:
+    with open(tmp_dir / pkglts_dir / pkg_cfg_file, "r") as fhr:
         pkg_cfg = json.load(fhr)
 
     cfg = Config(pkg_cfg)
@@ -58,10 +54,10 @@ def test_regenerate_pass(tmp_pths):
 
 def test_regenerate_check_pkg_cfg_validity(tmp_pths):
     tmp_dir, init_file = tmp_pths
-    with open(tmp_dir / pkglts_dir / pkg_cfg_file, 'r') as fhr:
+    with open(tmp_dir / pkglts_dir / pkg_cfg_file, "r") as fhr:
         pkg_cfg = json.load(fhr)
 
-    pkg_cfg['base']['pkgname'] = '1toto'
+    pkg_cfg["base"]["pkgname"] = "1toto"
 
     cfg = Config(pkg_cfg)
     assert not regenerate_package(cfg, tmp_dir)
@@ -73,7 +69,7 @@ def test_regenerate_handle_conflicts_keep(tmp_pths, mocker):
 
     init_file.write_text("modified")
 
-    mocker.patch('pkglts.manage.get_user_permission', return_value=False)
+    mocker.patch("pkglts.manage.get_user_permission", return_value=False)
     regenerate_package(cfg, tmp_dir)
 
     assert init_file.read_text() == "modified"
@@ -85,7 +81,7 @@ def test_regenerate_handle_conflicts_overwrite(tmp_pths, mocker):
 
     addendum(init_file)
 
-    mocker.patch('pkglts.manage.get_user_permission', return_value=True)
+    mocker.patch("pkglts.manage.get_user_permission", return_value=True)
     regenerate_package(cfg, tmp_dir)
 
     assert "modified" not in init_file.read_text()
@@ -146,7 +142,7 @@ def test_regenerate_fail_if_permanent_section_ids_have_been_modified(tmp_pths):
     tmp_dir, init_file = tmp_pths
     cfg = get_pkg_config(tmp_dir)
 
-    with open(init_file, 'a') as fhw:
+    with open(init_file, "a") as fhw:
         fhw.write("\n# {# pkglts, test\na = 1\n# #}\n")
 
     with pytest.raises(UserWarning):
@@ -157,7 +153,7 @@ def test_regenerate_option_fails_if_option_not_available(tmp_pths):
     tmp_dir, init_file = tmp_pths
     cfg = get_pkg_config(tmp_dir)
 
-    regenerate_option(cfg, 'base', tmp_dir)
+    regenerate_option(cfg, "base", tmp_dir)
 
     with pytest.raises(KeyError):
         regenerate_option(cfg, "toto", tmp_dir)

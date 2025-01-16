@@ -5,7 +5,7 @@ from pkglts.option.flake8.option import OptionFlake8
 
 @pytest.fixture()
 def opt():
-    return OptionFlake8('flake8')
+    return OptionFlake8("flake8")
 
 
 @pytest.fixture()

@@ -1,6 +1,7 @@
 """
 This tool will try to parse all release tags to create an history of package.
 """
+
 import logging
 import os
 from pathlib import Path
@@ -33,11 +34,10 @@ def github_tag_list(project):
     LOGGER.info("status: %s", res.status_code)
     tags = {}
     for tag in res.json():
-        if tag['tag_name'].startswith("v"):
-            tags[tag['tag_name'][1:]] = dict(name=tag['tag_name'],
-                                             date=tag['created_at'][:10],
-                                             title=tag['name'],
-                                             body=tag['body'])
+        if tag["tag_name"].startswith("v"):
+            tags[tag["tag_name"][1:]] = dict(
+                name=tag["tag_name"], date=tag["created_at"][:10], title=tag["name"], body=tag["body"]
+            )
 
     return tags
 
@@ -68,11 +68,13 @@ def gitlab_tag_list(server, project, token):
     LOGGER.debug("status: %s", res.status_code)
     tags = {}
     for tag in res.json():
-        if tag['name'].startswith("v"):
-            tags[tag['name'][1:]] = dict(name=tag['name'],
-                                         date=tag['commit']['committed_date'][:10],
-                                         title=tag['message'],
-                                         body=tag['release']['description'])
+        if tag["name"].startswith("v"):
+            tags[tag["name"][1:]] = dict(
+                name=tag["name"],
+                date=tag["commit"]["committed_date"][:10],
+                title=tag["message"],
+                body=tag["release"]["description"],
+            )
 
     return tags
 
@@ -98,7 +100,7 @@ def write_changelog(tags, fmt):
     ver_list.sort(key=cmp_to_key(semver.compare), reverse=True)
 
     # format changelog
-    if fmt not in ('md', 'rst'):
+    if fmt not in ("md", "rst"):
         LOGGER.warning("Doc format '%s' unsupported", fmt)
     else:
         if fmt == "md":
@@ -106,7 +108,7 @@ def write_changelog(tags, fmt):
             for ver in ver_list:
                 tag = tags[ver]
                 txt += f"## {tag['name']} - <small>*({tag['date']})*</small> - {tag['title']}\n\n"
-                txt += tag['body']
+                txt += tag["body"]
                 txt += "\n\n"
 
         else:  # fmt == "rst":
@@ -116,10 +118,10 @@ def write_changelog(tags, fmt):
                 tag_title = f"{tag['name']} - *({tag['date']})* - {tag['title']}"
                 txt += tag_title + "\n"
                 txt += "=" * len(tag_title) + "\n\n"
-                txt += tag['body']
+                txt += tag["body"]
                 txt += "\n\n"
 
-        root_dir = Path('.')
+        root_dir = Path(".")
         for name in (f"CHANGELOG.{fmt}", f"HISTORY.{fmt}"):
             pth = root_dir / name
             if pth.exists():
@@ -129,24 +131,23 @@ def write_changelog(tags, fmt):
 
 
 def action_history(cfg, **kwds):
-    """Regenerate history file from tag list.
-    """
+    """Regenerate history file from tag list."""
     LOGGER.info("Reconstruct history")
 
     # extract release tags from versioning system
-    if 'git' not in cfg.installed_options():
+    if "git" not in cfg.installed_options():
         LOGGER.warning("Project is not under git versioning, unable to continue")
         return
 
-    if 'gitlab' in cfg.installed_options():
-        server = cfg['gitlab']['server']
-        owner = cfg['gitlab']['owner']
-        project = cfg['gitlab']['project']
+    if "gitlab" in cfg.installed_options():
+        server = cfg["gitlab"]["server"]
+        owner = cfg["gitlab"]["owner"]
+        project = cfg["gitlab"]["project"]
         token = getpass("gitlab API access token:")
         tags = gitlab_tag_list(server, f"{owner}/{project}", token)
-    elif 'github' in cfg.installed_options():
-        owner = cfg['github']['owner']
-        project = cfg['github']['project']
+    elif "github" in cfg.installed_options():
+        owner = cfg["github"]["owner"]
+        project = cfg["github"]["project"]
         tags = github_tag_list(f"{owner}/{project}")
     else:
         LOGGER.info("git only option not supported yet")
@@ -154,7 +155,7 @@ def action_history(cfg, **kwds):
 
     # format tags into history file
     if tags:
-        write_changelog(tags, cfg['doc']['fmt'])
+        write_changelog(tags, cfg["doc"]["fmt"])
 
 
 def parser_history(subparsers):
@@ -169,6 +170,6 @@ def parser_history(subparsers):
         (string): a unique id for this parser
         (callable): the action to perform
     """
-    subparsers.add_parser('history', help=action_history.__doc__)
+    subparsers.add_parser("history", help=action_history.__doc__)
 
-    return 'history', action_history
+    return "history", action_history

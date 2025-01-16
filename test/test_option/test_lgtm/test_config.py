@@ -5,7 +5,7 @@ from pkglts.option.lgtm.option import OptionLgtm
 
 @pytest.fixture()
 def opt():
-    return OptionLgtm('lgtm')
+    return OptionLgtm("lgtm")
 
 
 @pytest.fixture()

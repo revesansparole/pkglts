@@ -5,7 +5,7 @@ from pkglts.option.pyproject.option import OptionPyproject
 
 @pytest.fixture()
 def opt():
-    return OptionPyproject('pyproject')
+    return OptionPyproject("pyproject")
 
 
 @pytest.fixture()
@@ -15,12 +15,12 @@ def cfg():
 
 def test_update_parameters(opt, cfg):
     opt.update_parameters(cfg)
-    assert len(cfg['pyproject']) == 1
+    assert len(cfg["pyproject"]) == 1
 
 
 def test_config_check_intended_version_exists(opt, cfg):
-    cfg['pyproject'] = {'intended_versions': []}
-    assert 'pyproject.intended_versions' in opt.check(cfg)
+    cfg["pyproject"] = {"intended_versions": []}
+    assert "pyproject.intended_versions" in opt.check(cfg)
 
 
 def test_require_option(opt, cfg):

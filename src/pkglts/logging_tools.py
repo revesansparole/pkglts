@@ -2,6 +2,7 @@
 Base setting for logging in the package.
 This module is executed when importing pkglts.
 """
+
 import logging
 import logging.handlers
 
@@ -25,7 +26,7 @@ def rolling_logs(logger):
     if pth.exists():
         pth.rename(tpl % 0)
 
-    info_ch = logging.FileHandler(str(pth), 'w')
+    info_ch = logging.FileHandler(str(pth), "w")
     logger.addHandler(info_ch)
 
 
@@ -42,7 +43,7 @@ def main(verbosity):
         verbosity = 2
     vlevel = [logging.WARNING, logging.INFO, logging.DEBUG][verbosity]
 
-    fmt = logging.Formatter('%(asctime)s %(levelname)s (%(name)s): %(message)s')
+    fmt = logging.Formatter("%(asctime)s %(levelname)s (%(name)s): %(message)s")
 
     wng_ch = logging.StreamHandler()
     wng_ch.setLevel(vlevel)
@@ -63,5 +64,5 @@ def main(verbosity):
     #     print("no info handler")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main(0)

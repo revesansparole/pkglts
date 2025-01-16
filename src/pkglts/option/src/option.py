@@ -25,15 +25,13 @@ class OptionSrc(Option):
     def check(self, cfg):
         invalids = []
 
-        if cfg[self._name]['namespace_method'] not in ("pkg_util", "setuptools", "P3.3>"):
+        if cfg[self._name]["namespace_method"] not in ("pkg_util", "setuptools", "P3.3>"):
             invalids.append("src.namespace_method")
 
         return invalids
 
     def require_option(self, cfg):
-        return ['base']
+        return ["base"]
 
     def environment_extensions(self, cfg):
-        return {
-            "src_pth": src_dir(cfg).as_posix()
-        }
+        return {"src_pth": src_dir(cfg).as_posix()}

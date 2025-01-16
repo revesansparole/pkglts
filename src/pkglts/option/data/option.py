@@ -16,11 +16,8 @@ class OptionData(Option):
 
     def update_parameters(self, cfg):
         LOGGER.info("update parameters %s", self._name)
-        sec = dict(
-            filetype=[".json", ".ini"],
-            use_ext_dir=False
-        )
+        sec = dict(filetype=[".json", ".ini"], use_ext_dir=False)
         cfg[self._name] = sec
 
     def require_option(self, cfg):
-        return ['src']
+        return ["src"]

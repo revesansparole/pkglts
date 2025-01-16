@@ -1,6 +1,7 @@
 """
 Main config object and functions to manipulate it.
 """
+
 import json
 import logging
 from datetime import date
@@ -18,10 +19,9 @@ CURRENT_PKG_CFG_VERSION = 18
 
 LOGGER = logging.getLogger(__name__)
 
-DEFAULT_CFG = dict(_pkglts=dict(use_prompts=False,
-                                auto_install=True,
-                                install_front_end='stdout',
-                                version=CURRENT_PKG_CFG_VERSION))
+DEFAULT_CFG = dict(
+    _pkglts=dict(use_prompts=False, auto_install=True, install_front_end="stdout", version=CURRENT_PKG_CFG_VERSION)
+)
 
 find_available_options()
 
@@ -30,6 +30,7 @@ class ConfigSection(object):
     """Small class to allow accessing parameters using the dot
     method instead of ['param_name'] method
     """
+
     pass
 
 
@@ -47,9 +48,9 @@ class Config(dict):
         self._env.keep_trailing_newline = True
 
         # add global filters and test
-        self._env.globals['today'] = lambda: date.today().isoformat()
+        self._env.globals["today"] = lambda: date.today().isoformat()
 
-        self.add_test('available', self._is_available)
+        self.add_test("available", self._is_available)
 
         # resolve
         self.resolve()
@@ -184,11 +185,11 @@ def get_pkg_config(rep="."):
     Returns:
         (Config): Config initialized with pkg_config
     """
-    with open(rep / pkglts_dir / pkg_cfg_file, 'r') as fhr:
+    with open(rep / pkglts_dir / pkg_cfg_file, "r") as fhr:
         pkg_cfg = json.load(fhr)
 
     # update version of pkg_config
-    file_version = pkg_cfg['_pkglts'].get('version', 0)
+    file_version = pkg_cfg["_pkglts"].get("version", 0)
     for i in range(file_version, CURRENT_PKG_CFG_VERSION):
         upgrade_pkg_cfg_version(pkg_cfg, i)
 
@@ -216,7 +217,7 @@ def write_pkg_config(cfg, rep="."):
     LOGGER.info("write package config")
     pkg_cfg = dict(cfg.template())
 
-    with open(rep / pkglts_dir / pkg_cfg_file, 'w') as fhw:
+    with open(rep / pkglts_dir / pkg_cfg_file, "w") as fhw:
         json.dump(pkg_cfg, fhw, sort_keys=True, indent=2)
 
 
@@ -231,155 +232,159 @@ def upgrade_pkg_cfg_version(pkg_cfg, version):
         (dict of str: any): a reference to an updated pkg_cfg
     """
     if version == 0:
-        pkg_cfg['_pkglts']['version'] = 1
+        pkg_cfg["_pkglts"]["version"] = 1
     elif version == 1:
-        pkg_cfg['_pkglts']['version'] = 2
+        pkg_cfg["_pkglts"]["version"] = 2
     elif version == 2:
-        pkg_cfg['_pkglts']['version'] = 3
-        if 'pysetup' in pkg_cfg:
-            section = pkg_cfg['pysetup']
-            section['require'] = section.get('require', [])
+        pkg_cfg["_pkglts"]["version"] = 3
+        if "pysetup" in pkg_cfg:
+            section = pkg_cfg["pysetup"]
+            section["require"] = section.get("require", [])
     elif version == 3:
-        pkg_cfg['_pkglts']['version'] = 4
-        if 'test' in pkg_cfg:
-            section = pkg_cfg['test']
-            section['suite_name'] = section.get('suite_name', "pytest")
+        pkg_cfg["_pkglts"]["version"] = 4
+        if "test" in pkg_cfg:
+            section = pkg_cfg["test"]
+            section["suite_name"] = section.get("suite_name", "pytest")
     elif version == 4:
-        pkg_cfg['_pkglts']['version'] = 5
-        if 'base' in pkg_cfg:
-            section = pkg_cfg['base']
-            section['namespace_method'] = section.get('namespace_method', "pkg_util")
+        pkg_cfg["_pkglts"]["version"] = 5
+        if "base" in pkg_cfg:
+            section = pkg_cfg["base"]
+            section["namespace_method"] = section.get("namespace_method", "pkg_util")
     elif version == 5:
-        pkg_cfg['_pkglts']['version'] = 6
-        if 'pysetup' in pkg_cfg:
-            section = pkg_cfg['pysetup']
+        pkg_cfg["_pkglts"]["version"] = 6
+        if "pysetup" in pkg_cfg:
+            section = pkg_cfg["pysetup"]
             deps = []
-            for pkg_mng, name in section.get('require', []):
-                if pkg_mng == 'none':
+            for pkg_mng, name in section.get("require", []):
+                if pkg_mng == "none":
                     deps.append(dict(name=name))
                 else:
                     deps.append(dict(name=name, pkg_mng=pkg_mng))
-            section['require'] = deps
+            section["require"] = deps
     elif version == 6:
-        pkg_cfg['_pkglts']['version'] = 7
-        if 'sphinx' in pkg_cfg:
-            section = pkg_cfg['sphinx']
-            section['build_dir'] = section.get('build_dir', "build/sphinx")
+        pkg_cfg["_pkglts"]["version"] = 7
+        if "sphinx" in pkg_cfg:
+            section = pkg_cfg["sphinx"]
+            section["build_dir"] = section.get("build_dir", "build/sphinx")
     elif version == 7:
-        pkg_cfg['_pkglts']['version'] = 8
-        if 'doc' in pkg_cfg:
-            section = pkg_cfg['doc']
-            section['fmt'] = section.get('fmt', 'rst')
+        pkg_cfg["_pkglts"]["version"] = 8
+        if "doc" in pkg_cfg:
+            section = pkg_cfg["doc"]
+            section["fmt"] = section.get("fmt", "rst")
     elif version == 8:
-        pkg_cfg['_pkglts']['version'] = 9
-        if 'github' in pkg_cfg or 'gitlab' in pkg_cfg:
-            LOGGER.info("\n"
-                        "################################################\n"
-                        "\n"
-                        "\n"
-                        "please remove '.gitignore file and regenerate package\n"
-                        "\n"
-                        "\n"
-                        "################################################\n")
-            OptionGit('git').update_parameters(pkg_cfg)
+        pkg_cfg["_pkglts"]["version"] = 9
+        if "github" in pkg_cfg or "gitlab" in pkg_cfg:
+            LOGGER.info(
+                "\n"
+                "################################################\n"
+                "\n"
+                "\n"
+                "please remove '.gitignore file and regenerate package\n"
+                "\n"
+                "\n"
+                "################################################\n"
+            )
+            OptionGit("git").update_parameters(pkg_cfg)
     elif version == 9:
-        pkg_cfg['_pkglts']['version'] = 10
-        if 'pypi' in pkg_cfg:
-            LOGGER.info("\n"
-                        "################################################\n"
-                        "\n"
-                        "\n"
-                        "please remove '.pypirc file and regenerate package\n"
-                        "\n"
-                        "\n"
-                        "################################################\n")
+        pkg_cfg["_pkglts"]["version"] = 10
+        if "pypi" in pkg_cfg:
+            LOGGER.info(
+                "\n"
+                "################################################\n"
+                "\n"
+                "\n"
+                "please remove '.pypirc file and regenerate package\n"
+                "\n"
+                "\n"
+                "################################################\n"
+            )
             # save section
             mem = dict(pkg_cfg["pypi"])
             # get newly defined list of servers
-            OptionPypi('pypi').update_parameters(pkg_cfg)
+            OptionPypi("pypi").update_parameters(pkg_cfg)
             servers = dict(pkg_cfg["pypi"]["servers"])
             # update option
             pkg_cfg["pypi"] = mem
             pkg_cfg["pypi"]["servers"] = pkg_cfg["pypi"].get("servers", {})
             pkg_cfg["pypi"]["servers"].update(servers)
     elif version == 10:
-        pkg_cfg['_pkglts']['version'] = 11
-        if 'data' in pkg_cfg:
-            section = pkg_cfg['data']
-            section['filetype'] = section.get('filetype', [".json", ".ini"])
-            section['use_ext_dir'] = section.get('use_ext_dir', False)
+        pkg_cfg["_pkglts"]["version"] = 11
+        if "data" in pkg_cfg:
+            section = pkg_cfg["data"]
+            section["filetype"] = section.get("filetype", [".json", ".ini"])
+            section["use_ext_dir"] = section.get("use_ext_dir", False)
     elif version == 11:
-        pkg_cfg['_pkglts']['version'] = 12
-        if 'pypi' in pkg_cfg:
+        pkg_cfg["_pkglts"]["version"] = 12
+        if "pypi" in pkg_cfg:
             # save servers
             servers = dict(pkg_cfg["pypi"]["servers"])
             # transform dict into list
-            servers_list = [dict(name=name, url=descr['url']) for name, descr in servers.items()]
+            servers_list = [dict(name=name, url=descr["url"]) for name, descr in servers.items()]
             pkg_cfg["pypi"]["servers"] = servers_list
     elif version == 12:
-        pkg_cfg['_pkglts']['version'] = 13
-        if 'base' in pkg_cfg:
-            namespace_method = pkg_cfg['base'].pop('namespace_method')
+        pkg_cfg["_pkglts"]["version"] = 13
+        if "base" in pkg_cfg:
+            namespace_method = pkg_cfg["base"].pop("namespace_method")
 
-            if 'src' not in pkg_cfg:
-                OptionSrc('src').update_parameters(pkg_cfg)
+            if "src" not in pkg_cfg:
+                OptionSrc("src").update_parameters(pkg_cfg)
 
-            pkg_cfg['src']['namespace_method'] = namespace_method
+            pkg_cfg["src"]["namespace_method"] = namespace_method
 
-        if 'pysetup' in pkg_cfg:
-            require = pkg_cfg['pysetup'].pop('require')
+        if "pysetup" in pkg_cfg:
+            require = pkg_cfg["pysetup"].pop("require")
 
-            if 'reqs' not in pkg_cfg:
-                OptionReqs('reqs').update_parameters(pkg_cfg)
+            if "reqs" not in pkg_cfg:
+                OptionReqs("reqs").update_parameters(pkg_cfg)
 
-            pkg_cfg['reqs']['require'] = require
+            pkg_cfg["reqs"]["require"] = require
 
-        if 'sphinx' in pkg_cfg:
-            pkg_cfg['sphinx']['gallery'] = pkg_cfg['sphinx'].get('gallery', "")
+        if "sphinx" in pkg_cfg:
+            pkg_cfg["sphinx"]["gallery"] = pkg_cfg["sphinx"].get("gallery", "")
     elif version == 13:
-        pkg_cfg['_pkglts']['version'] = 14
+        pkg_cfg["_pkglts"]["version"] = 14
 
-        if 'sphinx' in pkg_cfg:
-            pkg_cfg['sphinx']['doc_dir'] = pkg_cfg['sphinx'].get('doc_dir', "doc")
+        if "sphinx" in pkg_cfg:
+            pkg_cfg["sphinx"]["doc_dir"] = pkg_cfg["sphinx"].get("doc_dir", "doc")
     elif version == 14:
-        pkg_cfg['_pkglts']['version'] = 15
+        pkg_cfg["_pkglts"]["version"] = 15
 
-        if 'git' in pkg_cfg:
+        if "git" in pkg_cfg:
             try:
-                perm_branches = pkg_cfg['git']['permanent_branches']
+                perm_branches = pkg_cfg["git"]["permanent_branches"]
             except KeyError:
-                if 'gitlab' in pkg_cfg or 'github' in pkg_cfg:
+                if "gitlab" in pkg_cfg or "github" in pkg_cfg:
                     perm_branches = ["main"]
                 else:
                     perm_branches = []
 
-            pkg_cfg['git']['permanent_branches'] = perm_branches
+            pkg_cfg["git"]["permanent_branches"] = perm_branches
     elif version == 15:
-        pkg_cfg['_pkglts']['version'] = 16
+        pkg_cfg["_pkglts"]["version"] = 16
 
-        if 'conda' in pkg_cfg:
+        if "conda" in pkg_cfg:
             try:
-                env_name = pkg_cfg['conda']['env_name']
+                env_name = pkg_cfg["conda"]["env_name"]
             except KeyError:
                 env_name = "{{ base.pkgname }}"
 
-            pkg_cfg['conda']['env_name'] = env_name
+            pkg_cfg["conda"]["env_name"] = env_name
     elif version == 16:
-        pkg_cfg['_pkglts']['version'] = 17
+        pkg_cfg["_pkglts"]["version"] = 17
 
-        if 'pysetup' in pkg_cfg:
+        if "pysetup" in pkg_cfg:
             intended_versions = []
-            for ver in pkg_cfg['pysetup']['intended_versions']:
+            for ver in pkg_cfg["pysetup"]["intended_versions"]:
                 if "." in ver:
                     intended_versions.append(ver)
                 else:
                     intended_versions.append(".".join((ver[0], ver[1:])))
 
-            pkg_cfg['pysetup']['intended_versions'] = intended_versions
+            pkg_cfg["pysetup"]["intended_versions"] = intended_versions
     elif version == 17:
-        pkg_cfg['_pkglts']['version'] = 18
+        pkg_cfg["_pkglts"]["version"] = 18
 
-        if 'pysetup' in pkg_cfg:
-            pkg_cfg['pyproject'] = pkg_cfg.pop('pysetup')
+        if "pysetup" in pkg_cfg:
+            pkg_cfg["pyproject"] = pkg_cfg.pop("pysetup")
 
     return pkg_cfg

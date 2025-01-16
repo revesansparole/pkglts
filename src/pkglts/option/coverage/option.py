@@ -16,9 +16,9 @@ class OptionCoverage(Option):
         return Path(__file__).parent
 
     def require_option(self, cfg):
-        return ['test']
+        return ["test"]
 
     def require(self, cfg):
-        yield Dependency('coverage', intent='test')
-        if cfg['test']['suite_name'] == 'pytest':
-            yield Dependency('pytest-cov', intent='test')
+        yield Dependency("coverage", intent="test")
+        if cfg["test"]["suite_name"] == "pytest":
+            yield Dependency("pytest-cov", intent="test")

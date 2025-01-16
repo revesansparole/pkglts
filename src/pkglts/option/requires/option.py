@@ -16,20 +16,15 @@ class OptionRequires(Option):
         return Path(__file__).parent
 
     def require_option(self, cfg):
-        return ['doc', 'github']
+        return ["doc", "github"]
 
     def environment_extensions(self, cfg):
-        owner = cfg['github']['owner']
-        project = cfg['github']['project']
+        owner = cfg["github"]["owner"]
+        project = cfg["github"]["project"]
 
         base_url = f"requires.io/github/{owner}/{project}/"
         url = f"{base_url}requirements/?branch=master"
         img = f"{base_url}requirements.svg?branch=master"
-        badge = Badge(
-            name="requires",
-            url=url,
-            url_img=img,
-            text="Requirements status"
-        )
+        badge = Badge(name="requires", url=url, url_img=img, text="Requirements status")
 
         return {"badge": badge}

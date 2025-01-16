@@ -1,6 +1,7 @@
 """
 Configuration file for pkglts
 """
+
 from pathlib import Path
 
 pkglts_dir = Path(".pkglts")

@@ -24,21 +24,21 @@ class OptionTest(Option):
 
     def check(self, cfg):
         invalids = []
-        name = cfg[self._name]['suite_name']
+        name = cfg[self._name]["suite_name"]
 
         if name not in ("pytest", "nose"):
-            invalids.append('test.suite_name')
+            invalids.append("test.suite_name")
 
         return invalids
 
     def require_option(self, cfg):
-        return ['pyproject']
+        return ["pyproject"]
 
     def require(self, cfg):
-        test_suite = cfg['test']['suite_name']
-        if test_suite == 'pytest':
-            yield Dependency('pytest', intent='test')
-            yield Dependency('pytest-mock', intent='test')
-        elif test_suite == 'nose':
-            yield Dependency('nose', intent='test')
-            yield Dependency('mock', intent='test')
+        test_suite = cfg["test"]["suite_name"]
+        if test_suite == "pytest":
+            yield Dependency("pytest", intent="test")
+            yield Dependency("pytest-mock", intent="test")
+        elif test_suite == "nose":
+            yield Dependency("nose", intent="test")
+            yield Dependency("mock", intent="test")

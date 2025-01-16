@@ -19,28 +19,23 @@ class OptionLicense(Option):
 
     def update_parameters(self, cfg):
         LOGGER.info("update parameters %s", self._name)
-        sec = dict(
-            name="cecill-c",
-            year=datetime.now().year,
-            organization="organization",
-            project="{{ base.pkgname }}"
-        )
+        sec = dict(name="cecill-c", year=datetime.now().year, organization="organization", project="{{ base.pkgname }}")
         cfg[self._name] = sec
 
     def check(self, cfg):
         invalids = []
-        name = cfg[self._name]['name']
+        name = cfg[self._name]["name"]
         # year = pkg_cfg['license']['year']
         # organization = pkg_cfg['license']['organization']
         # project = pkg_cfg['license']['project']
 
         if not name or not get_tpl_path(name).exists():
-            invalids.append('license.name')
+            invalids.append("license.name")
 
         return invalids
 
     def require_option(self, cfg):
-        return ['base']
+        return ["base"]
 
     def environment_extensions(self, cfg):
         return {"full_text": full_text(cfg)}
@@ -61,13 +56,12 @@ def get_tpl_path(name):
 
 
 def full_text(cfg):
-    """Generate a license
-    """
-    name = cfg['license']['name']
+    """Generate a license"""
+    name = cfg["license"]["name"]
 
     # open template
     try:
-        with open(get_tpl_path(name), 'r') as fhr:
+        with open(get_tpl_path(name), "r") as fhr:
             cnt = fhr.read()
 
         return cfg.render(cnt)

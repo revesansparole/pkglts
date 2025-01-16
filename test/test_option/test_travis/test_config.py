@@ -5,7 +5,7 @@ from pkglts.option.travis.option import OptionTravis
 
 @pytest.fixture()
 def opt():
-    return OptionTravis('travis')
+    return OptionTravis("travis")
 
 
 @pytest.fixture()

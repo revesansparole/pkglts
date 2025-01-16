@@ -1,20 +1,21 @@
 from pkglts.option_tools import get_user_permission
 
-loc_input = 'builtins.input'
+loc_input = "builtins.input"
 
 
 def test_user_permission(mocker):
-    mocker.patch(loc_input, return_value='')
-    assert get_user_permission('action')
+    mocker.patch(loc_input, return_value="")
+    assert get_user_permission("action")
 
-    mocker.patch(loc_input, return_value='y')
-    assert get_user_permission('action')
+    mocker.patch(loc_input, return_value="y")
+    assert get_user_permission("action")
 
-    mocker.patch(loc_input, return_value='n')
-    assert not get_user_permission('action')
+    mocker.patch(loc_input, return_value="n")
+    assert not get_user_permission("action")
 
-    mocker.patch(loc_input, return_value='N')
-    assert not get_user_permission('action')
+    mocker.patch(loc_input, return_value="N")
+    assert not get_user_permission("action")
+
 
 # def test_get_key():
 #     assert get_key('toto', {'toto': 'titi'}) == 'titi'

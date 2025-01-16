@@ -2,17 +2,15 @@
 
 Use 'setup.py' for common tasks.
 """
+
 import logging
 from pathlib import Path
 from shutil import rmtree
 
 from .config import pkg_hash_file, pkglts_dir
-from .config_management import (Config, DEFAULT_CFG,
-                                get_pkg_config, write_pkg_config)
-from .hash_management import (get_pkg_hash, modified_file_hash,
-                              pth_as_key, write_pkg_hash)
-from .manage_tools import (check_option_parameters, find_templates,
-                           render_template, update_opt)
+from .config_management import Config, DEFAULT_CFG, get_pkg_config, write_pkg_config
+from .hash_management import get_pkg_hash, modified_file_hash, pth_as_key, write_pkg_hash
+from .manage_tools import check_option_parameters, find_templates, render_template, update_opt
 from .option_tools import available_options, get_user_permission
 from .small_tools import ensure_created
 
@@ -62,7 +60,7 @@ def clean(rep="."):
         cfg = get_pkg_config(rep)
 
         try:
-            doc_dir = root_dir / cfg['sphinx']['doc_dir']
+            doc_dir = root_dir / cfg["sphinx"]["doc_dir"]
             for pth in (doc_dir / "build", doc_dir / "_dvlpt"):
                 if pth.exists():
                     rmtree(pth)
@@ -78,15 +76,15 @@ def clean(rep="."):
 
     for dir_pth in tuple(root_dir.glob("**/")):
         if dir_pth.exists():  # could have been removed with a previous rmtree
-            if not dir_pth.name.startswith('.') and len(tuple(dir_pth.glob("clean.no"))) == 0:
-                if dir_pth.name == '__pycache__':
+            if not dir_pth.name.startswith(".") and len(tuple(dir_pth.glob("clean.no"))) == 0:
+                if dir_pth.name == "__pycache__":
                     rmtree(dir_pth)
                 else:
                     for pth in dir_pth.glob("*.pyc"):
-                        if not pth.name.startswith('.'):
+                        if not pth.name.startswith("."):
                             pth.unlink()
                     for pth in dir_pth.glob("*.pyo"):
-                        if not pth.name.startswith('.'):
+                        if not pth.name.startswith("."):
                             pth.unlink()
 
 
