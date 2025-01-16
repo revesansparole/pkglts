@@ -17,23 +17,18 @@ class OptionCoveralls(Option):
         return Path(__file__).parent
 
     def require_option(self, cfg):
-        return ['coverage', 'travis']
+        return ["coverage", "travis"]
 
     def require(self, cfg):
         del cfg
-        yield Dependency('coveralls', intent='test')
+        yield Dependency("coveralls", intent="test")
 
     def environment_extensions(self, cfg):
-        owner = cfg['github']['owner']
-        project = cfg['github']['project']
+        owner = cfg["github"]["owner"]
+        project = cfg["github"]["project"]
 
         url = f"coveralls.io/github/{owner}/{project}?branch=master"
         img = f"coveralls.io/repos/github/{owner}/{project}/badge.svg?branch=master"
-        badge = Badge(
-            name="coveralls",
-            url=url,
-            url_img=img,
-            text="Coverage report status"
-        )
+        badge = Badge(name="coveralls", url=url, url_img=img, text="Coverage report status")
 
         return {"badge": badge}

@@ -16,8 +16,8 @@ class OptionFlake8(Option):
         return Path(__file__).parent
 
     def require_option(self, cfg):
-        return ['base']
+        return ["base"]
 
     def require(self, cfg):
         del cfg
-        yield Dependency('flake8', intent='dvlpt')
+        yield Dependency("flake8", intent="dvlpt")

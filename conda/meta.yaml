@@ -1,7 +1,7 @@
 # {# pkglts, conda.package
 package:
   name: pkglts
-  version: "7.9.2"
+  version: "7.10.0"
 # #}
 
 # {# pkglts, conda.src
@@ -16,6 +16,7 @@ requirements:
     - python >=3.6
     - setuptools
     - pytest-runner
+    - black
     - coverage
     - coveralls
     - pytest

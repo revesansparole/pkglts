@@ -24,18 +24,18 @@ class OptionPypi(Option):
                 "Development Status :: 2 - Pre-Alpha",
                 "Intended Audience :: Developers",
                 "License :: OSI Approved :: BSD License",
-                "Natural Language :: English"
+                "Natural Language :: English",
             ],
             servers=[
                 dict(name="pypi", url="https://upload.pypi.org/legacy/"),
-                dict(name="test", url="https://testpypi.python.org/pypi")
-            ]
+                dict(name="test", url="https://testpypi.python.org/pypi"),
+            ],
         )
         cfg[self._name] = sec
 
     def check(self, cfg):
         invalids = []
-        classifiers = cfg[self._name]['classifiers']
+        classifiers = cfg[self._name]["classifiers"]
 
         if not classifiers:
             invalids.append("pypi.classifiers")
@@ -43,22 +43,19 @@ class OptionPypi(Option):
         return invalids
 
     def require_option(self, cfg):
-        return ['doc', 'pyproject']
+        return ["doc", "pyproject"]
 
     def require(self, cfg):
         del cfg
-        yield Dependency('twine', intent='dvlpt')
+        yield Dependency("twine", intent="dvlpt")
 
     def environment_extensions(self, cfg):
         ext = {"auto_classifiers": auto_classifiers(cfg)}
 
-        servers = cfg['pypi']['servers']
-        if servers and servers[0]['name'] == 'pypi':
+        servers = cfg["pypi"]["servers"]
+        if servers and servers[0]["name"] == "pypi":
             url = f"badge.fury.io/py/{pkg_full_name(cfg)}"
-            ext['badge'] = Badge(name="pypi",
-                                 url=url,
-                                 url_img=f"{url}.svg",
-                                 text="PyPI version")
+            ext["badge"] = Badge(name="pypi", url=url, url_img=f"{url}.svg", text="PyPI version")
 
         return ext
 
@@ -72,13 +69,13 @@ def auto_classifiers(cfg):
     Returns:
         (list of str)
     """
-    items = set(cfg['pypi']['classifiers'])
+    items = set(cfg["pypi"]["classifiers"])
 
     # add license item
     # TODO
 
     # add intended versions items
-    intended_versions = cfg['pyproject']['intended_versions']
+    intended_versions = cfg["pyproject"]["intended_versions"]
     if intended_versions:
         items.add("Programming Language :: Python")
 
@@ -92,7 +89,7 @@ def auto_classifiers(cfg):
             items.add(ver_cla_tpl.format(ver))
 
         if len(major_versions) == 1:
-            ver, = major_versions
+            (ver,) = major_versions
             items.add(f"Programming Language :: Python :: {ver} :: Only")
 
     return sorted(items)

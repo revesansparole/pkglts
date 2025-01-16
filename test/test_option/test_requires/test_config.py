@@ -5,7 +5,7 @@ from pkglts.option.requires.option import OptionRequires
 
 @pytest.fixture()
 def opt():
-    return OptionRequires('requires')
+    return OptionRequires("requires")
 
 
 @pytest.fixture()

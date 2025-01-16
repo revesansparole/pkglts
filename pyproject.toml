@@ -8,7 +8,7 @@ build-backend = "setuptools.build_meta"  # we don't know if we need it
 # {# pkglts, pyproject.project
 [project]  # https://packaging.python.org/en/latest/specifications/pyproject-toml/
 name = "pkglts"
-version = "7.9.2"
+version = "7.10.0"
 description = "Building packages with long term support"
 readme = "README.rst"
 requires-python = ">= 3.6"
@@ -64,6 +64,7 @@ dvlpt = [
     "twine",
 ]
 test = [
+    "black",
     "coverage",
     "coveralls",
     "pytest",
@@ -95,6 +96,10 @@ where = ["src"]
 "*" = ['*', '*.bat', '*.cfg', '*.json', '*.md', '*.in', '*.ini', '*.png', '*.ps1', '*.rst', '*.sh', '*.tpl', '*.txt', '*.yaml', '*.yml', ]
 
 # #}
+# {# pkglts, black, after pyproject.project
+[tool.black]
+line-length = 120
+# #}
 # {# pkglts, test, after pyproject.project
 [tool.pytest.ini_options]
 addopts = "--maxfail=2 -rf --cov=pkglts"
@@ -112,6 +117,7 @@ pmg = "pkglts.manage_script:main"
 [project.entry-points."pkglts"]
 base = "pkglts.option.base.option:OptionBase"
 appveyor = "pkglts.option.appveyor.option:OptionAppveyor"
+black = "pkglts.option.black.option:OptionBlack"
 conda = "pkglts.option.conda.option:OptionConda"
 conda_alias = "pkglts.option.conda_alias.option:OptionCondaAlias"
 coverage = "pkglts.option.coverage.option:OptionCoverage"

@@ -28,14 +28,10 @@ class Badge:
         else:
             txt = self.text
 
-        if doc_fmt == 'rst':
-            return ("\n"
-                    f".. image:: {self.url_img}\n"
-                    f"    :alt: {txt}\n"
-                    f"    :target: {self.url}\n"
-                    )
+        if doc_fmt == "rst":
+            return "\n" f".. image:: {self.url_img}\n" f"    :alt: {txt}\n" f"    :target: {self.url}\n"
 
-        if doc_fmt == 'md':
+        if doc_fmt == "md":
             return f"[![{txt}]({self.url_img})]({self.url})"
 
         raise UserWarning(f"Unknown format '{doc_fmt}'")

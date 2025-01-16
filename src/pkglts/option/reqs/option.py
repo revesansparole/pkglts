@@ -19,24 +19,22 @@ class OptionReqs(Option):
 
     def update_parameters(self, cfg):
         LOGGER.info("update parameters %s", self._name)
-        sec = dict(
-            require=[]
-        )
+        sec = dict(require=[])
         cfg[self._name] = sec
 
     def check(self, cfg):
         invalids = []
 
-        req = cfg[self._name]['require']
+        req = cfg[self._name]["require"]
 
         valid_methods = (None, "pip", "conda", "git")
-        if any(dep.get('pkg_mng') not in valid_methods for dep in req):
+        if any(dep.get("pkg_mng") not in valid_methods for dep in req):
             invalids.append("reqs.require")
 
         return invalids
 
     def require_option(self, cfg):
-        return ['base']
+        return ["base"]
 
     def tools(self, cfg):
         del cfg
@@ -46,7 +44,7 @@ class OptionReqs(Option):
         reqs = requirements(cfg)
 
         def all_intents():
-            intents = {'install', 'doc', 'dvlpt', 'test'}
+            intents = {"install", "doc", "dvlpt", "test"}
             for r in reqs:
                 intents.update(r.intents)
 
@@ -65,7 +63,7 @@ class OptionReqs(Option):
         def pip_reqs(intents):
             return fmt_pip_reqs(reqs, intents)
 
-        cfg.add_test('is_pip_dep', Dependency.is_pip)
+        cfg.add_test("is_pip_dep", Dependency.is_pip)
 
         return {
             "intents": all_intents,
@@ -93,7 +91,7 @@ def requirements(cfg):
         except KeyError:
             raise KeyError(f"option '{name}' does not exists")
 
-    for dep_def in cfg['reqs']['require']:
+    for dep_def in cfg["reqs"]["require"]:
         dep = Dependency(**dep_def)
         reqs[dep.name] = dep
 

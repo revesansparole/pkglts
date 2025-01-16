@@ -5,7 +5,7 @@ from pkglts.option.src.option import OptionSrc
 
 @pytest.fixture()
 def opt():
-    return OptionSrc('src')
+    return OptionSrc("src")
 
 
 @pytest.fixture()
@@ -15,12 +15,12 @@ def cfg():
 
 def test_update_parameters(opt, cfg):
     opt.update_parameters(cfg)
-    assert len(cfg['src']) == 1
+    assert len(cfg["src"]) == 1
 
 
 def test_config_check_pkg_names(opt, cfg):
-    cfg['src'] = {'namespace_method': "toto"}
-    assert 'src.namespace_method' in opt.check(cfg)
+    cfg["src"] = {"namespace_method": "toto"}
+    assert "src.namespace_method" in opt.check(cfg)
 
 
 def test_require_option(opt, cfg):

@@ -1,6 +1,7 @@
 """
 Set of function used to regenerate html files from notebooks.
 """
+
 import fnmatch
 import os
 import os.path
@@ -8,8 +9,7 @@ import shutil
 
 
 def write_rst_file_with_resources(body, resources):
-    """Helper function.
-    """
+    """Helper function."""
     import nbconvert
 
     # Create folder if the path not exists
@@ -48,11 +48,11 @@ def find_notebook_file(root_directory):
     """
     matches = []
     for root, _, filenames in os.walk(root_directory):
-        for filename in fnmatch.filter(filenames, '*.ipynb'):
+        for filename in fnmatch.filter(filenames, "*.ipynb"):
 
             # Avoid tmp notebook in hidden folder like *-checkpoint.ipynb
             if os.path.basename(root):
-                if os.path.basename(root)[0] == '.':
+                if os.path.basename(root)[0] == ".":
                     continue
 
             matches.append(os.path.join(root, filename))
@@ -61,11 +61,10 @@ def find_notebook_file(root_directory):
 
 
 def action_nbcompile(cfg, **kwds):
-    """Compile notebooks into html.
-    """
+    """Compile notebooks into html."""
     import nbconvert
 
-    src_directory = cfg["notebook"]['src_directory']
+    src_directory = cfg["notebook"]["src_directory"]
     len_src_directory = len(src_directory)
 
     nb_filenames = find_notebook_file(src_directory)
@@ -94,7 +93,7 @@ Notebook
         body, resources = rst_exporter.from_filename(nb_filename)
 
         # Remove basename src_directory in the path
-        resources["metadata"]["path"] = resources["metadata"]["path"][len_src_directory + 1:]
+        resources["metadata"]["path"] = resources["metadata"]["path"][len_src_directory + 1 :]
 
         # Get the local file_path of the notebook write
         local_file_path = os.path.join(resources["metadata"]["path"], resources["metadata"]["name"])
@@ -103,7 +102,9 @@ Notebook
         resources["metadata"]["path"] = os.path.join(dst_rst_directory, resources["metadata"]["path"])
 
         # Write beginning block to download file
-        disclaimer = "This file has been generated from the following notebook: :download:`%s`.\n\n" % os.path.basename(nb_filename)
+        disclaimer = "This file has been generated from the following notebook: :download:`%s`.\n\n" % os.path.basename(
+            nb_filename
+        )
         disclaimer += "Download it if you want to replay it using `jupyter notebook <http://jupyter.org/>`_.\n\n"
 
         body = disclaimer + body
@@ -134,6 +135,6 @@ def parser_nbcompile(subparsers):
         (string): a unique id for this parser
         (callable): the action to perform
     """
-    subparsers.add_parser('nbcompile', help=action_nbcompile.__doc__)
+    subparsers.add_parser("nbcompile", help=action_nbcompile.__doc__)
 
-    return 'nbcompile', action_nbcompile
+    return "nbcompile", action_nbcompile

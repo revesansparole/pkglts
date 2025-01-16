@@ -2,6 +2,7 @@
 Set of function to store the version of each option each time the package is
 regenerated and access them later to prevent reverting changes.
 """
+
 import json
 import logging
 
@@ -22,7 +23,7 @@ def load_pkg_version(rep="."):
     Returns:
         (dict of str, str): option name, version
     """
-    with open(rep / pkglts_dir / pkg_version_file, 'r') as fhr:
+    with open(rep / pkglts_dir / pkg_version_file, "r") as fhr:
         return json.load(fhr)
 
 
@@ -40,7 +41,7 @@ def write_pkg_version(cfg, rep="."):
 
     ver = {name: option_current_version(name) for name in cfg.installed_options()}
 
-    with open(rep / pkglts_dir / pkg_version_file, 'w') as fhw:
+    with open(rep / pkglts_dir / pkg_version_file, "w") as fhw:
         json.dump(ver, fhw, sort_keys=True, indent=2)
 
 

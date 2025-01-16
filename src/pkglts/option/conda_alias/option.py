@@ -17,7 +17,7 @@ class OptionCondaAlias(Option):
         return Path(__file__).parent
 
     def require_option(self, cfg):
-        return ['conda']
+        return ["conda"]
 
     def environment_extensions(self, cfg):
         return {"norm_name": normalize(pkg_full_name(cfg))}

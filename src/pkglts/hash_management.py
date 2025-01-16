@@ -1,6 +1,7 @@
 """
 Set of function to associate hash to blobs.
 """
+
 import json
 import logging
 from base64 import b64encode
@@ -38,8 +39,8 @@ def compute_hash(txt):
         (str): hash key
     """
     algo = sha512()
-    algo.update(txt.encode('utf-8'))  # TODO bad if non utf-8 encoded file
-    return b64encode(algo.digest()).decode('utf-8')
+    algo.update(txt.encode("utf-8"))  # TODO bad if non utf-8 encoded file
+    return b64encode(algo.digest()).decode("utf-8")
 
 
 def get_pkg_hash(rep="."):
@@ -52,7 +53,7 @@ def get_pkg_hash(rep="."):
         (dict of str, list): hash map of preserved sections in this
                              package
     """
-    return json.load(open(rep / pkglts_dir / pkg_hash_file, 'r'))
+    return json.load(open(rep / pkglts_dir / pkg_hash_file, "r"))
 
 
 def write_pkg_hash(pkg_hash, rep="."):
@@ -69,7 +70,7 @@ def write_pkg_hash(pkg_hash, rep="."):
     LOGGER.info("write package hash")
     cfg = {pth_key: dict(sec_hash) for pth_key, sec_hash in pkg_hash.items()}
 
-    with open(rep / pkglts_dir / pkg_hash_file, 'w') as fhw:
+    with open(rep / pkglts_dir / pkg_hash_file, "w") as fhw:
         json.dump(cfg, fhw, sort_keys=True, indent=2)
 
 
@@ -92,8 +93,7 @@ def modified_file_hash(pth, pkg_hash):
 
     blocks = parse_source(pth.read_text())
 
-    lts_blocks = dict((block.bid, block.content) for block in blocks
-                      if block.bid is not None)
+    lts_blocks = dict((block.bid, block.content) for block in blocks if block.bid is not None)
     if set(lts_blocks) != set(ref_blocks):
         return True
 

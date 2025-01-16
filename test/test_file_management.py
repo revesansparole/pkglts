@@ -7,7 +7,7 @@ from pkglts.file_management import write_file
 
 @pytest.fixture()
 def tmp_pth():
-    pth = 'toto.txt'
+    pth = "toto.txt"
 
     yield pth
 

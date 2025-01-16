@@ -25,7 +25,7 @@ class OptionPyproject(Option):
 
     def check(self, cfg):
         invalids = []
-        intended_versions = cfg[self._name]['intended_versions']
+        intended_versions = cfg[self._name]["intended_versions"]
 
         if not intended_versions:
             invalids.append("pyproject.intended_versions")
@@ -33,18 +33,18 @@ class OptionPyproject(Option):
         return invalids
 
     def require_option(self, cfg):
-        return ['src', 'doc', 'license', 'version', 'reqs']
+        return ["src", "doc", "license", "version", "reqs"]
 
     def environment_extensions(self, cfg):
-        py_vers = sorted([int(v) for v in ver.split(".")] for ver in cfg[self._name]['intended_versions'])
+        py_vers = sorted([int(v) for v in ver.split(".")] for ver in cfg[self._name]["intended_versions"])
 
-        universal = len(set(ver.split(".")[0] for ver in cfg[self._name]['intended_versions'])) > 1
+        universal = len(set(ver.split(".")[0] for ver in cfg[self._name]["intended_versions"])) > 1
 
         return {
             "urls": find_urls(cfg),
             "py_max_ver": ".".join(str(v) for v in py_vers[-1]),
             "py_min_ver": ".".join(str(v) for v in py_vers[0]),
-            "universal": universal
+            "universal": universal,
         }
 
 

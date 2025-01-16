@@ -5,7 +5,7 @@ from pkglts.option.git.option import OptionGit
 
 @pytest.fixture()
 def opt():
-    return OptionGit('git')
+    return OptionGit("git")
 
 
 @pytest.fixture()
@@ -15,11 +15,11 @@ def cfg():
 
 def test_update_parameters(opt, cfg):
     opt.update_parameters(cfg)
-    assert len(cfg['git']) == 1
+    assert len(cfg["git"]) == 1
 
 
 def test_config_check_nothing(opt, cfg):
-    cfg['git'] = {}
+    cfg["git"] = {}
     assert len(opt.check(cfg)) == 0
 
 

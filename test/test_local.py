@@ -1,7 +1,7 @@
 import pytest
 
 from pkglts.config_management import Config
-from pkglts.local import (pkg_full_name, src_dir)
+from pkglts.local import pkg_full_name, src_dir
 
 
 def test_pkg_full_name():
@@ -9,9 +9,9 @@ def test_pkg_full_name():
     with pytest.raises(KeyError):
         pkg_full_name(Config(cfg))
 
-    cfg['base'] = dict(pkgname='toto', namespace=None)
+    cfg["base"] = dict(pkgname="toto", namespace=None)
     name1 = pkg_full_name(Config(cfg))
-    cfg['base']['namespace'] = 'oa'
+    cfg["base"]["namespace"] = "oa"
     name2 = pkg_full_name(Config(cfg))
 
     assert name1 != name2
@@ -22,9 +22,9 @@ def test_src_dir():
     with pytest.raises(KeyError):
         pkg_full_name(Config(cfg))
 
-    cfg['base'] = dict(pkgname='toto', namespace=None)
+    cfg["base"] = dict(pkgname="toto", namespace=None)
     dir1 = src_dir(Config(cfg))
-    cfg['base']['namespace'] = 'oa'
+    cfg["base"]["namespace"] = "oa"
     dir2 = src_dir(Config(cfg))
 
     assert dir1 != dir2

@@ -9,30 +9,31 @@ print(__file__)
 def test_non_existing_option_raises_warning():
     cfg = Config({})
     with pytest.raises(KeyError):
-        update_opt('toto', cfg)
+        update_opt("toto", cfg)
 
 
 def test_option_fetch_parameter_list_from_config():
     cfg = Config(DEFAULT_CFG)
-    cfg = update_opt('base', cfg)
-    assert 'base' in cfg
-    assert 'pkgname' in cfg['base']
-    assert 'authors' in cfg['base']
+    cfg = update_opt("base", cfg)
+    assert "base" in cfg
+    assert "pkgname" in cfg["base"]
+    assert "authors" in cfg["base"]
 
 
 def test_option_handle_no_parameter_list_in_config():
     cfg = Config(DEFAULT_CFG)
-    cfg._env.globals['base'] = None
-    cfg = update_opt('data', cfg)
-    assert 'data' in cfg
-    assert len(tuple(cfg['data'].items())) == 2
+    cfg._env.globals["base"] = None
+    cfg = update_opt("data", cfg)
+    assert "data" in cfg
+    assert len(tuple(cfg["data"].items())) == 2
 
 
 def test_option_use_default_from_config():
     cfg = Config(DEFAULT_CFG)
-    cfg = update_opt('base', cfg)
-    assert 'base' in cfg
-    assert cfg['base']['authors'][0][0] == 'moi'
+    cfg = update_opt("base", cfg)
+    assert "base" in cfg
+    assert cfg["base"]["authors"][0][0] == "moi"
+
 
 # def test_option_prompt_user_if_global_config_ask_for_it(mocker):
 #     pkg_cfg = dict(_pkglts={'use_prompts': True})

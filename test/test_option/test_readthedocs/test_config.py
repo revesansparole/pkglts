@@ -5,7 +5,7 @@ from pkglts.option.readthedocs.option import OptionReadthedocs
 
 @pytest.fixture()
 def opt():
-    return OptionReadthedocs('readthedocs')
+    return OptionReadthedocs("readthedocs")
 
 
 @pytest.fixture()
@@ -15,12 +15,12 @@ def cfg():
 
 def test_update_parameters(opt, cfg):
     opt.update_parameters(cfg)
-    assert len(cfg['readthedocs']) == 1
+    assert len(cfg["readthedocs"]) == 1
 
 
 def test_config_check_project_exists(opt, cfg):
-    cfg['readthedocs'] = {'project': ""}
-    assert 'readthedocs.project' in opt.check(cfg)
+    cfg["readthedocs"] = {"project": ""}
+    assert "readthedocs.project" in opt.check(cfg)
 
 
 def test_require_option(opt, cfg):

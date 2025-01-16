@@ -1,6 +1,7 @@
 """
 Dependency object to handle multi dependency managers.
 """
+
 import logging
 import re
 
@@ -16,7 +17,7 @@ class Dependency(object):
     info to install a dependency.
     """
 
-    def __init__(self, name, version=None, pkg_mng=None, channel=None, intent='install'):
+    def __init__(self, name, version=None, pkg_mng=None, channel=None, intent="install"):
         self.name = name
         """name of dependency"""
 
@@ -49,10 +50,10 @@ class Dependency(object):
             version = ""
         else:
             version = self.version
-            if version[:2] in ('==', '>=', '<=', "~="):
+            if version[:2] in ("==", ">=", "<=", "~="):
                 LOGGER.warning("bad version specification for '%s' with conda, use '=' by default", self.name)
                 version = "=" + version[2:]
-            elif version[0] != '=':
+            elif version[0] != "=":
                 version = "=" + version
         return "{}{}".format(self.name, version)
 
@@ -61,10 +62,10 @@ class Dependency(object):
             version = ""
         else:
             version = self.version
-            if version[:2] in ('==', '>=', '<=', "~="):
+            if version[:2] in ("==", ">=", "<=", "~="):
                 # full formatter already do nothing
                 pass
-            elif version[0] == '=':
+            elif version[0] == "=":
                 # transform into '=='
                 version = "=" + version
             else:
@@ -114,9 +115,9 @@ class Dependency(object):
             (bool)
         """
         if strict:
-            return self.package_manager == 'conda'
+            return self.package_manager == "conda"
 
-        return self.package_manager is None or self.package_manager == 'conda'
+        return self.package_manager is None or self.package_manager == "conda"
 
     def is_pip(self, strict=True):
         """Check whether this dependency can be managed by pip
@@ -128,9 +129,9 @@ class Dependency(object):
             (bool)
         """
         if strict:
-            return self.package_manager == 'pip'
+            return self.package_manager == "pip"
 
-        return self.package_manager is None or self.package_manager == 'pip'
+        return self.package_manager is None or self.package_manager == "pip"
 
     def conda_install(self):
         """Produce command line needed to install this dependency.

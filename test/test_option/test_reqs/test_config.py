@@ -6,7 +6,7 @@ from pkglts.option.reqs.option import OptionReqs, fmt_conda_reqs, fmt_pip_reqs, 
 
 @pytest.fixture()
 def opt():
-    return OptionReqs('reqs')
+    return OptionReqs("reqs")
 
 
 @pytest.fixture()
@@ -16,15 +16,15 @@ def cfg():
 
 def test_update_parameters(opt, cfg):
     opt.update_parameters(cfg)
-    assert len(cfg['reqs']) == 1
+    assert len(cfg["reqs"]) == 1
 
 
 def test_config_check_pkg_names(opt, cfg):
-    cfg['reqs'] = {'require': []}
-    assert 'reqs.require' not in opt.check(cfg)
+    cfg["reqs"] = {"require": []}
+    assert "reqs.require" not in opt.check(cfg)
 
-    cfg['reqs'] = {'require': [{'pkg_mng': 'walou', 'name': 'numpy'}]}
-    assert 'reqs.require' in opt.check(cfg)
+    cfg["reqs"] = {"require": [{"pkg_mng": "walou", "name": "numpy"}]}
+    assert "reqs.require" in opt.check(cfg)
 
 
 def test_require_option(opt, cfg):
@@ -39,44 +39,44 @@ def test_require(opt, cfg):
 
 def test_require_puts_list_of_reqs_in_requirements(opt, cfg):
     opt.update_parameters(cfg)
-    cfg['reqs']['require'].append({'pkg_mng': 'walou', 'name': 'numpy'})
+    cfg["reqs"]["require"].append({"pkg_mng": "walou", "name": "numpy"})
 
-    assert 'numpy' in (dep.name for dep in requirements(cfg))
+    assert "numpy" in (dep.name for dep in requirements(cfg))
 
 
 def test_fmt_conda_reqs_works_correctly():
-    assert fmt_conda_reqs([], ['install']) == ""
+    assert fmt_conda_reqs([], ["install"]) == ""
 
-    d1 = Dependency('d1')
-    dex = Dependency('dex', intent='example')
-    dconda = Dependency('dconda')
-    dpip = Dependency('dpip')
+    d1 = Dependency("d1")
+    dex = Dependency("dex", intent="example")
+    dconda = Dependency("dconda")
+    dpip = Dependency("dpip")
 
-    cmd = fmt_conda_reqs([d1, dex, dconda, dpip], ['install'])
+    cmd = fmt_conda_reqs([d1, dex, dconda, dpip], ["install"])
 
     assert cmd.strip() == "conda install d1 dconda dpip"
 
-    d = Dependency('d', channel='extra')
+    d = Dependency("d", channel="extra")
 
-    assert fmt_conda_reqs([d], ['install']) == "conda install -c extra d"
+    assert fmt_conda_reqs([d], ["install"]) == "conda install -c extra d"
 
-    d = Dependency('d', version='= 5')
+    d = Dependency("d", version="= 5")
 
-    assert fmt_conda_reqs([d], ['install']) == 'conda install "d= 5"'
+    assert fmt_conda_reqs([d], ["install"]) == 'conda install "d= 5"'
 
 
 def test_fmt_pip_reqs_works_correctly():
-    assert fmt_pip_reqs([], ['install']) == ""
+    assert fmt_pip_reqs([], ["install"]) == ""
 
-    d1 = Dependency('d1')
-    dex = Dependency('dex', intent='example', pkg_mng='pip')
-    dconda = Dependency('dconda')
-    dpip = Dependency('dpip', pkg_mng='pip')
+    d1 = Dependency("d1")
+    dex = Dependency("dex", intent="example", pkg_mng="pip")
+    dconda = Dependency("dconda")
+    dpip = Dependency("dpip", pkg_mng="pip")
 
-    cmd = fmt_pip_reqs([d1, dex, dconda, dpip], ['install'])
+    cmd = fmt_pip_reqs([d1, dex, dconda, dpip], ["install"])
 
     assert cmd.strip() == 'pip install "dpip"'
 
-    d = Dependency('d', pkg_mng='pip', version='= 5')
+    d = Dependency("d", pkg_mng="pip", version="= 5")
 
-    assert fmt_pip_reqs([d], ['install']) == 'pip install "d== 5"'
+    assert fmt_pip_reqs([d], ["install"]) == 'pip install "d== 5"'

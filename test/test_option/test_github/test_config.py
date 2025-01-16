@@ -5,7 +5,7 @@ from pkglts.option.github.option import OptionGithub
 
 @pytest.fixture()
 def opt():
-    return OptionGithub('github')
+    return OptionGithub("github")
 
 
 @pytest.fixture()
@@ -15,12 +15,12 @@ def cfg():
 
 def test_update_parameters(opt, cfg):
     opt.update_parameters(cfg)
-    assert len(cfg['github']) == 3
+    assert len(cfg["github"]) == 3
 
 
 def test_config_check_project_exists(opt, cfg):
-    cfg['github'] = {'owner': "", 'project': "", "url": ""}
-    assert 'github.project' in opt.check(cfg)
+    cfg["github"] = {"owner": "", "project": "", "url": ""}
+    assert "github.project" in opt.check(cfg)
 
 
 def test_require_option(opt, cfg):

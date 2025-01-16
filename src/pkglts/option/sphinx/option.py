@@ -29,26 +29,26 @@ class OptionSphinx(Option):
 
     def check(self, cfg):
         invalids = []
-        if cfg['doc']['fmt'] != 'rst':
-            invalids.append('doc.fmt')
+        if cfg["doc"]["fmt"] != "rst":
+            invalids.append("doc.fmt")
 
-        theme = cfg[self._name]['theme']
+        theme = cfg[self._name]["theme"]
         if theme != str(theme):
-            invalids.append('sphinx.theme')
+            invalids.append("sphinx.theme")
 
-        gallery = cfg[self._name]['gallery']
+        gallery = cfg[self._name]["gallery"]
         if gallery != "" and not is_pathname_valid(gallery):
-            invalids.append('sphinx.gallery')
+            invalids.append("sphinx.gallery")
 
         return invalids
 
     def require_option(self, cfg):
-        return ['doc', 'license']
+        return ["doc", "license"]
 
     def require(self, cfg):
-        yield Dependency('sphinx', intent='doc')
+        yield Dependency("sphinx", intent="doc")
         if cfg["sphinx"]["theme"] == "sphinx_rtd_theme":
-            yield Dependency('sphinx-rtd-theme', intent='doc')
+            yield Dependency("sphinx-rtd-theme", intent="doc")
 
-        if cfg['sphinx']['gallery'] != "":
-            yield Dependency('sphinx-gallery', intent='doc', channel='conda-forge')
+        if cfg["sphinx"]["gallery"] != "":
+            yield Dependency("sphinx-gallery", intent="doc", channel="conda-forge")

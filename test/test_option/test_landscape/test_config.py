@@ -5,7 +5,7 @@ from pkglts.option.landscape.option import OptionLandscape
 
 @pytest.fixture()
 def opt():
-    return OptionLandscape('landscape')
+    return OptionLandscape("landscape")
 
 
 @pytest.fixture()

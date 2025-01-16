@@ -19,6 +19,7 @@
     "pkgname": "pkglts",
     "url": null
   },
+  "black": {},
   "conda": {
     "env_name": "{{ base.pkgname }}"
   },
@@ -143,7 +144,7 @@
   "travis": {},
   "version": {
     "major": 7,
-    "minor": 9,
-    "post": 2
+    "minor": 10,
+    "post": 0
   }
 }

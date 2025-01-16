@@ -1,12 +1,12 @@
 """
 Base class for options.
 """
+
 from pathlib import Path
 
 
 class Option(object):
-    """Base class to store information associated with an option
-    """
+    """Base class to store information associated with an option"""
 
     def __init__(self, name):
         self._name = name
@@ -33,7 +33,7 @@ class Option(object):
         Returns:
             (Path)
         """
-        pth = self.root_dir() / 'example'
+        pth = self.root_dir() / "example"
         if pth.exists():
             return pth
 
@@ -45,7 +45,7 @@ class Option(object):
         Returns:
             (Path)
         """
-        pth = self.root_dir() / 'resource'
+        pth = self.root_dir() / "resource"
         if pth.exists():
             return pth
 

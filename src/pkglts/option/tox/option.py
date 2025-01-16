@@ -16,8 +16,8 @@ class OptionTox(Option):
         return Path(__file__).parent
 
     def require_option(self, cfg):
-        return ['pyproject']
+        return ["pyproject"]
 
     def require(self, cfg):
         del cfg
-        yield Dependency('tox', intent='test', channel='conda-forge')
+        yield Dependency("tox", intent="test", channel="conda-forge")

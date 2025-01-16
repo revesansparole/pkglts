@@ -11,7 +11,7 @@ from pkglts.option_tools import available_options
 
 def pkglts_opts():
     # walk through all possible options defined by pkglts
-    option_basedir = Path(pkglts.__file__).parent / 'option'
+    option_basedir = Path(pkglts.__file__).parent / "option"
     for pth in option_basedir.glob("*/"):
         option_name = pth.name
         if pth.is_dir() and not option_name.startswith("_"):
@@ -43,10 +43,10 @@ def test_options_expose_parameters():
 
 def test_require_correctly_defined():
     cfg = Config(dict(base={}))
-    OptionDoc('doc').update_parameters(cfg)
-    OptionTest('test').update_parameters(cfg)
-    OptionSphinx('sphinx').update_parameters(cfg)
-    OptionSphinx('github').update_parameters(cfg)
+    OptionDoc("doc").update_parameters(cfg)
+    OptionTest("test").update_parameters(cfg)
+    OptionSphinx("sphinx").update_parameters(cfg)
+    OptionSphinx("github").update_parameters(cfg)
 
     for opt in pkglts_opts():
         assert len(tuple(opt.require_option(cfg))) >= 0
@@ -57,7 +57,7 @@ def test_tools_correctly_defined():
     cfg = Config(dict(base={}))
 
     parser = ArgumentParser(description="Package structure manager")
-    subparsers = parser.add_subparsers(dest='subcmd', help="sub-command help")
+    subparsers = parser.add_subparsers(dest="subcmd", help="sub-command help")
 
     for opt in pkglts_opts():
         for tool in opt.tools(cfg):

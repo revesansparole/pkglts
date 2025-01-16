@@ -1,5 +1,6 @@
 """ Some helpers for options
 """
+
 import logging
 from importlib.metadata import EntryPoint, entry_points
 
@@ -34,7 +35,7 @@ def find_available_options():
     Returns:
         (dict of str: Option)
     """
-    for ept in entry_points(group='pkglts'):
+    for ept in entry_points(group="pkglts"):
         option_name = ept.name
         if option_name not in available_options:
             available_options[option_name] = ept

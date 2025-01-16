@@ -6,7 +6,7 @@ from pkglts.hash_management import compute_hash, modified_file_hash, pth_as_key
 
 @pytest.fixture()
 def tmp_pth():
-    pth = Path('toto.txt')
+    pth = Path("toto.txt")
 
     yield pth
 
@@ -29,7 +29,7 @@ def test_compute_hash():
 
 
 def test_modified_file_raise_error_if_file_not_in_hashmap(tmp_pth):
-    with open(tmp_pth, 'w') as f:
+    with open(tmp_pth, "w") as f:
         f.write("lorem ipsum\n" * 10)
 
     with pytest.raises(IOError):
@@ -37,7 +37,7 @@ def test_modified_file_raise_error_if_file_not_in_hashmap(tmp_pth):
 
 
 def test_modified_file_detect_modifications_only_in_preserved_sections(tmp_pth):
-    with open(tmp_pth, 'w') as f:
+    with open(tmp_pth, "w") as f:
         f.write("lorem ipsum\n" * 10)
 
     assert not modified_file_hash(tmp_pth, {pth_as_key(tmp_pth): []})
@@ -46,7 +46,7 @@ def test_modified_file_detect_modifications_only_in_preserved_sections(tmp_pth):
 def test_modified_file_if_not_same_preserved_sections(tmp_pth):
     txt = "lorem ipsum\n" * 10
 
-    with open(tmp_pth, 'w') as f:
+    with open(tmp_pth, "w") as f:
         f.write("{# pkglts, toto\n")
         f.write(txt)
         f.write("#}\n")
@@ -58,14 +58,14 @@ def test_modified_file_detect_modifications_in_preserved_sections(tmp_pth):
     txt = "lorem ipsum\n" * 10
     hv = compute_hash(txt)
 
-    with open(tmp_pth, 'w') as f:
+    with open(tmp_pth, "w") as f:
         f.write("{# pkglts, toto\n")
         f.write(txt)
         f.write("#}\n")
 
     assert not modified_file_hash(tmp_pth, {pth_as_key(tmp_pth): dict(toto=hv)})
 
-    with open(tmp_pth, 'w') as f:
+    with open(tmp_pth, "w") as f:
         f.write("{# pkglts, toto\n")
         f.write(txt * 2)
         f.write("#}\n")

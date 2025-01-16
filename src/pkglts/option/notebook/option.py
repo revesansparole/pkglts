@@ -17,14 +17,12 @@ class OptionNotebook(Option):
 
     def update_parameters(self, cfg):
         LOGGER.info("update parameters %s", self._name)
-        sec = dict(
-            src_directory="example"
-        )
+        sec = dict(src_directory="example")
         cfg[self._name] = sec
 
     def check(self, cfg):
         invalids = []
-        src_directory = Path(cfg[self._name]['src_directory'])
+        src_directory = Path(cfg[self._name]["src_directory"])
 
         if not src_directory.exists():
             invalids.append("notebook.src_directory")
@@ -32,7 +30,7 @@ class OptionNotebook(Option):
         return invalids
 
     def require_option(self, cfg):
-        return ['sphinx']
+        return ["sphinx"]
 
     def tools(self, cfg):
         del cfg

@@ -8,7 +8,7 @@ from pkglts.small_tools import ensure_created, rmdir
 
 @pytest.fixture()
 def tmp_dir():
-    pth = Path('toto_manage_cfg')
+    pth = Path("toto_manage_cfg")
     ensure_created(pth)
     init_pkg(pth)
 
@@ -31,6 +31,7 @@ def test_manage_init_create_pkg_hash(tmp_dir):
 def test_manage_init_protect_pkglts_dir_from_modif(tmp_dir):
     assert "regenerate.no" in [pth.name for pth in (tmp_dir / pkglts_dir).iterdir()]
     assert "clean.no" in [pth.name for pth in (tmp_dir / pkglts_dir).iterdir()]
+
 
 # def test_manage_pkg_config(tmp_dir):
 #     cfg = get_pkg_config(tmp_dir)

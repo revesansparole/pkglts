@@ -46,8 +46,7 @@ def update_opt(name, cfg):
     for option_name in opt.require_option(cfg):
         if option_name not in cfg.installed_options():
             LOGGER.info("need to install option '%s' first", option_name)
-            if (cfg["_pkglts"]['auto_install'] or
-                    get_user_permission("install")):
+            if cfg["_pkglts"]["auto_install"] or get_user_permission("install"):
                 cfg = update_opt(option_name, cfg)
             else:
                 return cfg
@@ -82,8 +81,8 @@ def find_templates(src_dir, tgt_dir, cfg, rg_tree):
 
         tgt_pth = tgt_dir / tgt_name
         # handle namespace
-        if src_pth.is_dir() and src_dir.name == 'src' and src_pth.name == TPL_SRC_NAME:
-            namespace = cfg['base']['namespace']
+        if src_pth.is_dir() and src_dir.name == "src" and src_pth.name == TPL_SRC_NAME:
+            namespace = cfg["base"]["namespace"]
             if namespace is not None:
                 ns_pth = tgt_dir / namespace
                 init_namespace_dir(ns_pth, rg_tree)
@@ -96,7 +95,7 @@ def find_templates(src_dir, tgt_dir, cfg, rg_tree):
             else:
                 find_templates(src_pth, tgt_pth, cfg, rg_tree)
         else:
-            if tgt_name.split('.')[0] == "_":
+            if tgt_name.split(".")[0] == "_":
                 pass
             else:
                 try:

@@ -17,24 +17,22 @@ class OptionPluginProject(Option):
 
     def update_parameters(self, cfg):
         LOGGER.info("update parameters %s", self._name)
-        cfg[self._name] = {
-            "plugin_name": "{{ base.pkgname }}"
-        }
+        cfg[self._name] = {"plugin_name": "{{ base.pkgname }}"}
 
     def check(self, cfg):
         invalids = []
-        plugin_name = cfg[self._name]['plugin_name']
+        plugin_name = cfg[self._name]["plugin_name"]
 
         if "." in plugin_name:
-            invalids.append('plugin_project.plugin_name')
+            invalids.append("plugin_project.plugin_name")
         elif not plugin_name.isidentifier():
-            invalids.append('plugin_project.plugin_name')
+            invalids.append("plugin_project.plugin_name")
 
         return invalids
 
     def require_option(self, cfg):
-        return ['pyproject', 'data', 'git']
+        return ["pyproject", "data", "git"]
 
     def require(self, cfg):
         del cfg
-        yield Dependency('pkglts', intent='install', channel='revesansparole')
+        yield Dependency("pkglts", intent="install", channel="revesansparole")

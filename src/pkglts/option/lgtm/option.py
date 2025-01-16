@@ -16,19 +16,14 @@ class OptionLgtm(Option):
         return Path(__file__).parent
 
     def require_option(self, cfg):
-        return ['github', 'pyproject']
+        return ["github", "pyproject"]
 
     def environment_extensions(self, cfg):
-        owner = cfg['github']['owner']
-        project = cfg['github']['project']
+        owner = cfg["github"]["owner"]
+        project = cfg["github"]["project"]
 
         url = f"https://lgtm.com/projects/g/{owner}/{project}/context:python"
         img = f"https://img.shields.io/lgtm/grade/python/g/{owner}/{project}.svg?logo=lgtm&logoWidth=18"
-        badge = Badge(
-            name="lgtm",
-            url=url,
-            url_img=img,
-            text="Language grade: Python"
-        )
+        badge = Badge(name="lgtm", url=url, url_img=img, text="Language grade: Python")
 
         return {"badge": badge}

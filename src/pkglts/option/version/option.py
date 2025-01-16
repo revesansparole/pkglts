@@ -26,9 +26,9 @@ class OptionVersion(Option):
 
     def check(self, cfg):
         invalids = []
-        major = cfg[self._name]['major']
-        minor = cfg[self._name]['minor']
-        post = cfg[self._name]['post']
+        major = cfg[self._name]["major"]
+        minor = cfg[self._name]["minor"]
+        post = cfg[self._name]["post"]
 
         if not isinstance(major, int):
             invalids.append("version.major")
@@ -40,7 +40,7 @@ class OptionVersion(Option):
         return invalids
 
     def require_option(self, cfg):
-        return ['src']
+        return ["src"]
 
     def tools(self, cfg):
         del cfg

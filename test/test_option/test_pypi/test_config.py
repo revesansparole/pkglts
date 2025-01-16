@@ -5,7 +5,7 @@ from pkglts.option.pypi.option import OptionPypi
 
 @pytest.fixture()
 def opt():
-    return OptionPypi('pypi')
+    return OptionPypi("pypi")
 
 
 @pytest.fixture()
@@ -15,12 +15,12 @@ def cfg():
 
 def test_update_parameters(opt, cfg):
     opt.update_parameters(cfg)
-    assert len(cfg['pypi']) == 2
+    assert len(cfg["pypi"]) == 2
 
 
 def test_config_check_classifiers_exists(opt, cfg):
-    cfg['pypi'] = {'classifiers': []}
-    assert 'pypi.classifiers' in opt.check(cfg)
+    cfg["pypi"] = {"classifiers": []}
+    assert "pypi.classifiers" in opt.check(cfg)
 
 
 def test_require_option(opt, cfg):

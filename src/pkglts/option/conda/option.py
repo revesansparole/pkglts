@@ -24,7 +24,7 @@ class OptionConda(Option):
 
     def check(self, cfg):
         invalids = []
-        env_name = cfg[self._name]['env_name']
+        env_name = cfg[self._name]["env_name"]
 
         if not env_name:
             invalids.append("conda.env_name")
@@ -35,14 +35,17 @@ class OptionConda(Option):
         return invalids
 
     def require_option(self, cfg):
-        return ['pyproject']
+        return ["pyproject"]
 
     def environment_extensions(self, cfg):
         # use list(dict.fromkeys()) instead of set to preserve order
         # between two regenerate
         # requirements are already sorted by name
         channels = list(dict.fromkeys([dep.channel for dep in requirements(cfg) if dep.channel is not None]))
-        channels_minimal = list(dict.fromkeys([dep.channel for dep in requirements(cfg)
-                                               if 'install' in dep.intents and dep.channel is not None]))
+        channels_minimal = list(
+            dict.fromkeys(
+                [dep.channel for dep in requirements(cfg) if "install" in dep.intents and dep.channel is not None]
+            )
+        )
 
         return {"channels": channels, "channels_minimal": channels_minimal}

@@ -5,7 +5,7 @@ from pkglts.option.coveralls.option import OptionCoveralls
 
 @pytest.fixture()
 def opt():
-    return OptionCoveralls('coveralls')
+    return OptionCoveralls("coveralls")
 
 
 @pytest.fixture()

@@ -1,6 +1,7 @@
 """Regroup set of functions that make use of local environment
 inside a package. Just a way to normalize pre defined paths.
 """
+
 from pathlib import Path
 
 from .hash_management import pth_as_key
@@ -16,11 +17,11 @@ def pkg_full_name(cfg):
     Returns:
         (str)
     """
-    namespace = cfg['base']['namespace']
+    namespace = cfg["base"]["namespace"]
     if namespace is None:
-        return cfg['base']['pkgname']
+        return cfg["base"]["pkgname"]
 
-    return namespace + "." + cfg['base']['pkgname']
+    return namespace + "." + cfg["base"]["pkgname"]
 
 
 def src_dir(cfg):
@@ -34,11 +35,11 @@ def src_dir(cfg):
         (Path)
     """
     rep = Path("src")
-    namespace = cfg['base']['namespace']
+    namespace = cfg["base"]["namespace"]
     if namespace is not None:
         rep /= namespace
 
-    return rep / cfg['base']['pkgname']
+    return rep / cfg["base"]["pkgname"]
 
 
 def init_namespace_dir(pth, rg_tree):
