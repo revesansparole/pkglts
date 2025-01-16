@@ -54,7 +54,7 @@ class Dependency(object):
                 version = "=" + version[2:]
             elif version[0] != '=':
                 version = "=" + version
-        return "{}{}".format(normalize(self.name), version)
+        return "{}{}".format(self.name, version)
 
     def _pip_fmt_name(self):
         if self.version is None:
@@ -79,7 +79,7 @@ class Dependency(object):
                     version = ">=" + version + ", <" + next_version
                 else:
                     version = "==" + version
-        return "{}{}".format(normalize(self.name), version)
+        return "{}{}".format(self.name, version)
 
     def conda_full_name(self):
         """Produce fully qualified name with version number.
