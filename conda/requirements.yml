@@ -22,7 +22,6 @@ dependencies:
 - unidecode
 - url-normalize
 # test
-- black
 - coverage
 - coveralls
 - pytest

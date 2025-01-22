@@ -19,7 +19,6 @@
     "pkgname": "pkglts",
     "url": null
   },
-  "black": {},
   "conda": {
     "env_name": "{{ base.pkgname }}"
   },

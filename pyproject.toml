@@ -64,7 +64,6 @@ dvlpt = [
     "twine",
 ]
 test = [
-    "black",
     "coverage",
     "coveralls",
     "pytest",
@@ -96,10 +95,6 @@ where = ["src"]
 "*" = ['*', '*.bat', '*.cfg', '*.json', '*.md', '*.in', '*.ini', '*.png', '*.ps1', '*.rst', '*.sh', '*.tpl', '*.txt', '*.yaml', '*.yml', ]
 
 # #}
-# {# pkglts, black, after pyproject.project
-[tool.black]
-line-length = 120
-# #}
 # {# pkglts, test, after pyproject.project
 [tool.pytest.ini_options]
 addopts = "--maxfail=2 -rf --cov=pkglts"
@@ -114,10 +109,12 @@ pmg = "pkglts.manage_script:main"
 [project.gui-scripts]
 # #}
 
+[tool.black]
+line-length = 120
+
 [project.entry-points."pkglts"]
 base = "pkglts.option.base.option:OptionBase"
 appveyor = "pkglts.option.appveyor.option:OptionAppveyor"
-black = "pkglts.option.black.option:OptionBlack"
 conda = "pkglts.option.conda.option:OptionConda"
 conda_alias = "pkglts.option.conda_alias.option:OptionCondaAlias"
 coverage = "pkglts.option.coverage.option:OptionCoverage"

@@ -1,7 +1,6 @@
 {
   "appveyor": "7.10.0",
   "base": "7.10.0",
-  "black": "7.10.0",
   "conda": "7.10.0",
   "coverage": "7.10.0",
   "coveralls": "7.10.0",
