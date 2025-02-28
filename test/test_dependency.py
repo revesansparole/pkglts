@@ -115,10 +115,15 @@ def test_dependency_writes_correct_conda_requirements():
     txt = dep.fmt_conda_requirement()
     assert txt == "toto=2.18"
 
+    # version specified conda comparison operator
+    dep = Dependency("toto", pkg_mng="conda", version=">=2.18")
+    txt = dep.fmt_conda_requirement()
+    assert txt == "toto>=2.18"
+
     # version specified pip comparison operator
     dep = Dependency("toto", pkg_mng="conda", version="==2.18")
     txt = dep.fmt_conda_requirement()
-    assert txt == "toto=2.18"
+    assert txt == "toto==2.18"
 
     # no version specified pip pkg_mng
     dep = Dependency("toto", pkg_mng="pip")
@@ -133,4 +138,4 @@ def test_dependency_writes_correct_conda_requirements():
     # version partially specified pip comparison operator pip pkg_mng
     dep = Dependency("toto", pkg_mng="pip", version="==2.18")
     txt = dep.fmt_conda_requirement()
-    assert txt == "toto=2.18"
+    assert txt == "toto==2.18"
