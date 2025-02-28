@@ -51,9 +51,12 @@ class Dependency(object):
         else:
             version = self.version
             if version[:2] in ("==", ">=", "<=", "~="):
-                LOGGER.warning("bad version specification for '%s' with conda, use '=' by default", self.name)
-                version = "=" + version[2:]
-            elif version[0] != "=":
+                # full formatter already do nothing
+                pass
+            elif version[:1] in ("=", ">", "<"):
+                # full formatter already do nothing
+                pass
+            else:  # no operator, just version number
                 version = "=" + version
         return "{}{}".format(self.name, version)
 
@@ -63,6 +66,9 @@ class Dependency(object):
         else:
             version = self.version
             if version[:2] in ("==", ">=", "<=", "~="):
+                # full formatter already do nothing
+                pass
+            elif version[:1] in (">", "<"):
                 # full formatter already do nothing
                 pass
             elif version[0] == "=":
