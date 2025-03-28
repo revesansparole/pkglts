@@ -96,7 +96,6 @@ target/
 {% if 'coverage' is available %}
 # coverage
 .coverage
-.coveragerc
 {% endif -%}
 
 {%- if 'tox' is available %}
