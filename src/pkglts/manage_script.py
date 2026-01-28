@@ -198,6 +198,9 @@ def main():
         cfg = get_pkg_config()
     except FileNotFoundError:
         cfg = None
+    except KeyError as err:
+        LOGGER.error("This installation of pkglts does not support all the options of this package")
+        cfg = None
     else:
         # add option commands
         for opt_name in cfg.installed_options():
