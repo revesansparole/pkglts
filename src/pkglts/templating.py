@@ -189,7 +189,7 @@ class Template(object):
             None
         """
         if pth.suffix in NON_BIN_EXT:
-            for block in parse_source(pth.read_text()):
+            for block in parse_source(pth.read_text(encoding="utf-8")):
                 self.add(block)
         else:
             self.bin_cnt = pth.read_bytes()
@@ -216,7 +216,7 @@ class Template(object):
         blocks = []
         if tgt_pth.exists():  # retrieves preserved blocks from source
             # parse tgt file to find 'preserved' blocks
-            tgt_blocks = parse_source(tgt_pth.read_text())
+            tgt_blocks = parse_source(tgt_pth.read_text(encoding="utf-8"))
 
             tpl_bids = set(b.bid for b in self.blocks if b.bid is not None)
             tgt_bids = set(b.bid for b in tgt_blocks if b.bid is not None)
@@ -255,6 +255,6 @@ class Template(object):
                 tgt += block.before_footer + "#" + "}" + f"{block.after_footer}\n"
 
         ensure_path(tgt_pth)
-        tgt_pth.write_text(tgt)
+        tgt_pth.write_text(tgt, encoding="utf-8")
 
         return preserved
