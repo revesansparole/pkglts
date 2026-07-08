@@ -85,7 +85,6 @@ def modified_file_hash(pth, pkg_hash):
     Returns:
         (bool): whether this file has been modified or not
     """
-    print("pth", pth)
     key = pth_as_key(pth)
     if key not in pkg_hash:
         raise IOError(f"{key} not under check")
