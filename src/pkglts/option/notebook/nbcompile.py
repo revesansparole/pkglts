@@ -33,7 +33,7 @@ def write_rst_file_with_filename(body, filename):
         os.makedirs(os.path.dirname(filename))
 
     # Write rst file
-    with open(filename, "w+") as rst_file:
+    with open(filename, "w+", encoding="utf-8") as rst_file:
         rst_file.write(body)
 
 

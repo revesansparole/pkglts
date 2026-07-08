@@ -61,7 +61,7 @@ def full_text(cfg):
 
     # open template
     try:
-        with open(get_tpl_path(name), "r") as fhr:
+        with open(get_tpl_path(name), "r", encoding="utf-8") as fhr:
             cnt = fhr.read()
 
         return cfg.render(cnt)

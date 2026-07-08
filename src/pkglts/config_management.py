@@ -185,7 +185,7 @@ def get_pkg_config(rep="."):
     Returns:
         (Config): Config initialized with pkg_config
     """
-    with open(rep / pkglts_dir / pkg_cfg_file, "r") as fhr:
+    with open(rep / pkglts_dir / pkg_cfg_file, "r", encoding="utf-8") as fhr:
         pkg_cfg = json.load(fhr)
 
     # update version of pkg_config
@@ -217,7 +217,7 @@ def write_pkg_config(cfg, rep="."):
     LOGGER.info("write package config")
     pkg_cfg = dict(cfg.template())
 
-    with open(rep / pkglts_dir / pkg_cfg_file, "w") as fhw:
+    with open(rep / pkglts_dir / pkg_cfg_file, "w", encoding="utf-8") as fhw:
         json.dump(pkg_cfg, fhw, sort_keys=True, indent=2)
 
 

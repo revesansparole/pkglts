@@ -126,7 +126,7 @@ def write_changelog(tags, fmt):
             pth = root_dir / name
             if pth.exists():
                 LOGGER.info("write changelog in %s", name)
-                pth.write_text(txt)
+                pth.write_text(txt, encoding="utf-8")
                 break
 
 
